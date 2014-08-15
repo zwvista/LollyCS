@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using LollyBase;
+
+namespace Lolly
+{
+    public partial class WordsAtWillForm : WordsWebForm
+    {
+        private BindingList<MWORDATWILL> wordsList;
+
+        public WordsAtWillForm()
+        {
+            InitializeComponent();
+            dataGridView = dataGridView1;
+            bindingNavigator1.Items.Remove(filterToolStripSeparator);
+            bindingNavigator1.Items.Remove(setFilterToolStripButton);
+            bindingNavigator1.Items.Remove(removeFilterToolStripButton);
+            bindingNavigator1.Items.Remove(filtertoolStripLabel);
+            reindexToolStripButton.Click += reindexToolStripButton_Click;
+            refreshToolStripButton.Click += refreshToolStripButton_Click;
+        }
+
+        protected override void FillTable()
+        {
+            wordsList = new BindingList<MWORDATWILL>(new List<MWORDATWILL>());
+            bindingSource1.DataSource = wordsList;
+            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
+        }
+
+        protected override void OnDeleteWord()
+        {
+            bindingSource1.RemoveCurrent();
+        }
+
+        public override void UpdatelblSettings()
+        {
+            base.UpdatelblSettings();
+            Text = string.Format("Words At Will ({0})", lblSettings.LangName);
+        }
+
+        private void reindexToolStripButton_Click(object sender, EventArgs e)
+        {
+            var objs = (from row in wordsList
+                        where row.ID != 0
+                        orderby row.INDEX
+                        select new ReindexObject(row.INDEX, row.WORD)).ToArray();
+            var dlg = new ReindexDlg(objs);
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                foreach (var obj in objs)
+                {
+                    var row = wordsList.SingleOrDefault(r => r.ID == obj.ID);
+                    row.INDEX = obj.INDEX;
+                }
+                foreach (var row in wordsList)
+                    row.ID = row.INDEX;
+            }
+        }
+
+        protected override void OnAddComplete()
+        {
+            OnRowEnter();
+        }
+
+        private void refreshToolStripButton_Click(object sender, EventArgs e)
+        {
+            wordsList.Clear();
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = wordsList[e.RowIndex];
+            if (row.ID == 0)
+            {
+                if (row.INDEX == 0)
+                    row.INDEX = e.RowIndex + 1;
+                row.ID = row.INDEX;
+            }
+            row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
+        }
+    }
+}

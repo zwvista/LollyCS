@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{84BEFC83-CB8F-4288-B2E6-612E9205AB50}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lolly</RootNamespace>
+    <AssemblyName>Lolly</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>http://localhost/Lolly/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Lolly.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Lolly.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Speech">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDlg.Designer.cs">
+      <DependentUpon>AboutDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliary\AuxBooksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliary\AuxBooksForm.Designer.cs">
+      <DependentUpon>AuxBooksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliary\AuxDictionariesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliary\AuxDictionariesForm.Designer.cs">
+      <DependentUpon>AuxDictionariesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliary\AuxWebTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliary\AuxWebTextForm.Designer.cs">
+      <DependentUpon>AuxWebTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliary\AuxPicBooksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliary\AuxPicBooksForm.Designer.cs">
+      <DependentUpon>AuxPicBooksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options.cs" />
+    <Compile Include="Words\DictWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Words\SelectKanaDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\SelectKanaDlg.Designer.cs">
+      <DependentUpon>SelectKanaDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliary\AuxWebExtractForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliary\AuxWebExtractForm.Designer.cs">
+      <DependentUpon>AuxWebExtractForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EBWin.cs" />
+    <Compile Include="Tools\AutoCorrectTextDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\AutoCorrectTextDlg.Designer.cs">
+      <DependentUpon>AutoCorrectTextDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\BlogPostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\BlogPostForm.Designer.cs">
+      <DependentUpon>BlogPostForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReadNumberDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ReadNumberDlg.Designer.cs">
+      <DependentUpon>ReadNumberDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Text2PostDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\Text2PostDlg.Designer.cs">
+      <DependentUpon>Text2PostDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReindexDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReindexDlg.Designer.cs">
+      <DependentUpon>ReindexDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FilterDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FilterDlg.Designer.cs">
+      <DependentUpon>FilterDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Phrases\NewPhrasesDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Phrases\NewPhrasesDlg.Designer.cs">
+      <DependentUpon>NewPhrasesDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\NewWordsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\NewWordsDlg.Designer.cs">
+      <DependentUpon>NewWordsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Phrases\PhrasesBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Phrases\PhrasesBaseForm.Designer.cs">
+      <DependentUpon>PhrasesBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\EditTransDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\EditTransDlg.Designer.cs">
+      <DependentUpon>EditTransDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\TestDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\TestDlg.Designer.cs">
+      <DependentUpon>TestDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\WebBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\WebBrowserForm.Designer.cs">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsWebForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsWebForm.Designer.cs">
+      <DependentUpon>WordsWebForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsAtWillEBForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsAtWillEBForm.Designer.cs">
+      <DependentUpon>WordsAtWillEBForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsEBForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsEBForm.Designer.cs">
+      <DependentUpon>WordsEBForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsDlg.Designer.cs">
+      <DependentUpon>OptionsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Phrases\PhrasesLangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Phrases\PhrasesLangForm.Designer.cs">
+      <DependentUpon>PhrasesLangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Phrases\PhrasesLessonsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Phrases\PhrasesLessonsForm.Designer.cs">
+      <DependentUpon>PhrasesLessonsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectLessonsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectLessonsDlg.Designer.cs">
+      <DependentUpon>SelectLessonsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsLessonsEBForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsLessonsEBForm.Designer.cs">
+      <DependentUpon>WordsLessonsEBForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsLessonsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsLessonsForm.Designer.cs">
+      <DependentUpon>WordsLessonsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MDIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIForm.Designer.cs">
+      <DependentUpon>MDIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Words\WordsAtWillForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsAtWillForm.Designer.cs">
+      <DependentUpon>WordsAtWillForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AboutDlg.resx">
+      <DependentUpon>AboutDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliary\AuxBooksForm.resx">
+      <DependentUpon>AuxBooksForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliary\AuxWebExtractForm.resx">
+      <DependentUpon>AuxWebExtractForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliary\AuxDictionariesForm.resx">
+      <DependentUpon>AuxDictionariesForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliary\AuxWebTextForm.resx">
+      <DependentUpon>AuxWebTextForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliary\AuxPicBooksForm.resx">
+      <DependentUpon>AuxPicBooksForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\SelectKanaDlg.resx">
+      <DependentUpon>SelectKanaDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\AutoCorrectTextDlg.resx">
+      <DependentUpon>AutoCorrectTextDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\BlogPostForm.resx">
+      <DependentUpon>BlogPostForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReadNumberDlg.resx">
+      <DependentUpon>ReadNumberDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Text2PostDlg.resx">
+      <DependentUpon>Text2PostDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReindexDlg.resx">
+      <DependentUpon>ReindexDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilterDlg.resx">
+      <DependentUpon>FilterDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phrases\NewPhrasesDlg.resx">
+      <DependentUpon>NewPhrasesDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\NewWordsDlg.resx">
+      <DependentUpon>NewWordsDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phrases\PhrasesBaseForm.resx">
+      <DependentUpon>PhrasesBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\EditTransDlg.resx">
+      <DependentUpon>EditTransDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\TestDlg.resx">
+      <DependentUpon>TestDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\WebBrowserForm.resx">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsWebForm.resx">
+      <DependentUpon>WordsWebForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsAtWillEBForm.resx">
+      <DependentUpon>WordsAtWillEBForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsEBForm.resx">
+      <DependentUpon>WordsEBForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsDlg.resx">
+      <DependentUpon>OptionsDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phrases\PhrasesLangForm.resx">
+      <DependentUpon>PhrasesLangForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phrases\PhrasesLessonsForm.resx">
+      <DependentUpon>PhrasesLessonsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectLessonsDlg.resx">
+      <DependentUpon>SelectLessonsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsLessonsEBForm.resx">
+      <DependentUpon>WordsLessonsEBForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsLessonsForm.resx">
+      <DependentUpon>WordsLessonsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDIForm.resx">
+      <DependentUpon>MDIForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsLangForm.resx">
+      <DependentUpon>WordsLangForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliary\AuxAutoCorrectForm.resx">
+      <DependentUpon>AuxAutoCorrectForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ExtractWebDictForm.resx">
+      <DependentUpon>ExtractWebDictForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ExtractWebDictOptionsDlg.resx">
+      <DependentUpon>ExtractWebDictOptionsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsBaseForm.resx">
+      <DependentUpon>WordsBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Words\WordsBooksForm.resx">
+      <DependentUpon>WordsBooksForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Words\WordsAtWillForm.resx">
+      <DependentUpon>WordsAtWillForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Words\WordsLangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsLangForm.Designer.cs">
+      <DependentUpon>WordsLangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliary\AuxAutoCorrectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliary\AuxAutoCorrectForm.Designer.cs">
+      <DependentUpon>AuxAutoCorrectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ExtractWebDictForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ExtractWebDictForm.Designer.cs">
+      <DependentUpon>ExtractWebDictForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ExtractWebDictOptionsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\ExtractWebDictOptionsDlg.Designer.cs">
+      <DependentUpon>ExtractWebDictOptionsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsBaseForm.Designer.cs">
+      <DependentUpon>WordsBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsBooksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Words\WordsBooksForm.Designer.cs">
+      <DependentUpon>WordsBooksForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSHTML">
+      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\b.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Lolly.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppControl\Dll.AppControl.csproj">
+      <Project>{90e8dd9c-3c6b-488c-980f-ab26ac789300}</Project>
+      <Name>Dll.AppControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DllLolly\Dll.Lolly.csproj">
+      <Project>{dba6ef01-414e-4854-92c1-8585a75dda15}</Project>
+      <Name>Dll.Lolly</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LollyBase\Dll.LollyBase.csproj">
+      <Project>{fe4d7d23-1f41-44ce-8b68-9229d41406a1}</Project>
+      <Name>Dll.LollyBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Oli.Controls\Dll.Oli.Controls.csproj">
+      <Project>{3f1a45c7-96cb-4bad-a931-792d04b96128}</Project>
+      <Name>Dll.Oli.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>REM D:\Software\Misc\ResHack\ResHacker.exe -add "$(TargetPath)","$(TargetPath)","$(ProjectDir)Lolly.res" ,,,
+REM Mark project as DEP Noncompliant
+call "$(DevEnvDir)..\..\VC\bin\vcvars32.bat"
+call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

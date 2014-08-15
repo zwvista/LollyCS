@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppControl", "AppControl.csproj", "{90E8DD9C-3C6B-488C-980F-AB26AC789300}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{90E8DD9C-3C6B-488C-980F-AB26AC789300}.Debug.ActiveCfg = Debug|.NET
+		{90E8DD9C-3C6B-488C-980F-AB26AC789300}.Debug.Build.0 = Debug|.NET
+		{90E8DD9C-3C6B-488C-980F-AB26AC789300}.Release.ActiveCfg = Release|.NET
+		{90E8DD9C-3C6B-488C-980F-AB26AC789300}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

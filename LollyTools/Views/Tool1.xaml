@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="LollyTools.Views.Tool1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600" FontSize="15">
+    <Grid>
+        <Button Content="All Translations Frhelper" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" Width="219" Command="{Binding AllTranslationsFrhelperCommand}"/>
+        <Button Content="One Translation Frhelper" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Width="219" Command="{Binding OneTranslationFrhelperCommand}"/>
+        <Button Content="Sync Dictionary Words&#xD;&#xA;With Language" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Width="219" Command="{Binding SyncDictWordsWithLangCommand}"/>
+        <Label Content="Word:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="76,13,0,0" TextWrapping="Wrap" Text="{Binding Word}" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</UserControl>

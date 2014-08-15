@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LollySQLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTOCORRECT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="INPUT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EXTENDED" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BASIC" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BOOKS">
+          <Key>
+            <PropertyRef Name="BOOKID" />
+          </Key>
+          <Property Name="BOOKID" Type="int" Nullable="false" />
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="BOOKNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMLESSONS" Type="int" Nullable="false" />
+          <Property Name="PARTS" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LESSONFROM" Type="int" Nullable="false" />
+          <Property Name="PARTFROM" Type="int" Nullable="false" />
+          <Property Name="LESSONTO" Type="int" Nullable="false" />
+          <Property Name="PARTTO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DICTIONARIES">
+          <Key>
+            <PropertyRef Name="LANGID" />
+            <PropertyRef Name="DICTNAME" />
+          </Key>
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="DICTTYPEID" Type="int" Nullable="false" />
+          <Property Name="DICTNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LANGIDTO" Type="int" Nullable="false" />
+          <Property Name="URL" Type="ntext" />
+          <Property Name="CHCONV" Type="nvarchar" MaxLength="255" />
+          <Property Name="AUTOMATION" Type="ntext" />
+          <Property Name="AUTOJUMP" Type="bit" Nullable="false" />
+          <Property Name="DICTTABLE" Type="nvarchar" MaxLength="255" />
+          <Property Name="TEMPLATE" Type="ntext" />
+        </EntityType>
+        <EntityType Name="DICTTYPES">
+          <Key>
+            <PropertyRef Name="DICTTYPEID" />
+          </Key>
+          <Property Name="DICTTYPEID" Type="int" Nullable="false" />
+          <Property Name="DICTTYPENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LANGUAGES">
+          <Key>
+            <PropertyRef Name="LANGID" />
+          </Key>
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="ENGNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CHNNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VOICE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CURBOOKID" Type="int" />
+        </EntityType>
+        <EntityType Name="PHRASES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BOOKID" Type="int" Nullable="false" />
+          <Property Name="LESSON" Type="int" Nullable="false" />
+          <Property Name="PART" Type="int" Nullable="false" />
+          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="PHRASE" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TRANSLATION" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PICBOOKS">
+          <Key>
+            <PropertyRef Name="BOOKNAME" />
+          </Key>
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="BOOKNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FILENAME" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="NUMPAGES" Type="int" Nullable="false" />
+          <Property Name="CURPAGE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WEBEXTRACT">
+          <Key>
+            <PropertyRef Name="SITENAME" />
+          </Key>
+          <Property Name="SITENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TRANSFORM_WIN" Type="ntext" />
+          <Property Name="TRANSFORM_MAC" Type="ntext" />
+          <Property Name="WAIT" Type="int" />
+          <Property Name="BODY" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WEBTEXT">
+          <Key>
+            <PropertyRef Name="SITENAME" />
+          </Key>
+          <Property Name="SITENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="URL" Type="ntext" />
+          <Property Name="TEMPLATE" Type="ntext" />
+          <Property Name="FOLDER" Type="ntext" />
+        </EntityType>
+        <EntityType Name="WORDSBOOK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BOOKID" Type="int" Nullable="false" />
+          <Property Name="LESSON" Type="int" Nullable="false" />
+          <Property Name="PART" Type="int" Nullable="false" />
+          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="WORD" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NOTE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="WORDSLANG">
+          <Key>
+            <PropertyRef Name="LANGID" />
+            <PropertyRef Name="WORD" />
+          </Key>
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="WORD" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LEVEL" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lolly.dbo.DICTALL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DICTALL">
+          <Key>
+            <PropertyRef Name="LANGID" />
+            <PropertyRef Name="INDEX" />
+            <PropertyRef Name="LANGIDTO" />
+            
+            <PropertyRef Name="DICTNAME" />
+            <PropertyRef Name="AUTOJUMP" />
+          </Key>
+          <Property Name="LANGID" Type="int" Nullable="false" />
+          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="LANGIDTO" Type="int" Nullable="false" />
+          <Property Name="DICTTYPENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DICTNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="URL" Type="ntext" />
+          <Property Name="CHCONV" Type="nvarchar" MaxLength="255" />
+          <Property Name="AUTOMATION" Type="ntext" />
+          <Property Name="AUTOJUMP" Type="bit" Nullable="false" />
+          <Property Name="DICTTABLE" Type="nvarchar" MaxLength="255" />
+          <Property Name="TRANSFORM_WIN" Type="ntext" />
+          <Property Name="TRANSFORM_MAC" Type="ntext" />
+          <Property Name="WAIT" Type="int" />
+          <Property Name="BODY" Type="bit" />
+          <Property Name="TEMPLATE" Type="ntext" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lolly.dbo.WEBTEXTALL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WEBTEXTALL">
+          <Key>
+            <PropertyRef Name="SITENAME" />
+            <PropertyRef Name="BODY" />
+          </Key>
+          <Property Name="SITENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TRANSFORM_WIN" Type="ntext" />
+          <Property Name="TRANSFORM_MAC" Type="ntext" />
+          <Property Name="TEMPLATE" Type="ntext" />
+          <Property Name="URL" Type="ntext" />
+          <Property Name="FOLDER" Type="ntext" />
+          <Property Name="WAIT" Type="int" />
+          <Property Name="BODY" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="AUTOCORRECT_FK00">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="AUTOCORRECT" Type="Self.AUTOCORRECT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="AUTOCORRECT">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BOOKS_FK00">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="BOOKS" Type="Self.BOOKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="BOOKS">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PICBOOKS_FK00">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="PICBOOKS" Type="Self.PICBOOKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="PICBOOKS">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WEBTEXT_FK00">
+          <End Role="WEBEXTRACT" Type="Self.WEBEXTRACT" Multiplicity="1" />
+          <End Role="WEBTEXT" Type="Self.WEBTEXT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="WEBEXTRACT">
+              <PropertyRef Name="SITENAME" />
+            </Principal>
+            <Dependent Role="WEBTEXT">
+              <PropertyRef Name="SITENAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WORDSLANG_FK00">
+          <End Role="LANGUAGES" Type="Self.LANGUAGES" Multiplicity="1" />
+          <End Role="WORDSLANG" Type="Self.WORDSLANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGES">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="WORDSLANG">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LollySQLModelStoreContainer">
+          <EntitySet Name="AUTOCORRECT" EntityType="Self.AUTOCORRECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOOKS" EntityType="Self.BOOKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DICTIONARIES" EntityType="Self.DICTIONARIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DICTTYPES" EntityType="Self.DICTTYPES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHRASES" EntityType="Self.PHRASES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PICBOOKS" EntityType="Self.PICBOOKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WEBEXTRACT" EntityType="Self.WEBEXTRACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WEBTEXT" EntityType="Self.WEBTEXT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORDSBOOK" EntityType="Self.WORDSBOOK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WORDSLANG" EntityType="Self.WORDSLANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DICTALL" EntityType="Self.DICTALL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DICTALL].[LANGID] AS [LANGID], 
+[DICTALL].[INDEX] AS [INDEX], 
+[DICTALL].[LANGIDTO] AS [LANGIDTO], 
+[DICTALL].[DICTTYPENAME] AS [DICTTYPENAME], 
+[DICTALL].[DICTNAME] AS [DICTNAME], 
+[DICTALL].[URL] AS [URL], 
+[DICTALL].[CHCONV] AS [CHCONV], 
+[DICTALL].[AUTOMATION] AS [AUTOMATION], 
+[DICTALL].[AUTOJUMP] AS [AUTOJUMP], 
+[DICTALL].[DICTTABLE] AS [DICTTABLE], 
+[DICTALL].[TRANSFORM_WIN] AS [TRANSFORM_WIN], 
+[DICTALL].[TRANSFORM_MAC] AS [TRANSFORM_MAC], 
+[DICTALL].[WAIT] AS [WAIT], 
+[DICTALL].[BODY] AS [BODY], 
+[DICTALL].[TEMPLATE] AS [TEMPLATE]
+FROM [dbo].[DICTALL] AS [DICTALL]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WEBTEXTALL" EntityType="Self.WEBTEXTALL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[WEBTEXTALL].[SITENAME] AS [SITENAME], 
+[WEBTEXTALL].[TRANSFORM_WIN] AS [TRANSFORM_WIN], 
+[WEBTEXTALL].[TRANSFORM_MAC] AS [TRANSFORM_MAC], 
+[WEBTEXTALL].[TEMPLATE] AS [TEMPLATE], 
+[WEBTEXTALL].[URL] AS [URL], 
+[WEBTEXTALL].[FOLDER] AS [FOLDER], 
+[WEBTEXTALL].[WAIT] AS [WAIT], 
+[WEBTEXTALL].[BODY] AS [BODY]
+FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="AUTOCORRECT_FK00" Association="Self.AUTOCORRECT_FK00">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="AUTOCORRECT" EntitySet="AUTOCORRECT" />
+          </AssociationSet>
+          <AssociationSet Name="BOOKS_FK00" Association="Self.BOOKS_FK00">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="BOOKS" EntitySet="BOOKS" />
+          </AssociationSet>
+          <AssociationSet Name="PICBOOKS_FK00" Association="Self.PICBOOKS_FK00">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="PICBOOKS" EntitySet="PICBOOKS" />
+          </AssociationSet>
+          <AssociationSet Name="WEBTEXT_FK00" Association="Self.WEBTEXT_FK00">
+            <End Role="WEBEXTRACT" EntitySet="WEBEXTRACT" />
+            <End Role="WEBTEXT" EntitySet="WEBTEXT" />
+          </AssociationSet>
+          <AssociationSet Name="WORDSLANG_FK00" Association="Self.WORDSLANG_FK00">
+            <End Role="LANGUAGES" EntitySet="LANGUAGES" />
+            <End Role="WORDSLANG" EntitySet="WORDSLANG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LollySQLModel1" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="SPHRASELESSON" EntityType="LollySQLModel1.MPHRASELESSON" />
+          <EntitySet Name="SWORDLESSON" EntityType="LollySQLModel1.MWORDLESSON" />
+          <EntitySet Name="SWORDLANG" EntityType="LollySQLModel1.MWORDLANG" />
+          <EntitySet Name="SAUTOCORRECT" EntityType="LollySQLModel1.MAUTOCORRECT" />
+          <EntitySet Name="SBOOK" EntityType="LollySQLModel1.MBOOK" />
+          <EntitySet Name="SDICTALL" EntityType="LollySQLModel1.MDICTALL" />
+          <EntitySet Name="SLANGUAGE" EntityType="LollySQLModel1.MLANGUAGE" />
+          <EntitySet Name="SPICBOOK" EntityType="LollySQLModel1.MPICBOOK" />
+          <EntitySet Name="SDICTIONARY" EntityType="LollySQLModel1.MDICTIONARY" />
+          <EntitySet Name="SDICTTYPE" EntityType="LollySQLModel1.MDICTTYPE" />
+          <EntitySet Name="SWEBEXTRACT" EntityType="LollySQLModel1.MWEBEXTRACT" />
+          <EntitySet Name="SWEBTEXT" EntityType="LollySQLModel1.MWEBTEXT" />
+          <EntitySet Name="SWEBTEXTALL" EntityType="LollySQLModel1.MWEBTEXTALL" />
+          <AssociationSet Name="BOOKS_FK00" Association="LollySQLModel1.BOOKS_FK00">
+            <End Role="MLANGUAGE" EntitySet="SLANGUAGE" />
+            <End Role="MBOOK" EntitySet="SBOOK" />
+          </AssociationSet>
+          <AssociationSet Name="PICBOOKS_FK00" Association="LollySQLModel1.PICBOOKS_FK00">
+            <End Role="MLANGUAGE" EntitySet="SLANGUAGE" />
+            <End Role="MPICBOOK" EntitySet="SPICBOOK" />
+          </AssociationSet>
+          <AssociationSet Name="WORDSLANG_FK00" Association="LollySQLModel1.WORDSLANG_FK00">
+            <End Role="MLANGUAGE" EntitySet="SLANGUAGE" />
+            <End Role="MWORDLANG" EntitySet="SWORDLANG" />
+          </AssociationSet>
+          <AssociationSet Name="WEBTEXT_FK00" Association="LollySQLModel1.WEBTEXT_FK00">
+            <End Role="MWEBEXTRACT" EntitySet="SWEBEXTRACT" />
+            <End Role="MWEBTEXT" EntitySet="SWEBTEXT" />
+          </AssociationSet>
+          <AssociationSet Name="AUTOCORRECT_FK00" Association="LollySQLModel1.AUTOCORRECT_FK00">
+            <End Role="MLANGUAGE" EntitySet="SLANGUAGE" />
+            <End Role="MAUTOCORRECT" EntitySet="SAUTOCORRECT" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="MPHRASELESSON">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="BOOKID" Type="Int32" Nullable="false" />
+          <Property Name="LESSON" Type="Int32" Nullable="false" />
+          <Property Name="PART" Type="Int32" Nullable="false" />
+          <Property Name="INDEX" Type="Int32" Nullable="false" />
+          <Property Name="PHRASE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="TRANSLATION" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="MWORDLESSON">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="BOOKID" Type="Int32" Nullable="false" />
+          <Property Name="LESSON" Type="Int32" Nullable="false" />
+          <Property Name="PART" Type="Int32" Nullable="false" />
+          <Property Name="INDEX" Type="Int32" Nullable="false" />
+          <Property Name="WORD" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="NOTE" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="MWORDLANG">
+          <Key>
+            <PropertyRef Name="LANGID" />
+            <PropertyRef Name="WORD" />
+          </Key>
+          <Property Name="LANGID" Type="Int32" Nullable="false" />
+          <Property Name="WORD" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="LollySQLModel1.WORDSLANG_FK00" FromRole="MWORDLANG" ToRole="MLANGUAGE" />
+          <Property Type="Int32" Name="LEVEL" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="MWORDBOOK">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="BOOKID" Nullable="false" />
+          <Property Type="Int32" Name="LESSON" Nullable="false" />
+          <Property Type="Int32" Name="PART" Nullable="false" />
+          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NOTE" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="MPHRASELANG">
+          <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="LESSON" Nullable="false" />
+          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="String" Name="PHRASE" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="TRANSLATION" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="PART" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="BOOKID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MWORDATWILL">
+          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NOTE" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="MAUTOCORRECT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="LANGID" Nullable="false" />
+          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="String" Name="INPUT" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="EXTENDED" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="BASIC" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="LollySQLModel1.AUTOCORRECT_FK00" FromRole="MAUTOCORRECT" ToRole="MLANGUAGE" />
+        </EntityType>
+        <EntityType Name="MBOOK">
+          <Key>
+            <PropertyRef Name="BOOKID" />
+          </Key>
+          <Property Type="Int32" Name="BOOKID" Nullable="false" />
+          <Property Type="Int32" Name="LANGID" Nullable="false" />
+          <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="NUMLESSONS" Nullable="false" />
+          <Property Type="String" Name="PARTS" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="Int32" Name="LESSONFROM" Nullable="false" DefaultValue="1" />
+          <Property Type="Int32" Name="PARTFROM" Nullable="false" DefaultValue="1" />
+          <Property Type="Int32" Name="LESSONTO" Nullable="false" DefaultValue="1" />
+          <Property Type="Int32" Name="PARTTO" Nullable="false" DefaultValue="1" />
+          <NavigationProperty Name="LANGUAGES" Relationship="LollySQLModel1.BOOKS_FK00" FromRole="MBOOK" ToRole="MLANGUAGE" />
+        </EntityType>
+        <EntityType Name="MDICTALL">
+          <Key>
+            <PropertyRef Name="LANGID" />
+            <PropertyRef Name="INDEX" />
+            <PropertyRef Name="LANGIDTO" />
+            <PropertyRef Name="DICTNAME" />
+            <PropertyRef Name="AUTOJUMP" />
+          </Key>
+          <Property Type="Int32" Name="LANGID" Nullable="false" />
+          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="LANGIDTO" Nullable="false" />
+          <Property Type="String" Name="DICTTYPENAME" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="DICTNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CHCONV" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AUTOMATION" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="AUTOJUMP" Nullable="false" />
+          <Property Type="String" Name="DICTTABLE" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="WAIT" />
+          <Property Type="Boolean" Name="BODY" />
+          <Property Name="TRANSFORM_WIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TRANSFORM_MAC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TEMPLATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MLANGUAGE">
+          <Key>
+            <PropertyRef Name="LANGID" />
+          </Key>
+          <Property Type="Int32" Name="LANGID" Nullable="false" />
+          <Property Type="String" Name="ENGNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CHNNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VOICE" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CURBOOKID" />
+          <NavigationProperty Name="BOOKS" Relationship="LollySQLModel1.BOOKS_FK00" FromRole="MLANGUAGE" ToRole="MBOOK" />
+          <NavigationProperty Name="PICBOOKS" Relationship="LollySQLModel1.PICBOOKS_FK00" FromRole="MLANGUAGE" ToRole="MPICBOOK" />
+          <NavigationProperty Name="WORDSLANG" Relationship="LollySQLModel1.WORDSLANG_FK00" FromRole="MLANGUAGE" ToRole="MWORDLANG" />
+          <NavigationProperty Name="AUTOCORRECT" Relationship="LollySQLModel1.AUTOCORRECT_FK00" FromRole="MLANGUAGE" ToRole="MAUTOCORRECT" />
+        </EntityType>
+        <EntityType Name="MPICBOOK">
+          <Key>
+            <PropertyRef Name="BOOKNAME" />
+          </Key>
+          <Property Type="Int32" Name="LANGID" Nullable="false" />
+          <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FILENAME" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="NUMPAGES" Nullable="false" />
+          <Property Type="Int32" Name="CURPAGE" Nullable="false" />
+          <NavigationProperty Name="LANGUAGES" Relationship="LollySQLModel1.PICBOOKS_FK00" FromRole="MPICBOOK" ToRole="MLANGUAGE" />
+        </EntityType>
+        <ComplexType Name="MDICTENTITY">
+          <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TRANSLATION" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <EntityType Name="MDICTIONARY">
+          <Key>
+            <PropertyRef Name="LANGID" />
+            <PropertyRef Name="DICTNAME" />
+          </Key>
+          <Property Type="Int32" Name="LANGID" Nullable="false" />
+          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="DICTTYPEID" Nullable="false" DefaultValue="3" />
+          <Property Type="String" Name="DICTNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LANGIDTO" Nullable="false" DefaultValue="1" />
+          <Property Type="String" Name="URL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CHCONV" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AUTOMATION" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="AUTOJUMP" Nullable="false" />
+          <Property Type="String" Name="DICTTABLE" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TEMPLATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MDICTTYPE">
+          <Key>
+            <PropertyRef Name="DICTTYPEID" />
+          </Key>
+          <Property Type="Int32" Name="DICTTYPEID" Nullable="false" />
+          <Property Type="String" Name="DICTTYPENAME" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="MWORDLANGORBOOK">
+          <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="MWEBEXTRACT">
+          <Key>
+            <PropertyRef Name="SITENAME" />
+          </Key>
+          <Property Type="String" Name="SITENAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="WAIT" />
+          <Property Type="Boolean" Name="BODY" Nullable="false" />
+          <NavigationProperty Name="WEBTEXT" Relationship="LollySQLModel1.WEBTEXT_FK00" FromRole="MWEBEXTRACT" ToRole="MWEBTEXT" />
+          <Property Name="TRANSFORM_WIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TRANSFORM_MAC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MWEBTEXT">
+          <Key>
+            <PropertyRef Name="SITENAME" />
+          </Key>
+          <Property Type="String" Name="SITENAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FOLDER" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WEBEXTRACT" Relationship="LollySQLModel1.WEBTEXT_FK00" FromRole="MWEBTEXT" ToRole="MWEBEXTRACT" />
+          <Property Name="TEMPLATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MWEBTEXTALL">
+          <Key>
+            <PropertyRef Name="SITENAME" />
+            <PropertyRef Name="BODY" />
+          </Key>
+          <Property Type="String" Name="SITENAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FOLDER" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="WAIT" />
+          <Property Type="Boolean" Name="BODY" Nullable="false" />
+          <Property Name="TRANSFORM_WIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TRANSFORM_MAC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TEMPLATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="BOOKS_FK00">
+          <End Type="LollySQLModel1.MLANGUAGE" Role="MLANGUAGE" Multiplicity="1" />
+          <End Type="LollySQLModel1.MBOOK" Role="MBOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLANGUAGE">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="MBOOK">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PICBOOKS_FK00">
+          <End Type="LollySQLModel1.MLANGUAGE" Role="MLANGUAGE" Multiplicity="1" />
+          <End Type="LollySQLModel1.MPICBOOK" Role="MPICBOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLANGUAGE">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="MPICBOOK">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WORDSLANG_FK00">
+          <End Type="LollySQLModel1.MLANGUAGE" Role="MLANGUAGE" Multiplicity="1" />
+          <End Type="LollySQLModel1.MWORDLANG" Role="MWORDLANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLANGUAGE">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="MWORDLANG">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WEBTEXT_FK00">
+          <End Type="LollySQLModel1.MWEBEXTRACT" Role="MWEBEXTRACT" Multiplicity="1" />
+          <End Type="LollySQLModel1.MWEBTEXT" Role="MWEBTEXT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MWEBEXTRACT">
+              <PropertyRef Name="SITENAME" />
+            </Principal>
+            <Dependent Role="MWEBTEXT">
+              <PropertyRef Name="SITENAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUTOCORRECT_FK00">
+          <End Type="LollySQLModel1.MLANGUAGE" Role="MLANGUAGE" Multiplicity="1" />
+          <End Type="LollySQLModel1.MAUTOCORRECT" Role="MAUTOCORRECT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MLANGUAGE">
+              <PropertyRef Name="LANGID" />
+            </Principal>
+            <Dependent Role="MAUTOCORRECT">
+              <PropertyRef Name="LANGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LollySQLModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="SPHRASELESSON"><EntityTypeMapping TypeName="LollySQLModel1.MPHRASELESSON"><MappingFragment StoreEntitySet="PHRASES">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
+            <ScalarProperty Name="LESSON" ColumnName="LESSON" />
+            <ScalarProperty Name="PART" ColumnName="PART" />
+            <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+            <ScalarProperty Name="PHRASE" ColumnName="PHRASE" />
+            <ScalarProperty Name="TRANSLATION" ColumnName="TRANSLATION" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SWORDLESSON"><EntityTypeMapping TypeName="LollySQLModel1.MWORDLESSON"><MappingFragment StoreEntitySet="WORDSBOOK">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
+            <ScalarProperty Name="LESSON" ColumnName="LESSON" />
+            <ScalarProperty Name="PART" ColumnName="PART" />
+            <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+            <ScalarProperty Name="WORD" ColumnName="WORD" />
+            <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SWORDLANG"><EntityTypeMapping TypeName="LollySQLModel1.MWORDLANG"><MappingFragment StoreEntitySet="WORDSLANG">
+            <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+            <ScalarProperty Name="WORD" ColumnName="WORD" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SAUTOCORRECT">
+            <EntityTypeMapping TypeName="LollySQLModel1.MAUTOCORRECT">
+              <MappingFragment StoreEntitySet="AUTOCORRECT">
+                <ScalarProperty Name="BASIC" ColumnName="BASIC" />
+                <ScalarProperty Name="EXTENDED" ColumnName="EXTENDED" />
+                <ScalarProperty Name="INPUT" ColumnName="INPUT" />
+                <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SBOOK">
+            <EntityTypeMapping TypeName="LollySQLModel1.MBOOK">
+              <MappingFragment StoreEntitySet="BOOKS">
+                <ScalarProperty Name="PARTTO" ColumnName="PARTTO" />
+                <ScalarProperty Name="LESSONTO" ColumnName="LESSONTO" />
+                <ScalarProperty Name="PARTFROM" ColumnName="PARTFROM" />
+                <ScalarProperty Name="LESSONFROM" ColumnName="LESSONFROM" />
+                <ScalarProperty Name="PARTS" ColumnName="PARTS" />
+                <ScalarProperty Name="NUMLESSONS" ColumnName="NUMLESSONS" />
+                <ScalarProperty Name="BOOKNAME" ColumnName="BOOKNAME" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+                <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDICTALL">
+            <EntityTypeMapping TypeName="LollySQLModel1.MDICTALL">
+              <MappingFragment StoreEntitySet="DICTALL">
+                <ScalarProperty Name="TEMPLATE" ColumnName="TEMPLATE" />
+                <ScalarProperty Name="TRANSFORM_MAC" ColumnName="TRANSFORM_MAC" />
+                <ScalarProperty Name="TRANSFORM_WIN" ColumnName="TRANSFORM_WIN" />
+                <ScalarProperty Name="BODY" ColumnName="BODY" />
+                <ScalarProperty Name="WAIT" ColumnName="WAIT" />
+                <ScalarProperty Name="DICTTABLE" ColumnName="DICTTABLE" />
+                <ScalarProperty Name="AUTOJUMP" ColumnName="AUTOJUMP" />
+                <ScalarProperty Name="AUTOMATION" ColumnName="AUTOMATION" />
+                <ScalarProperty Name="CHCONV" ColumnName="CHCONV" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="DICTNAME" ColumnName="DICTNAME" />
+                <ScalarProperty Name="DICTTYPENAME" ColumnName="DICTTYPENAME" />
+                <ScalarProperty Name="LANGIDTO" ColumnName="LANGIDTO" />
+                <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLANGUAGE">
+            <EntityTypeMapping TypeName="LollySQLModel1.MLANGUAGE">
+              <MappingFragment StoreEntitySet="LANGUAGES">
+                <ScalarProperty Name="CURBOOKID" ColumnName="CURBOOKID" />
+                <ScalarProperty Name="VOICE" ColumnName="VOICE" />
+                <ScalarProperty Name="CHNNAME" ColumnName="CHNNAME" />
+                <ScalarProperty Name="ENGNAME" ColumnName="ENGNAME" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPICBOOK">
+            <EntityTypeMapping TypeName="LollySQLModel1.MPICBOOK">
+              <MappingFragment StoreEntitySet="PICBOOKS">
+                <ScalarProperty Name="CURPAGE" ColumnName="CURPAGE" />
+                <ScalarProperty Name="NUMPAGES" ColumnName="NUMPAGES" />
+                <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="BOOKNAME" ColumnName="BOOKNAME" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDICTIONARY">
+            <EntityTypeMapping TypeName="LollySQLModel1.MDICTIONARY">
+              <MappingFragment StoreEntitySet="DICTIONARIES">
+                <ScalarProperty Name="TEMPLATE" ColumnName="TEMPLATE" />
+                <ScalarProperty Name="DICTTABLE" ColumnName="DICTTABLE" />
+                <ScalarProperty Name="AUTOJUMP" ColumnName="AUTOJUMP" />
+                <ScalarProperty Name="AUTOMATION" ColumnName="AUTOMATION" />
+                <ScalarProperty Name="CHCONV" ColumnName="CHCONV" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="LANGIDTO" ColumnName="LANGIDTO" />
+                <ScalarProperty Name="DICTNAME" ColumnName="DICTNAME" />
+                <ScalarProperty Name="DICTTYPEID" ColumnName="DICTTYPEID" />
+                <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+                <ScalarProperty Name="LANGID" ColumnName="LANGID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDICTTYPE">
+            <EntityTypeMapping TypeName="LollySQLModel1.MDICTTYPE">
+              <MappingFragment StoreEntitySet="DICTTYPES">
+                <ScalarProperty Name="DICTTYPENAME" ColumnName="DICTTYPENAME" />
+                <ScalarProperty Name="DICTTYPEID" ColumnName="DICTTYPEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SWEBEXTRACT">
+            <EntityTypeMapping TypeName="LollySQLModel1.MWEBEXTRACT">
+              <MappingFragment StoreEntitySet="WEBEXTRACT">
+                <ScalarProperty Name="TRANSFORM_MAC" ColumnName="TRANSFORM_MAC" />
+                <ScalarProperty Name="TRANSFORM_WIN" ColumnName="TRANSFORM_WIN" />
+                <ScalarProperty Name="BODY" ColumnName="BODY" />
+                <ScalarProperty Name="WAIT" ColumnName="WAIT" />
+                <ScalarProperty Name="SITENAME" ColumnName="SITENAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SWEBTEXT">
+            <EntityTypeMapping TypeName="LollySQLModel1.MWEBTEXT">
+              <MappingFragment StoreEntitySet="WEBTEXT">
+                <ScalarProperty Name="TEMPLATE" ColumnName="TEMPLATE" />
+                <ScalarProperty Name="FOLDER" ColumnName="FOLDER" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="SITENAME" ColumnName="SITENAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SWEBTEXTALL">
+            <EntityTypeMapping TypeName="LollySQLModel1.MWEBTEXTALL">
+              <MappingFragment StoreEntitySet="WEBTEXTALL">
+                <ScalarProperty Name="TEMPLATE" ColumnName="TEMPLATE" />
+                <ScalarProperty Name="TRANSFORM_MAC" ColumnName="TRANSFORM_MAC" />
+                <ScalarProperty Name="TRANSFORM_WIN" ColumnName="TRANSFORM_WIN" />
+                <ScalarProperty Name="BODY" ColumnName="BODY" />
+                <ScalarProperty Name="WAIT" ColumnName="WAIT" />
+                <ScalarProperty Name="FOLDER" ColumnName="FOLDER" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="SITENAME" ColumnName="SITENAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="LollySQLModel1.MPHRASELESSON" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollySQLModel1.MWORDLESSON" Width="1.75" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollySQLModel1.MWORDLANG" Width="1.5" PointX="4.75" PointY="0.75" Height="1.3969734700520826" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollySQLModel1.MAUTOCORRECT" Width="1.75" PointX="4.875" PointY="2.875" Height="2.1610522460937496" />
+        <EntityTypeShape EntityType="LollySQLModel1.MBOOK" Width="1.5" PointX="2.875" PointY="3.25" Height="2.7341113281249996" />
+        <EntityTypeShape EntityType="LollySQLModel1.MDICTALL" Width="1.75" PointX="0.5" PointY="3.25" Height="3.8802294921875031" />
+        <EntityTypeShape EntityType="LollySQLModel1.MLANGUAGE" Width="1.5" PointX="7.75" PointY="0.875" Height="2.7341113281249996" />
+        <EntityTypeShape EntityType="LollySQLModel1.MPICBOOK" Width="1.5" PointX="10.75" PointY="5.5" Height="2.1610522460937496" />
+        <EntityTypeShape EntityType="LollySQLModel1.MDICTIONARY" Width="1.625" PointX="4.75" PointY="6.125" Height="3.4314583333333317" />
+        <EntityTypeShape EntityType="LollySQLModel1.MDICTTYPE" Width="1.5" PointX="7.375" PointY="5.75" Height="1.5095833333333317" />
+        <EntityTypeShape EntityType="LollySQLModel1.MWEBEXTRACT" Width="1.75" PointX="10.125" PointY="2" Height="2.3637500000000031" />
+        <EntityTypeShape EntityType="LollySQLModel1.MWEBTEXT" Width="1.5" PointX="12.5" PointY="2" Height="2.1502083333333317" />
+        <EntityTypeShape EntityType="LollySQLModel1.MWEBTEXTALL" Width="1.875" PointX="12.875" PointY="4.75" Height="2.5430916341145888" />
+        <AssociationConnector Association="LollySQLModel1.BOOKS_FK00">
+          <ConnectorPoint PointX="9.25" PointY="3.984111328125" />
+          <ConnectorPoint PointX="9.25" PointY="4.7125655110677078" />
+          <ConnectorPoint PointX="6.875" PointY="4.7125655110677078" />
+          <ConnectorPoint PointX="6.875" PointY="5.8520719401041674" />
+          <ConnectorPoint PointX="4.75" PointY="5.8520719401041674" />
+          <ConnectorPoint PointX="4.75" PointY="4.7125655110677078" />
+          <ConnectorPoint PointX="4.375" PointY="4.7125655110677078" />
+        </AssociationConnector>
+        <AssociationConnector Association="LollySQLModel1.PICBOOKS_FK00">
+          <ConnectorPoint PointX="9.6562525" PointY="3.984111328125" />
+          <ConnectorPoint PointX="9.6562525" PointY="7.4352628580729156" />
+          <ConnectorPoint PointX="10.75" PointY="7.4352628580729156" />
+        </AssociationConnector>
+        <AssociationConnector Association="LollySQLModel1.WORDSLANG_FK00">
+          <ConnectorPoint PointX="8.5" PointY="1.79399658203125" />
+          <ConnectorPoint PointX="6.25" PointY="1.79399658203125" />
+        </AssociationConnector>
+        <AssociationConnector Association="LollySQLModel1.WEBTEXT_FK00">
+          <ConnectorPoint PointX="11.875" PointY="2.9850162760416667" />
+          <ConnectorPoint PointX="12.5" PointY="2.9850162760416667" />
+        </AssociationConnector>
+        <AssociationConnector Association="LollySQLModel1.AUTOCORRECT_FK00" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
