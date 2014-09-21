@@ -53,7 +53,6 @@ namespace Lolly
             this.TRANSFORM_WIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TRANSFORM_MAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.waitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bodyColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -208,8 +207,7 @@ namespace Lolly
             this.sitenameColumn,
             this.TRANSFORM_WIN,
             this.TRANSFORM_MAC,
-            this.waitColumn,
-            this.bodyColumn});
+            this.waitColumn});
             this.dataGridView1.DataSource = this.bindingSource1;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -259,13 +257,6 @@ namespace Lolly
             this.waitColumn.Name = "waitColumn";
             this.waitColumn.Width = 50;
             // 
-            // bodyColumn
-            // 
-            this.bodyColumn.DataPropertyName = "BODY";
-            this.bodyColumn.HeaderText = "BODY";
-            this.bodyColumn.Name = "bodyColumn";
-            this.bodyColumn.Width = 50;
-            // 
             // AuxWebExtractForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -313,6 +304,5 @@ namespace Lolly
         private System.Windows.Forms.DataGridViewTextBoxColumn TRANSFORM_WIN;
         private System.Windows.Forms.DataGridViewTextBoxColumn TRANSFORM_MAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn waitColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn bodyColumn;
     }
 }

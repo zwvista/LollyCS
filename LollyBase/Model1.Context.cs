@@ -38,5 +38,29 @@ namespace LollyBase
         public DbSet<MWEBEXTRACT> SWEBEXTRACT { get; set; }
         public DbSet<MWEBTEXT> SWEBTEXT { get; set; }
         public DbSet<MWEBTEXTALL> SWEBTEXTALL { get; set; }
+        public DbSet<C_ES_CH_AA> C_ES_CH_AA { get; set; }
+        public DbSet<C_ES_EN_TRADUK> C_ES_EN_TRADUK { get; set; }
+        public DbSet<C_ES_EN_ULTRALINGUA> C_ES_EN_ULTRALINGUA { get; set; }
+        public DbSet<C_FR_CH_FRHELPER> C_FR_CH_FRHELPER { get; set; }
+        public DbSet<C_FR_EN_LAROUSSE> C_FR_EN_LAROUSSE { get; set; }
+        public DbSet<C_FR_EN_NEIL_COFFEY> C_FR_EN_NEIL_COFFEY { get; set; }
+        public DbSet<C_FR_EN_REVERSO> C_FR_EN_REVERSO { get; set; }
+        public DbSet<C_GE_CH_OHDICT> C_GE_CH_OHDICT { get; set; }
+        public DbSet<C_GE_EN_DICCIONARIOS> C_GE_EN_DICCIONARIOS { get; set; }
+        public DbSet<C_GE_EN_REVERSO> C_GE_EN_REVERSO { get; set; }
+        public DbSet<C_GE_EN_WORDREFERENCE> C_GE_EN_WORDREFERENCE { get; set; }
+        public DbSet<C_KO_EN_GOOGLE> C_KO_EN_GOOGLE { get; set; }
+        public DbSet<C_KO_EN_QUICKFIND> C_KO_EN_QUICKFIND { get; set; }
+        public DbSet<C_RU_EN_ABBYY> C_RU_EN_ABBYY { get; set; }
+        public DbSet<C_RU_EN_KMRU> C_RU_EN_KMRU { get; set; }
+        public DbSet<C_RU_EN_REVERSO> C_RU_EN_REVERSO { get; set; }
+        public DbSet<C_RU_EN_WORDREFERENCE> C_RU_EN_WORDREFERENCE { get; set; }
+        public DbSet<C_SP_CH_OHDICT> C_SP_CH_OHDICT { get; set; }
+        public DbSet<C_SP_EN_REVERSO> C_SP_EN_REVERSO { get; set; }
+        public DbSet<C_SP_EN_SPANISHDICT> C_SP_EN_SPANISHDICT { get; set; }
+        public DbSet<C_SP_EN_WORDREFERENCE> C_SP_EN_WORDREFERENCE { get; set; }
+        public DbSet<C_SP_EN_YAHOO> C_SP_EN_YAHOO { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<USERS> USERS { get; set; }
     }
 }

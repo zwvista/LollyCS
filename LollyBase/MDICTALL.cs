@@ -25,7 +25,6 @@ namespace LollyBase
         public bool AUTOJUMP { get; set; }
         public string DICTTABLE { get; set; }
         public Nullable<int> WAIT { get; set; }
-        public Nullable<bool> BODY { get; set; }
         public string TRANSFORM_WIN { get; set; }
         public string TRANSFORM_MAC { get; set; }
         public string TEMPLATE { get; set; }

@@ -20,16 +20,16 @@ namespace Lolly
             return (IHTMLDocument2)wb.Document.DomDocument;
         }
 
-        public static string ExtractFromWeb(this WebBrowser wb, bool bodyOnly, string transfrom)
+        public static string ExtractFromWeb(this WebBrowser wb, string transfrom)
         {
             var doc = wb.GetHTMLDoc();
-            var text = bodyOnly ? doc.body.outerHTML : doc.body.parentElement.outerHTML;
+            var text = doc.body.parentElement.outerHTML;
             return ExtensionClass.ExtractFromHtml(text, transfrom);
         }
 
         public static string ExtractFromWeb(this WebBrowser wb, MDICTALL dictRow, string defaultString = "")
         {
-            var text = wb.ExtractFromWeb((bool)dictRow.BODY, dictRow.TRANSFORM_WIN);
+            var text = wb.ExtractFromWeb(dictRow.TRANSFORM_WIN);
             return text == "" ? defaultString : text;
         }
 

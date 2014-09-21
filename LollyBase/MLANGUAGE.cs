@@ -23,10 +23,10 @@ namespace LollyBase
         }
     
         public int LANGID { get; set; }
-        public string ENGNAME { get; set; }
         public string CHNNAME { get; set; }
         public string VOICE { get; set; }
         public Nullable<int> CURBOOKID { get; set; }
+        public string LANGNAME { get; set; }
     
         public virtual ICollection<MBOOK> BOOKS { get; set; }
         public virtual ICollection<MPICBOOK> PICBOOKS { get; set; }

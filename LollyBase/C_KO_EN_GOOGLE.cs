@@ -12,13 +12,9 @@ namespace LollyBase
     using System;
     using System.Collections.Generic;
     
-    public partial class MWEBEXTRACT
+    public partial class C_KO_EN_GOOGLE
     {
-        public string SITENAME { get; set; }
-        public Nullable<int> WAIT { get; set; }
-        public string TRANSFORM_WIN { get; set; }
-        public string TRANSFORM_MAC { get; set; }
-    
-        public virtual MWEBTEXT WEBTEXT { get; set; }
+        public string WORD { get; set; }
+        public string TRANSLATION { get; set; }
     }
 }

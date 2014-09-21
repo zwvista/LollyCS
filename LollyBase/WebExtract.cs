@@ -30,8 +30,7 @@ namespace LollyBase
                     SITENAME = row.SITENAME,
                     TRANSFORM_WIN = row.TRANSFORM_WIN,
                     TRANSFORM_MAC = row.TRANSFORM_MAC,
-                    WAIT = row.WAIT,
-                    BODY = row.BODY
+                    WAIT = row.WAIT
                 };
                 db.SWEBEXTRACT.Add(item);
                 db.SaveChanges();
@@ -44,7 +43,7 @@ namespace LollyBase
             {
                 var sql = @"
                     UPDATE  WEBEXTRACT
-                    SET SITENAME = @sitename, TRANSFORM_WIN = @transform_win, TRANSFORM_MAC = @transfrom_mac, WAIT = @wait, BODY = @body
+                    SET SITENAME = @sitename, TRANSFORM_WIN = @transform_win, TRANSFORM_MAC = @transfrom_mac, WAIT = @wait
                     WHERE   (SITENAME = @original_sitename)
                 ";
                 db.Database.ExecuteSqlCommand(sql,
@@ -52,7 +51,6 @@ namespace LollyBase
                     new SqlParameter("transform_win", row.TRANSFORM_WIN ?? (object)DBNull.Value),
                     new SqlParameter("transfrom_mac", row.TRANSFORM_MAC ?? (object)DBNull.Value),
                     new SqlParameter("wait", row.WAIT),
-                    new SqlParameter("body", row.BODY),
                     new SqlParameter("original_sitename", original_sitename));
             }
         }
@@ -61,7 +59,7 @@ namespace LollyBase
         {
             using (var db = new Entities())
             {
-                return db.SWEBEXTRACT.ToList();
+                return db.SWEBEXTRACT.OrderBy(r => r.SITENAME).ToList();
             }
         }
     }

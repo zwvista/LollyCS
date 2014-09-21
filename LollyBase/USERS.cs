@@ -12,13 +12,10 @@ namespace LollyBase
     using System;
     using System.Collections.Generic;
     
-    public partial class MWEBEXTRACT
+    public partial class USERS
     {
-        public string SITENAME { get; set; }
-        public Nullable<int> WAIT { get; set; }
-        public string TRANSFORM_WIN { get; set; }
-        public string TRANSFORM_MAC { get; set; }
-    
-        public virtual MWEBTEXT WEBTEXT { get; set; }
+        public int USERID { get; set; }
+        public string USERNAME { get; set; }
+        public string PASSWORD { get; set; }
     }
 }

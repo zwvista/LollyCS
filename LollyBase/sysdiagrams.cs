@@ -12,13 +12,12 @@ namespace LollyBase
     using System;
     using System.Collections.Generic;
     
-    public partial class MWEBEXTRACT
+    public partial class sysdiagrams
     {
-        public string SITENAME { get; set; }
-        public Nullable<int> WAIT { get; set; }
-        public string TRANSFORM_WIN { get; set; }
-        public string TRANSFORM_MAC { get; set; }
-    
-        public virtual MWEBTEXT WEBTEXT { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
