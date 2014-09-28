@@ -22,15 +22,15 @@ namespace Lolly
 
         private void changeLBLSettings()
         {
-            langRow = Languages.GetDataByLang(Program.lblSettings.LangID);
-            Program.lblSettings.LangName = langRow.CHNNAME;
-            Program.lblSettings.BookID = (int)langRow.CURBOOKID;
-            bookRow = Books.GetDataByBook(Program.lblSettings.BookID);
-            Program.lblSettings.BookName = bookRow.BOOKNAME;
-            Program.lblSettings.LessonFrom = bookRow.LESSONFROM;
-            Program.lblSettings.PartFrom = bookRow.PARTFROM;
-            Program.lblSettings.LessonTo = bookRow.LESSONTO;
-            Program.lblSettings.PartTo = bookRow.PARTTO;
+            langRow = Languages.GetDataByLang(Program.lbuSettings.LangID);
+            Program.lbuSettings.LangName = langRow.CHNNAME;
+            Program.lbuSettings.BookID = (int)langRow.CURBOOKID;
+            bookRow = Books.GetDataByBook(Program.lbuSettings.BookID);
+            Program.lbuSettings.BookName = bookRow.BOOKNAME;
+            Program.lbuSettings.UnitFrom = bookRow.UNITFROM;
+            Program.lbuSettings.PartFrom = bookRow.PARTFROM;
+            Program.lbuSettings.UnitTo = bookRow.UNITTO;
+            Program.lbuSettings.PartTo = bookRow.PARTTO;
         }
 
         private void MDIForm_Load(object sender, EventArgs e)
@@ -39,14 +39,14 @@ namespace Lolly
             Program.InitVoices();
         }
 
-        private void selectLessonsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void selectUnitsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SelectLessonsDlg(true);
+            var dlg = new SelectUnitsDlg(true);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 changeLBLSettings();
-                if (dlg.ActiveIncluded && ActiveMdiChild is ILangBookLessons)
-                    ((ILangBookLessons)ActiveMdiChild).UpdatelblSettings();
+                if (dlg.ActiveIncluded && ActiveMdiChild is ILangBookUnits)
+                    ((ILangBookUnits)ActiveMdiChild).UpdatelbuSettings();
             }
         }
 
@@ -56,10 +56,10 @@ namespace Lolly
             childForm.Show();
         }
 
-        private void wordsLessonsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void wordsUnitsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //new Finder<WordsLessonsForm>(this).NextChild();
-            NextChildForm("WordsLessonsForm");
+            //new Finder<WordsUnitsForm>(this).NextChild();
+            NextChildForm("WordsUnitsForm");
         }
 
         private void wordsLanguageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,10 +80,10 @@ namespace Lolly
             NextChildForm("WordsBooksForm");
         }
 
-        private void phrasesLessonsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void phrasesUnitsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //new Finder<PhrasesLessonsForm>(this).NextChild();
-            NextChildForm("PhrasesLessonsForm");
+            //new Finder<PhrasesUnitsForm>(this).NextChild();
+            NextChildForm("PhrasesUnitsForm");
         }
 
         private void phrasesLanguageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,10 +92,10 @@ namespace Lolly
             NextChildForm("PhrasesLangForm");
         }
 
-        private void wordsLessonsEBWinToolStripMenuItem_Click(object sender, EventArgs e)
+        private void wordsUnitsEBWinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //new Finder<WordsLessonsEBForm>(this).NextChild();
-            NextChildForm("WordsLessonsEBForm");
+            //new Finder<WordsUnitsEBForm>(this).NextChild();
+            NextChildForm("WordsUnitsEBForm");
         }
 
         private void wordsAtWillEBWinToolStripMenuItem_Click(object sender, EventArgs e)
@@ -239,14 +239,14 @@ namespace Lolly
 
         private void speakToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.Speak(Program.lblSettings.LangID, Clipboard.GetText());
+            Program.Speak(Program.lbuSettings.LangID, Clipboard.GetText());
         }
 
         private void stopSpeakingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.Speak(0, "");
             Program.Speak(1, "");
-            Program.Speak(Program.lblSettings.LangID, "");
+            Program.Speak(Program.lbuSettings.LangID, "");
         }
 
         private void speakChineseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -259,9 +259,9 @@ namespace Lolly
             Program.Speak(1, Clipboard.GetText());
         }
 
-        private void wordsLessonsNewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void wordsUnitsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewChildForm(new WordsLessonsForm());
+            NewChildForm(new WordsUnitsForm());
         }
 
         private void wordsLanguageNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -279,9 +279,9 @@ namespace Lolly
             NewChildForm(new WordsBooksForm());
         }
 
-        private void phrasesLessonsNewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void phrasesUnitsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewChildForm(new PhrasesLessonsForm());
+            NewChildForm(new PhrasesUnitsForm());
         }
 
         private void phrasesLanguageNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -289,9 +289,9 @@ namespace Lolly
             NewChildForm(new PhrasesLangForm());
         }
 
-        private void wordsLessonsEBWinNewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void wordsUnitsEBWinNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewChildForm(new WordsLessonsEBForm());
+            NewChildForm(new WordsUnitsEBForm());
         }
 
         private void wordsAtWillEBWinNewToolStripMenuItem_Click(object sender, EventArgs e)

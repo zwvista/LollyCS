@@ -44,7 +44,7 @@ namespace Lolly
         private void WordsBaseForm_Shown(object sender, EventArgs e)
         {
             if (DesignMode == false)
-                UpdatelblSettings();
+                UpdatelbuSettings();
         }
 
         private void EnableToolStripButtons()
@@ -170,7 +170,7 @@ namespace Lolly
                 }
             };
 
-            var elemDicts = Program.GetConfigDicts(lblSettings.LangID);
+            var elemDicts = Program.GetConfigDicts(lbuSettings.LangID);
 
             // custom
             var elems = elemDicts.Elements("custom");
@@ -197,8 +197,8 @@ namespace Lolly
             foreach (var group in dictsGroupWithInfo)
             {
                 dictAllList = 
-                    group.Name == DictNames.WEB ? DictAll.GetDataByLangWeb(lblSettings.LangID) :
-                    DictAll.GetDataByLangDictType(lblSettings.LangID, group.DictType);
+                    group.Name == DictNames.WEB ? DictAll.GetDataByLangWeb(lbuSettings.LangID) :
+                    DictAll.GetDataByLangDictType(lbuSettings.LangID, group.DictType);
                 var dictNames = (from row in dictAllList select row.DICTNAME).ToArray();
                 if (group.Name == DictNames.OFFLINE)
                 {
@@ -215,7 +215,7 @@ namespace Lolly
                 dictsSpecial.Add("Lingoes");
             AddDictGroups(DictImage.Special, "Special", dictsSpecial.OrderBy(s => s).ToArray());
 
-            dictAllList = DictAll.GetDataByLang(lblSettings.LangID);
+            dictAllList = DictAll.GetDataByLang(lbuSettings.LangID);
             AddDict(DictNames.DEFAULT, (int)DictImage.Custom);
             SelectDict(0);
         }
@@ -425,9 +425,9 @@ namespace Lolly
             }
         }
 
-        #region ILangBookLessons Members
+        #region ILangBookUnits Members
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
             currentDWB = null;
             foreach (var dwb in dwbList)
@@ -438,7 +438,7 @@ namespace Lolly
             //dictsOffline = null;
             //dictTablesOffline = null;
 
-            base.UpdatelblSettings();
+            base.UpdatelbuSettings();
         }
 
         #endregion

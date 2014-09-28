@@ -32,7 +32,7 @@ namespace Lolly
         private void ReadNumberDlg_Load(object sender, EventArgs e)
         {
             langComboBox.DataSource = Languages.GetData();
-            langComboBox.SelectedValue = Program.lblSettings.LangID;
+            langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }
 
         private void readNumberButton_Click(object sender, EventArgs e)

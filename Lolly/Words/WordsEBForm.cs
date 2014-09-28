@@ -33,7 +33,7 @@ namespace Lolly
             if (DesignMode == false)
             {
                 ebwin = new EBWin(applicationControl1.AppHandle);
-                UpdatelblSettings();
+                UpdatelbuSettings();
                 Win32.SetForegroundWindow(this.Handle);
             }
         }
@@ -56,7 +56,7 @@ namespace Lolly
             dictsToolStrip.Items.Clear();
             dictsToolStrip.Tag = -1;
 
-            dictsEBWin = Program.GetConfigDicts(lblSettings.LangID)
+            dictsEBWin = Program.GetConfigDicts(lbuSettings.LangID)
                 .Elements("ebwin").Select(elem => (string)elem);
             if (dictsEBWin.Any())
             {

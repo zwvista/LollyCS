@@ -10,11 +10,11 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class WordsBaseForm : Form, ILangBookLessons
+    public partial class WordsBaseForm : Form, ILangBookUnits
     {
         protected string currentWord = "";
         protected string currentNote = "";
-        protected LangBookLessonSettings lblSettings;
+        protected LangBookUnitSettings lbuSettings;
         protected DataGridView dataGridView;
         protected Dictionary<string, int> wordLevelDic = new Dictionary<string, int>();
 
@@ -176,7 +176,7 @@ namespace Lolly
 
         private void speakToolStripButton_Click(object sender, EventArgs e)
         {
-            Program.Speak(lblSettings.LangID, currentWord);
+            Program.Speak(lbuSettings.LangID, currentWord);
         }
 
         private void keepSpeakToolStripButton_Click(object sender, EventArgs e)
@@ -211,12 +211,12 @@ namespace Lolly
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        #region ILangBookLessons Members
+        #region ILangBookUnits Members
 
-        public virtual void UpdatelblSettings()
+        public virtual void UpdatelbuSettings()
         {
-            lblSettings = Program.lblSettings;
-            bool canSpeak = Program.CanSpeak(lblSettings.LangID);
+            lbuSettings = Program.lbuSettings;
+            bool canSpeak = Program.CanSpeak(lbuSettings.LangID);
             speakToolStripButton.Enabled = keepSpeakToolStripButton.Enabled = canSpeak;
             FillTable();
             FillDicts();
@@ -271,7 +271,7 @@ namespace Lolly
         {
             if (!wordLevelDic.ContainsKey(w))
             {
-                var level = WordsLang.GetWordLevel(lblSettings.LangID, w) ?? 0;
+                var level = WordsLang.GetWordLevel(lbuSettings.LangID, w) ?? 0;
                 wordLevelDic.Add(w, level);
             }
             return wordLevelDic[w];
@@ -311,7 +311,7 @@ namespace Lolly
                 var newLevel = Math.Max(-3, Math.Min(3, level + delta));
                 if (level != newLevel)
                 {
-                    WordsLang.UpdateWordLevel(newLevel, lblSettings.LangID, w);
+                    WordsLang.UpdateWordLevel(newLevel, lbuSettings.LangID, w);
                     wordLevelDic[w] = newLevel;
                 }
             }

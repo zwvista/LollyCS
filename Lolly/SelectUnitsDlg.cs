@@ -10,7 +10,7 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class SelectLessonsDlg : Form
+    public partial class SelectUnitsDlg : Form
     {
         private int selectedLangID;
         private int selectedBookID;
@@ -25,17 +25,17 @@ namespace Lolly
         private IEnumerable<MLANGUAGE> languageList;
         private IEnumerable<MBOOK> bookList;
 
-        public SelectLessonsDlg(bool activeIncluded)
+        public SelectUnitsDlg(bool activeIncluded)
         {
             InitializeComponent();
             activeIncludedCheckBox.Checked = activeIncluded;
         }
 
-        private void SelectLessonsForm_Load(object sender, EventArgs e)
+        private void SelectUnitsForm_Load(object sender, EventArgs e)
         {
             languageList = Languages.GetData();
             langComboBox.DataSource = languageList;
-            langComboBox.SelectedValue = Program.lblSettings.LangID;
+            langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }
 
         private void langComboBox_SelectedValueChanged(object sender, EventArgs e)
@@ -53,11 +53,11 @@ namespace Lolly
             if (bookComboBox.SelectedValue == null) return;
             selectedBookID = (int)bookComboBox.SelectedValue;
             var row = bookList.Single(r => r.BOOKID == selectedBookID);
-            lessonInAllFromLabel.Text = lessonInAllToLabel.Text = string.Format("({0} in all)", row.NUMLESSONS);
-            lessonFromNumericUpDown.Maximum = row.NUMLESSONS;
-            lessonToNumericUpDown.Maximum = row.NUMLESSONS;
-            lessonFromNumericUpDown.Value = row.LESSONFROM;
-            lessonToNumericUpDown.Value = row.LESSONTO;
+            unitInAllFromLabel.Text = unitInAllToLabel.Text = string.Format("({0} in all)", row.UNITSINBOOK);
+            unitFromNumericUpDown.Maximum = row.UNITSINBOOK;
+            unitToNumericUpDown.Maximum = row.UNITSINBOOK;
+            unitFromNumericUpDown.Value = row.UNITFROM;
+            unitToNumericUpDown.Value = row.UNITTO;
             var parts = row.PARTS.Split(' ');
             partFromComboBox.Items.Clear();
             partFromComboBox.Items.AddRange(parts);
@@ -65,38 +65,38 @@ namespace Lolly
             partToComboBox.Items.AddRange(parts);
             partFromComboBox.SelectedIndex = row.PARTFROM - 1;
             partToComboBox.SelectedIndex = row.PARTTO - 1;
-            toCheckBox.Checked = row.LESSONFROM != row.LESSONTO || row.PARTFROM != row.PARTTO;
+            toCheckBox.Checked = row.UNITFROM != row.UNITTO || row.PARTFROM != row.PARTTO;
             toCheckBox_CheckedChanged(null, null);
         }
 
-        private void lessonFromNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void unitFromNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (!toCheckBox.Checked || lessonToNumericUpDown.Value < lessonFromNumericUpDown.Value)
-                lessonToNumericUpDown.Value = lessonFromNumericUpDown.Value;
+            if (!toCheckBox.Checked || unitToNumericUpDown.Value < unitFromNumericUpDown.Value)
+                unitToNumericUpDown.Value = unitFromNumericUpDown.Value;
         }
 
-        private void lessonToNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void unitToNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (lessonFromNumericUpDown.Value > lessonToNumericUpDown.Value)
-                lessonFromNumericUpDown.Value = lessonToNumericUpDown.Value;
+            if (unitFromNumericUpDown.Value > unitToNumericUpDown.Value)
+                unitFromNumericUpDown.Value = unitToNumericUpDown.Value;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
             Program.SetLangID(selectedLangID);
             Languages.UpdateBook(selectedBookID, selectedLangID);
-            Books.UpdateLesson((int)lessonFromNumericUpDown.Value, partFromComboBox.SelectedIndex + 1,
-                (int)lessonToNumericUpDown.Value, partToComboBox.SelectedIndex + 1, selectedBookID);
+            Books.UpdateUnit((int)unitFromNumericUpDown.Value, partFromComboBox.SelectedIndex + 1,
+                (int)unitToNumericUpDown.Value, partToComboBox.SelectedIndex + 1, selectedBookID);
         }
 
         private void toCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            lessonToNumericUpDown.Enabled = toCheckBox.Checked;
-            lessonInAllToLabel.Enabled = toCheckBox.Checked;
+            unitToNumericUpDown.Enabled = toCheckBox.Checked;
+            unitInAllToLabel.Enabled = toCheckBox.Checked;
             partToComboBox.Enabled = toCheckBox.Checked;
             if(!toCheckBox.Checked)
             {
-                lessonToNumericUpDown.Value = lessonFromNumericUpDown.Value;
+                unitToNumericUpDown.Value = unitFromNumericUpDown.Value;
                 partToComboBox.SelectedIndex = partFromComboBox.SelectedIndex;
             }
         }

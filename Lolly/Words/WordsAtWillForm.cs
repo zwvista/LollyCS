@@ -30,7 +30,7 @@ namespace Lolly
         {
             wordsList = new BindingList<MWORDATWILL>(new List<MWORDATWILL>());
             bindingSource1.DataSource = wordsList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
+            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
         }
 
         protected override void OnDeleteWord()
@@ -38,10 +38,10 @@ namespace Lolly
             bindingSource1.RemoveCurrent();
         }
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
-            base.UpdatelblSettings();
-            Text = string.Format("Words At Will ({0})", lblSettings.LangName);
+            base.UpdatelbuSettings();
+            Text = string.Format("Words At Will ({0})", lbuSettings.LangName);
         }
 
         private void reindexToolStripButton_Click(object sender, EventArgs e)

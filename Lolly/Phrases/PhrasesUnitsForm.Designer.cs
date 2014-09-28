@@ -2,7 +2,7 @@
 
 namespace Lolly
 {
-    partial class PhrasesLessonsForm
+    partial class PhrasesUnitsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,10 +31,10 @@ namespace Lolly
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhrasesLessonsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhrasesUnitsForm));
             this.bindingSource1 = new LLBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.lessonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.indexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phraseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,9 +45,9 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(MPHRASELESSON);
+            this.bindingSource1.DataSource = typeof(MPHRASEUNIT);
             this.bindingSource1.ListRowChanged = false;
-            this.bindingSource1.Sort = "LESSON,PART,INDEX";
+            this.bindingSource1.Sort = "UNIT,PART,INDEX";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
             // dataGridView1
@@ -55,7 +55,7 @@ namespace Lolly
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.lessonColumn,
+            this.unitColumn,
             this.partColumn,
             this.indexColumn,
             this.phraseColumn,
@@ -72,13 +72,13 @@ namespace Lolly
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             this.dataGridView1.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowValidated);
             // 
-            // lessonColumn
+            // unitColumn
             // 
-            this.lessonColumn.DataPropertyName = "LESSON";
-            this.lessonColumn.HeaderText = "LESSON";
-            this.lessonColumn.Name = "lessonColumn";
-            this.lessonColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.lessonColumn.Width = 75;
+            this.unitColumn.DataPropertyName = "UNIT";
+            this.unitColumn.HeaderText = "UNIT";
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.unitColumn.Width = 75;
             // 
             // partColumn
             // 
@@ -110,15 +110,15 @@ namespace Lolly
             this.translationColumn.Name = "translationColumn";
             this.translationColumn.Width = 400;
             // 
-            // PhrasesLessonsForm
+            // PhrasesUnitsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 471);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "PhrasesLessonsForm";
-            this.Text = "PhrasesLessonsForm";
+            this.Name = "PhrasesUnitsForm";
+            this.Text = "PhrasesUnitsForm";
             this.Load += new System.EventHandler(this.PhrasesForm_Load);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -132,7 +132,7 @@ namespace Lolly
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private LLBindingSource bindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lessonColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn partColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phraseColumn;

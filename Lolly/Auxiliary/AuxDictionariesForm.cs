@@ -10,11 +10,11 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class AuxDictionariesForm : Form, ILangBookLessons
+    public partial class AuxDictionariesForm : Form, ILangBookUnits
     {
         private string currentDict = "";
         private string deletedDict = "";
-        private LangBookLessonSettings lblSettings;
+        private LangBookUnitSettings lbuSettings;
         private List<MDICTIONARY> auxList;
 
         public AuxDictionariesForm()
@@ -24,14 +24,14 @@ namespace Lolly
 
         private void AuxDictionariesForm_Load(object sender, EventArgs e)
         {
-            UpdatelblSettings();
+            UpdatelbuSettings();
         }
 
         private void FillTable()
         {
             mLANGUAGEBindingSource.DataSource = Languages.GetData();
             mDICTTYPEBindingSource.DataSource = DictType.GetData();
-            auxList = Dictionaries.GetDataByLang(lblSettings.LangID);
+            auxList = Dictionaries.GetDataByLang(lbuSettings.LangID);
             bindingSource1.DataSource = auxList;
         }
 
@@ -73,12 +73,12 @@ namespace Lolly
             }
         }
 
-        #region ILangBookLessons Members
+        #region ILangBookUnits Members
 
-        public void UpdatelblSettings()
+        public void UpdatelbuSettings()
         {
-            lblSettings = Program.lblSettings;
-            Text = string.Format("Dictionaries ({0})", lblSettings.LangDesc);
+            lbuSettings = Program.lbuSettings;
+            Text = string.Format("Dictionaries ({0})", lbuSettings.LangDesc);
             FillTable();
         }
 
@@ -88,7 +88,7 @@ namespace Lolly
         {
             if (deletedDict == "") return;
 
-            Dictionaries.Delete(lblSettings.LangID, deletedDict);
+            Dictionaries.Delete(lbuSettings.LangID, deletedDict);
             deletedDict = "";
         }
 
@@ -104,7 +104,7 @@ namespace Lolly
             var row = auxList[e.RowIndex];
             if (row.LANGID == 0)
             {
-                row.LANGID = lblSettings.LangID;
+                row.LANGID = lbuSettings.LangID;
                 Dictionaries.Insert(row);
             }
             else

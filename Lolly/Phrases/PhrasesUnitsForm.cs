@@ -10,12 +10,12 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class PhrasesLessonsForm : PhrasesBaseForm
+    public partial class PhrasesUnitsForm : PhrasesBaseForm
     {
         private int deletedID = 0;
-        private BindingList<MPHRASELESSON> phrasesList;
+        private BindingList<MPHRASEUNIT> phrasesList;
 
-        public PhrasesLessonsForm()
+        public PhrasesUnitsForm()
         {
             InitializeComponent();
             dataGridView = dataGridView1;
@@ -30,16 +30,16 @@ namespace Lolly
 
         private void PhrasesForm_Load(object sender, EventArgs e)
         {
-            UpdatelblSettings();
+            UpdatelbuSettings();
         }
 
         protected override void FillTable()
         {
-            phrasesList = new BindingList<MPHRASELESSON>(
-                PhrasesLessons.GetDataByBookLessonParts(lblSettings.BookID,
-                lblSettings.LessonPartFrom, lblSettings.LessonPartTo));
+            phrasesList = new BindingList<MPHRASEUNIT>(
+                PhrasesUnits.GetDataByBookUnitParts(lbuSettings.BookID,
+                lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
             bindingSource1.DataSource = phrasesList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
+            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -68,10 +68,10 @@ namespace Lolly
             }
         }
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
-            base.UpdatelblSettings();
-            Text = string.Format("Phrases ({0})", lblSettings.BookLessonsDesc);
+            base.UpdatelbuSettings();
+            Text = string.Format("Phrases ({0})", lbuSettings.BookUnitsDesc);
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -79,7 +79,7 @@ namespace Lolly
             //if (e.ColumnIndex != 0) return;
             //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
             //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "LESSON, PART, INDEX" : "LESSON DESC, PART, INDEX DESC";
+            //bindingSource1.Sort = ascending ? "UNIT, PART, INDEX" : "UNIT DESC, PART, INDEX DESC";
         }
 
         private void reindexToolStripButton_Click(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace Lolly
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    PhrasesLessons.UpdateIndex(obj.INDEX, obj.ID);
+                    PhrasesUnits.UpdateIndex(obj.INDEX, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -101,7 +101,7 @@ namespace Lolly
         {
             if (deletedID == 0) return;
 
-            PhrasesLessons.Delete(deletedID);
+            PhrasesUnits.Delete(deletedID);
             deletedID = 0;
         }
 
@@ -112,22 +112,22 @@ namespace Lolly
             var row = phrasesList[e.RowIndex];
             if (row.ID == 0)
             {
-                row.BOOKID = lblSettings.BookID;
-                if (row.LESSON == 0)
-                    row.LESSON = lblSettings.LessonTo;
+                row.BOOKID = lbuSettings.BookID;
+                if (row.UNIT == 0)
+                    row.UNIT = lbuSettings.UnitTo;
                 if (row.PART == 0)
-                    row.PART = lblSettings.PartTo;
+                    row.PART = lbuSettings.PartTo;
                 if (row.INDEX == 0)
                     row.INDEX = e.RowIndex + 1;
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
-                row.ID = PhrasesLessons.Insert(row);
+                row.ID = PhrasesUnits.Insert(row);
                 dataGridView1.Refresh();
             }
             else
             {
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
-                PhrasesLessons.Update(row);
+                PhrasesUnits.Update(row);
             }
         }
     }

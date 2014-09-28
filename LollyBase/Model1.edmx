@@ -177,11 +177,11 @@
           <Property Name="BOOKID" Type="int" Nullable="false" />
           <Property Name="LANGID" Type="int" Nullable="false" />
           <Property Name="BOOKNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NUMLESSONS" Type="int" Nullable="false" />
+          <Property Name="UINTSINBOOK" Type="int" Nullable="false" />
           <Property Name="PARTS" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="LESSONFROM" Type="int" Nullable="false" />
+          <Property Name="UNITFROM" Type="int" Nullable="false" />
           <Property Name="PARTFROM" Type="int" Nullable="false" />
-          <Property Name="LESSONTO" Type="int" Nullable="false" />
+          <Property Name="UNITTO" Type="int" Nullable="false" />
           <Property Name="PARTTO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DICTIONARIES">
@@ -225,7 +225,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BOOKID" Type="int" Nullable="false" />
-          <Property Name="LESSON" Type="int" Nullable="false" />
+          <Property Name="UNIT" Type="int" Nullable="false" />
           <Property Name="PART" Type="int" Nullable="false" />
           <Property Name="INDEX" Type="int" Nullable="false" />
           <Property Name="PHRASE" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -283,7 +283,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BOOKID" Type="int" Nullable="false" />
-          <Property Name="LESSON" Type="int" Nullable="false" />
+          <Property Name="UNIT" Type="int" Nullable="false" />
           <Property Name="PART" Type="int" Nullable="false" />
           <Property Name="INDEX" Type="int" Nullable="false" />
           <Property Name="WORD" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -492,8 +492,8 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="LollySQLModel1" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-          <EntitySet Name="SPHRASELESSON" EntityType="LollySQLModel1.MPHRASELESSON" />
-          <EntitySet Name="SWORDLESSON" EntityType="LollySQLModel1.MWORDLESSON" />
+          <EntitySet Name="SPHRASEUNIT" EntityType="LollySQLModel1.MPHRASEUNIT" />
+          <EntitySet Name="SWORDUNIT" EntityType="LollySQLModel1.MWORDUNIT" />
           <EntitySet Name="SWORDLANG" EntityType="LollySQLModel1.MWORDLANG" />
           <EntitySet Name="SAUTOCORRECT" EntityType="LollySQLModel1.MAUTOCORRECT" />
           <EntitySet Name="SBOOK" EntityType="LollySQLModel1.MBOOK" />
@@ -550,25 +550,25 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <EntitySet Name="sysdiagrams" EntityType="LollySQLModel1.sysdiagrams" />
           <EntitySet Name="USERS" EntityType="LollySQLModel1.USERS" />
           </EntityContainer>
-        <EntityType Name="MPHRASELESSON">
+        <EntityType Name="MPHRASEUNIT">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="BOOKID" Type="Int32" Nullable="false" />
-          <Property Name="LESSON" Type="Int32" Nullable="false" />
+          <Property Name="UNIT" Type="Int32" Nullable="false" />
           <Property Name="PART" Type="Int32" Nullable="false" />
           <Property Name="INDEX" Type="Int32" Nullable="false" />
           <Property Name="PHRASE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="TRANSLATION" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="MWORDLESSON">
+        <EntityType Name="MWORDUNIT">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="BOOKID" Type="Int32" Nullable="false" />
-          <Property Name="LESSON" Type="Int32" Nullable="false" />
+          <Property Name="UNIT" Type="Int32" Nullable="false" />
           <Property Name="PART" Type="Int32" Nullable="false" />
           <Property Name="INDEX" Type="Int32" Nullable="false" />
           <Property Name="WORD" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -587,7 +587,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
         <ComplexType Name="MWORDBOOK">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="Int32" Name="BOOKID" Nullable="false" />
-          <Property Type="Int32" Name="LESSON" Nullable="false" />
+          <Property Type="Int32" Name="UNIT" Nullable="false" />
           <Property Type="Int32" Name="PART" Nullable="false" />
           <Property Type="Int32" Name="INDEX" Nullable="false" />
           <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
@@ -596,7 +596,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
         </ComplexType>
         <ComplexType Name="MPHRASELANG">
           <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="LESSON" Nullable="false" />
+          <Property Type="Int32" Name="UNIT" Nullable="false" />
           <Property Type="Int32" Name="INDEX" Nullable="false" />
           <Property Type="String" Name="PHRASE" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="TRANSLATION" Nullable="true" MaxLength="Max" />
@@ -629,11 +629,11 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Type="Int32" Name="BOOKID" Nullable="false" />
           <Property Type="Int32" Name="LANGID" Nullable="false" />
           <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="NUMLESSONS" Nullable="false" />
+          <Property Type="Int32" Name="UNITSINBOOK" Nullable="false" />
           <Property Type="String" Name="PARTS" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Type="Int32" Name="LESSONFROM" Nullable="false" DefaultValue="1" />
+          <Property Type="Int32" Name="UNITFROM" Nullable="false" DefaultValue="1" />
           <Property Type="Int32" Name="PARTFROM" Nullable="false" DefaultValue="1" />
-          <Property Type="Int32" Name="LESSONTO" Nullable="false" DefaultValue="1" />
+          <Property Type="Int32" Name="UNITTO" Nullable="false" DefaultValue="1" />
           <Property Type="Int32" Name="PARTTO" Nullable="false" DefaultValue="1" />
           <NavigationProperty Name="LANGUAGES" Relationship="LollySQLModel1.BOOKS_FK00" FromRole="MBOOK" ToRole="MLANGUAGE" />
         </EntityType>
@@ -988,19 +988,19 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LollySQLModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="SPHRASELESSON"><EntityTypeMapping TypeName="LollySQLModel1.MPHRASELESSON"><MappingFragment StoreEntitySet="PHRASES">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+          <EntitySetMapping Name="SPHRASEUNIT"><EntityTypeMapping TypeName="LollySQLModel1.MPHRASEUNIT"><MappingFragment StoreEntitySet="PHRASES">
+                <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
-            <ScalarProperty Name="LESSON" ColumnName="LESSON" />
             <ScalarProperty Name="PART" ColumnName="PART" />
             <ScalarProperty Name="INDEX" ColumnName="INDEX" />
             <ScalarProperty Name="PHRASE" ColumnName="PHRASE" />
             <ScalarProperty Name="TRANSLATION" ColumnName="TRANSLATION" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="SWORDLESSON"><EntityTypeMapping TypeName="LollySQLModel1.MWORDLESSON"><MappingFragment StoreEntitySet="WORDSBOOK">
-            <ScalarProperty Name="ID" ColumnName="ID" />
+          <EntitySetMapping Name="SWORDUNIT"><EntityTypeMapping TypeName="LollySQLModel1.MWORDUNIT"><MappingFragment StoreEntitySet="WORDSBOOK">
+                <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
-            <ScalarProperty Name="LESSON" ColumnName="LESSON" />
             <ScalarProperty Name="PART" ColumnName="PART" />
             <ScalarProperty Name="INDEX" ColumnName="INDEX" />
             <ScalarProperty Name="WORD" ColumnName="WORD" />
@@ -1026,12 +1026,12 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <EntitySetMapping Name="SBOOK">
             <EntityTypeMapping TypeName="LollySQLModel1.MBOOK">
               <MappingFragment StoreEntitySet="BOOKS">
+                <ScalarProperty Name="UNITSINBOOK" ColumnName="UINTSINBOOK" />
                 <ScalarProperty Name="PARTTO" ColumnName="PARTTO" />
-                <ScalarProperty Name="LESSONTO" ColumnName="LESSONTO" />
+                <ScalarProperty Name="UNITTO" ColumnName="UNITTO" />
                 <ScalarProperty Name="PARTFROM" ColumnName="PARTFROM" />
-                <ScalarProperty Name="LESSONFROM" ColumnName="LESSONFROM" />
+                <ScalarProperty Name="UNITFROM" ColumnName="UNITFROM" />
                 <ScalarProperty Name="PARTS" ColumnName="PARTS" />
-                <ScalarProperty Name="NUMLESSONS" ColumnName="NUMLESSONS" />
                 <ScalarProperty Name="BOOKNAME" ColumnName="BOOKNAME" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
                 <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
@@ -1358,8 +1358,8 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model1">
-        <EntityTypeShape EntityType="LollySQLModel1.MPHRASELESSON" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="LollySQLModel1.MWORDLESSON" Width="1.75" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollySQLModel1.MPHRASEUNIT" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollySQLModel1.MWORDUNIT" Width="1.75" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
         <EntityTypeShape EntityType="LollySQLModel1.MWORDLANG" Width="1.5" PointX="4.75" PointY="0.75" Height="1.3969734700520826" IsExpanded="true" />
         <EntityTypeShape EntityType="LollySQLModel1.MAUTOCORRECT" Width="1.75" PointX="4.875" PointY="2.875" Height="2.1610522460937496" />
         <EntityTypeShape EntityType="LollySQLModel1.MBOOK" Width="1.5" PointX="2.875" PointY="3.25" Height="2.7341113281249996" />

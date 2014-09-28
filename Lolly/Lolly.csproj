@@ -281,29 +281,29 @@
     <Compile Include="Phrases\PhrasesLangForm.Designer.cs">
       <DependentUpon>PhrasesLangForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Phrases\PhrasesLessonsForm.cs">
+    <Compile Include="Phrases\PhrasesUnitsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Phrases\PhrasesLessonsForm.Designer.cs">
-      <DependentUpon>PhrasesLessonsForm.cs</DependentUpon>
+    <Compile Include="Phrases\PhrasesUnitsForm.Designer.cs">
+      <DependentUpon>PhrasesUnitsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectLessonsDlg.cs">
+    <Compile Include="SelectUnitsDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectLessonsDlg.Designer.cs">
-      <DependentUpon>SelectLessonsDlg.cs</DependentUpon>
+    <Compile Include="SelectUnitsDlg.Designer.cs">
+      <DependentUpon>SelectUnitsDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Words\WordsLessonsEBForm.cs">
+    <Compile Include="Words\WordsUnitsEBForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Words\WordsLessonsEBForm.Designer.cs">
-      <DependentUpon>WordsLessonsEBForm.cs</DependentUpon>
+    <Compile Include="Words\WordsUnitsEBForm.Designer.cs">
+      <DependentUpon>WordsUnitsEBForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Words\WordsLessonsForm.cs">
+    <Compile Include="Words\WordsUnitsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Words\WordsLessonsForm.Designer.cs">
-      <DependentUpon>WordsLessonsForm.cs</DependentUpon>
+    <Compile Include="Words\WordsUnitsForm.Designer.cs">
+      <DependentUpon>WordsUnitsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MDIForm.cs">
       <SubType>Form</SubType>
@@ -402,20 +402,20 @@
       <DependentUpon>PhrasesLangForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Phrases\PhrasesLessonsForm.resx">
-      <DependentUpon>PhrasesLessonsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Phrases\PhrasesUnitsForm.resx">
+      <DependentUpon>PhrasesUnitsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectLessonsDlg.resx">
-      <DependentUpon>SelectLessonsDlg.cs</DependentUpon>
+    <EmbeddedResource Include="SelectUnitsDlg.resx">
+      <DependentUpon>SelectUnitsDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Words\WordsLessonsEBForm.resx">
-      <DependentUpon>WordsLessonsEBForm.cs</DependentUpon>
+    <EmbeddedResource Include="Words\WordsUnitsEBForm.resx">
+      <DependentUpon>WordsUnitsEBForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Words\WordsLessonsForm.resx">
-      <DependentUpon>WordsLessonsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Words\WordsUnitsForm.resx">
+      <DependentUpon>WordsUnitsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MDIForm.resx">

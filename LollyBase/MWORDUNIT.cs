@@ -12,14 +12,14 @@ namespace LollyBase
     using System;
     using System.Collections.Generic;
     
-    public partial class MPHRASELESSON
+    public partial class MWORDUNIT
     {
         public int ID { get; set; }
         public int BOOKID { get; set; }
-        public int LESSON { get; set; }
+        public int UNIT { get; set; }
         public int PART { get; set; }
         public int INDEX { get; set; }
-        public string PHRASE { get; set; }
-        public string TRANSLATION { get; set; }
+        public string WORD { get; set; }
+        public string NOTE { get; set; }
     }
 }

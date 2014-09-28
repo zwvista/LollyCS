@@ -6,47 +6,47 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class WordsLessons
+    public static class WordsUnits
     {
         public static void Delete(int id)
         {
             using (var db = new Entities())
             {
-                var item = db.SWORDLESSON.SingleOrDefault(r => r.ID == id);
+                var item = db.SWORDUNIT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
-                db.SWORDLESSON.Remove(item);
+                db.SWORDUNIT.Remove(item);
                 db.SaveChanges();
             }
         }
 
-        public static int Insert(MWORDLESSON row)
+        public static int Insert(MWORDUNIT row)
         {
             using (var db = new Entities())
             {
-                var item = new MWORDLESSON
+                var item = new MWORDUNIT
                 {
                     BOOKID = row.BOOKID,
-                    LESSON = row.LESSON,
+                    UNIT = row.UNIT,
                     PART = row.PART,
                     INDEX = row.INDEX,
                     WORD = row.WORD,
                     NOTE = row.NOTE
                 };
-                db.SWORDLESSON.Add(item);
+                db.SWORDUNIT.Add(item);
                 db.SaveChanges();
                 return item.ID;
             }
         }
 
-        public static void Update(MWORDLESSON row)
+        public static void Update(MWORDUNIT row)
         {
             using (var db = new Entities())
             {
-                var item = db.SWORDLESSON.SingleOrDefault(r => r.ID == row.ID);
+                var item = db.SWORDUNIT.SingleOrDefault(r => r.ID == row.ID);
                 if (item == null) return;
 
-                item.LESSON = row.LESSON;
+                item.UNIT = row.UNIT;
                 item.PART = row.PART;
                 item.INDEX = row.INDEX;
                 item.WORD = row.WORD;
@@ -59,7 +59,7 @@ namespace LollyBase
         {
             using (var db = new Entities())
             {
-                var item = db.SWORDLESSON.SingleOrDefault(r => r.ID == id);
+                var item = db.SWORDUNIT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
                 item.INDEX = index;
@@ -71,7 +71,7 @@ namespace LollyBase
         {
             using (var db = new Entities())
             {
-                var item = db.SWORDLESSON.SingleOrDefault(r => r.ID == id);
+                var item = db.SWORDUNIT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
                 item.NOTE = note;
@@ -79,15 +79,15 @@ namespace LollyBase
             }
         }
 
-        public static List<MWORDLESSON> GetDataByBookLessonParts(int bookid, int lessonpartfrom, int lessonpartto)
+        public static List<MWORDUNIT> GetDataByBookUnitParts(int bookid, int unitpartfrom, int unitpartto)
         {
             using (var db = new Entities())
             {
                 return (
-                    from r in db.SWORDLESSON
-                    let lessonpart = r.LESSON * 10 + r.PART
-                    where r.BOOKID == bookid && lessonpart >= lessonpartfrom && lessonpart <= lessonpartto
-                    orderby r.LESSON, r.PART, r.INDEX
+                    from r in db.SWORDUNIT
+                    let unitpart = r.UNIT * 10 + r.PART
+                    where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
+                    orderby r.UNIT, r.PART, r.INDEX
                     select r
                 ).ToList();
             }

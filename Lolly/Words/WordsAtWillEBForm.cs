@@ -33,10 +33,10 @@ namespace Lolly
             bindingSource1.RemoveCurrent();
         }
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
-            base.UpdatelblSettings();
-            Text = string.Format("Words At Will(EBWin) ({0})", lblSettings.LangName);
+            base.UpdatelbuSettings();
+            Text = string.Format("Words At Will(EBWin) ({0})", lbuSettings.LangName);
         }
 
         private void reindexToolStripButton_Click(object sender, EventArgs e)

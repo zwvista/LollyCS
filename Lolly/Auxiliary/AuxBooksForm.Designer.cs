@@ -50,7 +50,7 @@ namespace Lolly
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.bookidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.booknameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numlessonsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitsinbookColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -205,7 +205,7 @@ namespace Lolly
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.bookidColumn,
             this.booknameColumn,
-            this.numlessonsColumn,
+            this.unitsinbookColumn,
             this.partsColumn});
             this.dataGridView1.DataSource = this.bindingSource1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -233,11 +233,11 @@ namespace Lolly
             this.booknameColumn.Name = "booknameColumn";
             this.booknameColumn.Width = 300;
             // 
-            // numlessonsColumn
+            // unitsinbookColumn
             // 
-            this.numlessonsColumn.DataPropertyName = "NUMLESSONS";
-            this.numlessonsColumn.HeaderText = "NUMLESSONS";
-            this.numlessonsColumn.Name = "numlessonsColumn";
+            this.unitsinbookColumn.DataPropertyName = "UNITSINBOOK";
+            this.unitsinbookColumn.HeaderText = "UNITSINBOOK";
+            this.unitsinbookColumn.Name = "unitsinbookColumn";
             // 
             // partsColumn
             // 
@@ -289,7 +289,7 @@ namespace Lolly
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.DataGridViewTextBoxColumn bookidColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn booknameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numlessonsColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitsinbookColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn partsColumn;
     }
 }

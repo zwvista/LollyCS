@@ -1,16 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="LangLearn" Label="LangLearn" Category="プロジェクト" />
-    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="パッケージ" />
+    <Node Id="EntityFramework 5.0.0" Category="パッケージ" Label="EntityFramework 5.0.0" />
+    <Node Id="Lolly" Category="プロジェクト" Label="Lolly" />
   </Nodes>
   <Links>
-    <Link Source="LangLearn" Target="EntityFramework 5.0.0" Category="インストール済みのパッケージ" />
+    <Link Source="Lolly" Target="EntityFramework 5.0.0" Category="インストール済みのパッケージ" />
   </Links>
   <Categories>
-    <Category Id="プロジェクト" />
+    <Category Id="インストール済みのパッケージ" />
     <Category Id="パッケージ" />
+    <Category Id="プロジェクト" />
   </Categories>
+  <Properties>
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
   <Styles>
     <Style TargetType="Node" GroupLabel="プロジェクト" ValueLabel="True">
       <Condition Expression="HasCategory('プロジェクト')" />

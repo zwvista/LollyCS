@@ -10,11 +10,11 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class AuxPicBooksForm : Form, ILangBookLessons
+    public partial class AuxPicBooksForm : Form, ILangBookUnits
     {
         private string currentBook = "";
         private string deletedBook = "";
-        private LangBookLessonSettings lblSettings;
+        private LangBookUnitSettings lbuSettings;
         protected List<MPICBOOK> auxList;
 
         public AuxPicBooksForm()
@@ -24,12 +24,12 @@ namespace Lolly
 
         private void AuxPictureBooksForm_Load(object sender, EventArgs e)
         {
-            UpdatelblSettings();
+            UpdatelbuSettings();
         }
 
         private void FillTable()
         {
-            auxList = PicBooks.GetDataByLang(lblSettings.LangID);
+            auxList = PicBooks.GetDataByLang(lbuSettings.LangID);
             bindingSource1.DataSource = auxList;
         }
 
@@ -52,12 +52,12 @@ namespace Lolly
             FillTable();
         }
 
-        #region ILangBookLessons Members
+        #region ILangBookUnits Members
 
-        public void UpdatelblSettings()
+        public void UpdatelbuSettings()
         {
-            lblSettings = Program.lblSettings;
-            Text = string.Format("Picture Books ({0})", lblSettings.LangDesc);
+            lbuSettings = Program.lbuSettings;
+            Text = string.Format("Picture Books ({0})", lbuSettings.LangDesc);
             FillTable();
         }
 
@@ -83,7 +83,7 @@ namespace Lolly
             var row = auxList[e.RowIndex];
             if (row.LANGID == 0)
             {
-                row.LANGID = lblSettings.LangID;
+                row.LANGID = lbuSettings.LangID;
                 PicBooks.Insert(row);
             }
             else

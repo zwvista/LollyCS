@@ -8,14 +8,14 @@ namespace LollyBase
 {
     public static class WordsLangOrBook
     {
-        public static List<MWORDLANGORBOOK> GetDataByBookLessonParts(int bookid, int lessonpartfrom, int lessonpartto)
+        public static List<MWORDLANGORBOOK> GetDataByBookUnitParts(int bookid, int unitpartfrom, int unitpartto)
         {
             using (var db = new Entities())
             {
                 return (
-                    from r in db.SWORDLESSON
-                    let lessonpart = r.LESSON * 10 + r.PART
-                    where r.BOOKID == bookid && lessonpart >= lessonpartfrom && lessonpart <= lessonpartto
+                    from r in db.SWORDUNIT
+                    let unitpart = r.UNIT * 10 + r.PART
+                    where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
                     select r.WORD
                 ).ToList().Select(w => new MWORDLANGORBOOK { WORD = w }).ToList();
             }

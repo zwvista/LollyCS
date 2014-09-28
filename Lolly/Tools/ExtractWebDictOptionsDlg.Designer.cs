@@ -30,7 +30,7 @@
         {
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.bookLessonsRadioButton = new System.Windows.Forms.RadioButton();
+            this.bookUnitsRadioButton = new System.Windows.Forms.RadioButton();
             this.langRadioButton = new System.Windows.Forms.RadioButton();
             this.wordDataGridView = new System.Windows.Forms.DataGridView();
             this.checkBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -74,17 +74,17 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // bookLessonsRadioButton
+            // bookUnitsRadioButton
             // 
-            this.bookLessonsRadioButton.AutoSize = true;
-            this.bookLessonsRadioButton.Location = new System.Drawing.Point(6, 25);
-            this.bookLessonsRadioButton.Name = "bookLessonsRadioButton";
-            this.bookLessonsRadioButton.Size = new System.Drawing.Size(88, 16);
-            this.bookLessonsRadioButton.TabIndex = 1;
-            this.bookLessonsRadioButton.TabStop = true;
-            this.bookLessonsRadioButton.Text = "radioButton1";
-            this.bookLessonsRadioButton.UseVisualStyleBackColor = true;
-            this.bookLessonsRadioButton.CheckedChanged += new System.EventHandler(this.lessonsRadioButton_CheckedChanged);
+            this.bookUnitsRadioButton.AutoSize = true;
+            this.bookUnitsRadioButton.Location = new System.Drawing.Point(6, 25);
+            this.bookUnitsRadioButton.Name = "bookUnitsRadioButton";
+            this.bookUnitsRadioButton.Size = new System.Drawing.Size(88, 16);
+            this.bookUnitsRadioButton.TabIndex = 1;
+            this.bookUnitsRadioButton.TabStop = true;
+            this.bookUnitsRadioButton.Text = "radioButton1";
+            this.bookUnitsRadioButton.UseVisualStyleBackColor = true;
+            this.bookUnitsRadioButton.CheckedChanged += new System.EventHandler(this.unitsRadioButton_CheckedChanged);
             // 
             // langRadioButton
             // 
@@ -165,7 +165,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.langRadioButton);
-            this.groupBox1.Controls.Add(this.bookLessonsRadioButton);
+            this.groupBox1.Controls.Add(this.bookUnitsRadioButton);
             this.groupBox1.Location = new System.Drawing.Point(15, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(694, 58);
@@ -316,7 +316,7 @@
 
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.RadioButton bookLessonsRadioButton;
+        private System.Windows.Forms.RadioButton bookUnitsRadioButton;
         private System.Windows.Forms.RadioButton langRadioButton;
         private System.Windows.Forms.DataGridView wordDataGridView;
         private System.Windows.Forms.DataGridView dictDataGridView;

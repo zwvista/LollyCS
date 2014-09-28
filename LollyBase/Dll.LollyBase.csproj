@@ -166,7 +166,7 @@
     <Compile Include="MPHRASELANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="MPHRASELESSON.cs">
+    <Compile Include="MPHRASEUNIT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="MPICBOOK.cs">
@@ -193,7 +193,7 @@
     <Compile Include="MWORDLANGORBOOK.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="MWORDLESSON.cs">
+    <Compile Include="MWORDUNIT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="PhrasesLang.cs" />

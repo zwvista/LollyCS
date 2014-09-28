@@ -27,23 +27,23 @@ namespace Lolly
 
         private void PhrasesLangForm_Load(object sender, EventArgs e)
         {
-            UpdatelblSettings();
+            UpdatelbuSettings();
         }
 
         protected override void FillTable()
         {
             phrasesList = new BindingList<MPHRASELANG>(
-                filterScope == 0 ? PhrasesLang.GetDataByLangPhrase(lblSettings.LangID, filter) :
-                PhrasesLang.GetDataByLangTranslation(lblSettings.LangID, filter)
+                filterScope == 0 ? PhrasesLang.GetDataByLangPhrase(lbuSettings.LangID, filter) :
+                PhrasesLang.GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
             bindingSource1.DataSource = phrasesList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
+            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
         }
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
-            base.UpdatelblSettings();
-            Text = string.Format("Phrases ({0})", lblSettings.LangDesc);
+            base.UpdatelbuSettings();
+            Text = string.Format("Phrases ({0})", lbuSettings.LangDesc);
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -51,7 +51,7 @@ namespace Lolly
             //if (e.ColumnIndex != 0) return;
             //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
             //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "BOOKNAME,LESSON, INDEX" : "BOOKNAME DESC, LESSON DESC, INDEX DESC";
+            //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, INDEX" : "BOOKNAME DESC, UNIT DESC, INDEX DESC";
         }
     }
 }

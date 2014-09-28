@@ -35,7 +35,7 @@ namespace Lolly
             this.bindingSource1 = new LLBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.booknameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lessonColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.indexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phraseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,7 +47,7 @@ namespace Lolly
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(MPHRASELANG);
-            this.bindingSource1.Sort = "BOOKNAME,LESSON,INDEX";
+            this.bindingSource1.Sort = "BOOKNAME,UNIT,INDEX";
             // 
             // dataGridView1
             // 
@@ -57,7 +57,7 @@ namespace Lolly
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.booknameColumn,
-            this.lessonColumn,
+            this.unitColumn,
             this.partColumn,
             this.indexColumn,
             this.phraseColumn,
@@ -83,14 +83,14 @@ namespace Lolly
             this.booknameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.booknameColumn.Width = 200;
             // 
-            // lessonColumn
+            // unitColumn
             // 
-            this.lessonColumn.DataPropertyName = "LESSON";
-            this.lessonColumn.HeaderText = "LESSON";
-            this.lessonColumn.Name = "lessonColumn";
-            this.lessonColumn.ReadOnly = true;
-            this.lessonColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.lessonColumn.Width = 75;
+            this.unitColumn.DataPropertyName = "UNIT";
+            this.unitColumn.HeaderText = "UNIT";
+            this.unitColumn.Name = "unitColumn";
+            this.unitColumn.ReadOnly = true;
+            this.unitColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.unitColumn.Width = 75;
             // 
             // partColumn
             // 
@@ -149,7 +149,7 @@ namespace Lolly
         private System.Windows.Forms.DataGridView dataGridView1;
         private LLBindingSource bindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn booknameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lessonColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn partColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phraseColumn;

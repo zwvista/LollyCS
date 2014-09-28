@@ -47,7 +47,7 @@ namespace LollyBase
                     var doc = (HTMLDocument)Win32.ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
                     elemHtml = doc.body.parentElement;
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
 
                 }

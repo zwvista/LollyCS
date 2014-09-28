@@ -25,8 +25,8 @@ namespace LollyBase
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<MPHRASELESSON> SPHRASELESSON { get; set; }
-        public DbSet<MWORDLESSON> SWORDLESSON { get; set; }
+        public DbSet<MPHRASEUNIT> SPHRASEUNIT { get; set; }
+        public DbSet<MWORDUNIT> SWORDUNIT { get; set; }
         public DbSet<MWORDLANG> SWORDLANG { get; set; }
         public DbSet<MAUTOCORRECT> SAUTOCORRECT { get; set; }
         public DbSet<MBOOK> SBOOK { get; set; }

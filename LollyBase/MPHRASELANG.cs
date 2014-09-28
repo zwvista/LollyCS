@@ -14,7 +14,7 @@ namespace LollyBase
     public partial class MPHRASELANG
     {
         public string BOOKNAME { get; set; }
-        public int LESSON { get; set; }
+        public int UNIT { get; set; }
         public int INDEX { get; set; }
         public string PHRASE { get; set; }
         public string TRANSLATION { get; set; }

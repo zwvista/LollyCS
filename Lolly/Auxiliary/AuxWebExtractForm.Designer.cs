@@ -298,8 +298,6 @@ namespace Lolly
         private System.Windows.Forms.ToolStripButton refreshToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LLBindingSource bindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn textrangeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn textreplaceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sitenameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TRANSFORM_WIN;
         private System.Windows.Forms.DataGridViewTextBoxColumn TRANSFORM_MAC;

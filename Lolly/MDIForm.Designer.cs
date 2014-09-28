@@ -32,17 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.learnMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectLessonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectUnitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.wordsLessonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordsUnitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsAtWillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.phrasesLessonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.phrasesUnitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.phrasesLanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.wordsLessonsEBWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordsUnitsEBWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsAtWillEBWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,15 +75,15 @@
             this.newWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentWindowNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.wordsLessonsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordsUnitsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsLanguageNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsAtWillNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsBooksNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.phrasesLessonsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.phrasesUnitsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.phrasesLanguageNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.wordsLessonsEBWinNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordsUnitsEBWinNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordsAtWillEBWinNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,17 +123,17 @@
             // learnMenu
             // 
             this.learnMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectLessonsToolStripMenuItem,
+            this.selectUnitsToolStripMenuItem,
             this.toolStripSeparator2,
-            this.wordsLessonsToolStripMenuItem,
+            this.wordsUnitsToolStripMenuItem,
             this.wordsLanguageToolStripMenuItem,
             this.wordsAtWillToolStripMenuItem,
             this.wordsBooksToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.phrasesLessonsToolStripMenuItem,
+            this.phrasesUnitsToolStripMenuItem,
             this.phrasesLanguageToolStripMenuItem,
             this.toolStripSeparator3,
-            this.wordsLessonsEBWinToolStripMenuItem,
+            this.wordsUnitsEBWinToolStripMenuItem,
             this.wordsAtWillEBWinToolStripMenuItem,
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
@@ -142,26 +142,26 @@
             this.learnMenu.Size = new System.Drawing.Size(53, 22);
             this.learnMenu.Text = "&Learn";
             // 
-            // selectLessonsToolStripMenuItem
+            // selectUnitsToolStripMenuItem
             // 
-            this.selectLessonsToolStripMenuItem.Name = "selectLessonsToolStripMenuItem";
-            this.selectLessonsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.selectLessonsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
-            this.selectLessonsToolStripMenuItem.Text = "Select Lessons...";
-            this.selectLessonsToolStripMenuItem.Click += new System.EventHandler(this.selectLessonsToolStripMenuItem_Click);
+            this.selectUnitsToolStripMenuItem.Name = "selectUnitsToolStripMenuItem";
+            this.selectUnitsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.selectUnitsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.selectUnitsToolStripMenuItem.Text = "Select Units...";
+            this.selectUnitsToolStripMenuItem.Click += new System.EventHandler(this.selectUnitsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(267, 6);
             // 
-            // wordsLessonsToolStripMenuItem
+            // wordsUnitsToolStripMenuItem
             // 
-            this.wordsLessonsToolStripMenuItem.Name = "wordsLessonsToolStripMenuItem";
-            this.wordsLessonsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.wordsLessonsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
-            this.wordsLessonsToolStripMenuItem.Text = "Words in Lessons";
-            this.wordsLessonsToolStripMenuItem.Click += new System.EventHandler(this.wordsLessonsToolStripMenuItem_Click);
+            this.wordsUnitsToolStripMenuItem.Name = "wordsUnitsToolStripMenuItem";
+            this.wordsUnitsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.wordsUnitsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.wordsUnitsToolStripMenuItem.Text = "Words in Units";
+            this.wordsUnitsToolStripMenuItem.Click += new System.EventHandler(this.wordsUnitsToolStripMenuItem_Click);
             // 
             // wordsLanguageToolStripMenuItem
             // 
@@ -192,13 +192,13 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(267, 6);
             // 
-            // phrasesLessonsToolStripMenuItem
+            // phrasesUnitsToolStripMenuItem
             // 
-            this.phrasesLessonsToolStripMenuItem.Name = "phrasesLessonsToolStripMenuItem";
-            this.phrasesLessonsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.phrasesLessonsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
-            this.phrasesLessonsToolStripMenuItem.Text = "Phrases in Lessons";
-            this.phrasesLessonsToolStripMenuItem.Click += new System.EventHandler(this.phrasesLessonsToolStripMenuItem_Click);
+            this.phrasesUnitsToolStripMenuItem.Name = "phrasesUnitsToolStripMenuItem";
+            this.phrasesUnitsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.phrasesUnitsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.phrasesUnitsToolStripMenuItem.Text = "Phrases in Units";
+            this.phrasesUnitsToolStripMenuItem.Click += new System.EventHandler(this.phrasesUnitsToolStripMenuItem_Click);
             // 
             // phrasesLanguageToolStripMenuItem
             // 
@@ -213,13 +213,13 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(267, 6);
             // 
-            // wordsLessonsEBWinToolStripMenuItem
+            // wordsUnitsEBWinToolStripMenuItem
             // 
-            this.wordsLessonsEBWinToolStripMenuItem.Name = "wordsLessonsEBWinToolStripMenuItem";
-            this.wordsLessonsEBWinToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
-            this.wordsLessonsEBWinToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
-            this.wordsLessonsEBWinToolStripMenuItem.Text = "Words in Lessons(EBWin)";
-            this.wordsLessonsEBWinToolStripMenuItem.Click += new System.EventHandler(this.wordsLessonsEBWinToolStripMenuItem_Click);
+            this.wordsUnitsEBWinToolStripMenuItem.Name = "wordsUnitsEBWinToolStripMenuItem";
+            this.wordsUnitsEBWinToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
+            this.wordsUnitsEBWinToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.wordsUnitsEBWinToolStripMenuItem.Text = "Words in Units(EBWin)";
+            this.wordsUnitsEBWinToolStripMenuItem.Click += new System.EventHandler(this.wordsUnitsEBWinToolStripMenuItem_Click);
             // 
             // wordsAtWillEBWinToolStripMenuItem
             // 
@@ -468,15 +468,15 @@
             this.newWindowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentWindowNewToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.wordsLessonsNewToolStripMenuItem,
+            this.wordsUnitsNewToolStripMenuItem,
             this.wordsLanguageNewToolStripMenuItem,
             this.wordsAtWillNewToolStripMenuItem,
             this.wordsBooksNewToolStripMenuItem,
             this.toolStripSeparator1,
-            this.phrasesLessonsNewToolStripMenuItem,
+            this.phrasesUnitsNewToolStripMenuItem,
             this.phrasesLanguageNewToolStripMenuItem,
             this.toolStripSeparator5,
-            this.wordsLessonsEBWinNewToolStripMenuItem,
+            this.wordsUnitsEBWinNewToolStripMenuItem,
             this.wordsAtWillEBWinNewToolStripMenuItem});
             this.newWindowToolStripMenuItem.Name = "newWindowToolStripMenuItem";
             this.newWindowToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
@@ -496,12 +496,12 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(241, 6);
             // 
-            // wordsLessonsNewToolStripMenuItem
+            // wordsUnitsNewToolStripMenuItem
             // 
-            this.wordsLessonsNewToolStripMenuItem.Name = "wordsLessonsNewToolStripMenuItem";
-            this.wordsLessonsNewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.wordsLessonsNewToolStripMenuItem.Text = "Words in Lessons";
-            this.wordsLessonsNewToolStripMenuItem.Click += new System.EventHandler(this.wordsLessonsNewToolStripMenuItem_Click);
+            this.wordsUnitsNewToolStripMenuItem.Name = "wordsUnitsNewToolStripMenuItem";
+            this.wordsUnitsNewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.wordsUnitsNewToolStripMenuItem.Text = "Words in Units";
+            this.wordsUnitsNewToolStripMenuItem.Click += new System.EventHandler(this.wordsUnitsNewToolStripMenuItem_Click);
             // 
             // wordsLanguageNewToolStripMenuItem
             // 
@@ -529,12 +529,12 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
             // 
-            // phrasesLessonsNewToolStripMenuItem
+            // phrasesUnitsNewToolStripMenuItem
             // 
-            this.phrasesLessonsNewToolStripMenuItem.Name = "phrasesLessonsNewToolStripMenuItem";
-            this.phrasesLessonsNewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.phrasesLessonsNewToolStripMenuItem.Text = "Phrases in Lessons";
-            this.phrasesLessonsNewToolStripMenuItem.Click += new System.EventHandler(this.phrasesLessonsNewToolStripMenuItem_Click);
+            this.phrasesUnitsNewToolStripMenuItem.Name = "phrasesUnitsNewToolStripMenuItem";
+            this.phrasesUnitsNewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.phrasesUnitsNewToolStripMenuItem.Text = "Phrases in Units";
+            this.phrasesUnitsNewToolStripMenuItem.Click += new System.EventHandler(this.phrasesUnitsNewToolStripMenuItem_Click);
             // 
             // phrasesLanguageNewToolStripMenuItem
             // 
@@ -548,12 +548,12 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(241, 6);
             // 
-            // wordsLessonsEBWinNewToolStripMenuItem
+            // wordsUnitsEBWinNewToolStripMenuItem
             // 
-            this.wordsLessonsEBWinNewToolStripMenuItem.Name = "wordsLessonsEBWinNewToolStripMenuItem";
-            this.wordsLessonsEBWinNewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.wordsLessonsEBWinNewToolStripMenuItem.Text = "Words in Lessons(EBWin)";
-            this.wordsLessonsEBWinNewToolStripMenuItem.Click += new System.EventHandler(this.wordsLessonsEBWinNewToolStripMenuItem_Click);
+            this.wordsUnitsEBWinNewToolStripMenuItem.Name = "wordsUnitsEBWinNewToolStripMenuItem";
+            this.wordsUnitsEBWinNewToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.wordsUnitsEBWinNewToolStripMenuItem.Text = "Words in Units(EBWin)";
+            this.wordsUnitsEBWinNewToolStripMenuItem.Click += new System.EventHandler(this.wordsUnitsEBWinNewToolStripMenuItem_Click);
             // 
             // wordsAtWillEBWinNewToolStripMenuItem
             // 
@@ -701,16 +701,16 @@
         private System.Windows.Forms.ToolStripMenuItem helpMenu;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem extractWebDictToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selectLessonsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectUnitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton extractWebDictToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem webBrowserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wordsLessonsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wordsUnitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsLanguageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsBooksToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem phrasesLessonsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem phrasesUnitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phrasesLanguageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem auxiliaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem booksToolStripMenuItem;
@@ -728,20 +728,20 @@
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoCorrectTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsAtWillToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wordsLessonsNewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wordsUnitsNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsLanguageNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsAtWillNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsBooksNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem phrasesLessonsNewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem phrasesUnitsNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phrasesLanguageNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blogPostToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem wordsLessonsEBWinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wordsUnitsEBWinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsAtWillEBWinToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem wordsLessonsEBWinNewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wordsUnitsEBWinNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordsAtWillEBWinNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readNumberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentWindowNewToolStripMenuItem;

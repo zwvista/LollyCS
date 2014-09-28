@@ -32,24 +32,24 @@ namespace Lolly
 
         private void ExtractWebDictOptionsForm_Load(object sender, EventArgs e)
         {
-            LangID = Program.lblSettings.LangID;
-            bookLessonsRadioButton.Text = Program.lblSettings.BookLessonsDesc;
-            langRadioButton.Text = Program.lblSettings.LangDesc;
-            bookLessonsRadioButton.Checked = true;
-            dictDataGridView.DataSource = DictAll.GetDataByLangExact(Program.lblSettings.LangID);
+            LangID = Program.lbuSettings.LangID;
+            bookUnitsRadioButton.Text = Program.lbuSettings.BookUnitsDesc;
+            langRadioButton.Text = Program.lbuSettings.LangDesc;
+            bookUnitsRadioButton.Checked = true;
+            dictDataGridView.DataSource = DictAll.GetDataByLangExact(Program.lbuSettings.LangID);
             checkAllDictsButton.PerformClick();
         }
 
-        private void lessonsRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void unitsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            wordDataGridView.DataSource = WordsLangOrBook.GetDataByBookLessonParts(Program.lblSettings.BookID,
-                Program.lblSettings.LessonPartFrom, Program.lblSettings.LessonPartTo);
+            wordDataGridView.DataSource = WordsLangOrBook.GetDataByBookUnitParts(Program.lbuSettings.BookID,
+                Program.lbuSettings.UnitPartFrom, Program.lbuSettings.UnitPartTo);
             checkAllWordsButton.PerformClick();
         }
 
         private void langRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            wordDataGridView.DataSource = WordsLangOrBook.GetDataByLang(Program.lblSettings.LangID);
+            wordDataGridView.DataSource = WordsLangOrBook.GetDataByLang(Program.lbuSettings.LangID);
             checkAllWordsButton.PerformClick();
         }
 

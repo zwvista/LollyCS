@@ -10,7 +10,7 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class WordsLangForm : WordsWebForm, ILangBookLessons
+    public partial class WordsLangForm : WordsWebForm, ILangBookUnits
     {
         private string deletedWord = "";
         private BindingList<MWORDLANG> wordsList;
@@ -27,11 +27,11 @@ namespace Lolly
         protected override void FillTable()
         {
             wordsList = new BindingList<MWORDLANG>(
-                filterScope == 0 ? WordsLang.GetDataByLangWord(lblSettings.LangID, filter) :
-                WordsLang.GetDataByLangTranslationDictTables(lblSettings.LangID, filter, dictTablesOffline)
+                filterScope == 0 ? WordsLang.GetDataByLangWord(lbuSettings.LangID, filter) :
+                WordsLang.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, dictTablesOffline)
             );
             bindingSource1.DataSource = wordsList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
+            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
         }
 
         protected override void OnDeleteWord()
@@ -40,17 +40,17 @@ namespace Lolly
             bindingSource1.RemoveCurrent();
         }
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
-            base.UpdatelblSettings();
-            Text = string.Format("Words ({0})", lblSettings.LangDesc);
+            base.UpdatelbuSettings();
+            Text = string.Format("Words ({0})", lbuSettings.LangDesc);
         }
 
         private void bindingSource1_ListItemDeleted(object sender, ListChangedEventArgs e)
         {
             if (deletedWord == "") return;
 
-            WordsLang.Delete(lblSettings.LangID, deletedWord);
+            WordsLang.Delete(lbuSettings.LangID, deletedWord);
             deletedWord = "";
         }
 
@@ -61,7 +61,7 @@ namespace Lolly
             var row = wordsList[e.RowIndex];
             if (row.LANGID == 0)
             {
-                row.LANGID = lblSettings.LangID;
+                row.LANGID = lbuSettings.LangID;
                 row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
                 WordsLang.Insert(row.LANGID, row.WORD);
             }

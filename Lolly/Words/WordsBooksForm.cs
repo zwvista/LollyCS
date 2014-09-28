@@ -10,7 +10,7 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class WordsBooksForm : WordsWebForm, ILangBookLessons
+    public partial class WordsBooksForm : WordsWebForm, ILangBookUnits
     {
         private string deletedWord = "";
         private BindingList<MWORDBOOK> wordsList;
@@ -28,11 +28,11 @@ namespace Lolly
         protected override void FillTable()
         {
             wordsList = new BindingList<MWORDBOOK>(
-                filterScope == 0 ? WordsBooks.GetDataByLangWord(lblSettings.LangID, filter) :
-                WordsBooks.GetDataByLangTranslationDictTables(lblSettings.LangID, filter, dictTablesOffline)
+                filterScope == 0 ? WordsBooks.GetDataByLangWord(lbuSettings.LangID, filter) :
+                WordsBooks.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, dictTablesOffline)
             );
             bindingSource1.DataSource = wordsList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
+            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
         }
 
         protected override void OnDeleteWord()
@@ -41,10 +41,10 @@ namespace Lolly
             bindingSource1.RemoveCurrent();
         }
 
-        public override void UpdatelblSettings()
+        public override void UpdatelbuSettings()
         {
-            base.UpdatelblSettings();
-            Text = string.Format("Words (All Books on Learning {0})", lblSettings.LangDesc);
+            base.UpdatelbuSettings();
+            Text = string.Format("Words (All Books on Learning {0})", lbuSettings.LangDesc);
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -52,19 +52,19 @@ namespace Lolly
             //if (e.ColumnIndex != 0) return;
             //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
             //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "BOOKNAME,LESSON, INDEX" : "BOOKNAME DESC, LESSON DESC, INDEX DESC";
+            //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, INDEX" : "BOOKNAME DESC, UNIT DESC, INDEX DESC";
         }
 
         private void bindingSource1_ListItemDeleted(object sender, ListChangedEventArgs e)
         {
             //UpdateTable();
-            //var count = queriesTableAdapter.WORDSBOOKGetWordCount(lblSettings.LangID, deletedWord).Value;
+            //var count = queriesTableAdapter.WORDSBOOKGetWordCount(lbuSettings.LangID, deletedWord).Value;
             //if (count == 0)
             //{
             //    var msg = string.Format("The word \"{0}\" is about to be DELETED from the language \"{1}\". Are you sure?",
-            //        deletedWord, lblSettings.LangName);
+            //        deletedWord, lbuSettings.LangName);
             //    if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //        wORDSTRANSTableAdapter.Delete(lblSettings.LangID, deletedWord);
+            //        wORDSTRANSTableAdapter.Delete(lbuSettings.LangID, deletedWord);
             //}
         }
     }

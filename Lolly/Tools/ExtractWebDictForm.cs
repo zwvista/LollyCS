@@ -15,7 +15,7 @@ namespace Lolly
     [ComVisible(true)]
     public partial class ExtractWebDictForm : Form, IOleClientSite
     {
-        private LangBookLessonSettings lblSettings;
+        private LangBookUnitSettings lbuSettings;
         private string[] words;
         private bool overwriteDB;
         private int wordIndex = 0;
@@ -76,19 +76,19 @@ namespace Lolly
         public ExtractWebDictForm(string[] words, string dict, bool overwriteDB, DictWebBrowser dwb = null)
         {
             InitializeComponent();
-            this.lblSettings = Program.lblSettings;
+            this.lbuSettings = Program.lbuSettings;
             this.words = words;
             this.overwriteDB = overwriteDB;
             this.dwb = dwb;
 
             dictToolStripTextBox.Text = dict;
-            dictRow = DictAll.GetDataByLangDict(lblSettings.LangID, dict);
+            dictRow = DictAll.GetDataByLangDict(lbuSettings.LangID, dict);
         }
 
         private void ExtractWebDictForm_Shown(object sender, EventArgs e)
         {
-            autoCorrectList = AutoCorrect.GetDataByLang(lblSettings.LangID);
-            langToolStripTextBox.Text = lblSettings.LangName;
+            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
+            langToolStripTextBox.Text = lbuSettings.LangName;
             IOleObject obj = (IOleObject)webBrowser1.ActiveXInstance;
             obj.SetClientSite(this);
             ////notify browser of change

@@ -13,40 +13,40 @@ using LollyBase;
 
 namespace Lolly
 {
-    public struct LangBookLessonSettings
+    public struct LangBookUnitSettings
     {
         public int LangID { get; set; }
         public int BookID { get; set; }
-        public int LessonFrom { get; set; }
+        public int UnitFrom { get; set; }
         public int PartFrom { get; set; }
-        public int LessonTo { get; set; }
+        public int UnitTo { get; set; }
         public int PartTo { get; set; }
         public string LangName { get; set; }
         public string BookName { get; set; }
 
-        public int LessonPartFrom
+        public int UnitPartFrom
         {
             get
             {
-                return LessonFrom * 10 + PartFrom;
+                return UnitFrom * 10 + PartFrom;
             }
         }
 
-        public int LessonPartTo
+        public int UnitPartTo
         {
             get
             {
-                return LessonTo * 10 + PartTo;
+                return UnitTo * 10 + PartTo;
             }
         }
 
-        public string BookLessonsDesc
+        public string BookUnitsDesc
         {
             get
             {
-                return LessonPartFrom == LessonPartTo ? 
-                    string.Format("{0} {1}:{2}", BookName, LessonFrom, PartFrom) :
-                    string.Format("{0} {1}:{2} -- {3}:{4}", BookName, LessonFrom, PartFrom, LessonTo, PartTo);
+                return UnitPartFrom == UnitPartTo ? 
+                    string.Format("{0} {1}:{2}", BookName, UnitFrom, PartFrom) :
+                    string.Format("{0} {1}:{2} -- {3}:{4}", BookName, UnitFrom, PartFrom, UnitTo, PartTo);
             }
         }
 
@@ -59,9 +59,9 @@ namespace Lolly
         }
     }
 
-    interface ILangBookLessons
+    interface ILangBookUnits
     {
-        void UpdatelblSettings();
+        void UpdatelbuSettings();
     }
 
     public class ReindexObject
@@ -133,7 +133,7 @@ namespace Lolly
 
     static class Program
     {
-        public static LangBookLessonSettings lblSettings;
+        public static LangBookUnitSettings lbuSettings;
         public static string appDataFolder;
         public static string appDataFolderInHtml;
         public static string js;
@@ -204,7 +204,7 @@ namespace Lolly
 
         public static void SetLangID(int newLangID)
         {
-            lblSettings.LangID = newLangID;
+            lbuSettings.LangID = newLangID;
             Properties.Settings.Default.LangID = newLangID;
             Properties.Settings.Default.Save();
         }
@@ -268,7 +268,7 @@ namespace Lolly
         [STAThread]
         static void Main()
         {
-            lblSettings.LangID = Properties.Settings.Default.LangID;
+            lbuSettings.LangID = Properties.Settings.Default.LangID;
             appDataFolder = Properties.Settings.Default.AppDataFolder + "\\";
             appLogFolder = appDataFolder + "Log\\";
             js = System.IO.File.ReadAllText(appDataFolder + "Lolly.js");

@@ -1,6 +1,6 @@
 ﻿namespace Lolly
 {
-    partial class SelectLessonsDlg
+    partial class SelectUnitsDlg
     {
         /// <summary>
         /// Required designer variable.
@@ -33,18 +33,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.bookComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lessonFromNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.lessonToNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.lessonInAllFromLabel = new System.Windows.Forms.Label();
+            this.unitFromNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.unitToNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.unitInAllFromLabel = new System.Windows.Forms.Label();
             this.activeIncludedCheckBox = new System.Windows.Forms.CheckBox();
             this.toCheckBox = new System.Windows.Forms.CheckBox();
-            this.lessonInAllToLabel = new System.Windows.Forms.Label();
+            this.unitInAllToLabel = new System.Windows.Forms.Label();
             this.partFromComboBox = new System.Windows.Forms.ComboBox();
             this.partToComboBox = new System.Windows.Forms.ComboBox();
             this.okButton = new VistaButtonTest.VistaButton();
             this.cancelButton = new VistaButtonTest.VistaButton();
-            ((System.ComponentModel.ISupportInitialize)(this.lessonFromNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lessonToNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unitFromNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unitToNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,53 +100,53 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 16);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Lessons:";
+            this.label3.Text = "Units:";
             // 
-            // lessonFromNumericUpDown
+            // unitFromNumericUpDown
             // 
-            this.lessonFromNumericUpDown.Location = new System.Drawing.Point(99, 87);
-            this.lessonFromNumericUpDown.Minimum = new decimal(new int[] {
+            this.unitFromNumericUpDown.Location = new System.Drawing.Point(99, 87);
+            this.unitFromNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.lessonFromNumericUpDown.Name = "lessonFromNumericUpDown";
-            this.lessonFromNumericUpDown.Size = new System.Drawing.Size(44, 26);
-            this.lessonFromNumericUpDown.TabIndex = 5;
-            this.lessonFromNumericUpDown.Value = new decimal(new int[] {
+            this.unitFromNumericUpDown.Name = "unitFromNumericUpDown";
+            this.unitFromNumericUpDown.Size = new System.Drawing.Size(44, 26);
+            this.unitFromNumericUpDown.TabIndex = 5;
+            this.unitFromNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.lessonFromNumericUpDown.ValueChanged += new System.EventHandler(this.lessonFromNumericUpDown_ValueChanged);
+            this.unitFromNumericUpDown.ValueChanged += new System.EventHandler(this.unitFromNumericUpDown_ValueChanged);
             // 
-            // lessonToNumericUpDown
+            // unitToNumericUpDown
             // 
-            this.lessonToNumericUpDown.Location = new System.Drawing.Point(99, 118);
-            this.lessonToNumericUpDown.Minimum = new decimal(new int[] {
+            this.unitToNumericUpDown.Location = new System.Drawing.Point(99, 118);
+            this.unitToNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.lessonToNumericUpDown.Name = "lessonToNumericUpDown";
-            this.lessonToNumericUpDown.Size = new System.Drawing.Size(44, 26);
-            this.lessonToNumericUpDown.TabIndex = 9;
-            this.lessonToNumericUpDown.Value = new decimal(new int[] {
+            this.unitToNumericUpDown.Name = "unitToNumericUpDown";
+            this.unitToNumericUpDown.Size = new System.Drawing.Size(44, 26);
+            this.unitToNumericUpDown.TabIndex = 9;
+            this.unitToNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.lessonToNumericUpDown.ValueChanged += new System.EventHandler(this.lessonToNumericUpDown_ValueChanged);
+            this.unitToNumericUpDown.ValueChanged += new System.EventHandler(this.unitToNumericUpDown_ValueChanged);
             // 
-            // lessonInAllFromLabel
+            // unitInAllFromLabel
             // 
-            this.lessonInAllFromLabel.AutoSize = true;
-            this.lessonInAllFromLabel.Location = new System.Drawing.Point(146, 89);
-            this.lessonInAllFromLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lessonInAllFromLabel.Name = "lessonInAllFromLabel";
-            this.lessonInAllFromLabel.Size = new System.Drawing.Size(104, 16);
-            this.lessonInAllFromLabel.TabIndex = 6;
-            this.lessonInAllFromLabel.Text = "(100 in all)";
+            this.unitInAllFromLabel.AutoSize = true;
+            this.unitInAllFromLabel.Location = new System.Drawing.Point(146, 89);
+            this.unitInAllFromLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.unitInAllFromLabel.Name = "unitInAllFromLabel";
+            this.unitInAllFromLabel.Size = new System.Drawing.Size(104, 16);
+            this.unitInAllFromLabel.TabIndex = 6;
+            this.unitInAllFromLabel.Text = "(100 in all)";
             // 
             // activeIncludedCheckBox
             // 
@@ -169,15 +169,15 @@
             this.toCheckBox.UseVisualStyleBackColor = true;
             this.toCheckBox.CheckedChanged += new System.EventHandler(this.toCheckBox_CheckedChanged);
             // 
-            // lessonInAllToLabel
+            // unitInAllToLabel
             // 
-            this.lessonInAllToLabel.AutoSize = true;
-            this.lessonInAllToLabel.Location = new System.Drawing.Point(146, 121);
-            this.lessonInAllToLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lessonInAllToLabel.Name = "lessonInAllToLabel";
-            this.lessonInAllToLabel.Size = new System.Drawing.Size(104, 16);
-            this.lessonInAllToLabel.TabIndex = 10;
-            this.lessonInAllToLabel.Text = "(100 in all)";
+            this.unitInAllToLabel.AutoSize = true;
+            this.unitInAllToLabel.Location = new System.Drawing.Point(146, 121);
+            this.unitInAllToLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.unitInAllToLabel.Name = "unitInAllToLabel";
+            this.unitInAllToLabel.Size = new System.Drawing.Size(104, 16);
+            this.unitInAllToLabel.TabIndex = 10;
+            this.unitInAllToLabel.Text = "(100 in all)";
             // 
             // partFromComboBox
             // 
@@ -231,7 +231,7 @@
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 13;
             // 
-            // SelectLessonsDlg
+            // SelectUnitsDlg
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -243,14 +243,14 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.toCheckBox);
             this.Controls.Add(this.activeIncludedCheckBox);
-            this.Controls.Add(this.lessonToNumericUpDown);
-            this.Controls.Add(this.lessonFromNumericUpDown);
+            this.Controls.Add(this.unitToNumericUpDown);
+            this.Controls.Add(this.unitFromNumericUpDown);
             this.Controls.Add(this.partToComboBox);
             this.Controls.Add(this.partFromComboBox);
             this.Controls.Add(this.bookComboBox);
             this.Controls.Add(this.langComboBox);
-            this.Controls.Add(this.lessonInAllToLabel);
-            this.Controls.Add(this.lessonInAllFromLabel);
+            this.Controls.Add(this.unitInAllToLabel);
+            this.Controls.Add(this.unitInAllFromLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -259,13 +259,13 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SelectLessonsDlg";
+            this.Name = "SelectUnitsDlg";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select Lessons";
-            this.Load += new System.EventHandler(this.SelectLessonsForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.lessonFromNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lessonToNumericUpDown)).EndInit();
+            this.Text = "Select Units";
+            this.Load += new System.EventHandler(this.SelectUnitsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.unitFromNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unitToNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,12 +278,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox bookComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown lessonFromNumericUpDown;
-        private System.Windows.Forms.NumericUpDown lessonToNumericUpDown;
-        private System.Windows.Forms.Label lessonInAllFromLabel;
+        private System.Windows.Forms.NumericUpDown unitFromNumericUpDown;
+        private System.Windows.Forms.NumericUpDown unitToNumericUpDown;
+        private System.Windows.Forms.Label unitInAllFromLabel;
         private System.Windows.Forms.CheckBox activeIncludedCheckBox;
         private System.Windows.Forms.CheckBox toCheckBox;
-        private System.Windows.Forms.Label lessonInAllToLabel;
+        private System.Windows.Forms.Label unitInAllToLabel;
         private System.Windows.Forms.ComboBox partFromComboBox;
         private System.Windows.Forms.ComboBox partToComboBox;
         private VistaButtonTest.VistaButton okButton;

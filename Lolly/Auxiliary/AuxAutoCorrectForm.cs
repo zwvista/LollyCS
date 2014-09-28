@@ -10,10 +10,10 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class AuxAutoCorrectForm : Form, ILangBookLessons
+    public partial class AuxAutoCorrectForm : Form, ILangBookUnits
     {
         private int deletedID = 0;
-        private LangBookLessonSettings lblSettings;
+        private LangBookUnitSettings lbuSettings;
         protected BindingList<MAUTOCORRECT> auxList;
 
         public AuxAutoCorrectForm()
@@ -23,12 +23,12 @@ namespace Lolly
 
         private void AutoCorrectForm_Load(object sender, EventArgs e)
         {
-            UpdatelblSettings();
+            UpdatelbuSettings();
         }
 
         private void FillTable()
         {
-            auxList = new BindingList<MAUTOCORRECT>(AutoCorrect.GetDataByLang(lblSettings.LangID));
+            auxList = new BindingList<MAUTOCORRECT>(AutoCorrect.GetDataByLang(lbuSettings.LangID));
             bindingSource1.DataSource = auxList;
         }
 
@@ -54,12 +54,12 @@ namespace Lolly
             FillTable();
         }
 
-        #region ILangBookLessons Members
+        #region ILangBookUnits Members
 
-        public void UpdatelblSettings()
+        public void UpdatelbuSettings()
         {
-            lblSettings = Program.lblSettings;
-            Text = string.Format("AutoCorrect ({0})", lblSettings.LangDesc);
+            lbuSettings = Program.lbuSettings;
+            Text = string.Format("AutoCorrect ({0})", lbuSettings.LangDesc);
             FillTable();
         }
 
@@ -95,7 +95,7 @@ namespace Lolly
             var row = auxList[e.RowIndex];
             if (row.ID == 0)
             {
-                row.LANGID = lblSettings.LangID;
+                row.LANGID = lbuSettings.LangID;
                 if (row.INDEX == 0)
                     row.INDEX = e.RowIndex + 1;
                 row.ID = AutoCorrect.Insert(row);

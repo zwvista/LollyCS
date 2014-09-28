@@ -30,7 +30,7 @@ namespace LollyBase
                     BOOKID = row.BOOKID,
                     LANGID = row.LANGID,
                     BOOKNAME = row.BOOKNAME,
-                    NUMLESSONS = row.NUMLESSONS,
+                    UNITSINBOOK = row.UNITSINBOOK,
                     PARTS = row.PARTS
                 };
                 db.SBOOK.Add(item);
@@ -44,28 +44,28 @@ namespace LollyBase
             {
                 var sql = @"
                         UPDATE  BOOKS
-                        SET BOOKID = @bookid, BOOKNAME = @bookname, NUMLESSONS = @numlessons, PARTS = @parts
+                        SET BOOKID = @bookid, BOOKNAME = @bookname, UNITSINBOOK = @unitsinbook, PARTS = @parts
                         WHERE   (BOOKID = @original_bookid)
                     ";
                 db.Database.ExecuteSqlCommand(sql,
                     new SqlParameter("bookid", row.BOOKID),
                     new SqlParameter("bookname", row.BOOKNAME),
-                    new SqlParameter("numlessons", row.NUMLESSONS),
+                    new SqlParameter("unitsinbook", row.UNITSINBOOK),
                     new SqlParameter("parts", row.PARTS),
                     new SqlParameter("original_bookid", original_bookid));
             }
         }
 
-        public static void UpdateLesson(int lessonfrom, int partfrom, int lessonto, int partto, int bookid)
+        public static void UpdateUnit(int unitfrom, int partfrom, int unitto, int partto, int bookid)
         {
             using (var db = new Entities())
             {
                 var item = db.SBOOK.SingleOrDefault(r => r.BOOKID == bookid);
                 if (item == null) return;
 
-                item.LESSONFROM = lessonfrom;
+                item.UNITFROM = unitfrom;
                 item.PARTFROM = partfrom;
-                item.LESSONTO = lessonto;
+                item.UNITTO = unitto;
                 item.PARTTO = partto;
                 db.SaveChanges();
             }

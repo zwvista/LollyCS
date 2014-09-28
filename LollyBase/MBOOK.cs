@@ -16,20 +16,20 @@ namespace LollyBase
     {
         public MBOOK()
         {
-            this.LESSONFROM = 1;
+            this.UNITFROM = 1;
             this.PARTFROM = 1;
-            this.LESSONTO = 1;
+            this.UNITTO = 1;
             this.PARTTO = 1;
         }
     
         public int BOOKID { get; set; }
         public int LANGID { get; set; }
         public string BOOKNAME { get; set; }
-        public int NUMLESSONS { get; set; }
+        public int UNITSINBOOK { get; set; }
         public string PARTS { get; set; }
-        public int LESSONFROM { get; set; }
+        public int UNITFROM { get; set; }
         public int PARTFROM { get; set; }
-        public int LESSONTO { get; set; }
+        public int UNITTO { get; set; }
         public int PARTTO { get; set; }
     
         public virtual MLANGUAGE LANGUAGES { get; set; }

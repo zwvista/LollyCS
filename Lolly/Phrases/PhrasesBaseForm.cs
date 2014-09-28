@@ -12,11 +12,11 @@ using LollyBase;
 
 namespace Lolly
 {
-    public partial class PhrasesBaseForm : Form, ILangBookLessons
+    public partial class PhrasesBaseForm : Form, ILangBookUnits
     {
         protected string phrase = "";
         protected string translation = "";
-        protected LangBookLessonSettings lblSettings;
+        protected LangBookUnitSettings lbuSettings;
         protected DataGridView dataGridView;
         protected int filterScope = 0;
         protected string filter = "";
@@ -160,7 +160,7 @@ namespace Lolly
                     var evaluator = string.Format("$1{0}$3", kv.Value);
                     phrase2 = new Regex(pattern).Replace(phrase2, evaluator);
                 }
-                Program.AddPropmt(pb, lblSettings.LangID, phrase2);
+                Program.AddPropmt(pb, lbuSettings.LangID, phrase2);
             }
             if (speakTranslation)
             {
@@ -203,13 +203,13 @@ namespace Lolly
             navigateToolStripSplitButton.PerformButtonClick();
         }
 
-        #region ILangBookLessons Members
+        #region ILangBookUnits Members
 
-        public virtual void UpdatelblSettings()
+        public virtual void UpdatelbuSettings()
         {
-            lblSettings = Program.lblSettings;
+            lbuSettings = Program.lbuSettings;
 
-            bool canSpeak = Program.CanSpeak(lblSettings.LangID);
+            bool canSpeak = Program.CanSpeak(lbuSettings.LangID);
             speakToolStripButton.Enabled = keepSpeakToolStripButton.Enabled = canSpeak;
 
             Func<int, IEnumerable<KeyValuePair<string, string>>> GetReplacement = langID =>
@@ -219,7 +219,7 @@ namespace Lolly
                     (string)elem.Attribute("after")
                 ));
 
-            replacement = GetReplacement(lblSettings.LangID);
+            replacement = GetReplacement(lbuSettings.LangID);
             replacementChn = GetReplacement(0);
 
             FillTable();
