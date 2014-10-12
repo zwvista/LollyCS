@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define DEBUG_EXTRACT
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,15 +16,18 @@ namespace LollyBase
 {
     public static class ExtensionClass
     {
-        public const string NOTRANS = "<p style=\"color: #0000FF; font-weight: bold\">No translations were found.</p>";
+        public const string NOTRANSLATION = "<p style=\"color: #0000FF; font-weight: bold\">No translations were found.</p>";
+        private static readonly Dictionary<string, string> escapes = new Dictionary<string, string>()
+        {
+            {"<delete>", ""}, {@"\t", "\t"}, {@"\r", "\r"}, {@"\n", "\n"},
+        };
         public static string ExtractFromHtml(string text, string transfrom)
         {
+#if DEBUG_EXTRACT
             var logFolder = Settings.Default.LogFolder + "\\";
-            if (Debugger.IsAttached)
-            {
-                File.WriteAllText(logFolder + "0_raw.html", text);
-                transfrom = File.ReadAllText(logFolder + "1_transform.txt");
-            }
+            File.WriteAllText(logFolder + "0_raw.html", text);
+            transfrom = File.ReadAllText(logFolder + "1_transform.txt");
+#endif
             var arr = transfrom.Split(new[] { "\r\n" }, StringSplitOptions.None);
             var reg = new Regex(arr[0]);
             var match = reg.Match(text);
@@ -32,23 +37,23 @@ namespace LollyBase
             text = match.Groups[0].Value;
             Action<string> f = replacer =>
             {
-                replacer = replacer.Replace(@"\r", "\r").Replace(@"\n", "\n");
-                if (replacer == "<delete>")
-                    replacer = "";
+                foreach (var entry in escapes)
+                    replacer = replacer.Replace(entry.Key, entry.Value);
                 text = reg.Replace(text, replacer);
             };
 
             f(arr[1]);
-            if (Debugger.IsAttached)
-                File.WriteAllText(logFolder + "2_extracted.txt", text);
-            if (arr.Length > 2)
-                for (int i = 2; i < arr.Length; )
-                {
-                    reg = new Regex(arr[i++]);
-                    f(arr[i++]);
-                }
-            if (Debugger.IsAttached)
-                File.WriteAllText(logFolder + "3_cooked.txt", text);
+#if DEBUG_EXTRACT
+            File.WriteAllText(logFolder + "2_extracted.txt", text);
+#endif
+            for (int i = 2; i < arr.Length; )
+            {
+                reg = new Regex(arr[i++]);
+                f(arr[i++]);
+            }
+#if DEBUG_EXTRACT
+            File.WriteAllText(logFolder + "3_cooked.txt", text);
+#endif
             return text;
         }
 

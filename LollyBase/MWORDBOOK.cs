@@ -17,7 +17,7 @@ namespace LollyBase
         public int BOOKID { get; set; }
         public int UNIT { get; set; }
         public int PART { get; set; }
-        public int INDEX { get; set; }
+        public int ORD { get; set; }
         public string WORD { get; set; }
         public string BOOKNAME { get; set; }
         public string NOTE { get; set; }

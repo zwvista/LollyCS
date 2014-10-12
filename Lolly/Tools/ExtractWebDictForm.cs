@@ -145,7 +145,7 @@ namespace Lolly
             if (dwb == null)
                 Program.UpdateDictTable(webBrowser1, wordRow, dictRow, false);
             else
-                dwb.UpdateLiveHtml(word, dictRow.DICTNAME, webBrowser1.ExtractFromWeb(dictRow, ExtensionClass.NOTRANS));
+                dwb.UpdateLiveHtml(word, dictRow.DICTNAME, webBrowser1.ExtractFromWeb(dictRow, ExtensionClass.NOTRANSLATION));
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

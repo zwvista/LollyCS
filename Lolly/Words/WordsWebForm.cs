@@ -255,7 +255,7 @@ namespace Lolly
         private void deleteTranslationToolStripButton_Click(object sender, EventArgs e)
         {
             Action DeleteTranslation = () =>
-                DictEntity.Update(ExtensionClass.NOTRANS, currentWord, currentDWB.dictRow.DICTTABLE);
+                DictEntity.Update(ExtensionClass.NOTRANSLATION, currentWord, currentDWB.dictRow.DICTTABLE);
 
             if (currentDWB.dictName == DictNames.DEFAULT)
             {

@@ -104,7 +104,7 @@ namespace Lolly
             // 
             this.bindingSource1.DataSource = typeof(MWORDUNIT);
             this.bindingSource1.ListRowChanged = false;
-            this.bindingSource1.Sort = "UNIT,PART,INDEX";
+            this.bindingSource1.Sort = "UNIT,PART,ORD";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
             // dataGridView1
@@ -146,8 +146,8 @@ namespace Lolly
             // 
             // indexColumn
             // 
-            this.indexColumn.DataPropertyName = "INDEX";
-            this.indexColumn.HeaderText = "INDEX";
+            this.indexColumn.DataPropertyName = "ORD";
+            this.indexColumn.HeaderText = "ORD";
             this.indexColumn.Name = "indexColumn";
             this.indexColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.indexColumn.Width = 75;

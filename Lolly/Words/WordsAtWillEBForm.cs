@@ -43,18 +43,18 @@ namespace Lolly
         {
             var objs = (from row in wordsList
                         where row.ID != 0
-                        orderby row.INDEX
-                        select new ReindexObject(row.INDEX, row.WORD)).ToArray();
+                        orderby row.ORD
+                        select new ReindexObject(row.ORD, row.WORD)).ToArray();
             var dlg = new ReindexDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
                 {
                     var row = wordsList.SingleOrDefault(r => r.ID == obj.ID);
-                    row.INDEX = obj.INDEX;
+                    row.ORD = obj.ORD;
                 }
                 foreach (var row in wordsList)
-                    row.ID = row.INDEX;
+                    row.ID = row.ORD;
             }
         }
 
@@ -78,9 +78,9 @@ namespace Lolly
             var row = wordsList[e.RowIndex];
             if (row.ID == 0)
             {
-                if (row.INDEX == 0)
-                    row.INDEX = e.RowIndex + 1;
-                row.ID = row.INDEX;
+                if (row.ORD == 0)
+                    row.ORD = e.RowIndex + 1;
+                row.ID = row.ORD;
             }
         }
     }

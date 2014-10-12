@@ -29,7 +29,7 @@ namespace LollyBase
                     BOOKID = row.BOOKID,
                     UNIT = row.UNIT,
                     PART = row.PART,
-                    INDEX = row.INDEX,
+                    ORD = row.ORD,
                     WORD = row.WORD,
                     NOTE = row.NOTE
                 };
@@ -48,21 +48,21 @@ namespace LollyBase
 
                 item.UNIT = row.UNIT;
                 item.PART = row.PART;
-                item.INDEX = row.INDEX;
+                item.ORD = row.ORD;
                 item.WORD = row.WORD;
                 item.NOTE = row.NOTE;
                 db.SaveChanges();
             }
         }
 
-        public static void UpdateIndex(int index, int id)
+        public static void UpdateIndex(int ord, int id)
         {
             using (var db = new Entities())
             {
                 var item = db.SWORDUNIT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
-                item.INDEX = index;
+                item.ORD = ord;
                 db.SaveChanges();
             }
         }
@@ -87,7 +87,7 @@ namespace LollyBase
                     from r in db.SWORDUNIT
                     let unitpart = r.UNIT * 10 + r.PART
                     where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
-                    orderby r.UNIT, r.PART, r.INDEX
+                    orderby r.UNIT, r.PART, r.ORD
                     select r
                 ).ToList();
             }

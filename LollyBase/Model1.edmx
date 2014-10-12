@@ -165,7 +165,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LANGID" Type="int" Nullable="false" />
-          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="ORD" Type="int" Nullable="false" />
           <Property Name="INPUT" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EXTENDED" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BASIC" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -190,7 +190,7 @@
             <PropertyRef Name="DICTNAME" />
           </Key>
           <Property Name="LANGID" Type="int" Nullable="false" />
-          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="ORD" Type="int" Nullable="false" />
           <Property Name="DICTTYPEID" Type="int" Nullable="false" />
           <Property Name="DICTNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LANGIDTO" Type="int" Nullable="false" />
@@ -227,7 +227,7 @@
           <Property Name="BOOKID" Type="int" Nullable="false" />
           <Property Name="UNIT" Type="int" Nullable="false" />
           <Property Name="PART" Type="int" Nullable="false" />
-          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="ORD" Type="int" Nullable="false" />
           <Property Name="PHRASE" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="TRANSLATION" Type="nvarchar" MaxLength="255" />
         </EntityType>
@@ -285,7 +285,7 @@
           <Property Name="BOOKID" Type="int" Nullable="false" />
           <Property Name="UNIT" Type="int" Nullable="false" />
           <Property Name="PART" Type="int" Nullable="false" />
-          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="ORD" Type="int" Nullable="false" />
           <Property Name="WORD" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="NOTE" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -303,14 +303,14 @@ warning 6002: The table/view 'Lolly.dbo.DICTALL' does not have a primary key def
         <EntityType Name="DICTALL">
           <Key>
             <PropertyRef Name="LANGID" />
-            <PropertyRef Name="INDEX" />
+            <PropertyRef Name="ORD" />
             <PropertyRef Name="LANGIDTO" />
             
             <PropertyRef Name="DICTNAME" />
             <PropertyRef Name="AUTOJUMP" />
           </Key>
           <Property Name="LANGID" Type="int" Nullable="false" />
-          <Property Name="INDEX" Type="int" Nullable="false" />
+          <Property Name="ORD" Type="int" Nullable="false" />
           <Property Name="LANGIDTO" Type="int" Nullable="false" />
           <Property Name="DICTTYPENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DICTNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -439,7 +439,7 @@ warning 6002: The table/view 'Lolly.dbo.WEBTEXTALL' does not have a primary key 
           <EntitySet Name="DICTALL" EntityType="Self.DICTALL" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [DICTALL].[LANGID] AS [LANGID], 
-[DICTALL].[INDEX] AS [INDEX], 
+[DICTALL].ORD AS ORD, 
 [DICTALL].[LANGIDTO] AS [LANGIDTO], 
 [DICTALL].[DICTTYPENAME] AS [DICTTYPENAME], 
 [DICTALL].[DICTNAME] AS [DICTNAME], 
@@ -558,7 +558,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Name="BOOKID" Type="Int32" Nullable="false" />
           <Property Name="UNIT" Type="Int32" Nullable="false" />
           <Property Name="PART" Type="Int32" Nullable="false" />
-          <Property Name="INDEX" Type="Int32" Nullable="false" />
+          <Property Name="ORD" Type="Int32" Nullable="false" />
           <Property Name="PHRASE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="TRANSLATION" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
         </EntityType>
@@ -570,7 +570,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Name="BOOKID" Type="Int32" Nullable="false" />
           <Property Name="UNIT" Type="Int32" Nullable="false" />
           <Property Name="PART" Type="Int32" Nullable="false" />
-          <Property Name="INDEX" Type="Int32" Nullable="false" />
+          <Property Name="ORD" Type="Int32" Nullable="false" />
           <Property Name="WORD" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="NOTE" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
         </EntityType>
@@ -589,7 +589,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Type="Int32" Name="BOOKID" Nullable="false" />
           <Property Type="Int32" Name="UNIT" Nullable="false" />
           <Property Type="Int32" Name="PART" Nullable="false" />
-          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ORD" Nullable="false" />
           <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="NOTE" Nullable="true" MaxLength="100" />
@@ -597,7 +597,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
         <ComplexType Name="MPHRASELANG">
           <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="UNIT" Nullable="false" />
-          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ORD" Nullable="false" />
           <Property Type="String" Name="PHRASE" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="TRANSLATION" Nullable="true" MaxLength="Max" />
           <Property Type="Int32" Name="PART" Nullable="false" />
@@ -605,7 +605,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Type="Int32" Name="BOOKID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="MWORDATWILL">
-          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ORD" Nullable="false" />
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="WORD" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="NOTE" Nullable="true" MaxLength="100" />
@@ -616,7 +616,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="LANGID" Nullable="false" />
-          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ORD" Nullable="false" />
           <Property Type="String" Name="INPUT" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Type="String" Name="EXTENDED" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Type="String" Name="BASIC" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -640,13 +640,13 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
         <EntityType Name="MDICTALL">
           <Key>
             <PropertyRef Name="LANGID" />
-            <PropertyRef Name="INDEX" />
+            <PropertyRef Name="ORD" />
             <PropertyRef Name="LANGIDTO" />
             <PropertyRef Name="DICTNAME" />
             <PropertyRef Name="AUTOJUMP" />
           </Key>
           <Property Type="Int32" Name="LANGID" Nullable="false" />
-          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ORD" Nullable="false" />
           <Property Type="Int32" Name="LANGIDTO" Nullable="false" />
           <Property Type="String" Name="DICTTYPENAME" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Type="String" Name="DICTNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -695,7 +695,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
             <PropertyRef Name="DICTNAME" />
           </Key>
           <Property Type="Int32" Name="LANGID" Nullable="false" />
-          <Property Type="Int32" Name="INDEX" Nullable="false" />
+          <Property Type="Int32" Name="ORD" Nullable="false" />
           <Property Type="Int32" Name="DICTTYPEID" Nullable="false" DefaultValue="3" />
           <Property Type="String" Name="DICTNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="LANGIDTO" Nullable="false" DefaultValue="1" />
@@ -993,7 +993,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
             <ScalarProperty Name="PART" ColumnName="PART" />
-            <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+            <ScalarProperty Name="ORD" ColumnName="ORD" />
             <ScalarProperty Name="PHRASE" ColumnName="PHRASE" />
             <ScalarProperty Name="TRANSLATION" ColumnName="TRANSLATION" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -1002,7 +1002,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
             <ScalarProperty Name="PART" ColumnName="PART" />
-            <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+            <ScalarProperty Name="ORD" ColumnName="ORD" />
             <ScalarProperty Name="WORD" ColumnName="WORD" />
             <ScalarProperty Name="NOTE" ColumnName="NOTE" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -1017,7 +1017,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="BASIC" ColumnName="BASIC" />
                 <ScalarProperty Name="EXTENDED" ColumnName="EXTENDED" />
                 <ScalarProperty Name="INPUT" ColumnName="INPUT" />
-                <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+                <ScalarProperty Name="ORD" ColumnName="ORD" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -1053,7 +1053,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="DICTNAME" ColumnName="DICTNAME" />
                 <ScalarProperty Name="DICTTYPENAME" ColumnName="DICTTYPENAME" />
                 <ScalarProperty Name="LANGIDTO" ColumnName="LANGIDTO" />
-                <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+                <ScalarProperty Name="ORD" ColumnName="ORD" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1092,7 +1092,7 @@ FROM [dbo].[WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="LANGIDTO" ColumnName="LANGIDTO" />
                 <ScalarProperty Name="DICTNAME" ColumnName="DICTNAME" />
                 <ScalarProperty Name="DICTTYPEID" ColumnName="DICTTYPEID" />
-                <ScalarProperty Name="INDEX" ColumnName="INDEX" />
+                <ScalarProperty Name="ORD" ColumnName="ORD" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -69,13 +69,13 @@ namespace Lolly
         {
             var objs = (from row in auxList
                         where row.ID != 0
-                        orderby row.INDEX
+                        orderby row.ORD
                         select new ReindexObject(row.ID, row.EXTENDED)).ToArray();
             var dlg = new ReindexDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    AutoCorrect.UpdateIndex(obj.INDEX, obj.ID);
+                    AutoCorrect.UpdateIndex(obj.ORD, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -96,8 +96,8 @@ namespace Lolly
             if (row.ID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
-                if (row.INDEX == 0)
-                    row.INDEX = e.RowIndex + 1;
+                if (row.ORD == 0)
+                    row.ORD = e.RowIndex + 1;
                 row.ID = AutoCorrect.Insert(row);
                 dataGridView1.Refresh();
             }

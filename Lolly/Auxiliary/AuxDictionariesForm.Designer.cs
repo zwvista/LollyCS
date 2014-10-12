@@ -104,7 +104,7 @@ namespace Lolly
             // 
             this.bindingSource1.DataSource = typeof(LollyBase.MDICTIONARY);
             this.bindingSource1.ListRowChanged = false;
-            this.bindingSource1.Sort = "INDEX";
+            this.bindingSource1.Sort = "ORD";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
             // bindingNavigatorCountItem
@@ -255,8 +255,8 @@ namespace Lolly
             // 
             // indexColumn
             // 
-            this.indexColumn.DataPropertyName = "INDEX";
-            this.indexColumn.HeaderText = "INDEX";
+            this.indexColumn.DataPropertyName = "ORD";
+            this.indexColumn.HeaderText = "ORD";
             this.indexColumn.Name = "indexColumn";
             this.indexColumn.Width = 50;
             // 

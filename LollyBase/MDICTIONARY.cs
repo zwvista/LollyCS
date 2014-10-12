@@ -21,7 +21,7 @@ namespace LollyBase
         }
     
         public int LANGID { get; set; }
-        public int INDEX { get; set; }
+        public int ORD { get; set; }
         public int DICTTYPEID { get; set; }
         public string DICTNAME { get; set; }
         public int LANGIDTO { get; set; }

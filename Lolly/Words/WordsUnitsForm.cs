@@ -81,20 +81,20 @@ namespace Lolly
             //if (e.ColumnIndex != 0) return;
             //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
             //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "UNIT, PART, INDEX" : "UNIT DESC, PART, INDEX DESC";
+            //bindingSource1.Sort = ascending ? "UNIT, PART, ORD" : "UNIT DESC, PART, ORD DESC";
         }
 
         private void reindexToolStripButton_Click(object sender, EventArgs e)
         {
             var objs = (from row in wordsList
                         where row.ID != 0
-                        orderby row.INDEX
+                        orderby row.ORD
                         select new ReindexObject(row.ID, row.WORD)).ToArray();
             var dlg = new ReindexDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    WordsUnits.UpdateIndex(obj.INDEX, obj.ID);
+                    WordsUnits.UpdateIndex(obj.ORD, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -122,8 +122,8 @@ namespace Lolly
                     row.UNIT = lbuSettings.UnitTo;
                 if (row.PART == 0)
                     row.PART = lbuSettings.PartTo;
-                if (row.INDEX == 0)
-                    row.INDEX = e.RowIndex + 1;
+                if (row.ORD == 0)
+                    row.ORD = e.RowIndex + 1;
                 row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
                 row.ID = WordsUnits.Insert(row);
                 dataGridView1.Refresh();

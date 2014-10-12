@@ -13,7 +13,7 @@ namespace LollyBase
     
     public partial class MWORDATWILL
     {
-        public int INDEX { get; set; }
+        public int ORD { get; set; }
         public int ID { get; set; }
         public string WORD { get; set; }
         public string NOTE { get; set; }

@@ -208,7 +208,7 @@ namespace Lolly
             this.reindexToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
             this.reindexToolStripButton.Name = "reindexToolStripButton";
             this.reindexToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reindexToolStripButton.Text = "Renumber INDEX";
+            this.reindexToolStripButton.Text = "Renumber ORD";
             this.reindexToolStripButton.Click += new System.EventHandler(this.reindexToolStripButton_Click);
             // 
             // dataGridView1
@@ -251,14 +251,14 @@ namespace Lolly
             // 
             // indexColumn
             // 
-            this.indexColumn.DataPropertyName = "INDEX";
-            this.indexColumn.HeaderText = "INDEX";
+            this.indexColumn.DataPropertyName = "ORD";
+            this.indexColumn.HeaderText = "ORD";
             this.indexColumn.Name = "indexColumn";
             // 
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(MAUTOCORRECT);
-            this.bindingSource1.Sort = "INDEX";
+            this.bindingSource1.Sort = "ORD";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
             // AuxAutoCorrectForm

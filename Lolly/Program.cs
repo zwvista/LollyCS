@@ -67,12 +67,12 @@ namespace Lolly
     public class ReindexObject
     {
         public int ID {get; set;}
-        public int INDEX { get; set; }
+        public int ORD { get; set; }
         public string ITEM { get; set; }
         public ReindexObject(int id, string item)
         {
             ID = id;
-            INDEX = 0;
+            ORD = 0;
             ITEM = item;
         }
     }
@@ -195,7 +195,7 @@ namespace Lolly
 
         public static void UpdateDictTable(WebBrowser wb, MDICTENTITY wordRow, MDICTALL dictRow, bool append)
         {
-            var text = wb.ExtractFromWeb(dictRow, append ? "" : ExtensionClass.NOTRANS);
+            var text = wb.ExtractFromWeb(dictRow, append ? "" : ExtensionClass.NOTRANSLATION);
             if (append)
                 text = wordRow.TRANSLATION + text;
             wordRow.TRANSLATION = text;

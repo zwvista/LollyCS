@@ -125,8 +125,8 @@ namespace Lolly
             // 
             // indexColumn
             // 
-            this.indexColumn.DataPropertyName = "INDEX";
-            this.indexColumn.HeaderText = "INDEX";
+            this.indexColumn.DataPropertyName = "ORD";
+            this.indexColumn.HeaderText = "ORD";
             this.indexColumn.Name = "indexColumn";
             this.indexColumn.Width = 75;
             // 

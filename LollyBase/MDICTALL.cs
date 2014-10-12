@@ -15,7 +15,7 @@ namespace LollyBase
     public partial class MDICTALL
     {
         public int LANGID { get; set; }
-        public int INDEX { get; set; }
+        public int ORD { get; set; }
         public int LANGIDTO { get; set; }
         public string DICTTYPENAME { get; set; }
         public string DICTNAME { get; set; }

@@ -80,7 +80,7 @@ namespace LollyBase
             var text = Search(word);
             text = ExtensionClass.ExtractFromHtml(text, transform);
             if (text == "")
-                text = ExtensionClass.NOTRANS;
+                text = ExtensionClass.NOTRANSLATION;
             return text;
         }
     }

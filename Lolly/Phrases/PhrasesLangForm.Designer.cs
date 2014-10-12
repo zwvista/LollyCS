@@ -47,7 +47,7 @@ namespace Lolly
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(MPHRASELANG);
-            this.bindingSource1.Sort = "BOOKNAME,UNIT,INDEX";
+            this.bindingSource1.Sort = "BOOKNAME,UNIT,ORD";
             // 
             // dataGridView1
             // 
@@ -103,8 +103,8 @@ namespace Lolly
             // 
             // indexColumn
             // 
-            this.indexColumn.DataPropertyName = "INDEX";
-            this.indexColumn.HeaderText = "INDEX";
+            this.indexColumn.DataPropertyName = "ORD";
+            this.indexColumn.HeaderText = "ORD";
             this.indexColumn.Name = "indexColumn";
             this.indexColumn.ReadOnly = true;
             this.indexColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;

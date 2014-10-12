@@ -26,7 +26,7 @@ namespace LollyBase
                 return (
                     from r in db.SDICTALL
                     where r.LANGID == langid && r.DICTTYPENAME == dicttype
-                    orderby r.INDEX
+                    orderby r.ORD
                     select r
                 ).ToList();
         }

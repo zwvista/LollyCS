@@ -14,7 +14,7 @@ namespace LollyBase
             using (var db = new Entities())
             {
 //                    var sql = @"
-//        	            SELECT   WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, WORDSBOOK.[INDEX], 
+//        	            SELECT   WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, WORDSBOOK.ORD, 
 //        					            WORDSBOOK.WORD, BOOKS.BOOKNAME, WORDSBOOK.[NOTE]
 //        	            FROM      (WORDSBOOK INNER JOIN BOOKS ON WORDSBOOK.BOOKID = BOOKS.BOOKID)
 //        	            WHERE   (BOOKS.LANGID = @langid) AND (WORDSBOOK.WORD LIKE '%' + @word + '%')
@@ -27,7 +27,7 @@ namespace LollyBase
                     join rb in db.SBOOK
                     on rw.BOOKID equals rb.BOOKID
                     where rb.LANGID == langid && rw.WORD.Contains(word)
-                    select new { rw.ID, rw.BOOKID, rw.UNIT, rw.PART, rw.INDEX, rw.WORD, rb.BOOKNAME, rw.NOTE }
+                    select new { rw.ID, rw.BOOKID, rw.UNIT, rw.PART, rw.ORD, rw.WORD, rb.BOOKNAME, rw.NOTE }
                 ).ToList().ToNonAnonymousList(new List<MWORDBOOK>());
             }
         }
@@ -40,7 +40,7 @@ namespace LollyBase
                     string.Join(" Union ",
                         from dicttable in dictTablesOffline
                         select string.Format(@"
-                                SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, [INDEX], WORDSBOOK.WORD, NOTE
+                                SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, ORD, WORDSBOOK.WORD, NOTE
                                 FROM BOOKS INNER JOIN (WORDSBOOK INNER JOIN [{0}]
                                 ON WORDSBOOK.WORD = [{0}].WORD) ON BOOKS.BOOKID = WORDSBOOK.BOOKID
                                 WHERE LANGID = @langid AND [TRANSLATION] LIKE '%' + @word + '%'"

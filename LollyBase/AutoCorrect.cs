@@ -27,7 +27,7 @@ namespace LollyBase
                 var item = new MAUTOCORRECT
                 {
                     LANGID = row.LANGID,
-                    INDEX = row.INDEX,
+                    ORD = row.ORD,
                     INPUT = row.INPUT,
                     EXTENDED = row.EXTENDED,
                     BASIC = row.BASIC
@@ -46,7 +46,7 @@ namespace LollyBase
                 if (item == null) return;
 
                 item.LANGID = row.LANGID;
-                item.INDEX = row.INDEX;
+                item.ORD = row.ORD;
                 item.INPUT = row.INPUT;
                 item.EXTENDED = row.EXTENDED;
                 item.BASIC = row.BASIC;
@@ -54,14 +54,14 @@ namespace LollyBase
             }
         }
 
-        public static void UpdateIndex(int index, int id)
+        public static void UpdateIndex(int ord, int id)
         {
             using (var db = new Entities())
             {
                 var item = db.SAUTOCORRECT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
-                item.INDEX = index;
+                item.ORD = ord;
                 db.SaveChanges();
             }
         }

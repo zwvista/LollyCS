@@ -112,7 +112,7 @@ namespace LollyBase
 	        if(bFoundOne)
 		        result += "</DIV></DIV></BODY></HTML>";
 	        else
-                result = string.Format("<HTML><BODY>{0}</BODY></HTML>", ExtensionClass.NOTRANS);
+                result = string.Format("<HTML><BODY>{0}</BODY></HTML>", ExtensionClass.NOTRANSLATION);
             return result;
         }
     }

@@ -363,7 +363,7 @@
             this.reindexToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
             this.reindexToolStripButton.Name = "reindexToolStripButton";
             this.reindexToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reindexToolStripButton.Text = "Renumber INDEX";
+            this.reindexToolStripButton.Text = "Renumber ORD";
             // 
             // timerNavigate
             // 

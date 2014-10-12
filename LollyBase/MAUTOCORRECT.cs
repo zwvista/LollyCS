@@ -16,7 +16,7 @@ namespace LollyBase
     {
         public int ID { get; set; }
         public int LANGID { get; set; }
-        public int INDEX { get; set; }
+        public int ORD { get; set; }
         public string INPUT { get; set; }
         public string EXTENDED { get; set; }
         public string BASIC { get; set; }

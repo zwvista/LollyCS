@@ -52,7 +52,7 @@ namespace Lolly
             //if (e.ColumnIndex != 0) return;
             //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
             //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, INDEX" : "BOOKNAME DESC, UNIT DESC, INDEX DESC";
+            //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, ORD" : "BOOKNAME DESC, UNIT DESC, ORD DESC";
         }
 
         private void bindingSource1_ListItemDeleted(object sender, ListChangedEventArgs e)
