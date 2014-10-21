@@ -23,6 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dll.LollyBase", "LollyBase\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dll.Lolly", "DllLolly\Dll.Lolly.csproj", "{DBA6EF01-414E-4854-92C1-8585A75DDA15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyASPMVC", "LollyASPMVC\LollyASPMVC.csproj", "{AA790972-CF72-4B05-A47C-44B4189EEBBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyASPWebForms", "LollyASPWebForms\LollyASPWebForms.csproj", "{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FE4D7D23-1F41-44CE-8B68-9229D41406A1} = {FE4D7D23-1F41-44CE-8B68-9229D41406A1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +111,26 @@ Global
 		{DBA6EF01-414E-4854-92C1-8585A75DDA15}.Release|Mixed Platforms.Build.0 = Release|x86
 		{DBA6EF01-414E-4854-92C1-8585A75DDA15}.Release|x86.ActiveCfg = Release|x86
 		{DBA6EF01-414E-4854-92C1-8585A75DDA15}.Release|x86.Build.0 = Release|x86
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AA790972-CF72-4B05-A47C-44B4189EEBBC}.Release|x86.ActiveCfg = Release|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C580ADBC-8974-46C8-BEE9-EC7EC0EF6526}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

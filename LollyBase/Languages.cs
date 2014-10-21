@@ -23,17 +23,13 @@ namespace LollyBase
         public static MLANGUAGE GetDataByLang(int langid)
         {
             using (var db = new Entities())
-            {
                 return db.SLANGUAGE.SingleOrDefault(r => r.LANGID == langid);
-            }
         }
 
         public static List<MLANGUAGE> GetData()
         {
             using (var db = new Entities())
-            {
-                return db.SLANGUAGE.ToList();
-            }
+                return db.SLANGUAGE.Where(r => r.LANGID > 1).ToList();
         }
     }
 }

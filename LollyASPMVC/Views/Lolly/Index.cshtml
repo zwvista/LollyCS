@@ -1,0 +1,32 @@
+﻿@model LollyASPMVC.Models.LollyViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Lolly";
+}
+
+<table>
+    <tr>
+        <td>Language:</td>
+        <td>
+            @Html.DropDownListFor(m => m.SelectedLangID, Model.LangList);
+        </td>
+        <td>Dictionary:</td>
+        <td>
+            <select name="selectedDictName" id="dict"></select>
+        </td>
+    </tr>
+    <tr>
+        <td>Word:</td>
+        <td colspan="2">
+            @Html.LabelFor(m => m.Word)
+        </td>
+        <td>
+            <input type="button" value="Search" id='search' />
+        </td>
+    </tr>
+</table>
+
+<iframe id='dictframe' width='100%' height='500'></iframe>
