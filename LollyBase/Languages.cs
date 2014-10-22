@@ -29,7 +29,7 @@ namespace LollyBase
         public static List<MLANGUAGE> GetData()
         {
             using (var db = new Entities())
-                return db.SLANGUAGE.Where(r => r.LANGID > 1).ToList();
+                return db.SLANGUAGE.Where(r => r.LANGID > 0).ToList();
         }
     }
 }

@@ -13,17 +13,29 @@ namespace LollyASPMVC.Controllers
         // GET: Lolly
         public ActionResult Index()
         {
-            var m = new LollyViewModel()
+            var vm = new LollyViewModel()
             {
-                LangList = Languages.GetData()
-                    .Select(r => new SelectListItem()
-                    {
-                        Value = r.LANGID.ToString(),
-                        Text = r.LANGNAME
-                    }).ToList(),
                 Word = "一人"
             };
-            return View(m);
+            return View(vm);
+        }
+
+        public ActionResult DictList(int langid)
+        {
+            return Json(
+                Dictionaries.GetDataByLang(langid)
+                .Select(r => r.DICTNAME)
+                .OrderBy(r => r),
+                JsonRequestBehavior.AllowGet
+            );
+        }
+
+        [HttpPost]
+        public ActionResult UrlByWord(LollyViewModel vm)
+        {
+            var m = DictAll.GetDataByLangDict(vm.SelectedLangID, vm.SelectedDictName);
+            var url = string.Format(m.URL, HttpUtility.UrlEncode(vm.Word));
+            return Content(url);
         }
     }
 }

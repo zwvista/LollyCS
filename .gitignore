@@ -10,3 +10,5 @@ Release
 x64
 packages
 ipch
+bin
+obj
