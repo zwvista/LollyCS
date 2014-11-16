@@ -42,8 +42,8 @@
         if (langid != null && langid != '') {
             $.getJSON('@Url.Action("DictList")', {langid: langid}, function(response) {
                 $dict.empty();
-                $.each(response, function (index, dict) {
-                    $dict.append($('<option/>', { text: dict }));
+                $.each(response, function(index, dict) {
+                    $dict.append($('<option/>', {text: dict}));
                 });
             });
         }

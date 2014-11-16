@@ -103,7 +103,7 @@ namespace Lolly
             var dlg = new NewWordsDlg();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                dlg.Words.ForEach(w => OnAddWord(w));
+                dlg.Words.ForEach(OnAddWord);
                 dataGridView.MoveToAddNew();
                 OnAddComplete();
             }
