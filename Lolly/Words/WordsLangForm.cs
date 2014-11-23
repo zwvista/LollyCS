@@ -28,7 +28,7 @@ namespace Lolly
         {
             wordsList = new BindingList<MWORDLANG>(
                 filterScope == 0 ? WordsLang.GetDataByLangWord(lbuSettings.LangID, filter) :
-                WordsLang.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, dictTablesOffline)
+                WordsLang.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
             bindingSource1.DataSource = wordsList;
             autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);

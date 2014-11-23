@@ -27,9 +27,7 @@ namespace Lolly
             dictRow = dictAllList.SingleOrDefault(r => r.DICTNAME == dict);
         }
 
-        public void UpdateHtml(string word, List<MAUTOCORRECT> autoCorrectList,
-            List<MDICTALL> dictAllList, string[] dictsLingoes, string[] dictsOffline,
-            Dictionary<string, DictInfo[]> dictsCustom)
+        public void UpdateHtml(string word, List<MAUTOCORRECT> autoCorrectList, DictLangConfig config)
         {
             Func<string, string> GetTemplatedHtml = str =>
                 string.Format(dictRow.TEMPLATE, word, Program.appDataFolderInHtml + "css/", str);
@@ -47,7 +45,7 @@ namespace Lolly
 
             Func<bool, string> GetLingoesHtml = all =>
                 all ? Program.lingoes.Search(word) :
-                    Program.lingoes.Search(word, dictsLingoes);
+                    Program.lingoes.Search(word, config.dictsLingoes);
 
             Func<string, string> GetLiveHtml = dict =>
             {
@@ -58,7 +56,7 @@ namespace Lolly
                 return GetTemplatedHtml(Program.GetLiveHtml(word, dict));
             };
 
-            Func<DictInfo[], string> GetCustomHtml = dictInfos =>
+            Func<List<DictInfo>, string> GetCustomHtml = dictInfos =>
             {
                 Func<string, string> GetIFrameOfflineText = str => string.Format(
                     "<iframe frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{0}\");'></iframe>\n",
@@ -72,19 +70,22 @@ namespace Lolly
 
                 Action<string> AddOfflineDictText = dict =>
                 {
-                    FindDict(dictAllList, dict);
+                    FindDict(config.dictAllList, dict);
                     sb.Append(GetIFrameOfflineText(GetTranslationHtml()));
                 };
 
                 Action<string> AddOnlineDictText = dict =>
                 {
-                    FindDict(dictAllList, dict);
-                    sb.Append(GetIFrameOnlineText(GetDictURLForword()));
+                    FindDict(config.dictAllList, dict);
+                    if (dict == "Frhelper")
+                        sb.Append(GetIFrameOfflineText(GetLiveHtml(dict)));
+                    else
+                        sb.Append(GetIFrameOnlineText(GetDictURLForword()));
                 };
 
                 foreach (var info in dictInfos)
                 {
-                    var dictA = info.name;
+                    var dictA = info.Name;
                     switch (dictA)
                     {
                         case DictNames.LINGOES:
@@ -92,19 +93,19 @@ namespace Lolly
                             sb.Append(GetIFrameOfflineText(GetLingoesHtml(dictA == DictNames.LINGOESALL)));
                             break;
                         case DictNames.OFFLINEALL:
-                            foreach (var dictB in dictsOffline)
+                            foreach (var dictB in config.dictsOffline)
                                 AddOfflineDictText(dictB);
                             break;
                         case DictNames.ONLINEALL:
-                            foreach (var dictB in dictsOffline)
+                            foreach (var dictB in config.dictsOffline)
                                 AddOnlineDictText(dictB);
                             break;
                         case DictNames.LIVEALL:
-                            foreach (var dictB in dictsOffline)
+                            foreach (var dictB in config.dictsOffline)
                                 AddOfflineDictText(GetLiveHtml(dictB));
                             break;
                         default:
-                            switch (info.type)
+                            switch (info.Type)
                             {
                                 case DictNames.LOCAL:
                                 case DictNames.OFFLINE:
@@ -131,7 +132,7 @@ namespace Lolly
             emptyTrans = true;
             if (word == "")
                 DocumentText = "";
-            else if (dictImage == DictImage.Online || dictImage == DictImage.Conjugator || dictImage == DictImage.Web)
+            else if (dictImage == DictImage.Online && dictName != "Frhelper" || dictImage == DictImage.Conjugator || dictImage == DictImage.Web)
             {
                 automationDone = false;
                 Navigate(GetDictURLForword());
@@ -139,10 +140,14 @@ namespace Lolly
             else
                 DocumentText =
                     dictImage == DictImage.Local || dictImage == DictImage.Offline ? GetTranslationHtml() :
-                    dictImage == DictImage.Live ? GetLiveHtml(dictName) :
-                    dictImage == DictImage.Custom ? GetCustomHtml(dictsCustom[dictName]) :
+                    dictImage == DictImage.Live || dictImage == DictImage.Online && dictName == "Frhelper" ? GetLiveHtml(dictName) :
+                    dictImage == DictImage.Custom ? GetCustomHtml(config.dictsCustom[dictName]) :
                     dictName == DictNames.OFFLINEALL || dictName == DictNames.ONLINEALL ||dictName == DictNames.LIVEALL ?
-                        GetCustomHtml(new[] { new DictInfo("Group", dictName) }) :
+                        GetCustomHtml(new List<DictInfo>{ new DictInfo
+                        {
+                            Name = dictName,
+                            Type = "Group",
+                        }}) :
                     dictName == DictNames.LINGOES || dictName == DictNames.LINGOESALL ? GetLingoesHtml(dictName == DictNames.LINGOESALL) :
                     "";
         }

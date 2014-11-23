@@ -213,11 +213,7 @@ namespace Lolly
             speakToolStripButton.Enabled = keepSpeakToolStripButton.Enabled = canSpeak;
 
             Func<int, IEnumerable<KeyValuePair<string, string>>> GetReplacement = langID =>
-                Program.GetConfig(langID).Elements("phraseReplace")
-                .Select(elem => new KeyValuePair<string, string>(
-                    (string)elem.Attribute("before"),
-                    (string)elem.Attribute("after")
-                ));
+                Program.config.GetDictLangConfig(langID).replacement;
 
             replacement = GetReplacement(lbuSettings.LangID);
             replacementChn = GetReplacement(0);

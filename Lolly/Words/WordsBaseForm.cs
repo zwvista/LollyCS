@@ -17,6 +17,7 @@ namespace Lolly
         protected LangBookUnitSettings lbuSettings;
         protected DataGridView dataGridView;
         protected Dictionary<string, int> wordLevelDic = new Dictionary<string, int>();
+        protected DictLangConfig config;
 
         public WordsBaseForm()
         {
@@ -55,9 +56,9 @@ namespace Lolly
         protected void SelectNextDict(bool forward, int numDicts)
         {
             if (numDicts == 0) return;
-            int index = (int)dictToolStripDropDownButton.Tag + (forward ? 1 : -1);
-            index = (index + numDicts) % numDicts;
-            SelectDict(index);
+            //int index = (int)dictToolStripDropDownButton.Tag + (forward ? 1 : -1);
+            //index = (index + numDicts) % numDicts;
+            //SelectDict(index);
         }
 
         protected virtual void AddDict(string dictName, int imageIndex)
@@ -216,6 +217,7 @@ namespace Lolly
         public virtual void UpdatelbuSettings()
         {
             lbuSettings = Program.lbuSettings;
+            config = Program.config.GetDictLangConfig(lbuSettings.LangID);
             bool canSpeak = Program.CanSpeak(lbuSettings.LangID);
             speakToolStripButton.Enabled = keepSpeakToolStripButton.Enabled = canSpeak;
             FillTable();

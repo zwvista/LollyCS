@@ -108,22 +108,6 @@ namespace Lolly
         public const string WEB = "Web";
     };
 
-    public class DictInfo
-    {
-        public string type;
-        public string name;
-        public DictInfo(XElement elem)
-        {
-            type = (string)elem.Attribute("type");
-            name = (string)elem;
-        }
-        public DictInfo(string type, string name)
-        {
-            this.type = type;
-            this.name = name;
-        }
-    }
-
     enum DictWebBrowserStatus
     {
         Navigating,
@@ -138,7 +122,7 @@ namespace Lolly
         public static string appDataFolderInHtml;
         public static string js;
         public static string appLogFolder;
-        public static XElement config;
+        public static DictConfig config;
         public static string lingoesClassName;
         public static string lingoesWindowName;
         public static Lingoes lingoes = new Lingoes();
@@ -250,18 +234,6 @@ namespace Lolly
             }
         }
 
-        public static XElement GetConfig(int langID)
-        {
-            return Program.config.Elements("language")
-                .Where(lang => (int)lang.Attribute("id") == langID)
-                .FirstOrDefault();
-        }
-
-        public static XElement GetConfigDicts(int langID)
-        {
-            return GetConfig(langID).Element("dictionaries");
-        }
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -273,7 +245,7 @@ namespace Lolly
             appLogFolder = appDataFolder + "Log\\";
             js = System.IO.File.ReadAllText(appDataFolder + "Lolly.js");
             appDataFolderInHtml = appDataFolder.Replace('\\', '/');
-            config = XDocument.Load(appDataFolder + "Lolly.config").Element("configuration");
+            config = new DictConfig(appDataFolder + "Lolly.config");
 
             lingoesClassName = Properties.Settings.Default.LingoesClassName;
             lingoesWindowName = Properties.Settings.Default.LingoesWindowName;

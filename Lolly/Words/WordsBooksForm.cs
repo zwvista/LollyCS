@@ -29,7 +29,7 @@ namespace Lolly
         {
             wordsList = new BindingList<MWORDBOOK>(
                 filterScope == 0 ? WordsBooks.GetDataByLangWord(lbuSettings.LangID, filter) :
-                WordsBooks.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, dictTablesOffline)
+                WordsBooks.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
             bindingSource1.DataSource = wordsList;
             autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);

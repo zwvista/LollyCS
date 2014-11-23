@@ -12,7 +12,6 @@ namespace Lolly
 {
     public partial class WordsEBForm : WordsBaseForm
     {
-        private IEnumerable<string> dictsEBWin;
         protected EBWin ebwin;
         private string currentDict;
 
@@ -52,22 +51,14 @@ namespace Lolly
 
         protected override void FillDicts()
         {
-            dictToolStripDropDownButton.DropDownItems.Clear();
             dictsToolStrip.Items.Clear();
             dictsToolStrip.Tag = -1;
 
-            dictsEBWin = Program.GetConfigDicts(lbuSettings.LangID)
-                .Elements("ebwin").Select(elem => (string)elem);
-            if (dictsEBWin.Any())
+            if (config.dictsEBWin.Any())
             {
                 int imageIndex = (int)DictImage.Offline;
-                foreach (var dictName in dictsEBWin)
-                {
+                foreach (var dictName in config.dictsEBWin)
                     AddDict(dictName, imageIndex);
-                    var item = dictToolStripDropDownButton.DropDownItems.Add(dictName, imageList1.Images[imageIndex],
-                        (sender, e) => SelectDict((int)(sender as ToolStripItem).Tag - (int)DictImage.Offline));
-                    item.Tag = imageIndex++;
-                }
                 SelectDict(0);
             }
         }
@@ -115,8 +106,8 @@ namespace Lolly
                     case Keys.Alt | Keys.D7:
                     case Keys.Alt | Keys.D8:
                     case Keys.Alt | Keys.D9:
-                        if (keyData - (Keys.Alt | Keys.D1) < dictToolStripDropDownButton.DropDownItems.Count)
-                            SelectDict(keyData - (Keys.Alt | Keys.D1));
+                        //if (keyData - (Keys.Alt | Keys.D1) < dictToolStripDropDownButton.DropDownItems.Count)
+                        //    SelectDict(keyData - (Keys.Alt | Keys.D1));
                         return true;
                 }
             }

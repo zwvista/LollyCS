@@ -162,7 +162,20 @@
     <Compile Include="Auxiliary\AuxPicBooksForm.Designer.cs">
       <DependentUpon>AuxPicBooksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigDictDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigDictDlg.Designer.cs">
+      <DependentUpon>ConfigDictDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DictConfig.cs" />
     <Compile Include="Options.cs" />
+    <Compile Include="SharedImageLists1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SharedImageLists1.designer.cs">
+      <DependentUpon>SharedImageLists1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Words\DictWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -341,6 +354,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Auxiliary\AuxPicBooksForm.resx">
       <DependentUpon>AuxPicBooksForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigDictDlg.resx">
+      <DependentUpon>ConfigDictDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SharedImageLists1.resx">
+      <DependentUpon>SharedImageLists1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Words\SelectKanaDlg.resx">
@@ -587,9 +608,13 @@
       <Project>{fe4d7d23-1f41-44ce-8b68-9229d41406a1}</Project>
       <Name>Dll.LollyBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Oli.Controls\Dll.Oli.Controls.csproj">
+    <ProjectReference Include="..\Oli.Controls\Oli.Controls.csproj">
       <Project>{3f1a45c7-96cb-4bad-a931-792d04b96128}</Project>
-      <Name>Dll.Oli.Controls</Name>
+      <Name>Oli.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedImageListsComponent\SharedImageListsComponent.vbproj">
+      <Project>{b2bb9072-89e9-4d75-8d56-b4c0e740969c}</Project>
+      <Name>SharedImageListsComponent</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

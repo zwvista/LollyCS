@@ -66,7 +66,7 @@
             this.speakToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.keepSpeakToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.dictToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.dictsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.filterToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.setFilterToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.removeFilterToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -82,7 +82,8 @@
             this.levelUpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.levelDownToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.timerNavigate = new System.Windows.Forms.Timer(this.components);
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.sharedImageLists11 = new Lolly.SharedImageLists1(this.components);
+            this.imageList1 = this.sharedImageLists11.NewImageList(this.components, ((Lolly.SharedImageLists1)(this.sharedImageLists11.GetSharedImageLists())).imageList1);
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -195,7 +196,7 @@
             this.speakToolStripButton,
             this.keepSpeakToolStripButton,
             this.toolStripSeparator4,
-            this.dictToolStripDropDownButton,
+            this.dictsToolStripButton,
             this.filterToolStripSeparator,
             this.setFilterToolStripButton,
             this.removeFilterToolStripButton,
@@ -463,12 +464,14 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
-            // dictToolStripDropDownButton
+            // dictsToolStripButton
             // 
-            this.dictToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.dictToolStripDropDownButton.Name = "dictToolStripDropDownButton";
-            this.dictToolStripDropDownButton.Size = new System.Drawing.Size(89, 22);
-            this.dictToolStripDropDownButton.Text = "Dictionaries";
+            this.dictsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.dictsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("dictsToolStripButton.Image")));
+            this.dictsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.dictsToolStripButton.Name = "dictsToolStripButton";
+            this.dictsToolStripButton.Size = new System.Drawing.Size(80, 22);
+            this.dictsToolStripButton.Text = "Dictionaries";
             // 
             // filterToolStripSeparator
             // 
@@ -584,46 +587,6 @@
             this.timerNavigate.Interval = 3000;
             this.timerNavigate.Tick += new System.EventHandler(this.timerNavigate_Tick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Silver;
-            this.imageList1.Images.SetKeyName(0, "Offline0");
-            this.imageList1.Images.SetKeyName(1, "Offline1");
-            this.imageList1.Images.SetKeyName(2, "Offline2");
-            this.imageList1.Images.SetKeyName(3, "Offline3");
-            this.imageList1.Images.SetKeyName(4, "Offline4");
-            this.imageList1.Images.SetKeyName(5, "Offline5");
-            this.imageList1.Images.SetKeyName(6, "Offline6");
-            this.imageList1.Images.SetKeyName(7, "Offline7");
-            this.imageList1.Images.SetKeyName(8, "Offline8");
-            this.imageList1.Images.SetKeyName(9, "Offline9");
-            this.imageList1.Images.SetKeyName(10, "Online0");
-            this.imageList1.Images.SetKeyName(11, "Online1");
-            this.imageList1.Images.SetKeyName(12, "Online2");
-            this.imageList1.Images.SetKeyName(13, "Online3");
-            this.imageList1.Images.SetKeyName(14, "Online4");
-            this.imageList1.Images.SetKeyName(15, "Online5");
-            this.imageList1.Images.SetKeyName(16, "Online6");
-            this.imageList1.Images.SetKeyName(17, "Online7");
-            this.imageList1.Images.SetKeyName(18, "Online8");
-            this.imageList1.Images.SetKeyName(19, "Online9");
-            this.imageList1.Images.SetKeyName(20, "Live0");
-            this.imageList1.Images.SetKeyName(21, "Live1");
-            this.imageList1.Images.SetKeyName(22, "Live2");
-            this.imageList1.Images.SetKeyName(23, "Live3");
-            this.imageList1.Images.SetKeyName(24, "Live4");
-            this.imageList1.Images.SetKeyName(25, "Live5");
-            this.imageList1.Images.SetKeyName(26, "Live6");
-            this.imageList1.Images.SetKeyName(27, "Live7");
-            this.imageList1.Images.SetKeyName(28, "Live8");
-            this.imageList1.Images.SetKeyName(29, "Live9");
-            this.imageList1.Images.SetKeyName(30, "Custom");
-            this.imageList1.Images.SetKeyName(31, "Local");
-            this.imageList1.Images.SetKeyName(32, "Special");
-            this.imageList1.Images.SetKeyName(33, "Conjugator");
-            this.imageList1.Images.SetKeyName(34, "Web");
-            // 
             // WordsBaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -693,14 +656,12 @@
         protected System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         protected System.Windows.Forms.ToolStripSeparator lookupToolStripSeparator;
         protected System.Windows.Forms.Timer timerNavigate;
-        protected System.Windows.Forms.ImageList imageList1;
         protected System.Windows.Forms.ToolStrip dictsToolStrip;
         protected System.Windows.Forms.ToolStripMenuItem navigateForwardToolStripMenuItem;
         protected System.Windows.Forms.ToolStripButton extractOverriteToolStripButton;
         protected System.Windows.Forms.ToolStripButton extractAppendToolStripButton;
         protected System.Windows.Forms.ToolStripButton deleteTranslationToolStripButton;
         protected System.Windows.Forms.ToolStripButton editTranslationtoolStripButton;
-        protected System.Windows.Forms.ToolStripDropDownButton dictToolStripDropDownButton;
         private System.Windows.Forms.ToolStripSplitButton navigateToolStripSplitButton;
         protected System.Windows.Forms.ToolStripButton copyKanjiKanaToolStripButton;
         protected System.Windows.Forms.TextBox wordTextBox;
@@ -709,5 +670,8 @@
         private System.Windows.Forms.ToolStripButton levelUpToolStripButton;
         private System.Windows.Forms.ToolStripButton levelDownToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        protected System.Windows.Forms.ToolStripButton dictsToolStripButton;
+        private SharedImageLists1 sharedImageLists11;
+        protected internal System.Windows.Forms.ImageList imageList1;
     }
 }

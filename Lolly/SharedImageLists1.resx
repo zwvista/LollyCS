@@ -117,18 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="timerNavigate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>180, 17</value>
-  </metadata>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>316, 17</value>
+    <value>202, 30</value>
   </metadata>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADM
-        KAAAAk1TRnQBSQFMAgEBIwEAAZwBAQHQAQEBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADK
+        KAAAAk1TRnQBSQFMAgEBIwEAAcABAQHAAQEBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABkAMAAQEBAAEYBgABbP8AqAABzAFIAT8tAAGkAUkBoy0AASQBHAHtWgABzAFIAT8BzAFIAT8BzAFI
         AT8nAAGkAUkBowGkAUkBowGkAUkBoycAASQBHAHtASQBHAHtASQBHAHtVAABzAFIAT8BzAFIAT8BzAFI
         AT8BzAFIAT8BzAFIAT8hAAGkAUkBowGkAUkBowGkAUkBowGkAUkBowGkAUkBoyEAASQBHAHtASQBHAHt
@@ -302,35 +299,10 @@
         AecB/wHmAX8B/gF/Af4BfwHgAX8B8AH/AeABfzD/AfAB5wH5AecB4AFnAfAB5wHmAWcB+QPnAeYBZwHm
         AX8B+QH/AecB/wH+AX8B5gF/AfkB/wHzAf8B/gF/AeYBfwH5Af8B+QH/Af4BfwHmAX8B+QH/AfwB/wH4
         Af8B5gF/AfkB/wH+AX8B/gF/AeYBfwH5Af8B5gF/Af4BfwHmAX8B4QH/AeYBfwHmAX8B8AH/AfkB/wHw
-        Af8B8Bn/FgAL
+        Af8B8Bn/Cw==
 </value>
   </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>94</value>
+  <metadata name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAABUAAAAjAAAAHwAAABMAAAAKAAAAAwAAAAEAAAABAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMAAABLAAAAdAAAAG0AAABUAAAAPAAAACgAAAAaAAAACgAA
-        AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASBRB592bah/1xKTdweP3XRGCY+rwAAAH0dIShhAAAAMgAA
-        ABEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAToFQl6r+emf88Ucj/eXmb/090tfJojMLngJe4vTA0
-        OkQAAAAiAAAAFgAAAAkAAAABAAAAAAAAAAAAAAADg0Uee61fJP/HjFr/06qO//Tq5P+uelr3KhYKvwAA
-        AI0AAABrAAAAYgAAAE4AAAAgAAAABAAAAAAAAAAAAAAAD6ZbI+m2bjb/+uOx//TVmv/MlmT/6NG//8SX
-        d/tEJBPUJi034BMSFdEOFh+KAAAALwAAAAUAAAAAAAAAA3lEGF20aRr/5sOZ//rjsf/53qH/+NmQ/8yU
-        Uv+xkYL/S05a/3eVtv9uian6FSMzmgAAAEEAAAANAAAAAAAAAA+qaRLSxIdK//vowP/647H/99uf/+C7
-        fv+ebVL/dUpS/02MzP+NuOP/iFs96hAJA60AAABsAAAAIAAAAAOCUgpdu3QY//Hauv/76MD/9Nqr/9m0
-        hP+OdW7/cFVd/5RSG/+thTr/06Mx/9WhUP+8jCvxAAAAfAAAACYAAAAPun8N0tSlcv/77c//9eC5/9ay
-        jP+PUED/ikcl/4mju//Lp23/7sJN//THO//tuyL/0pcq/wAAAFIAAAAVl2gLWM2NIP/36tP/+erN/9u8
-        nP+UVz7/llMa/7JuDf/KjDn/7cNm//XMVf/0xzv/5K0f/4BWDJYAAAAeAAAABNOZB8ngvZH//PPf/9zB
-        p/98cW//pGEP/798HP/TnF7/8Mp7//XPbP/1zFX/5bEt/4NZCpQAAAAeAAAABAAAAADOkzH//vnu/+rZ
-        xv+wekL/f4eD/7qbbf/dsYT/9taP//bUfv/1z2z/5rU8/4tfCY4AAAAZAAAABAAAAAAAAAAAsmsUc9Km
-        aeKth1P/wH0e/9GZYf/fy7b/+eCm//jZkP/21H7/16Qz+F9BBmkAAAAUAAAAAgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAg5ao8NasivLbrW7/992n//neof/42ZD/2qg79mNFB2YAAAAUAAAAAgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAALPR8SHg4uMkmmkNFcWGDnTfsEzi369I5IhgCksAAAAPAAAAAgAAAAAAAAAAAAAAAAAA
-        AAAAAAAA8AcAAPADAADgAwAA4AAAAMAAAADAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAAAAMAAAAH
-        AADADwAAwB8AAA==
-</value>
-  </data>
 </root>
