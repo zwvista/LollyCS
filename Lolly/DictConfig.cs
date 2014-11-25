@@ -36,9 +36,17 @@ namespace Lolly
         public DictImage ImageIndex;
     }
 
+    public enum UIDictType
+    {
+        Single,
+        Collection,
+        Switch,
+    }
+
     public class UIDict
     {
         public string Name;
+        public UIDictType Type;
         public List<UIDictItem> Items = new List<UIDictItem>();
     }
 

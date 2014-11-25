@@ -30,13 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dictATreeView = new DllLolly.LollyTreeView();
-            this.addButton = new System.Windows.Forms.Button();
+            this.addCollectionButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.upButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
             this.cancelButton = new VistaButtonTest.VistaButton();
             this.okButton = new VistaButtonTest.VistaButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.addAllbutton = new System.Windows.Forms.Button();
+            this.addSwitchbutton = new System.Windows.Forms.Button();
             this.BottomButton = new System.Windows.Forms.Button();
             this.topButton = new System.Windows.Forms.Button();
             this.dictBTreeView = new System.Windows.Forms.TreeView();
@@ -61,22 +64,22 @@
             this.dictATreeView.TabIndex = 0;
             this.dictATreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.dictATreeView_AfterCheck);
             // 
-            // addButton
+            // addCollectionButton
             // 
-            this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addButton.Location = new System.Drawing.Point(206, 13);
-            this.addButton.Margin = new System.Windows.Forms.Padding(4);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(100, 31);
-            this.addButton.TabIndex = 1;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addCollectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.addCollectionButton.Location = new System.Drawing.Point(206, 13);
+            this.addCollectionButton.Margin = new System.Windows.Forms.Padding(4);
+            this.addCollectionButton.Name = "addCollectionButton";
+            this.addCollectionButton.Size = new System.Drawing.Size(101, 31);
+            this.addCollectionButton.TabIndex = 1;
+            this.addCollectionButton.Text = "Collection";
+            this.addCollectionButton.UseVisualStyleBackColor = true;
+            this.addCollectionButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // removeButton
             // 
             this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeButton.Location = new System.Drawing.Point(206, 66);
+            this.removeButton.Location = new System.Drawing.Point(206, 201);
             this.removeButton.Margin = new System.Windows.Forms.Padding(4);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(100, 31);
@@ -88,7 +91,7 @@
             // upButton
             // 
             this.upButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.upButton.Location = new System.Drawing.Point(206, 172);
+            this.upButton.Location = new System.Drawing.Point(208, 295);
             this.upButton.Margin = new System.Windows.Forms.Padding(4);
             this.upButton.Name = "upButton";
             this.upButton.Size = new System.Drawing.Size(100, 31);
@@ -100,7 +103,7 @@
             // downButton
             // 
             this.downButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.downButton.Location = new System.Drawing.Point(206, 225);
+            this.downButton.Location = new System.Drawing.Point(208, 342);
             this.downButton.Margin = new System.Windows.Forms.Padding(4);
             this.downButton.Name = "downButton";
             this.downButton.Size = new System.Drawing.Size(100, 31);
@@ -149,7 +152,10 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.addButton);
+            this.splitContainer1.Panel1.Controls.Add(this.clearButton);
+            this.splitContainer1.Panel1.Controls.Add(this.addAllbutton);
+            this.splitContainer1.Panel1.Controls.Add(this.addSwitchbutton);
+            this.splitContainer1.Panel1.Controls.Add(this.addCollectionButton);
             this.splitContainer1.Panel1.Controls.Add(this.dictATreeView);
             this.splitContainer1.Panel1.Controls.Add(this.removeButton);
             this.splitContainer1.Panel1.Controls.Add(this.BottomButton);
@@ -166,10 +172,46 @@
             this.splitContainer1.SplitterDistance = 314;
             this.splitContainer1.TabIndex = 16;
             // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearButton.Location = new System.Drawing.Point(206, 154);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(4);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(100, 31);
+            this.clearButton.TabIndex = 1;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // addAllbutton
+            // 
+            this.addAllbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.addAllbutton.Location = new System.Drawing.Point(207, 107);
+            this.addAllbutton.Margin = new System.Windows.Forms.Padding(4);
+            this.addAllbutton.Name = "addAllbutton";
+            this.addAllbutton.Size = new System.Drawing.Size(100, 31);
+            this.addAllbutton.TabIndex = 1;
+            this.addAllbutton.Text = "Add All";
+            this.addAllbutton.UseVisualStyleBackColor = true;
+            this.addAllbutton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // addSwitchbutton
+            // 
+            this.addSwitchbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.addSwitchbutton.Location = new System.Drawing.Point(207, 60);
+            this.addSwitchbutton.Margin = new System.Windows.Forms.Padding(4);
+            this.addSwitchbutton.Name = "addSwitchbutton";
+            this.addSwitchbutton.Size = new System.Drawing.Size(100, 31);
+            this.addSwitchbutton.TabIndex = 1;
+            this.addSwitchbutton.Text = "Switch";
+            this.addSwitchbutton.UseVisualStyleBackColor = true;
+            this.addSwitchbutton.Click += new System.EventHandler(this.addButton_Click);
+            // 
             // BottomButton
             // 
             this.BottomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BottomButton.Location = new System.Drawing.Point(205, 278);
+            this.BottomButton.Location = new System.Drawing.Point(207, 389);
             this.BottomButton.Margin = new System.Windows.Forms.Padding(4);
             this.BottomButton.Name = "BottomButton";
             this.BottomButton.Size = new System.Drawing.Size(100, 31);
@@ -181,7 +223,7 @@
             // topButton
             // 
             this.topButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.topButton.Location = new System.Drawing.Point(205, 119);
+            this.topButton.Location = new System.Drawing.Point(207, 248);
             this.topButton.Margin = new System.Windows.Forms.Padding(4);
             this.topButton.Name = "topButton";
             this.topButton.Size = new System.Drawing.Size(100, 31);
@@ -192,6 +234,9 @@
             // 
             // dictBTreeView
             // 
+            this.dictBTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dictBTreeView.Location = new System.Drawing.Point(0, 0);
             this.dictBTreeView.Name = "dictBTreeView";
             this.dictBTreeView.Size = new System.Drawing.Size(200, 636);
@@ -221,7 +266,7 @@
         #endregion
 
         private DllLolly.LollyTreeView dictATreeView;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button addCollectionButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button downButton;
@@ -232,5 +277,8 @@
         private System.Windows.Forms.Button topButton;
         private System.Windows.Forms.TreeView dictBTreeView;
         private SharedImageLists1 sharedImageLists11;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button addAllbutton;
+        private System.Windows.Forms.Button addSwitchbutton;
     }
 }

@@ -68,11 +68,13 @@ namespace Lolly
                 .SelectMany(n => n.Nodes.Cast<TreeNode>()
                 .Where(n2 => n2.Checked)).ToList();
             if (!nodes.Any()) return;
-            if (nodes.Count == 1)
-                dictBTreeView.Nodes.Add((TreeNode)nodes.First().Clone());
+            if (nodes.Count == 1 || sender == addAllbutton)
+                foreach (var node in nodes)
+                    dictBTreeView.Nodes.Add((TreeNode)node.Clone());
             else
             {
-                var node = AddTreeNode(dictBTreeView.Nodes, "Custom", (int)DictImage.Special);
+                var name = (sender as Button).Text;
+                var node = AddTreeNode(dictBTreeView.Nodes, name, (int)DictImage.Special);
                 foreach (var node2 in nodes)
                     node.Nodes.Add((TreeNode)node2.Clone());
             }
