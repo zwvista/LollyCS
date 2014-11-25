@@ -29,11 +29,17 @@ namespace Lolly
         }
     }
 
-    public class DictInfo
+    public class UIDictItem
     {
         public string Name;
         public string Type;
         public DictImage ImageIndex;
+    }
+
+    public class UIDict
+    {
+        public string Name;
+        public List<UIDictItem> Items = new List<UIDictItem>();
     }
 
     public class DictLangConfig
@@ -41,11 +47,11 @@ namespace Lolly
         public List<KeyValuePair<string, string>> replacement;
         public List<string> dictsEBWin;
         public string[] dictsLingoes;
-        public Dictionary<string, List<DictInfo>> dictsCustom;
+        public Dictionary<string, List<UIDictItem>> dictsCustom;
         public string[] dictsOffline;
         public string[] dictTablesOffline;
         public List<MDICTALL> dictAllList;
-        public SortedDictionary<string, List<DictInfo>> dictGroups = new SortedDictionary<string, List<DictInfo>>();
+        public SortedDictionary<string, List<UIDictItem>> dictGroups = new SortedDictionary<string, List<UIDictItem>>();
 
         public DictLangConfig(XElement elemLang, List<XElement> elemGroupDictInfo, int langID)
         {
@@ -66,13 +72,13 @@ namespace Lolly
             {
                 if (!dictNames.Any()) return;
 
-                var infos = new List<DictInfo>();
+                var infos = new List<UIDictItem>();
                 dictGroups[groupName] = infos;
 
                 int imageIndex = (int)dt;
                 foreach (var dictName in dictNames)
                 {
-                    infos.Add(new DictInfo
+                    infos.Add(new UIDictItem
                     {
                         Name = dictName,
                         Type = groupName,
@@ -90,7 +96,7 @@ namespace Lolly
             dictsCustom = elems.Select(elem => new
             {
                 Key = (string)elem.Attribute("name"),
-                Value = elem.Elements("dict").Select(elem2 => new DictInfo
+                Value = elem.Elements("dict").Select(elem2 => new UIDictItem
                 {
                     Name = (string)elem2,
                     Type = (string)elem2.Attribute("type"),
@@ -103,7 +109,7 @@ namespace Lolly
             var dictNormalGroups =
                 from info in elemGroupDictInfo
                 join dict in elemDictsGroup on (string)info equals (string)dict
-                select new DictInfo
+                select new UIDictItem
                 {
                     Name = (string)dict,
                     Type = (string)info.Attribute("dictType"),

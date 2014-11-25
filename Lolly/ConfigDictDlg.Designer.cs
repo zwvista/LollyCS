@@ -29,40 +29,37 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dictTreeView = new System.Windows.Forms.TreeView();
-            this.sharedImageLists11 = new Lolly.SharedImageLists1(this.components);
-            this.imageList1 = this.sharedImageLists11.NewImageList(this.components, ((Lolly.SharedImageLists1)(this.sharedImageLists11.GetSharedImageLists())).imageList1);
+            this.dictATreeView = new DllLolly.LollyTreeView();
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.upButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
-            this.dictListView = new System.Windows.Forms.ListView();
-            this.Dictionaries = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new VistaButtonTest.VistaButton();
             this.okButton = new VistaButtonTest.VistaButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.topButton = new System.Windows.Forms.Button();
             this.BottomButton = new System.Windows.Forms.Button();
+            this.topButton = new System.Windows.Forms.Button();
+            this.dictBTreeView = new System.Windows.Forms.TreeView();
+            this.sharedImageLists11 = new Lolly.SharedImageLists1(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dictTreeView
+            // dictATreeView
             // 
-            this.dictTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dictATreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dictTreeView.HideSelection = false;
-            this.dictTreeView.ImageIndex = 0;
-            this.dictTreeView.ImageList = this.imageList1;
-            this.dictTreeView.Location = new System.Drawing.Point(0, 0);
-            this.dictTreeView.Margin = new System.Windows.Forms.Padding(4);
-            this.dictTreeView.Name = "dictTreeView";
-            this.dictTreeView.SelectedImageIndex = 0;
-            this.dictTreeView.Size = new System.Drawing.Size(200, 636);
-            this.dictTreeView.TabIndex = 0;
+            this.dictATreeView.CheckBoxes = true;
+            this.dictATreeView.HideSelection = false;
+            this.dictATreeView.Location = new System.Drawing.Point(0, 0);
+            this.dictATreeView.Margin = new System.Windows.Forms.Padding(4);
+            this.dictATreeView.Name = "dictATreeView";
+            this.dictATreeView.Size = new System.Drawing.Size(200, 636);
+            this.dictATreeView.TabIndex = 0;
+            this.dictATreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.dictATreeView_AfterCheck);
             // 
             // addButton
             // 
@@ -112,29 +109,6 @@
             this.downButton.UseVisualStyleBackColor = true;
             this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
-            // dictListView
-            // 
-            this.dictListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dictListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Dictionaries});
-            this.dictListView.FullRowSelect = true;
-            this.dictListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.dictListView.HideSelection = false;
-            this.dictListView.Location = new System.Drawing.Point(0, 0);
-            this.dictListView.Name = "dictListView";
-            this.dictListView.Size = new System.Drawing.Size(200, 636);
-            this.dictListView.SmallImageList = this.imageList1;
-            this.dictListView.TabIndex = 2;
-            this.dictListView.UseCompatibleStateImageBehavior = false;
-            this.dictListView.View = System.Windows.Forms.View.Details;
-            // 
-            // Dictionaries
-            // 
-            this.Dictionaries.Text = "Dictionaries";
-            this.Dictionaries.Width = 146;
-            // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -176,7 +150,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.addButton);
-            this.splitContainer1.Panel1.Controls.Add(this.dictTreeView);
+            this.splitContainer1.Panel1.Controls.Add(this.dictATreeView);
             this.splitContainer1.Panel1.Controls.Add(this.removeButton);
             this.splitContainer1.Panel1.Controls.Add(this.BottomButton);
             this.splitContainer1.Panel1.Controls.Add(this.topButton);
@@ -185,12 +159,24 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.dictBTreeView);
             this.splitContainer1.Panel2.Controls.Add(this.cancelButton);
             this.splitContainer1.Panel2.Controls.Add(this.okButton);
-            this.splitContainer1.Panel2.Controls.Add(this.dictListView);
             this.splitContainer1.Size = new System.Drawing.Size(628, 637);
             this.splitContainer1.SplitterDistance = 314;
             this.splitContainer1.TabIndex = 16;
+            // 
+            // BottomButton
+            // 
+            this.BottomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BottomButton.Location = new System.Drawing.Point(205, 278);
+            this.BottomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.BottomButton.Name = "BottomButton";
+            this.BottomButton.Size = new System.Drawing.Size(100, 31);
+            this.BottomButton.TabIndex = 1;
+            this.BottomButton.Text = "Bottom";
+            this.BottomButton.UseVisualStyleBackColor = true;
+            this.BottomButton.Click += new System.EventHandler(this.BottomButton_Click);
             // 
             // topButton
             // 
@@ -204,17 +190,12 @@
             this.topButton.UseVisualStyleBackColor = true;
             this.topButton.Click += new System.EventHandler(this.topButton_Click);
             // 
-            // BottomButton
+            // dictBTreeView
             // 
-            this.BottomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BottomButton.Location = new System.Drawing.Point(205, 278);
-            this.BottomButton.Margin = new System.Windows.Forms.Padding(4);
-            this.BottomButton.Name = "BottomButton";
-            this.BottomButton.Size = new System.Drawing.Size(100, 31);
-            this.BottomButton.TabIndex = 1;
-            this.BottomButton.Text = "Bottom";
-            this.BottomButton.UseVisualStyleBackColor = true;
-            this.BottomButton.Click += new System.EventHandler(this.BottomButton_Click);
+            this.dictBTreeView.Location = new System.Drawing.Point(0, 0);
+            this.dictBTreeView.Name = "dictBTreeView";
+            this.dictBTreeView.Size = new System.Drawing.Size(200, 636);
+            this.dictBTreeView.TabIndex = 16;
             // 
             // ConfigDictDlg
             // 
@@ -239,19 +220,17 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView dictTreeView;
+        private DllLolly.LollyTreeView dictATreeView;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button downButton;
-        private System.Windows.Forms.ListView dictListView;
-        private System.Windows.Forms.ColumnHeader Dictionaries;
         private VistaButtonTest.VistaButton cancelButton;
         private VistaButtonTest.VistaButton okButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private SharedImageLists1 sharedImageLists11;
-        protected internal System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button BottomButton;
         private System.Windows.Forms.Button topButton;
+        private System.Windows.Forms.TreeView dictBTreeView;
+        private SharedImageLists1 sharedImageLists11;
     }
 }

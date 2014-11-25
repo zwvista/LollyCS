@@ -61,10 +61,23 @@ namespace Lolly
             //SelectDict(index);
         }
 
+        private void dictsToolStripItem_Click(object sender, EventArgs e)
+        {
+            SelectDict(dictsToolStrip.Items.IndexOf((ToolStripButton)sender));
+        }
+
         protected virtual void AddDict(string dictName, int imageIndex)
         {
-            var item = dictsToolStrip.Items.Add(dictName, imageList1.Images[imageIndex],
-                (sender, e) => SelectDict(dictsToolStrip.Items.IndexOf((ToolStripButton)sender)));
+            var item = dictsToolStrip.Items.Add(dictName, imageList1.Images[imageIndex], dictsToolStripItem_Click);
+            item.ImageIndex = imageIndex;
+        }
+
+        protected virtual void AddDict(List<UIDictItem> dictInfos)
+        {
+            var dictName = dictInfos[0].Name;
+            var imageIndex = (int)dictInfos[0].ImageIndex;
+            var item = new ToolStripSplitButton(dictName, imageList1.Images[imageIndex], dictsToolStripItem_Click);
+            dictsToolStrip.Items.Add(item);
             item.ImageIndex = imageIndex;
         }
 

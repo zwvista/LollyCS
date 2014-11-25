@@ -51,7 +51,7 @@
             this.ClientSize = new System.Drawing.Size(1028, 715);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WordsWebForm";
-            this.Shown += new System.EventHandler(this.WordsBaseForm_Shown);
+            this.Shown += new System.EventHandler(this.WordsWebForm_Shown);
             this.panel2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

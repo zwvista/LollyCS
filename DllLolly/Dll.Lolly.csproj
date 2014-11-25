@@ -104,6 +104,12 @@
   <ItemGroup>
     <Compile Include="BoolScope.cs" />
     <Compile Include="ControlExtensions.cs" />
+    <Compile Include="LollyTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LollyTreeView.Designer.cs">
+      <DependentUpon>LollyTreeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="LLBindingSource.cs">
       <SubType>Component</SubType>
     </Compile>

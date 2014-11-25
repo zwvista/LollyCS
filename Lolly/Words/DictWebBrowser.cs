@@ -56,7 +56,7 @@ namespace Lolly
                 return GetTemplatedHtml(Program.GetLiveHtml(word, dict));
             };
 
-            Func<List<DictInfo>, string> GetCustomHtml = dictInfos =>
+            Func<List<UIDictItem>, string> GetCustomHtml = dictInfos =>
             {
                 Func<string, string> GetIFrameOfflineText = str => string.Format(
                     "<iframe frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{0}\");'></iframe>\n",
@@ -143,7 +143,7 @@ namespace Lolly
                     dictImage == DictImage.Live || dictImage == DictImage.Online && dictName == "Frhelper" ? GetLiveHtml(dictName) :
                     dictImage == DictImage.Custom ? GetCustomHtml(config.dictsCustom[dictName]) :
                     dictName == DictNames.OFFLINEALL || dictName == DictNames.ONLINEALL ||dictName == DictNames.LIVEALL ?
-                        GetCustomHtml(new List<DictInfo>{ new DictInfo
+                        GetCustomHtml(new List<UIDictItem>{ new UIDictItem
                         {
                             Name = dictName,
                             Type = "Group",

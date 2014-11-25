@@ -16,7 +16,7 @@ namespace Lolly
 
         private List<DictWebBrowser> dwbList = new List<DictWebBrowser>();
         private DictWebBrowser currentDWB;
-        private List<DictInfo> dictsInUse = new List<DictInfo>(); 
+        private List<UIDict> uiDicts = new List<UIDict>();
 
         protected int filterScope = 0;
         protected string filter = "";
@@ -37,7 +37,7 @@ namespace Lolly
             dictsToolStripButton.Click += dictsToolStripButton_Click;
         }
 
-        private void WordsBaseForm_Shown(object sender, EventArgs e)
+        private void WordsWebForm_Shown(object sender, EventArgs e)
         {
             if (DesignMode == false)
                 UpdatelbuSettings();
@@ -133,30 +133,21 @@ namespace Lolly
 
         protected override void FillDicts()
         {
-            dictsInUse.Clear();
-            dictsInUse.Add(new DictInfo
-            {
-                Name = DictNames.DEFAULT,
-                ImageIndex = DictImage.Custom
-            });
-            FillDictsInUse();
-        }
-
-        private void RemoveAllDictsInUse()
-        {
             currentDWB = null;
             foreach (var dwb in dwbList)
                 dwb.Dispose();
             dwbList.Clear();
             dictsToolStrip.Items.Clear();
             dictsToolStrip.Tag = -1;
-        }
-
-        private void FillDictsInUse()
-        {
-            RemoveAllDictsInUse();
-            foreach (var dictInfo in dictsInUse)
-                AddDict(dictInfo.Name, (int)dictInfo.ImageIndex);
+            foreach (var dict in uiDicts)
+                if (dict.Items.Count == 1)
+                {
+                    var item = dict.Items.First();
+                    AddDict(item.Name, (int)item.ImageIndex);
+                } 
+                else
+                {
+                }
             SelectDict(0);
         }
 
@@ -218,10 +209,10 @@ namespace Lolly
 
         private void dictsToolStripButton_Click(object sender, EventArgs e)
         {
-            var dlg = new ConfigDictDlg(config, dictsInUse);
+            var dlg = new ConfigDictDlg(config, uiDicts);
             if (dlg.ShowDialog() != DialogResult.OK) return;
-            dictsInUse = dlg.dictsInUse;
-            FillDictsInUse();
+            uiDicts = dlg.uiDicts;
+            FillDicts();
         }
 
         private void extractToolStripButton_Click(object sender, EventArgs e)
@@ -377,7 +368,16 @@ namespace Lolly
 
         public override void UpdatelbuSettings()
         {
-            RemoveAllDictsInUse();
+            uiDicts.Clear();
+            uiDicts.Add(new UIDict
+            {
+                Name = "Custom",
+                Items = new List<UIDictItem> { new UIDictItem
+                {
+                    Name = DictNames.DEFAULT,
+                    ImageIndex = DictImage.Custom
+                }}
+            });
             base.UpdatelbuSettings();
         }
 
