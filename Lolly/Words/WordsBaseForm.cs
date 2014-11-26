@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyBase;
+using DllLolly;
 
 namespace Lolly
 {
@@ -43,12 +44,18 @@ namespace Lolly
 
         protected void SelectDict(int index)
         {
+            Action<ToolStripItem, bool> f = (item, b) => {
+                if (item is ToolStripButton)
+                    (item as ToolStripButton).Checked = b;
+                else if (item is ToolStripSplitButtonCheckable)
+                    (item as ToolStripSplitButtonCheckable).Checked = b;
+            };
             var oldIndex = (int)dictsToolStrip.Tag;
             if (oldIndex != -1)
-                ((ToolStripButton)dictsToolStrip.Items[oldIndex]).Checked = false;
+                f(dictsToolStrip.Items[oldIndex], false);
 
             dictsToolStrip.Tag = index;
-            ((ToolStripButton)dictsToolStrip.Items[index]).Checked = true;
+            f(dictsToolStrip.Items[index], true);
 
             OnDictSelected(index);
         }
@@ -63,22 +70,29 @@ namespace Lolly
 
         private void dictsToolStripItem_Click(object sender, EventArgs e)
         {
-            SelectDict(dictsToolStrip.Items.IndexOf((ToolStripButton)sender));
+            SelectDict(dictsToolStrip.Items.IndexOf((ToolStripItem)sender));
         }
 
-        protected virtual void AddDict(string dictName, int imageIndex)
+        protected virtual void AddDict(UIDict dict)
         {
-            var item = dictsToolStrip.Items.Add(dictName, imageList1.Images[imageIndex], dictsToolStripItem_Click);
-            item.ImageIndex = imageIndex;
-        }
-
-        protected virtual void AddDict(List<UIDictItem> dictInfos)
-        {
-            var dictName = dictInfos[0].Name;
-            var imageIndex = (int)dictInfos[0].ImageIndex;
-            var item = new ToolStripSplitButton(dictName, imageList1.Images[imageIndex], dictsToolStripItem_Click);
-            dictsToolStrip.Items.Add(item);
-            item.ImageIndex = imageIndex;
+            var item = dict.Items[0];
+            switch (dict.Type)
+            {
+                case UIDictType.Single:
+                case UIDictType.Collection:
+                    var btn = dictsToolStrip.Items.Add(dict.Name, null, dictsToolStripItem_Click);
+                    btn.ImageIndex = (int)item.ImageIndex;
+                    break;
+                case UIDictType.Switch:
+                    var btn2 = new ToolStripSplitButtonCheckable();
+                    btn2.Text = item.Name;
+                    btn2.ImageIndex = (int)item.ImageIndex;
+                    btn2.ButtonClick += dictsToolStripItem_Click;
+                    dictsToolStrip.Items.Add(btn2);
+                    foreach (var item2 in dict.Items)
+                        btn2.DropDownItems.Add(item2.Name, imageList1.Images[(int)item2.ImageIndex]);
+                    break;
+            }
         }
 
         protected virtual int RemoveDict(string dictName, int imageIndex)

@@ -119,6 +119,9 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="OleObjects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolStripSplitButtonCheckable.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="VistaButton.cs">
       <SubType>UserControl</SubType>
     </Compile>

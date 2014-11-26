@@ -95,9 +95,9 @@ namespace Lolly
             //SelectNextDict(forward, all ? dictsToolStrip.Items.Count : offsetOnline);
         }
 
-        protected override void AddDict(string dictName, int imageIndex)
+        protected override void AddDict(UIDict dict)
         {
-            base.AddDict(dictName, imageIndex);
+            base.AddDict(dict);
 
             var dwb = new DictWebBrowser();
             ((Control)dwb).Enter += webBrowser1_Enter;
@@ -108,9 +108,10 @@ namespace Lolly
             splitContainer1.Panel2.Controls.Add(dwb);
             dwbList.Add(dwb);
 
-            dwb.dictName = dictName;
-            dwb.FindDict(config.dictAllList, dictName);
-            var dictImage = (DictImage)imageIndex;
+            var item = dict.Items.First();
+            dwb.dictName = item.Name;
+            dwb.FindDict(config.dictAllList, item.Name);
+            var dictImage = item.ImageIndex;
             if (dictImage >= DictImage.Offline && dictImage < DictImage.Offline + 9)
                 dictImage = DictImage.Offline;
             else if (dictImage >= DictImage.Online && dictImage < DictImage.Online + 9)
@@ -140,14 +141,7 @@ namespace Lolly
             dictsToolStrip.Items.Clear();
             dictsToolStrip.Tag = -1;
             foreach (var dict in uiDicts)
-                if (dict.Items.Count == 1)
-                {
-                    var item = dict.Items.First();
-                    AddDict(item.Name, (int)item.ImageIndex);
-                } 
-                else
-                {
-                }
+                AddDict(dict);
             SelectDict(0);
         }
 
@@ -371,7 +365,8 @@ namespace Lolly
             uiDicts.Clear();
             uiDicts.Add(new UIDict
             {
-                Name = "Custom",
+                Name = DictNames.DEFAULT,
+                Type = UIDictType.Collection,
                 Items = new List<UIDictItem> { new UIDictItem
                 {
                     Name = DictNames.DEFAULT,

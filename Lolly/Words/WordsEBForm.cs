@@ -56,9 +56,16 @@ namespace Lolly
 
             if (config.dictsEBWin.Any())
             {
-                int imageIndex = (int)DictImage.Offline;
                 foreach (var dictName in config.dictsEBWin)
-                    AddDict(dictName, imageIndex);
+                    AddDict(new UIDict
+                    {
+                        Name = dictName,
+                        Type = UIDictType.Single,
+                        Items = new List<UIDictItem>{ new UIDictItem {
+                            Name = dictName,
+                            ImageIndex = DictImage.Offline
+                        }}
+                    });
                 SelectDict(0);
             }
         }

@@ -80,68 +80,77 @@ namespace Lolly
             }
         }
 
-        private void WithSelectedItem(Action<ListViewItem, int> action)
+        private void WithSelectedNode(Action<TreeNode, int> action)
         {
-            //var items = dictListView.SelectedItems;
-            //if (items.Count == 0) return;
-            //var item = items[0];
-            //int n = dictListView.Items.IndexOf(item);
-            //action(item, n);
+            var node = dictBTreeView.SelectedNode;
+            if (node == null || node.Level > 0) return;
+            int n = dictBTreeView.Nodes.IndexOf(node);
+            action(node, n);
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            //WithSelectedItem((item, n) => dictListView.Items.Remove(item));
+            WithSelectedNode((node, n) => dictBTreeView.Nodes.Remove(node));
         }
 
         private void topButton_Click(object sender, EventArgs e)
         {
-            //WithSelectedItem((item, n) =>
-            //{
-            //    if (n == 0) return;
-            //    dictListView.Items.Remove(item);
-            //    dictListView.Items.Insert(0, item);
-            //});
+            WithSelectedNode((node, n) =>
+            {
+                if (n == 0) return;
+                dictBTreeView.Nodes.Remove(node);
+                dictBTreeView.Nodes.Insert(0, node);
+            });
         }
 
         private void upButton_Click(object sender, EventArgs e)
         {
-            //WithSelectedItem((item, n) =>
-            //{
-            //    if (n == 0) return;
-            //    dictListView.Items.Remove(item);
-            //    dictListView.Items.Insert(n - 1, item);
-            //});
+            WithSelectedNode((node, n) =>
+            {
+                if (n == 0) return;
+                dictBTreeView.Nodes.Remove(node);
+                dictBTreeView.Nodes.Insert(n - 1, node);
+            });
         }
 
         private void downButton_Click(object sender, EventArgs e)
         {
-            //WithSelectedItem((item, n) =>
-            //{
-            //    if (n == dictListView.Items.Count) return;
-            //    dictListView.Items.Remove(item);
-            //    dictListView.Items.Insert(n + 1, item);
-            //});
+            WithSelectedNode((node, n) =>
+            {
+                if (n == dictBTreeView.Nodes.Count) return;
+                dictBTreeView.Nodes.Remove(node);
+                dictBTreeView.Nodes.Insert(n + 1, node);
+            });
         }
 
         private void BottomButton_Click(object sender, EventArgs e)
         {
-            //WithSelectedItem((item, n) =>
-            //{
-            //    if (n == dictListView.Items.Count) return;
-            //    dictListView.Items.Remove(item);
-            //    dictListView.Items.Add(item);
-            //});
+            WithSelectedNode((node, n) =>
+            {
+                if (n == dictBTreeView.Nodes.Count) return;
+                dictBTreeView.Nodes.Remove(node);
+                dictBTreeView.Nodes.Add(node);
+            });
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            //uiDicts = dictListView.Items.Cast<ListViewItem>()
-            //    .Select(i => new UIDictGroup
-            //    {
-            //        Name = i.Name,
-            //        ImageIndex = (DictImage) i.ImageIndex
-            //    }).ToList();
+            uiDicts = dictBTreeView.Nodes.Cast<TreeNode>()
+                .Select(n => new UIDict
+                {
+                    Name = n.Name,
+                    Type = n.Nodes.Count == 0 ? UIDictType.Single :
+                        n.Name == "Collection" ? UIDictType.Collection :
+                        UIDictType.Switch,
+                    Items = n.Nodes.Count == 0 ? new List<UIDictItem> { new UIDictItem {
+                        Name = n.Name,
+                        ImageIndex = (DictImage)n.ImageIndex
+                    }} : n.Nodes.Cast<TreeNode>()
+                    .Select(n2 => new UIDictItem {
+                        Name = n2.Name,
+                        ImageIndex = (DictImage)n2.ImageIndex
+                    }).ToList()
+                }).ToList();
         }
 
         private void dictATreeView_AfterCheck(object sender, TreeViewEventArgs e)

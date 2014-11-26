@@ -47,7 +47,7 @@ namespace Lolly
     {
         public string Name;
         public UIDictType Type;
-        public List<UIDictItem> Items = new List<UIDictItem>();
+        public List<UIDictItem> Items;
     }
 
     public class DictLangConfig
@@ -60,6 +60,7 @@ namespace Lolly
         public string[] dictTablesOffline;
         public List<MDICTALL> dictAllList;
         public SortedDictionary<string, List<UIDictItem>> dictGroups = new SortedDictionary<string, List<UIDictItem>>();
+        private Dictionary<string, UIDictItem> dictItems = new Dictionary<string, UIDictItem>();
 
         public DictLangConfig(XElement elemLang, List<XElement> elemGroupDictInfo, int langID)
         {
@@ -80,37 +81,24 @@ namespace Lolly
             {
                 if (!dictNames.Any()) return;
 
-                var infos = new List<UIDictItem>();
-                dictGroups[groupName] = infos;
+                var items = new List<UIDictItem>();
+                dictGroups[groupName] = items;
 
                 int imageIndex = (int)dt;
                 foreach (var dictName in dictNames)
                 {
-                    infos.Add(new UIDictItem
+                    var item = new UIDictItem
                     {
                         Name = dictName,
                         Type = groupName,
                         ImageIndex = (DictImage)imageIndex
-                    });
+                    };
+                    items.Add(item);
+                    dictItems[groupName + dictName] = item;
                     if (dt == DictImage.Offline || dt == DictImage.Online || dt == DictImage.Live)
                         imageIndex++;
                 }
             };
-
-            // custom
-            var elems = elemDicts.Elements("custom");
-            var dictNamesCustom = elems.Select(elem => (string)elem.Attribute("name")).ToArray();
-            AddDictGroups(DictImage.Custom, "Custom", dictNamesCustom);
-            dictsCustom = elems.Select(elem => new
-            {
-                Key = (string)elem.Attribute("name"),
-                Value = elem.Elements("dict").Select(elem2 => new UIDictItem
-                {
-                    Name = (string)elem2,
-                    Type = (string)elem2.Attribute("type"),
-                    ImageIndex = DictImage.Custom
-                }).ToList()
-            }).ToDictionary(elem => elem.Key, elem => elem.Value);
 
             // group
             var elemDictsGroup = elemDicts.Elements("group");
@@ -143,6 +131,26 @@ namespace Lolly
             if (dictsLingoes.Any())
                 dictsSpecial.Add("Lingoes");
             AddDictGroups(DictImage.Special, "Special", dictsSpecial.OrderBy(s => s).ToArray());
+
+            // custom
+            var elems = elemDicts.Elements("custom");
+            var dictNamesCustom = elems.Select(elem => (string)elem.Attribute("name")).ToArray();
+            AddDictGroups(DictImage.Custom, "Custom", dictNamesCustom);
+            dictsCustom = elems.Select(elem => new
+            {
+                Key = (string)elem.Attribute("name"),
+                Value = elem.Elements("dict").Select(elem2 => new UIDictItem
+                {
+                    Name = (string)elem2,
+                    Type = (string)elem2.Attribute("type"),
+                    ImageIndex = DictImage.Custom
+                }).SelectMany(i =>
+                    i.Name == DictNames.OFFLINEALL ? dictGroups[DictNames.OFFLINE] :
+                    i.Name == DictNames.ONLINEALL ? dictGroups[DictNames.ONLINE] :
+                    i.Name == DictNames.LIVEALL ? dictGroups[DictNames.LIVE] :
+                    new List<UIDictItem>{ dictItems[i.Type + i.Name] }
+                ).ToList()
+            }).ToDictionary(elem => elem.Key, elem => elem.Value);
 
             dictAllList = DictAll.GetDataByLang(langID);
         }
