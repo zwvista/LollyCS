@@ -141,7 +141,7 @@ namespace Lolly
                 DocumentText =
                     dictImage == DictImage.Local || dictImage == DictImage.Offline ? GetTranslationHtml() :
                     dictImage == DictImage.Live || dictImage == DictImage.Online && dictName == "Frhelper" ? GetLiveHtml(dictName) :
-                    dictImage == DictImage.Custom ? GetCustomHtml(config.dictsCustom[dictName]) :
+                    dictImage == DictImage.Custom ? GetCustomHtml(config.dictsCustom[dictName].Items) :
                     dictName == DictNames.OFFLINEALL || dictName == DictNames.ONLINEALL ||dictName == DictNames.LIVEALL ?
                         GetCustomHtml(new List<UIDictItem>{ new UIDictItem
                         {

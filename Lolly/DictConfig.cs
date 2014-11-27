@@ -55,7 +55,7 @@ namespace Lolly
         public List<KeyValuePair<string, string>> replacement;
         public List<string> dictsEBWin;
         public string[] dictsLingoes;
-        public Dictionary<string, List<UIDictItem>> dictsCustom;
+        public Dictionary<string, UIDict> dictsCustom;
         public string[] dictsOffline;
         public string[] dictTablesOffline;
         public List<MDICTALL> dictAllList;
@@ -136,10 +136,11 @@ namespace Lolly
             var elems = elemDicts.Elements("custom");
             var dictNamesCustom = elems.Select(elem => (string)elem.Attribute("name")).ToArray();
             AddDictGroups(DictImage.Custom, "Custom", dictNamesCustom);
-            dictsCustom = elems.Select(elem => new
+            dictsCustom = elems.Select(elem => new UIDict
             {
-                Key = (string)elem.Attribute("name"),
-                Value = elem.Elements("dict").Select(elem2 => new UIDictItem
+                Name = (string)elem.Attribute("name"),
+                Type = (UIDictType)Enum.Parse(typeof(UIDictType), (string)elem.Attribute("type")),
+                Items = elem.Elements("dict").Select(elem2 => new UIDictItem
                 {
                     Name = (string)elem2,
                     Type = (string)elem2.Attribute("type"),
@@ -150,7 +151,7 @@ namespace Lolly
                     i.Name == DictNames.LIVEALL ? dictGroups[DictNames.LIVE] :
                     new List<UIDictItem>{ dictItems[i.Type + i.Name] }
                 ).ToList()
-            }).ToDictionary(elem => elem.Key, elem => elem.Value);
+            }).ToDictionary(elem => elem.Name, elem => elem);
 
             dictAllList = DictAll.GetDataByLang(langID);
         }
