@@ -9,12 +9,25 @@ namespace Lolly
 {
     public class DictWebBrowser : WebBrowser
     {
-        public string dictName;
-        public DictImage dictImage;
-        public MDICTALL dictRow;
-        public MDICTENTITY wordRow;
+        private DictLangConfig config;
+        private List<UIDictItem> dictItems;
         public bool emptyTrans;
-        public bool automationDone;
+        private bool automationDone;
+
+        public DictWebBrowser(DictLangConfig config)
+        {
+            this.config = config;
+        }
+
+        public void SetDict(List<UIDictItem> items)
+        {
+            dictItems = items;
+        }
+
+        public void SetDict(UIDictItem item)
+        {
+            dictItems = new List<UIDictItem> {item};
+        }
 
         public void UpdateLiveHtml(string word, string dict, string translation)
         {
@@ -22,20 +35,27 @@ namespace Lolly
                 translation);
         }
 
-        public void FindDict(List<MDICTALL> dictAllList, string dict)
+        private MDICTALL FindDict(string dict)
         {
-            dictRow = dictAllList.SingleOrDefault(r => r.DICTNAME == dict);
+            return config.dictAllList.SingleOrDefault(r => r.DICTNAME == dict);
         }
 
-        public void UpdateHtml(string word, List<MAUTOCORRECT> autoCorrectList, DictLangConfig config)
+        private string GetTranslation(MDICTALL dictRow, string word)
         {
+            var wordRow = DictEntity.GetDataByWordDictTable(word, dictRow.DICTTABLE);
+            return wordRow == null ? "" : wordRow.TRANSLATION;
+        }
+
+        public void UpdateHtml(string word, List<MAUTOCORRECT> autoCorrectList)
+        {
+            MDICTALL dictRow = null;
+
             Func<string, string> GetTemplatedHtml = str =>
                 string.Format(dictRow.TEMPLATE, word, Program.appDataFolderInHtml + "css/", str);
 
             Func<string> GetTranslationHtml = () =>
             {
-                wordRow = DictEntity.GetDataByWordDictTable(word, dictRow.DICTTABLE);
-                string translation = wordRow == null ? "" : wordRow.TRANSLATION;
+                var translation = GetTranslation(dictRow, word);
                 emptyTrans = emptyTrans && translation == "";
                 return GetTemplatedHtml(translation);
             };
@@ -43,9 +63,11 @@ namespace Lolly
             Func<string> GetDictURLForword = () =>
                 Program.GetDictURLForWord(word, dictRow, autoCorrectList);
 
-            Func<bool, string> GetLingoesHtml = all =>
-                all ? Program.lingoes.Search(word) :
-                    Program.lingoes.Search(word, config.dictsLingoes);
+            Func<string> GetLingoesHtml = () => Program.lingoes.Search(word, config.dictsLingoes);
+
+            Func<string> GetLingoesAllHtml = () => Program.lingoes.Search(word);
+
+            Func<string> GetFrhelperHtml = () => GetTemplatedHtml(Program.frhelper.Search(word, dictRow.TRANSFORM_WIN));
 
             Func<string, string> GetLiveHtml = dict =>
             {
@@ -56,100 +78,154 @@ namespace Lolly
                 return GetTemplatedHtml(Program.GetLiveHtml(word, dict));
             };
 
-            Func<List<UIDictItem>, string> GetCustomHtml = dictInfos =>
+            emptyTrans = true;
+            if (word == "")
+                DocumentText = "";
+            else if (dictItems.Count == 1)
+            {
+                var item = dictItems.First();
+                dictRow = FindDict(item.Name);
+                if (item.Type == DictNames.ONLINE && item.Name != DictNames.FRHELPER ||
+                    item.Type == DictNames.CONJUGATOR ||
+                    item.Type == DictNames.WEB)
+                {
+                    automationDone = false;
+                    Navigate(GetDictURLForword());
+                }
+                else
+                    DocumentText =
+                        item.Type == DictNames.LOCAL || item.Type == DictNames.OFFLINE ? GetTranslationHtml() :
+                        item.Type == DictNames.LIVE ? GetLiveHtml(item.Name) :
+                        item.Type == DictNames.ONLINE && item.Name == DictNames.FRHELPER ? GetFrhelperHtml() :
+                        item.Name == DictNames.LINGOES ? GetLingoesHtml() :
+                        item.Name == DictNames.LINGOESALL ? GetLingoesAllHtml() :
+                        "";
+            }
+            else
             {
                 Func<string, string> GetIFrameOfflineText = str => string.Format(
                     "<iframe frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{0}\");'></iframe>\n",
                     str.Replace("'", "&#39;").Replace("\"", "\\\"").Replace("\r\n", "\\r\\n").Replace("\n", "\\n"));
 
-                Func<string, string> GetIFrameOnlineText = str => string.Format(
+                Func<string, string> GetIFrameOnlineText = url => string.Format(
                     "<iframe frameborder='1' style='width:100%; height:500px; display:block' src='{0}'></iframe>\n",
-                    str);
+                    url);
 
                 var sb = new StringBuilder("<html><head><META content=\"IE=10.0000\" http-equiv=\"X-UA-Compatible\"></head><body>\n");
+                sb.AppendFormat("<script type=\"text/javascript\">\n{0}\n</script>\n", Program.js);
 
-                Action<string> AddOfflineDictText = dict =>
+                foreach (var item in dictItems)
                 {
-                    FindDict(config.dictAllList, dict);
-                    sb.Append(GetIFrameOfflineText(GetTranslationHtml()));
-                };
-
-                Action<string> AddOnlineDictText = dict =>
-                {
-                    FindDict(config.dictAllList, dict);
-                    if (dict == "Frhelper")
-                        sb.Append(GetIFrameOfflineText(GetLiveHtml(dict)));
+                    dictRow = FindDict(item.Name);
+                    if (item.Name == DictNames.LINGOES)
+                        sb.Append(GetIFrameOfflineText(GetLingoesHtml()));
+                    else if (item.Name == DictNames.LINGOESALL)
+                        sb.Append(GetIFrameOfflineText(GetLingoesAllHtml()));
+                    else if (item.Type == DictNames.LOCAL ||
+                        item.Type == DictNames.OFFLINE)
+                        sb.Append(GetIFrameOfflineText(GetTranslationHtml()));
+                    else if (item.Type == DictNames.LIVE)
+                        sb.Append(GetIFrameOfflineText(GetLiveHtml(item.Name)));
+                    else if (item.Name == DictNames.FRHELPER)
+                        sb.Append(GetIFrameOfflineText(GetFrhelperHtml()));
                     else
                         sb.Append(GetIFrameOnlineText(GetDictURLForword()));
-                };
-
-                foreach (var info in dictInfos)
-                {
-                    var dictA = info.Name;
-                    switch (dictA)
-                    {
-                        case DictNames.LINGOES:
-                        case DictNames.LINGOESALL:
-                            sb.Append(GetIFrameOfflineText(GetLingoesHtml(dictA == DictNames.LINGOESALL)));
-                            break;
-                        case DictNames.OFFLINEALL:
-                            foreach (var dictB in config.dictsOffline)
-                                AddOfflineDictText(dictB);
-                            break;
-                        case DictNames.ONLINEALL:
-                            foreach (var dictB in config.dictsOffline)
-                                AddOnlineDictText(dictB);
-                            break;
-                        case DictNames.LIVEALL:
-                            foreach (var dictB in config.dictsOffline)
-                                AddOfflineDictText(GetLiveHtml(dictB));
-                            break;
-                        default:
-                            switch (info.Type)
-                            {
-                                case DictNames.LOCAL:
-                                case DictNames.OFFLINE:
-                                    AddOfflineDictText(dictA);
-                                    break;
-                                case DictNames.CONJUGATOR:
-                                case DictNames.ONLINE:
-                                case DictNames.WEB:
-                                    AddOnlineDictText(dictA);
-                                    break;
-                                case DictNames.LIVE:
-                                    AddOfflineDictText(GetLiveHtml(dictA));
-                                    break;
-                            }
-                            break;
-                    }
                 }
 
-                sb.AppendFormat("<script type=\"text/javascript\">\n{0}\n</script>", Program.js);
                 sb.Append("</body></html>\n");
-                return sb.ToString();
+                DocumentText = sb.ToString();
             };
+        }
 
-            emptyTrans = true;
-            if (word == "")
-                DocumentText = "";
-            else if (dictImage == DictImage.Online && dictName != "Frhelper" || dictImage == DictImage.Conjugator || dictImage == DictImage.Web)
+        public bool CanDeleteTranslation()
+        {
+            return dictItems.Any(i => i.Type == DictNames.OFFLINE);
+        }
+
+        public bool CanEditTranslation()
+        {
+            return dictItems.Count == 1 && dictItems[0].Type == DictNames.OFFLINE;
+        }
+
+        public bool CanExtractAndOverriteTranslation()
+        {
+            return dictItems.Any(i => i.Type == DictNames.OFFLINE) ||
+                dictItems.Count == 1 && dictItems[0].Type == DictNames.ONLINE;
+        }
+
+        public bool CanExtractAndAppendTranslation()
+        {
+            return dictItems.Count == 1 && dictItems[0].Type == DictNames.ONLINE;
+        }
+
+        public bool DoDeleteTranslation(string word)
+        {
+            var items = dictItems.Where(i => i.Type == DictNames.OFFLINE).ToList();
+            bool isPlural = items.Count > 1;
+            var sb = new StringBuilder();
+            sb.AppendFormat("The translation{0} of the word \"{1}\" in the following dictionar{2}\n\n",
+                isPlural ? "s" : "", word, isPlural ? "ies" : "y");
+            foreach (var item in items)
+                sb.AppendFormat("\t{0}\n", item.Name);
+            sb.Append("\nwill be DELETED. Are you sure?");
+            if (MessageBox.Show(sb.ToString(), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return false;
+            foreach (var item in items)
             {
-                automationDone = false;
-                Navigate(GetDictURLForword());
+                var dictRow = FindDict(item.Name);
+                DictEntity.Update(ExtensionClass.NOTRANSLATION, word, dictRow.DICTTABLE);
+            }
+            return true;
+        }
+
+        public bool DoEditTranslation(string word)
+        {
+            var dictRow = FindDict(dictItems[0].Name);
+            var translation = GetTranslation(dictRow, word);
+
+            var dlg = new EditTransDlg();
+            dlg.translationTextBox.Text = translation;
+            if (dlg.ShowDialog() != DialogResult.OK) return false;
+
+            DictEntity.Update(dlg.translationTextBox.Text, word, dictRow.DICTTABLE);
+            return true;
+        }
+
+        public bool DoExtractTranslation(string word, bool overriteDB)
+        {
+            if (dictItems.Count == 1 && dictItems[0].Type == DictNames.ONLINE)
+            {
+                var dictName = dictItems[0].Name;
+                var dictRow = FindDict(dictName);
+                var msg = string.Format("The translation from the url \"{0}\" will be EXTRACTED and {1} " +
+                    "the translation of the word \"{2}\" in the dictionary \"{3}\". Are you sure?",
+                    Url.AbsoluteUri,
+                    overriteDB ? "used to REPLACE" : "APPENDED to",
+                    word, dictName);
+                if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    return false;
+                var wordRow = Program.OpenDictTable(word, dictRow.DICTTABLE);
+                Program.UpdateDictTable(this, wordRow, dictRow, !overriteDB);
             }
             else
-                DocumentText =
-                    dictImage == DictImage.Local || dictImage == DictImage.Offline ? GetTranslationHtml() :
-                    dictImage == DictImage.Live || dictImage == DictImage.Online && dictName == "Frhelper" ? GetLiveHtml(dictName) :
-                    dictImage == DictImage.Custom ? GetCustomHtml(config.dictsCustom[dictName].Items) :
-                    dictName == DictNames.OFFLINEALL || dictName == DictNames.ONLINEALL ||dictName == DictNames.LIVEALL ?
-                        GetCustomHtml(new List<UIDictItem>{ new UIDictItem
-                        {
-                            Name = dictName,
-                            Type = "Group",
-                        }}) :
-                    dictName == DictNames.LINGOES || dictName == DictNames.LINGOESALL ? GetLingoesHtml(dictName == DictNames.LINGOESALL) :
-                    "";
+            {
+                var items = dictItems.Where(i => i.Type == DictNames.OFFLINE).ToList();
+                bool isPlural = items.Count > 1;
+                var sb = new StringBuilder();
+                if (!emptyTrans)
+                {
+                    sb.AppendFormat("The translation{0} of the word \"{1}\" in the following dictionar{2}\n\n",
+                        isPlural ? "s" : "", word, isPlural ? "ies" : "y");
+                    foreach (var item in items)
+                        sb.AppendFormat("\t{0}\n", item.Name);
+                    sb.Append("\nwill be DELETED and EXTRACTED from the web again. Are you sure?");
+                    if (MessageBox.Show(sb.ToString(), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                        return false;
+                }
+                ((MDIForm)FindForm().Parent.Parent).ExtractTranslation(new[]{word},
+                    dictItems.Select(i => i.Name).ToArray(), true);
+            }
+            return true;
         }
     };
 }

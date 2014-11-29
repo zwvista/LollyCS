@@ -96,6 +96,7 @@ namespace Lolly
     {
         public const string CONJUGATOR = "Conjugator";
         public const string DEFAULT = "DEFAULT";
+        public const string FRHELPER = "Frhelper";
         public const string LINGOES = "Lingoes";
         public const string LINGOESALL = "LINGOES";
         public const string LIVE = "Live";

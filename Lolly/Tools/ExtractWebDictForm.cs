@@ -131,7 +131,7 @@ namespace Lolly
             wordToolStripLabel.Text = string.Format("Word: {0} / {1}", wordIndex + 1, words.Length);
             wordToolStripTextBox.Text = word;
             dictStatus = DictWebBrowserStatus.Navigating;
-            if (dictRow.DICTNAME == "Frhelper")
+            if (dictRow.DICTNAME == DictNames.FRHELPER)
                 webBrowser1.DocumentText = Program.frhelper.Search(word);
             else
             {

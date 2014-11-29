@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dictATreeView = new DllLolly.LollyTreeView();
-            this.addCollectionButton = new System.Windows.Forms.Button();
+            this.addPileButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.upButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
@@ -64,17 +64,17 @@
             this.dictATreeView.TabIndex = 0;
             this.dictATreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.dictATreeView_AfterCheck);
             // 
-            // addCollectionButton
+            // addPileButton
             // 
-            this.addCollectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addCollectionButton.Location = new System.Drawing.Point(206, 13);
-            this.addCollectionButton.Margin = new System.Windows.Forms.Padding(4);
-            this.addCollectionButton.Name = "addCollectionButton";
-            this.addCollectionButton.Size = new System.Drawing.Size(101, 31);
-            this.addCollectionButton.TabIndex = 1;
-            this.addCollectionButton.Text = "Collection";
-            this.addCollectionButton.UseVisualStyleBackColor = true;
-            this.addCollectionButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addPileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.addPileButton.Location = new System.Drawing.Point(206, 13);
+            this.addPileButton.Margin = new System.Windows.Forms.Padding(4);
+            this.addPileButton.Name = "addPileButton";
+            this.addPileButton.Size = new System.Drawing.Size(101, 31);
+            this.addPileButton.TabIndex = 1;
+            this.addPileButton.Text = "Add Pile";
+            this.addPileButton.UseVisualStyleBackColor = true;
+            this.addPileButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // removeButton
             // 
@@ -155,7 +155,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.clearButton);
             this.splitContainer1.Panel1.Controls.Add(this.addAllbutton);
             this.splitContainer1.Panel1.Controls.Add(this.addSwitchbutton);
-            this.splitContainer1.Panel1.Controls.Add(this.addCollectionButton);
+            this.splitContainer1.Panel1.Controls.Add(this.addPileButton);
             this.splitContainer1.Panel1.Controls.Add(this.dictATreeView);
             this.splitContainer1.Panel1.Controls.Add(this.removeButton);
             this.splitContainer1.Panel1.Controls.Add(this.BottomButton);
@@ -182,7 +182,7 @@
             this.clearButton.TabIndex = 1;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.addButton_Click);
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // addAllbutton
             // 
@@ -204,7 +204,7 @@
             this.addSwitchbutton.Name = "addSwitchbutton";
             this.addSwitchbutton.Size = new System.Drawing.Size(100, 31);
             this.addSwitchbutton.TabIndex = 1;
-            this.addSwitchbutton.Text = "Switch";
+            this.addSwitchbutton.Text = "Add Switch";
             this.addSwitchbutton.UseVisualStyleBackColor = true;
             this.addSwitchbutton.Click += new System.EventHandler(this.addButton_Click);
             // 
@@ -266,7 +266,7 @@
         #endregion
 
         private DllLolly.LollyTreeView dictATreeView;
-        private System.Windows.Forms.Button addCollectionButton;
+        private System.Windows.Forms.Button addPileButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button downButton;

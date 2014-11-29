@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Linq.Mapping;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,10 +27,11 @@ namespace Lolly
             FillDicts();
         }
 
-        private TreeNode AddTreeNode(TreeNodeCollection nodes, string text, int imageIndex)
+        private TreeNode AddTreeNode(TreeNodeCollection nodes, string text, string type, int imageIndex)
         {
             var node = nodes.Add(text, text);
             node.ImageIndex = node.SelectedImageIndex = imageIndex;
+            node.Tag = type;
             return node;
         }
 
@@ -40,25 +42,27 @@ namespace Lolly
                 var imageIndex = grp.Value[0].ImageIndex;
                 if (imageIndex == DictImage.Offline || imageIndex == DictImage.Online || imageIndex == DictImage.Live)
                     imageIndex--;
-                var node = AddTreeNode(dictATreeView.Nodes, grp.Key, (int)imageIndex);
+                var node = AddTreeNode(dictATreeView.Nodes, grp.Key, grp.Key, (int)imageIndex);
                 foreach (var item in grp.Value)
                 {
-                    AddTreeNode(node.Nodes, item.Name, (int)item.ImageIndex);
+                    AddTreeNode(node.Nodes, item.Name, grp.Key, (int)item.ImageIndex);
                     node.Expand();
                 }
             }
 
             foreach (var dict in uiDicts)
-                if (dict.Items.Count == 1)
+                if (dict is UIDictItem)
                 {
-                    var item = dict.Items.First();
-                    AddTreeNode(dictBTreeView.Nodes, item.Name, (int)item.ImageIndex);
+                    var item = dict as UIDictItem;
+                    AddTreeNode(dictBTreeView.Nodes, item.Name, item.Type, (int)item.ImageIndex);
                 }
                 else
                 {
-                    var node = AddTreeNode(dictBTreeView.Nodes, dict.Name, (int)DictImage.Special);
-                    foreach (var item in dict.Items)
-                        AddTreeNode(node.Nodes, item.Name, (int)item.ImageIndex);
+                    var col = dict as UIDictCollection;
+                    var node = AddTreeNode(dictBTreeView.Nodes, col.Name,
+                        col is UIDictPile ? "Pile" : "Switch", (int)DictImage.Special);
+                    foreach (var item in col.Items)
+                        AddTreeNode(node.Nodes, item.Name, item.Type, (int)item.ImageIndex);
                 }
         }
 
@@ -73,11 +77,17 @@ namespace Lolly
                     dictBTreeView.Nodes.Add((TreeNode)node.Clone());
             else
             {
-                var name = (sender as Button).Text;
-                var node = AddTreeNode(dictBTreeView.Nodes, name, (int)DictImage.Special);
+                var name = sender == addPileButton ? "Pile" : "Switch";
+                var node = AddTreeNode(dictBTreeView.Nodes, name, name,
+                    (int)DictImage.Special);
                 foreach (var node2 in nodes)
                     node.Nodes.Add((TreeNode)node2.Clone());
             }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void WithSelectedNode(Action<TreeNode, int> action)
@@ -135,22 +145,25 @@ namespace Lolly
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            Func<TreeNode, UIDictItem> f = n => new UIDictItem
+            {
+                Name = n.Name,
+                Type = (string)n.Tag,
+                ImageIndex = (DictImage)n.ImageIndex
+            };
             uiDicts = dictBTreeView.Nodes.Cast<TreeNode>()
-                .Select(n => new UIDict
-                {
-                    Name = n.Name,
-                    Type = n.Nodes.Count == 0 ? UIDictType.Single :
-                        n.Name == "Collection" ? UIDictType.Collection :
-                        UIDictType.Switch,
-                    Items = n.Nodes.Count == 0 ? new List<UIDictItem> { new UIDictItem {
-                        Name = n.Name,
-                        ImageIndex = (DictImage)n.ImageIndex
-                    }} : n.Nodes.Cast<TreeNode>()
-                    .Select(n2 => new UIDictItem {
-                        Name = n2.Name,
-                        ImageIndex = (DictImage)n2.ImageIndex
-                    }).ToList()
-                }).ToList();
+                .Select(n => 
+                    n.Nodes.Count == 0 ? (UIDict)f(n) :
+                    (string)n.Tag == "Pile" ? (UIDict)new UIDictPile
+                    {
+                        Name = n.Text,
+                        Items = n.Nodes.Cast<TreeNode>().Select(f).ToList()
+                    } : (UIDict)new UIDictSwitch
+                    {
+                        Name = n.Text,
+                        Items = n.Nodes.Cast<TreeNode>().Select(f).ToList()
+                    }
+                ).ToList();
         }
 
         private void dictATreeView_AfterCheck(object sender, TreeViewEventArgs e)

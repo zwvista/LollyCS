@@ -176,6 +176,7 @@
     <Compile Include="SharedImageLists1.designer.cs">
       <DependentUpon>SharedImageLists1.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIDict.cs" />
     <Compile Include="Words\DictWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>

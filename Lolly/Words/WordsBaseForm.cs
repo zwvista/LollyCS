@@ -75,23 +75,29 @@ namespace Lolly
 
         protected virtual void AddDict(UIDict dict)
         {
-            var item = dict.Items[0];
-            switch (dict.Type)
+            if (dict is UIDictItem)
             {
-                case UIDictType.Single:
-                case UIDictType.Collection:
-                    var btn = dictsToolStrip.Items.Add(dict.Name, null, dictsToolStripItem_Click);
-                    btn.ImageIndex = (int)item.ImageIndex;
-                    break;
-                case UIDictType.Switch:
-                    var btn2 = new ToolStripSplitButtonCheckable();
-                    btn2.Text = item.Name;
-                    btn2.ImageIndex = (int)item.ImageIndex;
-                    btn2.ButtonClick += dictsToolStripItem_Click;
-                    dictsToolStrip.Items.Add(btn2);
-                    foreach (var item2 in dict.Items)
-                        btn2.DropDownItems.Add(item2.Name, imageList1.Images[(int)item2.ImageIndex]);
-                    break;
+                var item = dict as UIDictItem;
+                var btn = dictsToolStrip.Items.Add(item.Name, null, dictsToolStripItem_Click);
+                btn.ImageIndex = (int)item.ImageIndex;
+            }
+            else if (dict is UIDictPile)
+            {
+                var pile = dict as UIDictPile;
+                var btn = dictsToolStrip.Items.Add(pile.Name, null, dictsToolStripItem_Click);
+                btn.ImageIndex = (int) DictImage.Custom;
+            }
+            else
+            {
+                var sw = dict as UIDictSwitch;
+                var item = sw.Items.First();
+                var btn = new ToolStripSplitButtonCheckable();
+                btn.Text = item.Name;
+                btn.Image = imageList1.Images[(int)item.ImageIndex];
+                btn.ButtonClick += dictsToolStripItem_Click;
+                dictsToolStrip.Items.Add(btn);
+                foreach (var item2 in sw.Items)
+                    btn.DropDownItems.Add(item2.Name, imageList1.Images[(int)item2.ImageIndex]);
             }
         }
 

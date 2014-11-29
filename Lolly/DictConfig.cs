@@ -29,27 +29,6 @@ namespace Lolly
         }
     }
 
-    public class UIDictItem
-    {
-        public string Name;
-        public string Type;
-        public DictImage ImageIndex;
-    }
-
-    public enum UIDictType
-    {
-        Single,
-        Collection,
-        Switch,
-    }
-
-    public class UIDict
-    {
-        public string Name;
-        public UIDictType Type;
-        public List<UIDictItem> Items;
-    }
-
     public class DictLangConfig
     {
         public List<KeyValuePair<string, string>> replacement;
@@ -136,10 +115,10 @@ namespace Lolly
             var elems = elemDicts.Elements("custom");
             var dictNamesCustom = elems.Select(elem => (string)elem.Attribute("name")).ToArray();
             AddDictGroups(DictImage.Custom, "Custom", dictNamesCustom);
-            dictsCustom = elems.Select(elem => new UIDict
+            dictsCustom = elems.Select(elem => new
             {
                 Name = (string)elem.Attribute("name"),
-                Type = (UIDictType)Enum.Parse(typeof(UIDictType), (string)elem.Attribute("type")),
+                Type = (string)elem.Attribute("type"),
                 Items = elem.Elements("dict").Select(elem2 => new UIDictItem
                 {
                     Name = (string)elem2,
@@ -151,7 +130,19 @@ namespace Lolly
                     i.Name == DictNames.LIVEALL ? dictGroups[DictNames.LIVE] :
                     new List<UIDictItem>{ dictItems[i.Type + i.Name] }
                 ).ToList()
-            }).ToDictionary(elem => elem.Name, elem => elem);
+            }).Select(elem => new
+            {
+                Name = elem.Name,
+                Dict = elem.Type == "Pile" ? (UIDict)new UIDictPile
+                {
+                    Name = elem.Name,
+                    Items = elem.Items
+                } : (UIDict)new UIDictSwitch
+                {
+                    Name = elem.Name,
+                    Items = elem.Items
+                }
+            }).ToDictionary(elem => elem.Name, elem => elem.Dict);
 
             dictAllList = DictAll.GetDataByLang(langID);
         }

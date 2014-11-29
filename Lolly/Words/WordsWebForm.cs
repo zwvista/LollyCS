@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DllLolly;
 using LollyBase;
 
 namespace Lolly
@@ -45,12 +46,11 @@ namespace Lolly
 
         private void EnableToolStripButtons()
         {
-            deleteTranslationToolStripButton.Enabled = currentWord != "" &&
-                (currentDWB.dictImage == DictImage.Offline || currentDWB.dictName == DictNames.DEFAULT);
-            editTranslationtoolStripButton.Enabled = currentWord != "" && currentDWB.dictImage == DictImage.Offline;
-            extractOverriteToolStripButton.Enabled = currentWord != "" &&
-                (currentDWB.dictImage == DictImage.Offline || currentDWB.dictImage == DictImage.Online || currentDWB.dictName == DictNames.DEFAULT);
-            extractAppendToolStripButton.Enabled = currentWord != "" && currentDWB.dictImage == DictImage.Online;
+            bool b = currentWord != "";
+            deleteTranslationToolStripButton.Enabled = b && currentDWB.CanDeleteTranslation();
+            editTranslationtoolStripButton.Enabled = b && currentDWB.CanEditTranslation();
+            extractOverriteToolStripButton.Enabled = b && currentDWB.CanExtractAndOverriteTranslation();
+            extractAppendToolStripButton.Enabled = b && currentDWB.CanExtractAndAppendTranslation();
         }
 
         private void webBrowser1_Enter(object sender, EventArgs e)
@@ -99,7 +99,7 @@ namespace Lolly
         {
             base.AddDict(dict);
 
-            var dwb = new DictWebBrowser();
+            var dwb = new DictWebBrowser(config);
             ((Control)dwb).Enter += webBrowser1_Enter;
             dwb.DocumentCompleted += webBrowser1_DocumentCompleted;
             dwb.PreviewKeyDown += webBrowser1_PreviewKeyDown;
@@ -108,17 +108,31 @@ namespace Lolly
             splitContainer1.Panel2.Controls.Add(dwb);
             dwbList.Add(dwb);
 
-            var item = dict.Items.First();
-            dwb.dictName = item.Name;
-            dwb.FindDict(config.dictAllList, item.Name);
-            var dictImage = item.ImageIndex;
-            if (dictImage >= DictImage.Offline && dictImage < DictImage.Offline + 9)
-                dictImage = DictImage.Offline;
-            else if (dictImage >= DictImage.Online && dictImage < DictImage.Online + 9)
-                dictImage = DictImage.Online;
-            else if (dictImage >= DictImage.Live && dictImage < DictImage.Live + 9)
-                dictImage = DictImage.Live;
-            dwb.dictImage = dictImage;
+            if (dict is UIDictItem)
+                dwb.SetDict(dict as UIDictItem);
+            else
+            {
+                var items = (dict as UIDictCollection).Items;
+                if (dict is UIDictPile)
+                    dwb.SetDict(items);
+                else
+                {
+                    dwb.SetDict(items.First());
+                    var cnt = dictsToolStrip.Items.Count;
+                    var btn = dictsToolStrip.Items[cnt - 1] as ToolStripSplitButtonCheckable;
+                    EventHandler f = (sender, e) =>
+                    {
+                        var menu = sender as ToolStripMenuItem;
+                        var n = btn.DropDownItems.IndexOf(menu);
+                        btn.Text = menu.Text;
+                        btn.Image = menu.Image;
+                        dwb.SetDict((dict as UIDictCollection).Items[n]);
+                        UpdateHtml(dwb);
+                    };
+                    foreach (ToolStripMenuItem menu in btn.DropDownItems)
+                        menu.Click += f;
+                }
+            }
 
             UpdateHtml(dwb);
         }
@@ -140,14 +154,18 @@ namespace Lolly
             dwbList.Clear();
             dictsToolStrip.Items.Clear();
             dictsToolStrip.Tag = -1;
+            if(!uiDicts.Any())
+                uiDicts.Add(config.dictsCustom[DictNames.DEFAULT]);
             foreach (var dict in uiDicts)
                 AddDict(dict);
+            foreach (var dwb in dwbList)
+                dwb.Visible = false;
             SelectDict(0);
         }
 
         private void UpdateHtml(DictWebBrowser dwb)
         {
-            dwb.UpdateHtml(currentWord, autoCorrectList, config);
+            dwb.UpdateHtml(currentWord, autoCorrectList);
         }
 
         private void UpdateHtml()
@@ -179,26 +197,8 @@ namespace Lolly
 
         private void deleteTranslationToolStripButton_Click(object sender, EventArgs e)
         {
-            Action DeleteTranslation = () =>
-                DictEntity.Update(ExtensionClass.NOTRANSLATION, currentWord, currentDWB.dictRow.DICTTABLE);
-
-            if (currentDWB.dictName == DictNames.DEFAULT)
-            {
-                var msg = string.Format("ALL translations of the word \"{0}\" are about to be DELETED. Are you sure?", currentWord);
-                if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    foreach (var dictA in config.dictsOffline)
-                    {
-                        currentDWB.FindDict(config.dictAllList, dictA);
-                        DeleteTranslation();
-                    }
-            }
-            else
-            {
-                var msg = string.Format("The translation of the word \"{0}\" in the dictionary \"{1}\"" +
-                    "is about to be DELETED. Are you sure?", currentWord, currentDWB.dictName);
-                if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    DeleteTranslation();
-            }
+            if(currentDWB.DoDeleteTranslation(currentWord))
+                UpdateHtml(currentDWB);
         }
 
         private void dictsToolStripButton_Click(object sender, EventArgs e)
@@ -211,47 +211,14 @@ namespace Lolly
 
         private void extractToolStripButton_Click(object sender, EventArgs e)
         {
-            var msg = "";
-            if (currentDWB.dictName == DictNames.DEFAULT)
-            {
-                if (!currentDWB.emptyTrans)
-                    msg = string.Format("ALL of the translations of the word \"{0}\" " +
-                        "are about to be DELETED and EXTRACTED from the web again. Are you sure?", currentWord);
-                if (msg == "" || MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    ((MDIForm)Parent.Parent).ExtractTranslation(new[] { currentWord }, config.dictsOffline, true);
-            }
-            else
-            {
-                if (currentDWB.dictImage == DictImage.Online)
-                    msg = string.Format("The translation from the url \"{0}\" is about to be EXTRACTED and {1} " +
-                        "the translation of the word \"{2}\" in the dictionary \"{3}\". Are you sure?",
-                        currentDWB.Url.AbsoluteUri,
-                        sender == extractOverriteToolStripButton ? "used to REPLACE" : "APPENDED to",
-                        currentWord, currentDWB.dictName);
-                else if (!currentDWB.emptyTrans)
-                    msg = string.Format("The translation of the word \"{0}\" in the dictionary \"{1}\" " +
-                        "is about to be DELETED and EXTRACTED from the web again. Are you sure?",
-                        currentWord, currentDWB.dictName);
-                if (msg == "" || MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    if (currentDWB.dictImage == DictImage.Online)
-                    {
-                        currentDWB.wordRow = Program.OpenDictTable(currentWord, currentDWB.dictRow.DICTTABLE);
-                        Program.UpdateDictTable(currentDWB, currentDWB.wordRow, currentDWB.dictRow, sender == extractAppendToolStripButton);
-                    }
-                    else
-                        ((MDIForm)Parent.Parent).ExtractTranslation(new[] { currentWord }, new[] { currentDWB.dictName }, true);
-            }
+            if (currentDWB.DoExtractTranslation(currentWord, sender == extractOverriteToolStripButton))
+                UpdateHtml(currentDWB);
         }
 
         private void editTranslationtoolStripButton_Click(object sender, EventArgs e)
         {
-            var dlg = new EditTransDlg();
-            dlg.translationTextBox.Text = currentDWB.wordRow.TRANSLATION;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                DictEntity.Update(dlg.translationTextBox.Text, currentWord, currentDWB.dictRow.DICTTABLE);
-                UpdateHtml();
-            }
+            if (currentDWB.DoEditTranslation(currentWord))
+                UpdateHtml(currentDWB);
         }
 
         private void DoUpdateFilter()
@@ -348,14 +315,14 @@ namespace Lolly
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            var dwb = (DictWebBrowser)sender;
-            if (dwb.ReadyState == WebBrowserReadyState.Complete &&
-                (dwb.dictImage == DictImage.Online || dwb.dictImage == DictImage.Web) &&
-                dwb.dictRow.AUTOMATION != null && !dwb.automationDone)
-            {
-                dwb.DoWebAutomation(dwb.dictRow.AUTOMATION, currentWord);
-                dwb.automationDone = true;
-            }
+            //var dwb = (DictWebBrowser)sender;
+            //if (dwb.ReadyState == WebBrowserReadyState.Complete &&
+            //    (dwb.dictImage == DictImage.Online || dwb.dictImage == DictImage.Web) &&
+            //    dwb.dictRow.AUTOMATION != null && !dwb.automationDone)
+            //{
+            //    dwb.DoWebAutomation(dwb.dictRow.AUTOMATION, currentWord);
+            //    dwb.automationDone = true;
+            //}
         }
 
         #region ILangBookUnits Members
@@ -363,16 +330,6 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             uiDicts.Clear();
-            uiDicts.Add(new UIDict
-            {
-                Name = DictNames.DEFAULT,
-                Type = UIDictType.Collection,
-                Items = new List<UIDictItem> { new UIDictItem
-                {
-                    Name = DictNames.DEFAULT,
-                    ImageIndex = DictImage.Custom
-                }}
-            });
             base.UpdatelbuSettings();
         }
 
