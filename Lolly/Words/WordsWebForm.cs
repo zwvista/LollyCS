@@ -315,14 +315,9 @@ namespace Lolly
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            //var dwb = (DictWebBrowser)sender;
-            //if (dwb.ReadyState == WebBrowserReadyState.Complete &&
-            //    (dwb.dictImage == DictImage.Online || dwb.dictImage == DictImage.Web) &&
-            //    dwb.dictRow.AUTOMATION != null && !dwb.automationDone)
-            //{
-            //    dwb.DoWebAutomation(dwb.dictRow.AUTOMATION, currentWord);
-            //    dwb.automationDone = true;
-            //}
+            var dwb = (DictWebBrowser)sender;
+            if (dwb.ReadyState == WebBrowserReadyState.Complete)
+                dwb.DoWebAutomation(currentWord);
         }
 
         #region ILangBookUnits Members

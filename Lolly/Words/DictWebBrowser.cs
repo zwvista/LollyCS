@@ -11,7 +11,7 @@ namespace Lolly
     {
         private DictLangConfig config;
         private List<UIDictItem> dictItems;
-        public bool emptyTrans;
+        private bool emptyTrans;
         private bool automationDone;
 
         public DictWebBrowser(DictLangConfig config)
@@ -226,6 +226,19 @@ namespace Lolly
                     dictItems.Select(i => i.Name).ToArray(), true);
             }
             return true;
+        }
+
+        public void DoWebAutomation(string word)
+        {
+            if (dictItems.Count != 1) return;
+            var dictType = dictItems[0].Type;
+            var dictRow = FindDict(dictItems[0].Name);
+            if ((dictType == DictNames.ONLINE || dictType == DictNames.WEB) &&
+                dictRow.AUTOMATION != null && !automationDone)
+            {
+                this.DoWebAutomation(dictRow.AUTOMATION, word);
+                automationDone = true;
+            }
         }
     };
 }
