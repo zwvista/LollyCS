@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using LollyBase;
 
 namespace Lolly
@@ -13,6 +14,8 @@ namespace Lolly
         private List<UIDictItem> dictItems;
         private bool emptyTrans;
         private bool automationDone;
+
+        private Regex regBody = new Regex("(?:(?:<body>)|(?:<BODY>))((?:.*\r\n)*?.*?)(?:(?:</body>)|(?:</BODY>))");
 
         public DictWebBrowser(DictLangConfig config)
         {
@@ -29,15 +32,29 @@ namespace Lolly
             dictItems = new List<UIDictItem> {item};
         }
 
-        public void UpdateLiveHtml(string word, string dict, string translation)
-        {
-            DocumentText = DocumentText.Replace(Program.GetLiveHtml(word, dict),
-                translation);
-        }
-
         private MDICTALL FindDict(string dict)
         {
             return config.dictAllList.SingleOrDefault(r => r.DICTNAME == dict);
+        }
+
+        private string GetTemplatedHtml(MDICTALL dictRow, string word, string str)
+        {
+            return string.Format(dictRow.TEMPLATE, word, Program.appDataFolderInHtml + "css/", str);
+        }
+
+        public void UpdateLiveHtml(string ifrId, string word, string dict, string translation)
+        {
+            var text = Program.GetLiveHtml(word, dict);
+            if (ifrId == "")
+                DocumentText = DocumentText.Replace(text, translation);
+            else
+            {
+                var dictRow = FindDict(dict);
+                var ifrContent = GetTemplatedHtml(dictRow, word, translation);
+                var bodyContent = regBody.Match(ifrContent).Groups[1].Value;
+                object[] args = { ifrId, bodyContent };
+                Document.InvokeScript("updateLiveHtml", args);
+            }
         }
 
         private string GetTranslation(MDICTALL dictRow, string word)
@@ -50,14 +67,11 @@ namespace Lolly
         {
             MDICTALL dictRow = null;
 
-            Func<string, string> GetTemplatedHtml = str =>
-                string.Format(dictRow.TEMPLATE, word, Program.appDataFolderInHtml + "css/", str);
-
             Func<string> GetTranslationHtml = () =>
             {
                 var translation = GetTranslation(dictRow, word);
                 emptyTrans = emptyTrans && translation == "";
-                return GetTemplatedHtml(translation);
+                return GetTemplatedHtml(dictRow, word, translation);
             };
 
             Func<string> GetDictURLForword = () =>
@@ -67,15 +81,15 @@ namespace Lolly
 
             Func<string> GetLingoesAllHtml = () => Program.lingoes.Search(word);
 
-            Func<string> GetFrhelperHtml = () => GetTemplatedHtml(Program.frhelper.Search(word, dictRow.TRANSFORM_WIN));
+            Func<string> GetFrhelperHtml = () => GetTemplatedHtml(dictRow, word, Program.frhelper.Search(word, dictRow.TRANSFORM_WIN));
 
-            Func<string, string> GetLiveHtml = dict =>
+            Func<string, string, string> GetLiveHtml = (dict, ifrId) =>
             {
                 var f = Parent;
                 while (f as MDIForm == null)
                     f = f.Parent;
-                ((MDIForm)f).ExtractTranslation(new[] { word }, new[] { dict }, true, this);
-                return GetTemplatedHtml(Program.GetLiveHtml(word, dict));
+                ((MDIForm)f).ExtractTranslation(new[] { word }, new[] { dict }, true, this, ifrId);
+                return GetTemplatedHtml(dictRow, word, Program.GetLiveHtml(word, dict));
             };
 
             emptyTrans = true;
@@ -95,7 +109,7 @@ namespace Lolly
                 else
                     DocumentText =
                         item.Type == DictNames.LOCAL || item.Type == DictNames.OFFLINE ? GetTranslationHtml() :
-                        item.Type == DictNames.LIVE ? GetLiveHtml(item.Name) :
+                        item.Type == DictNames.LIVE ? GetLiveHtml(item.Name, "") :
                         item.Type == DictNames.ONLINE && item.Name == DictNames.FRHELPER ? GetFrhelperHtml() :
                         item.Name == DictNames.LINGOES ? GetLingoesHtml() :
                         item.Name == DictNames.LINGOESALL ? GetLingoesAllHtml() :
@@ -103,19 +117,22 @@ namespace Lolly
             }
             else
             {
-                Func<string, string> GetIFrameOfflineText = str => string.Format(
-                    "<iframe frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{0}\");'></iframe>\n",
-                    str.Replace("'", "&#39;").Replace("\"", "\\\"").Replace("\r\n", "\\r\\n").Replace("\n", "\\n"));
-
-                Func<string, string> GetIFrameOnlineText = url => string.Format(
-                    "<iframe frameborder='1' style='width:100%; height:500px; display:block' src='{0}'></iframe>\n",
-                    url);
-
                 var sb = new StringBuilder("<html><head><META content=\"IE=10.0000\" http-equiv=\"X-UA-Compatible\"></head><body>\n");
                 sb.AppendFormat("<script type=\"text/javascript\">\n{0}\n</script>\n", Program.js);
 
-                foreach (var item in dictItems)
+                for (int i = 0; i < dictItems.Count; i++)
                 {
+                    var item = dictItems[i];
+                    var ifrId = string.Format("ifr{0}", i);
+
+                    Func<string, string> GetIFrameOfflineText = str => string.Format(
+                        "<iframe id='{0}' frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{1}\");'></iframe>\n",
+                        ifrId, str.Replace("'", "&#39;").Replace("\"", "\\\"").Replace("\r\n", "\\r\\n").Replace("\n", "\\n"));
+
+                    Func<string, string> GetIFrameOnlineText = url => string.Format(
+                        "<iframe id='{0}' frameborder='1' style='width:100%; height:500px; display:block' src='{1}'></iframe>\n",
+                        ifrId, url);
+
                     dictRow = FindDict(item.Name);
                     if (item.Name == DictNames.LINGOES)
                         sb.Append(GetIFrameOfflineText(GetLingoesHtml()));
@@ -125,7 +142,7 @@ namespace Lolly
                         item.Type == DictNames.OFFLINE)
                         sb.Append(GetIFrameOfflineText(GetTranslationHtml()));
                     else if (item.Type == DictNames.LIVE)
-                        sb.Append(GetIFrameOfflineText(GetLiveHtml(item.Name)));
+                        sb.Append(GetIFrameOfflineText(GetLiveHtml(item.Name, ifrId)));
                     else if (item.Name == DictNames.FRHELPER)
                         sb.Append(GetIFrameOfflineText(GetFrhelperHtml()));
                     else

@@ -24,6 +24,7 @@ namespace Lolly
         private MDICTENTITY wordRow;
         private DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Navigating;
         private DictWebBrowser dwb;
+        private string ifrId;
         private IEnumerable<MAUTOCORRECT> autoCorrectList;
 
         [DispId(-5512)]
@@ -73,13 +74,14 @@ namespace Lolly
 
         #endregion
 
-        public ExtractWebDictForm(string[] words, string dict, bool overwriteDB, DictWebBrowser dwb = null)
+        public ExtractWebDictForm(string[] words, string dict, bool overwriteDB, DictWebBrowser dwb = null, string ifrId = "")
         {
             InitializeComponent();
             this.lbuSettings = Program.lbuSettings;
             this.words = words;
             this.overwriteDB = overwriteDB;
             this.dwb = dwb;
+            this.ifrId = ifrId;
 
             dictToolStripTextBox.Text = dict;
             dictRow = DictAll.GetDataByLangDict(lbuSettings.LangID, dict);
@@ -145,7 +147,7 @@ namespace Lolly
             if (dwb == null)
                 Program.UpdateDictTable(webBrowser1, wordRow, dictRow, false);
             else
-                dwb.UpdateLiveHtml(word, dictRow.DICTNAME, webBrowser1.ExtractFromWeb(dictRow, ExtensionClass.NOTRANSLATION));
+                dwb.UpdateLiveHtml(ifrId, word, dictRow.DICTNAME, webBrowser1.ExtractFromWeb(dictRow, ExtensionClass.NOTRANSLATION));
         }
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

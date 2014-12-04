@@ -151,10 +151,10 @@ namespace Lolly
                 ExtractTranslation(dlg.SelectedWords, dlg.SelectedDicts, dlg.OverwriteDB);
         }
 
-        public void ExtractTranslation(string[] words, string[] dicts, bool overwriteDB, DictWebBrowser dwb = null)
+        public void ExtractTranslation(string[] words, string[] dicts, bool overwriteDB, DictWebBrowser dwb = null, string ifrId = "")
         {
             foreach(var dict in dicts)
-                NewChildForm(new ExtractWebDictForm(words, dict, overwriteDB, dwb));
+                NewChildForm(new ExtractWebDictForm(words, dict, overwriteDB, dwb, ifrId));
             if (dwb != null)
                 dwb.FindForm().Activate();
         }
