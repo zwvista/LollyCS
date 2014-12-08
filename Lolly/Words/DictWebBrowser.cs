@@ -15,7 +15,7 @@ namespace Lolly
         private bool emptyTrans;
         private bool automationDone;
 
-        private Regex regBody = new Regex("(?:(?:<body>)|(?:<BODY>))((?:.*\r\n)*?.*?)(?:(?:</body>)|(?:</BODY>))");
+        private Regex regBody = new Regex("(?:<(?:body|BODY).*?>)((?:.*\r?\n)*?.*?)(?:</body>|</BODY>)");
 
         public DictWebBrowser(DictLangConfig config)
         {
