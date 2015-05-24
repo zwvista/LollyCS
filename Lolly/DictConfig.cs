@@ -58,7 +58,7 @@ namespace Lolly
 
             Action<DictImage, string, string[]> AddDictGroups = (dt, groupName, dictNames) =>
             {
-                if (!dictNames.Any()) return;
+                if (dictNames.IsEmpty()) return;
 
                 var items = new List<UIDictItem>();
                 dictGroups[groupName] = items;

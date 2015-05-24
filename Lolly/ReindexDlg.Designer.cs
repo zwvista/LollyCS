@@ -88,11 +88,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(355, 544);
-            this.ControlBox = false;
             this.Controls.Add(this.itemsDragDropListBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
-            this.Font = new System.Drawing.Font("SimSun", 12F);
+            this.Font = new System.Drawing.Font("宋体", 12F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
