@@ -237,10 +237,13 @@
             this.dictBTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dictBTreeView.HideSelection = false;
+            this.dictBTreeView.LabelEdit = true;
             this.dictBTreeView.Location = new System.Drawing.Point(0, 0);
             this.dictBTreeView.Name = "dictBTreeView";
             this.dictBTreeView.Size = new System.Drawing.Size(200, 636);
             this.dictBTreeView.TabIndex = 16;
+            this.dictBTreeView.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.dictBTreeView_BeforeLabelEdit);
             // 
             // ConfigDictDlg
             // 
@@ -248,7 +251,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 637);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

@@ -23,8 +23,8 @@ namespace Lolly
             dictATreeView.ImageList = dictBTreeView.ImageList = sharedImageLists11.imageList1;
             this.config = config;
             this.uiDicts = uiDicts;
-            FillDictsA();
-            FillDictsB();
+            FillTreeA();
+            FillTreeB();
         }
 
         private TreeNode AddTreeNode(TreeNodeCollection nodes, string text, string type, int imageIndex)
@@ -35,7 +35,7 @@ namespace Lolly
             return node;
         }
 
-        private void FillDictsA()
+        private void FillTreeA()
         {
             foreach (var grp in config.dictGroups)
             {
@@ -51,7 +51,7 @@ namespace Lolly
             }
         }
 
-        private void FillDictsB()
+        private void FillTreeB()
         {
             foreach (var dict in uiDicts)
                 if (dict is UIDictItem)
@@ -80,8 +80,10 @@ namespace Lolly
                     dictBTreeView.Nodes.Add((TreeNode)node.Clone());
             else
             {
-                var name = sender == addPileButton ? "Pile" : "Switch";
-                var node = AddTreeNode(dictBTreeView.Nodes, name, name,
+                var nodesGroup = nodes.Select(n => n.Parent).Distinct().ToList();
+                var type = sender == addPileButton ? "Pile" : "Switch";
+                var name = (nodesGroup.Count == 1 ? nodesGroup[0].Name + "_" : "") + type;
+                var node = AddTreeNode(dictBTreeView.Nodes, name, type,
                     (int)DictImage.Special);
                 foreach (var node2 in nodes)
                     node.Nodes.Add((TreeNode)node2.Clone());
@@ -91,7 +93,7 @@ namespace Lolly
         private void clearButton_Click(object sender, EventArgs e)
         {
             dictBTreeView.Nodes.Clear();
-            FillDictsB();
+            FillTreeB();
         }
 
         private void WithSelectedNode(Action<TreeNode, int> action)
@@ -114,6 +116,7 @@ namespace Lolly
                 if (n == 0) return;
                 dictBTreeView.Nodes.Remove(node);
                 dictBTreeView.Nodes.Insert(0, node);
+                dictBTreeView.SelectedNode = node;
             });
         }
 
@@ -124,6 +127,7 @@ namespace Lolly
                 if (n == 0) return;
                 dictBTreeView.Nodes.Remove(node);
                 dictBTreeView.Nodes.Insert(n - 1, node);
+                dictBTreeView.SelectedNode = node;
             });
         }
 
@@ -134,6 +138,7 @@ namespace Lolly
                 if (n == dictBTreeView.Nodes.Count) return;
                 dictBTreeView.Nodes.Remove(node);
                 dictBTreeView.Nodes.Insert(n + 1, node);
+                dictBTreeView.SelectedNode = node;
             });
         }
 
@@ -144,6 +149,7 @@ namespace Lolly
                 if (n == dictBTreeView.Nodes.Count) return;
                 dictBTreeView.Nodes.Remove(node);
                 dictBTreeView.Nodes.Add(node);
+                dictBTreeView.SelectedNode = node;
             });
         }
 
@@ -183,6 +189,11 @@ namespace Lolly
                 node2.Checked = node2.Nodes.Cast<TreeNode>()
                     .All(n => n.Checked);
             }
+        }
+
+        private void dictBTreeView_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            e.CancelEdit = e.Node.Level > 0;
         }
     }
 }
