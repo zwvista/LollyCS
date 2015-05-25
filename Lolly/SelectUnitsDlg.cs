@@ -31,7 +31,7 @@ namespace Lolly
             activeIncludedCheckBox.Checked = activeIncluded;
         }
 
-        private void SelectUnitsForm_Load(object sender, EventArgs e)
+        private void SelectUnitsDlg_Load(object sender, EventArgs e)
         {
             languageList = Languages.GetData();
             langComboBox.DataSource = languageList;
@@ -53,11 +53,12 @@ namespace Lolly
             if (bookComboBox.SelectedValue == null) return;
             selectedBookID = (int)bookComboBox.SelectedValue;
             var row = bookList.Single(r => r.BOOKID == selectedBookID);
+            // Controls for Units
             unitInAllFromLabel.Text = unitInAllToLabel.Text = string.Format("({0} in all)", row.UNITSINBOOK);
-            unitFromNumericUpDown.Maximum = row.UNITSINBOOK;
-            unitToNumericUpDown.Maximum = row.UNITSINBOOK;
+            unitFromNumericUpDown.Maximum = unitToNumericUpDown.Maximum = row.UNITSINBOOK;
             unitFromNumericUpDown.Value = row.UNITFROM;
             unitToNumericUpDown.Value = row.UNITTO;
+            // Controls for Parts
             var parts = row.PARTS.Split(' ');
             partFromComboBox.Items.Clear();
             partFromComboBox.Items.AddRange(parts);
@@ -65,6 +66,7 @@ namespace Lolly
             partToComboBox.Items.AddRange(parts);
             partFromComboBox.SelectedIndex = row.PARTFROM - 1;
             partToComboBox.SelectedIndex = row.PARTTO - 1;
+            // toCheckBox
             toCheckBox.Checked = row.UNITFROM != row.UNITTO || row.PARTFROM != row.PARTTO;
             toCheckBox_CheckedChanged(null, null);
         }

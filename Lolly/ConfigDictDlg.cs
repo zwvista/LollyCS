@@ -20,11 +20,11 @@ namespace Lolly
         public ConfigDictDlg(DictLangConfig config, List<UIDict> uiDicts)
         {
             InitializeComponent();
-            dictATreeView.ImageList = sharedImageLists11.imageList1;
-            dictBTreeView.ImageList = sharedImageLists11.imageList1;
+            dictATreeView.ImageList = dictBTreeView.ImageList = sharedImageLists11.imageList1;
             this.config = config;
             this.uiDicts = uiDicts;
-            FillDicts();
+            FillDictsA();
+            FillDictsB();
         }
 
         private TreeNode AddTreeNode(TreeNodeCollection nodes, string text, string type, int imageIndex)
@@ -35,7 +35,7 @@ namespace Lolly
             return node;
         }
 
-        private void FillDicts()
+        private void FillDictsA()
         {
             foreach (var grp in config.dictGroups)
             {
@@ -49,7 +49,10 @@ namespace Lolly
                     node.Expand();
                 }
             }
+        }
 
+        private void FillDictsB()
+        {
             foreach (var dict in uiDicts)
                 if (dict is UIDictItem)
                 {
@@ -71,7 +74,7 @@ namespace Lolly
             var nodes = dictATreeView.Nodes.Cast<TreeNode>()
                 .SelectMany(n => n.Nodes.Cast<TreeNode>()
                 .Where(n2 => n2.Checked)).ToList();
-            if (!nodes.Any()) return;
+            if (nodes.IsEmpty()) return;
             if (nodes.Count == 1 || sender == addAllbutton)
                 foreach (var node in nodes)
                     dictBTreeView.Nodes.Add((TreeNode)node.Clone());
@@ -87,7 +90,8 @@ namespace Lolly
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-
+            dictBTreeView.Nodes.Clear();
+            FillDictsB();
         }
 
         private void WithSelectedNode(Action<TreeNode, int> action)

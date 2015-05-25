@@ -98,7 +98,7 @@
             this.label3.Location = new System.Drawing.Point(13, 89);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 16);
+            this.label3.Size = new System.Drawing.Size(56, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Units:";
             // 
@@ -238,7 +238,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(377, 232);
-            this.ControlBox = false;
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.toCheckBox);
@@ -254,7 +253,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
@@ -263,7 +262,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Units";
-            this.Load += new System.EventHandler(this.SelectUnitsForm_Load);
+            this.Load += new System.EventHandler(this.SelectUnitsDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.unitFromNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unitToNumericUpDown)).EndInit();
             this.ResumeLayout(false);
