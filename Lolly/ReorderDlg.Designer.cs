@@ -1,6 +1,6 @@
 ﻿namespace Lolly
 {
-    partial class ReindexDlg
+    partial class ReorderDlg
     {
         /// <summary>
         /// Required designer variable.

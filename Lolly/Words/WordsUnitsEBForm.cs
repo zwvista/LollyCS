@@ -22,7 +22,7 @@ namespace Lolly
             dataGridView = dataGridView1;
             bindingNavigator1.BindingSource = bindingSource1;
             refreshToolStripButton.Click += refreshToolStripButton_Click;
-            reindexToolStripButton.Click += reindexToolStripButton_Click;
+            reorderToolStripButton.Click += reorderToolStripButton_Click;
         }
 
         protected override void FillTable()
@@ -74,13 +74,13 @@ namespace Lolly
             FillTable();
         }
 
-        private void reindexToolStripButton_Click(object sender, EventArgs e)
+        private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
             var objs = (from row in wordsList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReindexObject(row.ID, row.WORD)).ToArray();
-            var dlg = new ReindexDlg(objs);
+            var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)

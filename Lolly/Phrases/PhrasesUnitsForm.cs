@@ -25,7 +25,7 @@ namespace Lolly
             bindingNavigator1.Items.Remove(filtertoolStripLabel);
             bindingNavigatorAddNewItem.Click += bindingNavigatorAddNewItem_Click;
             bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
-            reindexToolStripButton.Click += reindexToolStripButton_Click;
+            reorderToolStripButton.Click += reorderToolStripButton_Click;
         }
 
         private void PhrasesForm_Load(object sender, EventArgs e)
@@ -82,13 +82,13 @@ namespace Lolly
             //bindingSource1.Sort = ascending ? "UNIT, PART, ORD" : "UNIT DESC, PART, ORD DESC";
         }
 
-        private void reindexToolStripButton_Click(object sender, EventArgs e)
+        private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
             var objs = (from row in phrasesList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReindexObject(row.ID, row.PHRASE)).ToArray();
-            var dlg = new ReindexDlg(objs);
+            var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)

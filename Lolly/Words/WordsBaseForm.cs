@@ -232,7 +232,7 @@ namespace Lolly
                         multiAddToolStripButton.TryPerformClick();
                         return true;
                     case Keys.Control | Keys.Shift | Keys.I:
-                        reindexToolStripButton.TryPerformClick();
+                        reorderToolStripButton.TryPerformClick();
                         return true;
                     case Keys.Alt | Keys.Up:
                         naviagetBackwardToolStripMenuItem.PerformClick();

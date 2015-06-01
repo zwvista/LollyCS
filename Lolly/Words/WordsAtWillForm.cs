@@ -22,7 +22,7 @@ namespace Lolly
             bindingNavigator1.Items.Remove(setFilterToolStripButton);
             bindingNavigator1.Items.Remove(removeFilterToolStripButton);
             bindingNavigator1.Items.Remove(filtertoolStripLabel);
-            reindexToolStripButton.Click += reindexToolStripButton_Click;
+            reorderToolStripButton.Click += reorderToolStripButton_Click;
             refreshToolStripButton.Click += refreshToolStripButton_Click;
         }
 
@@ -44,13 +44,13 @@ namespace Lolly
             Text = string.Format("Words At Will ({0})", lbuSettings.LangName);
         }
 
-        private void reindexToolStripButton_Click(object sender, EventArgs e)
+        private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
             var objs = (from row in wordsList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReindexObject(row.ORD, row.WORD)).ToArray();
-            var dlg = new ReindexDlg(objs);
+            var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)

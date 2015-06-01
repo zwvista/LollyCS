@@ -65,13 +65,13 @@ namespace Lolly
 
         #endregion
 
-        private void reindexToolStripButton_Click(object sender, EventArgs e)
+        private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
             var objs = (from row in auxList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReindexObject(row.ID, row.EXTENDED)).ToArray();
-            var dlg = new ReindexDlg(objs);
+            var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)

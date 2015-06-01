@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace Lolly
 {
-    public partial class ReindexDlg : Form
+    public partial class ReorderDlg : Form
     {
         private ReindexObject[] objs;
 
-        public ReindexDlg(ReindexObject[] objs)
+        public ReorderDlg(ReindexObject[] objs)
         {
             this.objs = objs;
             InitializeComponent();

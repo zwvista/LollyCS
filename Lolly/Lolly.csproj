@@ -230,11 +230,11 @@
     <Compile Include="Tools\Text2PostDlg.Designer.cs">
       <DependentUpon>Text2PostDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReindexDlg.cs">
+    <Compile Include="ReorderDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReindexDlg.Designer.cs">
-      <DependentUpon>ReindexDlg.cs</DependentUpon>
+    <Compile Include="ReorderDlg.Designer.cs">
+      <DependentUpon>ReorderDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="FilterDlg.cs">
       <SubType>Form</SubType>
@@ -393,8 +393,8 @@
     <EmbeddedResource Include="Tools\Text2PostDlg.resx">
       <DependentUpon>Text2PostDlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReindexDlg.resx">
-      <DependentUpon>ReindexDlg.cs</DependentUpon>
+    <EmbeddedResource Include="ReorderDlg.resx">
+      <DependentUpon>ReorderDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FilterDlg.resx">
       <DependentUpon>FilterDlg.cs</DependentUpon>

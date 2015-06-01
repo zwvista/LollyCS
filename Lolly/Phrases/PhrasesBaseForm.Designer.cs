@@ -60,7 +60,7 @@
             this.setFilterToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.removeFilterToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.filtertoolStripLabel = new System.Windows.Forms.ToolStripLabel();
-            this.reindexToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.reorderToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.timerNavigate = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -98,7 +98,7 @@
             this.setFilterToolStripButton,
             this.removeFilterToolStripButton,
             this.filtertoolStripLabel,
-            this.reindexToolStripButton});
+            this.reorderToolStripButton});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -356,14 +356,14 @@
             this.filtertoolStripLabel.Size = new System.Drawing.Size(58, 22);
             this.filtertoolStripLabel.Text = "No Filter";
             // 
-            // reindexToolStripButton
+            // reorderToolStripButton
             // 
-            this.reindexToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reindexToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("reindexToolStripButton.Image")));
-            this.reindexToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
-            this.reindexToolStripButton.Name = "reindexToolStripButton";
-            this.reindexToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reindexToolStripButton.Text = "Renumber ORD";
+            this.reorderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reorderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("reorderToolStripButton.Image")));
+            this.reorderToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.reorderToolStripButton.Name = "reorderToolStripButton";
+            this.reorderToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.reorderToolStripButton.Text = "Renumber ORD";
             // 
             // timerNavigate
             // 
@@ -401,7 +401,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        protected System.Windows.Forms.ToolStripButton reindexToolStripButton;
+        protected System.Windows.Forms.ToolStripButton reorderToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton speakToolStripButton;
         private System.Windows.Forms.ToolStripButton speakTranslationToolStripButton;

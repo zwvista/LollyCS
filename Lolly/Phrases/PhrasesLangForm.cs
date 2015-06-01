@@ -22,7 +22,7 @@ namespace Lolly
             bindingNavigator1.Items.Remove(bindingNavigatorAddNewItem);
             bindingNavigator1.Items.Remove(multiAddToolStripButton);
             bindingNavigator1.Items.Remove(addDeleteToolStripSeparator);
-            bindingNavigator1.Items.Remove(reindexToolStripButton);
+            bindingNavigator1.Items.Remove(reorderToolStripButton);
         }
 
         private void PhrasesLangForm_Load(object sender, EventArgs e)

@@ -47,7 +47,7 @@ namespace Lolly
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.reindexToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.reorderToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.inputColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extendedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +81,7 @@ namespace Lolly
             this.toolStripSeparator1,
             this.refreshToolStripButton,
             this.toolStripSeparator2,
-            this.reindexToolStripButton});
+            this.reorderToolStripButton});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -200,16 +200,16 @@ namespace Lolly
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // reindexToolStripButton
+            // reorderToolStripButton
             // 
-            this.reindexToolStripButton.CheckOnClick = true;
-            this.reindexToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reindexToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("reindexToolStripButton.Image")));
-            this.reindexToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
-            this.reindexToolStripButton.Name = "reindexToolStripButton";
-            this.reindexToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reindexToolStripButton.Text = "Renumber ORD";
-            this.reindexToolStripButton.Click += new System.EventHandler(this.reindexToolStripButton_Click);
+            this.reorderToolStripButton.CheckOnClick = true;
+            this.reorderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reorderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("reorderToolStripButton.Image")));
+            this.reorderToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.reorderToolStripButton.Name = "reorderToolStripButton";
+            this.reorderToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.reorderToolStripButton.Text = "Renumber ORD";
+            this.reorderToolStripButton.Click += new System.EventHandler(this.reorderToolStripButton_Click);
             // 
             // dataGridView1
             // 
@@ -302,7 +302,7 @@ namespace Lolly
         private LLBindingSource bindingSource1;
         private System.Windows.Forms.ToolStripButton refreshToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        protected System.Windows.Forms.ToolStripButton reindexToolStripButton;
+        protected System.Windows.Forms.ToolStripButton reorderToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn inputColumn;

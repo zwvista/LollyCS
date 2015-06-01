@@ -14,13 +14,7 @@ namespace Lolly
     {
         private int selectedLangID;
         private int selectedBookID;
-        public bool ActiveIncluded
-        {
-            get
-            {
-                return activeIncludedCheckBox.Checked;
-            }
-        }
+        public bool ActiveIncluded => activeIncludedCheckBox.Checked;
 
         private IEnumerable<MLANGUAGE> languageList;
         private IEnumerable<MBOOK> bookList;

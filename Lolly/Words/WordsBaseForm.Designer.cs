@@ -77,7 +77,7 @@
             this.findKanaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copyKanjiKanaToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.reindexToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.reorderToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.levelUpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.levelDownToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -207,7 +207,7 @@
             this.findKanaToolStripButton,
             this.copyKanjiKanaToolStripButton,
             this.toolStripSeparator7,
-            this.reindexToolStripButton,
+            this.reorderToolStripButton,
             this.toolStripSeparator1,
             this.levelUpToolStripButton,
             this.levelDownToolStripButton});
@@ -548,14 +548,14 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
-            // reindexToolStripButton
+            // reorderToolStripButton
             // 
-            this.reindexToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reindexToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("reindexToolStripButton.Image")));
-            this.reindexToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
-            this.reindexToolStripButton.Name = "reindexToolStripButton";
-            this.reindexToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reindexToolStripButton.Text = "Renumber ORD";
+            this.reorderToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reorderToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("reorderToolStripButton.Image")));
+            this.reorderToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.reorderToolStripButton.Name = "reorderToolStripButton";
+            this.reorderToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.reorderToolStripButton.Text = "Reorder";
             // 
             // toolStripSeparator1
             // 
@@ -637,7 +637,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        protected System.Windows.Forms.ToolStripButton reindexToolStripButton;
+        protected System.Windows.Forms.ToolStripButton reorderToolStripButton;
         private System.Windows.Forms.ToolStripButton timerNavigateToolStripButton;
         protected System.Windows.Forms.ToolStripSeparator filterToolStripSeparator;
         private System.Windows.Forms.ToolStripButton speakToolStripButton;
