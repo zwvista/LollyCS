@@ -27,7 +27,7 @@ namespace Lolly
 
         private void SelectUnitsDlg_Load(object sender, EventArgs e)
         {
-            languageList = Program.db.Languages_GetData();
+            languageList = Program.db.Languages_GetDataNonChinese();
             langComboBox.DataSource = languageList;
             langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }

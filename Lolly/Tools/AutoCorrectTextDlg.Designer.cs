@@ -34,8 +34,8 @@
             this.copyTextButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new TextBoxEx();
-            this.textBox2 = new TextBoxEx();
+            this.textBox1 = new Lolly.TextBoxEx();
+            this.textBox2 = new Lolly.TextBoxEx();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -57,12 +57,13 @@
             // 
             // langComboBox
             // 
+            this.langComboBox.DisplayMember = "CHNNAME";
             this.langComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.langComboBox.FormattingEnabled = true;
             this.langComboBox.Location = new System.Drawing.Point(99, 15);
             this.langComboBox.MaxDropDownItems = 10;
             this.langComboBox.Name = "langComboBox";
-            this.langComboBox.Size = new System.Drawing.Size(149, 24);
+            this.langComboBox.Size = new System.Drawing.Size(149, 32);
             this.langComboBox.TabIndex = 4;
             this.langComboBox.ValueMember = "LANGID";
             this.langComboBox.SelectedValueChanged += new System.EventHandler(this.langComboBox_SelectedValueChanged);
@@ -73,7 +74,7 @@
             this.label1.Location = new System.Drawing.Point(13, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 16);
+            this.label1.Size = new System.Drawing.Size(118, 24);
             this.label1.TabIndex = 3;
             this.label1.Text = "Language:";
             // 
@@ -143,12 +144,12 @@
             // 
             // AutoCorrectTextDlg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

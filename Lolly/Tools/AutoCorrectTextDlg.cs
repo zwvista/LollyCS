@@ -23,7 +23,7 @@ namespace Lolly
 
         private void AutoCorrectTextDlg_Load(object sender, EventArgs e)
         {
-            langComboBox.DataSource = Program.db.Languages_GetData();
+            langComboBox.DataSource = Program.db.Languages_GetDataNonChinese();
             langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }
 

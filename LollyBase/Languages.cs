@@ -22,6 +22,9 @@ namespace LollyBase
             db.Table<MLANGUAGE>().SingleOrDefault(r => r.LANGID == langid);
 
         public List<MLANGUAGE> Languages_GetData() =>
+            db.Table<MLANGUAGE>().ToList();
+
+        public List<MLANGUAGE> Languages_GetDataNonChinese() =>
             db.Table<MLANGUAGE>().Where(r => r.LANGID > 0).ToList();
     }
 }
