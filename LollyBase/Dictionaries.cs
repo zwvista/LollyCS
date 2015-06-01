@@ -7,73 +7,37 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class Dictionaries
+    public partial class LollyDB
     {
-        public static void Delete(int langid, string dictname)
+        public void Dictionaries_Delete(int langid, string dictname)
         {
-            using (var db = new Entities())
-            {
-                var item = db.SDICTIONARY.SingleOrDefault(r => r.LANGID == langid && r.DICTNAME == dictname);
-                if (item == null) return;
-
-                db.SDICTIONARY.Remove(item);
-                db.SaveChanges();
-            }
+            var sql = @"
+                DELETE
+                FROM DICTIONARIES
+                WHERE   (LANGID = @langid) AND (DICTNAME = @dictname)
+            ";
+            db.Execute(sql, langid, dictname);
         }
 
-        public static void Insert(MDICTIONARY row)
+        public void Dictionaries_Insert(MDICTIONARY row) =>
+            db.Insert(row);
+
+        public void Dictionaries_Update(MDICTIONARY row, string original_dictname)
         {
-            using (var db = new Entities())
-            {
-                var item = new MDICTIONARY
-                {
-                    LANGID = row.LANGID,
-                    ORD = row.ORD,
-                    DICTTYPEID = row.DICTTYPEID,
-                    DICTNAME = row.DICTNAME,
-                    LANGIDTO = row.LANGIDTO,
-                    URL = row.URL,
-                    CHCONV = row.CHCONV,
-                    AUTOMATION = row.AUTOMATION,
-                    AUTOJUMP = row.AUTOJUMP,
-                    DICTTABLE = row.DICTTABLE,
-                    TEMPLATE = row.TEMPLATE
-                };
-                db.SDICTIONARY.Add(item);
-                db.SaveChanges();
-            }
+            var sql = @"
+                UPDATE  DICTIONARIES
+                SET ORD = @ord, DICTTYPEID = @dicttypeid, DICTNAME = @dictname, LANGIDTO = @langidto,
+                    URL = @url, CHCONV = @chconv, AUTOMATION = @automation, AUTOJUMP = @autojump,
+                    DICTTABLE = @dicttable, TEMPLATE = @template
+                WHERE   (LANGID = @langid) AND (DICTNAME = @original_dictname)
+            ";
+            db.Execute(sql, row.ORD, row.DICTTYPEID, row.DICTNAME, row.LANGIDTO,
+                row.URL ?? (object)DBNull.Value, row.CHCONV, row.AUTOMATION,
+                row.AUTOJUMP, row.DICTTABLE ?? (object)DBNull.Value,
+                row.TEMPLATE ?? (object)DBNull.Value, row.LANGID, original_dictname);
         }
 
-        public static void Update(MDICTIONARY row, string original_dictname)
-        {
-            using (var db = new Entities())
-            {
-                var sql = @"
-                    UPDATE  DICTIONARIES
-                    SET ORD = @ord, DICTTYPEID = @dicttypeid, DICTNAME = @dictname, LANGIDTO = @langidto,
-                        URL = @url, CHCONV = @chconv, AUTOMATION = @automation, AUTOJUMP = @autojump, DICTTABLE = @dicttable, TEMPLATE = @template
-                    WHERE   (LANGID = @langid) AND (DICTNAME = @original_dictname)
-                ";
-                db.Database.ExecuteSqlCommand(sql,
-                    new SqlParameter("ord", row.ORD),
-                    new SqlParameter("dicttypeid", row.DICTTYPEID),
-                    new SqlParameter("dictname", row.DICTNAME),
-                    new SqlParameter("langidto", row.LANGIDTO),
-                    new SqlParameter("url", row.URL ?? (object)DBNull.Value),
-                    new SqlParameter("chconv", row.CHCONV ?? (object)DBNull.Value),
-                    new SqlParameter("automation", row.AUTOMATION ?? (object)DBNull.Value),
-                    new SqlParameter("autojump", row.AUTOJUMP),
-                    new SqlParameter("dicttable", row.DICTTABLE ?? (object)DBNull.Value),
-                    new SqlParameter("template", row.TEMPLATE ?? (object)DBNull.Value),
-                    new SqlParameter("langid", row.LANGID),
-                    new SqlParameter("original_dictname", original_dictname));
-            }
-        }
-
-        public static List<MDICTIONARY> GetDataByLang(int langid)
-        {
-            using (var db = new Entities())
-                return db.SDICTIONARY.Where(r => r.LANGID == langid).ToList();
-        }
+        public List<MDICTIONARY> Dictionaries_GetDataByLang(int langid) =>
+            db.Table<MDICTIONARY>().Where(r => r.LANGID == langid).ToList();
     }
 }

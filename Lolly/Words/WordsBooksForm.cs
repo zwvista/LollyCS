@@ -28,11 +28,11 @@ namespace Lolly
         protected override void FillTable()
         {
             wordsList = new BindingList<MWORDBOOK>(
-                filterScope == 0 ? WordsBooks.GetDataByLangWord(lbuSettings.LangID, filter) :
-                WordsBooks.GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
+                filterScope == 0 ? Program.db.WordsBooks_GetDataByLangWord(lbuSettings.LangID, filter) :
+                Program.db.WordsBooks_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
             bindingSource1.DataSource = wordsList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         protected override void OnDeleteWord()

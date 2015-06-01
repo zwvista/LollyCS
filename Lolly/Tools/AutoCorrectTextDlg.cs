@@ -23,7 +23,7 @@ namespace Lolly
 
         private void AutoCorrectTextDlg_Load(object sender, EventArgs e)
         {
-            langComboBox.DataSource = Languages.GetData();
+            langComboBox.DataSource = Program.db.Languages_GetData();
             langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }
 
@@ -41,7 +41,7 @@ namespace Lolly
         {
             if (langComboBox.SelectedValue == null) return;
             var langID = (int)langComboBox.SelectedValue;
-            autoCorrectList = LollyBase.AutoCorrect.GetDataByLang(langID);
+            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(langID);
             AutoCorrect();
         }
 

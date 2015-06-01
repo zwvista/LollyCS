@@ -29,7 +29,7 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = PicBooks.GetDataByLang(lbuSettings.LangID);
+            auxList = Program.db.PicBooks_GetDataByLang(lbuSettings.LangID);
             bindingSource1.DataSource = auxList;
         }
 
@@ -67,7 +67,7 @@ namespace Lolly
         {
             if (deletedBook == "") return;
 
-            PicBooks.Delete(deletedBook);
+            Program.db.PicBooks_Delete(deletedBook);
             deletedBook = "";
         }
 
@@ -84,10 +84,10 @@ namespace Lolly
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
-                PicBooks.Insert(row);
+                Program.db.PicBooks_Insert(row);
             }
             else
-                PicBooks.Update(row, currentBook);
+                Program.db.PicBooks_Update(row, currentBook);
         }
     }
 }

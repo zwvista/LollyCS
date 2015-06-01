@@ -6,50 +6,40 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class PhrasesLang
+    public partial class LollyDB
     {
-        public static List<MPHRASELANG> GetDataByLangPhrase(int langid, string phrase)
+        public List<MPHRASELANG> PhrasesLang_GetDataByLangPhrase(int langid, string phrase)
         {
-            using (var db = new Entities())
-            {
-//                    var sql = @"
-//        	            SELECT   PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE, PHRASES.[TRANSLATION]
-//        	            FROM     PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID
-//        	            WHERE   (BOOKS.LANGID = @langid) AND (PHRASES.PHRASE LIKE '%' + @phrase + '%')
-//                    ";
-//                    return db.Database.SqlQuery<MPHRASELANG>(sql,
-//                        new SqlParameter("langid", langid),
-//                        new SqlParameter("phrase", phrase));
-                return (
-                    from rp in db.SPHRASEUNIT
-                    join rb in db.SBOOK
-                    on rp.BOOKID equals rb.BOOKID
-                    where rb.LANGID == langid && rp.PHRASE.Contains(phrase)
-                    select new { rp.ID, rp.BOOKID, rb.BOOKNAME, rp.UNIT, rp.PART, rp.ORD, rp.PHRASE, rp.TRANSLATION }
-                ).ToList().ToNonAnonymousList(new List<MPHRASELANG>());
-            }
+            var sql = @"
+                SELECT   PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE, PHRASES.[TRANSLATION]
+                FROM     PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID
+                WHERE   (BOOKS.LANGID = @langid) AND (PHRASES.PHRASE LIKE @phrase)
+            ";
+            return db.Query<MPHRASELANG>(sql, langid, $"%{phrase}%");
+            //return (
+            //    from rp in db.Table<MPHRASEUNIT>()
+            //    join rb in db.Table<MBOOK>()
+            //    on rp.BOOKID equals rb.BOOKID
+            //    where rb.LANGID == langid && rp.PHRASE.Contains(phrase)
+            //    select new { rp.ID, rp.BOOKID, rb.BOOKNAME, rp.UNIT, rp.PART, rp.ORD, rp.PHRASE, rp.TRANSLATION }
+            //).ToList().ToNonAnonymousList(new List<MPHRASELANG>());
         }
 
-        public static List<MPHRASELANG> GetDataByLangTranslation(int langid, string translation)
+        public List<MPHRASELANG> PhrasesLang_GetDataByLangTranslation(int langid, string translation)
         {
-            using (var db = new Entities())
-            {
-//                    var sql = @"
-//	                    SELECT   PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE, PHRASES.[TRANSLATION]
-//	                    FROM      (PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID)
-//	                    WHERE   (BOOKS.LANGID = @langid) AND (PHRASES.[TRANSLATION] LIKE '%' + @translation + '%')
-//                    ";
-//                    return db.Database.SqlQuery<MPHRASELANG>(sql,
-//                        new SqlParameter("langid", langid),
-//                        new SqlParameter("translation", translation));
-                return (
-                    from rp in db.SPHRASEUNIT
-                    join rb in db.SBOOK
-                    on rp.BOOKID equals rb.BOOKID
-                    where rb.LANGID == langid && rp.TRANSLATION.Contains(translation)
-                    select new { rp.ID, rp.BOOKID, rb.BOOKNAME, rp.UNIT, rp.PART, rp.ORD, rp.PHRASE, rp.TRANSLATION }
-                ).ToList().ToNonAnonymousList(new List<MPHRASELANG>());
-            }
+            var sql = @"
+                SELECT   PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.ORD, PHRASES.PHRASE, PHRASES.[TRANSLATION]
+                FROM      (PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID)
+                WHERE   (BOOKS.LANGID = @langid) AND (PHRASES.[TRANSLATION] LIKE @translation)
+            ";
+            return db.Query<MPHRASELANG>(sql, langid, $"%{translation}%");
+            //return (
+            //    from rp in db.Table<MPHRASEUNIT>()
+            //    join rb in db.Table<MBOOK>()
+            //    on rp.BOOKID equals rb.BOOKID
+            //    where rb.LANGID == langid && rp.TRANSLATION.Contains(translation)
+            //    select new { rp.ID, rp.BOOKID, rb.BOOKNAME, rp.UNIT, rp.PART, rp.ORD, rp.PHRASE, rp.TRANSLATION }
+            //).ToList().ToNonAnonymousList(new List<MPHRASELANG>());
         }
     }
 }

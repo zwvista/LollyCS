@@ -7,85 +7,43 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class Books
+    public partial class LollyDB
     {
-        public static void Delete(int bookid)
-        {
-            using (var db = new Entities())
-            {
-                var item = db.SBOOK.SingleOrDefault(r => r.BOOKID == bookid);
-                if (item == null) return;
+        public void Books_Delete(int bookid) =>
+            db.Delete<MBOOK>(bookid);
 
-                db.SBOOK.Remove(item);
-                db.SaveChanges();
-            }
+        public void Books_Insert(MBOOK row) =>
+            db.Insert(row);
+
+        public void Books_Update(MBOOK row, int original_bookid)
+        {
+            var sql = @"
+                UPDATE  BOOKS
+                SET BOOKID = @bookid, BOOKNAME = @bookname, UNITSINBOOK = @unitsinbook, PARTS = @parts
+                WHERE   (BOOKID = ?)
+            ";
+            db.Execute(sql, row.BOOKID, row.BOOKNAME, row.UNITSINBOOK, row.PARTS, original_bookid);
         }
 
-        public static void Insert(MBOOK row)
+        public void Books_UpdateUnit(int unitfrom, int partfrom, int unitto, int partto, int bookid)
         {
-            using (var db = new Entities())
-            {
-                var item = new MBOOK
-                {
-                    BOOKID = row.BOOKID,
-                    LANGID = row.LANGID,
-                    BOOKNAME = row.BOOKNAME,
-                    UNITSINBOOK = row.UNITSINBOOK,
-                    PARTS = row.PARTS
-                };
-                db.SBOOK.Add(item);
-                db.SaveChanges();
-            }
+            var sql = @"
+                UPDATE  BOOKS
+                SET UNITFROM = @unitfrom, PARTFROM = @partfrom, UNITTO = @unitto, PARTTO = @partto
+                WHERE   (BOOKID = ?)
+            ";
+            db.Execute(sql, unitfrom, partfrom, unitto, partto, bookid);
         }
 
-        public static void Update(MBOOK row, int original_bookid)
-        {
-            using (var db = new Entities())
-            {
-                var sql = @"
-                        UPDATE  BOOKS
-                        SET BOOKID = @bookid, BOOKNAME = @bookname, UNITSINBOOK = @unitsinbook, PARTS = @parts
-                        WHERE   (BOOKID = @original_bookid)
-                    ";
-                db.Database.ExecuteSqlCommand(sql,
-                    new SqlParameter("bookid", row.BOOKID),
-                    new SqlParameter("bookname", row.BOOKNAME),
-                    new SqlParameter("unitsinbook", row.UNITSINBOOK),
-                    new SqlParameter("parts", row.PARTS),
-                    new SqlParameter("original_bookid", original_bookid));
-            }
-        }
+        public MBOOK Books_GetDataByBook(int bookid) =>
+            db.Table<MBOOK>().SingleOrDefault(r => r.BOOKID == bookid);
 
-        public static void UpdateUnit(int unitfrom, int partfrom, int unitto, int partto, int bookid)
-        {
-            using (var db = new Entities())
-            {
-                var item = db.SBOOK.SingleOrDefault(r => r.BOOKID == bookid);
-                if (item == null) return;
-
-                item.UNITFROM = unitfrom;
-                item.PARTFROM = partfrom;
-                item.UNITTO = unitto;
-                item.PARTTO = partto;
-                db.SaveChanges();
-            }
-        }
-
-        public static MBOOK GetDataByBook(int bookid)
-        {
-            using (var db = new Entities())
-                return db.SBOOK.SingleOrDefault(r => r.BOOKID == bookid);
-        }
-
-        public static List<MBOOK> GetDataByLang(int langid)
-        {
-            using (var db = new Entities())
-                return (
-                    from r in db.SBOOK
-                    where r.LANGID == langid
-                    orderby r.BOOKID
-                    select r
-                ).ToList();
-        }
+        public List<MBOOK> Books_GetDataByLang(int langid) =>
+        (
+            from r in db.Table<MBOOK>()
+            where r.LANGID == langid
+            orderby r.BOOKID
+            select r
+        ).ToList();
     }
 }

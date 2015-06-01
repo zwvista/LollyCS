@@ -6,31 +6,21 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class WordsLangOrBook
+    public partial class LollyDB
     {
-        public static List<MWORDLANGORBOOK> GetDataByBookUnitParts(int bookid, int unitpartfrom, int unitpartto)
-        {
-            using (var db = new Entities())
-            {
-                return (
-                    from r in db.SWORDUNIT
-                    let unitpart = r.UNIT * 10 + r.PART
-                    where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
-                    select r.WORD
-                ).ToList().Select(w => new MWORDLANGORBOOK { WORD = w }).ToList();
-            }
-        }
+        public List<MWORDLANGORBOOK> WordsLangOrBook_GetDataByBookUnitParts(int bookid, int unitpartfrom, int unitpartto) =>
+        (
+            from r in db.Table<MWORDUNIT>()
+            let unitpart = r.UNIT * 10 + r.PART
+            where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
+            select r.WORD
+        ).ToList().Select(w => new MWORDLANGORBOOK { WORD = w }).ToList();
 
-        public static List<MWORDLANGORBOOK> GetDataByLang(int langid)
-        {
-            using (var db = new Entities())
-            {
-                return (
-                    from r in db.SWORDLANG
-                    where r.LANGID == langid
-                    select r.WORD
-                ).ToList().Select(w => new MWORDLANGORBOOK { WORD = w }).ToList();
-            }
-        }
+        public List<MWORDLANGORBOOK> WordsLangOrBook_GetDataByLang(int langid) =>
+        (
+            from r in db.Table<MWORDLANG>()
+            where r.LANGID == langid
+            select r.WORD
+        ).ToList().Select(w => new MWORDLANGORBOOK { WORD = w }).ToList();
     }
 }

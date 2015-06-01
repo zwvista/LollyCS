@@ -6,30 +6,22 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class Languages
+    public partial class LollyDB
     {
-        public static void UpdateBook(int bookid, int langid)
+        public void Languages_UpdateBook(int bookid, int langid)
         {
-            using (var db = new Entities())
-            {
-                var item = db.SLANGUAGE.SingleOrDefault(r => r.LANGID == langid);
-                if (item == null) return;
-
-                item.CURBOOKID = bookid;
-                db.SaveChanges();
-            }
+            var sql = @"
+                UPDATE  LANGUAGES
+                SET CURBOOKID = ?
+                WHERE   (LANGID = ?)
+            ";
+            db.Execute(sql, bookid, langid);
         }
 
-        public static MLANGUAGE GetDataByLang(int langid)
-        {
-            using (var db = new Entities())
-                return db.SLANGUAGE.SingleOrDefault(r => r.LANGID == langid);
-        }
+        public MLANGUAGE Languages_GetDataByLang(int langid) =>
+            db.Table<MLANGUAGE>().SingleOrDefault(r => r.LANGID == langid);
 
-        public static List<MLANGUAGE> GetData()
-        {
-            using (var db = new Entities())
-                return db.SLANGUAGE.Where(r => r.LANGID > 0).ToList();
-        }
+        public List<MLANGUAGE> Languages_GetData() =>
+            db.Table<MLANGUAGE>().Where(r => r.LANGID > 0).ToList();
     }
 }

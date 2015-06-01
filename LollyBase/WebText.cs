@@ -7,60 +7,25 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public static class WebText
+    public partial class LollyDB
     {
-        public static void Delete(string sitename)
-        {
-            using (var db = new Entities())
-            {
-                var item = db.SWEBTEXT.SingleOrDefault(r => r.SITENAME == sitename);
-                if (item == null) return;
+        public void WebText_Delete(string sitename) =>
+            db.Delete<MWEBTEXT>(sitename);
 
-                db.SWEBTEXT.Remove(item);
-                db.SaveChanges();
-            }
+        public void WebText_Insert(MWEBTEXT row) =>
+            db.Insert(row);
+
+        public void WebText_Update(MWEBTEXT row, string original_sitename)
+        {
+            var sql = @"
+                UPDATE  WEBTEXT
+                SET SITENAME = @sitename, URL = @url, TEMPLATE = @template, FOLDER = @folder
+                WHERE   (SITENAME = @original_sitename)
+            ";
+            db.Execute(sql, row.SITENAME, row.URL, row.TEMPLATE, row.FOLDER, original_sitename);
         }
 
-        public static void Insert(MWEBTEXT row)
-        {
-            using (var db = new Entities())
-            {
-                var item = new MWEBTEXT
-                {
-                    SITENAME = row.SITENAME,
-                    URL = row.URL,
-                    TEMPLATE = row.TEMPLATE,
-                    FOLDER = row.FOLDER
-                };
-                db.SWEBTEXT.Add(item);
-                db.SaveChanges();
-            }
-        }
-
-        public static void Update(MWEBTEXT row, string original_sitename)
-        {
-            using (var db = new Entities())
-            {
-                var sql = @"
-                        UPDATE  WEBTEXT
-                        SET SITENAME = @sitename, URL = @url, TEMPLATE = @template, FOLDER = @folder
-                        WHERE   (SITENAME = @original_sitename)
-                    ";
-                db.Database.ExecuteSqlCommand(sql,
-                    new SqlParameter("sitename", row.SITENAME),
-                    new SqlParameter("url", row.URL),
-                    new SqlParameter("template", row.TEMPLATE),
-                    new SqlParameter("folder", row.FOLDER),
-                    new SqlParameter("original_sitename", original_sitename));
-            }
-        }
-
-        public static List<MWEBTEXT> GetData()
-        {
-            using (var db = new Entities())
-            {
-                return db.SWEBTEXT.ToList();
-            }
-        }
+        public List<MWEBTEXT> WebText_GetData() =>
+            db.Table<MWEBTEXT>().ToList();
     }
 }

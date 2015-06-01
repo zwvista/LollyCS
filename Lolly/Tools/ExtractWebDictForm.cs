@@ -84,12 +84,12 @@ namespace Lolly
             this.ifrId = ifrId;
 
             dictToolStripTextBox.Text = dict;
-            dictRow = DictAll.GetDataByLangDict(lbuSettings.LangID, dict);
+            dictRow = Program.db.DictAll_GetDataByLangDict(lbuSettings.LangID, dict);
         }
 
         private void ExtractWebDictForm_Shown(object sender, EventArgs e)
         {
-            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
             langToolStripTextBox.Text = lbuSettings.LangName;
             IOleObject obj = (IOleObject)webBrowser1.ActiveXInstance;
             obj.SetClientSite(this);

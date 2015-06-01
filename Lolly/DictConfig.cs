@@ -93,8 +93,8 @@ namespace Lolly
             foreach (var group in dictNormalGroups)
             {
                 dictAllList =
-                    group.Name == DictNames.WEB ? DictAll.GetDataByLangWeb(langID) :
-                    DictAll.GetDataByLangDictType(langID, group.Type);
+                    group.Name == DictNames.WEB ? Program.db.DictAll_GetDataByLangWeb(langID) :
+                    Program.db.DictAll_GetDataByLangDictType(langID, group.Type);
                 var dictNames = (from row in dictAllList select row.DICTNAME).ToArray();
                 if (group.Name == DictNames.OFFLINE)
                 {
@@ -144,7 +144,7 @@ namespace Lolly
                 }
             }).ToDictionary(elem => elem.Name, elem => elem.Dict);
 
-            dictAllList = DictAll.GetDataByLang(langID);
+            dictAllList = Program.db.DictAll_GetDataByLang(langID);
         }
     }
 }

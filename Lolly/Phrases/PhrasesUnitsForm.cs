@@ -36,10 +36,10 @@ namespace Lolly
         protected override void FillTable()
         {
             phrasesList = new BindingList<MPHRASEUNIT>(
-                PhrasesUnits.GetDataByBookUnitParts(lbuSettings.BookID,
+                Program.db.PhrasesUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
             bindingSource1.DataSource = phrasesList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace Lolly
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    PhrasesUnits.UpdateIndex(obj.ORD, obj.ID);
+                    Program.db.PhrasesUnits_UpdateOrd(obj.ORD, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -101,7 +101,7 @@ namespace Lolly
         {
             if (deletedID == 0) return;
 
-            PhrasesUnits.Delete(deletedID);
+            Program.db.PhrasesUnits_Delete(deletedID);
             deletedID = 0;
         }
 
@@ -121,13 +121,13 @@ namespace Lolly
                     row.ORD = e.RowIndex + 1;
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
-                row.ID = PhrasesUnits.Insert(row);
+                row.ID = Program.db.PhrasesUnits_Insert(row);
                 dataGridView1.Refresh();
             }
             else
             {
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
-                PhrasesUnits.Update(row);
+                Program.db.PhrasesUnits_Update(row);
             }
         }
     }

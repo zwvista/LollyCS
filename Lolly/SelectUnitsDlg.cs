@@ -33,7 +33,7 @@ namespace Lolly
 
         private void SelectUnitsDlg_Load(object sender, EventArgs e)
         {
-            languageList = Languages.GetData();
+            languageList = Program.db.Languages_GetData();
             langComboBox.DataSource = languageList;
             langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }
@@ -43,7 +43,7 @@ namespace Lolly
             if (langComboBox.SelectedValue == null) return;
             selectedLangID = (int)langComboBox.SelectedValue;
             var row = languageList.Single(r => r.LANGID == selectedLangID);
-            bookList = Books.GetDataByLang(selectedLangID);
+            bookList = Program.db.Books_GetDataByLang(selectedLangID);
             bookComboBox.DataSource = bookList;
             bookComboBox.SelectedValue = row.CURBOOKID;
         }
@@ -54,7 +54,7 @@ namespace Lolly
             selectedBookID = (int)bookComboBox.SelectedValue;
             var row = bookList.Single(r => r.BOOKID == selectedBookID);
             // Controls for Units
-            unitInAllFromLabel.Text = unitInAllToLabel.Text = string.Format("({0} in all)", row.UNITSINBOOK);
+            unitsInAllFromLabel.Text = unitsInAllToLabel.Text = string.Format("({0} in all)", row.UNITSINBOOK);
             unitFromNumericUpDown.Maximum = unitToNumericUpDown.Maximum = row.UNITSINBOOK;
             unitFromNumericUpDown.Value = row.UNITFROM;
             unitToNumericUpDown.Value = row.UNITTO;
@@ -86,15 +86,15 @@ namespace Lolly
         private void okButton_Click(object sender, EventArgs e)
         {
             Program.SetLangID(selectedLangID);
-            Languages.UpdateBook(selectedBookID, selectedLangID);
-            Books.UpdateUnit((int)unitFromNumericUpDown.Value, partFromComboBox.SelectedIndex + 1,
+            Program.db.Languages_UpdateBook(selectedBookID, selectedLangID);
+            Program.db.Books_UpdateUnit((int)unitFromNumericUpDown.Value, partFromComboBox.SelectedIndex + 1,
                 (int)unitToNumericUpDown.Value, partToComboBox.SelectedIndex + 1, selectedBookID);
         }
 
         private void toCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             unitToNumericUpDown.Enabled = toCheckBox.Checked;
-            unitInAllToLabel.Enabled = toCheckBox.Checked;
+            unitsInAllToLabel.Enabled = toCheckBox.Checked;
             partToComboBox.Enabled = toCheckBox.Checked;
             if(!toCheckBox.Checked)
             {

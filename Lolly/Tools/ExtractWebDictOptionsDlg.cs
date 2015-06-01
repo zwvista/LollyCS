@@ -36,20 +36,20 @@ namespace Lolly
             bookUnitsRadioButton.Text = Program.lbuSettings.BookUnitsDesc;
             langRadioButton.Text = Program.lbuSettings.LangDesc;
             bookUnitsRadioButton.Checked = true;
-            dictDataGridView.DataSource = DictAll.GetDataByLangExact(Program.lbuSettings.LangID);
+            dictDataGridView.DataSource = Program.db.DictAll_GetDataByLangExact(Program.lbuSettings.LangID);
             checkAllDictsButton.PerformClick();
         }
 
         private void unitsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            wordDataGridView.DataSource = WordsLangOrBook.GetDataByBookUnitParts(Program.lbuSettings.BookID,
+            wordDataGridView.DataSource = Program.db.WordsLangOrBook_GetDataByBookUnitParts(Program.lbuSettings.BookID,
                 Program.lbuSettings.UnitPartFrom, Program.lbuSettings.UnitPartTo);
             checkAllWordsButton.PerformClick();
         }
 
         private void langRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            wordDataGridView.DataSource = WordsLangOrBook.GetDataByLang(Program.lbuSettings.LangID);
+            wordDataGridView.DataSource = Program.db.WordsLangOrBook_GetDataByLang(Program.lbuSettings.LangID);
             checkAllWordsButton.PerformClick();
         }
 

@@ -22,10 +22,10 @@ namespace Lolly
 
         private void changeLBLSettings()
         {
-            langRow = Languages.GetDataByLang(Program.lbuSettings.LangID);
+            langRow = Program.db.Languages_GetDataByLang(Program.lbuSettings.LangID);
             Program.lbuSettings.LangName = langRow.CHNNAME;
             Program.lbuSettings.BookID = (int)langRow.CURBOOKID;
-            bookRow = Books.GetDataByBook(Program.lbuSettings.BookID);
+            bookRow = Program.db.Books_GetDataByBook(Program.lbuSettings.BookID);
             Program.lbuSettings.BookName = bookRow.BOOKNAME;
             Program.lbuSettings.UnitFrom = bookRow.UNITFROM;
             Program.lbuSettings.PartFrom = bookRow.PARTFROM;

@@ -118,6 +118,7 @@ namespace Lolly
 
     static class Program
     {
+        public static LollyDB db = new LollyDB();
         public static LangBookUnitSettings lbuSettings;
         public static string appDataFolder;
         public static string appDataFolderInHtml;
@@ -169,11 +170,11 @@ namespace Lolly
 
         public static MDICTENTITY OpenDictTable(string word, string dictTable)
         {
-            var wordRow = DictEntity.GetDataByWordDictTable(word, dictTable);
+            var wordRow = db.DictEntity_GetDataByWordDictTable(word, dictTable);
             if (wordRow == null)
             {
-                DictEntity.Insert(word, dictTable);
-                wordRow = DictEntity.GetDataByWordDictTable(word, dictTable);
+                db.DictEntity_Insert(word, dictTable);
+                wordRow = db.DictEntity_GetDataByWordDictTable(word, dictTable);
             }
             return wordRow;
         }
@@ -184,7 +185,7 @@ namespace Lolly
             if (append)
                 text = wordRow.TRANSLATION + text;
             wordRow.TRANSLATION = text;
-            DictEntity.Update(text, wordRow.WORD, dictRow.DICTTABLE);
+            db.DictEntity_Update(text, wordRow.WORD, dictRow.DICTTABLE);
         }
 
         public static void SetLangID(int newLangID)
@@ -197,7 +198,7 @@ namespace Lolly
         public static void InitVoices()
         {
             var voices = new SpeechSynthesizer().GetInstalledVoices();
-            voiceNames = (from row in Languages.GetData() select row.VOICE).ToArray();
+            voiceNames = (from row in db.Languages_GetData() select row.VOICE).ToArray();
         }
 
         public static void Speak(int nLangID, string text)

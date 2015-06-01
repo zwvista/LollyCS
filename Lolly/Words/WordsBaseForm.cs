@@ -306,7 +306,7 @@ namespace Lolly
         {
             if (!wordLevelDic.ContainsKey(w))
             {
-                var level = WordsLang.GetWordLevel(lbuSettings.LangID, w) ?? 0;
+                var level = Program.db.WordsLang_GetWordLevel(lbuSettings.LangID, w) ?? 0;
                 wordLevelDic.Add(w, level);
             }
             return wordLevelDic[w];
@@ -346,7 +346,7 @@ namespace Lolly
                 var newLevel = Math.Max(-3, Math.Min(3, level + delta));
                 if (level != newLevel)
                 {
-                    WordsLang.UpdateWordLevel(newLevel, lbuSettings.LangID, w);
+                    Program.db.WordsLang_UpdateWordLevel(newLevel, lbuSettings.LangID, w);
                     wordLevelDic[w] = newLevel;
                 }
             }

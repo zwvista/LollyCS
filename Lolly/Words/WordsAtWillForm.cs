@@ -30,7 +30,7 @@ namespace Lolly
         {
             wordsList = new BindingList<MWORDATWILL>(new List<MWORDATWILL>());
             bindingSource1.DataSource = wordsList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         protected override void OnDeleteWord()

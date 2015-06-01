@@ -35,10 +35,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.unitFromNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.unitToNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.unitInAllFromLabel = new System.Windows.Forms.Label();
+            this.unitsInAllFromLabel = new System.Windows.Forms.Label();
             this.activeIncludedCheckBox = new System.Windows.Forms.CheckBox();
             this.toCheckBox = new System.Windows.Forms.CheckBox();
-            this.unitInAllToLabel = new System.Windows.Forms.Label();
+            this.unitsInAllToLabel = new System.Windows.Forms.Label();
             this.partFromComboBox = new System.Windows.Forms.ComboBox();
             this.partToComboBox = new System.Windows.Forms.ComboBox();
             this.okButton = new VistaButtonTest.VistaButton();
@@ -140,13 +140,13 @@
             // 
             // unitInAllFromLabel
             // 
-            this.unitInAllFromLabel.AutoSize = true;
-            this.unitInAllFromLabel.Location = new System.Drawing.Point(146, 89);
-            this.unitInAllFromLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.unitInAllFromLabel.Name = "unitInAllFromLabel";
-            this.unitInAllFromLabel.Size = new System.Drawing.Size(104, 16);
-            this.unitInAllFromLabel.TabIndex = 6;
-            this.unitInAllFromLabel.Text = "(100 in all)";
+            this.unitsInAllFromLabel.AutoSize = true;
+            this.unitsInAllFromLabel.Location = new System.Drawing.Point(146, 89);
+            this.unitsInAllFromLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.unitsInAllFromLabel.Name = "unitInAllFromLabel";
+            this.unitsInAllFromLabel.Size = new System.Drawing.Size(104, 16);
+            this.unitsInAllFromLabel.TabIndex = 6;
+            this.unitsInAllFromLabel.Text = "(100 in all)";
             // 
             // activeIncludedCheckBox
             // 
@@ -171,13 +171,13 @@
             // 
             // unitInAllToLabel
             // 
-            this.unitInAllToLabel.AutoSize = true;
-            this.unitInAllToLabel.Location = new System.Drawing.Point(146, 121);
-            this.unitInAllToLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.unitInAllToLabel.Name = "unitInAllToLabel";
-            this.unitInAllToLabel.Size = new System.Drawing.Size(104, 16);
-            this.unitInAllToLabel.TabIndex = 10;
-            this.unitInAllToLabel.Text = "(100 in all)";
+            this.unitsInAllToLabel.AutoSize = true;
+            this.unitsInAllToLabel.Location = new System.Drawing.Point(146, 121);
+            this.unitsInAllToLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.unitsInAllToLabel.Name = "unitInAllToLabel";
+            this.unitsInAllToLabel.Size = new System.Drawing.Size(104, 16);
+            this.unitsInAllToLabel.TabIndex = 10;
+            this.unitsInAllToLabel.Text = "(100 in all)";
             // 
             // partFromComboBox
             // 
@@ -248,8 +248,8 @@
             this.Controls.Add(this.partFromComboBox);
             this.Controls.Add(this.bookComboBox);
             this.Controls.Add(this.langComboBox);
-            this.Controls.Add(this.unitInAllToLabel);
-            this.Controls.Add(this.unitInAllFromLabel);
+            this.Controls.Add(this.unitsInAllToLabel);
+            this.Controls.Add(this.unitsInAllFromLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -279,10 +279,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown unitFromNumericUpDown;
         private System.Windows.Forms.NumericUpDown unitToNumericUpDown;
-        private System.Windows.Forms.Label unitInAllFromLabel;
+        private System.Windows.Forms.Label unitsInAllFromLabel;
         private System.Windows.Forms.CheckBox activeIncludedCheckBox;
         private System.Windows.Forms.CheckBox toCheckBox;
-        private System.Windows.Forms.Label unitInAllToLabel;
+        private System.Windows.Forms.Label unitsInAllToLabel;
         private System.Windows.Forms.ComboBox partFromComboBox;
         private System.Windows.Forms.ComboBox partToComboBox;
         private VistaButtonTest.VistaButton okButton;

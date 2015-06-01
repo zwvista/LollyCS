@@ -33,11 +33,11 @@ namespace Lolly
         protected override void FillTable()
         {
             phrasesList = new BindingList<MPHRASELANG>(
-                filterScope == 0 ? PhrasesLang.GetDataByLangPhrase(lbuSettings.LangID, filter) :
-                PhrasesLang.GetDataByLangTranslation(lbuSettings.LangID, filter)
+                filterScope == 0 ? Program.db.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter) :
+                Program.db.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
             bindingSource1.DataSource = phrasesList;
-            autoCorrectList = AutoCorrect.GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         public override void UpdatelbuSettings()

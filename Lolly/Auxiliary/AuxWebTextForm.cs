@@ -28,7 +28,7 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = WebText.GetData();
+            auxList = Program.db.WebText_GetData();
             bindingSource1.DataSource = auxList;
         }
 
@@ -71,7 +71,7 @@ namespace Lolly
         {
             if (deletedSite == "") return;
 
-            WebText.Delete(deletedSite);
+            Program.db.WebText_Delete(deletedSite);
             deletedSite = "";
         }
 
@@ -86,9 +86,9 @@ namespace Lolly
 
             var row = auxList[e.RowIndex];
             if (currentSite == null)
-                WebText.Insert(row);
+                Program.db.WebText_Insert(row);
             else
-                WebText.Update(row, currentSite);
+                Program.db.WebText_Update(row, currentSite);
         }
     }
 }
