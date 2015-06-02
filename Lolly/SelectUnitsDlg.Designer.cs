@@ -138,12 +138,12 @@
             0});
             this.unitToNumericUpDown.ValueChanged += new System.EventHandler(this.unitToNumericUpDown_ValueChanged);
             // 
-            // unitInAllFromLabel
+            // unitsInAllFromLabel
             // 
             this.unitsInAllFromLabel.AutoSize = true;
             this.unitsInAllFromLabel.Location = new System.Drawing.Point(146, 89);
             this.unitsInAllFromLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.unitsInAllFromLabel.Name = "unitInAllFromLabel";
+            this.unitsInAllFromLabel.Name = "unitsInAllFromLabel";
             this.unitsInAllFromLabel.Size = new System.Drawing.Size(104, 16);
             this.unitsInAllFromLabel.TabIndex = 6;
             this.unitsInAllFromLabel.Text = "(100 in all)";
@@ -169,12 +169,12 @@
             this.toCheckBox.UseVisualStyleBackColor = true;
             this.toCheckBox.CheckedChanged += new System.EventHandler(this.toCheckBox_CheckedChanged);
             // 
-            // unitInAllToLabel
+            // unitsInAllToLabel
             // 
             this.unitsInAllToLabel.AutoSize = true;
             this.unitsInAllToLabel.Location = new System.Drawing.Point(146, 121);
             this.unitsInAllToLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.unitsInAllToLabel.Name = "unitInAllToLabel";
+            this.unitsInAllToLabel.Name = "unitsInAllToLabel";
             this.unitsInAllToLabel.Size = new System.Drawing.Size(104, 16);
             this.unitsInAllToLabel.TabIndex = 10;
             this.unitsInAllToLabel.Text = "(100 in all)";

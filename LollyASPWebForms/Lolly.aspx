@@ -8,12 +8,12 @@
             <td style="height: 21px">
                 <asp:DropDownList ID="ddlLanguage" runat="server" AutoPostBack="True" DataSourceID="odsLanguage" DataTextField="LANGNAME" DataValueField="LANGID" >
                 </asp:DropDownList>
-                <asp:ObjectDataSource ID="odsLanguage" runat="server" SelectMethod="GetData" TypeName="LollyBase.Languages"></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="odsLanguage" runat="server" SelectMethod="Languages_GetDataNonChinese" TypeName="LollyBase.LollyDB"></asp:ObjectDataSource>
             </td>
             <td><asp:Label ID="Label2" runat="server" Text="Dictionary:"></asp:Label></td>
             <td><asp:DropDownList ID="ddlDictionary" runat="server" DataSourceID="odsDictionary" DataTextField="DICTNAME" DataValueField="DICTNAME" >
     </asp:DropDownList></td>
-                <asp:ObjectDataSource ID="odsDictionary" runat="server" SelectMethod="GetDataByLang" TypeName="LollyBase.Dictionaries">
+                <asp:ObjectDataSource ID="odsDictionary" runat="server" SelectMethod="Dictionaries_GetDataByLang" TypeName="LollyBase.LollyDB">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="ddlLanguage" Name="langid" PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>
@@ -26,7 +26,7 @@
             </td>
             <td>
                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
-                <asp:ObjectDataSource ID="odsDictAll" runat="server" SelectMethod="GetDataByLangDict" TypeName="LollyBase.DictAll">
+                <asp:ObjectDataSource ID="odsDictAll" runat="server" SelectMethod="DictAll_GetDataByLangDict" TypeName="LollyBase.LollyDB">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="ddlLanguage" Name="langid" PropertyName="SelectedValue" Type="Int32" />
                         <asp:ControlParameter ControlID="ddlDictionary" Name="dict" PropertyName="SelectedValue" Type="String" />

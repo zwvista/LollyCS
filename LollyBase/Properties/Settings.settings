@@ -14,7 +14,7 @@
     <Setting Name="LogFolder" Type="System.String" Scope="Application">
       <Value Profile="(Default)">E:\Education\Lolly\log</Value>
     </Setting>
-    <Setting Name="DBPath" Type="System.String" Scope="User">
+    <Setting Name="DBPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\zw\backup\Lolly.db</Value>
     </Setting>
   </Settings>
