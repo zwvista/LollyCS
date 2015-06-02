@@ -44,7 +44,7 @@ namespace Lolly
         {
             var row = auxList[bindingSource1.Position];
             var item = row.DICTNAME;
-            var msg = string.Format("The dictionaries item \"{0}\" is about to be DELETED. Are you sure?", item);
+            var msg = $"The dictionaries item \"{item}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 deletedDict = currentDict;
@@ -63,7 +63,7 @@ namespace Lolly
             {
                 var row = auxList[e.RowIndex];
                 var item = row.DICTNAME;
-                var msg = string.Format("The dictionaries item \"{0}\" is about to be updated. Are you sure?", item);
+                var msg = $"The dictionaries item \"{item}\" is about to be updated. Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.No)
                 {
@@ -78,7 +78,7 @@ namespace Lolly
         public void UpdatelbuSettings()
         {
             lbuSettings = Program.lbuSettings;
-            Text = string.Format("Dictionaries ({0})", lbuSettings.LangDesc);
+            Text = $"Dictionaries ({lbuSettings.LangDesc})";
             FillTable();
         }
 

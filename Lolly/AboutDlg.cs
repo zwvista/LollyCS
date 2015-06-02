@@ -13,9 +13,9 @@ namespace Lolly
         public AboutDlg()
         {
             InitializeComponent();
-            this.Text = string.Format("About {0} {0}", AssemblyTitle);
+            this.Text = $"About {AssemblyTitle} {AssemblyTitle}";
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = string.Format("Version {0} {0}", AssemblyVersion);
+            this.labelVersion.Text = $"Version {AssemblyVersion} {AssemblyVersion}";
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;

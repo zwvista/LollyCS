@@ -43,7 +43,7 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             base.UpdatelbuSettings();
-            Text = string.Format("Phrases ({0})", lbuSettings.LangDesc);
+            Text = $"Phrases ({lbuSettings.LangDesc})";
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

@@ -52,9 +52,9 @@ namespace LollyBase
                 select $@"
                     SELECT LANGID, WORDSLANG.WORD, LEVEL
                     FROM WORDSLANG INNER JOIN [{dicttable}] ON WORDSLANG.WORD = [{dicttable}].WORD
-                    WHERE LANGID = @langid AND [TRANSLATION] LIKE '%' + @word + '%'"
+                    WHERE LANGID = @langid AND [TRANSLATION] LIKE @word"
             );
-            return db.Query<MWORDLANG>(sql, langid, word).ToList();
+            return db.Query<MWORDLANG>(sql, langid, $"%{word}%").ToList();
         }
 
         public int WordsLang_GetWordCount(int langid, string word) =>

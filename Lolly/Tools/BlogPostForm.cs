@@ -45,11 +45,10 @@ namespace Lolly
         private void newPatternToolStripButton_Click(object sender, EventArgs e)
         {
             var index = (int)patternNamesToolStripComboBox.SelectedIndex;
-            var xml = string.Format(
-                @"<note><line>
-		        <original>～：</original><definition></definition><translation></translation>
-		        </line>{0}</note>",
-                index == 0 ? "" : string.Format("<line>{0}</line>", patterns[index - 1]));
+            var line = index == 0 ? "" : $"<line>{patterns[index - 1]}</line>";
+            var xml = $@"<note><line>
+                <original>～：</original><definition></definition><translation></translation>
+                </line>{line}</note>";
             NewNote(xml);
             patternNamesToolStripComboBox.SelectedIndex = 0;
         }
@@ -57,7 +56,7 @@ namespace Lolly
         private void NewNote(string note, bool noNoteTag = true)
         {
             if (!noNoteTag)
-                note = string.Format("<note>{0}</note>", note);
+                note = $"<note>{note}</note>";
 
             Clipboard.SetText(note);
             Win32.SetForegroundWindow(applicationControl1.AppHandle);
@@ -119,9 +118,7 @@ namespace Lolly
         private void bi_ToolStripButton_Click(object sender, EventArgs e)
         {
             var str = new Regex("<.+?>").Replace(sourceTextBox.SelectedText, "");
-            sourceTextBox.SelectedText = string.Format(
-                sender == b_ToolStripButton ? "<b>{0}</b>" : "<i>{0}</i>",
-                str);
+            sourceTextBox.SelectedText = sender == b_ToolStripButton ? $"<b>{str}</b>" : $"<i>{str}</i>";
         }
     }
 }

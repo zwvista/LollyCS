@@ -60,7 +60,7 @@ namespace Lolly
         private string GetTranslation(MDICTALL dictRow, string word)
         {
             var wordRow = Program.db.DictEntity_GetDataByWordDictTable(word, dictRow.DICTTABLE);
-            return wordRow == null ? "" : wordRow.TRANSLATION;
+            return wordRow?.TRANSLATION ?? "";
         }
 
         public void UpdateHtml(string word, List<MAUTOCORRECT> autoCorrectList)
@@ -123,15 +123,16 @@ namespace Lolly
                 for (int i = 0; i < dictItems.Count; i++)
                 {
                     var item = dictItems[i];
-                    var ifrId = string.Format("ifr{0}", i);
+                    var ifrId = $"ifr{i}";
 
-                    Func<string, string> GetIFrameOfflineText = str => string.Format(
-                        "<iframe id='{0}' frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{1}\");'></iframe>\n",
-                        ifrId, str.Replace("'", "&#39;").Replace("\"", "\\\"").Replace("\r\n", "\\r\\n").Replace("\n", "\\n"));
+                    Func<string, string> GetIFrameOfflineText = str =>
+                    {
+                        var str2 = str.Replace("'", "&#39;").Replace("\"", "\\\"").Replace("\r\n", "\\r\\n").Replace("\n", "\\n");
+                        return $"<iframe id='{ifrId}' frameborder='0' style='width:100%; display:block' onload='setFrameContent(this, \"{str2}\");'></iframe>\n";
+                    };
 
-                    Func<string, string> GetIFrameOnlineText = url => string.Format(
-                        "<iframe id='{0}' frameborder='1' style='width:100%; height:500px; display:block' src='{1}'></iframe>\n",
-                        ifrId, url);
+                    Func<string, string> GetIFrameOnlineText = url => 
+                        $"<iframe id='{ifrId}' frameborder='1' style='width:100%; height:500px; display:block' src='{url}'></iframe>\n";
 
                     dictRow = FindDict(item.Name);
                     if (item.Name == DictNames.LINGOES)
@@ -214,11 +215,9 @@ namespace Lolly
             {
                 var dictName = dictItems[0].Name;
                 var dictRow = FindDict(dictName);
-                var msg = string.Format("The translation from the url \"{0}\" will be EXTRACTED and {1} " +
-                    "the translation of the word \"{2}\" in the dictionary \"{3}\". Are you sure?",
-                    Url.AbsoluteUri,
-                    overriteDB ? "used to REPLACE" : "APPENDED to",
-                    word, dictName);
+                var msg = $"The translation from the url \"{Url.AbsoluteUri}\" will be EXTRACTED and " +
+                    (overriteDB ? "used to REPLACE" : "APPENDED to") +
+                    $" the translation of the word \"{word}\" in the dictionary \"{dictName}\". Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return false;
                 var wordRow = Program.OpenDictTable(word, dictRow.DICTTABLE);

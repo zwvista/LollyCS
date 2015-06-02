@@ -89,7 +89,7 @@ namespace Lolly
         {
             if (filtertoolStripLabel.Owner != null)
                 filtertoolStripLabel.Text =
-                    filter == "" ? "No Filter" : string.Format("Filter: \"{0}\"", filter);
+                    filter == "" ? "No Filter" : $"Filter: \"{filter}\"";
         }
 
         private void setFilterToolStripButton_Click(object sender, EventArgs e)
@@ -156,8 +156,8 @@ namespace Lolly
                 var phrase2 = phrase;
                 foreach(var kv in replacement)
                 {
-                    var pattern = string.Format(@"(\W|^)({0})(\W|$)", kv.Key);
-                    var evaluator = string.Format("$1{0}$3", kv.Value);
+                    var pattern = $@"(\W|^)({kv.Key})(\W|$)";
+                    var evaluator = $"$1{kv.Value}$3";
                     phrase2 = new Regex(pattern).Replace(phrase2, evaluator);
                 }
                 Program.AddPropmt(pb, lbuSettings.LangID, phrase2);

@@ -11,15 +11,15 @@ namespace Lolly
 {
     public partial class ReorderDlg : Form
     {
-        private ReindexObject[] objs;
+        private ReorderObject[] objs;
 
-        public ReorderDlg(ReindexObject[] objs)
+        public ReorderDlg(ReorderObject[] objs)
         {
             this.objs = objs;
             InitializeComponent();
         }
 
-        private void ReindexDlg_Load(object sender, EventArgs e)
+        private void ReorderDlg_Load(object sender, EventArgs e)
         {
             itemsDragDropListBox.Items.AddRange(objs); 
         }
@@ -27,7 +27,7 @@ namespace Lolly
         private void okButton_Click(object sender, EventArgs e)
         {
             int i = 0;
-            foreach(ReindexObject obj in itemsDragDropListBox.Items)
+            foreach(ReorderObject obj in itemsDragDropListBox.Items)
                 obj.ORD = ++i;
         }
     }

@@ -39,7 +39,7 @@ namespace Lolly
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            var msg = string.Format("The webtext item \"{0}\" is about to be DELETED. Are you sure?", currentSite);
+            var msg = $"The webtext item \"{currentSite}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 deletedSite = currentSite;
@@ -57,7 +57,7 @@ namespace Lolly
             if (dataGridView1.IsCurrentRowDirty)
             {
                 var item = auxList[e.RowIndex].SITENAME;
-                var msg = string.Format("The webtext item \"{0}\" is about to be updated. Are you sure?", item);
+                var msg = $"The webtext item \"{item}\" is about to be updated. Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.No)
                 {

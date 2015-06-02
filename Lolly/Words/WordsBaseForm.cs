@@ -145,7 +145,7 @@ namespace Lolly
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            var msg = string.Format("The word \"{0}\" is about to be DELETED. Are you sure?", currentWord);
+            var msg = $"The word \"{currentWord}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 OnDeleteWord();
         }

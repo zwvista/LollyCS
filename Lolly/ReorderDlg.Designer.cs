@@ -81,7 +81,7 @@
             this.itemsDragDropListBox.Size = new System.Drawing.Size(201, 484);
             this.itemsDragDropListBox.TabIndex = 4;
             // 
-            // ReindexDlg
+            // ReorderDlg
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -96,11 +96,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(371, 560);
-            this.Name = "ReindexDlg";
+            this.Name = "ReorderDlg";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Reindex";
-            this.Load += new System.EventHandler(this.ReindexDlg_Load);
+            this.Text = "Reorder";
+            this.Load += new System.EventHandler(this.ReorderDlg_Load);
             this.ResumeLayout(false);
 
         }

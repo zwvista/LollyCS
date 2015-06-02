@@ -225,7 +225,7 @@ namespace Lolly
         {
             if(filtertoolStripLabel.Owner != null)
                 filtertoolStripLabel.Text =
-                    filter == "" ? "No Filter" : string.Format("Filter: \"{0}\"", filter);
+                    filter == "" ? "No Filter" : $"Filter: \"{filter}\"";
         }
 
         private void setFilterToolStripButton_Click(object sender, EventArgs e)

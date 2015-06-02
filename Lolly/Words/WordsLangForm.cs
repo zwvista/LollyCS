@@ -43,7 +43,7 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             base.UpdatelbuSettings();
-            Text = string.Format("Words ({0})", lbuSettings.LangDesc);
+            Text = $"Words ({lbuSettings.LangDesc})";
         }
 
         private void bindingSource1_ListItemDeleted(object sender, ListChangedEventArgs e)

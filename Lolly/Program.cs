@@ -24,39 +24,12 @@ namespace Lolly
         public string LangName { get; set; }
         public string BookName { get; set; }
 
-        public int UnitPartFrom
-        {
-            get
-            {
-                return UnitFrom * 10 + PartFrom;
-            }
-        }
-
-        public int UnitPartTo
-        {
-            get
-            {
-                return UnitTo * 10 + PartTo;
-            }
-        }
-
-        public string BookUnitsDesc
-        {
-            get
-            {
-                return UnitPartFrom == UnitPartTo ? 
-                    string.Format("{0} {1}:{2}", BookName, UnitFrom, PartFrom) :
-                    string.Format("{0} {1}:{2} -- {3}:{4}", BookName, UnitFrom, PartFrom, UnitTo, PartTo);
-            }
-        }
-
-        public string LangDesc
-        {
-            get
-            {
-                return string.Format("Language: {0}", LangName);
-            }
-        }
+        public int UnitPartFrom => UnitFrom * 10 + PartFrom;
+        public int UnitPartTo => UnitTo * 10 + PartTo;
+        public string BookUnitsDesc => UnitPartFrom == UnitPartTo ?
+            $"{BookName} {UnitFrom}:{PartFrom}" :
+            $"{BookName} {UnitFrom}:{PartFrom} -- {UnitTo}:{PartTo}";
+        public string LangDesc => $"Language: {LangName}";
     }
 
     interface ILangBookUnits
@@ -64,12 +37,12 @@ namespace Lolly
         void UpdatelbuSettings();
     }
 
-    public class ReindexObject
+    public class ReorderObject
     {
-        public int ID {get; set;}
+        public int ID { get; set; }
         public int ORD { get; set; }
         public string ITEM { get; set; }
-        public ReindexObject(int id, string item)
+        public ReorderObject(int id, string item)
         {
             ID = id;
             ORD = 0;
@@ -164,8 +137,7 @@ namespace Lolly
 
         public static string GetLiveHtml(string word, string dict)
         {
-            return string.Format("<p style=\"color: #0000FF; font-weight: bold\">Extracting translation of the word \"{0}\" from the web dictionary \"{1}\"</p>",
-                word, dict);
+            return $"<p style=\"color: #0000FF; font-weight: bold\">Extracting translation of the word \"{word}\" from the web dictionary \"{dict}\"</p>";
         }
 
         public static MDICTENTITY OpenDictTable(string word, string dictTable)

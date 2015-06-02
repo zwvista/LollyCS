@@ -137,8 +137,8 @@ namespace Lolly
 
         private void copyKanjiKanaToolStripButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(string.Format(
-                currentWord != currentNote ? "{0}（{1}）：" : "{0}：", currentWord, currentNote));
+            Clipboard.SetText(
+                currentWord != currentNote ? $"{currentWord}（{currentNote}）：" : $"{currentWord}：");
         }
     }
 

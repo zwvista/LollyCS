@@ -130,7 +130,7 @@ namespace Lolly
 
         private void SearchDictForWord()
         {
-            wordToolStripLabel.Text = string.Format("Word: {0} / {1}", wordIndex + 1, words.Length);
+            wordToolStripLabel.Text = $"Word: {wordIndex + 1} / {words.Length}";
             wordToolStripTextBox.Text = word;
             dictStatus = DictWebBrowserStatus.Navigating;
             if (dictRow.DICTNAME == DictNames.FRHELPER)

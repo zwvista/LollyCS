@@ -42,7 +42,7 @@ namespace Lolly
         {
             var row = auxList[bindingSource1.Position];
             var item = row.BOOKNAME;
-            var msg = string.Format("The picbooks item \"{0}\" is about to be DELETED. Are you sure?", item);
+            var msg = $"The picbooks item \"{item}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 bindingSource1.RemoveCurrent();
         }
@@ -57,7 +57,7 @@ namespace Lolly
         public void UpdatelbuSettings()
         {
             lbuSettings = Program.lbuSettings;
-            Text = string.Format("Picture Books ({0})", lbuSettings.LangDesc);
+            Text = $"Picture Books ({lbuSettings.LangDesc})";
             FillTable();
         }
 

@@ -48,7 +48,7 @@ namespace Lolly
             selectedBookID = (int)bookComboBox.SelectedValue;
             var row = bookList.Single(r => r.BOOKID == selectedBookID);
             // Controls for Units
-            unitsInAllFromLabel.Text = unitsInAllToLabel.Text = string.Format("({0} in all)", row.UNITSINBOOK);
+            unitsInAllFromLabel.Text = unitsInAllToLabel.Text = $"({row.UNITSINBOOK} in all)";
             unitFromNumericUpDown.Maximum = unitToNumericUpDown.Maximum = row.UNITSINBOOK;
             unitFromNumericUpDown.Value = row.UNITFROM;
             unitToNumericUpDown.Value = row.UNITTO;

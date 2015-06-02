@@ -15,13 +15,7 @@ namespace Lolly
         public int LangID { get; private set; }
         public string[] SelectedWords { get; private set; }
         public string[] SelectedDicts { get; private set; }
-        public bool OverwriteDB
-        {
-            get
-            {
-                return overwriteCheckBox.Checked;
-            }
-        }
+        public bool OverwriteDB => overwriteCheckBox.Checked;
 
         public ExtractWebDictOptionsDlg()
         {
@@ -53,14 +47,6 @@ namespace Lolly
             checkAllWordsButton.PerformClick();
         }
 
-        private string[] GetAllChecked(DataGridView gdv)
-        {
-            return (from DataGridViewRow row in gdv.Rows
-                    let v = row.Cells[0].Value
-                    where v != null && (bool)v
-                    select row.Cells[1].Value.ToString()).ToArray();
-        }
-
         private void CheckButton_Click(object sender, EventArgs e)
         {
             var tag = int.Parse(((Button)sender).Tag.ToString());
@@ -74,10 +60,17 @@ namespace Lolly
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            Func<DataGridView, string[]> GetAllChecked = gdv => (
+                from DataGridViewRow row in gdv.Rows
+                let v = row.Cells[0].Value
+                where v != null && (bool)v
+                select row.Cells[1].Value.ToString()
+            ).ToArray();
+
             SelectedWords = GetAllChecked(wordDataGridView);
             SelectedDicts = GetAllChecked(dictDataGridView);
             if (SelectedWords.Length == 0 || SelectedDicts.Length == 0)
-                this.DialogResult = DialogResult.Cancel;
+                DialogResult = DialogResult.Cancel;
         }
     }
 }

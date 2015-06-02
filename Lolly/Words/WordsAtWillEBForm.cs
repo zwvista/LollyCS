@@ -36,7 +36,7 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             base.UpdatelbuSettings();
-            Text = string.Format("Words At Will(EBWin) ({0})", lbuSettings.LangName);
+            Text = $"Words At Will(EBWin) ({lbuSettings.LangName})";
         }
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace Lolly
             var objs = (from row in wordsList
                         where row.ID != 0
                         orderby row.ORD
-                        select new ReindexObject(row.ORD, row.WORD)).ToArray();
+                        select new ReorderObject(row.ORD, row.WORD)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {

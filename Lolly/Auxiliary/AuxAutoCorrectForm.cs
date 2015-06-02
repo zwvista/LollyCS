@@ -41,7 +41,7 @@ namespace Lolly
         {
             var row = auxList[bindingSource1.Position];
             var item = row.EXTENDED;
-            var msg = string.Format("The autocorrect item \"{0}\" is about to be DELETED. Are you sure?", item);
+            var msg = $"The autocorrect item \"{item}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 deletedID = row.ID;
@@ -59,7 +59,7 @@ namespace Lolly
         public void UpdatelbuSettings()
         {
             lbuSettings = Program.lbuSettings;
-            Text = string.Format("AutoCorrect ({0})", lbuSettings.LangDesc);
+            Text = $"AutoCorrect ({lbuSettings.LangDesc})";
             FillTable();
         }
 
@@ -70,7 +70,7 @@ namespace Lolly
             var objs = (from row in auxList
                         where row.ID != 0
                         orderby row.ORD
-                        select new ReindexObject(row.ID, row.EXTENDED)).ToArray();
+                        select new ReorderObject(row.ID, row.EXTENDED)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {

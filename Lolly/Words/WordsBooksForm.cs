@@ -44,7 +44,7 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             base.UpdatelbuSettings();
-            Text = string.Format("Words (All Books on Learning {0})", lbuSettings.LangDesc);
+            Text = $"Words (All Books on Learning {lbuSettings.LangDesc})";
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -61,8 +61,7 @@ namespace Lolly
             //var count = queriesTableAdapter.WORDSBOOKGetWordCount(lbuSettings.LangID, deletedWord).Value;
             //if (count == 0)
             //{
-            //    var msg = string.Format("The word \"{0}\" is about to be DELETED from the language \"{1}\". Are you sure?",
-            //        deletedWord, lbuSettings.LangName);
+            //    var msg = $"The word \"{deletedWord}\" is about to be DELETED from the language \"{lbuSettings.LangName}\". Are you sure?";
             //    if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             //        wORDSTRANSTableAdapter.Delete(lbuSettings.LangID, deletedWord);
             //}

@@ -60,7 +60,7 @@ namespace Lolly
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            var msg = string.Format("The phrase \"{0}\" is about to be DELETED. Are you sure?", phrase);
+            var msg = $"The phrase \"{phrase}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 deletedID = phrasesList[bindingSource1.Position].ID;
@@ -71,7 +71,7 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             base.UpdatelbuSettings();
-            Text = string.Format("Phrases ({0})", lbuSettings.BookUnitsDesc);
+            Text = $"Phrases ({lbuSettings.BookUnitsDesc})";
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -87,7 +87,7 @@ namespace Lolly
             var objs = (from row in phrasesList
                         where row.ID != 0
                         orderby row.ORD
-                        select new ReindexObject(row.ID, row.PHRASE)).ToArray();
+                        select new ReorderObject(row.ID, row.PHRASE)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {

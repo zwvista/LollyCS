@@ -34,7 +34,7 @@ namespace Lolly
 
         private void Navigate()
         {
-            var url = string.Format("http://2ch.in/forum-22-{0}.html", ++page);
+            var url = $"http://2ch.in/forum-22-{++page}.html";
             webBrowser1.Navigate(url);
         }
 
@@ -51,8 +51,7 @@ namespace Lolly
                       let num = m.Groups[1].Value
                       let pattern = m.Groups[2].Value
                       select new { num,
-                          tag = string.Format(@"<a href=""{0}"">{1} {2}</a>",
-                                elem.href, num, pattern)
+                          tag = $"<a href=\"{elem.href}\">{num} {pattern}</a>"
                       });
             foreach (var v in all)
                 sent_patterns[int.Parse(v.num) - 1] = v.tag;

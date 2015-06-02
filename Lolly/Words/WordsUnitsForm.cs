@@ -56,8 +56,7 @@ namespace Lolly
             var count = Program.db.WordsBooks_GetWordCount(lbuSettings.LangID, word);
             if (count == 0)
             {
-                var msg = string.Format("The word \"{0}\" is about to be DELETED from the language \"{1}\". Are you sure?",
-                    word, lbuSettings.LangName);
+                var msg = $"The word \"{word}\" is about to be DELETED from the language \"{lbuSettings.LangName}\". Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     Program.db.WordsLang_Delete(lbuSettings.LangID, word);
             }
@@ -73,7 +72,7 @@ namespace Lolly
         public override void UpdatelbuSettings()
         {
             base.UpdatelbuSettings();
-            Text = string.Format("Words ({0})", lbuSettings.BookUnitsDesc);
+            Text = $"Words ({lbuSettings.BookUnitsDesc})";
         }
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -89,7 +88,7 @@ namespace Lolly
             var objs = (from row in wordsList
                         where row.ID != 0
                         orderby row.ORD
-                        select new ReindexObject(row.ID, row.WORD)).ToArray();
+                        select new ReorderObject(row.ID, row.WORD)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
