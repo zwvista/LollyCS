@@ -329,8 +329,8 @@ namespace Lolly
             // 
             // AuxDictionariesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1115, 536);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bindingNavigator1);

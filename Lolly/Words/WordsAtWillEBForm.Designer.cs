@@ -107,7 +107,8 @@ namespace Lolly
             // 
             // WordsAtWillEBForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1028, 715);
             this.Name = "WordsAtWillEBForm";
             this.panel2.ResumeLayout(false);
