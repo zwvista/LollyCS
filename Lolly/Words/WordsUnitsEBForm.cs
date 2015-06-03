@@ -124,7 +124,7 @@ namespace Lolly
                     row.PART = lbuSettings.PartTo;
                 if (row.ORD == 0)
                     row.ORD = e.RowIndex + 1;
-                row.ID = Program.db.WordsUnits_Insert(row);
+                Program.db.WordsUnits_Insert(row);
                 dataGridView1.Refresh();
 
                 InsertWordIfNeeded(row.WORD);

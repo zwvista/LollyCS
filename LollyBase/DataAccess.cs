@@ -13,7 +13,7 @@ namespace LollyBase
     [Table("AUTOCORRECT")]
     public partial class MAUTOCORRECT
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         [NotNull]
         public int LANGID { get; set; }
@@ -158,7 +158,7 @@ namespace LollyBase
     [Table("PHRASES")]
     public partial class MPHRASEUNIT
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         [NotNull]
         public int BOOKID { get; set; }
@@ -251,7 +251,7 @@ namespace LollyBase
     [Table("WORDSBOOK")]
     public partial class MWORDUNIT
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         [NotNull]
         public int BOOKID { get; set; }

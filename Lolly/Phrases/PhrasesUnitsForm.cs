@@ -121,7 +121,7 @@ namespace Lolly
                     row.ORD = e.RowIndex + 1;
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
-                row.ID = Program.db.PhrasesUnits_Insert(row);
+                Program.db.PhrasesUnits_Insert(row);
                 dataGridView1.Refresh();
             }
             else

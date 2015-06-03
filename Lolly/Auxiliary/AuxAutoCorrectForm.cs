@@ -98,7 +98,7 @@ namespace Lolly
                 row.LANGID = lbuSettings.LangID;
                 if (row.ORD == 0)
                     row.ORD = e.RowIndex + 1;
-                row.ID = Program.db.AutoCorrect_Insert(row);
+                Program.db.AutoCorrect_Insert(row);
                 dataGridView1.Refresh();
             }
             else

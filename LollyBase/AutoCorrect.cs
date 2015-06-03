@@ -11,11 +11,8 @@ namespace LollyBase
         public void AutoCorrect_Delete(int id) =>
             db.Delete<MAUTOCORRECT>(id);
 
-        public int AutoCorrect_Insert(MAUTOCORRECT row)
-        {
+        public int AutoCorrect_Insert(MAUTOCORRECT row) =>
             db.Insert(row);
-            return row.ID;
-        }
 
         public void AutoCorrect_Update(MAUTOCORRECT row) =>
             db.Update(row);

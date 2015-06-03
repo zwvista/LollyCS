@@ -11,7 +11,7 @@ namespace LollyBase
         public void PhrasesUnits_Delete(int id) =>
             db.Delete<MPHRASEUNIT>(id);
 
-        public int PhrasesUnits_Insert(MPHRASEUNIT row) =>
+        public void PhrasesUnits_Insert(MPHRASEUNIT row) =>
             db.Insert(row);
 
         public void PhrasesUnits_Update(MPHRASEUNIT row) =>
