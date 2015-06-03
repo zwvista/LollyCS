@@ -16,8 +16,8 @@ namespace Lolly
         private int selectedBookID;
         public bool ActiveIncluded => activeIncludedCheckBox.Checked;
 
-        private IEnumerable<MLANGUAGE> languageList;
-        private IEnumerable<MBOOK> bookList;
+        private List<MLANGUAGE> languageList;
+        private List<MBOOK> bookList;
 
         public SelectUnitsDlg(bool activeIncluded)
         {

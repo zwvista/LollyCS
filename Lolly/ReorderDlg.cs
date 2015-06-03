@@ -21,7 +21,7 @@ namespace Lolly
 
         private void ReorderDlg_Load(object sender, EventArgs e)
         {
-            itemsDragDropListBox.Items.AddRange(objs); 
+            itemsDragDropListBox.Items.AddRange(objs);
         }
 
         private void okButton_Click(object sender, EventArgs e)

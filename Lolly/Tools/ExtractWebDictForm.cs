@@ -25,7 +25,7 @@ namespace Lolly
         private DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Navigating;
         private DictWebBrowser dwb;
         private string ifrId;
-        private IEnumerable<MAUTOCORRECT> autoCorrectList;
+        private List<MAUTOCORRECT> autoCorrectList;
 
         [DispId(-5512)]
         public virtual int IDispatch_Invoke_Handler()

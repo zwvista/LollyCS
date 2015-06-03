@@ -40,12 +40,11 @@ namespace Lolly
     public class ReorderObject
     {
         public int ID { get; set; }
-        public int ORD { get; set; }
+        public int ORD { get; set; } = 0;
         public string ITEM { get; set; }
         public ReorderObject(int id, string item)
         {
             ID = id;
-            ORD = 0;
             ITEM = item;
         }
     }
@@ -106,7 +105,7 @@ namespace Lolly
         private static SpeechSynthesizer synth = new SpeechSynthesizer();
         private static string[] voiceNames;
 
-        private static string AutoCorrect(string text, IEnumerable<MAUTOCORRECT> autoCorrectList,
+        private static string AutoCorrect(string text, List<MAUTOCORRECT> autoCorrectList,
             Func<MAUTOCORRECT, string> colFunc1, Func<MAUTOCORRECT, string> colFunc2)
         {
             var str = text;
@@ -115,12 +114,12 @@ namespace Lolly
             return str;
         }
 
-        public static string AutoCorrect(string text, IEnumerable<MAUTOCORRECT> autoCorrectList)
+        public static string AutoCorrect(string text, List<MAUTOCORRECT> autoCorrectList)
         {
             return AutoCorrect(text, autoCorrectList, row => row.INPUT, row => row.EXTENDED);
         }
 
-        public static string GetDictURLForWord(string word, MDICTALL dictRow, IEnumerable<MAUTOCORRECT> autoCorrectList)
+        public static string GetDictURLForWord(string word, MDICTALL dictRow, List<MAUTOCORRECT> autoCorrectList)
         {
             var chconv = dictRow.CHCONV;
             var word2 =
@@ -191,21 +190,11 @@ namespace Lolly
             return voiceNames[nLangID] != "";
         }
 
-        public static void AddPropmt(PromptBuilder pb, int nLangID, string text)
+        public static void AddPrompt(PromptBuilder pb, int nLangID, string text)
         {
             pb.StartVoice(voiceNames[nLangID]);
             pb.AppendText(text);
             pb.EndVoice();
-        }
-
-        public static void textBoxSelectAll_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A) 
-            { 
-                (sender as TextBox).SelectAll();
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-            }
         }
 
         /// <summary>

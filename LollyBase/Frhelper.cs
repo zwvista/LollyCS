@@ -3,6 +3,8 @@ using LollyBase.Properties;
 using mshtml;
 using System.Windows.Forms;
 
+using static LollyBase.Win32;
+
 namespace LollyBase
 {
     public class Frhelper
@@ -17,21 +19,21 @@ namespace LollyBase
         {
             if (elemHtml != null) return;
 
-            hwndMain = Win32.FindWindow(Settings.Default.FrhelperClassName, null);
+            hwndMain = FindWindow(Settings.Default.FrhelperClassName, null);
             if (hwndMain == IntPtr.Zero) return;
 
-            IntPtr hwndToolbar = Win32.FindWindowEx(hwndMain, IntPtr.Zero, "TbsSkinToolBar", "");
-            IntPtr hwnd = Win32.FindWindowEx(hwndToolbar, IntPtr.Zero, "TbsSkinComboBox", null);
-            hwndEditWord = Win32.FindWindowEx(hwnd, IntPtr.Zero, "TbsCustomEdit", null);
+            IntPtr hwndToolbar = FindWindowEx(hwndMain, IntPtr.Zero, "TbsSkinToolBar", "");
+            IntPtr hwnd = FindWindowEx(hwndToolbar, IntPtr.Zero, "TbsSkinComboBox", null);
+            hwndEditWord = FindWindowEx(hwnd, IntPtr.Zero, "TbsCustomEdit", null);
 
-            IntPtr hwndPnlMain = Win32.FindWindowEx(hwndMain, IntPtr.Zero, "TbsSkinPanel", "panelMain");
+            IntPtr hwndPnlMain = FindWindowEx(hwndMain, IntPtr.Zero, "TbsSkinPanel", "panelMain");
 
-            hwnd = Win32.FindWindowEx(hwndPnlMain, IntPtr.Zero, "TPanel", "leftPanel");
-            hwndListWords = Win32.FindWindowEx(hwnd, IntPtr.Zero, "TVirtualStringTree", "");
+            hwnd = FindWindowEx(hwndPnlMain, IntPtr.Zero, "TPanel", "leftPanel");
+            hwndListWords = FindWindowEx(hwnd, IntPtr.Zero, "TVirtualStringTree", "");
             
-            hwnd = Win32.FindWindowEx(hwndPnlMain, IntPtr.Zero, "Shell Embedding", "");
-            hwnd = Win32.GetDlgItem(hwnd, 0);
-            hwndHtml = Win32.GetDlgItem(hwnd, 0);
+            hwnd = FindWindowEx(hwndPnlMain, IntPtr.Zero, "Shell Embedding", "");
+            hwnd = GetDlgItem(hwnd, 0);
+            hwndHtml = GetDlgItem(hwnd, 0);
         }
 
         public string GetContent()
@@ -40,11 +42,11 @@ namespace LollyBase
             {
                 try
                 {
-                    uint WM_HTML_GETOBJECT = Win32.RegisterWindowMessage("WM_HTML_GETOBJECT");
+                    uint WM_HTML_GETOBJECT = RegisterWindowMessage("WM_HTML_GETOBJECT");
                     UIntPtr lngRes;
-                    Win32.SendMessageTimeout(hwndHtml, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero,
+                    SendMessageTimeout(hwndHtml, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero,
                         SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
-                    var doc = (HTMLDocument)Win32.ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
+                    var doc = (HTMLDocument)ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
                     elemHtml = doc.body.parentElement;
                 }
                 catch (System.Exception)
@@ -58,18 +60,18 @@ namespace LollyBase
         public string Search(string word)
         {
             FindFrhelper();
-            Win32.SendMessage(hwndEditWord, Win32.WM_SETTEXT, 0, word);
-            Win32.SendKey(hwndEditWord, Keys.Enter, false);
+            SendMessage(hwndEditWord, WM_SETTEXT, 0, word);
+            SendKey(hwndEditWord, Keys.Enter, false);
             System.Threading.Thread.Sleep(400);
 
             string lastWord = "", dictWord, text;
             for (;;)
             {
                 text = GetContent();
-                dictWord = Win32.GetControlText(hwndEditWord);
+                dictWord = GetControlText(hwndEditWord);
                 if (string.Equals(dictWord, word, StringComparison.InvariantCultureIgnoreCase) || dictWord == lastWord) break;
                 lastWord = dictWord;
-                Win32.SendKey(hwndListWords, Keys.Down, false);
+                SendKey(hwndListWords, Keys.Down, false);
                 System.Threading.Thread.Sleep(400);
             }
             return dictWord == lastWord ? "" : text;

@@ -11,17 +11,13 @@ namespace Lolly
 {
     public partial class NewWordsDlg : Form
     {
-        public List<string> Words
-        {
-            get
-            {
-                return
-                    (from line in wordsTextBox.Lines
-                     let w = line.Trim()
-                     where w != ""
-                     select w).ToList();
-            }
-        }
+        public List<string> Words =>
+        (
+            from line in wordsTextBox.Lines
+            let w = line.Trim()
+            where w != ""
+            select w
+        ).ToList();
 
         public NewWordsDlg()
         {

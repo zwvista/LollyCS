@@ -6,6 +6,8 @@ using System.Windows.Automation;
 using System.Runtime.InteropServices;
 using LollyBase;
 
+using static LollyBase.Win32;
+
 namespace Lolly
 {
     public class EBWin
@@ -22,14 +24,14 @@ namespace Lolly
         public EBWin(IntPtr inAppHandle)
         {
             appHandle = inAppHandle;
-            IntPtr hwndcbSearch = Win32.GetDlgItem(appHandle, 0xE81B);
-            IntPtr hwnddlgSearch = Win32.GetDlgItem(hwndcbSearch, 0xE805);
-            hwndComboWord = Win32.GetDlgItem(hwnddlgSearch, 0x3E8);
-            hwndButtonFind = Win32.GetDlgItem(hwnddlgSearch, 0x3E9);
-            hwndComboDicts = Win32.GetDlgItem(hwnddlgSearch, 0x427);
-            IntPtr hwndFrame = Win32.GetDlgItem(appHandle, 0xE900);
-            hwndlstWords = Win32.GetDlgItem(hwndFrame, 0xE900);
-            hwndtbSearch = Win32.GetDlgItem(hwndcbSearch, 0xE882);
+            IntPtr hwndcbSearch = GetDlgItem(appHandle, 0xE81B);
+            IntPtr hwnddlgSearch = GetDlgItem(hwndcbSearch, 0xE805);
+            hwndComboWord = GetDlgItem(hwnddlgSearch, 0x3E8);
+            hwndButtonFind = GetDlgItem(hwnddlgSearch, 0x3E9);
+            hwndComboDicts = GetDlgItem(hwnddlgSearch, 0x427);
+            IntPtr hwndFrame = GetDlgItem(appHandle, 0xE900);
+            hwndlstWords = GetDlgItem(hwndFrame, 0xE900);
+            hwndtbSearch = GetDlgItem(hwndcbSearch, 0xE882);
         }
 
         private List<string> GetWordList()
@@ -46,18 +48,18 @@ namespace Lolly
             //return words;
 
             uint processid = 0;
-            uint threadid = Win32.GetWindowThreadProcessId(hwndlstWords, out processid);
+            uint threadid = GetWindowThreadProcessId(hwndlstWords, out processid);
 
             //open process
-            IntPtr vProcess = Win32.OpenProcess(Win32.PROCESS_VM_OPERATION | Win32.PROCESS_VM_READ |
-                Win32.PROCESS_VM_WRITE, false, processid);
+            IntPtr vProcess = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ |
+                PROCESS_VM_WRITE, false, processid);
 
             //get the number of list item
-            int count = Win32.SendMessage(hwndlstWords, Win32.LVM_GETITEMCOUNT, 0, 0);
+            int count = SendMessage(hwndlstWords, LVM_GETITEMCOUNT, 0, 0);
 
             //allocate memory in this process address space
-            IntPtr vPointer = Win32.VirtualAllocEx(vProcess, IntPtr.Zero, 4096, Win32.MEM_RESERVE |
-                Win32.MEM_COMMIT, Win32.PAGE_READWRITE);
+            IntPtr vPointer = VirtualAllocEx(vProcess, IntPtr.Zero, 4096, MEM_RESERVE |
+                MEM_COMMIT, PAGE_READWRITE);
 
             var words = new List<string>();
             try
@@ -65,24 +67,24 @@ namespace Lolly
                 for (int i = 0; i < count; i++)
                 {
                     byte[] buffer = new byte[100];
-                    Win32.LVItem[] vItem = new Win32.LVItem[1];
-                    vItem[0].mask = Win32.LVIF_TEXT;
+                    LVItem[] vItem = new LVItem[1];
+                    vItem[0].mask = LVIF_TEXT;
                     vItem[0].iItem = i;
                     vItem[0].iSubItem = 1;
                     vItem[0].cchTextMax = buffer.Length;
-                    vItem[0].pszText = (IntPtr)((int)vPointer + Marshal.SizeOf(typeof(Win32.LVItem)));
+                    vItem[0].pszText = (IntPtr)((int)vPointer + Marshal.SizeOf(typeof(LVItem)));
 
                     uint vNumberOfBytesRead = 0;
 
                     //write the struct to the memory of target process
-                    Win32.WriteProcessMemory(vProcess, vPointer, Marshal.UnsafeAddrOfPinnedArrayElement(vItem, 0),
-                        Marshal.SizeOf(typeof(Win32.LVItem)), ref vNumberOfBytesRead);
+                    WriteProcessMemory(vProcess, vPointer, Marshal.UnsafeAddrOfPinnedArrayElement(vItem, 0),
+                        Marshal.SizeOf(typeof(LVItem)), ref vNumberOfBytesRead);
 
                     //let the target process read item text to this struct
-                    Win32.SendMessage(hwndlstWords, Win32.LVM_GETITEMTEXT, i, vPointer.ToInt32());
+                    SendMessage(hwndlstWords, LVM_GETITEMTEXT, i, vPointer.ToInt32());
 
                     //read this struct
-                    Win32.ReadProcessMemory(vProcess, (IntPtr)((int)vPointer + Marshal.SizeOf(typeof(Win32.LVItem))),
+                    ReadProcessMemory(vProcess, (IntPtr)((int)vPointer + Marshal.SizeOf(typeof(LVItem))),
                         Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0), buffer.Length, ref vNumberOfBytesRead);
 
                     var w = Marshal.PtrToStringUni(Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0));
@@ -93,19 +95,19 @@ namespace Lolly
             }
             finally
             {
-                Win32.VirtualFreeEx(vProcess, vPointer, 0, Win32.MEM_RELEASE);
-                Win32.CloseHandle(vProcess);
+                VirtualFreeEx(vProcess, vPointer, 0, MEM_RELEASE);
+                CloseHandle(vProcess);
             }
             return words;
         }
 
         public void LookUp(string word)
         {
-            Win32.SendMessage(hwndButtonFind, Win32.BM_CLICK, 0, 0);
-            Win32.SendMessage(hwndComboWord, (uint)Win32.ComboBoxMessages.CB_RESETCONTENT, 0, 0);
-            Win32.SendMessage(hwndComboWord, (uint)Win32.ComboBoxMessages.CB_ADDSTRING, 0, word);
-            Win32.SendMessage(hwndComboWord, (uint)Win32.ComboBoxMessages.CB_SETCURSEL, 0, 0);
-            Win32.SendMessage(hwndButtonFind, Win32.BM_CLICK, 0, 0);
+            SendMessage(hwndButtonFind, BM_CLICK, 0, 0);
+            SendMessage(hwndComboWord, (uint)ComboBoxMessages.CB_RESETCONTENT, 0, 0);
+            SendMessage(hwndComboWord, (uint)ComboBoxMessages.CB_ADDSTRING, 0, word);
+            SendMessage(hwndComboWord, (uint)ComboBoxMessages.CB_SETCURSEL, 0, 0);
+            SendMessage(hwndButtonFind, BM_CLICK, 0, 0);
         }
 
         public void SelectEntry(string reference = "")
@@ -121,53 +123,53 @@ namespace Lolly
             //    if (i++ == n)
             //    {
             //        (child.GetCurrentPattern(SelectionItemPattern.Pattern) as SelectionItemPattern).Select();
-            //        //Win32.SendMessage(hwndlstWords, Win32.WM_KEYDOWN, (int)Win32.VK_RETURN, 1);
-            //        //Win32.SendMessage(hwndlstWords, Win32.WM_KEYUP, (int)Win32.VK_RETURN, 1);
+            //        //SendMessage(hwndlstWords, WM_KEYDOWN, (int)VK_RETURN, 1);
+            //        //SendMessage(hwndlstWords, WM_KEYUP, (int)VK_RETURN, 1);
             //        return;
             //    }
 
             uint processid = 0;
-            uint threadid = Win32.GetWindowThreadProcessId(hwndlstWords, out processid);
+            uint threadid = GetWindowThreadProcessId(hwndlstWords, out processid);
 
             //open process
-            IntPtr vProcess = Win32.OpenProcess(Win32.PROCESS_VM_OPERATION | Win32.PROCESS_VM_READ |
-                Win32.PROCESS_VM_WRITE, false, processid);
+            IntPtr vProcess = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ |
+                PROCESS_VM_WRITE, false, processid);
 
             //allocate memory in this process address space
-            IntPtr vPointer = Win32.VirtualAllocEx(vProcess, IntPtr.Zero, 4096, Win32.MEM_RESERVE |
-                Win32.MEM_COMMIT, Win32.PAGE_READWRITE);
+            IntPtr vPointer = VirtualAllocEx(vProcess, IntPtr.Zero, 4096, MEM_RESERVE |
+                MEM_COMMIT, PAGE_READWRITE);
 
             try
             {
-                Win32.LVItem[] vItem = new Win32.LVItem[1];
-                vItem[0].stateMask = Win32.LVIS_FOCUSED | Win32.LVIS_SELECTED;
-                vItem[0].state = Win32.LVIS_FOCUSED | Win32.LVIS_SELECTED;
+                LVItem[] vItem = new LVItem[1];
+                vItem[0].stateMask = LVIS_FOCUSED | LVIS_SELECTED;
+                vItem[0].state = LVIS_FOCUSED | LVIS_SELECTED;
 
                 uint vNumberOfBytesRead = 0;
 
                 //write the struct to the memory of target process
-                Win32.WriteProcessMemory(vProcess, vPointer, Marshal.UnsafeAddrOfPinnedArrayElement(vItem, 0),
-                    Marshal.SizeOf(typeof(Win32.LVItem)), ref vNumberOfBytesRead);
+                WriteProcessMemory(vProcess, vPointer, Marshal.UnsafeAddrOfPinnedArrayElement(vItem, 0),
+                    Marshal.SizeOf(typeof(LVItem)), ref vNumberOfBytesRead);
 
                 //let the target process read item text to this struct
-                Win32.SendMessage(hwndlstWords, Win32.LVM_SETITEMSTATE, n, vPointer.ToInt32());
-                Win32.SendMessage(hwndlstWords, Win32.WM_KEYDOWN, (int)Win32.VK_RETURN, 1);
-                Win32.SendMessage(hwndlstWords, Win32.WM_KEYUP, (int)Win32.VK_RETURN, 1);
+                SendMessage(hwndlstWords, LVM_SETITEMSTATE, n, vPointer.ToInt32());
+                SendMessage(hwndlstWords, WM_KEYDOWN, (int)VK_RETURN, 1);
+                SendMessage(hwndlstWords, WM_KEYUP, (int)VK_RETURN, 1);
             }
             finally
             {
-                Win32.VirtualFreeEx(vProcess, vPointer, 0, Win32.MEM_RELEASE);
-                Win32.CloseHandle(vProcess);
+                VirtualFreeEx(vProcess, vPointer, 0, MEM_RELEASE);
+                CloseHandle(vProcess);
             }
         }
 
         public void ChooseDict(string dict)
         {
-            int n = Win32.SendMessage(hwndComboDicts, (uint)Win32.ComboBoxMessages.CB_FINDSTRINGEXACT, 0, dict);
+            int n = SendMessage(hwndComboDicts, (uint)ComboBoxMessages.CB_FINDSTRINGEXACT, 0, dict);
             if (n != -1)
             {
-                Win32.SendMessage(appHandle, (uint)Win32.WM_COMMAND, 33101 + n, 0);
-                Win32.SendMessage(hwndButtonFind, Win32.BM_CLICK, 0, 0);
+                SendMessage(appHandle, (uint)WM_COMMAND, 33101 + n, 0);
+                SendMessage(hwndButtonFind, BM_CLICK, 0, 0);
             }
         }
 
