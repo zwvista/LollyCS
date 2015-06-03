@@ -20,10 +20,10 @@ namespace Lolly
         protected DataGridView dataGridView;
         protected int filterScope = 0;
         protected string filter = "";
-        protected IEnumerable<MAUTOCORRECT> autoCorrectList;
+        protected List<MAUTOCORRECT> autoCorrectList;
 
-        private IEnumerable<KeyValuePair<string, string>> replacement;
-        private IEnumerable<KeyValuePair<string, string>> replacementChn;
+        private List<KeyValuePair<string, string>> replacement;
+        private List<KeyValuePair<string, string>> replacementChn;
 
         public PhrasesBaseForm()
         {
@@ -160,14 +160,14 @@ namespace Lolly
                     var evaluator = $"$1{kv.Value}$3";
                     phrase2 = new Regex(pattern).Replace(phrase2, evaluator);
                 }
-                Program.AddPropmt(pb, lbuSettings.LangID, phrase2);
+                Program.AddPrompt(pb, lbuSettings.LangID, phrase2);
             }
             if (speakTranslation)
             {
                 var translation2 = translation;
                 foreach (var kv in replacementChn)
                     translation2 = translation2.Replace(kv.Key, kv.Value);
-                Program.AddPropmt(pb, 0, translation2);
+                Program.AddPrompt(pb, 0, translation2);
             }
 
             Program.Speak(pb);
@@ -212,7 +212,7 @@ namespace Lolly
             bool canSpeak = Program.CanSpeak(lbuSettings.LangID);
             speakToolStripButton.Enabled = keepSpeakToolStripButton.Enabled = canSpeak;
 
-            Func<int, IEnumerable<KeyValuePair<string, string>>> GetReplacement = langID =>
+            Func<int, List<KeyValuePair<string, string>>> GetReplacement = langID =>
                 Program.config.GetDictLangConfig(langID).replacement;
 
             replacement = GetReplacement(lbuSettings.LangID);

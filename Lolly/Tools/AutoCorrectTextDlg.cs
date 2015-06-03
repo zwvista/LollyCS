@@ -12,13 +12,11 @@ namespace Lolly
 {
     public partial class AutoCorrectTextDlg : Form
     {
-        private IEnumerable<MAUTOCORRECT> autoCorrectList;
+        private List<MAUTOCORRECT> autoCorrectList;
 
         public AutoCorrectTextDlg()
         {
             InitializeComponent();
-            textBox1.KeyDown += Program.textBoxSelectAll_KeyDown;
-            textBox2.KeyDown += Program.textBoxSelectAll_KeyDown;
         }
 
         private void AutoCorrectTextDlg_Load(object sender, EventArgs e)

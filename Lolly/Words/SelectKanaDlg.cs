@@ -11,13 +11,7 @@ namespace Lolly
 {
     public partial class SelectKanaDlg : Form
     {
-        public string SelectedKana
-        {
-            get
-            {
-                return kanasComboBox.Text;
-            }
-        }
+        public string SelectedKana => kanasComboBox.Text;
 
         public SelectKanaDlg(string word, string[] kanas)
         {

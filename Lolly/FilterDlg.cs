@@ -12,23 +12,11 @@ namespace Lolly
 {
     public partial class FilterDlg : Form
     {
-        public string Filter
-        {
-            get
-            {
-                return filterComboBox.Text;
-            }
-        }
-        public int FilterScope
-        {
-            get
-            {
-                return filterScopeComboBox.SelectedIndex;
-            }
-        }
-        private IEnumerable<MAUTOCORRECT> autoCorrectList;
+        public string Filter => filterComboBox.Text;
+        public int FilterScope => filterScopeComboBox.SelectedIndex;
+        private List<MAUTOCORRECT> autoCorrectList;
 
-        public FilterDlg(IEnumerable<MAUTOCORRECT> autoCorrectList)
+        public FilterDlg(List<MAUTOCORRECT> autoCorrectList)
         {
             this.autoCorrectList = autoCorrectList;
             InitializeComponent();

@@ -5,6 +5,8 @@ using System.Text;
 using LollyBase.Properties;
 using mshtml;
 
+using static LollyBase.Win32;
+
 namespace LollyBase
 {
     public class Lingoes
@@ -19,32 +21,32 @@ namespace LollyBase
         {
             if (elemHtml != null) return;
 
-            //hwndMain = Win32.FindWindow(Settings.Default.LingoesClassName, null);
-            //hwndMain = Win32.FindWindow(Program.lingoesClassName, Program.LingoesWindowName);
+            //hwndMain = FindWindow(Settings.Default.LingoesClassName, null);
+            //hwndMain = FindWindow(Program.lingoesClassName, Program.LingoesWindowName);
             // couldn't find "Lingoes 灵格斯" window in the Japanese OS,
-            // although Win32.GetText(hwndMain) == "Lingoes 灵格斯"
-            hwndMain = Win32.FindWindow(null, Settings.Default.LingoesWindowName);
+            // although GetText(hwndMain) == "Lingoes 灵格斯"
+            hwndMain = FindWindow(null, Settings.Default.LingoesWindowName);
             if (hwndMain == IntPtr.Zero) return;
 
-            IntPtr hwndDlg = Win32.GetDlgItem(hwndMain, 0);
-            hwndEditWord = Win32.GetDlgItem(hwndDlg, 0x67);
-            hwndButtonSearch = Win32.GetDlgItem(hwndDlg, 0x68);
+            IntPtr hwndDlg = GetDlgItem(hwndMain, 0);
+            hwndEditWord = GetDlgItem(hwndDlg, 0x67);
+            hwndButtonSearch = GetDlgItem(hwndDlg, 0x68);
 
-            IntPtr hwndDlg2 = Win32.GetWindow(hwndDlg, Win32.GW_HWNDNEXT);
-            hwndListWords = Win32.GetDlgItem(hwndDlg2, 0x3F7);
+            IntPtr hwndDlg2 = GetWindow(hwndDlg, GW_HWNDNEXT);
+            hwndListWords = GetDlgItem(hwndDlg2, 0x3F7);
 
-            IntPtr hwndDlg3 = Win32.GetWindow(hwndDlg2, Win32.GW_HWNDNEXT);
-            IntPtr hwnd = Win32.GetDlgItem(hwndDlg3, 0x71);
-            hwnd = Win32.GetDlgItem(hwnd, 0);
-            hwnd = Win32.GetDlgItem(hwnd, 0);
-            hwnd = Win32.GetDlgItem(hwnd, 0);
+            IntPtr hwndDlg3 = GetWindow(hwndDlg2, GW_HWNDNEXT);
+            IntPtr hwnd = GetDlgItem(hwndDlg3, 0x71);
+            hwnd = GetDlgItem(hwnd, 0);
+            hwnd = GetDlgItem(hwnd, 0);
+            hwnd = GetDlgItem(hwnd, 0);
 
             try
             {
-                uint WM_HTML_GETOBJECT = Win32.RegisterWindowMessage("WM_HTML_GETOBJECT");
+                uint WM_HTML_GETOBJECT = RegisterWindowMessage("WM_HTML_GETOBJECT");
                 UIntPtr lngRes;
-                Win32.SendMessageTimeout(hwnd, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
-                var doc = (HTMLDocument)Win32.ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
+                SendMessageTimeout(hwnd, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
+                var doc = (HTMLDocument)ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
                 elemHtml = doc.body.parentElement;
             }
             catch (System.Exception)
@@ -61,8 +63,8 @@ namespace LollyBase
         public string Search(string word)
         {
             FindLingoes();
-            Win32.SendMessage(hwndEditWord, Win32.WM_SETTEXT, 0, word);
-            Win32.SendMessage(hwndButtonSearch, Win32.BM_CLICK, 0, 0);
+            SendMessage(hwndEditWord, WM_SETTEXT, 0, word);
+            SendMessage(hwndButtonSearch, BM_CLICK, 0, 0);
             return GetContent();
         }
 
@@ -80,38 +82,40 @@ namespace LollyBase
             string result = text.Substring(0, p);
             text = text.Substring(p);
 
-	        string str;
-	        bool bFoundOne = false;
-	        do{
-		        p = text.IndexOf(dictArea);
-		        if(p == -1)
+            string str;
+            bool bFoundOne = false;
+            do
+            {
+                p = text.IndexOf(dictArea);
+                if (p == -1)
                 {
-			        str = text;
+                    str = text;
                     text = "";
                 }
-		        else
+                else
                 {
-			        str = text.Substring(0, p);
+                    str = text.Substring(0, p);
                     text = text.Substring(p + dictArea.Length);
                 }
-		        bool bFound = dicts.Any(dict => str.Contains(dict));
-		        if(bFound){
-				    bFoundOne = true;
+                bool bFound = dicts.Any(dict => str.Contains(dict));
+                if (bFound)
+                {
+                    bFoundOne = true;
                     if (text == "")
                     {
-				        p = str.IndexOf(foot);
-				        if(p != -1)
+                        p = str.IndexOf(foot);
+                        if (p != -1)
                             str = str.Substring(0, p);
-			        }
+                    }
                     p = str.IndexOf(ad);
-			        if(p != -1)
+                    if (p != -1)
                         str = str.Substring(0, p) + str.Substring(str.IndexOf("</DIV>", p) + 6);
-			        result += dictArea + str;
-		        }
+                    result += dictArea + str;
+                }
             } while (text != "");
-	        if(bFoundOne)
-		        result += "</DIV></DIV></BODY></HTML>";
-	        else
+            if (bFoundOne)
+                result += "</DIV></DIV></BODY></HTML>";
+            else
                 result = $"<HTML><BODY>{ExtensionClass.NOTRANSLATION}</BODY></HTML>";
             return result;
         }

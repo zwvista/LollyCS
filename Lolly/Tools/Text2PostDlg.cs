@@ -18,8 +18,6 @@ namespace Lolly
         {
             InitializeComponent();
 
-            textBox1.KeyDown += Program.textBoxSelectAll_KeyDown;
-            textBox2.KeyDown += Program.textBoxSelectAll_KeyDown;
             paragraphEndComboBox.SelectedIndex = 1;
 
             var blogFolder = Program.appDataFolder + "blog\\";
