@@ -53,5 +53,31 @@ namespace Lolly
             //    dataGridView1.SortOrder == SortOrder.Descending;
             //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, ORD" : "BOOKNAME DESC, UNIT DESC, ORD DESC";
         }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = phrasesList[e.RowIndex];
+            row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
+            Program.db.PhrasesUnits_Update(row);
+        }
+
+        private void dataGridView1_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (dataGridView1.IsCurrentRowDirty)
+            {
+                var row = phrasesList[e.RowIndex];
+                var msg = $"The phrase \"{row.PHRASE}\" is about to be updated. Are you sure?";
+                if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2) == DialogResult.No)
+                {
+                    Program.db.PhrasesUnits_Get(row);
+                    dataGridView1.CancelEdit();
+                    bindingSource1.ListRowChanged = false;
+                    //e.Cancel = true;
+                }
+            }
+        }
     }
 }

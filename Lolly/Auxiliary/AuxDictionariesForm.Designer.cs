@@ -51,7 +51,7 @@ namespace Lolly
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.mDICTTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mLANGUAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.indexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dicttypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dictnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.langtoColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -214,7 +214,7 @@ namespace Lolly
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.indexColumn,
+            this.ordColumn,
             this.dicttypeColumn,
             this.dictnameColumn,
             this.langtoColumn,
@@ -253,12 +253,12 @@ namespace Lolly
             // 
             this.mLANGUAGEBindingSource.DataSource = typeof(LollyBase.MLANGUAGE);
             // 
-            // indexColumn
+            // ordColumn
             // 
-            this.indexColumn.DataPropertyName = "ORD";
-            this.indexColumn.HeaderText = "ORD";
-            this.indexColumn.Name = "indexColumn";
-            this.indexColumn.Width = 50;
+            this.ordColumn.DataPropertyName = "ORD";
+            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.Name = "ordColumn";
+            this.ordColumn.Width = 50;
             // 
             // dicttypeColumn
             // 
@@ -372,7 +372,7 @@ namespace Lolly
         private LLBindingSource bindingSource1;
         private System.Windows.Forms.BindingSource mLANGUAGEBindingSource;
         private System.Windows.Forms.BindingSource mDICTTYPEBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn dicttypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dictnameColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn langtoColumn;

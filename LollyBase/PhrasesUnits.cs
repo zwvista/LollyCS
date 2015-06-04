@@ -11,11 +11,22 @@ namespace LollyBase
         public void PhrasesUnits_Delete(int id) =>
             db.Delete<MPHRASEUNIT>(id);
 
+        public void PhrasesUnits_Get(MPHRASEUNIT row)
+        {
+            var rowDB = db.Get<MPHRASEUNIT>(row.ID);
+            row.BOOKID = rowDB.BOOKID;
+            row.UNIT = rowDB.UNIT;
+            row.PART = rowDB.PART;
+            row.ORD = rowDB.ORD;
+            row.PHRASE = rowDB.PHRASE;
+            row.TRANSLATION = rowDB.TRANSLATION;
+        }
+
         public void PhrasesUnits_Insert(MPHRASEUNIT row) =>
             db.Insert(row);
 
         public void PhrasesUnits_Update(MPHRASEUNIT row) =>
-            db.Update(row);
+            db.Update(row, typeof(MPHRASEUNIT));
 
 
         public void PhrasesUnits_UpdateOrd(int ord, int id)

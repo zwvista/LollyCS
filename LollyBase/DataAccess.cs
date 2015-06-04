@@ -144,17 +144,6 @@ namespace LollyBase
         [MaxLength(2147483647)]
         public string ENGNAME { get; set; }
     }
-    public partial class MPHRASELANG
-    {
-        public string BOOKNAME { get; set; }
-        public int UNIT { get; set; }
-        public int ORD { get; set; }
-        public string PHRASE { get; set; }
-        public string TRANSLATION { get; set; }
-        public int PART { get; set; }
-        public int ID { get; set; }
-        public int BOOKID { get; set; }
-    }
     [Table("PHRASES")]
     public partial class MPHRASEUNIT
     {
@@ -173,6 +162,10 @@ namespace LollyBase
         public string PHRASE { get; set; }
         [MaxLength(2147483647)]
         public string TRANSLATION { get; set; }
+    }
+    public partial class MPHRASELANG : MPHRASEUNIT
+    {
+        public string BOOKNAME { get; set; }
     }
     [Table("PICBOOKS")]
     public partial class MPICBOOK

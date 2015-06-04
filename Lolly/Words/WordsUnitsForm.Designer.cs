@@ -36,7 +36,7 @@ namespace Lolly
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.indexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.noteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
@@ -75,7 +75,7 @@ namespace Lolly
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.unitColumn,
             this.partColumn,
-            this.indexColumn,
+            this.ordColumn,
             this.wordColumn,
             this.noteColumn});
             this.dataGridView1.DataSource = this.bindingSource1;
@@ -105,13 +105,13 @@ namespace Lolly
             this.partColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.partColumn.Width = 75;
             // 
-            // indexColumn
+            // ordColumn
             // 
-            this.indexColumn.DataPropertyName = "ORD";
-            this.indexColumn.HeaderText = "ORD";
-            this.indexColumn.Name = "indexColumn";
-            this.indexColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.indexColumn.Width = 75;
+            this.ordColumn.DataPropertyName = "ORD";
+            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.Name = "ordColumn";
+            this.ordColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ordColumn.Width = 75;
             // 
             // wordColumn
             // 
@@ -155,7 +155,7 @@ namespace Lolly
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn partColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn wordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn noteColumn;
     }

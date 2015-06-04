@@ -52,7 +52,7 @@ namespace Lolly
             this.inputColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extendedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.basicColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.indexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new LLBindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -216,7 +216,7 @@ namespace Lolly
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.indexColumn,
+            this.ordColumn,
             this.inputColumn,
             this.extendedColumn,
             this.basicColumn});
@@ -249,11 +249,11 @@ namespace Lolly
             this.basicColumn.HeaderText = "BASIC";
             this.basicColumn.Name = "basicColumn";
             // 
-            // indexColumn
+            // ordColumn
             // 
-            this.indexColumn.DataPropertyName = "ORD";
-            this.indexColumn.HeaderText = "ORD";
-            this.indexColumn.Name = "indexColumn";
+            this.ordColumn.DataPropertyName = "ORD";
+            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.Name = "ordColumn";
             // 
             // bindingSource1
             // 
@@ -304,7 +304,7 @@ namespace Lolly
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         protected System.Windows.Forms.ToolStripButton reorderToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn inputColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn extendedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn basicColumn;

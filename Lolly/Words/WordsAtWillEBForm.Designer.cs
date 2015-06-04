@@ -34,7 +34,7 @@ namespace Lolly
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordsAtWillEBForm));
             this.bindingSource1 = new LLBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.indexColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.noteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
@@ -70,7 +70,7 @@ namespace Lolly
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.indexColumn,
+            this.ordColumn,
             this.wordColumn,
             this.noteColumn});
             this.dataGridView1.DataSource = this.bindingSource1;
@@ -84,12 +84,12 @@ namespace Lolly
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowValidated);
             // 
-            // indexColumn
+            // ordColumn
             // 
-            this.indexColumn.DataPropertyName = "ORD";
-            this.indexColumn.HeaderText = "ORD";
-            this.indexColumn.Name = "indexColumn";
-            this.indexColumn.Width = 75;
+            this.ordColumn.DataPropertyName = "ORD";
+            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.Name = "ordColumn";
+            this.ordColumn.Width = 75;
             // 
             // wordColumn
             // 
@@ -130,7 +130,7 @@ namespace Lolly
 
         private LLBindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn wordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn noteColumn;
     }
