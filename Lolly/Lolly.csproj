@@ -642,9 +642,9 @@
       <Project>{dba6ef01-414e-4854-92c1-8585a75dda15}</Project>
       <Name>Dll.Lolly</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LollyBase\Dll.LollyBase.csproj">
+    <ProjectReference Include="..\LollyShared\Dll.LollyShared.csproj">
       <Project>{fe4d7d23-1f41-44ce-8b68-9229d41406a1}</Project>
-      <Name>Dll.LollyBase</Name>
+      <Name>Dll.LollyShared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Oli.Controls\Oli.Controls.csproj">
       <Project>{3f1a45c7-96cb-4bad-a931-792d04b96128}</Project>

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
-using LollyBase;
+using LollyShared;
 
 namespace Lolly
 {

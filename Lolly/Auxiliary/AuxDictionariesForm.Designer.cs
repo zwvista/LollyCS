@@ -1,4 +1,4 @@
-﻿using LollyBase;
+﻿using LollyShared;
 
 namespace Lolly
 {
@@ -102,7 +102,7 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(LollyBase.MDICTIONARY);
+            this.bindingSource1.DataSource = typeof(LollyShared.MDICTIONARY);
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "ORD";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
@@ -247,11 +247,11 @@ namespace Lolly
             // 
             // mDICTTYPEBindingSource
             // 
-            this.mDICTTYPEBindingSource.DataSource = typeof(LollyBase.MDICTTYPE);
+            this.mDICTTYPEBindingSource.DataSource = typeof(LollyShared.MDICTTYPE);
             // 
             // mLANGUAGEBindingSource
             // 
-            this.mLANGUAGEBindingSource.DataSource = typeof(LollyBase.MLANGUAGE);
+            this.mLANGUAGEBindingSource.DataSource = typeof(LollyShared.MLANGUAGE);
             // 
             // ordColumn
             // 

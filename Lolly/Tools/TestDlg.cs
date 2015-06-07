@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using LollyBase;
+using LollyShared;
 using mshtml;
 using System.Text.RegularExpressions;
 using System.IO;

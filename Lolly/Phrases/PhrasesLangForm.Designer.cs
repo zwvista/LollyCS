@@ -1,4 +1,4 @@
-﻿using LollyBase;
+﻿using LollyShared;
 
 namespace Lolly
 {
@@ -46,7 +46,7 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(LollyBase.MPHRASELANG);
+            this.bindingSource1.DataSource = typeof(LollyShared.MPHRASELANG);
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "BOOKNAME,UNIT,ORD";
             // 

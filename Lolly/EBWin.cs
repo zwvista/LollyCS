@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Automation;
 using System.Runtime.InteropServices;
-using LollyBase;
+using LollyShared;
 
-using static LollyBase.Win32;
+using static LollyShared.Win32;
 
 namespace Lolly
 {

@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LollyShared.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LingoesClassName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Afx:00007FF6C4800000:0</Value>
+    </Setting>
+    <Setting Name="LingoesWindowName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Lingoes 灵格斯</Value>
+    </Setting>
+    <Setting Name="FrhelperClassName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TFormMainEudic</Value>
+    </Setting>
+    <Setting Name="LogFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">E:\Education\Lolly\log</Value>
+    </Setting>
+    <Setting Name="DBPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\zw\backup\Lolly.db</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

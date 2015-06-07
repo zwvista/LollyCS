@@ -1,4 +1,4 @@
-﻿using LollyBase;
+﻿using LollyShared;
 
 namespace Lolly
 {
@@ -92,7 +92,7 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(LollyBase.MWEBEXTRACT);
+            this.bindingSource1.DataSource = typeof(LollyShared.MWEBEXTRACT);
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "SITENAME";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);

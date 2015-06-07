@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using LollyBase;
+using LollyShared;
 
 namespace Lolly
 {

@@ -9,7 +9,7 @@ using System.Web;
 using System.Speech.Synthesis;
 using Microsoft.Win32;
 using System.Reflection;
-using LollyBase;
+using LollyShared;
 
 namespace Lolly
 {

@@ -407,9 +407,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LollyBase\Dll.LollyBase.csproj">
+    <ProjectReference Include="..\LollyShared\Dll.LollyShared.csproj">
       <Project>{fe4d7d23-1f41-44ce-8b68-9229d41406a1}</Project>
-      <Name>Dll.LollyBase</Name>
+      <Name>Dll.LollyShared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
