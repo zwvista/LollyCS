@@ -29,9 +29,9 @@ namespace Lolly
 
         private void FillTable()
         {
-            mLANGUAGEBindingSource.DataSource = Program.db.Languages_GetData();
-            mDICTTYPEBindingSource.DataSource = Program.db.DictTypes_GetData();
-            auxList = Program.db.Dictionaries_GetDataByLang(lbuSettings.LangID);
+            mLANGUAGEBindingSource.DataSource = LollyDB.Languages_GetData();
+            mDICTTYPEBindingSource.DataSource = LollyDB.DictTypes_GetData();
+            auxList = LollyDB.Dictionaries_GetDataByLang(lbuSettings.LangID);
             bindingSource1.DataSource = auxList;
         }
 
@@ -88,7 +88,7 @@ namespace Lolly
         {
             if (deletedDict == "") return;
 
-            Program.db.Dictionaries_Delete(lbuSettings.LangID, deletedDict);
+            LollyDB.Dictionaries_Delete(lbuSettings.LangID, deletedDict);
             deletedDict = "";
         }
 
@@ -105,10 +105,10 @@ namespace Lolly
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
-                Program.db.Dictionaries_Insert(row);
+                LollyDB.Dictionaries_Insert(row);
             }
             else
-                Program.db.Dictionaries_Update(row, currentDict);
+                LollyDB.Dictionaries_Update(row, currentDict);
         }
     }
 }

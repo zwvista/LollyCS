@@ -6,25 +6,36 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public partial class LollyDB
+    public static partial class LollyDB
     {
-        public void Languages_UpdateBook(int bookid, int langid)
+        public static void Languages_UpdateBook(long bookid, long langid)
         {
-            var sql = @"
-                UPDATE  LANGUAGES
-                SET CURBOOKID = ?
-                WHERE   (LANGID = ?)
-            ";
-            db.Execute(sql, bookid, langid);
+            using (var db = new LollyEntities())
+            {
+                var item = db.SLANGUAGE.SingleOrDefault(r => r.LANGID == langid);
+                if (item == null) return;
+
+                item.CURBOOKID = bookid;
+                db.SaveChanges();
+            }
         }
 
-        public MLANGUAGE Languages_GetDataByLang(int langid) =>
-            db.Table<MLANGUAGE>().SingleOrDefault(r => r.LANGID == langid);
+        public static MLANGUAGE Languages_GetDataByLang(long langid)
+        {
+            using (var db = new LollyEntities())
+                return db.SLANGUAGE.SingleOrDefault(r => r.LANGID == langid);
+        }
 
-        public List<MLANGUAGE> Languages_GetData() =>
-            db.Table<MLANGUAGE>().ToList();
+        public static List<MLANGUAGE> Languages_GetData()
+        {
+            using (var db = new LollyEntities())
+                return db.SLANGUAGE.ToList();
+        }
 
-        public List<MLANGUAGE> Languages_GetDataNonChinese() =>
-            db.Table<MLANGUAGE>().Where(r => r.LANGID > 0).ToList();
+        public static List<MLANGUAGE> Languages_GetDataNonChinese()
+        {
+            using (var db = new LollyEntities())
+                return db.SLANGUAGE.Where(r => r.LANGID > 0).ToList();
+        }
     }
 }

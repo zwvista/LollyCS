@@ -15,17 +15,17 @@ namespace Lolly
 {
     public struct LangBookUnitSettings
     {
-        public int LangID { get; set; }
-        public int BookID { get; set; }
-        public int UnitFrom { get; set; }
-        public int PartFrom { get; set; }
-        public int UnitTo { get; set; }
-        public int PartTo { get; set; }
+        public long LangID { get; set; }
+        public long BookID { get; set; }
+        public long UnitFrom { get; set; }
+        public long PartFrom { get; set; }
+        public long UnitTo { get; set; }
+        public long PartTo { get; set; }
         public string LangName { get; set; }
         public string BookName { get; set; }
 
-        public int UnitPartFrom => UnitFrom * 10 + PartFrom;
-        public int UnitPartTo => UnitTo * 10 + PartTo;
+        public long UnitPartFrom => UnitFrom * 10 + PartFrom;
+        public long UnitPartTo => UnitTo * 10 + PartTo;
         public string BookUnitsDesc => UnitPartFrom == UnitPartTo ?
             $"{BookName} {UnitFrom}:{PartFrom}" :
             $"{BookName} {UnitFrom}:{PartFrom} -- {UnitTo}:{PartTo}";
@@ -39,10 +39,10 @@ namespace Lolly
 
     public class ReorderObject
     {
-        public int ID { get; set; }
-        public int ORD { get; set; } = 0;
+        public long ID { get; set; }
+        public long ORD { get; set; } = 0;
         public string ITEM { get; set; }
-        public ReorderObject(int id, string item)
+        public ReorderObject(long id, string item)
         {
             ID = id;
             ITEM = item;
@@ -90,7 +90,6 @@ namespace Lolly
 
     static class Program
     {
-        public static LollyDB db = new LollyDB();
         public static LangBookUnitSettings lbuSettings;
         public static string appDataFolder;
         public static string appDataFolderInHtml;
@@ -141,11 +140,11 @@ namespace Lolly
 
         public static MDICTENTITY OpenDictTable(string word, string dictTable)
         {
-            var wordRow = db.DictEntity_GetDataByWordDictTable(word, dictTable);
+            var wordRow = LollyDB.DictEntity_GetDataByWordDictTable(word, dictTable);
             if (wordRow == null)
             {
-                db.DictEntity_Insert(word, dictTable);
-                wordRow = db.DictEntity_GetDataByWordDictTable(word, dictTable);
+                LollyDB.DictEntity_Insert(word, dictTable);
+                wordRow = LollyDB.DictEntity_GetDataByWordDictTable(word, dictTable);
             }
             return wordRow;
         }
@@ -156,10 +155,10 @@ namespace Lolly
             if (append)
                 text = wordRow.TRANSLATION + text;
             wordRow.TRANSLATION = text;
-            db.DictEntity_Update(text, wordRow.WORD, dictRow.DICTTABLE);
+            LollyDB.DictEntity_Update(text, wordRow.WORD, dictRow.DICTTABLE);
         }
 
-        public static void SetLangID(int newLangID)
+        public static void SetLangID(long newLangID)
         {
             lbuSettings.LangID = newLangID;
             Properties.Settings.Default.LangID = newLangID;
@@ -169,10 +168,10 @@ namespace Lolly
         public static void InitVoices()
         {
             var voices = new SpeechSynthesizer().GetInstalledVoices();
-            voiceNames = (from row in db.Languages_GetData() select row.VOICE).ToArray();
+            voiceNames = (from row in LollyDB.Languages_GetData() select row.VOICE).ToArray();
         }
 
-        public static void Speak(int nLangID, string text)
+        public static void Speak(long nLangID, string text)
         {
             synth.SpeakAsyncCancelAll();
             synth.SelectVoice(voiceNames[nLangID]);
@@ -185,12 +184,12 @@ namespace Lolly
             synth.SpeakAsync(pb);
         }
 
-        public static bool CanSpeak(int nLangID)
+        public static bool CanSpeak(long nLangID)
         {
             return voiceNames[nLangID] != "";
         }
 
-        public static void AddPrompt(PromptBuilder pb, int nLangID, string text)
+        public static void AddPrompt(PromptBuilder pb, long nLangID, string text)
         {
             pb.StartVoice(voiceNames[nLangID]);
             pb.AppendText(text);

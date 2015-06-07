@@ -84,12 +84,12 @@ namespace Lolly
             this.ifrId = ifrId;
 
             dictToolStripTextBox.Text = dict;
-            dictRow = Program.db.DictAll_GetDataByLangDict(lbuSettings.LangID, dict);
+            dictRow = LollyDB.DictAll_GetDataByLangDict(lbuSettings.LangID, dict);
         }
 
         private void ExtractWebDictForm_Shown(object sender, EventArgs e)
         {
-            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
             langToolStripTextBox.Text = lbuSettings.LangName;
             IOleObject obj = (IOleObject)webBrowser1.ActiveXInstance;
             obj.SetClientSite(this);
@@ -159,7 +159,7 @@ namespace Lolly
 
             dictStatus = dictStatus == DictWebBrowserStatus.Navigating && !string.IsNullOrEmpty(automation) &&
                 webBrowser1.DoWebAutomation(automation, word) &&
-                !dictRow.AUTOJUMP ? DictWebBrowserStatus.Automating :
+                dictRow.AUTOJUMP == 0 ? DictWebBrowserStatus.Automating :
                 DictWebBrowserStatus.Ready;
 
             if (dictStatus == DictWebBrowserStatus.Ready)

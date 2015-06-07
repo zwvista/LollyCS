@@ -23,7 +23,7 @@ namespace LollyASPMVC.Controllers
         public ActionResult DictList(int langid)
         {
             return Json(
-                MvcApplication.db.Dictionaries_GetDataByLang(langid)
+                LollyDB.Dictionaries_GetDataByLang(langid)
                 .Select(r => r.DICTNAME)
                 .OrderBy(r => r),
                 JsonRequestBehavior.AllowGet
@@ -33,7 +33,7 @@ namespace LollyASPMVC.Controllers
         [HttpPost]
         public ActionResult UrlByWord(LollyViewModel vm)
         {
-            var m = MvcApplication.db.DictAll_GetDataByLangDict(vm.SelectedLangID, vm.SelectedDictName);
+            var m = LollyDB.DictAll_GetDataByLangDict(vm.SelectedLangID, vm.SelectedDictName);
             var url = string.Format(m.URL, HttpUtility.UrlEncode(vm.Word));
             return Content(url);
         }

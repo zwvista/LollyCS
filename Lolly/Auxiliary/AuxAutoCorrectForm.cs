@@ -12,7 +12,7 @@ namespace Lolly
 {
     public partial class AuxAutoCorrectForm : Form, ILangBookUnits
     {
-        private int deletedID = 0;
+        private long deletedID = 0;
         private LangBookUnitSettings lbuSettings;
         protected BindingList<MAUTOCORRECT> auxList;
 
@@ -28,7 +28,7 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = new BindingList<MAUTOCORRECT>(Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID));
+            auxList = new BindingList<MAUTOCORRECT>(LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID));
             bindingSource1.DataSource = auxList;
         }
 
@@ -75,7 +75,7 @@ namespace Lolly
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    Program.db.AutoCorrect_UpdateOrd(obj.ORD, obj.ID);
+                    LollyDB.AutoCorrect_UpdateOrd(obj.ORD, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -84,7 +84,7 @@ namespace Lolly
         {
             if (deletedID == 0) return;
 
-            Program.db.AutoCorrect_Delete(deletedID);
+            LollyDB.AutoCorrect_Delete(deletedID);
             deletedID = 0;
         }
 
@@ -98,11 +98,11 @@ namespace Lolly
                 row.LANGID = lbuSettings.LangID;
                 if (row.ORD == 0)
                     row.ORD = e.RowIndex + 1;
-                Program.db.AutoCorrect_Insert(row);
+                row.ID = LollyDB.AutoCorrect_Insert(row);
                 dataGridView1.Refresh();
             }
             else
-                Program.db.AutoCorrect_Update(row);
+                LollyDB.AutoCorrect_Update(row);
         }
     }
 }

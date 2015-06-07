@@ -12,8 +12,8 @@ namespace Lolly
 {
     public partial class AuxBooksForm : Form, ILangBookUnits
     {
-        private int currentBookID = 0;
-        private int deletedBookID = 0;
+        private long currentBookID = 0;
+        private long deletedBookID = 0;
         private LangBookUnitSettings lbuSettings;
         protected List<MBOOK> auxList;
 
@@ -29,7 +29,7 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = Program.db.Books_GetDataByLang(lbuSettings.LangID);
+            auxList = LollyDB.Books_GetDataByLang(lbuSettings.LangID);
             bindingSource1.DataSource = auxList;
         }
 
@@ -70,7 +70,7 @@ namespace Lolly
         {
             if (deletedBookID == 0) return;
 
-            Program.db.Books_Delete(deletedBookID);
+            LollyDB.Books_Delete(deletedBookID);
             deletedBookID = 0;
         }
 
@@ -87,10 +87,10 @@ namespace Lolly
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
-                Program.db.Books_Insert(row);
+                LollyDB.Books_Insert(row);
             }
             else
-                Program.db.Books_Update(row, currentBookID);
+                LollyDB.Books_Update(row, currentBookID);
         }
     }
 }

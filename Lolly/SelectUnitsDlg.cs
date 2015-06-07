@@ -12,8 +12,8 @@ namespace Lolly
 {
     public partial class SelectUnitsDlg : Form
     {
-        private int selectedLangID;
-        private int selectedBookID;
+        private long selectedLangID;
+        private long selectedBookID;
         public bool ActiveIncluded => activeIncludedCheckBox.Checked;
 
         private List<MLANGUAGE> languageList;
@@ -27,7 +27,7 @@ namespace Lolly
 
         private void SelectUnitsDlg_Load(object sender, EventArgs e)
         {
-            languageList = Program.db.Languages_GetDataNonChinese();
+            languageList = LollyDB.Languages_GetDataNonChinese();
             langComboBox.DataSource = languageList;
             langComboBox.SelectedValue = Program.lbuSettings.LangID;
         }
@@ -35,9 +35,9 @@ namespace Lolly
         private void langComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             if (langComboBox.SelectedValue == null) return;
-            selectedLangID = (int)langComboBox.SelectedValue;
+            selectedLangID = (long)langComboBox.SelectedValue;
             var row = languageList.Single(r => r.LANGID == selectedLangID);
-            bookList = Program.db.Books_GetDataByLang(selectedLangID);
+            bookList = LollyDB.Books_GetDataByLang(selectedLangID);
             bookComboBox.DataSource = bookList;
             bookComboBox.SelectedValue = row.CURBOOKID;
         }
@@ -45,7 +45,7 @@ namespace Lolly
         private void bookComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             if (bookComboBox.SelectedValue == null) return;
-            selectedBookID = (int)bookComboBox.SelectedValue;
+            selectedBookID = (long)bookComboBox.SelectedValue;
             var row = bookList.Single(r => r.BOOKID == selectedBookID);
             // Controls for Units
             unitsInAllFromLabel.Text = unitsInAllToLabel.Text = $"({row.UNITSINBOOK} in all)";
@@ -58,8 +58,8 @@ namespace Lolly
             partFromComboBox.Items.AddRange(parts);
             partToComboBox.Items.Clear();
             partToComboBox.Items.AddRange(parts);
-            partFromComboBox.SelectedIndex = row.PARTFROM - 1;
-            partToComboBox.SelectedIndex = row.PARTTO - 1;
+            partFromComboBox.SelectedIndex = (int)row.PARTFROM - 1;
+            partToComboBox.SelectedIndex = (int)row.PARTTO - 1;
             // toCheckBox
             toCheckBox.Checked = row.UNITFROM != row.UNITTO || row.PARTFROM != row.PARTTO;
             toCheckBox_CheckedChanged(null, null);
@@ -80,8 +80,8 @@ namespace Lolly
         private void okButton_Click(object sender, EventArgs e)
         {
             Program.SetLangID(selectedLangID);
-            Program.db.Languages_UpdateBook(selectedBookID, selectedLangID);
-            Program.db.Books_UpdateUnit((int)unitFromNumericUpDown.Value, partFromComboBox.SelectedIndex + 1,
+            LollyDB.Languages_UpdateBook(selectedBookID, selectedLangID);
+            LollyDB.Books_UpdateUnit((int)unitFromNumericUpDown.Value, partFromComboBox.SelectedIndex + 1,
                 (int)unitToNumericUpDown.Value, partToComboBox.SelectedIndex + 1, selectedBookID);
         }
 

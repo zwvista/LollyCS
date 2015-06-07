@@ -10,7 +10,7 @@ namespace Lolly
 {
     public class DictConfig
     {
-        private Dictionary<int, DictLangConfig> lang2Config = new Dictionary<int, DictLangConfig>();
+        private Dictionary<long, DictLangConfig> lang2Config = new Dictionary<long, DictLangConfig>();
 
         public DictConfig(string uri)
         {
@@ -18,12 +18,12 @@ namespace Lolly
             var elemGroupDictInfo = config.Element("dictInfo").Elements("group").ToList();
             foreach (var elemLang in config.Elements("language"))
             {
-                int langID = (int) elemLang.Attribute("id");
+                long langID = (long) elemLang.Attribute("id");
                 lang2Config[langID] = new DictLangConfig(elemLang, elemGroupDictInfo, langID);
             }
         }
 
-        public DictLangConfig GetDictLangConfig(int langID)
+        public DictLangConfig GetDictLangConfig(long langID)
         {
             return lang2Config[langID];
         }
@@ -41,7 +41,7 @@ namespace Lolly
         public SortedDictionary<string, List<UIDictItem>> dictGroups = new SortedDictionary<string, List<UIDictItem>>();
         private Dictionary<string, UIDictItem> dictItems = new Dictionary<string, UIDictItem>();
 
-        public DictLangConfig(XElement elemLang, List<XElement> elemGroupDictInfo, int langID)
+        public DictLangConfig(XElement elemLang, List<XElement> elemGroupDictInfo, long langID)
         {
             // replacement
             replacement = elemLang.Elements("phraseReplace")
@@ -93,8 +93,8 @@ namespace Lolly
             foreach (var group in dictNormalGroups)
             {
                 dictAllList =
-                    group.Name == DictNames.WEB ? Program.db.DictAll_GetDataByLangWeb(langID) :
-                    Program.db.DictAll_GetDataByLangDictType(langID, group.Type);
+                    group.Name == DictNames.WEB ? LollyDB.DictAll_GetDataByLangWeb(langID) :
+                    LollyDB.DictAll_GetDataByLangDictType(langID, group.Type);
                 var dictNames = (from row in dictAllList select row.DICTNAME).ToArray();
                 if (group.Name == DictNames.OFFLINE)
                 {
@@ -144,7 +144,7 @@ namespace Lolly
                 }
             }).ToDictionary(elem => elem.Name, elem => elem.Dict);
 
-            dictAllList = Program.db.DictAll_GetDataByLang(langID);
+            dictAllList = LollyDB.DictAll_GetDataByLang(langID);
         }
     }
 }

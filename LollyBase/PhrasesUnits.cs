@@ -6,55 +6,111 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public partial class LollyDB
+    public static partial class LollyDB
     {
-        public void PhrasesUnits_Delete(int id) =>
-            db.Delete<MPHRASEUNIT>(id);
-
-        public void PhrasesUnits_Get(MPHRASEUNIT row)
+        public static void PhrasesUnits_Delete(long id)
         {
-            var rowDB = db.Get<MPHRASEUNIT>(row.ID);
-            row.BOOKID = rowDB.BOOKID;
-            row.UNIT = rowDB.UNIT;
-            row.PART = rowDB.PART;
-            row.ORD = rowDB.ORD;
-            row.PHRASE = rowDB.PHRASE;
-            row.TRANSLATION = rowDB.TRANSLATION;
+            using (var db = new LollyEntities())
+            {
+                var item = db.SPHRASEUNIT.SingleOrDefault(r => r.ID == id);
+                if (item == null) return;
+
+                db.SPHRASEUNIT.Remove(item);
+                db.SaveChanges();
+            }
         }
 
-        public void PhrasesUnits_Insert(MPHRASEUNIT row) =>
-            db.Insert(row);
-
-        public void PhrasesUnits_Update(MPHRASEUNIT row) =>
-            db.Update(row, typeof(MPHRASEUNIT));
-
-
-        public void PhrasesUnits_UpdateOrd(int ord, int id)
+        public static void PhrasesUnits_Get(MPHRASELANG row)
         {
-            var sql = @"
-                UPDATE  PHRASES
-                SET ORD = @ord
-                WHERE (id = @id)
-            ";
-            db.Execute(sql, ord, id);
+            using (var db = new LollyEntities())
+            {
+                var item = db.SPHRASEUNIT.SingleOrDefault(r => r.ID == row.ID);
+                if (item == null) return;
+
+                row.BOOKID = item.BOOKID;
+                row.UNIT = item.UNIT;
+                row.PART = item.PART;
+                row.ORD = item.ORD;
+                row.PHRASE = item.PHRASE;
+                row.TRANSLATION = item.TRANSLATION;
+            }
         }
 
-        public List<MPHRASEUNIT> PhrasesUnits_GetDataByBookUnitParts(int bookid, int unitpartfrom, int unitpartto)
+        public static long PhrasesUnits_Insert(MPHRASEUNIT row)
         {
-            //return (
-            //    from r in db.Table<MPHRASEUNIT>()
-            //    let unitpart = r.UNIT * 10 + r.PART
-            //    where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
-            //    orderby r.UNIT, r.PART, r.ORD
-            //    select r
-            //).ToList();
-            var sql = @"
-                SELECT *
-                FROM PHRASES
-                WHERE BOOKID = @bookid AND UNIT * 10 + PART >= @unitpartfrom AND UNIT * 10 + PART <= @unitpartto
-                ORDER BY UNIT, PART, ORD
-            ";
-            return db.Query<MPHRASEUNIT>(sql, bookid, unitpartfrom, unitpartto);
+            using (var db = new LollyEntities())
+            {
+                var item = new MPHRASEUNIT
+                {
+                    BOOKID = row.BOOKID,
+                    UNIT = row.UNIT,
+                    PART = row.PART,
+                    ORD = row.ORD,
+                    PHRASE = row.PHRASE,
+                    TRANSLATION = row.TRANSLATION
+                };
+                db.SPHRASEUNIT.Add(item);
+                db.SaveChanges();
+                return item.ID;
+            }
+        }
+
+        public static void PhrasesUnits_Update(MPHRASEUNIT row)
+        {
+            using (var db = new LollyEntities())
+            {
+                var item = db.SPHRASEUNIT.SingleOrDefault(r => r.ID == row.ID);
+                if (item == null) return;
+
+                item.UNIT = row.UNIT;
+                item.PART = row.PART;
+                item.ORD = row.ORD;
+                item.PHRASE = row.PHRASE;
+                item.TRANSLATION = row.TRANSLATION;
+                db.SaveChanges();
+            }
+        }
+
+        public static void PhrasesUnits_Update(MPHRASELANG row)
+        {
+            using (var db = new LollyEntities())
+            {
+                var item = db.SPHRASEUNIT.SingleOrDefault(r => r.ID == row.ID);
+                if (item == null) return;
+
+                item.UNIT = row.UNIT;
+                item.PART = row.PART;
+                item.ORD = row.ORD;
+                item.PHRASE = row.PHRASE;
+                item.TRANSLATION = row.TRANSLATION;
+                db.SaveChanges();
+            }
+        }
+
+        public static void PhrasesUnits_UpdateOrd(long ord, long id)
+        {
+            using (var db = new LollyEntities())
+            {
+                var item = db.SPHRASEUNIT.SingleOrDefault(r => r.ID == id);
+                if (item == null) return;
+
+                item.ORD = ord;
+                db.SaveChanges();
+            }
+        }
+
+        public static List<MPHRASEUNIT> PhrasesUnits_GetDataByBookUnitParts(long bookid, long unitpartfrom, long unitpartto)
+        {
+            using (var db = new LollyEntities())
+            {
+                return (
+                    from r in db.SPHRASEUNIT
+                    let unitpart = r.UNIT * 10 + r.PART
+                    where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
+                    orderby r.UNIT, r.PART, r.ORD
+                    select r
+                ).ToList();
+            }
         }
     }
 }

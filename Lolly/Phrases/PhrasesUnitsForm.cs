@@ -12,7 +12,7 @@ namespace Lolly
 {
     public partial class PhrasesUnitsForm : PhrasesBaseForm
     {
-        private int deletedID = 0;
+        private long deletedID = 0;
         private BindingList<MPHRASEUNIT> phrasesList;
 
         public PhrasesUnitsForm()
@@ -36,10 +36,10 @@ namespace Lolly
         protected override void FillTable()
         {
             phrasesList = new BindingList<MPHRASEUNIT>(
-                Program.db.PhrasesUnits_GetDataByBookUnitParts(lbuSettings.BookID,
+                LollyDB.PhrasesUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
             bindingSource1.DataSource = phrasesList;
-            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace Lolly
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    Program.db.PhrasesUnits_UpdateOrd(obj.ORD, obj.ID);
+                    LollyDB.PhrasesUnits_UpdateOrd(obj.ORD, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -101,7 +101,7 @@ namespace Lolly
         {
             if (deletedID == 0) return;
 
-            Program.db.PhrasesUnits_Delete(deletedID);
+            LollyDB.PhrasesUnits_Delete(deletedID);
             deletedID = 0;
         }
 
@@ -121,13 +121,13 @@ namespace Lolly
                     row.ORD = e.RowIndex + 1;
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
-                Program.db.PhrasesUnits_Insert(row);
+                row.ID = LollyDB.PhrasesUnits_Insert(row);
                 dataGridView1.Refresh();
             }
             else
             {
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
-                Program.db.PhrasesUnits_Update(row);
+                LollyDB.PhrasesUnits_Update(row);
             }
         }
     }

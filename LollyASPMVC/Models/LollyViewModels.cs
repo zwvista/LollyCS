@@ -15,7 +15,7 @@ namespace LollyASPMVC.Models
         {
             get
             {
-                return MvcApplication.db.Languages_GetDataNonChinese()
+                return LollyDB.Languages_GetDataNonChinese()
                     .Select(r => new SelectListItem()
                     {
                         Value = r.LANGID.ToString(),

@@ -8,7 +8,7 @@
     <Setting Name="AppDataFolder" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\zw\backup</Value>
     </Setting>
-    <Setting Name="LangID" Type="System.Int32" Scope="User">
+    <Setting Name="LangID" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="EBWinExe" Type="System.String" Scope="Application">

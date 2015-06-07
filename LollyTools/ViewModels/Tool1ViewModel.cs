@@ -36,8 +36,8 @@ namespace LollyTools.ViewModels
         private void OnAllTranslationsFrhelper()
         {
             var obj = new Frhelper();
-            var dictRow = DictAll.GetDataByLangDict(3, "Frhelper");
-            using (var db = new Entities())
+            var dictRow = LollyDB.DictAll_GetDataByLangDict(3, "Frhelper");
+            using (var db = new LollyEntities())
             {
                 var sql = @"
                     SELECT   *
@@ -56,7 +56,7 @@ namespace LollyTools.ViewModels
                     }
                     if (string.Equals(wordInDict, r.WORD, StringComparison.InvariantCultureIgnoreCase)) continue;
                     var html = obj.Search(r.WORD, dictRow.TRANSFORM_WIN);
-                    DictEntity.Update(html, r.WORD, "@FR-CH FRHELPER");
+                    LollyDB.DictEntity_Update(html, r.WORD, "@FR-CH FRHELPER");
                     Debug.Print("{0} <> {1}", r.WORD, wordInDict);
                 }
             }
@@ -65,7 +65,7 @@ namespace LollyTools.ViewModels
         private void OnOneTranslationFrhelper()
         {
             var obj = new Frhelper();
-            var dictRow = DictAll.GetDataByLangDict(3, "Frhelper");
+            var dictRow = LollyDB.DictAll_GetDataByLangDict(3, "Frhelper");
             var html = obj.Search(Word, dictRow.TRANSFORM_WIN);
         }
 
@@ -86,7 +86,7 @@ namespace LollyTools.ViewModels
                 EXCEPT
                 SELECT WORD FROM [{0}]
             ";
-            using (var db = new Entities())
+            using (var db = new LollyEntities())
             {
                 var dictRows = (
                     from r in db.SDICTALL
@@ -100,7 +100,7 @@ namespace LollyTools.ViewModels
                     db.Database.ExecuteSqlCommand(string.Format(sqlDel, r.DICTTABLE, langid));
                     var newWords = db.Database.SqlQuery<string>(string.Format(sqlNewWords, r.DICTTABLE, langid)).ToList();
                     foreach (var w in newWords)
-                        DictEntity.Insert(w, r.DICTTABLE);
+                        LollyDB.DictEntity_Insert(w, r.DICTTABLE);
                 }
             }
         }

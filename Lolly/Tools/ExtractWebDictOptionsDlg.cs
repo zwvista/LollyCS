@@ -12,7 +12,7 @@ namespace Lolly
 {
     public partial class ExtractWebDictOptionsDlg : Form
     {
-        public int LangID { get; private set; }
+        public long LangID { get; private set; }
         public string[] SelectedWords { get; private set; }
         public string[] SelectedDicts { get; private set; }
         public bool OverwriteDB => overwriteCheckBox.Checked;
@@ -30,20 +30,20 @@ namespace Lolly
             bookUnitsRadioButton.Text = Program.lbuSettings.BookUnitsDesc;
             langRadioButton.Text = Program.lbuSettings.LangDesc;
             bookUnitsRadioButton.Checked = true;
-            dictDataGridView.DataSource = Program.db.DictAll_GetDataByLangExact(Program.lbuSettings.LangID);
+            dictDataGridView.DataSource = LollyDB.DictAll_GetDataByLangExact(Program.lbuSettings.LangID);
             checkAllDictsButton.PerformClick();
         }
 
         private void unitsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            wordDataGridView.DataSource = Program.db.WordsLangOrBook_GetDataByBookUnitParts(Program.lbuSettings.BookID,
+            wordDataGridView.DataSource = LollyDB.WordsLangOrBook_GetDataByBookUnitParts(Program.lbuSettings.BookID,
                 Program.lbuSettings.UnitPartFrom, Program.lbuSettings.UnitPartTo);
             checkAllWordsButton.PerformClick();
         }
 
         private void langRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            wordDataGridView.DataSource = Program.db.WordsLangOrBook_GetDataByLang(Program.lbuSettings.LangID);
+            wordDataGridView.DataSource = LollyDB.WordsLangOrBook_GetDataByLang(Program.lbuSettings.LangID);
             checkAllWordsButton.PerformClick();
         }
 

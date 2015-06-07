@@ -17,7 +17,7 @@ namespace Lolly
         protected string currentNote = "";
         protected LangBookUnitSettings lbuSettings;
         protected DataGridView dataGridView;
-        protected Dictionary<string, int> wordLevelDic = new Dictionary<string, int>();
+        protected Dictionary<string, long> wordLevelDic = new Dictionary<string, long>();
         protected DictLangConfig config;
 
         public WordsBaseForm()
@@ -302,11 +302,11 @@ namespace Lolly
             wordTextBox.SelectAll();
         }
 
-        private int GetWordLevel(string w)
+        private long GetWordLevel(string w)
         {
             if (!wordLevelDic.ContainsKey(w))
             {
-                var level = Program.db.WordsLang_GetWordLevel(lbuSettings.LangID, w) ?? 0;
+                var level = LollyDB.WordsLang_GetWordLevel(lbuSettings.LangID, w) ?? 0;
                 wordLevelDic.Add(w, level);
             }
             return wordLevelDic[w];
@@ -346,7 +346,7 @@ namespace Lolly
                 var newLevel = Math.Max(-3, Math.Min(3, level + delta));
                 if (level != newLevel)
                 {
-                    Program.db.WordsLang_UpdateWordLevel(newLevel, lbuSettings.LangID, w);
+                    LollyDB.WordsLang_UpdateWordLevel(newLevel, lbuSettings.LangID, w);
                     wordLevelDic[w] = newLevel;
                 }
             }

@@ -27,11 +27,11 @@ namespace Lolly
         protected override void FillTable()
         {
             wordsList = new BindingList<MWORDLANG>(
-                filterScope == 0 ? Program.db.WordsLang_GetDataByLangWord(lbuSettings.LangID, filter) :
-                Program.db.WordsLang_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
+                filterScope == 0 ? LollyDB.WordsLang_GetDataByLangWord(lbuSettings.LangID, filter) :
+                LollyDB.WordsLang_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
             bindingSource1.DataSource = wordsList;
-            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         protected override void OnDeleteWord()
@@ -50,7 +50,7 @@ namespace Lolly
         {
             if (deletedWord == "") return;
 
-            Program.db.WordsLang_Delete(lbuSettings.LangID, deletedWord);
+            LollyDB.WordsLang_Delete(lbuSettings.LangID, deletedWord);
             deletedWord = "";
         }
 
@@ -63,12 +63,12 @@ namespace Lolly
             {
                 row.LANGID = lbuSettings.LangID;
                 row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
-                Program.db.WordsLang_Insert(row.LANGID, row.WORD);
+                LollyDB.WordsLang_Insert(row.LANGID, row.WORD);
             }
             else
             {
                 row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
-                Program.db.WordsLang_Update(row.WORD, row.LANGID, currentWord);
+                LollyDB.WordsLang_Update(row.WORD, row.LANGID, currentWord);
             }
         }
     }

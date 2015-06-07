@@ -12,7 +12,6 @@ namespace LollyASPMVC
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static LollyDB db = new LollyDB();
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

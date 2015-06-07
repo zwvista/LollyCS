@@ -59,7 +59,7 @@ namespace Lolly
 
         private string GetTranslation(MDICTALL dictRow, string word)
         {
-            var wordRow = Program.db.DictEntity_GetDataByWordDictTable(word, dictRow.DICTTABLE);
+            var wordRow = LollyDB.DictEntity_GetDataByWordDictTable(word, dictRow.DICTTABLE);
             return wordRow?.TRANSLATION ?? "";
         }
 
@@ -191,7 +191,7 @@ namespace Lolly
             foreach (var item in items)
             {
                 var dictRow = FindDict(item.Name);
-                Program.db.DictEntity_Update(ExtensionClass.NOTRANSLATION, word, dictRow.DICTTABLE);
+                LollyDB.DictEntity_Update(ExtensionClass.NOTRANSLATION, word, dictRow.DICTTABLE);
             }
             return true;
         }
@@ -205,7 +205,7 @@ namespace Lolly
             dlg.translationTextBox.Text = translation;
             if (dlg.ShowDialog() != DialogResult.OK) return false;
 
-            Program.db.DictEntity_Update(dlg.translationTextBox.Text, word, dictRow.DICTTABLE);
+            LollyDB.DictEntity_Update(dlg.translationTextBox.Text, word, dictRow.DICTTABLE);
             return true;
         }
 

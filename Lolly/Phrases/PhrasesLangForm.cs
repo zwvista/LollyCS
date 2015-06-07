@@ -33,11 +33,11 @@ namespace Lolly
         protected override void FillTable()
         {
             phrasesList = new BindingList<MPHRASELANG>(
-                filterScope == 0 ? Program.db.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter) :
-                Program.db.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
+                filterScope == 0 ? LollyDB.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter) :
+                LollyDB.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
             bindingSource1.DataSource = phrasesList;
-            autoCorrectList = Program.db.AutoCorrect_GetDataByLang(lbuSettings.LangID);
+            autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
         public override void UpdatelbuSettings()
@@ -60,7 +60,7 @@ namespace Lolly
 
             var row = phrasesList[e.RowIndex];
             row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
-            Program.db.PhrasesUnits_Update(row);
+            LollyDB.PhrasesUnits_Update(row);
         }
 
         private void dataGridView1_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
@@ -72,7 +72,7 @@ namespace Lolly
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.No)
                 {
-                    Program.db.PhrasesUnits_Get(row);
+                    LollyDB.PhrasesUnits_Get(row);
                     dataGridView1.CancelEdit();
                     bindingSource1.ListRowChanged = false;
                     //e.Cancel = true;

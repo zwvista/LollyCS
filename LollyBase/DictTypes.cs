@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace LollyBase
 {
-    public partial class LollyDB
+    public static partial class LollyDB
     {
-        public List<MDICTTYPE> DictTypes_GetData() =>
-            db.Table<MDICTTYPE>().ToList();
+        public static List<MDICTTYPE> DictTypes_GetData()
+        {
+            using (var db = new LollyEntities())
+                return db.SDICTTYPE.ToList();
+        }
     }
 }
