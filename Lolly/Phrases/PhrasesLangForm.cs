@@ -33,7 +33,7 @@ namespace Lolly
         protected override void FillTable()
         {
             phrasesList = new BindingList<MPHRASELANG>(
-                filterScope == 0 ? LollyDB.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter) :
+                filterScope == 0 ? LollyDB.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter, matchWholeWords) :
                 LollyDB.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
             bindingSource1.DataSource = phrasesList;

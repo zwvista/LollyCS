@@ -21,6 +21,7 @@ namespace Lolly
 
         protected int filterScope = 0;
         protected string filter = "";
+        protected bool matchWholeWords = true;
         protected List<MAUTOCORRECT> autoCorrectList;
 
 
@@ -235,6 +236,7 @@ namespace Lolly
             {
                 filter = dlg.Filter;
                 filterScope = dlg.FilterScope;
+                matchWholeWords = dlg.MatchWholeWord;
                 refreshToolStripButton.PerformClick();
             }
         }

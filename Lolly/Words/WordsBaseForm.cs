@@ -253,6 +253,7 @@ namespace Lolly
             config = Program.config.GetDictLangConfig(lbuSettings.LangID);
             bool canSpeak = Program.CanSpeak(lbuSettings.LangID);
             speakToolStripButton.Enabled = keepSpeakToolStripButton.Enabled = canSpeak;
+            currentWord = "";
             FillTable();
             FillDicts();
         }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LollyShared
 {
     public static partial class LollyDB
     {
-        public static List<MPHRASELANG> PhrasesLang_GetDataByLangPhrase(long langid, string phrase)
+        public static List<MPHRASELANG> PhrasesLang_GetDataByLangPhrase(long langid, string phrase, bool matchWholeWords)
         {
             using (var db = new LollyEntities())
             {
@@ -20,13 +21,16 @@ namespace LollyShared
 //                    return db.Database.SqlQuery<MPHRASELANG>(sql,
 //                        new SQLiteParameter("langid", langid),
 //                        new SQLiteParameter("phrase", phrase));
-                return (
+                var lst = (
                     from rp in db.SPHRASEUNIT
                     join rb in db.SBOOK
                     on rp.BOOKID equals rb.BOOKID
                     where rb.LANGID == langid && (phrase == "" || rp.PHRASE.Contains(phrase))
                     select new { rp.ID, rp.BOOKID, rb.BOOKNAME, rp.UNIT, rp.PART, rp.ORD, rp.PHRASE, rp.TRANSLATION }
                 ).ToList().ToNonAnonymousList(new List<MPHRASELANG>());
+                if (matchWholeWords)
+                    lst = lst.Where(r => Regex.IsMatch(r.PHRASE, $@"\b{phrase}\b")).ToList();
+                return lst;
             }
         }
 

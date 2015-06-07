@@ -14,6 +14,7 @@ namespace Lolly
     {
         public string Filter => filterComboBox.Text;
         public int FilterScope => filterScopeComboBox.SelectedIndex;
+        public bool MatchWholeWord => matchWholeWordsCheckBox.Checked;
         private List<MAUTOCORRECT> autoCorrectList;
 
         public FilterDlg(List<MAUTOCORRECT> autoCorrectList)

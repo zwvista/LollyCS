@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
             this.filterScopeComboBox = new System.Windows.Forms.ComboBox();
+            this.matchWholeWordsCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -105,6 +106,19 @@
             this.filterScopeComboBox.Size = new System.Drawing.Size(338, 24);
             this.filterScopeComboBox.TabIndex = 3;
             // 
+            // matchWholeWordsCheckBox
+            // 
+            this.matchWholeWordsCheckBox.AutoSize = true;
+            this.matchWholeWordsCheckBox.Checked = true;
+            this.matchWholeWordsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.matchWholeWordsCheckBox.Location = new System.Drawing.Point(184, 94);
+            this.matchWholeWordsCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.matchWholeWordsCheckBox.Name = "matchWholeWordsCheckBox";
+            this.matchWholeWordsCheckBox.Size = new System.Drawing.Size(163, 20);
+            this.matchWholeWordsCheckBox.TabIndex = 6;
+            this.matchWholeWordsCheckBox.Text = "Match Whole Words";
+            this.matchWholeWordsCheckBox.UseVisualStyleBackColor = true;
+            // 
             // FilterDlg
             // 
             this.AcceptButton = this.okButton;
@@ -112,6 +126,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(379, 227);
+            this.Controls.Add(this.matchWholeWordsCheckBox);
             this.Controls.Add(this.filterScopeComboBox);
             this.Controls.Add(this.filterComboBox);
             this.Controls.Add(this.label2);
@@ -120,7 +135,7 @@
             this.Controls.Add(this.okButton);
             this.Font = new System.Drawing.Font("宋体", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FilterDlg";
@@ -140,5 +155,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox filterComboBox;
         private System.Windows.Forms.ComboBox filterScopeComboBox;
+        private System.Windows.Forms.CheckBox matchWholeWordsCheckBox;
     }
 }
