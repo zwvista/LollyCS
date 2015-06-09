@@ -58,14 +58,5 @@ namespace LollyShared.Properties {
                 return ((string)(this["LogFolder"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\zw\\backup\\Lolly.db")]
-        public string DBPath {
-            get {
-                return ((string)(this["DBPath"]));
-            }
-        }
     }
 }

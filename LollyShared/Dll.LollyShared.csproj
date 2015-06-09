@@ -7,8 +7,8 @@
     <ProjectGuid>{FE4D7D23-1F41-44CE-8B68-9229D41406A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LollyBase</RootNamespace>
-    <AssemblyName>LollyBase</AssemblyName>
+    <RootNamespace>LollyShared</RootNamespace>
+    <AssemblyName>LollyShared</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -161,7 +161,9 @@
     <Compile Include="WordsUnits.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DataSources\MAUTOCORRECT.datasource" />
     <None Include="DataSources\MBOOK.datasource" />
     <None Include="DataSources\MDICTALL.datasource" />

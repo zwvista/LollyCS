@@ -34,7 +34,7 @@ namespace Lolly.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\zw\\backup")]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\Education\\Lolly")]
         public string AppDataFolder {
             get {
                 return ((string)(this["AppDataFolder"]));
