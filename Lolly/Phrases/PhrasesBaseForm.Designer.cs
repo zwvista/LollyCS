@@ -290,7 +290,7 @@
             this.speakToolStripButton.ImageTransparentColor = System.Drawing.Color.Silver;
             this.speakToolStripButton.Name = "speakToolStripButton";
             this.speakToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.speakToolStripButton.Text = "toolStripButton1";
+            this.speakToolStripButton.Text = "Speak";
             this.speakToolStripButton.Click += new System.EventHandler(this.speakToolStripButton_Click);
             // 
             // speakTranslationToolStripButton
@@ -300,7 +300,7 @@
             this.speakTranslationToolStripButton.ImageTransparentColor = System.Drawing.Color.Silver;
             this.speakTranslationToolStripButton.Name = "speakTranslationToolStripButton";
             this.speakTranslationToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.speakTranslationToolStripButton.Text = "toolStripButton2";
+            this.speakTranslationToolStripButton.Text = "Keep Speaking";
             this.speakTranslationToolStripButton.Click += new System.EventHandler(this.speakTranslationToolStripButton_Click);
             // 
             // keepSpeakToolStripButton
@@ -311,7 +311,7 @@
             this.keepSpeakToolStripButton.ImageTransparentColor = System.Drawing.Color.Silver;
             this.keepSpeakToolStripButton.Name = "keepSpeakToolStripButton";
             this.keepSpeakToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.keepSpeakToolStripButton.Text = "toolStripButton3";
+            this.keepSpeakToolStripButton.Text = "Speak";
             this.keepSpeakToolStripButton.Click += new System.EventHandler(this.keepSpeakToolStripButton_Click);
             // 
             // keepSpeakTranslationToolStripButton
@@ -322,7 +322,7 @@
             this.keepSpeakTranslationToolStripButton.ImageTransparentColor = System.Drawing.Color.Silver;
             this.keepSpeakTranslationToolStripButton.Name = "keepSpeakTranslationToolStripButton";
             this.keepSpeakTranslationToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.keepSpeakTranslationToolStripButton.Text = "toolStripButton4";
+            this.keepSpeakTranslationToolStripButton.Text = "Keep Speaking";
             this.keepSpeakTranslationToolStripButton.Click += new System.EventHandler(this.keepSpeakTranslationToolStripButton_Click);
             // 
             // toolStripSeparator3
@@ -363,7 +363,7 @@
             this.reorderToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
             this.reorderToolStripButton.Name = "reorderToolStripButton";
             this.reorderToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reorderToolStripButton.Text = "Renumber ORD";
+            this.reorderToolStripButton.Text = "Reorder";
             // 
             // timerNavigate
             // 

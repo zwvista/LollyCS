@@ -117,7 +117,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExtractWebDictForm";
-            this.Text = "ExtractWebDictForm";
+            this.Text = "Extract Web Dictionary";
             this.Shown += new System.EventHandler(this.ExtractWebDictForm_Shown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
