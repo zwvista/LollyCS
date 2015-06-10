@@ -14,6 +14,15 @@ namespace LollyShared
     
     public partial class MBOOK
     {
+        public MBOOK()
+        {
+            this.PARTS = "TEXT";
+            this.UNITFROM = 1;
+            this.PARTFROM = 1;
+            this.UNITTO = 1;
+            this.PARTTO = 1;
+        }
+    
         public long BOOKID { get; set; }
         public long LANGID { get; set; }
         public string BOOKNAME { get; set; }
