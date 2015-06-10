@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
     public partial class PhrasesLangForm : PhrasesBaseForm
     {
-        private BindingList<MPHRASELANG> phrasesList;
+        private BindingListView<MPHRASELANG> phrasesList;
 
         public PhrasesLangForm()
         {
@@ -32,7 +33,7 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            phrasesList = new BindingList<MPHRASELANG>(
+            phrasesList = new BindingListView<MPHRASELANG>(
                 filterScope == 0 ? LollyDB.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter, matchWholeWords) :
                 LollyDB.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
@@ -48,17 +49,17 @@ namespace Lolly
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //if (e.ColumnIndex != 0) return;
-            //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
-            //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, ORD" : "BOOKNAME DESC, UNIT DESC, ORD DESC";
+            if (e.ColumnIndex != 0) return;
+            bool ascending = dataGridView1.SortedColumn.Index != 0 ||
+                dataGridView1.SortOrder == SortOrder.Descending;
+            bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, ORD" : "BOOKNAME DESC, UNIT DESC, ORD DESC";
         }
 
         private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = phrasesList[e.RowIndex];
+            var row = phrasesList[e.RowIndex].Object;
             row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
             LollyDB.PhrasesUnits_Update(row);
         }
@@ -67,7 +68,7 @@ namespace Lolly
         {
             if (dataGridView1.IsCurrentRowDirty)
             {
-                var row = phrasesList[e.RowIndex];
+                var row = phrasesList[e.RowIndex].Object;
                 var msg = $"The phrase \"{row.PHRASE}\" is about to be updated. Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.No)

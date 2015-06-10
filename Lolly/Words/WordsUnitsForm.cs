@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
@@ -14,7 +15,7 @@ namespace Lolly
     {
         private long deletedID = 0;
         private string deletedWord = "";
-        private BindingList<MWORDUNIT> wordsList;
+        private BindingListView<MWORDUNIT> wordsList;
 
         public WordsUnitsForm()
         {
@@ -38,7 +39,7 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingList<MWORDUNIT>(LollyDB.WordsUnits_GetDataByBookUnitParts(lbuSettings.BookID,
+            wordsList = new BindingListView<MWORDUNIT>(LollyDB.WordsUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
             bindingSource1.DataSource = wordsList;
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
@@ -64,7 +65,7 @@ namespace Lolly
 
         protected override void OnDeleteWord()
         {
-            deletedID = wordsList[bindingSource1.Position].ID;
+            deletedID = wordsList[bindingSource1.Position].Object.ID;
             deletedWord = currentWord;
             bindingSource1.RemoveCurrent();
         }
@@ -77,15 +78,15 @@ namespace Lolly
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //if (e.ColumnIndex != 0) return;
-            //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
-            //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "UNIT, PART, ORD" : "UNIT DESC, PART, ORD DESC";
+            if (e.ColumnIndex != 0) return;
+            bool ascending = dataGridView1.SortedColumn.Index != 0 ||
+                dataGridView1.SortOrder == SortOrder.Descending;
+            bindingSource1.Sort = ascending ? "UNIT, PART, ORD" : "UNIT DESC, PART, ORD DESC";
         }
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
-            var objs = (from row in wordsList
+            var objs = (from row in wordsList.DataSource.Cast<MWORDUNIT>()
                         where row.ID != 0
                         orderby row.ORD
                         select new ReorderObject(row.ID, row.WORD)).ToArray();
@@ -113,7 +114,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = wordsList[e.RowIndex];
+            var row = wordsList[e.RowIndex].Object;
             if (row.ID == 0)
             {
                 row.BOOKID = lbuSettings.BookID;

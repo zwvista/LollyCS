@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
     public partial class WordsLangForm : WordsWebForm, ILangBookUnits
     {
         private string deletedWord = "";
-        private BindingList<MWORDLANG> wordsList;
+        private BindingListView<MWORDLANG> wordsList;
         
         public WordsLangForm()
         {
@@ -26,7 +27,7 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingList<MWORDLANG>(
+            wordsList = new BindingListView<MWORDLANG>(
                 filterScope == 0 ? LollyDB.WordsLang_GetDataByLangWord(lbuSettings.LangID, filter) :
                 LollyDB.WordsLang_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
@@ -58,7 +59,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = wordsList[e.RowIndex];
+            var row = wordsList[e.RowIndex].Object;
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
     public partial class WordsBooksForm : WordsWebForm, ILangBookUnits
     {
         private string deletedWord = "";
-        private BindingList<MWORDBOOK> wordsList;
+        private BindingListView<MWORDBOOK> wordsList;
 
         public WordsBooksForm()
         {
@@ -27,7 +28,7 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingList<MWORDBOOK>(
+            wordsList = new BindingListView<MWORDBOOK>(
                 filterScope == 0 ? LollyDB.WordsBooks_GetDataByLangWord(lbuSettings.LangID, filter) :
                 LollyDB.WordsBooks_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
@@ -49,10 +50,10 @@ namespace Lolly
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //if (e.ColumnIndex != 0) return;
-            //bool ascending = dataGridView1.SortedColumn.Index != 0 ||
-            //    dataGridView1.SortOrder == SortOrder.Descending;
-            //bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, ORD" : "BOOKNAME DESC, UNIT DESC, ORD DESC";
+            if (e.ColumnIndex != 0) return;
+            bool ascending = dataGridView1.SortedColumn.Index != 0 ||
+                dataGridView1.SortOrder == SortOrder.Descending;
+            bindingSource1.Sort = ascending ? "BOOKNAME,UNIT, ORD" : "BOOKNAME DESC, UNIT DESC, ORD DESC";
         }
 
         private void bindingSource1_ListItemDeleted(object sender, ListChangedEventArgs e)

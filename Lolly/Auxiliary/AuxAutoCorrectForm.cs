@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
@@ -14,7 +15,7 @@ namespace Lolly
     {
         private long deletedID = 0;
         private LangBookUnitSettings lbuSettings;
-        protected BindingList<MAUTOCORRECT> auxList;
+        protected BindingListView<MAUTOCORRECT> auxList;
 
         public AuxAutoCorrectForm()
         {
@@ -28,7 +29,7 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = new BindingList<MAUTOCORRECT>(LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID));
+            auxList = new BindingListView<MAUTOCORRECT>(LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID));
             bindingSource1.DataSource = auxList;
         }
 
@@ -39,7 +40,7 @@ namespace Lolly
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            var row = auxList[bindingSource1.Position];
+            var row = auxList[bindingSource1.Position].Object;
             var item = row.EXTENDED;
             var msg = $"The autocorrect item \"{item}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -67,7 +68,7 @@ namespace Lolly
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
-            var objs = (from row in auxList
+            var objs = (from row in auxList.DataSource.Cast<MAUTOCORRECT>()
                         where row.ID != 0
                         orderby row.ORD
                         select new ReorderObject(row.ID, row.EXTENDED)).ToArray();
@@ -92,7 +93,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = auxList[e.RowIndex];
+            var row = auxList[e.RowIndex].Object;
             if (row.ID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
