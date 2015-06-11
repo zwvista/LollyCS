@@ -634,21 +634,21 @@
     <Content Include="Resources\Lolly.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppControl\Dll.AppControl.csproj">
+    <ProjectReference Include="..\AppControl\AppControl.csproj">
       <Project>{90e8dd9c-3c6b-488c-980f-ab26ac789300}</Project>
-      <Name>Dll.AppControl</Name>
+      <Name>AppControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\BindingListView\BindingListView.csproj">
       <Project>{75af36a8-7797-4023-b183-5b63d448420a}</Project>
       <Name>BindingListView</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DllLolly\Dll.Lolly.csproj">
+    <ProjectReference Include="..\LollyControls\LollyControls.csproj">
       <Project>{dba6ef01-414e-4854-92c1-8585a75dda15}</Project>
-      <Name>Dll.Lolly</Name>
+      <Name>LollyControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LollyShared\Dll.LollyShared.csproj">
+    <ProjectReference Include="..\LollyShared\LollyShared.csproj">
       <Project>{fe4d7d23-1f41-44ce-8b68-9229d41406a1}</Project>
-      <Name>Dll.LollyShared</Name>
+      <Name>LollyShared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Oli.Controls\Oli.Controls.csproj">
       <Project>{3f1a45c7-96cb-4bad-a931-792d04b96128}</Project>

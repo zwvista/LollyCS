@@ -15,6 +15,7 @@ namespace Lolly
     {
         private long deletedID = 0;
         private BindingList<MPHRASEUNIT> phrasesList;
+        private BindingListView<MPHRASEUNIT> phrasesView;
 
         public PhrasesUnitsForm()
         {
@@ -39,7 +40,7 @@ namespace Lolly
             phrasesList = new BindingList<MPHRASEUNIT>(
                 LollyDB.PhrasesUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
-            bindingSource1.DataSource = new BindingListView<MPHRASEUNIT>(phrasesList);
+            bindingSource1.DataSource = phrasesView = new BindingListView<MPHRASEUNIT>(phrasesList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -53,10 +54,10 @@ namespace Lolly
             dataGridView.MoveToAddNew();
             dataGridView.BeginEdit(false);
             dataGridView.NotifyCurrentCellDirty(true);
-            dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["translationColumn"];
-            dataGridView.CurrentCell.Value = translation;
             dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["phraseColumn"];
             dataGridView.CurrentCell.Value = phrase;
+            dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["translationColumn"];
+            dataGridView.CurrentCell.Value = translation;
             dataGridView.EndEdit();
             dataGridView.MoveToAddNew();
         }
@@ -110,6 +111,8 @@ namespace Lolly
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
+            if (!bindingSource1.ListRowChanged) return;
+
             var row = phrasesList.Last();
             if (row.ID == 0)
             {
@@ -123,7 +126,7 @@ namespace Lolly
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
                 row.ID = LollyDB.PhrasesUnits_Insert(row);
-                dataGridView1.Refresh();
+                phrasesView.Refresh();
             }
         }
 

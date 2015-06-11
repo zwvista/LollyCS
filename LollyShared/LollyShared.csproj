@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="AutoCorrect.cs" />
     <Compile Include="Books.cs" />
+    <Compile Include="BoolScope.cs" />
     <Compile Include="DictAll.cs" />
     <Compile Include="DictEntity.cs" />
     <Compile Include="Dictionaries.cs" />

@@ -169,9 +169,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LollyShared\Dll.LollyShared.csproj">
+    <ProjectReference Include="..\LollyShared\LollyShared.csproj">
       <Project>{fe4d7d23-1f41-44ce-8b68-9229d41406a1}</Project>
-      <Name>Dll.LollyShared</Name>
+      <Name>LollyShared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

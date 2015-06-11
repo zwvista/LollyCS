@@ -61,45 +61,6 @@ namespace Lolly
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.Images.SetKeyName(0, "Offline0");
-            this.imageList1.Images.SetKeyName(1, "Offline1");
-            this.imageList1.Images.SetKeyName(2, "Offline2");
-            this.imageList1.Images.SetKeyName(3, "Offline3");
-            this.imageList1.Images.SetKeyName(4, "Offline4");
-            this.imageList1.Images.SetKeyName(5, "Offline5");
-            this.imageList1.Images.SetKeyName(6, "Offline6");
-            this.imageList1.Images.SetKeyName(7, "Offline7");
-            this.imageList1.Images.SetKeyName(8, "Offline8");
-            this.imageList1.Images.SetKeyName(9, "Offline9");
-            this.imageList1.Images.SetKeyName(10, "Online0");
-            this.imageList1.Images.SetKeyName(11, "Online1");
-            this.imageList1.Images.SetKeyName(12, "Online2");
-            this.imageList1.Images.SetKeyName(13, "Online3");
-            this.imageList1.Images.SetKeyName(14, "Online4");
-            this.imageList1.Images.SetKeyName(15, "Online5");
-            this.imageList1.Images.SetKeyName(16, "Online6");
-            this.imageList1.Images.SetKeyName(17, "Online7");
-            this.imageList1.Images.SetKeyName(18, "Online8");
-            this.imageList1.Images.SetKeyName(19, "Online9");
-            this.imageList1.Images.SetKeyName(20, "Live0");
-            this.imageList1.Images.SetKeyName(21, "Live1");
-            this.imageList1.Images.SetKeyName(22, "Live2");
-            this.imageList1.Images.SetKeyName(23, "Live3");
-            this.imageList1.Images.SetKeyName(24, "Live4");
-            this.imageList1.Images.SetKeyName(25, "Live5");
-            this.imageList1.Images.SetKeyName(26, "Live6");
-            this.imageList1.Images.SetKeyName(27, "Live7");
-            this.imageList1.Images.SetKeyName(28, "Live8");
-            this.imageList1.Images.SetKeyName(29, "Live9");
-            this.imageList1.Images.SetKeyName(30, "Custom");
-            this.imageList1.Images.SetKeyName(31, "Local");
-            this.imageList1.Images.SetKeyName(32, "Special");
-            this.imageList1.Images.SetKeyName(33, "Conjugator");
-            this.imageList1.Images.SetKeyName(34, "Web");
-            // 
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(LollyShared.MWORDUNIT);
