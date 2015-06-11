@@ -32,7 +32,7 @@ namespace Lolly
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhrasesUnitsForm));
-            this.bindingSource1 = new LLBindingSource(this.components);
+            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,9 +45,10 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(MPHRASEUNIT);
+            this.bindingSource1.DataSource = typeof(LollyShared.MPHRASEUNIT);
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "UNIT,PART,ORD";
+            this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
             // dataGridView1

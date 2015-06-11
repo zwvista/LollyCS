@@ -15,7 +15,7 @@ namespace Lolly
     {
         private long deletedID = 0;
         private string deletedWord = "";
-        private BindingListView<MWORDUNIT> wordsList;
+        private BindingList<MWORDUNIT> wordsList;
 
         public WordsUnitsForm()
         {
@@ -39,9 +39,9 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingListView<MWORDUNIT>(LollyDB.WordsUnits_GetDataByBookUnitParts(lbuSettings.BookID,
+            wordsList = new BindingList<MWORDUNIT>(LollyDB.WordsUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
-            bindingSource1.DataSource = wordsList;
+            bindingSource1.DataSource = new BindingListView<MWORDUNIT>(wordsList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -65,7 +65,7 @@ namespace Lolly
 
         protected override void OnDeleteWord()
         {
-            deletedID = wordsList[bindingSource1.Position].Object.ID;
+            deletedID = wordsList[bindingSource1.Position].ID;
             deletedWord = currentWord;
             bindingSource1.RemoveCurrent();
         }
@@ -86,7 +86,7 @@ namespace Lolly
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
-            var objs = (from row in wordsList.DataSource.Cast<MWORDUNIT>()
+            var objs = (from row in wordsList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReorderObject(row.ID, row.WORD)).ToArray();
@@ -110,11 +110,9 @@ namespace Lolly
             deletedWord = "";
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
-
-            var row = wordsList[e.RowIndex].Object;
+            var row = wordsList.Last();
             if (row.ID == 0)
             {
                 row.BOOKID = lbuSettings.BookID;
@@ -123,22 +121,26 @@ namespace Lolly
                 if (row.PART == 0)
                     row.PART = lbuSettings.PartTo;
                 if (row.ORD == 0)
-                    row.ORD = e.RowIndex + 1;
+                    row.ORD = wordsList.Count;
                 row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
                 row.ID = LollyDB.WordsUnits_Insert(row);
                 dataGridView1.Refresh();
 
                 InsertWordIfNeeded(row.WORD);
             }
-            else
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = wordsList[e.RowIndex];
+            row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
+            LollyDB.WordsUnits_Update(row);
+            if (currentWord != row.WORD)
             {
-                row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
-                LollyDB.WordsUnits_Update(row);
-                if (currentWord != row.WORD)
-                {
-                    DeleteWordIfNeeded(currentWord);
-                    InsertWordIfNeeded(row.WORD);
-                }
+                DeleteWordIfNeeded(currentWord);
+                InsertWordIfNeeded(row.WORD);
             }
         }
     }

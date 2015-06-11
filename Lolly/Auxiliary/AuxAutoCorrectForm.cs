@@ -15,7 +15,7 @@ namespace Lolly
     {
         private long deletedID = 0;
         private LangBookUnitSettings lbuSettings;
-        protected BindingListView<MAUTOCORRECT> auxList;
+        private BindingList<MAUTOCORRECT> auxList;
 
         public AuxAutoCorrectForm()
         {
@@ -29,8 +29,8 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = new BindingListView<MAUTOCORRECT>(LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID));
-            bindingSource1.DataSource = auxList;
+            auxList = new BindingList<MAUTOCORRECT>(LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID));
+            bindingSource1.DataSource = new BindingListView<MAUTOCORRECT>(auxList);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace Lolly
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            var row = auxList[bindingSource1.Position].Object;
+            var row = auxList[bindingSource1.Position];
             var item = row.EXTENDED;
             var msg = $"The autocorrect item \"{item}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -68,7 +68,7 @@ namespace Lolly
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
-            var objs = (from row in auxList.DataSource.Cast<MAUTOCORRECT>()
+            var objs = (from row in auxList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReorderObject(row.ID, row.EXTENDED)).ToArray();
@@ -89,21 +89,25 @@ namespace Lolly
             deletedID = 0;
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
-
-            var row = auxList[e.RowIndex].Object;
+            var row = auxList.Last();
             if (row.ID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
                 if (row.ORD == 0)
-                    row.ORD = e.RowIndex + 1;
+                    row.ORD = auxList.Count;
                 row.ID = LollyDB.AutoCorrect_Insert(row);
                 dataGridView1.Refresh();
             }
-            else
-                LollyDB.AutoCorrect_Update(row);
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = auxList[e.RowIndex];
+            LollyDB.AutoCorrect_Update(row);
         }
     }
 }

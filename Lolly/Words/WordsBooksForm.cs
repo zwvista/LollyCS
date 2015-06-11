@@ -14,7 +14,7 @@ namespace Lolly
     public partial class WordsBooksForm : WordsWebForm, ILangBookUnits
     {
         private string deletedWord = "";
-        private BindingListView<MWORDBOOK> wordsList;
+        private BindingList<MWORDBOOK> wordsList;
 
         public WordsBooksForm()
         {
@@ -28,11 +28,11 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingListView<MWORDBOOK>(
+            wordsList = new BindingList<MWORDBOOK>(
                 filterScope == 0 ? LollyDB.WordsBooks_GetDataByLangWord(lbuSettings.LangID, filter) :
                 LollyDB.WordsBooks_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
-            bindingSource1.DataSource = wordsList;
+            bindingSource1.DataSource = new BindingListView<MWORDBOOK>(wordsList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 

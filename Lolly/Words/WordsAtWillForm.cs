@@ -13,7 +13,7 @@ namespace Lolly
 {
     public partial class WordsAtWillForm : WordsWebForm
     {
-        private BindingListView<MWORDATWILL> wordsList;
+        private BindingList<MWORDATWILL> wordsList;
 
         public WordsAtWillForm()
         {
@@ -29,8 +29,8 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingListView<MWORDATWILL>(new List<MWORDATWILL>());
-            bindingSource1.DataSource = wordsList;
+            wordsList = new BindingList<MWORDATWILL>(new List<MWORDATWILL>());
+            bindingSource1.DataSource = new BindingListView<MWORDATWILL>(wordsList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -47,7 +47,7 @@ namespace Lolly
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
-            var objs = (from row in wordsList.DataSource.Cast<MWORDATWILL>()
+            var objs = (from row in wordsList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReorderObject(row.ORD, row.WORD)).ToArray();
@@ -56,10 +56,10 @@ namespace Lolly
             {
                 foreach (var obj in objs)
                 {
-                    var row = wordsList.DataSource.Cast<MWORDATWILL>().SingleOrDefault(r => r.ID == obj.ID);
+                    var row = wordsList.SingleOrDefault(r => r.ID == obj.ID);
                     row.ORD = obj.ORD;
                 }
-                foreach (var row in wordsList.DataSource.Cast<MWORDATWILL>())
+                foreach (var row in wordsList)
                     row.ID = row.ORD;
             }
         }
@@ -71,14 +71,14 @@ namespace Lolly
 
         private void refreshToolStripButton_Click(object sender, EventArgs e)
         {
-            wordsList.DataSource.Clear();
+            wordsList.Clear();
         }
 
         private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = wordsList[e.RowIndex].Object;
+            var row = wordsList[e.RowIndex];
             if (row.ID == 0)
             {
                 if (row.ORD == 0)

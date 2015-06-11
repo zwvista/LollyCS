@@ -105,10 +105,6 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Equin.ApplicationFramework.BindingListView, Version=1.2.2446.31718, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unofficial.BindingListView.1.2.0.0\lib\net20\Equin.ApplicationFramework.BindingListView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
@@ -641,6 +637,10 @@
     <ProjectReference Include="..\AppControl\Dll.AppControl.csproj">
       <Project>{90e8dd9c-3c6b-488c-980f-ab26ac789300}</Project>
       <Name>Dll.AppControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BindingListView\BindingListView.csproj">
+      <Project>{75af36a8-7797-4023-b183-5b63d448420a}</Project>
+      <Name>BindingListView</Name>
     </ProjectReference>
     <ProjectReference Include="..\DllLolly\Dll.Lolly.csproj">
       <Project>{dba6ef01-414e-4854-92c1-8585a75dda15}</Project>

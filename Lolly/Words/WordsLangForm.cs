@@ -14,7 +14,7 @@ namespace Lolly
     public partial class WordsLangForm : WordsWebForm, ILangBookUnits
     {
         private string deletedWord = "";
-        private BindingListView<MWORDLANG> wordsList;
+        private BindingList<MWORDLANG> wordsList;
         
         public WordsLangForm()
         {
@@ -27,11 +27,11 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            wordsList = new BindingListView<MWORDLANG>(
+            wordsList = new BindingList<MWORDLANG>(
                 filterScope == 0 ? LollyDB.WordsLang_GetDataByLangWord(lbuSettings.LangID, filter) :
                 LollyDB.WordsLang_GetDataByLangTranslationDictTables(lbuSettings.LangID, filter, config.dictTablesOffline)
             );
-            bindingSource1.DataSource = wordsList;
+            bindingSource1.DataSource = new BindingListView<MWORDLANG>(wordsList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -55,22 +55,24 @@ namespace Lolly
             deletedWord = "";
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
-
-            var row = wordsList[e.RowIndex].Object;
+            var row = wordsList.Last();
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
                 row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
                 LollyDB.WordsLang_Insert(row.LANGID, row.WORD);
             }
-            else
-            {
-                row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
-                LollyDB.WordsLang_Update(row.WORD, row.LANGID, currentWord);
-            }
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = wordsList[e.RowIndex];
+            row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
+            LollyDB.WordsLang_Update(row.WORD, row.LANGID, currentWord);
         }
     }
 }

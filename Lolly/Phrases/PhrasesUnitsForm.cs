@@ -14,7 +14,7 @@ namespace Lolly
     public partial class PhrasesUnitsForm : PhrasesBaseForm
     {
         private long deletedID = 0;
-        private BindingListView<MPHRASEUNIT> phrasesList;
+        private BindingList<MPHRASEUNIT> phrasesList;
 
         public PhrasesUnitsForm()
         {
@@ -36,10 +36,10 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            phrasesList = new BindingListView<MPHRASEUNIT>(
+            phrasesList = new BindingList<MPHRASEUNIT>(
                 LollyDB.PhrasesUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
-            bindingSource1.DataSource = phrasesList;
+            bindingSource1.DataSource = new BindingListView<MPHRASEUNIT>(phrasesList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -53,8 +53,10 @@ namespace Lolly
             dataGridView.MoveToAddNew();
             dataGridView.BeginEdit(false);
             dataGridView.NotifyCurrentCellDirty(true);
-            dataGridView.CurrentRow.Cells["phraseColumn"].Value = phrase;
-            dataGridView.CurrentRow.Cells["translationColumn"].Value = translation;
+            dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["translationColumn"];
+            dataGridView.CurrentCell.Value = translation;
+            dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["phraseColumn"];
+            dataGridView.CurrentCell.Value = phrase;
             dataGridView.EndEdit();
             dataGridView.MoveToAddNew();
         }
@@ -64,7 +66,7 @@ namespace Lolly
             var msg = $"The phrase \"{phrase}\" is about to be DELETED. Are you sure?";
             if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                deletedID = phrasesList[bindingSource1.Position].Object.ID;
+                deletedID = phrasesList[bindingSource1.Position].ID;
                 bindingSource1.RemoveCurrent();
             }
         }
@@ -85,7 +87,7 @@ namespace Lolly
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
-            var objs = (from row in phrasesList.DataSource.Cast<MPHRASEUNIT>()
+            var objs = (from row in phrasesList
                         where row.ID != 0
                         orderby row.ORD
                         select new ReorderObject(row.ID, row.PHRASE)).ToArray();
@@ -106,11 +108,9 @@ namespace Lolly
             deletedID = 0;
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
-
-            var row = phrasesList[e.RowIndex].Object;
+            var row = phrasesList.Last();
             if (row.ID == 0)
             {
                 row.BOOKID = lbuSettings.BookID;
@@ -119,17 +119,21 @@ namespace Lolly
                 if (row.PART == 0)
                     row.PART = lbuSettings.PartTo;
                 if (row.ORD == 0)
-                    row.ORD = e.RowIndex + 1;
+                    row.ORD = phrasesList.Count;
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
                 row.ID = LollyDB.PhrasesUnits_Insert(row);
                 dataGridView1.Refresh();
             }
-            else
-            {
-                row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
-                LollyDB.PhrasesUnits_Update(row);
-            }
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = phrasesList[e.RowIndex];
+            row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
+            LollyDB.PhrasesUnits_Update(row);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Lolly
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuxAutoCorrectForm));
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -49,15 +50,14 @@ namespace Lolly
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.reorderToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inputColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extendedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.basicColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new LLBindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // bindingNavigator1
@@ -93,11 +93,19 @@ namespace Lolly
             this.bindingNavigator1.TabIndex = 0;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(LollyShared.MAUTOCORRECT);
+            this.bindingSource1.ListRowChanged = false;
+            this.bindingSource1.Sort = "ORD";
+            this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
+            this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(39, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorMoveFirstItem
@@ -231,6 +239,12 @@ namespace Lolly
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowValidated);
             // 
+            // ordColumn
+            // 
+            this.ordColumn.DataPropertyName = "ORD";
+            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.Name = "ordColumn";
+            // 
             // inputColumn
             // 
             this.inputColumn.DataPropertyName = "INPUT";
@@ -249,18 +263,6 @@ namespace Lolly
             this.basicColumn.HeaderText = "BASIC";
             this.basicColumn.Name = "basicColumn";
             // 
-            // ordColumn
-            // 
-            this.ordColumn.DataPropertyName = "ORD";
-            this.ordColumn.HeaderText = "ORD";
-            this.ordColumn.Name = "ordColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(MAUTOCORRECT);
-            this.bindingSource1.Sort = "ORD";
-            this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
-            // 
             // AuxAutoCorrectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -268,7 +270,7 @@ namespace Lolly
             this.ClientSize = new System.Drawing.Size(641, 471);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bindingNavigator1);
-            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AuxAutoCorrectForm";
@@ -277,8 +279,8 @@ namespace Lolly
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

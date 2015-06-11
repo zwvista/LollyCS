@@ -13,7 +13,7 @@ namespace Lolly
 {
     public partial class PhrasesLangForm : PhrasesBaseForm
     {
-        private BindingListView<MPHRASELANG> phrasesList;
+        private BindingList<MPHRASELANG> phrasesList;
 
         public PhrasesLangForm()
         {
@@ -33,11 +33,11 @@ namespace Lolly
 
         protected override void FillTable()
         {
-            phrasesList = new BindingListView<MPHRASELANG>(
+            phrasesList = new BindingList<MPHRASELANG>(
                 filterScope == 0 ? LollyDB.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter, matchWholeWords) :
                 LollyDB.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
-            bindingSource1.DataSource = phrasesList;
+            bindingSource1.DataSource = new BindingListView<MPHRASELANG>(phrasesList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -59,7 +59,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = phrasesList[e.RowIndex].Object;
+            var row = phrasesList[e.RowIndex];
             row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
             LollyDB.PhrasesUnits_Update(row);
         }
@@ -68,7 +68,7 @@ namespace Lolly
         {
             if (dataGridView1.IsCurrentRowDirty)
             {
-                var row = phrasesList[e.RowIndex].Object;
+                var row = phrasesList[e.RowIndex];
                 var msg = $"The phrase \"{row.PHRASE}\" is about to be updated. Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2) == DialogResult.No)
