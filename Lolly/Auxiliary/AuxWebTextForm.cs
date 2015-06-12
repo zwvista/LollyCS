@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
@@ -14,7 +15,8 @@ namespace Lolly
     {
         private string currentSite = "";
         private string deletedSite = "";
-        protected List<MWEBTEXT> auxList;
+        protected BindingList<MWEBTEXT> auxList;
+        protected BindingListView<MWEBTEXT> auxView;
 
         public AuxWebTextForm()
         {
@@ -28,8 +30,8 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = LollyDB.WebText_GetData();
-            bindingSource1.DataSource = auxList;
+            auxList = new BindingList<MWEBTEXT>(LollyDB.WebText_GetData());
+            bindingSource1.DataSource = auxView = new BindingListView<MWEBTEXT>(auxList);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -80,15 +82,21 @@ namespace Lolly
             currentSite = auxList[e.RowIndex].SITENAME;
         }
 
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
+        {
+            if (auxList.Count < auxView.Count) return;
+
+            var row = auxList.Last();
+            if (currentSite == null)
+                LollyDB.WebText_Insert(row);
+        }
+
         private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = auxList[e.RowIndex];
-            if (currentSite == null)
-                LollyDB.WebText_Insert(row);
-            else
-                LollyDB.WebText_Update(row, currentSite);
+            var row = auxView[e.RowIndex].Object;
+            LollyDB.WebText_Update(row, currentSite);
         }
     }
 }

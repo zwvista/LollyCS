@@ -95,6 +95,7 @@ namespace Lolly
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "BOOKNAME";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
+            this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             // 
             // bindingNavigatorCountItem
             // 

@@ -131,7 +131,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = phrasesList[e.RowIndex];
+            var row = phrasesView[e.RowIndex].Object;
             row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
             LollyDB.PhrasesUnits_Update(row);
         }

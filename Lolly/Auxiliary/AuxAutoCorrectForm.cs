@@ -109,7 +109,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = auxList[e.RowIndex];
+            var row = auxView[e.RowIndex].Object;
             LollyDB.AutoCorrect_Update(row);
         }
     }

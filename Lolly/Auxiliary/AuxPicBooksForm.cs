@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
@@ -15,7 +16,8 @@ namespace Lolly
         private string currentBook = "";
         private string deletedBook = "";
         private LangBookUnitSettings lbuSettings;
-        protected List<MPICBOOK> auxList;
+        private BindingList<MPICBOOK> auxList;
+        private BindingListView<MPICBOOK> auxView;
 
         public AuxPicBooksForm()
         {
@@ -29,8 +31,8 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = LollyDB.PicBooks_GetDataByLang(lbuSettings.LangID);
-            bindingSource1.DataSource = auxList;
+            auxList = new BindingList<MPICBOOK>(LollyDB.PicBooks_GetDataByLang(lbuSettings.LangID));
+            bindingSource1.DataSource = auxView = new BindingListView<MPICBOOK>(auxList);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -76,18 +78,24 @@ namespace Lolly
             currentBook = auxList[e.RowIndex].BOOKNAME;
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
+            if (auxList.Count < auxView.Count) return;
 
-            var row = auxList[e.RowIndex];
+            var row = auxList.Last();
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
                 LollyDB.PicBooks_Insert(row);
             }
-            else
-                LollyDB.PicBooks_Update(row, currentBook);
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = auxView[e.RowIndex].Object;
+            LollyDB.PicBooks_Update(row, currentBook);
         }
     }
 }

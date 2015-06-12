@@ -14,6 +14,7 @@ namespace Lolly
     public partial class PhrasesLangForm : PhrasesBaseForm
     {
         private BindingList<MPHRASELANG> phrasesList;
+        private BindingListView<MPHRASELANG> phrasesView;
 
         public PhrasesLangForm()
         {
@@ -37,7 +38,7 @@ namespace Lolly
                 filterScope == 0 ? LollyDB.PhrasesLang_GetDataByLangPhrase(lbuSettings.LangID, filter, matchWholeWords) :
                 LollyDB.PhrasesLang_GetDataByLangTranslation(lbuSettings.LangID, filter)
             );
-            bindingSource1.DataSource = new BindingListView<MPHRASELANG>(phrasesList);
+            bindingSource1.DataSource = phrasesView = new BindingListView<MPHRASELANG>(phrasesList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -59,7 +60,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = phrasesList[e.RowIndex];
+            var row = phrasesView[e.RowIndex].Object;
             row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
             LollyDB.PhrasesUnits_Update(row);
         }
@@ -76,7 +77,7 @@ namespace Lolly
                     LollyDB.PhrasesUnits_Get(row);
                     dataGridView1.CancelEdit();
                     bindingSource1.ListRowChanged = false;
-                    //e.Cancel = true;
+                    e.Cancel = true;
                 }
             }
         }

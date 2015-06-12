@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
@@ -15,7 +16,8 @@ namespace Lolly
         private string currentDict = "";
         private string deletedDict = "";
         private LangBookUnitSettings lbuSettings;
-        private List<MDICTIONARY> auxList;
+        private BindingList<MDICTIONARY> auxList;
+        private BindingListView<MDICTIONARY> auxView;
 
         public AuxDictionariesForm()
         {
@@ -31,8 +33,8 @@ namespace Lolly
         {
             mLANGUAGEBindingSource.DataSource = LollyDB.Languages_GetData();
             mDICTTYPEBindingSource.DataSource = LollyDB.DictTypes_GetData();
-            auxList = LollyDB.Dictionaries_GetDataByLang(lbuSettings.LangID);
-            bindingSource1.DataSource = auxList;
+            auxList = new BindingList<MDICTIONARY>(LollyDB.Dictionaries_GetDataByLang(lbuSettings.LangID));
+            bindingSource1.DataSource = auxView = new BindingListView<MDICTIONARY>(auxList);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -97,18 +99,24 @@ namespace Lolly
             currentDict = auxList[e.RowIndex].DICTNAME;
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
+            if (auxList.Count < auxView.Count) return;
 
-            var row = auxList[e.RowIndex];
+            var row = auxList.Last();
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
                 LollyDB.Dictionaries_Insert(row);
             }
-            else
-                LollyDB.Dictionaries_Update(row, currentDict);
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = auxView[e.RowIndex].Object;
+            LollyDB.Dictionaries_Update(row, currentDict);
         }
     }
 }

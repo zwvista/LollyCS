@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LollyShared;
+using Equin.ApplicationFramework;
 
 namespace Lolly
 {
@@ -15,7 +16,8 @@ namespace Lolly
         private long currentBookID = 0;
         private long deletedBookID = 0;
         private LangBookUnitSettings lbuSettings;
-        protected List<MBOOK> auxList;
+        protected BindingList<MBOOK> auxList;
+        protected BindingListView<MBOOK> auxView;
 
         public AuxBooksForm()
         {
@@ -29,8 +31,8 @@ namespace Lolly
 
         private void FillTable()
         {
-            auxList = LollyDB.Books_GetDataByLang(lbuSettings.LangID);
-            bindingSource1.DataSource = auxList;
+            auxList = new BindingList<MBOOK>(LollyDB.Books_GetDataByLang(lbuSettings.LangID));
+            bindingSource1.DataSource = auxView = new BindingListView<MBOOK>(auxList);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -79,18 +81,24 @@ namespace Lolly
             currentBookID = auxList[e.RowIndex].BOOKID;
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
+            if (auxList.Count < auxView.Count) return;
 
-            var row = auxList[e.RowIndex];
+            var row = auxList.Last();
             if (row.LANGID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
                 LollyDB.Books_Insert(row);
             }
-            else
-                LollyDB.Books_Update(row, currentBookID);
+        }
+
+        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bindingSource1.ListRowChanged) return;
+
+            var row = auxView[e.RowIndex].Object;
+            LollyDB.Books_Update(row, currentBookID);
         }
     }
 }

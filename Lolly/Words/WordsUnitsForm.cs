@@ -137,7 +137,7 @@ namespace Lolly
         {
             if (!bindingSource1.ListRowChanged) return;
 
-            var row = wordsList[e.RowIndex];
+            var row = wordsView[e.RowIndex].Object;
             row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
             LollyDB.WordsUnits_Update(row);
             if (currentWord != row.WORD)

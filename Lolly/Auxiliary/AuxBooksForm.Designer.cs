@@ -95,6 +95,7 @@ namespace Lolly
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "BOOKID";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
+            this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             // 
             // bindingNavigatorCountItem
             // 
@@ -224,7 +225,7 @@ namespace Lolly
             this.bookidColumn.DataPropertyName = "BOOKID";
             this.bookidColumn.HeaderText = "BOOKID";
             this.bookidColumn.Name = "bookidColumn";
-            this.bookidColumn.Width = 75;
+            this.bookidColumn.Width = 100;
             // 
             // booknameColumn
             // 
