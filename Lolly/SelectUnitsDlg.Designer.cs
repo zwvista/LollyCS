@@ -36,13 +36,14 @@
             this.unitFromNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.unitToNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.unitsInAllFromLabel = new System.Windows.Forms.Label();
-            this.activeIncludedCheckBox = new System.Windows.Forms.CheckBox();
+            this.applyActiveCheckBox = new System.Windows.Forms.CheckBox();
             this.toCheckBox = new System.Windows.Forms.CheckBox();
             this.unitsInAllToLabel = new System.Windows.Forms.Label();
             this.partFromComboBox = new System.Windows.Forms.ComboBox();
             this.partToComboBox = new System.Windows.Forms.ComboBox();
             this.okButton = new VistaButtonTest.VistaButton();
             this.cancelButton = new VistaButtonTest.VistaButton();
+            this.applyAllCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.unitFromNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unitToNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -148,15 +149,17 @@
             this.unitsInAllFromLabel.TabIndex = 6;
             this.unitsInAllFromLabel.Text = "(100 in all)";
             // 
-            // activeIncludedCheckBox
+            // applyActiveCheckBox
             // 
-            this.activeIncludedCheckBox.AutoSize = true;
-            this.activeIncludedCheckBox.Location = new System.Drawing.Point(13, 150);
-            this.activeIncludedCheckBox.Name = "activeIncludedCheckBox";
-            this.activeIncludedCheckBox.Size = new System.Drawing.Size(347, 20);
-            this.activeIncludedCheckBox.TabIndex = 12;
-            this.activeIncludedCheckBox.Text = "Also Change the Active Window\'s Settings";
-            this.activeIncludedCheckBox.UseVisualStyleBackColor = true;
+            this.applyActiveCheckBox.AutoSize = true;
+            this.applyActiveCheckBox.Checked = true;
+            this.applyActiveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.applyActiveCheckBox.Location = new System.Drawing.Point(15, 150);
+            this.applyActiveCheckBox.Name = "applyActiveCheckBox";
+            this.applyActiveCheckBox.Size = new System.Drawing.Size(235, 20);
+            this.applyActiveCheckBox.TabIndex = 12;
+            this.applyActiveCheckBox.Text = "Apply to the Active Window";
+            this.applyActiveCheckBox.UseVisualStyleBackColor = true;
             // 
             // toCheckBox
             // 
@@ -211,7 +214,7 @@
             this.okButton.CornerRadius = 20;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.GlowColor = System.Drawing.Color.Cyan;
-            this.okButton.Location = new System.Drawing.Point(43, 181);
+            this.okButton.Location = new System.Drawing.Point(149, 204);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(100, 32);
             this.okButton.TabIndex = 13;
@@ -226,10 +229,22 @@
             this.cancelButton.CornerRadius = 20;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(141)))), ((int)(((byte)(189)))));
-            this.cancelButton.Location = new System.Drawing.Point(215, 181);
+            this.cancelButton.Location = new System.Drawing.Point(260, 204);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 13;
+            // 
+            // applyAllCheckBox
+            // 
+            this.applyAllCheckBox.AutoSize = true;
+            this.applyAllCheckBox.Checked = true;
+            this.applyAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.applyAllCheckBox.Location = new System.Drawing.Point(15, 176);
+            this.applyAllCheckBox.Name = "applyAllCheckBox";
+            this.applyAllCheckBox.Size = new System.Drawing.Size(187, 20);
+            this.applyAllCheckBox.TabIndex = 12;
+            this.applyAllCheckBox.Text = "Apply to All Windows";
+            this.applyAllCheckBox.UseVisualStyleBackColor = true;
             // 
             // SelectUnitsDlg
             // 
@@ -237,11 +252,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(377, 232);
+            this.ClientSize = new System.Drawing.Size(377, 244);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.toCheckBox);
-            this.Controls.Add(this.activeIncludedCheckBox);
+            this.Controls.Add(this.applyAllCheckBox);
+            this.Controls.Add(this.applyActiveCheckBox);
             this.Controls.Add(this.unitToNumericUpDown);
             this.Controls.Add(this.unitFromNumericUpDown);
             this.Controls.Add(this.partToComboBox);
@@ -253,7 +269,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
@@ -280,12 +296,13 @@
         private System.Windows.Forms.NumericUpDown unitFromNumericUpDown;
         private System.Windows.Forms.NumericUpDown unitToNumericUpDown;
         private System.Windows.Forms.Label unitsInAllFromLabel;
-        private System.Windows.Forms.CheckBox activeIncludedCheckBox;
+        private System.Windows.Forms.CheckBox applyActiveCheckBox;
         private System.Windows.Forms.CheckBox toCheckBox;
         private System.Windows.Forms.Label unitsInAllToLabel;
         private System.Windows.Forms.ComboBox partFromComboBox;
         private System.Windows.Forms.ComboBox partToComboBox;
         private VistaButtonTest.VistaButton okButton;
         private VistaButtonTest.VistaButton cancelButton;
+        private System.Windows.Forms.CheckBox applyAllCheckBox;
     }
 }

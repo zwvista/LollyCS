@@ -14,15 +14,15 @@ namespace Lolly
     {
         private long selectedLangID;
         private long selectedBookID;
-        public bool ActiveIncluded => activeIncludedCheckBox.Checked;
+        public bool ApplyActive => applyActiveCheckBox.Checked;
+        public bool ApplyAll => applyAllCheckBox.Checked;
 
         private List<MLANGUAGE> languageList;
         private List<MBOOK> bookList;
 
-        public SelectUnitsDlg(bool activeIncluded)
+        public SelectUnitsDlg()
         {
             InitializeComponent();
-            activeIncludedCheckBox.Checked = activeIncluded;
         }
 
         private void SelectUnitsDlg_Load(object sender, EventArgs e)

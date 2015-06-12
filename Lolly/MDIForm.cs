@@ -41,12 +41,14 @@ namespace Lolly
 
         private void selectUnitsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SelectUnitsDlg(true);
+            var dlg = new SelectUnitsDlg();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 changeLBLSettings();
-                if (dlg.ActiveIncluded && ActiveMdiChild is ILangBookUnits)
-                    ((ILangBookUnits)ActiveMdiChild).UpdatelbuSettings();
+                if (dlg.ApplyAll)
+                    MdiChildren.OfType<ILangBookUnits>().ForEach(c => c.UpdatelbuSettings());
+                else if (dlg.ApplyActive)
+                    (ActiveMdiChild as ILangBookUnits)?.UpdatelbuSettings();
             }
         }
 
