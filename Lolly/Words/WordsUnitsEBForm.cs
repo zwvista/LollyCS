@@ -16,6 +16,7 @@ namespace Lolly
         private long deletedID = 0;
         private string deletedWord = "";
         private BindingList<MWORDUNIT> wordsList;
+        private BindingListView<MWORDUNIT> wordsView;
 
         public WordsUnitsEBForm()
         {
@@ -30,7 +31,7 @@ namespace Lolly
         {
             wordsList = new BindingList<MWORDUNIT>(LollyDB.WordsUnits_GetDataByBookUnitParts(lbuSettings.BookID,
                 lbuSettings.UnitPartFrom, lbuSettings.UnitPartTo));
-            bindingSource1.DataSource = new BindingListView<MWORDUNIT>(wordsList);
+            bindingSource1.DataSource = wordsView = new BindingListView<MWORDUNIT>(wordsList);
         }
 
         private void InsertWordIfNeeded(string word)
@@ -116,6 +117,8 @@ namespace Lolly
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
+            if (wordsList.Count < wordsView.Count) return;
+
             var row = wordsList.Last();
             if (row.ID == 0)
             {

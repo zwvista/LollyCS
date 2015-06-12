@@ -31,8 +31,7 @@ namespace Lolly
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordsAtWillEBForm));
-            this.bindingSource1 = new LLBindingSource(this.components);
+            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,9 +60,10 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(MWORDATWILL);
+            this.bindingSource1.DataSource = typeof(LollyShared.MWORDATWILL);
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "";
+            this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             // 
             // dataGridView1
             // 
@@ -82,7 +82,6 @@ namespace Lolly
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(506, 634);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowValidated);
             // 
             // ordColumn
             // 
@@ -110,6 +109,7 @@ namespace Lolly
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1028, 715);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "WordsAtWillEBForm";
             this.panel2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

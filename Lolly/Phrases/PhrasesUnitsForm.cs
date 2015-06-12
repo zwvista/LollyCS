@@ -52,13 +52,10 @@ namespace Lolly
         protected override void OnAddPhrase(string phrase, string translation)
         {
             dataGridView.MoveToAddNew();
-            dataGridView.BeginEdit(false);
             dataGridView.NotifyCurrentCellDirty(true);
-            dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["phraseColumn"];
-            dataGridView.CurrentCell.Value = phrase;
-            dataGridView.CurrentCell = dataGridView.CurrentRow.Cells["translationColumn"];
-            dataGridView.CurrentCell.Value = translation;
-            dataGridView.EndEdit();
+            dataGridView.CurrentRow.Cells["phraseColumn"].Value = phrase;
+            dataGridView.CurrentRow.Cells["translationColumn"].Value = translation;
+            dataGridView.NotifyCurrentCellDirty(false);
             dataGridView.MoveToAddNew();
         }
 
@@ -111,7 +108,7 @@ namespace Lolly
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
+            if (phrasesList.Count < phrasesView.Count) return;
 
             var row = phrasesList.Last();
             if (row.ID == 0)
@@ -126,7 +123,7 @@ namespace Lolly
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
                 row.ID = LollyDB.PhrasesUnits_Insert(row);
-                phrasesView.Refresh();
+                dataGridView.Refresh();
             }
         }
 

@@ -48,7 +48,7 @@ namespace Lolly
             var dlg = new NewPhrasesDlg();
             if (dlg.ShowDialog() != DialogResult.OK) return;
             var pts = dlg.PhrasesTranslations;
-            for (int i = 0; i < pts.Length; i += 2)
+            for (int i = 0; i < pts.Count; i += 2)
                 OnAddPhrase(pts[i], pts[i + 1]);
             bindingNavigatorAddNewItem.PerformClick();
         }

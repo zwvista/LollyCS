@@ -16,6 +16,7 @@ namespace Lolly
         private long deletedID = 0;
         private LangBookUnitSettings lbuSettings;
         private BindingList<MAUTOCORRECT> auxList;
+        private BindingListView<MAUTOCORRECT> auxView;
 
         public AuxAutoCorrectForm()
         {
@@ -30,7 +31,7 @@ namespace Lolly
         private void FillTable()
         {
             auxList = new BindingList<MAUTOCORRECT>(LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID));
-            bindingSource1.DataSource = new BindingListView<MAUTOCORRECT>(auxList);
+            bindingSource1.DataSource = auxView = new BindingListView<MAUTOCORRECT>(auxList);
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -91,6 +92,8 @@ namespace Lolly
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
+            if (auxList.Count < auxView.Count) return;
+
             var row = auxList.Last();
             if (row.ID == 0)
             {

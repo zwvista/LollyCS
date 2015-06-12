@@ -122,10 +122,9 @@ namespace Lolly
         protected virtual void OnAddWord(string word)
         {
             dataGridView.MoveToAddNew();
-            dataGridView.BeginEdit(false);
             dataGridView.NotifyCurrentCellDirty(true);
             dataGridView.CurrentRow.Cells["wordColumn"].Value = word;
-            dataGridView.EndEdit();
+            dataGridView.NotifyCurrentCellDirty(false);
         }
 
         protected virtual void OnAddComplete()

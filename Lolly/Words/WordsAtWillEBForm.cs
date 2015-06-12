@@ -14,6 +14,7 @@ namespace Lolly
     public partial class WordsAtWillEBForm : Lolly.WordsEBForm
     {
         private BindingList<MWORDATWILL> wordsList;
+        private BindingListView<MWORDATWILL> wordsView;
 
         public WordsAtWillEBForm()
         {
@@ -26,7 +27,7 @@ namespace Lolly
         protected override void FillTable()
         {
             wordsList = new BindingList<MWORDATWILL>(new List<MWORDATWILL>());
-            bindingSource1.DataSource = new BindingListView<MWORDATWILL>(wordsList);
+            bindingSource1.DataSource = wordsView = new BindingListView<MWORDATWILL>(wordsList);
         }
 
         protected override void OnDeleteWord()
@@ -72,15 +73,15 @@ namespace Lolly
             wordsList.Clear();
         }
 
-        private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
         {
-            if (!bindingSource1.ListRowChanged) return;
+            if (wordsList.Count < wordsView.Count) return;
 
-            var row = wordsList[e.RowIndex];
+            var row = wordsList.Last();
             if (row.ID == 0)
             {
                 if (row.ORD == 0)
-                    row.ORD = e.RowIndex + 1;
+                    row.ORD = wordsList.Count;
                 row.ID = row.ORD;
             }
         }

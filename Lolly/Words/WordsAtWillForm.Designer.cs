@@ -34,7 +34,7 @@ namespace Lolly
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordsAtWillForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.bindingSource1 = new LLBindingSource(this.components);
+            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,9 +69,10 @@ namespace Lolly
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(MWORDATWILL);
+            this.bindingSource1.DataSource = typeof(LollyShared.MWORDATWILL);
             this.bindingSource1.ListRowChanged = false;
             this.bindingSource1.Sort = "";
+            this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             // 
             // dataGridView1
             // 

@@ -14,6 +14,7 @@ namespace Lolly
     public partial class WordsAtWillForm : WordsWebForm
     {
         private BindingList<MWORDATWILL> wordsList;
+        private BindingListView<MWORDATWILL> wordsView;
 
         public WordsAtWillForm()
         {
@@ -30,7 +31,7 @@ namespace Lolly
         protected override void FillTable()
         {
             wordsList = new BindingList<MWORDATWILL>(new List<MWORDATWILL>());
-            bindingSource1.DataSource = new BindingListView<MWORDATWILL>(wordsList);
+            bindingSource1.DataSource = wordsView = new BindingListView<MWORDATWILL>(wordsList);
             autoCorrectList = LollyDB.AutoCorrect_GetDataByLang(lbuSettings.LangID);
         }
 
@@ -74,17 +75,25 @@ namespace Lolly
             wordsList.Clear();
         }
 
+        private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)
+        {
+            if (wordsList.Count < wordsView.Count) return;
+
+            var row = wordsList.Last();
+            if (row.ID == 0)
+            {
+                if (row.ORD == 0)
+                    row.ORD = wordsList.Count;
+                row.ID = row.ORD;
+                row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
+            }
+        }
+
         private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (!bindingSource1.ListRowChanged) return;
 
             var row = wordsList[e.RowIndex];
-            if (row.ID == 0)
-            {
-                if (row.ORD == 0)
-                    row.ORD = e.RowIndex + 1;
-                row.ID = row.ORD;
-            }
             row.WORD = Program.AutoCorrect(row.WORD, autoCorrectList);
         }
     }

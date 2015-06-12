@@ -11,15 +11,18 @@ namespace Lolly
 {
     public partial class NewPhrasesDlg : Form
     {
-        public string[] PhrasesTranslations
+        public List<string> PhrasesTranslations
         {
             get
             {
-                return
+                var pts =
                     (from line in phrasesTranslationsTextBox.Lines
-                    let pt = line.Trim()
-                    where pt != ""
-                    select pt).ToArray();
+                     let pt = line.Trim()
+                     where pt != ""
+                     select pt).ToList();
+                if (pts.Count % 2 != 0)
+                    pts.Add("");
+                return pts;
             }
         }
 
