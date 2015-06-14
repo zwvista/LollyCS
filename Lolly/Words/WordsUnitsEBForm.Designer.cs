@@ -89,6 +89,7 @@ namespace Lolly
             this.dataGridView1.Size = new System.Drawing.Size(506, 634);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowValidated);
+            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // unitColumn
             // 

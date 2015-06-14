@@ -13,7 +13,7 @@ namespace Lolly
     public partial class FilterDlg : Form
     {
         public string Filter => filterComboBox.Text;
-        public int FilterScope => filterScopeComboBox.SelectedIndex;
+        public int FilterScope => wordsPhrasesRadioButton.Checked ? 0 : 1;
         public bool MatchWholeWord => matchWholeWordsCheckBox.Checked;
         private List<MAUTOCORRECT> autoCorrectList;
 
@@ -21,7 +21,6 @@ namespace Lolly
         {
             this.autoCorrectList = autoCorrectList;
             InitializeComponent();
-            filterScopeComboBox.SelectedIndex = 0;
         }
 
         private void okButton_Click(object sender, EventArgs e)

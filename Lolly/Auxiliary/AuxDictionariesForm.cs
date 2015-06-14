@@ -96,7 +96,7 @@ namespace Lolly
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            currentDict = auxList[e.RowIndex].DICTNAME;
+            currentDict = auxView[e.RowIndex].Object.DICTNAME;
         }
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)

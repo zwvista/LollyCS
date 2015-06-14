@@ -33,8 +33,9 @@
             this.okButton = new VistaButtonTest.VistaButton();
             this.label2 = new System.Windows.Forms.Label();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
-            this.filterScopeComboBox = new System.Windows.Forms.ComboBox();
             this.matchWholeWordsCheckBox = new System.Windows.Forms.CheckBox();
+            this.wordsPhrasesRadioButton = new System.Windows.Forms.RadioButton();
+            this.translationRadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +57,7 @@
             this.cancelButton.CornerRadius = 20;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(141)))), ((int)(((byte)(189)))));
-            this.cancelButton.Location = new System.Drawing.Point(224, 172);
+            this.cancelButton.Location = new System.Drawing.Point(267, 157);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 5;
@@ -70,7 +71,7 @@
             this.okButton.CornerRadius = 20;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.GlowColor = System.Drawing.Color.Cyan;
-            this.okButton.Location = new System.Drawing.Point(52, 172);
+            this.okButton.Location = new System.Drawing.Point(144, 157);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(100, 32);
             this.okButton.TabIndex = 4;
@@ -79,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 95);
+            this.label2.Location = new System.Drawing.Point(9, 54);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 16);
@@ -89,35 +90,45 @@
             // filterComboBox
             // 
             this.filterComboBox.FormattingEnabled = true;
-            this.filterComboBox.Location = new System.Drawing.Point(12, 51);
+            this.filterComboBox.Location = new System.Drawing.Point(79, 18);
             this.filterComboBox.Name = "filterComboBox";
-            this.filterComboBox.Size = new System.Drawing.Size(338, 24);
+            this.filterComboBox.Size = new System.Drawing.Size(288, 24);
             this.filterComboBox.TabIndex = 1;
-            // 
-            // filterScopeComboBox
-            // 
-            this.filterScopeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.filterScopeComboBox.FormattingEnabled = true;
-            this.filterScopeComboBox.Items.AddRange(new object[] {
-            "Words/Phrases",
-            "Translations"});
-            this.filterScopeComboBox.Location = new System.Drawing.Point(12, 130);
-            this.filterScopeComboBox.Name = "filterScopeComboBox";
-            this.filterScopeComboBox.Size = new System.Drawing.Size(338, 24);
-            this.filterScopeComboBox.TabIndex = 3;
             // 
             // matchWholeWordsCheckBox
             // 
             this.matchWholeWordsCheckBox.AutoSize = true;
             this.matchWholeWordsCheckBox.Checked = true;
             this.matchWholeWordsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.matchWholeWordsCheckBox.Location = new System.Drawing.Point(184, 94);
-            this.matchWholeWordsCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.matchWholeWordsCheckBox.Location = new System.Drawing.Point(12, 121);
+            this.matchWholeWordsCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.matchWholeWordsCheckBox.Name = "matchWholeWordsCheckBox";
             this.matchWholeWordsCheckBox.Size = new System.Drawing.Size(163, 20);
             this.matchWholeWordsCheckBox.TabIndex = 6;
             this.matchWholeWordsCheckBox.Text = "Match Whole Words";
             this.matchWholeWordsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // wordsPhrasesRadioButton
+            // 
+            this.wordsPhrasesRadioButton.AutoSize = true;
+            this.wordsPhrasesRadioButton.Checked = true;
+            this.wordsPhrasesRadioButton.Location = new System.Drawing.Point(12, 85);
+            this.wordsPhrasesRadioButton.Name = "wordsPhrasesRadioButton";
+            this.wordsPhrasesRadioButton.Size = new System.Drawing.Size(130, 20);
+            this.wordsPhrasesRadioButton.TabIndex = 7;
+            this.wordsPhrasesRadioButton.TabStop = true;
+            this.wordsPhrasesRadioButton.Text = "Words/Phrases";
+            this.wordsPhrasesRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // translationRadioButton
+            // 
+            this.translationRadioButton.AutoSize = true;
+            this.translationRadioButton.Location = new System.Drawing.Point(245, 85);
+            this.translationRadioButton.Name = "translationRadioButton";
+            this.translationRadioButton.Size = new System.Drawing.Size(122, 20);
+            this.translationRadioButton.TabIndex = 7;
+            this.translationRadioButton.Text = "Translations";
+            this.translationRadioButton.UseVisualStyleBackColor = true;
             // 
             // FilterDlg
             // 
@@ -125,9 +136,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(379, 227);
+            this.ClientSize = new System.Drawing.Size(379, 205);
+            this.Controls.Add(this.translationRadioButton);
+            this.Controls.Add(this.wordsPhrasesRadioButton);
             this.Controls.Add(this.matchWholeWordsCheckBox);
-            this.Controls.Add(this.filterScopeComboBox);
             this.Controls.Add(this.filterComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -135,7 +147,7 @@
             this.Controls.Add(this.okButton);
             this.Font = new System.Drawing.Font("宋体", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FilterDlg";
@@ -154,7 +166,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox filterComboBox;
-        private System.Windows.Forms.ComboBox filterScopeComboBox;
         private System.Windows.Forms.CheckBox matchWholeWordsCheckBox;
+        private System.Windows.Forms.RadioButton wordsPhrasesRadioButton;
+        private System.Windows.Forms.RadioButton translationRadioButton;
     }
 }

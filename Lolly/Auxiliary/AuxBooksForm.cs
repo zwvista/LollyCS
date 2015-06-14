@@ -78,7 +78,7 @@ namespace Lolly
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            currentBookID = auxList[e.RowIndex].BOOKID;
+            currentBookID = auxView[e.RowIndex].Object.BOOKID;
         }
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)

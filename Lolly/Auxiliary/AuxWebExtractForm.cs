@@ -79,7 +79,7 @@ namespace Lolly
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            currentSite = auxList[e.RowIndex].SITENAME;
+            currentSite = auxView[e.RowIndex].Object.SITENAME;
         }
 
         private void bindingSource1_ListItemAdded(object sender, ListChangedEventArgs e)

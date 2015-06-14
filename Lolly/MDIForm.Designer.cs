@@ -195,7 +195,7 @@
             // phrasesUnitsToolStripMenuItem
             // 
             this.phrasesUnitsToolStripMenuItem.Name = "phrasesUnitsToolStripMenuItem";
-            this.phrasesUnitsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.phrasesUnitsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
             this.phrasesUnitsToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.phrasesUnitsToolStripMenuItem.Text = "Phrases in Units";
             this.phrasesUnitsToolStripMenuItem.Click += new System.EventHandler(this.phrasesUnitsToolStripMenuItem_Click);
@@ -203,7 +203,7 @@
             // phrasesLanguageToolStripMenuItem
             // 
             this.phrasesLanguageToolStripMenuItem.Name = "phrasesLanguageToolStripMenuItem";
-            this.phrasesLanguageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.phrasesLanguageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
             this.phrasesLanguageToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.phrasesLanguageToolStripMenuItem.Text = "Phrases in Language";
             this.phrasesLanguageToolStripMenuItem.Click += new System.EventHandler(this.phrasesLanguageToolStripMenuItem_Click);
