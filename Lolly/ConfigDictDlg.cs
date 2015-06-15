@@ -63,7 +63,7 @@ namespace Lolly
                 {
                     var col = dict as UIDictCollection;
                     var node = AddTreeNode(dictBTreeView.Nodes, col.Name,
-                        col is UIDictPile ? "Pile" : "Switch", (int)DictImage.Special);
+                        col.IsPile ? "Pile" : "Switch", (int)DictImage.Special);
                     foreach (var item in col.Items)
                         AddTreeNode(node.Nodes, item.Name, item.Type, (int)item.ImageIndex);
                 }
@@ -164,17 +164,15 @@ namespace Lolly
             uiDicts = dictBTreeView.Nodes.Cast<TreeNode>()
                 .Select(n => 
                     n.Nodes.Count == 0 ? (UIDict)f(n) :
-                    (string)n.Tag == "Pile" ? (UIDict)new UIDictPile
+                    new UIDictCollection
                     {
-                        Name = n.Text,
-                        Items = n.Nodes.Cast<TreeNode>().Select(f).ToList()
-                    } : (UIDict)new UIDictSwitch
-                    {
+                        IsPile = (string)n.Tag == "Pile",
                         Name = n.Text,
                         Items = n.Nodes.Cast<TreeNode>().Select(f).ToList()
                     }
                 ).ToList();
         }
+
 
         private void dictATreeView_AfterCheck(object sender, TreeViewEventArgs e)
         {

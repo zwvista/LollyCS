@@ -19,16 +19,8 @@ namespace Lolly
 
     public class UIDictCollection : UIDict
     {
+        public bool IsPile;
         public string Name;
         public List<UIDictItem> Items;
     }
-
-    public class UIDictPile : UIDictCollection
-    {
-    }
-
-    public class UIDictSwitch : UIDictCollection
-    {
-    }
-
 }

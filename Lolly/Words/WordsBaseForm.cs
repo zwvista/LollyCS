@@ -81,23 +81,25 @@ namespace Lolly
                 var btn = dictsToolStrip.Items.Add(item.Name, null, dictsToolStripItem_Click);
                 btn.ImageIndex = (int)item.ImageIndex;
             }
-            else if (dict is UIDictPile)
-            {
-                var pile = dict as UIDictPile;
-                var btn = dictsToolStrip.Items.Add(pile.Name, null, dictsToolStripItem_Click);
-                btn.ImageIndex = (int) DictImage.Custom;
-            }
             else
             {
-                var sw = dict as UIDictSwitch;
-                var item = sw.Items.First();
-                var btn = new ToolStripSplitButtonCheckable();
-                btn.Text = item.Name;
-                btn.Image = imageList1.Images[(int)item.ImageIndex];
-                btn.ButtonClick += dictsToolStripItem_Click;
-                dictsToolStrip.Items.Add(btn);
-                foreach (var item2 in sw.Items)
-                    btn.DropDownItems.Add(item2.Name, imageList1.Images[(int)item2.ImageIndex]);
+                var col = dict as UIDictCollection;
+                if (col.IsPile)
+                {
+                    var btn = dictsToolStrip.Items.Add(col.Name, null, dictsToolStripItem_Click);
+                    btn.ImageIndex = (int)DictImage.Custom;
+                }
+                else
+                {
+                    var item = col.Items.First();
+                    var btn = new ToolStripSplitButtonCheckable();
+                    btn.Text = item.Name;
+                    btn.Image = imageList1.Images[(int)item.ImageIndex];
+                    btn.ButtonClick += dictsToolStripItem_Click;
+                    dictsToolStrip.Items.Add(btn);
+                    foreach (var item2 in col.Items)
+                        btn.DropDownItems.Add(item2.Name, imageList1.Images[(int)item2.ImageIndex]);
+                }
             }
         }
 

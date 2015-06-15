@@ -113,8 +113,9 @@ namespace Lolly
                 dwb.SetDict(dict as UIDictItem);
             else
             {
-                var items = (dict as UIDictCollection).Items;
-                if (dict is UIDictPile)
+                var col = dict as UIDictCollection;
+                var items = col.Items;
+                if (col.IsPile)
                     dwb.SetDict(items);
                 else
                 {
@@ -127,7 +128,7 @@ namespace Lolly
                         var n = btn.DropDownItems.IndexOf(menu);
                         btn.Text = menu.Text;
                         btn.Image = menu.Image;
-                        dwb.SetDict((dict as UIDictCollection).Items[n]);
+                        dwb.SetDict(items[n]);
                         UpdateHtml(dwb);
                     };
                     foreach (ToolStripMenuItem menu in btn.DropDownItems)

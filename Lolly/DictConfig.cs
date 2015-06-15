@@ -50,20 +50,20 @@ namespace Lolly
                     (string)elem.Attribute("after")
                 )).ToList();
 
-            // ebwin
-            dictsEBWin = elemLang.Elements("ebwin").Select(elem => (string)elem).ToList();
-
             var elemDicts = elemLang.Element("dictionaries");
             if (elemDicts == null) return;
 
-            Action<DictImage, string, string[]> AddDictGroups = (dt, groupName, dictNames) =>
+            // ebwin
+            dictsEBWin = elemDicts.Elements("ebwin").Select(elem => (string)elem).ToList();
+
+            Action<DictImage, string, string[]> AddDictGroups = (di, groupName, dictNames) =>
             {
                 if (dictNames.IsEmpty()) return;
 
                 var items = new List<UIDictItem>();
                 dictGroups[groupName] = items;
 
-                int imageIndex = (int)dt;
+                int imageIndex = (int)di;
                 foreach (var dictName in dictNames)
                 {
                     var item = new UIDictItem
@@ -74,7 +74,7 @@ namespace Lolly
                     };
                     items.Add(item);
                     dictItems[groupName + dictName] = item;
-                    if (dt == DictImage.Offline || dt == DictImage.Online || dt == DictImage.Live)
+                    if (di == DictImage.Offline || di == DictImage.Online || di == DictImage.Live)
                         imageIndex++;
                 }
             };
@@ -133,12 +133,9 @@ namespace Lolly
             }).Select(elem => new
             {
                 Name = elem.Name,
-                Dict = elem.Type == "Pile" ? (UIDict)new UIDictPile
+                Dict = (UIDict)new UIDictCollection
                 {
-                    Name = elem.Name,
-                    Items = elem.Items
-                } : (UIDict)new UIDictSwitch
-                {
+                    IsPile = elem.Type == "Pile",
                     Name = elem.Name,
                     Items = elem.Items
                 }
