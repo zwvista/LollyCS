@@ -100,8 +100,7 @@ namespace Lolly
                 var item = dictItems.First();
                 dictRow = FindDict(item.Name);
                 if (item.Type == DictNames.ONLINE && item.Name != DictNames.FRHELPER ||
-                    item.Type == DictNames.CONJUGATOR ||
-                    item.Type == DictNames.WEB)
+                    item.Type == DictNames.CONJUGATOR || item.Type == DictNames.WEB)
                 {
                     automationDone = false;
                     Navigate(GetDictURLForword());
@@ -139,8 +138,7 @@ namespace Lolly
                         sb.Append(GetIFrameOfflineText(GetLingoesHtml()));
                     else if (item.Name == DictNames.LINGOESALL)
                         sb.Append(GetIFrameOfflineText(GetLingoesAllHtml()));
-                    else if (item.Type == DictNames.LOCAL ||
-                        item.Type == DictNames.OFFLINE)
+                    else if (item.Type == DictNames.LOCAL || item.Type == DictNames.OFFLINE)
                         sb.Append(GetIFrameOfflineText(GetTranslationHtml()));
                     else if (item.Type == DictNames.LIVE)
                         sb.Append(GetIFrameOfflineText(GetLiveHtml(item.Name, ifrId)));
@@ -209,19 +207,19 @@ namespace Lolly
             return true;
         }
 
-        public bool DoExtractTranslation(string word, bool overriteDB)
+        public bool DoExtractTranslation(string word, bool overwriteDB)
         {
             if (dictItems.Count == 1 && dictItems[0].Type == DictNames.ONLINE)
             {
                 var dictName = dictItems[0].Name;
                 var dictRow = FindDict(dictName);
                 var msg = $"The translation from the url \"{Url.AbsoluteUri}\" will be EXTRACTED and " +
-                    (overriteDB ? "used to REPLACE" : "APPENDED to") +
+                    (overwriteDB ? "used to REPLACE" : "APPENDED to") +
                     $" the translation of the word \"{word}\" in the dictionary \"{dictName}\". Are you sure?";
                 if (MessageBox.Show(msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return false;
                 var wordRow = Program.OpenDictTable(word, dictRow.DICTTABLE);
-                Program.UpdateDictTable(this, wordRow, dictRow, !overriteDB);
+                Program.UpdateDictTable(this, wordRow, dictRow, !overwriteDB);
             }
             else
             {

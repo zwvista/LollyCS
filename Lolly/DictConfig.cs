@@ -123,7 +123,6 @@ namespace Lolly
                 {
                     Name = (string)elem2,
                     Type = (string)elem2.Attribute("type"),
-                    ImageIndex = DictImage.Custom
                 }).SelectMany(i =>
                     i.Name == DictNames.OFFLINEALL ? dictGroups[DictNames.OFFLINE] :
                     i.Name == DictNames.ONLINEALL ? dictGroups[DictNames.ONLINE] :
