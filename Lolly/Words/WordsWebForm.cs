@@ -106,6 +106,7 @@ namespace Lolly
             dwb.PreviewKeyDown += webBrowser1_PreviewKeyDown;
             dwb.Dock = DockStyle.Fill;
             dwb.ScriptErrorsSuppressed = true;
+            dwb.Visible = false;
             splitContainer1.Panel2.Controls.Add(dwb);
             dwbList.Add(dwb);
 
@@ -156,12 +157,10 @@ namespace Lolly
             dwbList.Clear();
             dictsToolStrip.Items.Clear();
             dictsToolStrip.Tag = -1;
-            if(!uiDicts.Any())
+            if(uiDicts.IsEmpty())
                 uiDicts.Add(config.dictsCustom[DictNames.DEFAULT]);
             foreach (var dict in uiDicts)
                 AddDict(dict);
-            foreach (var dwb in dwbList)
-                dwb.Visible = false;
             SelectDict(0);
         }
 

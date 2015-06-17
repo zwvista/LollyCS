@@ -11,7 +11,7 @@ using Equin.ApplicationFramework;
 
 namespace Lolly
 {
-    public partial class WordsAtWillEBForm : Lolly.WordsEBForm
+    public partial class WordsAtWillEBForm : WordsEBForm
     {
         private BindingList<MWORDATWILL> wordsList;
         private BindingListView<MWORDATWILL> wordsView;

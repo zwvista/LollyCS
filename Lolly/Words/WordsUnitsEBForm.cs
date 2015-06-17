@@ -11,7 +11,7 @@ using Equin.ApplicationFramework;
 
 namespace Lolly
 {
-    public partial class WordsUnitsEBForm : Lolly.WordsEBForm
+    public partial class WordsUnitsEBForm : WordsEBForm
     {
         private long deletedID = 0;
         private string deletedWord = "";

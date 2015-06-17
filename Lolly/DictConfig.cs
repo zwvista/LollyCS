@@ -115,30 +115,23 @@ namespace Lolly
             var elems = elemDicts.Elements("custom");
             var dictNamesCustom = elems.Select(elem => (string)elem.Attribute("name")).ToArray();
             AddDictGroups(DictImage.Custom, "Custom", dictNamesCustom);
-            dictsCustom = elems.Select(elem => new
+            dictsCustom = elems.Select(elem => (UIDict)new UIDictCollection
             {
                 Name = (string)elem.Attribute("name"),
                 Type = (string)elem.Attribute("type"),
+                ImageIndex = DictImage.Custom,
                 Items = elem.Elements("dict").Select(elem2 => new UIDictItem
                 {
                     Name = (string)elem2,
                     Type = (string)elem2.Attribute("type"),
+                    ImageIndex = DictImage.Custom
                 }).SelectMany(i =>
                     i.Name == DictNames.OFFLINEALL ? dictGroups[DictNames.OFFLINE] :
                     i.Name == DictNames.ONLINEALL ? dictGroups[DictNames.ONLINE] :
                     i.Name == DictNames.LIVEALL ? dictGroups[DictNames.LIVE] :
                     new List<UIDictItem>{ dictItems[i.Type + i.Name] }
                 ).ToList()
-            }).Select(elem => new
-            {
-                Name = elem.Name,
-                Dict = (UIDict)new UIDictCollection
-                {
-                    IsPile = elem.Type == "Pile",
-                    Name = elem.Name,
-                    Items = elem.Items
-                }
-            }).ToDictionary(elem => elem.Name, elem => elem.Dict);
+            }).ToDictionary(elem => elem.Name, elem => elem);
 
             dictAllList = LollyDB.DictAll_GetDataByLang(langID);
         }

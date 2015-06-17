@@ -166,8 +166,9 @@ namespace Lolly
                     n.Nodes.Count == 0 ? (UIDict)f(n) :
                     new UIDictCollection
                     {
-                        IsPile = (string)n.Tag == "Pile",
                         Name = n.Text,
+                        Type = (string)n.Tag,
+                        ImageIndex = DictImage.Custom,
                         Items = n.Nodes.Cast<TreeNode>().Select(f).ToList()
                     }
                 ).ToList();
