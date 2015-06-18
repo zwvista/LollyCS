@@ -65,7 +65,10 @@ namespace Lolly
                     var node = AddTreeNode(dictBTreeView.Nodes, col.Name,
                         col.IsPile ? "Pile" : "Switch", (int)DictImage.Special);
                     foreach (var item in col.Items)
+                    {
                         AddTreeNode(node.Nodes, item.Name, item.Type, (int)item.ImageIndex);
+                        node.Expand();
+                    }
                 }
         }
 
@@ -142,7 +145,7 @@ namespace Lolly
             });
         }
 
-        private void BottomButton_Click(object sender, EventArgs e)
+        private void bottomButton_Click(object sender, EventArgs e)
         {
             WithSelectedNode((node, n) =>
             {

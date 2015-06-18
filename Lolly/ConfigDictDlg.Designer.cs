@@ -40,7 +40,7 @@
             this.clearButton = new System.Windows.Forms.Button();
             this.addAllbutton = new System.Windows.Forms.Button();
             this.addSwitchbutton = new System.Windows.Forms.Button();
-            this.BottomButton = new System.Windows.Forms.Button();
+            this.bottomButton = new System.Windows.Forms.Button();
             this.topButton = new System.Windows.Forms.Button();
             this.dictBTreeView = new System.Windows.Forms.TreeView();
             this.sharedImageLists11 = new Lolly.SharedImageLists1(this.components);
@@ -158,7 +158,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.addPileButton);
             this.splitContainer1.Panel1.Controls.Add(this.dictATreeView);
             this.splitContainer1.Panel1.Controls.Add(this.removeButton);
-            this.splitContainer1.Panel1.Controls.Add(this.BottomButton);
+            this.splitContainer1.Panel1.Controls.Add(this.bottomButton);
             this.splitContainer1.Panel1.Controls.Add(this.topButton);
             this.splitContainer1.Panel1.Controls.Add(this.downButton);
             this.splitContainer1.Panel1.Controls.Add(this.upButton);
@@ -208,17 +208,17 @@
             this.addSwitchbutton.UseVisualStyleBackColor = true;
             this.addSwitchbutton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // BottomButton
+            // bottomButton
             // 
-            this.BottomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BottomButton.Location = new System.Drawing.Point(207, 389);
-            this.BottomButton.Margin = new System.Windows.Forms.Padding(4);
-            this.BottomButton.Name = "BottomButton";
-            this.BottomButton.Size = new System.Drawing.Size(100, 31);
-            this.BottomButton.TabIndex = 1;
-            this.BottomButton.Text = "Bottom";
-            this.BottomButton.UseVisualStyleBackColor = true;
-            this.BottomButton.Click += new System.EventHandler(this.BottomButton_Click);
+            this.bottomButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bottomButton.Location = new System.Drawing.Point(207, 389);
+            this.bottomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomButton.Name = "bottomButton";
+            this.bottomButton.Size = new System.Drawing.Size(100, 31);
+            this.bottomButton.TabIndex = 1;
+            this.bottomButton.Text = "Bottom";
+            this.bottomButton.UseVisualStyleBackColor = true;
+            this.bottomButton.Click += new System.EventHandler(this.bottomButton_Click);
             // 
             // topButton
             // 
@@ -277,7 +277,7 @@
         private VistaButtonTest.VistaButton cancelButton;
         private VistaButtonTest.VistaButton okButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Button BottomButton;
+        private System.Windows.Forms.Button bottomButton;
         private System.Windows.Forms.Button topButton;
         private System.Windows.Forms.TreeView dictBTreeView;
         private SharedImageLists1 sharedImageLists11;
