@@ -63,7 +63,7 @@ namespace Lolly
                 {
                     var col = dict as UIDictCollection;
                     var node = AddTreeNode(dictBTreeView.Nodes, col.Name,
-                        col.IsPile ? "Pile" : "Switch", (int)DictImage.Special);
+                        col.IsPile ? "Pile" : "Switch", (int)col.ImageIndex);
                     foreach (var item in col.Items)
                     {
                         AddTreeNode(node.Nodes, item.Name, item.Type, (int)item.ImageIndex);
@@ -87,7 +87,7 @@ namespace Lolly
                 var type = sender == addPileButton ? "Pile" : "Switch";
                 var name = (nodesGroup.Count == 1 ? nodesGroup[0].Name + "_" : "") + type;
                 var node = AddTreeNode(dictBTreeView.Nodes, name, type,
-                    (int)DictImage.Special);
+                    (int)DictImage.Custom);
                 foreach (var node2 in nodes)
                     node.Nodes.Add((TreeNode)node2.Clone());
             }

@@ -13,11 +13,10 @@ namespace LollyShared
         public IntPtr hwndEditWord = IntPtr.Zero;
         public IntPtr hwndHtml = IntPtr.Zero;
         public IntPtr hwndListWords = IntPtr.Zero;
-        public IHTMLElement elemHtml;
 
         public void FindFrhelper()
         {
-            if (elemHtml != null) return;
+            if (hwndHtml != IntPtr.Zero) return;
 
             hwndMain = FindWindow(Settings.Default.FrhelperClassName, null);
             if (hwndMain == IntPtr.Zero) return;
@@ -38,6 +37,7 @@ namespace LollyShared
 
         public string GetContent()
         {
+            IHTMLElement elemHtml = null;
             do
             {
                 try
