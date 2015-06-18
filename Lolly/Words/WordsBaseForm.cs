@@ -87,7 +87,7 @@ namespace Lolly
                 if (col.IsPile)
                 {
                     var btn = dictsToolStrip.Items.Add(col.Name, null, dictsToolStripItem_Click);
-                    btn.ImageIndex = (int)DictImage.Custom;
+                    btn.ImageIndex = (int)col.ImageIndex;
                 }
                 else
                 {
