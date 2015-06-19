@@ -50,7 +50,7 @@
             this.multiAddToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.translationToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.extractOverriteToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.extractOverwriteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.extractAppendToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.editTranslationtoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deleteTranslationToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -183,7 +183,7 @@
             this.multiAddToolStripButton,
             this.bindingNavigatorDeleteItem,
             this.translationToolStripSeparator,
-            this.extractOverriteToolStripButton,
+            this.extractOverwriteToolStripButton,
             this.extractAppendToolStripButton,
             this.editTranslationtoolStripButton,
             this.deleteTranslationToolStripButton,
@@ -324,14 +324,14 @@
             this.translationToolStripSeparator.Name = "translationToolStripSeparator";
             this.translationToolStripSeparator.Size = new System.Drawing.Size(6, 25);
             // 
-            // extractOverriteToolStripButton
+            // extractOverwriteToolStripButton
             // 
-            this.extractOverriteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.extractOverriteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("extractOverriteToolStripButton.Image")));
-            this.extractOverriteToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
-            this.extractOverriteToolStripButton.Name = "extractOverriteToolStripButton";
-            this.extractOverriteToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.extractOverriteToolStripButton.Text = "Extract and overrite translation";
+            this.extractOverwriteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.extractOverwriteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("extractOverwriteToolStripButton.Image")));
+            this.extractOverwriteToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.extractOverwriteToolStripButton.Name = "extractOverwriteToolStripButton";
+            this.extractOverwriteToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.extractOverwriteToolStripButton.Text = "Extract and overwrite translation";
             // 
             // extractAppendToolStripButton
             // 
@@ -658,7 +658,7 @@
         protected System.Windows.Forms.Timer timerNavigate;
         protected System.Windows.Forms.ToolStrip dictsToolStrip;
         protected System.Windows.Forms.ToolStripMenuItem navigateForwardToolStripMenuItem;
-        protected System.Windows.Forms.ToolStripButton extractOverriteToolStripButton;
+        protected System.Windows.Forms.ToolStripButton extractOverwriteToolStripButton;
         protected System.Windows.Forms.ToolStripButton extractAppendToolStripButton;
         protected System.Windows.Forms.ToolStripButton deleteTranslationToolStripButton;
         protected System.Windows.Forms.ToolStripButton editTranslationtoolStripButton;

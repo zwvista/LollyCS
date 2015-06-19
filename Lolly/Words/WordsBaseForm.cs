@@ -103,19 +103,6 @@ namespace Lolly
             }
         }
 
-        protected virtual int RemoveDict(string dictName, int imageIndex)
-        {
-            var items = dictsToolStrip.Items.Cast<ToolStripButton>().ToArray();
-            int i = Array.FindIndex(items, item => item.Text == dictName && item.ImageIndex == imageIndex);
-            if (i != -1)
-            {
-                if ((int)dictsToolStrip.Tag == i)
-                    SelectDict(i - 1);
-                dictsToolStrip.Items.RemoveAt(i);
-            }
-            return i;
-        }
-
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
             dataGridView.MoveToAddNew();

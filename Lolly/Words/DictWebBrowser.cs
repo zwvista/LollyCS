@@ -163,7 +163,7 @@ namespace Lolly
             return dictItems.Count == 1 && dictItems[0].Type == DictNames.OFFLINE;
         }
 
-        public bool CanExtractAndOverriteTranslation()
+        public bool CanExtractAndOverwriteTranslation()
         {
             return dictItems.Any(i => i.Type == DictNames.OFFLINE) ||
                 dictItems.Count == 1 && dictItems[0].Type == DictNames.ONLINE;

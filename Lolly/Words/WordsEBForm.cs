@@ -19,7 +19,7 @@ namespace Lolly
         {
             InitializeComponent();
             bindingNavigator1.Items.Remove(translationToolStripSeparator);
-            bindingNavigator1.Items.Remove(extractOverriteToolStripButton);
+            bindingNavigator1.Items.Remove(extractOverwriteToolStripButton);
             bindingNavigator1.Items.Remove(extractAppendToolStripButton);
             bindingNavigator1.Items.Remove(editTranslationtoolStripButton);
             bindingNavigator1.Items.Remove(deleteTranslationToolStripButton);

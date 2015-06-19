@@ -32,7 +32,7 @@ namespace Lolly
             refreshToolStripButton.Click += refreshToolStripButton_Click;
             deleteTranslationToolStripButton.Click += deleteTranslationToolStripButton_Click;
             extractAppendToolStripButton.Click += extractToolStripButton_Click;
-            extractOverriteToolStripButton.Click += extractToolStripButton_Click;
+            extractOverwriteToolStripButton.Click += extractToolStripButton_Click;
             editTranslationtoolStripButton.Click += editTranslationtoolStripButton_Click;
             setFilterToolStripButton.Click += setFilterToolStripButton_Click;
             removeFilterToolStripButton.Click += removeFilterToolStripButton_Click;
@@ -50,7 +50,7 @@ namespace Lolly
             bool b = currentWord != "";
             deleteTranslationToolStripButton.Enabled = b && currentDWB.CanDeleteTranslation();
             editTranslationtoolStripButton.Enabled = b && currentDWB.CanEditTranslation();
-            extractOverriteToolStripButton.Enabled = b && currentDWB.CanExtractAndOverriteTranslation();
+            extractOverwriteToolStripButton.Enabled = b && currentDWB.CanExtractAndOverwriteTranslation();
             extractAppendToolStripButton.Enabled = b && currentDWB.CanExtractAndAppendTranslation();
         }
 
@@ -140,15 +140,6 @@ namespace Lolly
             UpdateHtml(dwb);
         }
 
-        protected override int RemoveDict(string dictName, int imageIndex)
-        {
-            int i = base.RemoveDict(dictName, imageIndex);
-            var dwb = dwbList[i];
-            dwb.Dispose();
-            dwbList.RemoveAt(i);
-            return i;
-        }
-
         protected override void FillDicts()
         {
             currentDWB = null;
@@ -212,7 +203,7 @@ namespace Lolly
 
         private void extractToolStripButton_Click(object sender, EventArgs e)
         {
-            if (currentDWB.DoExtractTranslation(currentWord, sender == extractOverriteToolStripButton))
+            if (currentDWB.DoExtractTranslation(currentWord, sender == extractOverwriteToolStripButton))
                 UpdateHtml(currentDWB);
         }
 
@@ -255,7 +246,7 @@ namespace Lolly
                 switch (keyData)
                 {
                     case Keys.Control | Keys.Shift | Keys.O:
-                        extractOverriteToolStripButton.TryPerformClick();
+                        extractOverwriteToolStripButton.TryPerformClick();
                         return true;
                     case Keys.Control | Keys.Shift | Keys.D:
                         deleteTranslationToolStripButton.TryPerformClick();
