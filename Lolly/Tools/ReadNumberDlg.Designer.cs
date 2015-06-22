@@ -85,6 +85,7 @@
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(22, 12);
             this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Maximum = 100000000;
             this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
             this.numericUpDown1.TabIndex = 5;
             // 
