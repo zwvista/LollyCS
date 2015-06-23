@@ -31,37 +31,41 @@ namespace Lolly
             langRadioButton.Text = Program.lbuSettings.LangDesc;
             bookUnitsRadioButton.Checked = true;
             dictDataGridView.DataSource = LollyDB.DictAll_GetDataByLangExact(Program.lbuSettings.LangID);
-            checkAllDictsButton.PerformClick();
+            CheckDataGridView(dictDataGridView, true, false);
         }
 
         private void unitsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             wordDataGridView.DataSource = LollyDB.WordsLangOrBook_GetDataByBookUnitParts(Program.lbuSettings.BookID,
                 Program.lbuSettings.UnitPartFrom, Program.lbuSettings.UnitPartTo);
-            checkAllWordsButton.PerformClick();
+            CheckDataGridView(wordDataGridView, true, false);
         }
 
         private void langRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             wordDataGridView.DataSource = LollyDB.WordsLangOrBook_GetDataByLang(Program.lbuSettings.LangID);
-            checkAllWordsButton.PerformClick();
+            CheckDataGridView(wordDataGridView, true, false);
         }
 
-        private void CheckButton_Click(object sender, EventArgs e)
+        private void CheckDataGridView(DataGridView dgv, bool toCheck, bool needSelect)
         {
-            var tag = int.Parse(((Button)sender).Tag.ToString());
-            var gdv = tag < 4 ? wordDataGridView : dictDataGridView;
-            var toCheck = tag % 2 == 0;
-            var needSelect = tag % 4 > 1;
-            foreach (DataGridViewRow row in gdv.Rows)
+            foreach (DataGridViewRow row in dgv.Rows)
                 if (!needSelect || row.Selected)
                     row.Cells[0].Value = toCheck;
         }
 
+        private void checkLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var tag = int.Parse(((LinkLabel)sender).Tag.ToString());
+            var dgv = tag < 2 ? wordDataGridView : dictDataGridView;
+            var toCheck = tag % 2 == 0;
+            CheckDataGridView(dgv, toCheck, false);
+        }
+
         private void okButton_Click(object sender, EventArgs e)
         {
-            Func<DataGridView, string[]> GetAllChecked = gdv => (
-                from DataGridViewRow row in gdv.Rows
+            Func<DataGridView, string[]> GetAllChecked = dgv => (
+                from DataGridViewRow row in dgv.Rows
                 let v = row.Cells[0].Value
                 where v != null && (bool)v
                 select row.Cells[1].Value.ToString()

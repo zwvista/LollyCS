@@ -39,15 +39,13 @@
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkSelectedWordsButton = new System.Windows.Forms.Button();
-            this.uncheckSelectedWordsButton = new System.Windows.Forms.Button();
-            this.checkSelectedDictsButton = new System.Windows.Forms.Button();
-            this.uncheckSelectedDictsButton = new System.Windows.Forms.Button();
             this.overwriteCheckBox = new System.Windows.Forms.CheckBox();
-            this.uncheckAllDictsButton = new System.Windows.Forms.Button();
-            this.checkAllDictsButton = new System.Windows.Forms.Button();
-            this.uncheckAllWordsButton = new System.Windows.Forms.Button();
-            this.checkAllWordsButton = new System.Windows.Forms.Button();
+            this.checkAllWordsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkNoneWordsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.checkAllDictsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.checkNoneDictsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.wordDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dictDataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -79,7 +77,7 @@
             this.bookUnitsRadioButton.AutoSize = true;
             this.bookUnitsRadioButton.Location = new System.Drawing.Point(6, 25);
             this.bookUnitsRadioButton.Name = "bookUnitsRadioButton";
-            this.bookUnitsRadioButton.Size = new System.Drawing.Size(88, 16);
+            this.bookUnitsRadioButton.Size = new System.Drawing.Size(122, 20);
             this.bookUnitsRadioButton.TabIndex = 1;
             this.bookUnitsRadioButton.TabStop = true;
             this.bookUnitsRadioButton.Text = "radioButton1";
@@ -91,7 +89,7 @@
             this.langRadioButton.AutoSize = true;
             this.langRadioButton.Location = new System.Drawing.Point(429, 25);
             this.langRadioButton.Name = "langRadioButton";
-            this.langRadioButton.Size = new System.Drawing.Size(88, 16);
+            this.langRadioButton.Size = new System.Drawing.Size(122, 20);
             this.langRadioButton.TabIndex = 2;
             this.langRadioButton.TabStop = true;
             this.langRadioButton.Text = "radioButton1";
@@ -107,12 +105,12 @@
             this.wordDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.checkBoxColumn,
             this.wordColumn});
-            this.wordDataGridView.Location = new System.Drawing.Point(15, 152);
+            this.wordDataGridView.Location = new System.Drawing.Point(15, 93);
             this.wordDataGridView.Name = "wordDataGridView";
             this.wordDataGridView.RowHeadersVisible = false;
             this.wordDataGridView.RowTemplate.Height = 21;
             this.wordDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.wordDataGridView.Size = new System.Drawing.Size(327, 285);
+            this.wordDataGridView.Size = new System.Drawing.Size(327, 344);
             this.wordDataGridView.TabIndex = 6;
             // 
             // checkBoxColumn
@@ -140,12 +138,12 @@
             this.dictDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewCheckBoxColumn1,
             this.dataGridViewTextBoxColumn1});
-            this.dictDataGridView.Location = new System.Drawing.Point(348, 152);
+            this.dictDataGridView.Location = new System.Drawing.Point(348, 93);
             this.dictDataGridView.Name = "dictDataGridView";
             this.dictDataGridView.RowHeadersVisible = false;
             this.dictDataGridView.RowTemplate.Height = 21;
             this.dictDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dictDataGridView.Size = new System.Drawing.Size(363, 285);
+            this.dictDataGridView.Size = new System.Drawing.Size(363, 344);
             this.dictDataGridView.TabIndex = 11;
             // 
             // dataGridViewCheckBoxColumn1
@@ -173,50 +171,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search for Words in";
             // 
-            // checkSelectedWordsButton
-            // 
-            this.checkSelectedWordsButton.Location = new System.Drawing.Point(15, 118);
-            this.checkSelectedWordsButton.Name = "checkSelectedWordsButton";
-            this.checkSelectedWordsButton.Size = new System.Drawing.Size(151, 23);
-            this.checkSelectedWordsButton.TabIndex = 3;
-            this.checkSelectedWordsButton.Tag = "2";
-            this.checkSelectedWordsButton.Text = "Check Selected";
-            this.checkSelectedWordsButton.UseVisualStyleBackColor = true;
-            this.checkSelectedWordsButton.Click += new System.EventHandler(this.CheckButton_Click);
-            // 
-            // uncheckSelectedWordsButton
-            // 
-            this.uncheckSelectedWordsButton.Location = new System.Drawing.Point(169, 118);
-            this.uncheckSelectedWordsButton.Name = "uncheckSelectedWordsButton";
-            this.uncheckSelectedWordsButton.Size = new System.Drawing.Size(168, 23);
-            this.uncheckSelectedWordsButton.TabIndex = 5;
-            this.uncheckSelectedWordsButton.Tag = "3";
-            this.uncheckSelectedWordsButton.Text = "Uncheck Selected";
-            this.uncheckSelectedWordsButton.UseVisualStyleBackColor = true;
-            this.uncheckSelectedWordsButton.Click += new System.EventHandler(this.CheckButton_Click);
-            // 
-            // checkSelectedDictsButton
-            // 
-            this.checkSelectedDictsButton.Location = new System.Drawing.Point(347, 118);
-            this.checkSelectedDictsButton.Name = "checkSelectedDictsButton";
-            this.checkSelectedDictsButton.Size = new System.Drawing.Size(175, 23);
-            this.checkSelectedDictsButton.TabIndex = 9;
-            this.checkSelectedDictsButton.Tag = "6";
-            this.checkSelectedDictsButton.Text = "Check Selected";
-            this.checkSelectedDictsButton.UseVisualStyleBackColor = true;
-            this.checkSelectedDictsButton.Click += new System.EventHandler(this.CheckButton_Click);
-            // 
-            // uncheckSelectedDictsButton
-            // 
-            this.uncheckSelectedDictsButton.Location = new System.Drawing.Point(522, 118);
-            this.uncheckSelectedDictsButton.Name = "uncheckSelectedDictsButton";
-            this.uncheckSelectedDictsButton.Size = new System.Drawing.Size(189, 23);
-            this.uncheckSelectedDictsButton.TabIndex = 10;
-            this.uncheckSelectedDictsButton.Tag = "7";
-            this.uncheckSelectedDictsButton.Text = "Uncheck Selected";
-            this.uncheckSelectedDictsButton.UseVisualStyleBackColor = true;
-            this.uncheckSelectedDictsButton.Click += new System.EventHandler(this.CheckButton_Click);
-            // 
             // overwriteCheckBox
             // 
             this.overwriteCheckBox.AutoSize = true;
@@ -227,49 +181,71 @@
             this.overwriteCheckBox.Text = "Overwrite Existing Translations";
             this.overwriteCheckBox.UseVisualStyleBackColor = true;
             // 
-            // uncheckAllDictsButton
+            // checkAllWordsLinkLabel
             // 
-            this.uncheckAllDictsButton.Location = new System.Drawing.Point(522, 89);
-            this.uncheckAllDictsButton.Name = "uncheckAllDictsButton";
-            this.uncheckAllDictsButton.Size = new System.Drawing.Size(189, 23);
-            this.uncheckAllDictsButton.TabIndex = 8;
-            this.uncheckAllDictsButton.Tag = "5";
-            this.uncheckAllDictsButton.Text = "Uncheck All";
-            this.uncheckAllDictsButton.UseVisualStyleBackColor = true;
-            this.uncheckAllDictsButton.Click += new System.EventHandler(this.CheckButton_Click);
+            this.checkAllWordsLinkLabel.AutoSize = true;
+            this.checkAllWordsLinkLabel.Location = new System.Drawing.Point(83, 73);
+            this.checkAllWordsLinkLabel.Name = "checkAllWordsLinkLabel";
+            this.checkAllWordsLinkLabel.Size = new System.Drawing.Size(32, 16);
+            this.checkAllWordsLinkLabel.TabIndex = 15;
+            this.checkAllWordsLinkLabel.TabStop = true;
+            this.checkAllWordsLinkLabel.Tag = "0";
+            this.checkAllWordsLinkLabel.Text = "All";
+            this.checkAllWordsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
             // 
-            // checkAllDictsButton
+            // label1
             // 
-            this.checkAllDictsButton.Location = new System.Drawing.Point(347, 89);
-            this.checkAllDictsButton.Name = "checkAllDictsButton";
-            this.checkAllDictsButton.Size = new System.Drawing.Size(175, 23);
-            this.checkAllDictsButton.TabIndex = 7;
-            this.checkAllDictsButton.Tag = "4";
-            this.checkAllDictsButton.Text = "Check All";
-            this.checkAllDictsButton.UseVisualStyleBackColor = true;
-            this.checkAllDictsButton.Click += new System.EventHandler(this.CheckButton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 16);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Check:";
             // 
-            // uncheckAllWordsButton
+            // checkNoneWordsLinkLabel
             // 
-            this.uncheckAllWordsButton.Location = new System.Drawing.Point(169, 89);
-            this.uncheckAllWordsButton.Name = "uncheckAllWordsButton";
-            this.uncheckAllWordsButton.Size = new System.Drawing.Size(168, 23);
-            this.uncheckAllWordsButton.TabIndex = 2;
-            this.uncheckAllWordsButton.Tag = "1";
-            this.uncheckAllWordsButton.Text = "Uncheck All";
-            this.uncheckAllWordsButton.UseVisualStyleBackColor = true;
-            this.uncheckAllWordsButton.Click += new System.EventHandler(this.CheckButton_Click);
+            this.checkNoneWordsLinkLabel.AutoSize = true;
+            this.checkNoneWordsLinkLabel.Location = new System.Drawing.Point(121, 73);
+            this.checkNoneWordsLinkLabel.Name = "checkNoneWordsLinkLabel";
+            this.checkNoneWordsLinkLabel.Size = new System.Drawing.Size(40, 16);
+            this.checkNoneWordsLinkLabel.TabIndex = 15;
+            this.checkNoneWordsLinkLabel.TabStop = true;
+            this.checkNoneWordsLinkLabel.Tag = "1";
+            this.checkNoneWordsLinkLabel.Text = "None";
+            this.checkNoneWordsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
             // 
-            // checkAllWordsButton
+            // checkAllDictsLinkLabel
             // 
-            this.checkAllWordsButton.Location = new System.Drawing.Point(15, 89);
-            this.checkAllWordsButton.Name = "checkAllWordsButton";
-            this.checkAllWordsButton.Size = new System.Drawing.Size(151, 23);
-            this.checkAllWordsButton.TabIndex = 1;
-            this.checkAllWordsButton.Tag = "0";
-            this.checkAllWordsButton.Text = "Check All";
-            this.checkAllWordsButton.UseVisualStyleBackColor = true;
-            this.checkAllWordsButton.Click += new System.EventHandler(this.CheckButton_Click);
+            this.checkAllDictsLinkLabel.AutoSize = true;
+            this.checkAllDictsLinkLabel.Location = new System.Drawing.Point(415, 73);
+            this.checkAllDictsLinkLabel.Name = "checkAllDictsLinkLabel";
+            this.checkAllDictsLinkLabel.Size = new System.Drawing.Size(32, 16);
+            this.checkAllDictsLinkLabel.TabIndex = 15;
+            this.checkAllDictsLinkLabel.TabStop = true;
+            this.checkAllDictsLinkLabel.Tag = "2";
+            this.checkAllDictsLinkLabel.Text = "All";
+            this.checkAllDictsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
+            // 
+            // checkNoneDictsLinkLabel
+            // 
+            this.checkNoneDictsLinkLabel.AutoSize = true;
+            this.checkNoneDictsLinkLabel.Location = new System.Drawing.Point(453, 73);
+            this.checkNoneDictsLinkLabel.Name = "checkNoneDictsLinkLabel";
+            this.checkNoneDictsLinkLabel.Size = new System.Drawing.Size(40, 16);
+            this.checkNoneDictsLinkLabel.TabIndex = 15;
+            this.checkNoneDictsLinkLabel.TabStop = true;
+            this.checkNoneDictsLinkLabel.Tag = "3";
+            this.checkNoneDictsLinkLabel.Text = "None";
+            this.checkNoneDictsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(350, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Check:";
             // 
             // ExtractWebDictOptionsDlg
             // 
@@ -279,15 +255,13 @@
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(729, 493);
             this.ControlBox = false;
-            this.Controls.Add(this.uncheckAllDictsButton);
-            this.Controls.Add(this.checkAllDictsButton);
-            this.Controls.Add(this.uncheckAllWordsButton);
-            this.Controls.Add(this.checkAllWordsButton);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.checkNoneDictsLinkLabel);
+            this.Controls.Add(this.checkAllDictsLinkLabel);
+            this.Controls.Add(this.checkNoneWordsLinkLabel);
+            this.Controls.Add(this.checkAllWordsLinkLabel);
             this.Controls.Add(this.overwriteCheckBox);
-            this.Controls.Add(this.uncheckSelectedDictsButton);
-            this.Controls.Add(this.checkSelectedDictsButton);
-            this.Controls.Add(this.uncheckSelectedWordsButton);
-            this.Controls.Add(this.checkSelectedWordsButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dictDataGridView);
             this.Controls.Add(this.wordDataGridView);
@@ -321,18 +295,16 @@
         private System.Windows.Forms.DataGridView wordDataGridView;
         private System.Windows.Forms.DataGridView dictDataGridView;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button checkSelectedWordsButton;
-        private System.Windows.Forms.Button uncheckSelectedWordsButton;
-        private System.Windows.Forms.Button checkSelectedDictsButton;
-        private System.Windows.Forms.Button uncheckSelectedDictsButton;
         private System.Windows.Forms.CheckBox overwriteCheckBox;
-        private System.Windows.Forms.Button uncheckAllDictsButton;
-        private System.Windows.Forms.Button checkAllDictsButton;
-        private System.Windows.Forms.Button uncheckAllWordsButton;
-        private System.Windows.Forms.Button checkAllWordsButton;
         private System.Windows.Forms.DataGridViewCheckBoxColumn checkBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn wordColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.LinkLabel checkAllWordsLinkLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel checkNoneWordsLinkLabel;
+        private System.Windows.Forms.LinkLabel checkAllDictsLinkLabel;
+        private System.Windows.Forms.LinkLabel checkNoneDictsLinkLabel;
+        private System.Windows.Forms.Label label2;
     }
 }
