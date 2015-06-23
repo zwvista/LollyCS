@@ -44,7 +44,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.b_ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.i_ToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.sourceTextBox = new TextBoxEx();
+            this.sourceTextBox = new LollyTextBox();
             this.applicationControl1 = new AppControl.ApplicationControl();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -249,6 +249,6 @@
         private System.Windows.Forms.ToolStripButton i_ToolStripButton;
         private System.Windows.Forms.ToolStripButton sourceViewToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private TextBoxEx sourceTextBox;
+        private LollyTextBox sourceTextBox;
     }
 }

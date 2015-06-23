@@ -34,7 +34,7 @@ namespace Lolly
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordsAtWillForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
+            this.bindingSource1 = new Lolly.LollyBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,7 +143,7 @@ namespace Lolly
 
         #endregion
 
-        private LLBindingSource bindingSource1;
+        private LollyBindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn wordColumn;

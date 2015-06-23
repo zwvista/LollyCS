@@ -35,8 +35,8 @@
             this.closeButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new TextBoxEx();
-            this.textBox2 = new TextBoxEx();
+            this.textBox1 = new LollyTextBox();
+            this.textBox2 = new LollyTextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -191,8 +191,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private TextBoxEx textBox1;
-        private TextBoxEx textBox2;
+        private LollyTextBox textBox1;
+        private LollyTextBox textBox2;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;

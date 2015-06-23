@@ -8,8 +8,8 @@
     <ProjectGuid>{DBA6EF01-414E-4854-92C1-8585A75DDA15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DllLolly</RootNamespace>
-    <AssemblyName>DllLolly</AssemblyName>
+    <RootNamespace>Lolly</RootNamespace>
+    <AssemblyName>LollyControls</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -103,16 +103,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlExtensions.cs" />
+    <Compile Include="LollyDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="LollyTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="LollyTreeView.Designer.cs">
       <DependentUpon>LollyTreeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="LLBindingSource.cs">
+    <Compile Include="LollyBindingSource.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TextBoxEx.cs">
+    <Compile Include="LollyTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Helpers.cs" />

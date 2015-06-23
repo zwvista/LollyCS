@@ -34,8 +34,8 @@
             this.copyTextButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new Lolly.TextBoxEx();
-            this.textBox2 = new Lolly.TextBoxEx();
+            this.textBox1 = new Lolly.LollyTextBox();
+            this.textBox2 = new Lolly.LollyTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -173,8 +173,8 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private TextBoxEx textBox1;
-        private TextBoxEx textBox2;
+        private LollyTextBox textBox1;
+        private LollyTextBox textBox2;
         private System.Windows.Forms.Button copyTextButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.ComboBox langComboBox;

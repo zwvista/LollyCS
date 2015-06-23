@@ -34,7 +34,7 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelCompanyName = new System.Windows.Forms.Label();
-            this.textBoxDescription = new Lolly.TextBoxEx();
+            this.textBoxDescription = new Lolly.LollyTextBox();
             this.okButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
@@ -180,7 +180,7 @@
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label labelCompanyName;
-        private TextBoxEx textBoxDescription;
+        private LollyTextBox textBoxDescription;
         private System.Windows.Forms.Button okButton;
     }
 }

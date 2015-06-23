@@ -31,7 +31,7 @@ namespace Lolly
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
+            this.bindingSource1 = new Lolly.LollyBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -128,7 +128,7 @@ namespace Lolly
 
         #endregion
 
-        private LLBindingSource bindingSource1;
+        private LollyBindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn wordColumn;

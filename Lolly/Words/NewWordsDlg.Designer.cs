@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.wordsTextBox = new TextBoxEx();
+            this.wordsTextBox = new LollyTextBox();
             this.cancelButton = new VistaButtonTest.VistaButton();
             this.okButton = new VistaButtonTest.VistaButton();
             this.SuspendLayout();
@@ -119,6 +119,6 @@
         private VistaButtonTest.VistaButton cancelButton;
         private VistaButtonTest.VistaButton okButton;
         private System.Windows.Forms.Label label1;
-        private TextBoxEx wordsTextBox;
+        private LollyTextBox wordsTextBox;
     }
 }

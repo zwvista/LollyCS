@@ -31,7 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.cancelButton = new VistaButtonTest.VistaButton();
             this.okButton = new VistaButtonTest.VistaButton();
-            this.translationTextBox = new TextBoxEx();
+            this.translationTextBox = new LollyTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,7 +115,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        public TextBoxEx translationTextBox;
+        public LollyTextBox translationTextBox;
         private VistaButtonTest.VistaButton cancelButton;
         private VistaButtonTest.VistaButton okButton;
     }

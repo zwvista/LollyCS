@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lolly
 {
-    public class TextBoxEx : System.Windows.Forms.TextBox
+    public class LollyTextBox : System.Windows.Forms.TextBox
     {
         protected override void OnKeyDown(System.Windows.Forms.KeyEventArgs e)
         {

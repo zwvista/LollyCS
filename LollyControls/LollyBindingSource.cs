@@ -9,20 +9,20 @@ using System.Windows.Forms;
 
 namespace Lolly
 {
-    public partial class LLBindingSource : BindingSource
+    public partial class LollyBindingSource : BindingSource
     {
-        public LLBindingSource()
+        public LollyBindingSource()
         {
 
         }
 
-        public LLBindingSource(IContainer container)
+        public LollyBindingSource(IContainer container)
             : base(container)
         {
             
         }
 
-        public LLBindingSource(Object dataSource, string dataMember)
+        public LollyBindingSource(Object dataSource, string dataMember)
             : base(dataSource, dataMember)
         {
         }

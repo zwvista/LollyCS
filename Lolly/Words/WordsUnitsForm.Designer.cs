@@ -32,7 +32,7 @@ namespace Lolly
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WordsUnitsForm));
-            this.bindingSource1 = new Lolly.LLBindingSource(this.components);
+            this.bindingSource1 = new Lolly.LollyBindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.unitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -153,7 +153,7 @@ namespace Lolly
 
         #endregion
 
-        private LLBindingSource bindingSource1;
+        private LollyBindingSource bindingSource1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn partColumn;
