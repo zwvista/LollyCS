@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" FontSize="16">
+        Title="MainWindow" Height="480" Width="600" FontSize="16">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Label>Word:</Label>
             <TextBox Width="200" Text="{Binding Word}"></TextBox>
-            <Button>Search</Button>
+            <Button Click="SearchButton_Click">Search</Button>
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <Label>Language:</Label>
-            <ComboBox Width="100" Name="LangComboBox" ItemsSource="{Binding Languages}" DisplayMemberPath="LANGNAME" SelectedValuePath="LANGID" SelectionChanged="LangComboBox_SelectionChanged"></ComboBox>
+            <ComboBox Width="150" Name="LangComboBox" ItemsSource="{Binding Languages}" DisplayMemberPath="LANGNAME" SelectedValuePath="LANGID" SelectionChanged="LangComboBox_SelectionChanged"></ComboBox>
             <Label>Dictionary:</Label>
-            <ComboBox Width="100" Name="DictComboBox" ItemsSource="{Binding DictAll}" DisplayMemberPath="DICTNAME" SelectedValuePath="URL"></ComboBox>
+            <ComboBox Width="150" Name="DictComboBox" ItemsSource="{Binding DictAll}" DisplayMemberPath="DICTNAME" SelectedValuePath="URL"></ComboBox>
         </StackPanel>
-        <WebBrowser></WebBrowser>
+        <WebBrowser Name="DictWebBrowser"></WebBrowser>
 
     </DockPanel>
 </Window>

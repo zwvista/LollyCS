@@ -52,11 +52,11 @@ namespace LollyTools.ViewModels
                     {
                         var match = reg.Match(r.TRANSLATION);
                         if (match.Groups.Count == 2)
-                            wordInDict = match.Groups[1].Value;
+                            wordInDict = match.Groups[1].Value.Trim();
                     }
                     if (string.Equals(wordInDict, r.WORD, StringComparison.InvariantCultureIgnoreCase)) continue;
-                    var html = obj.Search(r.WORD, dictRow.TRANSFORM_WIN);
-                    LollyDB.DictEntity_Update(html, r.WORD, "@FR-CH FRHELPER");
+                    //var html = obj.Search(r.WORD, dictRow.TRANSFORM_WIN);
+                    //LollyDB.DictEntity_Update(html, r.WORD, "@FR-CH FRHELPER");
                     Debug.Print("{0} <> {1}", r.WORD, wordInDict);
                 }
             }

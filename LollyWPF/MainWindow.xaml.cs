@@ -12,10 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Web;
 
 using LollyShared;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace LollyWPF
 {
@@ -32,6 +34,8 @@ namespace LollyWPF
 
             Languages = new ObservableCollection<MLANGUAGE>(LollyDB.Languages_GetDataNonChinese());
             Word = "一人";
+            LangComboBox.SelectedIndex = 0;
+            HideScriptErrors(DictWebBrowser, true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -89,6 +93,27 @@ namespace LollyWPF
         {
             var langId = (long)LangComboBox.SelectedValue;
             DictAll = new ObservableCollection<MDICTALL>(LollyDB.DictAll_GetDataByLang(langId));
+            DictComboBox.SelectedIndex = 0;
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            var rawURL = (string)DictComboBox.SelectedValue;
+            var url = string.Format(rawURL, HttpUtility.UrlEncode(Word));
+            DictWebBrowser.Navigate(url);
+        }
+
+        private void HideScriptErrors(WebBrowser wb, bool hide)
+        {
+            var fiComWebBrowser = typeof(WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (fiComWebBrowser == null) return;
+            var objComWebBrowser = fiComWebBrowser.GetValue(wb);
+            if (objComWebBrowser == null)
+            {
+                wb.Loaded += (o, s) => HideScriptErrors(wb, hide); //In case we are to early
+                return;
+            }
+            objComWebBrowser.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, objComWebBrowser, new object[] { hide });
         }
     }
 }

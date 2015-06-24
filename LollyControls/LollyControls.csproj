@@ -103,9 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlExtensions.cs" />
-    <Compile Include="LollyDataGridView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="LollyTreeView.cs">
       <SubType>Component</SubType>
     </Compile>

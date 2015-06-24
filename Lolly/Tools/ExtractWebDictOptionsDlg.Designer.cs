@@ -46,6 +46,12 @@
             this.checkAllDictsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.checkNoneDictsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkSelectedWordsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.uncheckSelectedWordsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.checkSelectedDictsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.uncheckSelectedDictsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.wordDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dictDataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -184,7 +190,7 @@
             // checkAllWordsLinkLabel
             // 
             this.checkAllWordsLinkLabel.AutoSize = true;
-            this.checkAllWordsLinkLabel.Location = new System.Drawing.Point(83, 73);
+            this.checkAllWordsLinkLabel.Location = new System.Drawing.Point(73, 73);
             this.checkAllWordsLinkLabel.Name = "checkAllWordsLinkLabel";
             this.checkAllWordsLinkLabel.Size = new System.Drawing.Size(32, 16);
             this.checkAllWordsLinkLabel.TabIndex = 15;
@@ -205,7 +211,7 @@
             // checkNoneWordsLinkLabel
             // 
             this.checkNoneWordsLinkLabel.AutoSize = true;
-            this.checkNoneWordsLinkLabel.Location = new System.Drawing.Point(121, 73);
+            this.checkNoneWordsLinkLabel.Location = new System.Drawing.Point(102, 73);
             this.checkNoneWordsLinkLabel.Name = "checkNoneWordsLinkLabel";
             this.checkNoneWordsLinkLabel.Size = new System.Drawing.Size(40, 16);
             this.checkNoneWordsLinkLabel.TabIndex = 15;
@@ -217,24 +223,24 @@
             // checkAllDictsLinkLabel
             // 
             this.checkAllDictsLinkLabel.AutoSize = true;
-            this.checkAllDictsLinkLabel.Location = new System.Drawing.Point(415, 73);
+            this.checkAllDictsLinkLabel.Location = new System.Drawing.Point(403, 73);
             this.checkAllDictsLinkLabel.Name = "checkAllDictsLinkLabel";
             this.checkAllDictsLinkLabel.Size = new System.Drawing.Size(32, 16);
             this.checkAllDictsLinkLabel.TabIndex = 15;
             this.checkAllDictsLinkLabel.TabStop = true;
-            this.checkAllDictsLinkLabel.Tag = "2";
+            this.checkAllDictsLinkLabel.Tag = "4";
             this.checkAllDictsLinkLabel.Text = "All";
             this.checkAllDictsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
             // 
             // checkNoneDictsLinkLabel
             // 
             this.checkNoneDictsLinkLabel.AutoSize = true;
-            this.checkNoneDictsLinkLabel.Location = new System.Drawing.Point(453, 73);
+            this.checkNoneDictsLinkLabel.Location = new System.Drawing.Point(431, 73);
             this.checkNoneDictsLinkLabel.Name = "checkNoneDictsLinkLabel";
             this.checkNoneDictsLinkLabel.Size = new System.Drawing.Size(40, 16);
             this.checkNoneDictsLinkLabel.TabIndex = 15;
             this.checkNoneDictsLinkLabel.TabStop = true;
-            this.checkNoneDictsLinkLabel.Tag = "3";
+            this.checkNoneDictsLinkLabel.Tag = "5";
             this.checkNoneDictsLinkLabel.Text = "None";
             this.checkNoneDictsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
             // 
@@ -247,6 +253,72 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "Check:";
             // 
+            // checkSelectedWordsLinkLabel
+            // 
+            this.checkSelectedWordsLinkLabel.AutoSize = true;
+            this.checkSelectedWordsLinkLabel.Location = new System.Drawing.Point(220, 74);
+            this.checkSelectedWordsLinkLabel.Name = "checkSelectedWordsLinkLabel";
+            this.checkSelectedWordsLinkLabel.Size = new System.Drawing.Size(48, 16);
+            this.checkSelectedWordsLinkLabel.TabIndex = 15;
+            this.checkSelectedWordsLinkLabel.TabStop = true;
+            this.checkSelectedWordsLinkLabel.Tag = "2";
+            this.checkSelectedWordsLinkLabel.Text = "Check";
+            this.checkSelectedWordsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
+            // 
+            // uncheckSelectedWordsLinkLabel
+            // 
+            this.uncheckSelectedWordsLinkLabel.AutoSize = true;
+            this.uncheckSelectedWordsLinkLabel.Location = new System.Drawing.Point(266, 74);
+            this.uncheckSelectedWordsLinkLabel.Name = "uncheckSelectedWordsLinkLabel";
+            this.uncheckSelectedWordsLinkLabel.Size = new System.Drawing.Size(64, 16);
+            this.uncheckSelectedWordsLinkLabel.TabIndex = 15;
+            this.uncheckSelectedWordsLinkLabel.TabStop = true;
+            this.uncheckSelectedWordsLinkLabel.Tag = "3";
+            this.uncheckSelectedWordsLinkLabel.Text = "Uncheck";
+            this.uncheckSelectedWordsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(142, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 16);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Selected:";
+            // 
+            // checkSelectedDictsLinkLabel
+            // 
+            this.checkSelectedDictsLinkLabel.AutoSize = true;
+            this.checkSelectedDictsLinkLabel.Location = new System.Drawing.Point(546, 73);
+            this.checkSelectedDictsLinkLabel.Name = "checkSelectedDictsLinkLabel";
+            this.checkSelectedDictsLinkLabel.Size = new System.Drawing.Size(48, 16);
+            this.checkSelectedDictsLinkLabel.TabIndex = 15;
+            this.checkSelectedDictsLinkLabel.TabStop = true;
+            this.checkSelectedDictsLinkLabel.Tag = "6";
+            this.checkSelectedDictsLinkLabel.Text = "Check";
+            this.checkSelectedDictsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
+            // 
+            // uncheckSelectedDictsLinkLabel
+            // 
+            this.uncheckSelectedDictsLinkLabel.AutoSize = true;
+            this.uncheckSelectedDictsLinkLabel.Location = new System.Drawing.Point(592, 73);
+            this.uncheckSelectedDictsLinkLabel.Name = "uncheckSelectedDictsLinkLabel";
+            this.uncheckSelectedDictsLinkLabel.Size = new System.Drawing.Size(64, 16);
+            this.uncheckSelectedDictsLinkLabel.TabIndex = 15;
+            this.uncheckSelectedDictsLinkLabel.TabStop = true;
+            this.uncheckSelectedDictsLinkLabel.Tag = "7";
+            this.uncheckSelectedDictsLinkLabel.Text = "Uncheck";
+            this.uncheckSelectedDictsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkLinkLabel_LinkClicked);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(468, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 16);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Selected:";
+            // 
             // ExtractWebDictOptionsDlg
             // 
             this.AcceptButton = this.okButton;
@@ -256,9 +328,15 @@
             this.ClientSize = new System.Drawing.Size(729, 493);
             this.ControlBox = false;
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkNoneDictsLinkLabel);
             this.Controls.Add(this.checkAllDictsLinkLabel);
+            this.Controls.Add(this.uncheckSelectedDictsLinkLabel);
+            this.Controls.Add(this.checkSelectedDictsLinkLabel);
+            this.Controls.Add(this.uncheckSelectedWordsLinkLabel);
+            this.Controls.Add(this.checkSelectedWordsLinkLabel);
             this.Controls.Add(this.checkNoneWordsLinkLabel);
             this.Controls.Add(this.checkAllWordsLinkLabel);
             this.Controls.Add(this.overwriteCheckBox);
@@ -306,5 +384,11 @@
         private System.Windows.Forms.LinkLabel checkAllDictsLinkLabel;
         private System.Windows.Forms.LinkLabel checkNoneDictsLinkLabel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel checkSelectedWordsLinkLabel;
+        private System.Windows.Forms.LinkLabel uncheckSelectedWordsLinkLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel checkSelectedDictsLinkLabel;
+        private System.Windows.Forms.LinkLabel uncheckSelectedDictsLinkLabel;
+        private System.Windows.Forms.Label label4;
     }
 }

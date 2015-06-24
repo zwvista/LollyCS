@@ -57,9 +57,10 @@ namespace Lolly
         private void checkLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var tag = int.Parse(((LinkLabel)sender).Tag.ToString());
-            var dgv = tag < 2 ? wordDataGridView : dictDataGridView;
+            var dgv = tag < 4 ? wordDataGridView : dictDataGridView;
             var toCheck = tag % 2 == 0;
-            CheckDataGridView(dgv, toCheck, false);
+            var needSelect = tag % 4 > 1;
+            CheckDataGridView(dgv, toCheck, needSelect);
         }
 
         private void okButton_Click(object sender, EventArgs e)
