@@ -15,17 +15,17 @@ namespace LollyShared
         public IntPtr hwndEditWord = IntPtr.Zero;
         public IntPtr hwndButtonSearch = IntPtr.Zero;
         public IntPtr hwndListWords = IntPtr.Zero;
-        public IHTMLElement elemHtml;
+        public IntPtr hwndHtml = IntPtr.Zero;
 
         public void FindLingoes()
         {
-            if (elemHtml != null) return;
+            if (hwndHtml != IntPtr.Zero) return;
 
-            //hwndMain = FindWindow(Settings.Default.LingoesClassName, null);
+            hwndMain = FindWindow(Settings.Default.LingoesClassName, null);
             //hwndMain = FindWindow(Program.lingoesClassName, Program.LingoesWindowName);
             // couldn't find "Lingoes 灵格斯" window in the Japanese OS,
             // although GetText(hwndMain) == "Lingoes 灵格斯"
-            hwndMain = FindWindow(null, Settings.Default.LingoesWindowName);
+            //hwndMain = FindWindow(null, Settings.Default.LingoesWindowName);
             if (hwndMain == IntPtr.Zero) return;
 
             IntPtr hwndDlg = GetDlgItem(hwndMain, 0);
@@ -39,25 +39,25 @@ namespace LollyShared
             IntPtr hwnd = GetDlgItem(hwndDlg3, 0x71);
             hwnd = GetDlgItem(hwnd, 0);
             hwnd = GetDlgItem(hwnd, 0);
-            hwnd = GetDlgItem(hwnd, 0);
+            hwndHtml = GetDlgItem(hwnd, 0);
+        }
 
+        public string GetContent()
+        {
+            IHTMLElement elemHtml = null;
             try
             {
                 uint WM_HTML_GETOBJECT = RegisterWindowMessage("WM_HTML_GETOBJECT");
                 UIntPtr lngRes;
-                SendMessageTimeout(hwnd, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
+                SendMessageTimeout(hwndHtml, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero, SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
                 var doc = (HTMLDocument)ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
                 elemHtml = doc.body.parentElement;
             }
             catch (System.Exception)
             {
-            	
-            }
-        }
 
-        public string GetContent()
-        {
-            return elemHtml.outerHTML;
+            }
+            return elemHtml?.outerHTML;
         }
 
         public string Search(string word)

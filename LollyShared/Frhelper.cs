@@ -38,23 +38,20 @@ namespace LollyShared
         public string GetContent()
         {
             IHTMLElement elemHtml = null;
-            do
+            try
             {
-                try
-                {
-                    uint WM_HTML_GETOBJECT = RegisterWindowMessage("WM_HTML_GETOBJECT");
-                    UIntPtr lngRes;
-                    SendMessageTimeout(hwndHtml, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero,
-                        SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
-                    var doc = (HTMLDocument)ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
-                    elemHtml = doc.body.parentElement;
-                }
-                catch (System.Exception)
-                {
+                uint WM_HTML_GETOBJECT = RegisterWindowMessage("WM_HTML_GETOBJECT");
+                UIntPtr lngRes;
+                SendMessageTimeout(hwndHtml, WM_HTML_GETOBJECT, UIntPtr.Zero, IntPtr.Zero,
+                    SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG, 1000, out lngRes);
+                var doc = (HTMLDocument)ObjectFromLresult(lngRes, typeof(HTMLDocument).GUID, IntPtr.Zero);
+                elemHtml = doc.body.parentElement;
+            }
+            catch (System.Exception)
+            {
 
-                }
-            } while (elemHtml == null || elemHtml.innerHTML == null);
-            return elemHtml.outerHTML;
+            }
+            return elemHtml?.outerHTML;
         }
 
         public string Search(string word)
