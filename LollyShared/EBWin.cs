@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Automation;
 using System.Runtime.InteropServices;
-using LollyShared;
 
 using static LollyShared.Win32;
 
-namespace Lolly
+namespace LollyShared
 {
     public class EBWin
     {

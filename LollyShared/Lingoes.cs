@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using LollyShared.Properties;
 using mshtml;
+using System.Windows.Forms;
 
 using static LollyShared.Win32;
 
@@ -118,6 +119,24 @@ namespace LollyShared
             else
                 result = $"<HTML><BODY>{ExtensionClass.NOTRANSLATION}</BODY></HTML>";
             return result;
+        }
+
+        public List<string> GetWordList()
+        {
+            FindLingoes();
+
+            var words = new List<string>();
+            string lastWord = "", dictWord;
+            for(;;)
+            {
+                dictWord = GetControlText(hwndEditWord);
+                if (dictWord == lastWord) break;
+                words.Add(lastWord = dictWord);
+                SendKey(hwndListWords, Keys.Down, false);
+                System.Threading.Thread.Sleep(10);
+            }
+
+            return words;
         }
     }
 }

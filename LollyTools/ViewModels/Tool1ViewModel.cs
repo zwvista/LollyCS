@@ -64,9 +64,13 @@ namespace LollyTools.ViewModels
 
         private void OnOneTranslationFrhelper()
         {
-            var obj = new Frhelper();
-            var dictRow = LollyDB.DictAll_GetDataByLangDict(3, "Frhelper");
-            var html = obj.Search(Word, dictRow.TRANSFORM_WIN);
+            //var obj = new Frhelper();
+            //var dictRow = LollyDB.DictAll_GetDataByLangDict(3, "Frhelper");
+            //var html = obj.Search(Word, dictRow.TRANSFORM_WIN);
+
+            var obj = new Lingoes();
+            obj.FindLingoes();
+            var lst = obj.GetWordList();
         }
 
         private void OnSyncDictWordsWithLang()
