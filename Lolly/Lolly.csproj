@@ -162,8 +162,6 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationClient" />
-    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -227,7 +225,6 @@
     <Compile Include="Auxiliary\AuxWebExtractForm.Designer.cs">
       <DependentUpon>AuxWebExtractForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EBWin.cs" />
     <Compile Include="Tools\AutoCorrectTextDlg.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -173,7 +173,7 @@ namespace Lolly
             }
         }
 
-        public string FindKana(string word)
+        public string[] FindKanas(string word)
         {
             LookUp(word);
             var kanas = (from w in GetWordList()
@@ -181,17 +181,7 @@ namespace Lolly
                          let n = w2.IndexOf("【")
                          select n != -1 ? w2.Substring(0, n) : w2)
                          .Distinct().ToArray();
-            switch (kanas.Length)
-            {
-                case 0:
-                    return "";
-                case 1:
-                    return kanas[0];
-                default:
-                    var dlg = new SelectKanaDlg(word, kanas);
-                    dlg.ShowDialog();
-                    return dlg.SelectedKana;
-            }
+            return kanas;
         }
     }
 }

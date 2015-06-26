@@ -196,6 +196,22 @@ namespace Lolly
             pb.EndVoice();
         }
 
+        public static string FindKana(this EBWin ebwin, string word)
+        {
+            var kanas = ebwin.FindKanas(word);
+            switch (kanas.Length)
+            {
+                case 0:
+                    return "";
+                case 1:
+                    return kanas[0];
+                default:
+                    var dlg = new SelectKanaDlg(word, kanas);
+                    dlg.ShowDialog();
+                    return dlg.SelectedKana;
+            }
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

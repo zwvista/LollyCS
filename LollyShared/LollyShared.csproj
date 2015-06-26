@@ -62,6 +62,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCorrect.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="DictEntity.cs" />
     <Compile Include="Dictionaries.cs" />
     <Compile Include="DictTypes.cs" />
+    <Compile Include="EBWin.cs" />
     <Compile Include="ExtensionClass.cs" />
     <Compile Include="Frhelper.cs" />
     <Compile Include="Languages.cs" />
