@@ -221,7 +221,8 @@ namespace Lolly
             lbuSettings.LangID = Properties.Settings.Default.LangID;
             appDataFolder = Properties.Settings.Default.AppDataFolder + "\\";
             appLogFolder = appDataFolder + "Log\\";
-            js = System.IO.File.ReadAllText(appDataFolder + "Lolly.js");
+            var jsPath = System.IO.Path.Combine(Properties.Settings.Default.AppDataFolder, "Lolly.js");
+            js = System.IO.File.ReadAllText(jsPath);
             appDataFolderInHtml = appDataFolder.Replace('\\', '/');
             config = new DictConfig(appDataFolder + "Lolly.config");
 

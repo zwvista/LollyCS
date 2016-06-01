@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LollyModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=E:\Education\Lolly\Lolly.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LollyModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=‪C:\zw\backup\Lolly.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AUTOCORRECT">
           <Key>
             <PropertyRef Name="ID" />
@@ -743,6 +743,26 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="1faf9ee6a2a94ad9aec533a6371f6141" Name="Diagram1">
+        <EntityTypeShape EntityType="LollyModel.MAUTOCORRECT" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MBOOK" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MDICTIONARY" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MDICTTYPE" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MLANGUAGE" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MPHRASEUNIT" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MPICBOOK" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MWEBEXTRACT" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MWEBTEXT" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MWORDUNIT" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MWORDLANG" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MDICTALL" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LollyModel.MWEBTEXTALL" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="LollyModel.FK_AUTOCORRECT_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LollyModel.FK_DICTIONARIES_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LollyModel.FK_PICBOOKS_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="LollyModel.FK_WORDSLANG_0_0" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

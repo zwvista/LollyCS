@@ -12,7 +12,7 @@
       <Value Profile="(Default)">TFormMainEudic</Value>
     </Setting>
     <Setting Name="LogFolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">E:\Education\Lolly\log</Value>
+      <Value Profile="(Default)">‪C:\zw\backup\log</Value>
     </Setting>
   </Settings>
 </SettingsFile>
