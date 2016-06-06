@@ -39,23 +39,35 @@
 <script type="text/javascript">
     var $lang = $('#SelectedLangID');
     var $dict = $('#SelectedDictName');
-    $lang.change(function () {
-        var langid = $(this).val();
-        if (langid != null && langid != '') {
-            $.getJSON('@Url.Action("DictList")', { langid: langid }, function (response) {
-                $dict.empty();
-                $.each(response, function (index, dict) {
-                    $dict.append($('<option/>', { text: dict }));
-                });
+    $lang.change(function() {
+        $.post('@Url.Action("DictList")', $('form').serialize(), function(response) {
+            $dict.empty();
+            $.each(response, function (index, dict) {
+                $dict.append($('<option/>', { text: dict }));
             });
-        }
+        });
     });
     $lang.change();
-    $('#search').click(function (e) {
-        var $form = $(this).closest("form");
-        e.preventDefault();
-        $.post('@Url.Action("UrlByWord")', $form.serialize(), function (response) {
-            $('#dictframe').attr('src', response);
+    var redirectSearch = false;
+    $('#search').click(function() { redirectSearch = false; });
+    $('#redirectSearch').click(function() { redirectSearch = true; });
+    $('form').submit(function() {
+        if(redirectSearch) return;
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("UrlByWord")",
+            data: $('form').serialize(),
+            success: function(response) {
+                $('#wordError').empty();
+                $('#dictframe').attr('src', response);
+            },
+            error: function(response) {
+                //alert(JSON.stringify(response));
+                var err = response.statusText;
+                $('#wordError').html(err);
+                $('#dictframe').attr('src', 'about:blank');
+            }
         });
     });
 </script>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using LollyASPMVC.Models;
 using LollyShared;
+using System.Net;
 
 namespace LollyASPMVC.Controllers
 {
@@ -20,12 +21,12 @@ namespace LollyASPMVC.Controllers
             return View(vm);
         }
 
-        public ActionResult DictList(int langid)
+        [HttpPost]
+        public ActionResult DictList(LollyViewModel vm)
         {
             return Json(
-                LollyDB.Dictionaries_GetDataByLang(langid)
-                .Select(r => r.DICTNAME)
-                .OrderBy(r => r),
+                LollyDB.Dictionaries_GetDataByLang(vm.SelectedLangID)
+                .Select(r => r.DICTNAME),
                 JsonRequestBehavior.AllowGet
             );
         }
@@ -33,9 +34,17 @@ namespace LollyASPMVC.Controllers
         [HttpPost]
         public ActionResult UrlByWord(LollyViewModel vm)
         {
-            var m = LollyDB.DictAll_GetDataByLangDict(vm.SelectedLangID, vm.SelectedDictName);
-            var url = string.Format(m.URL, HttpUtility.UrlEncode(vm.Word));
-            return Content(url);
+            if(string.IsNullOrWhiteSpace(vm.Word))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Word Required.");
+            return Content(vm.UrlByWord);
+        }
+
+        [HttpPost]
+        public ActionResult Search(LollyViewModel vm)
+        {
+            if (string.IsNullOrWhiteSpace(vm.Word))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Word Required.");
+            return Redirect(vm.UrlByWord);
         }
     }
 }

@@ -35,7 +35,7 @@
                     <asp:ControlParameter ControlID="ddlDictionary" Name="dict" PropertyName="SelectedValue" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
-            <div class="col-sm-3 error vcenter" id='wordError'></div>
+            <asp:Label ID="lblError" runat="server" CssClass="col-sm-3 error vcenter"></asp:Label>
         </div>
     </div>
 <iframe id='dictframe' runat="server">
