@@ -7,24 +7,24 @@
     ViewBag.Title = "Lolly";
 }
 
-@section Styles {
+@section styles {
     <link href="@Url.Content("~/Styles/lolly.css")" rel="stylesheet" type="text/css" />
 }
 
 @using (Html.BeginForm("Search", "Lolly", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <div class="form-group">
-        <label class="col-sm-1 control-label" for='lang'>Language:</label>
+        <label class="col-sm-1 control-label" for='SelectedLangID'>Language:</label>
         <div class="col-sm-3">
             @Html.DropDownListFor(m => m.SelectedLangID, Model.LangList, new { @class = "form-control" })
         </div>
-        <label class="col-sm-1 control-label" for='dict'>Dictionary:</label>
+        <label class="col-sm-1 control-label" for='SelectedDictName'>Dictionary:</label>
         <div class="col-sm-3">
             @Html.DropDownListFor(m => m.SelectedDictName, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-1 control-label" for='word'>Word:</label>
+        <label class="col-sm-1 control-label" for='Word'>Word:</label>
         <div class="col-sm-3">
             @Html.TextBoxFor(m => m.Word, new { @class = "form-control" })
         </div>
@@ -35,7 +35,7 @@
 }
 <iframe id='dictframe'></iframe>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@section scripts {
 <script type="text/javascript">
     var $lang = $('#SelectedLangID');
     var $dict = $('#SelectedDictName');
@@ -59,3 +59,4 @@
         });
     });
 </script>
+}

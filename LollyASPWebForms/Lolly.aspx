@@ -5,13 +5,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-horizontal" role="form">
         <div class="form-group">
-            <asp:Label ID="Label1" runat="server" Text="Language:" CssClass="col-sm-1 control-label"></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text="Language:" CssClass="col-sm-1 control-label" AssociatedControlID="ddlLanguage"></asp:Label>
             <div class="col-sm-3">
                 <asp:DropDownList ID="ddlLanguage" runat="server" AutoPostBack="True" DataSourceID="odsLanguage" DataTextField="LANGNAME" DataValueField="LANGID" CssClass="form-control">
                 </asp:DropDownList>
                 <asp:ObjectDataSource ID="odsLanguage" runat="server" SelectMethod="Languages_GetDataNonChinese" TypeName="LollyShared.LollyDB"></asp:ObjectDataSource>
             </div>
-            <asp:Label ID="Label2" runat="server" Text="Dictionary:" CssClass="col-sm-1 control-label"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Dictionary:" CssClass="col-sm-1 control-label" AssociatedControlID="ddlDictionary"></asp:Label>
             <div class="col-sm-3">
                 <asp:DropDownList ID="ddlDictionary" runat="server" DataSourceID="odsDictionary" DataTextField="DICTNAME" DataValueField="DICTNAME" CssClass="form-control" >
                 </asp:DropDownList>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label ID="Label3" runat="server" Text="Word:" CssClass="col-sm-1 control-label"></asp:Label>
+            <asp:Label ID="Label3" runat="server" Text="Word:" CssClass="col-sm-1 control-label" AssociatedControlID="txtWord"></asp:Label>
             <div class="col-sm-3">
                 <asp:TextBox ID="txtWord" runat="server" CssClass="form-control">一人</asp:TextBox>
             </div>
