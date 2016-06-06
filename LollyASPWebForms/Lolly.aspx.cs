@@ -20,5 +20,11 @@ namespace LollyASPWebForms
             var m = odsDictAll.Select().OfType<MDICTALL>().First();
             dictframe.Src = string.Format(m.URL, HttpUtility.UrlEncode(txtWord.Text));
         }
+
+        protected void btnSearchRedirect_Click(object sender, EventArgs e)
+        {
+            var m = odsDictAll.Select().OfType<MDICTALL>().First();
+            dictframe.Src = string.Format(m.URL, HttpUtility.UrlEncode(txtWord.Text));
+        }
     }
 }

@@ -1,0 +1,13 @@
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.error {
+	font-weight: bold;
+    color:red;
+}
+iframe {
+	width:100%;
+	height:500px;
+}

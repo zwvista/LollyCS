@@ -7,51 +7,55 @@
     ViewBag.Title = "Lolly";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Styles/lolly.css")" rel="stylesheet" type="text/css" />
+}
+
 @using (Html.BeginForm("Search", "Lolly", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <div class="form-group">
         <label class="col-sm-1 control-label" for='lang'>Language:</label>
         <div class="col-sm-3">
-            @Html.DropDownListFor(m => m.SelectedLangID, Model.LangList)
+            @Html.DropDownListFor(m => m.SelectedLangID, Model.LangList, new { @class = "form-control" })
         </div>
         <label class="col-sm-1 control-label" for='dict'>Dictionary:</label>
         <div class="col-sm-3">
-            @Html.DropDownListFor(m => m.SelectedDictName, Enumerable.Empty<SelectListItem>())
+            @Html.DropDownListFor(m => m.SelectedDictName, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-1 control-label" for='word'>Word:</label>
         <div class="col-sm-3">
-            @Html.TextBoxFor(m => m.Word)
+            @Html.TextBoxFor(m => m.Word, new { @class = "form-control" })
         </div>
         <input type="submit" class="btn btn-primary" value='Search' id='search' />
         <input type="submit" class="btn btn-primary" value='Search(redirect)' id='redirectSearch' />
         <div class="col-sm-3 error vcenter" id='wordError'></div>
     </div>
 }
-<iframe id='dictframe' width='100%' height='500'></iframe>
+<iframe id='dictframe'></iframe>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-        var $lang = $('#SelectedLangID');
-        var $dict = $('#SelectedDictName');
-        $lang.change(function () {
-            var langid = $(this).val();
-            if (langid != null && langid != '') {
-                $.getJSON('@Url.Action("DictList")', { langid: langid }, function (response) {
-                    $dict.empty();
-                    $.each(response, function (index, dict) {
-                        $dict.append($('<option/>', { text: dict }));
-                    });
+    var $lang = $('#SelectedLangID');
+    var $dict = $('#SelectedDictName');
+    $lang.change(function () {
+        var langid = $(this).val();
+        if (langid != null && langid != '') {
+            $.getJSON('@Url.Action("DictList")', { langid: langid }, function (response) {
+                $dict.empty();
+                $.each(response, function (index, dict) {
+                    $dict.append($('<option/>', { text: dict }));
                 });
-            }
-        });
-        $lang.change();
-        $('#search').click(function (e) {
-            var $form = $(this).closest("form");
-            e.preventDefault();
-            $.post('@Url.Action("UrlByWord")', $form.serialize(), function (response) {
-                $('#dictframe').attr('src', response);
             });
+        }
+    });
+    $lang.change();
+    $('#search').click(function (e) {
+        var $form = $(this).closest("form");
+        e.preventDefault();
+        $.post('@Url.Action("UrlByWord")', $form.serialize(), function (response) {
+            $('#dictframe').attr('src', response);
         });
+    });
 </script>
