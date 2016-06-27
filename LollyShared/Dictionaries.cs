@@ -28,7 +28,7 @@ namespace LollyShared
                 var item = new MDICTIONARY
                 {
                     LANGID = row.LANGID,
-                    ORD = row.ORD,
+                    SEQNUM = row.SEQNUM,
                     DICTTYPEID = row.DICTTYPEID,
                     DICTNAME = row.DICTNAME,
                     LANGIDTO = row.LANGIDTO,
@@ -50,12 +50,12 @@ namespace LollyShared
             {
                 var sql = @"
                     UPDATE  DICTIONARIES
-                    SET ORD = @ord, DICTTYPEID = @dicttypeid, DICTNAME = @dictname, LANGIDTO = @langidto,
+                    SET SEQNUM = @ord, DICTTYPEID = @dicttypeid, DICTNAME = @dictname, LANGIDTO = @langidto,
                         URL = @url, CHCONV = @chconv, AUTOMATION = @automation, AUTOJUMP = @autojump, DICTTABLE = @dicttable, TEMPLATE = @template
                     WHERE   (LANGID = @langid) AND (DICTNAME = @original_dictname)
                 ";
                 db.Database.ExecuteSqlCommand(sql,
-                    new SQLiteParameter("ord", row.ORD),
+                    new SQLiteParameter("ord", row.SEQNUM),
                     new SQLiteParameter("dicttypeid", row.DICTTYPEID),
                     new SQLiteParameter("dictname", row.DICTNAME),
                     new SQLiteParameter("langidto", row.LANGIDTO),

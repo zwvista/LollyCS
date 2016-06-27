@@ -97,7 +97,7 @@ namespace Lolly
             // 
             this.bindingSource1.DataSource = typeof(LollyShared.MAUTOCORRECT);
             this.bindingSource1.ListRowChanged = false;
-            this.bindingSource1.Sort = "ORD";
+            this.bindingSource1.Sort = "SEQNUM";
             this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
@@ -216,7 +216,7 @@ namespace Lolly
             this.reorderToolStripButton.ImageTransparentColor = System.Drawing.Color.White;
             this.reorderToolStripButton.Name = "reorderToolStripButton";
             this.reorderToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.reorderToolStripButton.Text = "Renumber ORD";
+            this.reorderToolStripButton.Text = "Renumber SEQNUM";
             this.reorderToolStripButton.Click += new System.EventHandler(this.reorderToolStripButton_Click);
             // 
             // dataGridView1
@@ -241,8 +241,8 @@ namespace Lolly
             // 
             // ordColumn
             // 
-            this.ordColumn.DataPropertyName = "ORD";
-            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.DataPropertyName = "SEQNUM";
+            this.ordColumn.HeaderText = "SEQNUM";
             this.ordColumn.Name = "ordColumn";
             // 
             // inputColumn

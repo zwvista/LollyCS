@@ -96,7 +96,7 @@ namespace LollyTools.ViewModels
                     from r in db.SDICTALL
                     where r.LANGID == langid
                     where r.DICTTYPENAME == "OFFLINE-ONLINE"
-                    orderby r.ORD
+                    orderby r.SEQNUM
                     select r
                 ).ToList();
                 foreach (var r in dictRows)

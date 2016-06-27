@@ -65,7 +65,7 @@ namespace Lolly
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(MWORDBOOK);
-            this.bindingSource1.Sort = "BOOKNAME,UNIT,ORD";
+            this.bindingSource1.Sort = "BOOKNAME,UNIT,SEQNUM";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             // 
             // dataGridView1
@@ -118,8 +118,8 @@ namespace Lolly
             // 
             // ordColumn
             // 
-            this.ordColumn.DataPropertyName = "ORD";
-            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.DataPropertyName = "SEQNUM";
+            this.ordColumn.HeaderText = "SEQNUM";
             this.ordColumn.Name = "ordColumn";
             this.ordColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ordColumn.Width = 75;

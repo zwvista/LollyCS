@@ -17,7 +17,7 @@ namespace LollyShared
         public long BOOKID { get; set; }
         public long UNIT { get; set; }
         public long PART { get; set; }
-        public long ORD { get; set; }
+        public long SEQNUM { get; set; }
         public string WORD { get; set; }
         public string NOTE { get; set; }
         public string BOOKNAME { get; set; }

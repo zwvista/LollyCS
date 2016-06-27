@@ -26,7 +26,7 @@ namespace LollyShared
                 return (
                     from r in db.SDICTALL
                     where r.LANGID == langid && r.DICTTYPENAME == dicttype
-                    orderby r.ORD
+                    orderby r.SEQNUM
                     select r
                 ).ToList();
         }

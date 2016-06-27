@@ -15,7 +15,7 @@ namespace LollyShared
     public partial class MDICTALL
     {
         public long LANGID { get; set; }
-        public long ORD { get; set; }
+        public long SEQNUM { get; set; }
         public long LANGIDTO { get; set; }
         public string DICTTYPENAME { get; set; }
         public string DICTNAME { get; set; }

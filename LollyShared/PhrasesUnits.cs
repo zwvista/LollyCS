@@ -30,7 +30,7 @@ namespace LollyShared
                 row.BOOKID = item.BOOKID;
                 row.UNIT = item.UNIT;
                 row.PART = item.PART;
-                row.ORD = item.ORD;
+                row.SEQNUM = item.SEQNUM;
                 row.PHRASE = item.PHRASE;
                 row.TRANSLATION = item.TRANSLATION;
             }
@@ -45,7 +45,7 @@ namespace LollyShared
                     BOOKID = row.BOOKID,
                     UNIT = row.UNIT,
                     PART = row.PART,
-                    ORD = row.ORD,
+                    SEQNUM = row.SEQNUM,
                     PHRASE = row.PHRASE,
                     TRANSLATION = row.TRANSLATION
                 };
@@ -64,7 +64,7 @@ namespace LollyShared
 
                 item.UNIT = row.UNIT;
                 item.PART = row.PART;
-                item.ORD = row.ORD;
+                item.SEQNUM = row.SEQNUM;
                 item.PHRASE = row.PHRASE;
                 item.TRANSLATION = row.TRANSLATION;
                 db.SaveChanges();
@@ -80,7 +80,7 @@ namespace LollyShared
 
                 item.UNIT = row.UNIT;
                 item.PART = row.PART;
-                item.ORD = row.ORD;
+                item.SEQNUM = row.SEQNUM;
                 item.PHRASE = row.PHRASE;
                 item.TRANSLATION = row.TRANSLATION;
                 db.SaveChanges();
@@ -94,7 +94,7 @@ namespace LollyShared
                 var item = db.SPHRASEUNIT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
-                item.ORD = ord;
+                item.SEQNUM = ord;
                 db.SaveChanges();
             }
         }
@@ -107,7 +107,7 @@ namespace LollyShared
                     from r in db.SPHRASEUNIT
                     let unitpart = r.UNIT * 10 + r.PART
                     where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
-                    orderby r.UNIT, r.PART, r.ORD
+                    orderby r.UNIT, r.PART, r.SEQNUM
                     select r
                 ).ToList();
             }

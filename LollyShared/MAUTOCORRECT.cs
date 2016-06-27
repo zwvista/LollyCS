@@ -16,7 +16,7 @@ namespace LollyShared
     {
         public long ID { get; set; }
         public long LANGID { get; set; }
-        public long ORD { get; set; }
+        public long SEQNUM { get; set; }
         public string INPUT { get; set; }
         public string EXTENDED { get; set; }
         public string BASIC { get; set; }

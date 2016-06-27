@@ -100,8 +100,8 @@ namespace Lolly
             // 
             // ordColumn
             // 
-            this.ordColumn.DataPropertyName = "ORD";
-            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.DataPropertyName = "SEQNUM";
+            this.ordColumn.HeaderText = "SEQNUM";
             this.ordColumn.Name = "ordColumn";
             this.ordColumn.Width = 75;
             // 

@@ -27,7 +27,7 @@ namespace LollyShared
                 var item = new MAUTOCORRECT
                 {
                     LANGID = row.LANGID,
-                    ORD = row.ORD,
+                    SEQNUM = row.SEQNUM,
                     INPUT = row.INPUT,
                     EXTENDED = row.EXTENDED,
                     BASIC = row.BASIC
@@ -46,7 +46,7 @@ namespace LollyShared
                 if (item == null) return;
 
                 item.LANGID = row.LANGID;
-                item.ORD = row.ORD;
+                item.SEQNUM = row.SEQNUM;
                 item.INPUT = row.INPUT;
                 item.EXTENDED = row.EXTENDED;
                 item.BASIC = row.BASIC;
@@ -61,7 +61,7 @@ namespace LollyShared
                 var item = db.SAUTOCORRECT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
-                item.ORD = ord;
+                item.SEQNUM = ord;
                 db.SaveChanges();
             }
         }

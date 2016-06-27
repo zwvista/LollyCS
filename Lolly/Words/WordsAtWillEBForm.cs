@@ -45,18 +45,18 @@ namespace Lolly
         {
             var objs = (from row in wordsList
                         where row.ID != 0
-                        orderby row.ORD
-                        select new ReorderObject(row.ORD, row.WORD)).ToArray();
+                        orderby row.SEQNUM
+                        select new ReorderObject(row.SEQNUM, row.WORD)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
                 {
                     var row = wordsList.SingleOrDefault(r => r.ID == obj.ID);
-                    row.ORD = obj.ORD;
+                    row.SEQNUM = obj.SEQNUM;
                 }
                 foreach (var row in wordsList)
-                    row.ID = row.ORD;
+                    row.ID = row.SEQNUM;
             }
         }
 
@@ -80,9 +80,9 @@ namespace Lolly
             var row = wordsList.Last();
             if (row.ID == 0)
             {
-                if (row.ORD == 0)
-                    row.ORD = wordsList.Count;
-                row.ID = row.ORD;
+                if (row.SEQNUM == 0)
+                    row.SEQNUM = wordsList.Count;
+                row.ID = row.SEQNUM;
             }
         }
     }

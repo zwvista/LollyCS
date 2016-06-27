@@ -48,7 +48,7 @@ namespace Lolly
             // 
             this.bindingSource1.DataSource = typeof(LollyShared.MPHRASELANG);
             this.bindingSource1.ListRowChanged = false;
-            this.bindingSource1.Sort = "BOOKNAME,UNIT,ORD";
+            this.bindingSource1.Sort = "BOOKNAME,UNIT,SEQNUM";
             // 
             // dataGridView1
             // 
@@ -103,8 +103,8 @@ namespace Lolly
             // 
             // ordColumn
             // 
-            this.ordColumn.DataPropertyName = "ORD";
-            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.DataPropertyName = "SEQNUM";
+            this.ordColumn.HeaderText = "SEQNUM";
             this.ordColumn.Name = "ordColumn";
             this.ordColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ordColumn.Width = 75;

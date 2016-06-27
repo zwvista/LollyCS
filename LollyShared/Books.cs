@@ -43,7 +43,7 @@ namespace LollyShared
             using (var db = new LollyEntities())
             {
                 var sql = @"
-                        UPDATE  BOOKS
+                        UPDATE  TEXTBOOKS
                         SET BOOKID = @bookid, BOOKNAME = @bookname, UNITSINBOOK = @unitsinbook, PARTS = @parts
                         WHERE   (BOOKID = @original_bookid)
                     ";

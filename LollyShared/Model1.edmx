@@ -11,12 +11,12 @@
           </Key>
           <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LANGID" Type="integer" Nullable="false" />
-          <Property Name="ORD" Type="integer" Nullable="false" />
+          <Property Name="SEQNUM" Type="integer" Nullable="false" />
           <Property Name="INPUT" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="EXTENDED" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="BASIC" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
-        <EntityType Name="BOOKS">
+        <EntityType Name="TEXTBOOKS">
           <Key>
             <PropertyRef Name="BOOKID" />
           </Key>
@@ -36,7 +36,7 @@
             <PropertyRef Name="DICTNAME" />
           </Key>
           <Property Name="LANGID" Type="integer" Nullable="false" />
-          <Property Name="ORD" Type="integer" Nullable="false" />
+          <Property Name="SEQNUM" Type="integer" Nullable="false" />
           <Property Name="DICTTYPEID" Type="integer" Nullable="false" />
           <Property Name="DICTNAME" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="LANGIDTO" Type="integer" Nullable="false" />
@@ -73,7 +73,7 @@
           <Property Name="BOOKID" Type="integer" Nullable="false" />
           <Property Name="UNIT" Type="integer" Nullable="false" />
           <Property Name="PART" Type="integer" Nullable="false" />
-          <Property Name="ORD" Type="integer" Nullable="false" />
+          <Property Name="SEQNUM" Type="integer" Nullable="false" />
           <Property Name="PHRASE" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="TRANSLATION" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
@@ -113,7 +113,7 @@
           <Property Name="BOOKID" Type="integer" Nullable="false" />
           <Property Name="UNIT" Type="integer" Nullable="false" />
           <Property Name="PART" Type="integer" Nullable="false" />
-          <Property Name="ORD" Type="integer" Nullable="false" />
+          <Property Name="SEQNUM" Type="integer" Nullable="false" />
           <Property Name="WORD" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="NOTE" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
@@ -131,14 +131,14 @@
         <EntityType Name="DICTALL">
           <Key>
             <PropertyRef Name="LANGID" />
-            <PropertyRef Name="ORD" />
+            <PropertyRef Name="SEQNUM" />
             <PropertyRef Name="LANGIDTO" />
             <PropertyRef Name="DICTTYPENAME" />
             <PropertyRef Name="DICTNAME" />
             <PropertyRef Name="AUTOJUMP" />
           </Key>
           <Property Name="LANGID" Type="integer" Nullable="false" />
-          <Property Name="ORD" Type="integer" Nullable="false" />
+          <Property Name="SEQNUM" Type="integer" Nullable="false" />
           <Property Name="LANGIDTO" Type="integer" Nullable="false" />
           <Property Name="DICTTYPENAME" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="DICTNAME" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
@@ -216,7 +216,7 @@
         </Association>
         <EntityContainer Name="LollyModelStoreContainer">
           <EntitySet Name="AUTOCORRECT" EntityType="Self.AUTOCORRECT" store:Type="Tables" />
-          <EntitySet Name="BOOKS" EntityType="Self.BOOKS" store:Type="Tables" />
+          <EntitySet Name="TEXTBOOKS" EntityType="Self.TEXTBOOKS" store:Type="Tables" />
           <EntitySet Name="DICTIONARIES" EntityType="Self.DICTIONARIES" store:Type="Tables" />
           <EntitySet Name="DICTTYPES" EntityType="Self.DICTTYPES" store:Type="Tables" />
           <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" store:Type="Tables" />
@@ -229,7 +229,7 @@
           <EntitySet Name="DICTALL" EntityType="Self.DICTALL" store:Type="Views">
             <DefiningQuery>SELECT 
 [DICTALL].[LANGID] AS [LANGID], 
-[DICTALL].[ORD] AS [ORD], 
+[DICTALL].[SEQNUM] AS [SEQNUM], 
 [DICTALL].[LANGIDTO] AS [LANGIDTO], 
 [DICTALL].[DICTTYPENAME] AS [DICTTYPENAME], 
 [DICTALL].[DICTNAME] AS [DICTNAME], 
@@ -313,7 +313,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
         </ComplexType>
         <ComplexType Name="MWORDATWILL" >
           <Property Type="Int64" Name="ID" Nullable="false" />
-          <Property Type="Int64" Name="ORD" Nullable="false" />
+          <Property Type="Int64" Name="SEQNUM" Nullable="false" />
           <Property Type="String" Name="WORD" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="NOTE" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </ComplexType>
@@ -322,7 +322,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Type="Int64" Name="BOOKID" Nullable="false" />
           <Property Type="Int64" Name="UNIT" Nullable="false" />
           <Property Type="Int64" Name="PART" Nullable="false" />
-          <Property Type="Int64" Name="ORD" Nullable="false" />
+          <Property Type="Int64" Name="SEQNUM" Nullable="false" />
           <Property Type="String" Name="WORD" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="NOTE" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -335,7 +335,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Type="Int64" Name="BOOKID" Nullable="false" />
           <Property Type="Int64" Name="UNIT" Nullable="false" />
           <Property Type="Int64" Name="PART" Nullable="false" />
-          <Property Type="Int64" Name="ORD" Nullable="false" />
+          <Property Type="Int64" Name="SEQNUM" Nullable="false" />
           <Property Type="String" Name="PHRASE" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TRANSLATION" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BOOKNAME" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -346,7 +346,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LANGID" Type="Int64" Nullable="false" />
-          <Property Name="ORD" Type="Int64" Nullable="false" />
+          <Property Name="SEQNUM" Type="Int64" Nullable="false" />
           <Property Name="INPUT" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="EXTENDED" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="BASIC" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -372,7 +372,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
             <PropertyRef Name="DICTNAME" />
           </Key>
           <Property Name="LANGID" Type="Int64" Nullable="false" />
-          <Property Name="ORD" Type="Int64" Nullable="false" />
+          <Property Name="SEQNUM" Type="Int64" Nullable="false" />
           <Property Name="DICTTYPEID" Type="Int64" Nullable="false" />
           <Property Name="DICTNAME" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="LANGIDTO" Type="Int64" Nullable="false" />
@@ -414,7 +414,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Name="BOOKID" Type="Int64" Nullable="false" />
           <Property Name="UNIT" Type="Int64" Nullable="false" />
           <Property Name="PART" Type="Int64" Nullable="false" />
-          <Property Name="ORD" Type="Int64" Nullable="false" />
+          <Property Name="SEQNUM" Type="Int64" Nullable="false" />
           <Property Name="PHRASE" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="TRANSLATION" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -455,7 +455,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           <Property Name="BOOKID" Type="Int64" Nullable="false" />
           <Property Name="UNIT" Type="Int64" Nullable="false" />
           <Property Name="PART" Type="Int64" Nullable="false" />
-          <Property Name="ORD" Type="Int64" Nullable="false" />
+          <Property Name="SEQNUM" Type="Int64" Nullable="false" />
           <Property Name="WORD" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="NOTE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -472,14 +472,14 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
         <EntityType Name="MDICTALL">
           <Key>
             <PropertyRef Name="LANGID" />
-            <PropertyRef Name="ORD" />
+            <PropertyRef Name="SEQNUM" />
             <PropertyRef Name="LANGIDTO" />
             <PropertyRef Name="DICTTYPENAME" />
             <PropertyRef Name="DICTNAME" />
             <PropertyRef Name="AUTOJUMP" />
           </Key>
           <Property Name="LANGID" Type="Int64" Nullable="false" />
-          <Property Name="ORD" Type="Int64" Nullable="false" />
+          <Property Name="SEQNUM" Type="Int64" Nullable="false" />
           <Property Name="LANGIDTO" Type="Int64" Nullable="false" />
           <Property Name="DICTTYPENAME" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="DICTNAME" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -565,7 +565,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="BASIC" ColumnName="BASIC" />
                 <ScalarProperty Name="EXTENDED" ColumnName="EXTENDED" />
                 <ScalarProperty Name="INPUT" ColumnName="INPUT" />
-                <ScalarProperty Name="ORD" ColumnName="ORD" />
+                <ScalarProperty Name="SEQNUM" ColumnName="SEQNUM" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -573,7 +573,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           </EntitySetMapping>
           <EntitySetMapping Name="SBOOK">
             <EntityTypeMapping TypeName="LollyModel.MBOOK">
-              <MappingFragment StoreEntitySet="BOOKS">
+              <MappingFragment StoreEntitySet="TEXTBOOKS">
                 <ScalarProperty Name="PARTTO" ColumnName="PARTTO" />
                 <ScalarProperty Name="UNITTO" ColumnName="UNITTO" />
                 <ScalarProperty Name="PARTFROM" ColumnName="PARTFROM" />
@@ -598,7 +598,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="LANGIDTO" ColumnName="LANGIDTO" />
                 <ScalarProperty Name="DICTNAME" ColumnName="DICTNAME" />
                 <ScalarProperty Name="DICTTYPEID" ColumnName="DICTTYPEID" />
-                <ScalarProperty Name="ORD" ColumnName="ORD" />
+                <ScalarProperty Name="SEQNUM" ColumnName="SEQNUM" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -628,7 +628,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
               <MappingFragment StoreEntitySet="PHRASES">
                 <ScalarProperty Name="TRANSLATION" ColumnName="TRANSLATION" />
                 <ScalarProperty Name="PHRASE" ColumnName="PHRASE" />
-                <ScalarProperty Name="ORD" ColumnName="ORD" />
+                <ScalarProperty Name="SEQNUM" ColumnName="SEQNUM" />
                 <ScalarProperty Name="PART" ColumnName="PART" />
                 <ScalarProperty Name="UNIT" ColumnName="UNIT" />
                 <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
@@ -672,7 +672,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
               <MappingFragment StoreEntitySet="WORDSBOOK">
                 <ScalarProperty Name="NOTE" ColumnName="NOTE" />
                 <ScalarProperty Name="WORD" ColumnName="WORD" />
-                <ScalarProperty Name="ORD" ColumnName="ORD" />
+                <ScalarProperty Name="SEQNUM" ColumnName="SEQNUM" />
                 <ScalarProperty Name="PART" ColumnName="PART" />
                 <ScalarProperty Name="UNIT" ColumnName="UNIT" />
                 <ScalarProperty Name="BOOKID" ColumnName="BOOKID" />
@@ -704,7 +704,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
                 <ScalarProperty Name="DICTNAME" ColumnName="DICTNAME" />
                 <ScalarProperty Name="DICTTYPENAME" ColumnName="DICTTYPENAME" />
                 <ScalarProperty Name="LANGIDTO" ColumnName="LANGIDTO" />
-                <ScalarProperty Name="ORD" ColumnName="ORD" />
+                <ScalarProperty Name="SEQNUM" ColumnName="SEQNUM" />
                 <ScalarProperty Name="LANGID" ColumnName="LANGID" />
               </MappingFragment>
             </EntityTypeMapping>

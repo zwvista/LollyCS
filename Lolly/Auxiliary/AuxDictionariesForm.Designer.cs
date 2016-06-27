@@ -104,7 +104,7 @@ namespace Lolly
             // 
             this.bindingSource1.DataSource = typeof(LollyShared.MDICTIONARY);
             this.bindingSource1.ListRowChanged = false;
-            this.bindingSource1.Sort = "ORD";
+            this.bindingSource1.Sort = "SEQNUM";
             this.bindingSource1.ListItemDeleted += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemDeleted);
             this.bindingSource1.ListItemAdded += new System.ComponentModel.ListChangedEventHandler(this.bindingSource1_ListItemAdded);
             // 
@@ -256,8 +256,8 @@ namespace Lolly
             // 
             // ordColumn
             // 
-            this.ordColumn.DataPropertyName = "ORD";
-            this.ordColumn.HeaderText = "ORD";
+            this.ordColumn.DataPropertyName = "SEQNUM";
+            this.ordColumn.HeaderText = "SEQNUM";
             this.ordColumn.Name = "ordColumn";
             this.ordColumn.Width = 50;
             // 

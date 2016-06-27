@@ -80,20 +80,20 @@ namespace Lolly
             if (e.ColumnIndex != 0) return;
             bool ascending = dataGridView1.SortedColumn.Index != 0 ||
                 dataGridView1.SortOrder == SortOrder.Descending;
-            bindingSource1.Sort = ascending ? "UNIT, PART, ORD" : "UNIT DESC, PART, ORD DESC";
+            bindingSource1.Sort = ascending ? "UNIT, PART, SEQNUM" : "UNIT DESC, PART, SEQNUM DESC";
         }
 
         private void reorderToolStripButton_Click(object sender, EventArgs e)
         {
             var objs = (from row in phrasesList
                         where row.ID != 0
-                        orderby row.ORD
+                        orderby row.SEQNUM
                         select new ReorderObject(row.ID, row.PHRASE)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    LollyDB.PhrasesUnits_UpdateOrd(obj.ORD, obj.ID);
+                    LollyDB.PhrasesUnits_UpdateOrd(obj.SEQNUM, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -118,8 +118,8 @@ namespace Lolly
                     row.UNIT = lbuSettings.UnitTo;
                 if (row.PART == 0)
                     row.PART = lbuSettings.PartTo;
-                if (row.ORD == 0)
-                    row.ORD = phrasesList.Count;
+                if (row.SEQNUM == 0)
+                    row.SEQNUM = phrasesList.Count;
                 row.PHRASE = Program.AutoCorrect(row.PHRASE, autoCorrectList);
                 row.TRANSLATION = row.TRANSLATION;
                 row.ID = LollyDB.PhrasesUnits_Insert(row);

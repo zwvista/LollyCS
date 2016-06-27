@@ -71,13 +71,13 @@ namespace Lolly
         {
             var objs = (from row in auxList
                         where row.ID != 0
-                        orderby row.ORD
+                        orderby row.SEQNUM
                         select new ReorderObject(row.ID, row.EXTENDED)).ToArray();
             var dlg = new ReorderDlg(objs);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 foreach (var obj in objs)
-                    LollyDB.AutoCorrect_UpdateOrd(obj.ORD, obj.ID);
+                    LollyDB.AutoCorrect_UpdateOrd(obj.SEQNUM, obj.ID);
                 refreshToolStripButton.PerformClick();
             }
         }
@@ -98,8 +98,8 @@ namespace Lolly
             if (row.ID == 0)
             {
                 row.LANGID = lbuSettings.LangID;
-                if (row.ORD == 0)
-                    row.ORD = auxList.Count;
+                if (row.SEQNUM == 0)
+                    row.SEQNUM = auxList.Count;
                 row.ID = LollyDB.AutoCorrect_Insert(row);
                 dataGridView1.Refresh();
             }

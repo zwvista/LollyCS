@@ -1,10 +1,10 @@
-﻿// T4 code generation is enabled for model 'C:\zw\programs\Lolly\LollyCS\LollyShared\Model1.edmx'. 
-// To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
-// property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
-// is open in the designer.
+﻿// T4 コード生成がモデル 'C:\zw\programs\Lolly\LollyCS\LollyShared\Model1.edmx' に対して有効です。 
+// レガシ コード生成を有効にするには、'コード生成方法' デザイナー
+// プロパティの値を 'レガシ ObjectContext' に変更します。このプロパティは、デザイナーでモデルが開かれている場合に [プロパティ] ウィンドウ
+// で使用できます。
 
-// If no context and entity classes have been generated, it may be because you created an empty model but
-// have not yet chosen which version of Entity Framework to use. To generate a context class and entity
-// classes for your model, open the model in the designer, right-click on the designer surface, and
-// select 'Update Model from Database...', 'Generate Database from Model...', or 'Add Code Generation
-// Item...'.
+// 生成されたコンテキストおよびエンティティ クラスがない場合、空のモデルを作成したが、使用する Entity Framework の
+// バージョンをまだ選択していないための可能性があります。モデルのコンテキスト クラスおよび
+// エンティティ クラスを生成するには、デザイナーでモデルを開いてデザイナー画面を右クリックし、
+// [データベースからモデルを更新]、[モデルからデータベースを生成]、または [コード生成項目の
+// 追加] を選択します。

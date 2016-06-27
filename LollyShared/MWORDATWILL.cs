@@ -14,7 +14,7 @@ namespace LollyShared
     public partial class MWORDATWILL
     {
         public long ID { get; set; }
-        public long ORD { get; set; }
+        public long SEQNUM { get; set; }
         public string WORD { get; set; }
         public string NOTE { get; set; }
     }

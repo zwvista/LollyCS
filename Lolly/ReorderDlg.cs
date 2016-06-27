@@ -28,7 +28,7 @@ namespace Lolly
         {
             int i = 0;
             foreach(ReorderObject obj in itemsDragDropListBox.Items)
-                obj.ORD = ++i;
+                obj.SEQNUM = ++i;
         }
     }
 }

@@ -14,10 +14,10 @@ namespace LollyShared
             using (var db = new LollyEntities())
             {
 //                    var sql = @"
-//        	            SELECT   WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, WORDSBOOK.ORD, 
-//        					            WORDSBOOK.WORD, BOOKS.BOOKNAME, WORDSBOOK.[NOTE]
-//        	            FROM      (WORDSBOOK INNER JOIN BOOKS ON WORDSBOOK.BOOKID = BOOKS.BOOKID)
-//        	            WHERE   (BOOKS.LANGID = @langid) AND (WORDSBOOK.WORD LIKE '%' + @word + '%')
+//        	            SELECT   WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, WORDSBOOK.SEQNUM, 
+//        					            WORDSBOOK.WORD, TEXTBOOKS.BOOKNAME, WORDSBOOK.[NOTE]
+//        	            FROM      (WORDSBOOK INNER JOIN TEXTBOOKS ON WORDSBOOK.BOOKID = TEXTBOOKS.BOOKID)
+//        	            WHERE   (TEXTBOOKS.LANGID = @langid) AND (WORDSBOOK.WORD LIKE '%' + @word + '%')
 //                    ";
 //                    return db.Database.SqlQuery<MWORDBOOK>(sql,
 //                        new SQLiteParameter("langid", langid),
@@ -27,7 +27,7 @@ namespace LollyShared
                     join rb in db.SBOOK
                     on rw.BOOKID equals rb.BOOKID
                     where rb.LANGID == langid && (word == "" || rw.WORD.Contains(word))
-                    select new { rw.ID, rw.BOOKID, rw.UNIT, rw.PART, rw.ORD, rw.WORD, rb.BOOKNAME, rw.NOTE }
+                    select new { rw.ID, rw.BOOKID, rw.UNIT, rw.PART, rw.SEQNUM, rw.WORD, rb.BOOKNAME, rw.NOTE }
                 ).ToList().ToNonAnonymousList(new List<MWORDBOOK>());
             }
         }
@@ -40,9 +40,9 @@ namespace LollyShared
                     string.Join(" Union ",
                         from dicttable in dictTablesOffline
                         select string.Format(@"
-                                SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, ORD, WORDSBOOK.WORD, NOTE
-                                FROM BOOKS INNER JOIN (WORDSBOOK INNER JOIN [{0}]
-                                ON WORDSBOOK.WORD = [{0}].WORD) ON BOOKS.BOOKID = WORDSBOOK.BOOKID
+                                SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, SEQNUM, WORDSBOOK.WORD, NOTE
+                                FROM TEXTBOOKS INNER JOIN (WORDSBOOK INNER JOIN [{0}]
+                                ON WORDSBOOK.WORD = [{0}].WORD) ON TEXTBOOKS.BOOKID = WORDSBOOK.BOOKID
                                 WHERE LANGID = @langid AND [TRANSLATION] LIKE '%' + @word + '%'"
                             , dicttable
                         )
@@ -59,8 +59,8 @@ namespace LollyShared
             {
 //                    var sql = @"
 //	                    SELECT   COUNT(*)
-//	                    FROM      (BOOKS INNER JOIN WORDSBOOK ON BOOKS.BOOKID = WORDSBOOK.BOOKID)
-//	                    WHERE   (BOOKS.LANGID = @langid) AND (WORDSBOOK.WORD = @word)
+//	                    FROM      (TEXTBOOKS INNER JOIN WORDSBOOK ON TEXTBOOKS.BOOKID = WORDSBOOK.BOOKID)
+//	                    WHERE   (TEXTBOOKS.LANGID = @langid) AND (WORDSBOOK.WORD = @word)
 //                    ";
 //                    return db.Database.SqlQuery<int>(sql,
 //                        new SQLiteParameter("langid", langid),

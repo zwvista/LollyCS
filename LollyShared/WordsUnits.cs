@@ -29,7 +29,7 @@ namespace LollyShared
                     BOOKID = row.BOOKID,
                     UNIT = row.UNIT,
                     PART = row.PART,
-                    ORD = row.ORD,
+                    SEQNUM = row.SEQNUM,
                     WORD = row.WORD,
                     NOTE = row.NOTE
                 };
@@ -48,7 +48,7 @@ namespace LollyShared
 
                 item.UNIT = row.UNIT;
                 item.PART = row.PART;
-                item.ORD = row.ORD;
+                item.SEQNUM = row.SEQNUM;
                 item.WORD = row.WORD;
                 item.NOTE = row.NOTE;
                 db.SaveChanges();
@@ -62,7 +62,7 @@ namespace LollyShared
                 var item = db.SWORDUNIT.SingleOrDefault(r => r.ID == id);
                 if (item == null) return;
 
-                item.ORD = ord;
+                item.SEQNUM = ord;
                 db.SaveChanges();
             }
         }
@@ -87,7 +87,7 @@ namespace LollyShared
                     from r in db.SWORDUNIT
                     let unitpart = r.UNIT * 10 + r.PART
                     where r.BOOKID == bookid && unitpart >= unitpartfrom && unitpart <= unitpartto
-                    orderby r.UNIT, r.PART, r.ORD
+                    orderby r.UNIT, r.PART, r.SEQNUM
                     select r
                 ).ToList();
             }

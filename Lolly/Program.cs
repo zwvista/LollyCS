@@ -40,7 +40,7 @@ namespace Lolly
     public class ReorderObject
     {
         public long ID { get; set; }
-        public long ORD { get; set; } = 0;
+        public long SEQNUM { get; set; } = 0;
         public string ITEM { get; set; }
         public ReorderObject(long id, string item)
         {
