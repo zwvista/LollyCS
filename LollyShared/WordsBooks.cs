@@ -15,9 +15,9 @@ namespace LollyShared
             {
 //                    var sql = @"
 //        	            SELECT   WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, WORDSBOOK.SEQNUM, 
-//        					            WORDSBOOK.WORD, TEXTBOOKS.BOOKNAME, WORDSBOOK.[NOTE]
-//        	            FROM      (WORDSBOOK INNER JOIN TEXTBOOKS ON WORDSBOOK.BOOKID = TEXTBOOKS.BOOKID)
-//        	            WHERE   (TEXTBOOKS.LANGID = @langid) AND (WORDSBOOK.WORD LIKE '%' + @word + '%')
+//        					            WORDSBOOK.WORD, BOOKS.BOOKNAME, WORDSBOOK.[NOTE]
+//        	            FROM      (WORDSBOOK INNER JOIN BOOKS ON WORDSBOOK.BOOKID = BOOKS.BOOKID)
+//        	            WHERE   (BOOKS.LANGID = @langid) AND (WORDSBOOK.WORD LIKE '%' + @word + '%')
 //                    ";
 //                    return db.Database.SqlQuery<MWORDBOOK>(sql,
 //                        new SQLiteParameter("langid", langid),
@@ -41,8 +41,8 @@ namespace LollyShared
                         from dicttable in dictTablesOffline
                         select string.Format(@"
                                 SELECT ID, WORDSBOOK.BOOKID, BOOKNAME, UNIT, PART, SEQNUM, WORDSBOOK.WORD, NOTE
-                                FROM TEXTBOOKS INNER JOIN (WORDSBOOK INNER JOIN [{0}]
-                                ON WORDSBOOK.WORD = [{0}].WORD) ON TEXTBOOKS.BOOKID = WORDSBOOK.BOOKID
+                                FROM BOOKS INNER JOIN (WORDSBOOK INNER JOIN [{0}]
+                                ON WORDSBOOK.WORD = [{0}].WORD) ON BOOKS.BOOKID = WORDSBOOK.BOOKID
                                 WHERE LANGID = @langid AND [TRANSLATION] LIKE '%' + @word + '%'"
                             , dicttable
                         )
@@ -59,8 +59,8 @@ namespace LollyShared
             {
 //                    var sql = @"
 //	                    SELECT   COUNT(*)
-//	                    FROM      (TEXTBOOKS INNER JOIN WORDSBOOK ON TEXTBOOKS.BOOKID = WORDSBOOK.BOOKID)
-//	                    WHERE   (TEXTBOOKS.LANGID = @langid) AND (WORDSBOOK.WORD = @word)
+//	                    FROM      (BOOKS INNER JOIN WORDSBOOK ON BOOKS.BOOKID = WORDSBOOK.BOOKID)
+//	                    WHERE   (BOOKS.LANGID = @langid) AND (WORDSBOOK.WORD = @word)
 //                    ";
 //                    return db.Database.SqlQuery<int>(sql,
 //                        new SQLiteParameter("langid", langid),

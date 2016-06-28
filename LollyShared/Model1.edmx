@@ -16,7 +16,7 @@
           <Property Name="EXTENDED" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="BASIC" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
-        <EntityType Name="TEXTBOOKS">
+        <EntityType Name="BOOKS">
           <Key>
             <PropertyRef Name="BOOKID" />
           </Key>
@@ -216,7 +216,7 @@
         </Association>
         <EntityContainer Name="LollyModelStoreContainer">
           <EntitySet Name="AUTOCORRECT" EntityType="Self.AUTOCORRECT" store:Type="Tables" />
-          <EntitySet Name="TEXTBOOKS" EntityType="Self.TEXTBOOKS" store:Type="Tables" />
+          <EntitySet Name="BOOKS" EntityType="Self.BOOKS" store:Type="Tables" />
           <EntitySet Name="DICTIONARIES" EntityType="Self.DICTIONARIES" store:Type="Tables" />
           <EntitySet Name="DICTTYPES" EntityType="Self.DICTTYPES" store:Type="Tables" />
           <EntitySet Name="LANGUAGES" EntityType="Self.LANGUAGES" store:Type="Tables" />
@@ -573,7 +573,7 @@ FROM [WEBTEXTALL] AS [WEBTEXTALL]</DefiningQuery>
           </EntitySetMapping>
           <EntitySetMapping Name="SBOOK">
             <EntityTypeMapping TypeName="LollyModel.MBOOK">
-              <MappingFragment StoreEntitySet="TEXTBOOKS">
+              <MappingFragment StoreEntitySet="BOOKS">
                 <ScalarProperty Name="PARTTO" ColumnName="PARTTO" />
                 <ScalarProperty Name="UNITTO" ColumnName="UNITTO" />
                 <ScalarProperty Name="PARTFROM" ColumnName="PARTFROM" />

@@ -15,9 +15,9 @@ namespace LollyShared
             using (var db = new LollyEntities())
             {
                 var sql = @"
-                    SELECT   PHRASES.ID, PHRASES.BOOKID, TEXTBOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.SEQNUM, PHRASES.PHRASE, PHRASES.[TRANSLATION]
-                    FROM     PHRASES INNER JOIN TEXTBOOKS ON PHRASES.BOOKID = TEXTBOOKS.BOOKID
-                    WHERE   (TEXTBOOKS.LANGID = @langid) AND (PHRASES.PHRASE LIKE @phrase)
+                    SELECT   PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.SEQNUM, PHRASES.PHRASE, PHRASES.[TRANSLATION]
+                    FROM     PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID
+                    WHERE   (BOOKS.LANGID = @langid) AND (PHRASES.PHRASE LIKE @phrase)
                 ";
                 var lst = db.Database.SqlQuery<MPHRASELANG>(sql,
                     new SQLiteParameter("langid", langid),
@@ -40,9 +40,9 @@ namespace LollyShared
             using (var db = new LollyEntities())
             {
                 var sql = @"
-                    SELECT   PHRASES.ID, PHRASES.BOOKID, TEXTBOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.SEQNUM, PHRASES.PHRASE, PHRASES.[TRANSLATION]
-                    FROM      (PHRASES INNER JOIN TEXTBOOKS ON PHRASES.BOOKID = TEXTBOOKS.BOOKID)
-                    WHERE   (TEXTBOOKS.LANGID = @langid) AND (PHRASES.[TRANSLATION] LIKE @translation)
+                    SELECT   PHRASES.ID, PHRASES.BOOKID, BOOKS.BOOKNAME, PHRASES.UNIT, PHRASES.PART, PHRASES.SEQNUM, PHRASES.PHRASE, PHRASES.[TRANSLATION]
+                    FROM      (PHRASES INNER JOIN BOOKS ON PHRASES.BOOKID = BOOKS.BOOKID)
+                    WHERE   (BOOKS.LANGID = @langid) AND (PHRASES.[TRANSLATION] LIKE @translation)
                 ";
                 return db.Database.SqlQuery<MPHRASELANG>(sql,
                     new SQLiteParameter("langid", langid),
