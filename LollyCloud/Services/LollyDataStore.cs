@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class LollyDataStore<T> where T: class
     {
         protected HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri(App.LollyUrl)
+            BaseAddress = new Uri(HtmlApi.LollyUrl)
         };
 
         protected async Task<U> GetDataByUrl<U>(string url) where U : class

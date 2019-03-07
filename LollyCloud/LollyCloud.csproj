@@ -62,6 +62,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -82,15 +83,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MLangPhrase.cs" />
+    <Compile Include="Models\MTextbookPhrase.cs" />
+    <Compile Include="Models\MUnitPhrase.cs" />
+    <Compile Include="Models\MLangWord.cs" />
+    <Compile Include="Models\MTextbookWord.cs" />
+    <Compile Include="Services\LangPhraseDataStore.cs" />
+    <Compile Include="Services\UnitPhraseDataStore.cs" />
+    <Compile Include="Services\LangWordDataStore.cs" />
+    <Compile Include="Shared\HtmApi.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\MAutoCorrect.cs" />
+    <Compile Include="Models\MDictionary.cs" />
+    <Compile Include="Models\MLanguage.cs" />
+    <Compile Include="Models\MTextbook.cs" />
+    <Compile Include="Models\MUnitWord.cs" />
+    <Compile Include="Models\MUserSetting.cs" />
+    <Compile Include="Services\AutoCorrectDataStore.cs" />
     <Compile Include="Services\CloudDataStore.cs" />
     <Compile Include="Services\DictDataStore.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\LanguageDataStore.cs" />
     <Compile Include="Services\LollyDataStore.cs" />
+    <Compile Include="Services\MockDataStore.cs" />
     <Compile Include="Services\TextbookDataStore.cs" />
     <Compile Include="Services\UnitWordDataStore.cs" />
     <Compile Include="Services\UserSettingDataStore.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ItemBaseViewModel.cs" />
+    <Compile Include="ViewModels\ItemDetailViewModel.cs" />
+    <Compile Include="ViewModels\ItemsViewModel.cs" />
     <Compile Include="ViewModels\LollyViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\WordsUnitViewModel.cs" />
@@ -108,11 +131,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Dictionary.cs" />
-    <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\Textbook.cs" />
-    <Compile Include="Models\UnitWord.cs" />
-    <Compile Include="Models\UserSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,5 +157,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

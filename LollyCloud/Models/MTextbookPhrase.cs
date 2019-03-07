@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace LollyShared
 {
-    public class MUnitWords
+    public class MTextbookPhrases
     {
-        public List<MUnitWord> VUNITWORDS { get; set; }
+        public List<MTextbookPhrase> VTEXTBOOKPHRASES { get; set; }
     }
-    public class MUnitWord
+    public class MTextbookPhrase
     {
         public int ID { get; set; }
         public int LANGID { get; set; }
@@ -15,10 +15,8 @@ namespace LollyShared
         public int UNIT { get; set; }
         public int PART { get; set; }
         public int SEQNUM { get; set; }
-        public int WORDID { get; set; }
-        public string WORD { get; set; }
-        public string NOTE { get; set; }
-        public int FAMIID { get; set; }
-        public int LEVEL { get; set; }
+        public int PHRASEID { get; set; }
+        public string PHRASE { get; set; }
+        public string TRANSLATION { get; set; }
     }
 }

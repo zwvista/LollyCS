@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class CloudDataStore : IDataStore<Item>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class ItemDetailViewModel : ItemBaseViewModel
     {

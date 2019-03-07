@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public interface IDataStore<T>
     {

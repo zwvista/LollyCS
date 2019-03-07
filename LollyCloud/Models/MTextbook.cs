@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class MTextbooks
     {

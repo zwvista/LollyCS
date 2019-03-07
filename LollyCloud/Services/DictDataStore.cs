@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
-    public class DictOnlineDataStore : LollyDataStore<MDictOnline>
+    public class DictMeanDataStore : LollyDataStore<MDictMean>
     {
-        public async Task<IEnumerable<MDictOnline>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<MDictsOnline>($"VDICTSONLINE?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSONLINE;
+        public async Task<IEnumerable<MDictMean>> GetDataByLang(int langid) =>
+        (await GetDataByUrl<MDictsMean>($"VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSMEAN;
     }
     public class DictNoteDataStore : LollyDataStore<MDictNote>
     {
         public async Task<IEnumerable<MDictNote>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<DictsNote>($"VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSNOTE;
+        (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSNOTE;
     }
 }

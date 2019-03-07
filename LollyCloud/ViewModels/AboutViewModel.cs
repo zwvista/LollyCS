@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class AboutViewModel : BaseViewModel
     {

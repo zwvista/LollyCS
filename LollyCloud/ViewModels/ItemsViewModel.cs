@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class ItemsViewModel : ItemBaseViewModel
     {

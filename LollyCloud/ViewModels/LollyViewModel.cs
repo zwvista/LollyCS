@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class LollyViewModel : BaseViewModel
     {

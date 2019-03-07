@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class MAutoCorrects
     {
@@ -18,7 +18,7 @@ namespace LollyXamarinNative
         public string EXTENDED { get; set; }
         public string BASIC { get; set; }
 
-        public string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,
+        public static string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,
                                   Func<MAutoCorrect, string> colFunc1, Func<MAutoCorrect, string> colFunc2) =>
         lstAutoCorrects.Aggregate(text, (str, row) => str.Replace(colFunc1(row), colFunc2(row)));
     }

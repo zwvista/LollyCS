@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace LollyXamarinNative
+namespace LollyShared
 {
     public class SettingsViewModel : LollyViewModel
     {
