@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
-    public class Dictionary
+    public class MDictionary
     {
         public int ID { get; set; }
         public string LANGNAME { get; set; }
@@ -16,19 +16,19 @@ namespace LollyCloud
         public string TEMPLATE { get; set; }
     }
 
-    public class DictsOnline
+    public class MDictsOnline
     {
-        public List<DictOnline> VDICTSONLINE { get; set; }
+        public List<MDictOnline> VDICTSONLINE { get; set; }
     }
-    public class DictOnline : Dictionary { }
+    public class MDictOnline : MDictionary { }
     public class DictsOffline
     {
-        public List<DictOffline> VDICTSOFFLINE { get; set; }
+        public List<MDictOffline> VDICTSOFFLINE { get; set; }
     }
-    public class DictOffline : Dictionary { }
+    public class MDictOffline : MDictionary { }
     public class DictsNote
     {
-        public List<DictNote> VDICTSNOTE { get; set; }
+        public List<MDictNote> VDICTSNOTE { get; set; }
     }
-    public class DictNote : Dictionary { }
+    public class MDictNote : MDictionary { }
 }

@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
-    public class UnitWordDataStore : LollyDataStore<UnitWord>
+    public class UnitWordDataStore : LollyDataStore<MUnitWord>
     {
-        public async Task<IEnumerable<UnitWord>> GetDataByTextbookUnitPart(int textbookid, int unitPartFrom, int unitPartTo) =>
-        (await GetDataByUrl<UnitWords>($"VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,{textbookid}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITWORDS;
+        public async Task<IEnumerable<MUnitWord>> GetDataByTextbookUnitPart(int textbookid, int unitPartFrom, int unitPartTo) =>
+        (await GetDataByUrl<MUnitWords>($"VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,{textbookid}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITWORDS;
 
-        public async Task<bool> Create(UnitWord item) =>
+        public async Task<bool> Create(MUnitWord item) =>
         await CreateByUrl($"UNITWORDS", item);
 
         public async Task<bool> UpdateSeqNum(int id, int seqnum) =>
         await UpdateByUrl($"UNITWORDS/{id}", $"SEQNUM={seqnum}");
 
-        public async Task<bool> UpdateNote(int id, String note) =>
+        public async Task<bool> UpdateNote(int id, string note) =>
         await UpdateByUrl($"UNITWORDS/{id}", $"NOTE={note}");
 
-        public async Task<bool> Update(UnitWord item) =>
+        public async Task<bool> Update(MUnitWord item) =>
         await UpdateByUrl($"UNITWORDS/{item.ID}", JsonConvert.SerializeObject(item));
 
         public async Task<bool> Delete(int id) =>

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
-    public class TextbookDataStore : LollyDataStore<Language>
+    public class TextbookDataStore : LollyDataStore<MTextbook>
     {
-        public async Task<IEnumerable<Textbook>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<Textbooks>($"TEXTBOOKS?transform=1&filter=LANGID,eq,{langid}")).TEXTBOOKS;
+        public async Task<IEnumerable<MTextbook>> GetDataByLang(int langid) =>
+        (await GetDataByUrl<MTextbooks>($"TEXTBOOKS?transform=1&filter=LANGID,eq,{langid}")).TEXTBOOKS;
     }
 }

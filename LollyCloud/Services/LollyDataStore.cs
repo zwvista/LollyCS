@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
     public class LollyDataStore<T> where T: class
     {
@@ -16,10 +16,11 @@ namespace LollyCloud
         {
             BaseAddress = new Uri(App.LollyUrl)
         };
-        protected IEnumerable<T> items = new List<T>();
 
-        protected async Task<U> GetDataByUrl<U>(string url)
+        protected async Task<U> GetDataByUrl<U>(string url) where U : class
         {
+            if (!CrossConnectivity.Current.IsConnected) return null;
+
             var json = await client.GetStringAsync(url);
             U u = await Task.Run(() =>
             {
@@ -29,7 +30,7 @@ namespace LollyCloud
                 }
                 catch (JsonException ex)
                 {
-                    return default(U);
+                    return null;
                 }
             });
             return u;

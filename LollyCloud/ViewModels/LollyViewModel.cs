@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
     public class LollyViewModel : BaseViewModel
     {

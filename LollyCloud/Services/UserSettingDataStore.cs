@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
-    public class UserSettingDataStore : LollyDataStore<UserSetting>
+    public class UserSettingDataStore : LollyDataStore<MUserSetting>
     {
-        public async Task<IEnumerable<UserSetting>> GetDataByUser(int userid) =>
-        (await GetDataByUrl<UserSettings>($"USERSETTINGS?transform=1&filter=USERID,eq,{userid}")).USERSETTINGS;
+        public async Task<IEnumerable<MUserSetting>> GetDataByUser(int userid) =>
+        (await GetDataByUrl<MUserSettings>($"USERSETTINGS?transform=1&filter=USERID,eq,{userid}")).USERSETTINGS;
 
         public async Task<bool> UpdateLang(int id, int langid) =>
         await UpdateByUrl($"USERSETTINGS/{id}", $"VALUE1={langid}");

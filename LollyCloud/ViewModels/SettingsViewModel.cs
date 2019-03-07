@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
     public class SettingsViewModel : LollyViewModel
     {
@@ -14,15 +14,15 @@ namespace LollyCloud
         DictNoteDataStore DictNoteDS = new DictNoteDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
 
-        public ObservableCollection<UserSetting> UserSettings { get; set; }
+        public ObservableCollection<MUserSetting> UserSettings { get; set; }
         int SelectedUSUserIndex { get; set; }
-        UserSetting SelectedUSUser => UserSettings[SelectedUSUserIndex];
+        MUserSetting SelectedUSUser => UserSettings[SelectedUSUserIndex];
         public int USLANGID {
             get => int.Parse(SelectedUSUser.VALUE1);
             set => SelectedUSUser.VALUE1 = value.ToString();
         }
         int SelectedUSLangIndex { get; set; }
-        UserSetting SelectedUSLang => UserSettings[SelectedUSLangIndex];
+        MUserSetting SelectedUSLang => UserSettings[SelectedUSLangIndex];
         public int USTEXTBOOKID
         {
             get => int.Parse(SelectedUSLang.VALUE1);
@@ -39,7 +39,7 @@ namespace LollyCloud
             set => SelectedUSLang.VALUE3 = value.ToString();
         }
         int SelectedUSTextbookIndex { get; set; }
-        UserSetting SelectedUSTextbook => UserSettings[SelectedUSTextbookIndex];
+        MUserSetting SelectedUSTextbook => UserSettings[SelectedUSTextbookIndex];
         public int USUNITFROM
         {
             get => int.Parse(SelectedUSTextbook.VALUE1);
@@ -65,11 +65,11 @@ namespace LollyCloud
         public bool IsSingleUnitPart => USUNITPARTFROM == USUNITPARTTO;
         public bool IsInvalidUnitPart => USUNITPARTFROM > USUNITPARTTO;
 
-        public ObservableCollection<Language> Languages { get; set; }
+        public ObservableCollection<MLanguage> Languages { get; set; }
         int SelectedLangIndex { get; set; }
-        Language SelectedLang => Languages[SelectedLangIndex];
+        MLanguage SelectedLang => Languages[SelectedLangIndex];
 
-        public ObservableCollection<DictOnline> DictsOnline { get; set; }
+        public ObservableCollection<MDictOnline> DictsOnline { get; set; }
         int selectedDictOnlineIndex = 0;
         public int SelectedDictOnlineIndex {
             get => selectedDictOnlineIndex;
@@ -78,9 +78,9 @@ namespace LollyCloud
                 USDICTONLINEID = SelectedDictOnline.ID;
             }
         }
-        public DictOnline SelectedDictOnline => DictsOnline[SelectedDictOnlineIndex];
+        public MDictOnline SelectedDictOnline => DictsOnline[SelectedDictOnlineIndex];
 
-        public ObservableCollection<DictNote> DictsNote { get; set; }
+        public ObservableCollection<MDictNote> DictsNote { get; set; }
         int selectedDictNoteIndex = 0;
         public int SelectedDictNoteIndex {
             get => selectedDictNoteIndex;
@@ -89,9 +89,9 @@ namespace LollyCloud
                 USDICTNOTEID = SelectedDictNote?.ID ?? 0;
             }
         }
-        DictNote SelectedDictNote => DictsNote.Count == 0 ? null : DictsNote[SelectedDictNoteIndex];
+        MDictNote SelectedDictNote => DictsNote.Count == 0 ? null : DictsNote[SelectedDictNoteIndex];
 
-        public ObservableCollection<Textbook> Textbooks { get; set; }
+        public ObservableCollection<MTextbook> Textbooks { get; set; }
         int selectedTextbookIndex = 0;
         public int SelectedTextbookIndex {
             get => selectedTextbookIndex;
@@ -100,10 +100,11 @@ namespace LollyCloud
                 SetSelectedTextbookIndex();
             }
         }
-        public Textbook SelectedTextbook => Textbooks[SelectedTextbookIndex];
+        public MTextbook SelectedTextbook => Textbooks[SelectedTextbookIndex];
 
-        public ObservableCollection<String> Units { get; set; }
-        public ObservableCollection<String> Parts { get; set; }
+        public ObservableCollection<string> Units { get; set; }
+        public ObservableCollection<string> Parts { get; set; }
+        public ObservableCollection<> AutoCorrects { get; set; }
 
         public int UserId = 1;
 
@@ -129,7 +130,7 @@ namespace LollyCloud
         void SetSelectedTextbookIndex() {
             USTEXTBOOKID = SelectedTextbook.ID;
             SelectedUSTextbookIndex = UserSettings.ToList().FindIndex(o => o.KIND == 3 && o.ENTITYID == USTEXTBOOKID);
-            Units = new ObservableCollection<String>(Enumerable.Range(1, SelectedTextbook.UNITS).Select(i => i.ToString()));
+            Units = new ObservableCollection<string>(Enumerable.Range(1, SelectedTextbook.UNITS).Select(i => i.ToString()));
             Parts = new ObservableCollection<string>(SelectedTextbook.PARTS.Split(' '));
         }
 

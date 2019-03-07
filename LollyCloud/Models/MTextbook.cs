@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace LollyCloud
+namespace LollyXamarinNative
 {
-    public class Textbooks
+    public class MTextbooks
     {
-        public List<Textbook> TEXTBOOKS { get; set; }
+        public List<MTextbook> TEXTBOOKS { get; set; }
     }
-    public class Textbook
+    public class MTextbook
     {
         public int ID { get; set; }
         public string LANGNAME { get; set; }
