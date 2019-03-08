@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace LollyShared
 {
@@ -20,5 +22,11 @@ namespace LollyShared
         public string NOTE { get; set; }
         public int FAMIID { get; set; }
         public int LEVEL { get; set; }
+
+        public ObservableCollection<MSelectItem> lstUnits;
+        public ObservableCollection<MSelectItem> lstParts;
+
+        public string UNITSTR => lstUnits.First(o => o.Value == UNIT).Label;
+        public string PARTSTR => lstParts.First(o => o.Value == PART).Label;
     }
 }

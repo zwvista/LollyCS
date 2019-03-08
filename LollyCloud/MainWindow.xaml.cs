@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using LollyShared;
+
 namespace LollyCloud
 {
     /// <summary>
@@ -20,9 +22,20 @@ namespace LollyCloud
     /// </summary>
     public partial class MainWindow : Window
     {
+        SettingsViewModel vmSettings = new SettingsViewModel();
+        WordsUnitViewModel vmWords;
+
         public MainWindow()
         {
             InitializeComponent();
+            // Can't call Init().Wait(); here
+            Init();
+        }
+
+        async Task Init()
+        {
+            await vmSettings.GetData();
+            vmWords = await WordsUnitViewModel.CreateAsync(vmSettings);
         }
     }
 }

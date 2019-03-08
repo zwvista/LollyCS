@@ -14,7 +14,7 @@ namespace LollyShared
         public string LANGNAME { get; set; }
         [JsonProperty("NAME")]
         public string TEXTBOOKNAME { get; set; }
-        public int UNITS { get; set; }
+        public string UNITS { get; set; }
         public string PARTS { get; set; }
     }
 }

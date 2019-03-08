@@ -44,7 +44,7 @@ namespace LollyShared
     {
         public string DICTID { get; set; }
         public string DICTNAME { get; set; }
-        MDictItem(string id, string name)
+        public MDictItem(string id, string name)
         {
             DICTID = id;
             DICTNAME = name;

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
@@ -12,8 +10,17 @@ namespace LollyShared
 {
     public class UnitPhraseDataStore : LollyDataStore<MUnitPhrase>
     {
-        public async Task<IEnumerable<MUnitPhrase>> GetDataByTextbookUnitPart(int textbookid, int unitPartFrom, int unitPartTo) =>
-        (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,{textbookid}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITPHRASES;
+        public async Task<IEnumerable<MUnitPhrase>> GetDataByTextbookUnitPart(int textbookid, int unitPartFrom, int unitPartTo,
+            ObservableCollection<MSelectItem> lstUnits, ObservableCollection<MSelectItem> lstParts)
+        {
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,{textbookid}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITPHRASES;
+            foreach (var o in lst)
+            {
+                o.lstUnits = lstUnits;
+                o.lstParts = lstParts;
+            }
+            return lst;
+        }
 
         public async Task<bool> Create(MUnitPhrase item) =>
         await CreateByUrl($"UNITPHRASES", item);

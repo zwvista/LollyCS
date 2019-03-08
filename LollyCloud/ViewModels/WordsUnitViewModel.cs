@@ -7,22 +7,20 @@ namespace LollyShared
 {
     public class WordsUnitViewModel : LollyViewModel
     {
-        public SettingsViewModel SettingsVM;
+        public SettingsViewModel vmSettings;
         public UnitWordDataStore DS = new UnitWordDataStore();
- 
-        public ObservableCollection<MUnitWord> UnitWords { get; set; }
-        public Command GetDataCommand { get; set; }
-        public Command CreateCommand { get; set; }
 
-        public WordsUnitViewModel(SettingsViewModel SettingsVM)
+        public ObservableCollection<MUnitWord> UnitWords { get; set; }
+
+        // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
+        public static async Task<WordsUnitViewModel> CreateAsync(SettingsViewModel vmSettings)
         {
-            this.SettingsVM = SettingsVM;
-            GetDataCommand = new Command(async () => UnitWords = await GetData(async () => 
-                await DS.GetDataByTextbookUnitPart(SettingsVM.USTEXTBOOKID, SettingsVM.USUNITPARTFROM, SettingsVM.USUNITPARTTO)));
-            CreateCommand = new Command<MUnitWord>(async (MUnitWord item) => {
-                UnitWords.Add(item);
-                await DS.Create(item);
-            });
+            var o = new WordsUnitViewModel();
+            o.vmSettings = vmSettings;
+            o.UnitWords = new ObservableCollection<MUnitWord>(await o.DS.GetDataByTextbookUnitPart(
+                vmSettings.USTEXTBOOKID, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO,
+                vmSettings.Units, vmSettings.Parts));
+            return o;
         }
     }
 }

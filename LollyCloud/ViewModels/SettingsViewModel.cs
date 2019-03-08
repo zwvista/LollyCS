@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Globalization;
 
 namespace LollyShared
 {
@@ -10,36 +12,45 @@ namespace LollyShared
     {
         UserSettingDataStore UserSettingDS = new UserSettingDataStore();
         LanguageDataStore LanguageDS = new LanguageDataStore();
-        DictOnlineDataStore DictOnlineDS = new DictOnlineDataStore();
+        DictMeanDataStore DictMeanDS = new DictMeanDataStore();
         DictNoteDataStore DictNoteDS = new DictNoteDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
+        AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
 
         public ObservableCollection<MUserSetting> UserSettings { get; set; }
-        int SelectedUSUserIndex { get; set; }
-        MUserSetting SelectedUSUser => UserSettings[SelectedUSUserIndex];
+        MUserSetting SelectedUSUser0;
+        MUserSetting SelectedUSUser1;
         public int USLANGID {
-            get => int.Parse(SelectedUSUser.VALUE1);
-            set => SelectedUSUser.VALUE1 = value.ToString();
+            get => int.Parse(SelectedUSUser0.VALUE1);
+            set => SelectedUSUser0.VALUE1 = value.ToString();
         }
-        int SelectedUSLangIndex { get; set; }
-        MUserSetting SelectedUSLang => UserSettings[SelectedUSLangIndex];
+        public List<int> USROWSPERPAGEOPTIONS =>
+            SelectedUSUser0.VALUE2.Split(',').Select(s => int.Parse(s)).ToList();
+        public int USROWSPERPAGE => int.Parse(SelectedUSUser0.VALUE3);
+        public Dictionary<int, List<int>> USLEVELCOLORS;
+        public int USREADINTERVAL => int.Parse(SelectedUSUser1.VALUE1);
+        MUserSetting SelectedUSLang;
         public int USTEXTBOOKID
         {
             get => int.Parse(SelectedUSLang.VALUE1);
             set => SelectedUSLang.VALUE1 = value.ToString();
         }
-        public int USDICTONLINEID
+        public string USDICTITEM
         {
-            get => int.Parse(SelectedUSLang.VALUE2);
-            set => SelectedUSLang.VALUE2 = value.ToString();
+            get => SelectedUSLang.VALUE2;
+            set => SelectedUSLang.VALUE2 = value;
         }
         public int USDICTNOTEID
         {
             get => int.Parse(SelectedUSLang.VALUE3);
             set => SelectedUSLang.VALUE3 = value.ToString();
         }
-        int SelectedUSTextbookIndex { get; set; }
-        MUserSetting SelectedUSTextbook => UserSettings[SelectedUSTextbookIndex];
+        public string USDICTITEMS
+        {
+            get => SelectedUSLang.VALUE4 ?? "0";
+            set => SelectedUSLang.VALUE4 = value;
+        }
+        MUserSetting SelectedUSTextbook;
         public int USUNITFROM
         {
             get => int.Parse(SelectedUSTextbook.VALUE1);
@@ -66,77 +77,94 @@ namespace LollyShared
         public bool IsInvalidUnitPart => USUNITPARTFROM > USUNITPARTTO;
 
         public ObservableCollection<MLanguage> Languages { get; set; }
-        int SelectedLangIndex { get; set; }
-        MLanguage SelectedLang => Languages[SelectedLangIndex];
+        public MLanguage SelectedLang;
+        public int SelectedLangIndex => Languages.IndexOf(SelectedLang);
 
-        public ObservableCollection<MDictOnline> DictsOnline { get; set; }
-        int selectedDictOnlineIndex = 0;
-        public int SelectedDictOnlineIndex {
-            get => selectedDictOnlineIndex;
+        public ObservableCollection<MDictMean> DictsMean;
+        public ObservableCollection<MDictItem> DictItems;
+        MDictItem selectedDictItem;
+        public MDictItem SelectedDictItem {
+            get => selectedDictItem;
             set {
-                selectedDictOnlineIndex = value;
-                USDICTONLINEID = SelectedDictOnline.ID;
+                selectedDictItem = value;
+                USDICTITEM = selectedDictItem.DICTID;
             }
         }
-        public MDictOnline SelectedDictOnline => DictsOnline[SelectedDictOnlineIndex];
+        public int SelectedDictItemIndex => DictItems.IndexOf(SelectedDictItem);
 
         public ObservableCollection<MDictNote> DictsNote { get; set; }
-        int selectedDictNoteIndex = 0;
-        public int SelectedDictNoteIndex {
-            get => selectedDictNoteIndex;
+        MDictNote selectedDictNote = new MDictNote();
+        public MDictNote SelectedDictNote {
+            get => selectedDictNote;
             set {
-                selectedDictNoteIndex = value;
-                USDICTNOTEID = SelectedDictNote?.ID ?? 0;
+                selectedDictNote = value;
+                USDICTNOTEID = selectedDictNote.ID;
             }
         }
-        MDictNote SelectedDictNote => DictsNote.Count == 0 ? null : DictsNote[SelectedDictNoteIndex];
+        public int SelectedDictNoteIndex => DictsNote.IndexOf(SelectedDictNote);
 
         public ObservableCollection<MTextbook> Textbooks { get; set; }
-        int selectedTextbookIndex = 0;
-        public int SelectedTextbookIndex {
-            get => selectedTextbookIndex;
+        MTextbook selectedTextbook;
+        public MTextbook SelectedTextbook {
+            get => selectedTextbook;
             set {
-                selectedTextbookIndex = value;
-                SetSelectedTextbookIndex();
+                selectedTextbook = value;
+                SetSelectedTextbook();
             }
         }
-        public MTextbook SelectedTextbook => Textbooks[SelectedTextbookIndex];
+        public int SelectedTextbookIndex => Textbooks.IndexOf(SelectedTextbook);
 
-        public ObservableCollection<string> Units { get; set; }
-        public ObservableCollection<string> Parts { get; set; }
-        public ObservableCollection<> AutoCorrects { get; set; }
+        public ObservableCollection<MSelectItem> Units { get; set; }
+        public int UnitCount => Units.Count;
+        public ObservableCollection<MSelectItem> Parts { get; set; }
+        public int PartCount => Parts.Count;
+        public bool IsSinglePart => PartCount == 1;
+
+        public ObservableCollection<MAutoCorrect> AutoCorrects { get; set; }
 
         public int UserId = 1;
 
         public async Task GetData() {
             Languages = await GetData(async () => await LanguageDS.GetData());
             UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(UserId));
-            SelectedUSUserIndex = UserSettings.ToList().FindIndex(o => o.KIND == 1);
-            await SetSelectedLangIndex(Languages.ToList().FindIndex(o => o.ID == USLANGID));
+            SelectedUSUser0 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 0);
+            SelectedUSUser1 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 1);
+            var lst = SelectedUSUser0.VALUE4.Split(new [] { "\r\n" }, StringSplitOptions.None).Select(s => s.Split(',')).ToList();
+            USLEVELCOLORS = new Dictionary<int, List<int>>();
+            foreach (var v in lst)
+                USLEVELCOLORS[int.Parse(v[0])] = new List<int> { int.Parse(v[1], NumberStyles.HexNumber), int.Parse(v[2], NumberStyles.HexNumber) };
+            await SetSelectedLangIndex(Languages.FirstOrDefault(o => o.ID == USLANGID));
         }
 
-        public async Task SetSelectedLangIndex(int langindex) {
-            SelectedLangIndex = langindex;
+        public async Task SetSelectedLangIndex(MLanguage lang) {
+            SelectedLang = lang;
             USLANGID = SelectedLang.ID;
-            SelectedUSLangIndex = UserSettings.ToList().FindIndex(o => o.KIND == 2 && o.ENTITYID == USLANGID);
-            DictsOnline = await GetData(async () => await DictOnlineDS.GetDataByLang(USLANGID));
-            SelectedDictOnlineIndex = DictsOnline.ToList().FindIndex(o => o.ID == USDICTONLINEID);
+            SelectedUSLang = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
+            var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
+            DictsMean = await GetData(async () => await DictMeanDS.GetDataByLang(USLANGID));
             DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
-            SelectedDictNoteIndex = DictsNote.ToList().FindIndex(o => o.ID == USDICTNOTEID);
             Textbooks = await GetData(async () => await TextbookDS.GetDataByLang(USLANGID));
-            SelectedTextbookIndex = Textbooks.ToList().FindIndex(o => o.ID == USTEXTBOOKID);
+            AutoCorrects = await GetData(async () => await AutoCorrectDS.GetDataByLang(USLANGID));
+            var i = 0;
+            DictItems = new ObservableCollection<MDictItem>(lstDicts.SelectMany(d => d == "0" ?
+                DictsMean.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
+                new List<MDictItem> { new MDictItem(d, $"Custom{++i}") }
+            ));
+            SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
+            SelectedDictNote = DictsNote.IsEmpty() ? new MDictNote() : DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID);
+            SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
         }
 
-        void SetSelectedTextbookIndex() {
+        void SetSelectedTextbook() {
             USTEXTBOOKID = SelectedTextbook.ID;
-            SelectedUSTextbookIndex = UserSettings.ToList().FindIndex(o => o.KIND == 3 && o.ENTITYID == USTEXTBOOKID);
-            Units = new ObservableCollection<string>(Enumerable.Range(1, SelectedTextbook.UNITS).Select(i => i.ToString()));
-            Parts = new ObservableCollection<string>(SelectedTextbook.PARTS.Split(' '));
+            SelectedUSTextbook = UserSettings.ToList().FirstOrDefault(o => o.KIND == 3 && o.ENTITYID == USTEXTBOOKID);
+            Units = new ObservableCollection<MSelectItem>(CommonApi.UnitsFrom(SelectedTextbook.UNITS));
+            Parts = new ObservableCollection<MSelectItem>(CommonApi.PartsFrom(SelectedTextbook.PARTS));
         }
 
-        public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser.ID, USLANGID);
+        public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser0.ID, USLANGID);
         public async Task<bool> UpdateTextbook() => await UserSettingDS.UpdateTextbook(SelectedUSLang.ID, USTEXTBOOKID);
-        public async Task<bool> UpdateDictOnline() => await UserSettingDS.UpdateDictOnline(SelectedUSLang.ID, USDICTONLINEID);
+        public async Task<bool> UpdateDictItem() => await UserSettingDS.UpdateDictItem(SelectedUSLang.ID, USDICTITEM);
         public async Task<bool> UpdateDictNote() => await UserSettingDS.UpdateDictNote(SelectedUSLang.ID, USDICTNOTEID);
         public async Task<bool> UpdateUnitFrom() => await UserSettingDS.UpdateUnitFrom(SelectedUSTextbook.ID, USUNITFROM);
         public async Task<bool> UpdatePartFrom() => await UserSettingDS.UpdatePartFrom(SelectedUSTextbook.ID, USPARTFROM);

@@ -56,6 +56,9 @@
     <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="System.Interactive, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.3.2.0\lib\net45\System.Interactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reactive, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
@@ -88,9 +91,13 @@
     <Compile Include="Models\MUnitPhrase.cs" />
     <Compile Include="Models\MLangWord.cs" />
     <Compile Include="Models\MTextbookWord.cs" />
+    <Compile Include="Models\MSelectItem.cs" />
     <Compile Include="Services\LangPhraseDataStore.cs" />
+    <Compile Include="Services\TextbookPhraseDataStore.cs" />
     <Compile Include="Services\UnitPhraseDataStore.cs" />
     <Compile Include="Services\LangWordDataStore.cs" />
+    <Compile Include="Services\TextbookWordDataStore.cs" />
+    <Compile Include="Shared\CommonApi.cs" />
     <Compile Include="Shared\HtmApi.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\MAutoCorrect.cs" />
@@ -100,20 +107,14 @@
     <Compile Include="Models\MUnitWord.cs" />
     <Compile Include="Models\MUserSetting.cs" />
     <Compile Include="Services\AutoCorrectDataStore.cs" />
-    <Compile Include="Services\CloudDataStore.cs" />
     <Compile Include="Services\DictDataStore.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\LanguageDataStore.cs" />
     <Compile Include="Services\LollyDataStore.cs" />
-    <Compile Include="Services\MockDataStore.cs" />
     <Compile Include="Services\TextbookDataStore.cs" />
     <Compile Include="Services\UnitWordDataStore.cs" />
     <Compile Include="Services\UserSettingDataStore.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ItemBaseViewModel.cs" />
-    <Compile Include="ViewModels\ItemDetailViewModel.cs" />
-    <Compile Include="ViewModels\ItemsViewModel.cs" />
     <Compile Include="ViewModels\LollyViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\WordsUnitViewModel.cs" />

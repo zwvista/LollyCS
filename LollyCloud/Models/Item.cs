@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LollyShared
+namespace LollyXamarinForms
 {
     public class Item
     {
