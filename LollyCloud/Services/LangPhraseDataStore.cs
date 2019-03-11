@@ -13,7 +13,7 @@ namespace LollyShared
 {
     public class LangPhraseDataStore : LollyDataStore<MLangPhrase>
     {
-        public async Task<IEnumerable<MLangPhrase>> GetDataByTextbookUnitPart(int langid) =>
+        public async Task<IEnumerable<MLangPhrase>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MLangPhrases>($"VLANGPHRASE?transform=1&filter=LANGID,eq,{langid}&order=PHRASE")).LANGPHRASES;
 
         public async Task<IEnumerable<MLangPhrase>> getDataByLangPhrase(int langid, string phrase) =>
@@ -25,8 +25,8 @@ namespace LollyShared
         public async Task<bool> Create(MLangPhrase item) =>
         await CreateByUrl($"LANGPHRASE", item);
 
-        public async Task<bool> UpdateNote(int id, string note) =>
-        await UpdateByUrl($"LANGPHRASE/{id}", $"NOTE={note}");
+        public async Task<bool> UpdateTranslation(int id, string translation) =>
+        await UpdateByUrl($"LANGPHRASE/{id}", $"TRANSLATION={translation}");
 
         public async Task<bool> Update(MLangPhrase item) =>
         await UpdateByUrl($"LANGPHRASE/{item.ID}", JsonConvert.SerializeObject(item));

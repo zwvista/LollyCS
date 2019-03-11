@@ -35,8 +35,8 @@ namespace LollyShared
         public string HtmlString(string html, string word, bool useTemplate2 = false)
         {
             var template = useTemplate2 && !string.IsNullOrEmpty(TEMPLATE2) ? TEMPLATE2 : TEMPLATE;
-            return HtmlApi.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
-                string.Format(template2, word, HtmlApi.CssFolder, text));
+            return CommonApi.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
+                string.Format(template2, word, CommonApi.CssFolder, text));
         }
     }
 

@@ -10,17 +10,19 @@ namespace LollyShared
 {
     public class UnitWordDataStore : LollyDataStore<MUnitWord>
     {
-        public async Task<IEnumerable<MUnitWord>> GetDataByTextbookUnitPart(int textbookid, int unitPartFrom, int unitPartTo,
-            ObservableCollection<MSelectItem> lstUnits, ObservableCollection<MSelectItem> lstParts)
+        public async Task<IEnumerable<MUnitWord>> GetDataByTextbookUnitPart(MTextbook textbook, int unitPartFrom, int unitPartTo)
         {
-            var lst = (await GetDataByUrl<MUnitWords>($"VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,{textbookid}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITWORDS;
+            var lst = (await GetDataByUrl<MUnitWords>($"VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,{textbook.ID}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITWORDS;
             foreach (var o in lst)
             {
-                o.lstUnits = lstUnits;
-                o.lstParts = lstParts;
+                o.lstUnits = textbook.lstUnits;
+                o.lstParts = textbook.lstParts;
             }
             return lst;
         }
+
+        public async Task<IEnumerable<MUnitWord>> GetDataByLang(int langid) =>
+        (await GetDataByUrl<MUnitWords>($"VUNITWORDS?transform=1&filter=LANGID,eq,{langid}&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM")).VUNITWORDS;
 
         public async Task<bool> Create(MUnitWord item) =>
         await CreateByUrl($"UNITWORDS", item);

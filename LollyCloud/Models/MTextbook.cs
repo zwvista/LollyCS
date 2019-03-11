@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
 namespace LollyShared
@@ -11,10 +12,13 @@ namespace LollyShared
     public class MTextbook
     {
         public int ID { get; set; }
-        public string LANGNAME { get; set; }
+        public int LANGID { get; set; }
         [JsonProperty("NAME")]
         public string TEXTBOOKNAME { get; set; }
         public string UNITS { get; set; }
         public string PARTS { get; set; }
+
+        public ObservableCollection<MSelectItem> lstUnits;
+        public ObservableCollection<MSelectItem> lstParts;
     }
 }

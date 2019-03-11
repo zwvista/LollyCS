@@ -14,7 +14,7 @@ namespace LollyShared
     {
         protected HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri(HtmlApi.LollyUrl)
+            BaseAddress = new Uri(CommonApi.LollyUrl)
         };
 
         protected async Task<U> GetDataByUrl<U>(string url) where U : class

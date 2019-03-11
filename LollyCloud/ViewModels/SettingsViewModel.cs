@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Globalization;
@@ -29,27 +28,28 @@ namespace LollyShared
         public int USROWSPERPAGE => int.Parse(SelectedUSUser0.VALUE3);
         public Dictionary<int, List<int>> USLEVELCOLORS;
         public int USREADINTERVAL => int.Parse(SelectedUSUser1.VALUE1);
-        MUserSetting SelectedUSLang;
+        MUserSetting SelectedUSLang2;
         public int USTEXTBOOKID
         {
-            get => int.Parse(SelectedUSLang.VALUE1);
-            set => SelectedUSLang.VALUE1 = value.ToString();
+            get => int.Parse(SelectedUSLang2.VALUE1);
+            set => SelectedUSLang2.VALUE1 = value.ToString();
         }
         public string USDICTITEM
         {
-            get => SelectedUSLang.VALUE2;
-            set => SelectedUSLang.VALUE2 = value;
+            get => SelectedUSLang2.VALUE2;
+            set => SelectedUSLang2.VALUE2 = value;
         }
         public int USDICTNOTEID
         {
-            get => int.Parse(SelectedUSLang.VALUE3);
-            set => SelectedUSLang.VALUE3 = value.ToString();
+            get => int.Parse(SelectedUSLang2.VALUE3);
+            set => SelectedUSLang2.VALUE3 = value.ToString();
         }
         public string USDICTITEMS
         {
-            get => SelectedUSLang.VALUE4 ?? "0";
-            set => SelectedUSLang.VALUE4 = value;
+            get => SelectedUSLang2.VALUE4 ?? "0";
+            set => SelectedUSLang2.VALUE4 = value;
         }
+        MUserSetting SelectedUSLang3;
         MUserSetting SelectedUSTextbook;
         public int USUNITFROM
         {
@@ -122,8 +122,6 @@ namespace LollyShared
 
         public ObservableCollection<MAutoCorrect> AutoCorrects { get; set; }
 
-        public int UserId = 1;
-
         public async Task GetData() {
             Languages = await GetData(async () => await LanguageDS.GetData());
             UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(UserId));
@@ -139,7 +137,7 @@ namespace LollyShared
         public async Task SetSelectedLangIndex(MLanguage lang) {
             SelectedLang = lang;
             USLANGID = SelectedLang.ID;
-            SelectedUSLang = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
+            SelectedUSLang2 = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
             var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
             DictsMean = await GetData(async () => await DictMeanDS.GetDataByLang(USLANGID));
             DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
@@ -163,9 +161,9 @@ namespace LollyShared
         }
 
         public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser0.ID, USLANGID);
-        public async Task<bool> UpdateTextbook() => await UserSettingDS.UpdateTextbook(SelectedUSLang.ID, USTEXTBOOKID);
-        public async Task<bool> UpdateDictItem() => await UserSettingDS.UpdateDictItem(SelectedUSLang.ID, USDICTITEM);
-        public async Task<bool> UpdateDictNote() => await UserSettingDS.UpdateDictNote(SelectedUSLang.ID, USDICTNOTEID);
+        public async Task<bool> UpdateTextbook() => await UserSettingDS.UpdateTextbook(SelectedUSLang2.ID, USTEXTBOOKID);
+        public async Task<bool> UpdateDictItem() => await UserSettingDS.UpdateDictItem(SelectedUSLang2.ID, USDICTITEM);
+        public async Task<bool> UpdateDictNote() => await UserSettingDS.UpdateDictNote(SelectedUSLang2.ID, USDICTNOTEID);
         public async Task<bool> UpdateUnitFrom() => await UserSettingDS.UpdateUnitFrom(SelectedUSTextbook.ID, USUNITFROM);
         public async Task<bool> UpdatePartFrom() => await UserSettingDS.UpdatePartFrom(SelectedUSTextbook.ID, USPARTFROM);
         public async Task<bool> UpdateUnitTo() => await UserSettingDS.UpdateUnitTo(SelectedUSTextbook.ID, USUNITTO);

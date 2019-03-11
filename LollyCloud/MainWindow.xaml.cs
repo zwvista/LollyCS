@@ -28,6 +28,8 @@ namespace LollyCloud
         public MainWindow()
         {
             InitializeComponent();
+            // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
+            Style = (Style)FindResource(typeof(Window));
             // Can't call Init().Wait(); here
             Init();
         }

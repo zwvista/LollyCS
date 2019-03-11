@@ -7,33 +7,56 @@ namespace LollyShared
 {
     public static class CommonApi
     {
-        public static List<MSelectItem> UnitsFrom(string units)
+        public static string LollyUrl = "https://zwvista.tk/lolly/api.php/";
+        public static string CssFolder = "https://zwvista.tk/lolly/css/";
+        public static int UserId = 1;
+        private static readonly Dictionary<string, string> escapes = new Dictionary<string, string>()
         {
-            List<string> f()
+            {"<delete>", ""}, {@"\t", "\t"}, {@"\r", "\r"}, {@"\n", "\n"},
+        };
+        public static string ExtractTextFromHtml(string html, string transfrom, string template, Func<string, string, string> templateHandler)
+        {
+#if DEBUG_EXTRACT
+            var logFolder = Settings.Default.LogFolder + "\\";
+            File.WriteAllText(logFolder + "0_raw.html", html);
+            transfrom = File.ReadAllText(logFolder + "1_transform.txt");
+            template = File.ReadAllText(logFolder + "5_template.txt");
+#endif
+            var text = "";
+            do
             {
-                var m = new Regex(@"UNITS,(\d+)").Match(units);
-                if (m.Success)
-                {
-                    var n = int.Parse(m.Groups[1].Value);
-                    return Enumerable.Range(1, n).Select(i => i.ToString()).ToList();
-                }
-                m = new Regex(@"PAGES,(\d+),(\d+)").Match(units);
-                if (m.Success)
-                {
-                    var n1 = int.Parse(m.Groups[1].Value);
-                    var n2 = int.Parse(m.Groups[2].Value);
-                    var n = (n1 + n2 - 1) / n2;
-                    return Enumerable.Range(1, n).Select(i => $"{i * n2 - n2 + 1}~{i * n2}").ToList();
-                }
-                m = new Regex(@"CUSTOM,(.+)").Match(units);
-                if (m.Success)
-                    return m.Groups[1].Value.Split(',').ToList();
-                return new List<string>();
-            }
-            return f().Select((s, i) => new MSelectItem(i + 1, s)).ToList();
-        }
+                if (string.IsNullOrEmpty(transfrom)) break;
+                var arr = transfrom.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                var reg = new Regex(arr[0]);
+                var match = reg.Match(html);
+                if (!match.Success) break;
 
-        public static List<MSelectItem> PartsFrom(string parts) =>
-            parts.Split(',').Select((s, i) => new MSelectItem(i + 1, s)).ToList();
+                text = match.Groups[0].Value;
+                void f(string replacer)
+                {
+                    foreach (var entry in escapes)
+                        replacer = replacer.Replace(entry.Key, entry.Value);
+                    text = reg.Replace(text, replacer);
+                };
+
+                f(arr[1]);
+#if DEBUG_EXTRACT
+            File.WriteAllText(logFolder + "2_extracted.txt", text);
+#endif
+                for (int i = 2; i < arr.Length;)
+                {
+                    reg = new Regex(arr[i++]);
+                    f(arr[i++]);
+                }
+#if DEBUG_EXTRACT
+            File.WriteAllText(logFolder + "4_cooked.txt", text);
+#endif
+            } while (false);
+
+#if DEBUG_EXTRACT
+            File.WriteAllText(logFolder + "6_result.html", text);
+#endif
+            return text;
+        }
     }
 }

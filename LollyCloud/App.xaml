@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:LollyCloud"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontSize"
+            Value="15" />
+        </Style>
     </Application.Resources>
 </Application>

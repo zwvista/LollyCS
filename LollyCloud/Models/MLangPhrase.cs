@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LollyShared
 {
@@ -14,6 +15,28 @@ namespace LollyShared
         public string PHRASE { get; set; }
         public string TRANSLATION { get; set; }
 
-        MLangPhrase() { }
+        MLangPhrase(MUnitPhrase item)
+        {
+            ID = item.WORDID;
+            LANGID = item.LANGID;
+            PHRASE = item.PHRASE;
+            TRANSLATION = item.TRANSLATION;
+        }
+
+        bool combineTranslation(string translation)
+        {
+            var oldTranslation = TRANSLATION;
+            if (!string.IsNullOrEmpty(translation))
+                if (string.IsNullOrEmpty(TRANSLATION))
+                    TRANSLATION = translation;
+                else
+                {
+                    var lst = TRANSLATION.Split(',').ToList();
+                    if (!lst.Contains(translation))
+                        lst.Add(translation);
+                    TRANSLATION = string.Join(",", lst);
+                }
+            return oldTranslation != TRANSLATION;
+        }
     }
 }

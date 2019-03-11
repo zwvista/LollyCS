@@ -22,6 +22,9 @@ namespace LollyShared
             return lst;
         }
 
+        public async Task<IEnumerable<MUnitPhrase>> GetDataByTextbookUnitPart(int langid) =>
+        (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?transform=1&filter[]=LANGID,eq,{langid}&&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM")).VUNITPHRASES;
+
         public async Task<bool> Create(MUnitPhrase item) =>
         await CreateByUrl($"UNITPHRASES", item);
 
