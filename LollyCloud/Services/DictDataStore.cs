@@ -12,12 +12,12 @@ namespace LollyShared
 {
     public class DictMeanDataStore : LollyDataStore<MDictMean>
     {
-        public async Task<IEnumerable<MDictMean>> GetDataByLang(int langid) =>
+        public async Task<List<MDictMean>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MDictsMean>($"VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSMEAN;
     }
     public class DictNoteDataStore : LollyDataStore<MDictNote>
     {
-        public async Task<IEnumerable<MDictNote>> GetDataByLang(int langid) =>
+        public async Task<List<MDictNote>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSNOTE;
     }
 }

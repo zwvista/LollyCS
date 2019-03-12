@@ -9,7 +9,7 @@ namespace LollyShared
 {
     public class TextbookDataStore : LollyDataStore<MTextbook>
     {
-        public async Task<IEnumerable<MTextbook>> GetDataByLang(int langid)
+        public async Task<List<MTextbook>> GetDataByLang(int langid)
         {
             var lst = (await GetDataByUrl<MTextbooks>($"TEXTBOOKS?transform=1&filter=LANGID,eq,{langid}")).TEXTBOOKS;
             List<string> f(string units)

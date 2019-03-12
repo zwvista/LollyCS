@@ -13,13 +13,13 @@ namespace LollyShared
 {
     public class LangPhraseDataStore : LollyDataStore<MLangPhrase>
     {
-        public async Task<IEnumerable<MLangPhrase>> GetDataByLang(int langid) =>
+        public async Task<List<MLangPhrase>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MLangPhrases>($"VLANGPHRASE?transform=1&filter=LANGID,eq,{langid}&order=PHRASE")).LANGPHRASES;
 
-        public async Task<IEnumerable<MLangPhrase>> getDataByLangPhrase(int langid, string phrase) =>
+        public async Task<List<MLangPhrase>> GetDataByLangPhrase(int langid, string phrase) =>
         (await GetDataByUrl<MLangPhrases>($"VLANGPHRASE?transform=1&filter[]=LANGID,eq,{langid}&filter[]=PHRASE,eq,{HttpUtility.HtmlEncode(phrase)}")).LANGPHRASES;
 
-        public async Task<IEnumerable<MLangPhrase>> getDataById(int id) =>
+        public async Task<List<MLangPhrase>> GetDataById(int id) =>
         (await GetDataByUrl<MLangPhrases>($"VLANGPHRASE?transform=1&filter[]=ID,eq,{id}")).LANGPHRASES;
 
         public async Task<bool> Create(MLangPhrase item) =>

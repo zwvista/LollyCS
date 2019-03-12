@@ -13,7 +13,7 @@ namespace LollyShared
             Title = "Browse";
         }
 
-        protected async Task<ObservableCollection<T>> GetData<T>(Func<Task<IEnumerable<T>>> func)
+        protected async Task<ObservableCollection<T>> GetData<T>(Func<Task<List<T>>> func)
         {
             var Items = new ObservableCollection<T>();
 

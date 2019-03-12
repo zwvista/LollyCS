@@ -15,7 +15,8 @@ namespace LollyShared
         public string PHRASE { get; set; }
         public string TRANSLATION { get; set; }
 
-        MLangPhrase(MUnitPhrase item)
+        public MLangPhrase() { }
+        public MLangPhrase(MUnitPhrase item)
         {
             ID = item.PHRASEID;
             LANGID = item.LANGID;
@@ -23,7 +24,7 @@ namespace LollyShared
             TRANSLATION = item.TRANSLATION;
         }
 
-        bool combineTranslation(string translation)
+        public bool combineTranslation(string translation)
         {
             var oldTranslation = TRANSLATION;
             if (!string.IsNullOrEmpty(translation))

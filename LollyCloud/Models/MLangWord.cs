@@ -17,8 +17,8 @@ namespace LollyShared
         public int FAMIID { get; set; }
         public int LEVEL { get; set; }
 
-        MLangWord() { }
-        MLangWord(MUnitWord item)
+        public MLangWord() { }
+        public MLangWord(MUnitWord item)
         {
             ID = item.WORDID;
             LANGID = item.LANGID;
@@ -26,7 +26,7 @@ namespace LollyShared
             NOTE = item.NOTE;
         }
 
-        bool CombineNote(string note)
+        public bool CombineNote(string note)
         {
             var oldNote = NOTE;
             if (!string.IsNullOrEmpty(note))

@@ -12,7 +12,7 @@ namespace LollyShared
 {
     public class AutoCorrectDataStore : LollyDataStore<MAutoCorrect>
     {
-        public async Task<IEnumerable<MAutoCorrect>> GetDataByLang(int langid) =>
+        public async Task<List<MAutoCorrect>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MAutoCorrects>($"AUTOCORRECT?transform=1&filter=LANGID,eq,{langid}")).AUTOCORRECT;
     }
 }
