@@ -18,8 +18,7 @@ namespace LollyShared
             var o = new WordsUnitViewModel();
             o.vmSettings = vmSettings;
             o.UnitWords = new ObservableCollection<MUnitWord>(await o.DS.GetDataByTextbookUnitPart(
-                vmSettings.USTEXTBOOKID, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO,
-                vmSettings.Units, vmSettings.Parts));
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO));
             return o;
         }
     }

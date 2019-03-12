@@ -41,7 +41,7 @@ namespace LollyShared
         }
         public int USDICTNOTEID
         {
-            get => int.Parse(SelectedUSLang2.VALUE3);
+            get => int.TryParse(SelectedUSLang2.VALUE3, out var v) ? v : 0;
             set => SelectedUSLang2.VALUE3 = value.ToString();
         }
         public string USDICTITEMS
@@ -50,6 +50,11 @@ namespace LollyShared
             set => SelectedUSLang2.VALUE4 = value;
         }
         MUserSetting SelectedUSLang3;
+        public int USVOICEID
+        {
+            get => int.TryParse(SelectedUSLang3.VALUE1, out var v) ? v : 0;
+            set => SelectedUSLang2.VALUE1 = value.ToString();
+        }
         MUserSetting SelectedUSTextbook;
         public int USUNITFROM
         {
@@ -109,7 +114,8 @@ namespace LollyShared
             get => selectedTextbook;
             set {
                 selectedTextbook = value;
-                SetSelectedTextbook();
+                USTEXTBOOKID = SelectedTextbook.ID;
+                SelectedUSTextbook = UserSettings.FirstOrDefault(o => o.KIND == 11 && o.ENTITYID == USTEXTBOOKID);
             }
         }
         public int SelectedTextbookIndex => Textbooks.IndexOf(SelectedTextbook);
@@ -124,7 +130,7 @@ namespace LollyShared
 
         public async Task GetData() {
             Languages = await GetData(async () => await LanguageDS.GetData());
-            UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(UserId));
+            UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(CommonApi.UserId));
             SelectedUSUser0 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 0);
             SelectedUSUser1 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 1);
             var lst = SelectedUSUser0.VALUE4.Split(new [] { "\r\n" }, StringSplitOptions.None).Select(s => s.Split(',')).ToList();
@@ -138,6 +144,7 @@ namespace LollyShared
             SelectedLang = lang;
             USLANGID = SelectedLang.ID;
             SelectedUSLang2 = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
+            SelectedUSLang3 = UserSettings.FirstOrDefault(o => o.KIND == 3 && o.ENTITYID == USLANGID);
             var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
             DictsMean = await GetData(async () => await DictMeanDS.GetDataByLang(USLANGID));
             DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
@@ -151,13 +158,6 @@ namespace LollyShared
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
             SelectedDictNote = DictsNote.IsEmpty() ? new MDictNote() : DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID);
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
-        }
-
-        void SetSelectedTextbook() {
-            USTEXTBOOKID = SelectedTextbook.ID;
-            SelectedUSTextbook = UserSettings.ToList().FirstOrDefault(o => o.KIND == 3 && o.ENTITYID == USTEXTBOOKID);
-            Units = new ObservableCollection<MSelectItem>(CommonApi.UnitsFrom(SelectedTextbook.UNITS));
-            Parts = new ObservableCollection<MSelectItem>(CommonApi.PartsFrom(SelectedTextbook.PARTS));
         }
 
         public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser0.ID, USLANGID);

@@ -87,18 +87,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\MLangPhrase.cs" />
-    <Compile Include="Models\MTextbookPhrase.cs" />
     <Compile Include="Models\MUnitPhrase.cs" />
     <Compile Include="Models\MLangWord.cs" />
-    <Compile Include="Models\MTextbookWord.cs" />
     <Compile Include="Models\MSelectItem.cs" />
+    <Compile Include="Models\MWordFami.cs" />
+    <Compile Include="Models\MVoice.cs" />
     <Compile Include="Services\LangPhraseDataStore.cs" />
-    <Compile Include="Services\TextbookPhraseDataStore.cs" />
+    <Compile Include="Services\WordFamiDataStore.cs" />
+    <Compile Include="Services\VoiceDataStore.cs" />
     <Compile Include="Services\UnitPhraseDataStore.cs" />
     <Compile Include="Services\LangWordDataStore.cs" />
-    <Compile Include="Services\TextbookWordDataStore.cs" />
     <Compile Include="Shared\CommonApi.cs" />
-    <Compile Include="Shared\HtmApi.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\MAutoCorrect.cs" />
     <Compile Include="Models\MDictionary.cs" />

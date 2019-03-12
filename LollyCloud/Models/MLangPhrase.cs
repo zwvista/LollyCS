@@ -17,7 +17,7 @@ namespace LollyShared
 
         MLangPhrase(MUnitPhrase item)
         {
-            ID = item.WORDID;
+            ID = item.PHRASEID;
             LANGID = item.LANGID;
             PHRASE = item.PHRASE;
             TRANSLATION = item.TRANSLATION;
