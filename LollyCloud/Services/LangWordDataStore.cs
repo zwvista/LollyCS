@@ -22,7 +22,7 @@ namespace LollyShared
         public async Task<List<MLangWord>> GetDataById(int id) =>
         (await GetDataByUrl<MLangWords>($"VLANGWORDS?transform=1&filter=ID,eq,{id}")).VLANGWORDS;
 
-        public async Task<bool> Create(MLangWord item) =>
+        public async Task<int> Create(MLangWord item) =>
         await CreateByUrl($"LANGWORDS", item);
 
         public async Task<bool> UpdateNote(int id, string note) =>

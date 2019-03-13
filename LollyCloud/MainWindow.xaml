@@ -9,9 +9,6 @@
     <DockPanel>
         <ToolBarTray Name="ToolBarTray1" DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Name="ToolBar1" Band="1">
-                <Button>A</Button>
-                <Button>B</Button>
-                <Button>C</Button>
             </ToolBar>
             <ToolBar Name="ToolBar2" Band="2">
                 <Button>D</Button>

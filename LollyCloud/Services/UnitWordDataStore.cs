@@ -37,7 +37,7 @@ namespace LollyShared
         public async Task<List<MUnitWord>> GetDataByLangWord(int wordid) =>
         (await GetDataByUrl<MUnitWords>($"VUNITWORDS?transform=1&filter=WORDID,eq,{wordid}")).VUNITWORDS;
 
-        public async Task<bool> Create(MUnitWord item) =>
+        public async Task<int> Create(MUnitWord item) =>
         await CreateByUrl($"UNITWORDS", item);
 
         public async Task<bool> UpdateSeqNum(int id, int seqnum) =>

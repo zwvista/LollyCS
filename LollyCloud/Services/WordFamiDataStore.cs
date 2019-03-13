@@ -11,7 +11,7 @@ namespace LollyShared
         private async Task<IEnumerable<MWordFami>> getDataByUserWord(int userid, int wordid) =>
         (await GetDataByUrl<MWordsFami>($"WORDSFAMI?transform=1&filter[]=USERID,eq,{userid}&filter[]=WORDID,eq,{wordid}")).WORDSFAMI;
 
-        private async Task<bool> Create(MWordFami item) =>
+        private async Task<int> Create(MWordFami item) =>
         await CreateByUrl($"WORDSFAMI", item);
 
         private async Task<bool> Update(MWordFami item) =>
@@ -34,7 +34,7 @@ namespace LollyShared
                 if (level == 0)
                     return true;
                 else
-                    return await Create(item);
+                    return await Create(item) != 0;
             else
             {
                 var id = lst[0].ID;

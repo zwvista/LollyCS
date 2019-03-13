@@ -61,5 +61,58 @@ namespace LollyShared
             item.WORDID = wordid;
             return await unitWordDS.Update(item);
         }
+        public async Task<int> Create(MUnitWord item)
+        {
+            var lstLang = await langWordDS.GetDataByLangWord(item.LANGID, item.WORD);
+            int wordid;
+            if (lstLang.IsEmpty())
+            {
+                var itemLang = new MLangWord(item);
+                wordid = await langWordDS.Create(itemLang);
+            }
+            else
+            {
+                var itemLang = lstLang[0];
+                wordid = itemLang.ID;
+                var b = itemLang.CombineNote(item.NOTE);
+                item.NOTE = itemLang.NOTE;
+                if (b) await langWordDS.UpdateNote(wordid, item.NOTE);
+            }
+            item.WORDID = wordid;
+            return await unitWordDS.Create(item);
+        }
+        public async Task<bool> Delete(MUnitWord item)
+        {
+            await unitWordDS.Delete(item.ID);
+            var lst = await unitWordDS.GetDataByLangWord(item.WORDID);
+            return !lst.IsEmpty() || await langWordDS.Delete(item.WORDID);
+        }
+
+        public async Task Reindex(Action<int> complete)
+        {
+            for (int i = 1; i <= UnitWords.Count; i++)
+            {
+                var item = UnitWords[i - 1];
+                if (item.SEQNUM == i) continue;
+                item.SEQNUM = i;
+                await UpdateSeqNum(item.ID, item.SEQNUM);
+                complete(i - 1);
+            }
+        }
+
+        public MUnitWord NewUnitWord()
+        {
+            var maxElem = UnitWords.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            return new MUnitWord
+            {
+                LANGID = vmSettings.SelectedLang.ID,
+                TEXTBOOKID = maxElem?.UNIT ?? vmSettings.USUNITTO,
+                UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO,
+                PART = maxElem?.PART ?? vmSettings.USPARTTO,
+                SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
+                lstUnits = vmSettings.lstUnits,
+                lstParts = vmSettings.lstParts
+            };
+        }
     }
 }

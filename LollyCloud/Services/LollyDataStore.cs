@@ -36,16 +36,16 @@ namespace LollyShared
             return u;
         }
 
-        protected async Task<bool> CreateByUrl(string url, T item)
+        protected async Task<int> CreateByUrl(string url, T item)
         {
             if (item == null || !CrossConnectivity.Current.IsConnected)
-                return false;
+                return 0;
 
             var serializedItem = JsonConvert.SerializeObject(item);
 
             var response = await client.PostAsync(url, new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
-            return response.IsSuccessStatusCode;
+            return !response.IsSuccessStatusCode || !int.TryParse(response.ToString(), out var v) ? 0 : v;
         }
 
         protected async Task<bool> UpdateByUrl(string url, string body)

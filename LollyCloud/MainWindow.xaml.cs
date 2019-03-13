@@ -39,6 +39,8 @@ namespace LollyCloud
             await vmSettings.GetData();
             vmWords = await WordsUnitViewModel.CreateAsync(vmSettings);
             dg.ItemsSource = vmWords.UnitWords;
+            foreach (var o in vmSettings.DictItems)
+                ToolBar1.Items.Add(new Button { Content = o.DICTNAME });
         }
     }
 }

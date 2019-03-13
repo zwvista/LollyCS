@@ -103,7 +103,7 @@ namespace LollyShared
             get => selectedDictNote;
             set {
                 selectedDictNote = value;
-                USDICTNOTEID = selectedDictNote.ID;
+                USDICTNOTEID = selectedDictNote?.ID ?? 0;
             }
         }
         public int SelectedDictNoteIndex => DictsNote.IndexOf(SelectedDictNote);
@@ -120,10 +120,10 @@ namespace LollyShared
         }
         public int SelectedTextbookIndex => Textbooks.IndexOf(SelectedTextbook);
 
-        public ObservableCollection<MSelectItem> Units { get; set; }
-        public int UnitCount => Units.Count;
-        public ObservableCollection<MSelectItem> Parts { get; set; }
-        public int PartCount => Parts.Count;
+        public ObservableCollection<MSelectItem> lstUnits;
+        public int UnitCount => lstUnits.Count;
+        public ObservableCollection<MSelectItem> lstParts;
+        public int PartCount => lstParts.Count;
         public bool IsSinglePart => PartCount == 1;
 
         public ObservableCollection<MAutoCorrect> AutoCorrects { get; set; }
@@ -156,7 +156,7 @@ namespace LollyShared
                 new List<MDictItem> { new MDictItem(d, $"Custom{++i}") }
             ));
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
-            SelectedDictNote = DictsNote.IsEmpty() ? new MDictNote() : DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID);
+            SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
         }
 

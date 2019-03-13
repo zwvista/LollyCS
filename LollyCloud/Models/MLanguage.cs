@@ -1,4 +1,4 @@
-﻿using System;
+﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -8,10 +8,21 @@ namespace LollyShared
     {
         public List<MLanguage> LANGUAGES { get; set; }
     }
-    public class MLanguage
+    public class MLanguage : ReactiveObject
     {
-        public int ID { get; set; }
+        private int _ID;
+        [JsonProperty]
+        public int ID
+        {
+            get { return _ID; }
+            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+        }
+        private string _LANGNAME;
         [JsonProperty("NAME")]
-        public string LANGNAME { get; set; }
+        public string LANGNAME
+        {
+            get { return _LANGNAME; }
+            set { this.RaiseAndSetIfChanged(ref _LANGNAME, value); }
+        }
     }
 }

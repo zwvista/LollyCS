@@ -1,22 +1,89 @@
-﻿using System;
+﻿using ReactiveUI;
 using System.Collections.Generic;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace LollyShared
 {
-    public class MDictionary
+    public class MDictionary : ReactiveObject
     {
-        public int ID { get; set; }
-        public int DICTID { get; set; }
-        public int? LANGIDFROM { get; set; }
-        public string DICTTYPENAME { get; set; }
-        public string DICTNAME { get; set; }
-        public string URL { get; set; }
-        public string CHCONV { get; set; }
-        public string TRANSFORM { get; set; }
-        public int? WAIT { get; set; }
-        public string TEMPLATE { get; set; }
-        public string TEMPLATE2 { get; set; }
+        private int _ID;
+        [JsonProperty]
+        public int ID
+        {
+            get { return _ID; }
+            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+        }
+        private int _DICTID;
+        [JsonProperty]
+        public int DICTID
+        {
+            get { return _DICTID; }
+            set { this.RaiseAndSetIfChanged(ref _DICTID, value); }
+        }
+        private int _LANGIDFROM;
+        [JsonProperty]
+        public int LANGIDFROM
+        {
+            get { return _LANGIDFROM; }
+            set { this.RaiseAndSetIfChanged(ref _LANGIDFROM, value); }
+        }
+        private string _DICTTYPENAME;
+        [JsonProperty]
+        public string DICTTYPENAME
+        {
+            get { return _DICTTYPENAME; }
+            set { this.RaiseAndSetIfChanged(ref _DICTTYPENAME, value); }
+        }
+        private string _DICTNAME;
+        [JsonProperty]
+        public string DICTNAME
+        {
+            get { return _DICTNAME; }
+            set { this.RaiseAndSetIfChanged(ref _DICTNAME, value); }
+        }
+        private string _URL;
+        [JsonProperty]
+        public string URL
+        {
+            get { return _URL; }
+            set { this.RaiseAndSetIfChanged(ref _URL, value); }
+        }
+        private string _CHCONV;
+        [JsonProperty]
+        public string CHCONV
+        {
+            get { return _CHCONV; }
+            set { this.RaiseAndSetIfChanged(ref _CHCONV, value); }
+        }
+        private string _TRANSFORM;
+        [JsonProperty]
+        public string TRANSFORM
+        {
+            get { return _TRANSFORM; }
+            set { this.RaiseAndSetIfChanged(ref _TRANSFORM, value); }
+        }
+        private int? _WAIT;
+        [JsonProperty]
+        public int? WAIT
+        {
+            get { return _WAIT; }
+            set { this.RaiseAndSetIfChanged(ref _WAIT, value); }
+        }
+        private string _TEMPLATE;
+        [JsonProperty]
+        public string TEMPLATE
+        {
+            get { return _TEMPLATE; }
+            set { this.RaiseAndSetIfChanged(ref _TEMPLATE, value); }
+        }
+        private string _TEMPLATE2;
+        [JsonProperty]
+        public string TEMPLATE2
+        {
+            get { return _TEMPLATE2; }
+            set { this.RaiseAndSetIfChanged(ref _TEMPLATE2, value); }
+        }
 
         public string UrlString(string word, List<MAutoCorrect> lstAutoCorrects)
         {
@@ -40,10 +107,20 @@ namespace LollyShared
         }
     }
 
-    public class MDictItem
+    public class MDictItem : ReactiveObject
     {
-        public string DICTID { get; set; }
-        public string DICTNAME { get; set; }
+        private string _DICTID;
+        public string DICTID
+        {
+            get { return _DICTID; }
+            set { this.RaiseAndSetIfChanged(ref _DICTID, value); }
+        }
+        private string _DICTNAME;
+        public string DICTNAME
+        {
+            get { return _DICTNAME; }
+            set { this.RaiseAndSetIfChanged(ref _DICTNAME, value); }
+        }
         public MDictItem(string id, string name)
         {
             DICTID = id;
