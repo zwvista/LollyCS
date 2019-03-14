@@ -11,19 +11,9 @@
             <ToolBar Name="ToolBar1" Band="1">
             </ToolBar>
             <ToolBar Name="ToolBar2" Band="2">
-                <Button>D</Button>
-                <Button>E</Button>
-                <Button>F</Button>
-            </ToolBar>
-            <ToolBar Name="ToolBar3" Band="2">
-                <Button>G</Button>
-                <Button>H</Button>
-                <Button>I</Button>
-            </ToolBar>
-            <ToolBar Name="ToolBar4" Band="2">
-                <Button>J</Button>
-                <Button>K</Button>
-                <Button>L</Button>
+                <Button>Add</Button>
+                <Button>Delete</Button>
+                <Button>Refresh</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -32,7 +22,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid Name="dg" AutoGenerateColumns="False" >
+            <DataGrid Name="dg" AutoGenerateColumns="False" SelectionChanged="Dg_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT"/>
                 <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART"/>

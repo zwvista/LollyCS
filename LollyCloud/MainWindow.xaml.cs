@@ -39,8 +39,22 @@ namespace LollyCloud
             await vmSettings.GetData();
             vmWords = await WordsUnitViewModel.CreateAsync(vmSettings);
             dg.ItemsSource = vmWords.UnitWords;
-            foreach (var o in vmSettings.DictItems)
-                ToolBar1.Items.Add(new Button { Content = o.DICTNAME });
+            for (int i = 0; i < vmSettings.DictItems.Count; i++)
+            {
+                var b = new RadioButton
+                {
+                    Content = vmSettings.DictItems[i].DICTNAME,
+                    GroupName = "DICT"
+                };
+                ToolBar1.Items.Add(b);
+                if (i == vmSettings.SelectedDictItemIndex)
+                    b.IsChecked = true;
+            }
+        }
+
+        private void Dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
