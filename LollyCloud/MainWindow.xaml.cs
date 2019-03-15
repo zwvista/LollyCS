@@ -38,7 +38,7 @@ namespace LollyCloud
         {
             await vmSettings.GetData();
             vmWords = await WordsUnitViewModel.CreateAsync(vmSettings);
-            dg.ItemsSource = vmWords.UnitWords;
+            dgWords.ItemsSource = vmWords.UnitWords;
             for (int i = 0; i < vmSettings.DictItems.Count; i++)
             {
                 var b = new RadioButton
@@ -52,7 +52,7 @@ namespace LollyCloud
             }
         }
 
-        private void Dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

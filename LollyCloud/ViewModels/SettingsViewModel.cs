@@ -160,6 +160,10 @@ namespace LollyShared
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
         }
 
+        string DictHtml(string word, string dictids)
+        {
+        }
+
         public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser0.ID, USLANGID);
         public async Task<bool> UpdateTextbook() => await UserSettingDS.UpdateTextbook(SelectedUSLang2.ID, USTEXTBOOKID);
         public async Task<bool> UpdateDictItem() => await UserSettingDS.UpdateDictItem(SelectedUSLang2.ID, USDICTITEM);
