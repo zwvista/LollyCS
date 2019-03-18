@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace LollyShared
 {
+    public enum DictWebBrowserStatus
+    {
+        Ready, Navigating, Automating
+    }
     public static class CommonApi
     {
         public static string LollyUrl = "https://zwvista.tk/lolly/api.php/";

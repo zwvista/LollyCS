@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Net.Http;
 using System.Reactive.Linq;
 
 namespace LollyShared
@@ -11,7 +10,6 @@ namespace LollyShared
     {
         public SettingsViewModel vmSettings;
         private MDictNote DictNote => vmSettings.SelectedDictNote;
-        private HttpClient client = new HttpClient();
 
         public NoteViewModel(SettingsViewModel vmSettings)
         {
@@ -22,7 +20,7 @@ namespace LollyShared
         {
             if (DictNote == null) return "";
             var url = DictNote.UrlString(word, vmSettings.AutoCorrects.ToList());
-            var html = await client.GetStringAsync(url);
+            var html = await vmSettings.client.GetStringAsync(url);
             return CommonApi.ExtractTextFromHtml(html, DictNote.TRANSFORM, "", (text, _) => text);
         }
 

@@ -126,7 +126,7 @@ namespace LollyShared
             DICTID = id;
             DICTNAME = name;
         }
-        string[] DictIDs => DICTID.Split(',');
+        public string[] DictIDs => DICTID.Split(',');
     }
 
     public class MDictsNote

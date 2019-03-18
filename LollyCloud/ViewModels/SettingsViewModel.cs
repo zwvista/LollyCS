@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Globalization;
+using System.Net.Http;
 
 namespace LollyShared
 {
@@ -128,6 +129,8 @@ namespace LollyShared
 
         public ObservableCollection<MAutoCorrect> AutoCorrects { get; set; }
 
+        public HttpClient client = new HttpClient();
+
         public async Task GetData() {
             Languages = await GetData(async () => await LanguageDS.GetData());
             UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(CommonApi.UserId));
@@ -160,8 +163,18 @@ namespace LollyShared
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
         }
 
-        string DictHtml(string word, string dictids)
+        public string DictHtml(string word, List<string> dictids)
         {
+            var s = "<html><body>\n";
+            foreach (var (dictid, i) in dictids.Select((dict, i) => (dict, i)))
+            {
+                var item = DictsMean.First(o => o.DICTID.ToString() == dictid);
+                var ifrId = $"ifr{i + 1}";
+                var url = item.UrlString(word, AutoCorrects.ToList());
+                s += $"<iframe id='{ifrId}' frameborder='1' style='width:100%; height:500px; display:block' src='{url}'></iframe>\n";
+            }
+            s += "</body></html>\n";
+            return s;
         }
 
         public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser0.ID, USLANGID);
