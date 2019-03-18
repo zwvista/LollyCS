@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Reflection;
 
 namespace LollyShared
 {
@@ -63,6 +64,16 @@ namespace LollyShared
             File.WriteAllText(logFolder + "6_result.html", text);
 #endif
             return text;
+        }
+    }
+    public static class WebBrowserExt
+    {
+        public static void SetSilent(this WebBrowser browser, bool silent)
+        {
+            dynamic activeX = browser.GetType().InvokeMember("ActiveXInstance",
+                    BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                    null, browser, new object[] { });
+            activeX.Silent = true;
         }
     }
 }

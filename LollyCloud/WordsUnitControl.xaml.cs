@@ -25,6 +25,7 @@ namespace LollyCloud
         SettingsViewModel vmSettings = new SettingsViewModel();
         WordsUnitViewModel vmWords;
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
+        int selectedDictItemIndex;
 
         public WordsUnitControl()
         {
@@ -36,6 +37,7 @@ namespace LollyCloud
         async Task Init()
         {
             await vmSettings.GetData();
+            selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
             vmWords = await WordsUnitViewModel.CreateAsync(vmSettings);
             dgWords.ItemsSource = vmWords.UnitWords;
             for (int i = 0; i < vmSettings.DictItems.Count; i++)
@@ -43,21 +45,26 @@ namespace LollyCloud
                 var b = new RadioButton
                 {
                     Content = vmSettings.DictItems[i].DICTNAME,
-                    GroupName = "DICT"
+                    GroupName = "DICT",
+                    Tag = i,
                 };
+                b.Click += SearchDict;
                 ToolBar1.Items.Add(b);
-                if (i == vmSettings.SelectedDictItemIndex)
+                if (i == selectedDictItemIndex)
                     b.IsChecked = true;
             }
+            wbDict.SetSilent(true);
         }
 
         private void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SearchDict(sender);
+            SearchDict(null, null);
         }
 
-        private void SearchDict(object sender)
+        private void SearchDict(object sender, RoutedEventArgs e)
         {
+            if (sender is RadioButton)
+                selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWords.SelectedIndex;
             SearchWord(vmWords.UnitWords[row].WORD);
         }
@@ -65,7 +72,7 @@ namespace LollyCloud
         private async void SearchWord(string word)
         {
             status = DictWebBrowserStatus.Ready;
-            var item = vmSettings.SelectedDictItem;
+            var item = vmSettings.DictItems[selectedDictItemIndex];
             if (item.DICTNAME.StartsWith("Custom"))
             {
                 var str = vmSettings.DictHtml(word, item.DictIDs.ToList());
@@ -89,6 +96,12 @@ namespace LollyCloud
                         status = DictWebBrowserStatus.Navigating;
                 }
             }
+        }
+
+        // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
+        private void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

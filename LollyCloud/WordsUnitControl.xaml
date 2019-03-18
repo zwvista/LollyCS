@@ -22,19 +22,25 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid Name="dgWords" AutoGenerateColumns="False" SelectionChanged="dgWords_SelectionChanged" >
+            <DataGrid Name="dgWords" AutoGenerateColumns="False" SelectionChanged="dgWords_SelectionChanged" CanUserAddRows="false" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT"/>
-                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART"/>
+                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
                     <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
                     <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID"/>
-                    <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID"/>
+                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
-            <WebBrowser Name="wbDict" Grid.Column="3" />
+            <WebBrowser Name="wbDict" Grid.Column="2" />
         </Grid>
     </DockPanel>
 </UserControl>
