@@ -56,12 +56,12 @@ namespace LollyCloud
             wbDict.SetSilent(true);
         }
 
-        private void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SearchDict(null, null);
         }
 
-        private void SearchDict(object sender, RoutedEventArgs e)
+        void SearchDict(object sender, RoutedEventArgs e)
         {
             if (sender is RadioButton)
                 selectedDictItemIndex = (int)(sender as RadioButton).Tag;
@@ -69,7 +69,7 @@ namespace LollyCloud
             SearchWord(vmWords.UnitWords[row].WORD);
         }
 
-        private async void SearchWord(string word)
+        async void SearchWord(string word)
         {
             status = DictWebBrowserStatus.Ready;
             var item = vmSettings.DictItems[selectedDictItemIndex];
@@ -99,7 +99,7 @@ namespace LollyCloud
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
-        private void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
         }

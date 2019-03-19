@@ -11,33 +11,33 @@ namespace LollyShared
     }
     public class MLangPhrase : ReactiveObject
     {
-        private int _ID;
+        int _ID;
         [JsonProperty]
         public int ID
         {
-            get { return _ID; }
-            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+            get => _ID;
+            set => this.RaiseAndSetIfChanged(ref _ID, value);
         }
-        private int _LANGID;
+        int _LANGID;
         [JsonProperty]
         public int LANGID
         {
-            get { return _LANGID; }
-            set { this.RaiseAndSetIfChanged(ref _LANGID, value); }
+            get => _LANGID;
+            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
         }
-        private string _PHRASE;
+        string _PHRASE;
         [JsonProperty]
         public string PHRASE
         {
-            get { return _PHRASE; }
-            set { this.RaiseAndSetIfChanged(ref _PHRASE, value); }
+            get => _PHRASE;
+            set => this.RaiseAndSetIfChanged(ref _PHRASE, value);
         }
-        private string _TRANSLATION;
+        string _TRANSLATION;
         [JsonProperty]
         public string TRANSLATION
         {
-            get { return _TRANSLATION; }
-            set { this.RaiseAndSetIfChanged(ref _TRANSLATION, value); }
+            get => _TRANSLATION;
+            set => this.RaiseAndSetIfChanged(ref _TRANSLATION, value);
         }
 
         public MLangPhrase() { }

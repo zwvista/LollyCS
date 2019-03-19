@@ -13,47 +13,47 @@ namespace LollyShared
 
     public class MAutoCorrect : ReactiveObject
     {
-        private int _ID;
+        int _ID;
         [JsonProperty]
         public int ID
         {
-            get { return _ID; }
-            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+            get => _ID;
+            set => this.RaiseAndSetIfChanged(ref _ID, value);
         }
-        private int _LANGID;
+        int _LANGID;
         [JsonProperty]
         public int LANGID
         {
-            get { return _LANGID; }
-            set { this.RaiseAndSetIfChanged(ref _LANGID, value); }
+            get => _LANGID;
+            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
         }
-        private int _SEQNUM;
+        int _SEQNUM;
         [JsonProperty]
         public int SEQNUM
         {
-            get { return _SEQNUM; }
-            set { this.RaiseAndSetIfChanged(ref _SEQNUM, value); }
+            get => _SEQNUM;
+            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
         }
-        private string _INPUT;
+        string _INPUT;
         [JsonProperty]
         public string INPUT
         {
-            get { return _INPUT; }
-            set { this.RaiseAndSetIfChanged(ref _INPUT, value); }
+            get => _INPUT;
+            set => this.RaiseAndSetIfChanged(ref _INPUT, value);
         }
-        private string _EXTENDED;
+        string _EXTENDED;
         [JsonProperty]
         public string EXTENDED
         {
-            get { return _EXTENDED; }
-            set { this.RaiseAndSetIfChanged(ref _EXTENDED, value); }
+            get => _EXTENDED;
+            set => this.RaiseAndSetIfChanged(ref _EXTENDED, value);
         }
-        private string _BASIC;
+        string _BASIC;
         [JsonProperty]
         public string BASIC
         {
-            get { return _BASIC; }
-            set { this.RaiseAndSetIfChanged(ref _BASIC, value); }
+            get => _BASIC;
+            set => this.RaiseAndSetIfChanged(ref _BASIC, value);
         }
 
         public static string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,

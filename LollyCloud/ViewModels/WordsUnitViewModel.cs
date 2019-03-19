@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
     public class WordsUnitViewModel : LollyViewModel
     {
         public SettingsViewModel vmSettings;
-        private UnitWordDataStore unitWordDS = new UnitWordDataStore();
-        private LangWordDataStore langWordDS = new LangWordDataStore();
+        UnitWordDataStore unitWordDS = new UnitWordDataStore();
+        LangWordDataStore langWordDS = new LangWordDataStore();
 
         public ObservableCollection<MUnitWord> UnitWords { get; set; }
 
@@ -110,8 +110,8 @@ namespace LollyShared
                 UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO,
                 PART = maxElem?.PART ?? vmSettings.USPARTTO,
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
-                lstUnits = vmSettings.lstUnits,
-                lstParts = vmSettings.lstParts
+                lstUnits = vmSettings.Units,
+                lstParts = vmSettings.Parts
             };
         }
     }

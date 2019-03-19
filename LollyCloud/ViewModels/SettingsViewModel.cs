@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Globalization;
@@ -17,7 +17,7 @@ namespace LollyShared
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
 
-        public ObservableCollection<MUserSetting> UserSettings { get; set; }
+        public List<MUserSetting> UserSettings { get; set; }
         MUserSetting SelectedUSUser0;
         MUserSetting SelectedUSUser1;
         public int USLANGID {
@@ -56,25 +56,37 @@ namespace LollyShared
             get => int.TryParse(SelectedUSLang3.VALUE1, out var v) ? v : 0;
             set => SelectedUSLang2.VALUE1 = value.ToString();
         }
-        MUserSetting SelectedUSTextbook;
+        MUserSetting _SelectedUSTextbook;
+        public MUserSetting SelectedUSTextbook
+        {
+            get => _SelectedUSTextbook;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _SelectedUSTextbook, value);
+                this.RaisePropertyChanged("USUNITFROM");
+                this.RaisePropertyChanged("USPARTFROM");
+                this.RaisePropertyChanged("USUNITTO");
+                this.RaisePropertyChanged("USPARTTO");
+            }
+        }
         public int USUNITFROM
         {
-            get => int.Parse(SelectedUSTextbook.VALUE1);
+            get => int.TryParse(SelectedUSTextbook?.VALUE1, out var v) ? v : 0;
             set => SelectedUSTextbook.VALUE1 = value.ToString();
         }
         public int USPARTFROM
         {
-            get => int.Parse(SelectedUSTextbook.VALUE2);
+            get => int.TryParse(SelectedUSTextbook?.VALUE2, out var v) ? v : 0;
             set => SelectedUSTextbook.VALUE2 = value.ToString();
         }
         public int USUNITTO
         {
-            get => int.Parse(SelectedUSTextbook.VALUE3);
+            get => int.TryParse(SelectedUSTextbook?.VALUE3, out var v) ? v : 0;
             set => SelectedUSTextbook.VALUE3 = value.ToString();
         }
         public int USPARTTO
         {
-            get => int.Parse(SelectedUSTextbook.VALUE4);
+            get => int.TryParse(SelectedUSTextbook?.VALUE4, out var v) ? v : 0;
             set => SelectedUSTextbook.VALUE4 = value.ToString();
         }
         public int USUNITPARTFROM => USUNITFROM * 10 + USPARTFROM;
@@ -82,52 +94,91 @@ namespace LollyShared
         public bool IsSingleUnitPart => USUNITPARTFROM == USUNITPARTTO;
         public bool IsInvalidUnitPart => USUNITPARTFROM > USUNITPARTTO;
 
-        public ObservableCollection<MLanguage> Languages { get; set; }
-        public MLanguage SelectedLang;
-        public int SelectedLangIndex => Languages.IndexOf(SelectedLang);
+        List<MLanguage> _Languages;
+        public List<MLanguage> Languages
+        {
+            get => _Languages;
+            set => this.RaiseAndSetIfChanged(ref _Languages, value);
+        }
+        MLanguage _SelectedLang;
+        public MLanguage SelectedLang
+        {
+            get => _SelectedLang;
+            set => this.RaiseAndSetIfChanged(ref _SelectedLang, value);
+        }
+        public int SelectedLangIndex => Languages.IndexOf(_SelectedLang);
 
-        public ObservableCollection<MDictMean> DictsMean;
-        public ObservableCollection<MDictItem> DictItems;
-        MDictItem selectedDictItem;
+        public List<MDictMean> DictsMean;
+        List<MDictItem> _DictItems;
+        public List<MDictItem> DictItems
+        {
+            get => _DictItems;
+            set => this.RaiseAndSetIfChanged(ref _DictItems, value);
+        }
+        MDictItem _SelectedDictItem;
         public MDictItem SelectedDictItem {
-            get => selectedDictItem;
+            get => _SelectedDictItem;
             set {
-                selectedDictItem = value;
-                USDICTITEM = selectedDictItem.DICTID;
+                this.RaiseAndSetIfChanged(ref _SelectedDictItem, value);
+                USDICTITEM = value.DICTID;
             }
         }
-        public int SelectedDictItemIndex => DictItems.IndexOf(SelectedDictItem);
+        public int SelectedDictItemIndex => DictItems.IndexOf(_SelectedDictItem);
 
-        public ObservableCollection<MDictNote> DictsNote { get; set; }
-        MDictNote selectedDictNote = new MDictNote();
+        public List<MDictNote> DictsNote { get; set; }
+        MDictNote _SelectedDictNote = new MDictNote();
         public MDictNote SelectedDictNote {
-            get => selectedDictNote;
+            get => _SelectedDictNote;
             set {
-                selectedDictNote = value;
-                USDICTNOTEID = selectedDictNote?.ID ?? 0;
+                this.RaiseAndSetIfChanged(ref _SelectedDictNote, value);
+                USDICTNOTEID = value?.ID ?? 0;
             }
         }
-        public int SelectedDictNoteIndex => DictsNote.IndexOf(SelectedDictNote);
+        public int SelectedDictNoteIndex => DictsNote.IndexOf(_SelectedDictNote);
 
-        public ObservableCollection<MTextbook> Textbooks { get; set; }
-        MTextbook selectedTextbook;
+        List<MTextbook> _Textbooks;
+        public List<MTextbook> Textbooks
+        {
+            get => _Textbooks;
+            set => this.RaiseAndSetIfChanged(ref _Textbooks, value);
+        }
+        MTextbook _SelectedTextbook;
         public MTextbook SelectedTextbook {
-            get => selectedTextbook;
+            get => _SelectedTextbook;
             set {
-                selectedTextbook = value;
-                USTEXTBOOKID = SelectedTextbook.ID;
+                this.RaiseAndSetIfChanged(ref _SelectedTextbook, value);
+                USTEXTBOOKID = value.ID;
                 SelectedUSTextbook = UserSettings.FirstOrDefault(o => o.KIND == 11 && o.ENTITYID == USTEXTBOOKID);
+                this.RaisePropertyChanged("Units");
+                this.RaisePropertyChanged("UnitsInAll");
+                this.RaisePropertyChanged("Parts");
+                SelectedToType = IsSingleUnit ? 0 : IsSingleUnitPart ? 1 : 2;
             }
         }
-        public int SelectedTextbookIndex => Textbooks.IndexOf(SelectedTextbook);
+        public int SelectedTextbookIndex => Textbooks.IndexOf(_SelectedTextbook);
 
-        public ObservableCollection<MSelectItem> lstUnits;
-        public int UnitCount => lstUnits.Count;
-        public ObservableCollection<MSelectItem> lstParts;
-        public int PartCount => lstParts.Count;
+        public List<MSelectItem> Units => SelectedTextbook?.Units;
+        public int UnitCount => Units?.Count ?? 0;
+        public string UnitsInAll => $"({UnitCount} in all)";
+        public List<MSelectItem> Parts => SelectedTextbook?.Parts;
+        public int PartCount => Parts?.Count ?? 0;
+        public bool IsSingleUnit => USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == PartCount;
         public bool IsSinglePart => PartCount == 1;
 
-        public ObservableCollection<MAutoCorrect> AutoCorrects { get; set; }
+        public List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
+        {
+            new MSelectItem(1, "Unit"),
+            new MSelectItem(2, "Part"),
+            new MSelectItem(3, "To"),
+        };
+        int _SelectedToType = 1;
+        public int SelectedToType
+        {
+            get => _SelectedToType;
+            set => this.RaiseAndSetIfChanged(ref _SelectedToType, value);
+        }
+
+        public List<MAutoCorrect> AutoCorrects { get; set; }
 
         public HttpClient client = new HttpClient();
 
@@ -140,10 +191,10 @@ namespace LollyShared
             USLEVELCOLORS = new Dictionary<int, List<int>>();
             foreach (var v in lst)
                 USLEVELCOLORS[int.Parse(v[0])] = new List<int> { int.Parse(v[1], NumberStyles.HexNumber), int.Parse(v[2], NumberStyles.HexNumber) };
-            await SetSelectedLangIndex(Languages.FirstOrDefault(o => o.ID == USLANGID));
+            await SetSelectedLang(Languages.FirstOrDefault(o => o.ID == USLANGID));
         }
 
-        public async Task SetSelectedLangIndex(MLanguage lang) {
+        public async Task SetSelectedLang(MLanguage lang) {
             SelectedLang = lang;
             USLANGID = SelectedLang.ID;
             SelectedUSLang2 = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
@@ -154,10 +205,10 @@ namespace LollyShared
             Textbooks = await GetData(async () => await TextbookDS.GetDataByLang(USLANGID));
             AutoCorrects = await GetData(async () => await AutoCorrectDS.GetDataByLang(USLANGID));
             var i = 0;
-            DictItems = new ObservableCollection<MDictItem>(lstDicts.SelectMany(d => d == "0" ?
+            DictItems = lstDicts.SelectMany(d => d == "0" ?
                 DictsMean.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
                 new List<MDictItem> { new MDictItem(d, $"Custom{++i}") }
-            ));
+            ).ToList();
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);

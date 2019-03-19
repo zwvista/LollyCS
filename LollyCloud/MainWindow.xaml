@@ -14,6 +14,9 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="Learn">
+                <MenuItem Header="Search" />
+                <MenuItem Header="Settings" Click="miSettings_Click" />
+                <Separator />
                 <MenuItem Header="Words in Unit" />
                 <MenuItem Header="Phrases in Unit" />
                 <Separator />

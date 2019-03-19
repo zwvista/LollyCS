@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Reactive.Linq;
@@ -9,7 +8,7 @@ namespace LollyShared
     public class NoteViewModel : LollyViewModel
     {
         public SettingsViewModel vmSettings;
-        private MDictNote DictNote => vmSettings.SelectedDictNote;
+        MDictNote DictNote => vmSettings.SelectedDictNote;
 
         public NoteViewModel(SettingsViewModel vmSettings)
         {

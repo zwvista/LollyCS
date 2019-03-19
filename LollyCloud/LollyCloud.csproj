@@ -101,7 +101,6 @@
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\CommonApi.cs" />
-    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\MAutoCorrect.cs" />
     <Compile Include="Models\MDictionary.cs" />
     <Compile Include="Models\MLanguage.cs" />

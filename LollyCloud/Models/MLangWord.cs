@@ -11,47 +11,47 @@ namespace LollyShared
     }
     public class MLangWord : ReactiveObject
     {
-        private int _ID;
+        int _ID;
         [JsonProperty]
         public int ID
         {
-            get { return _ID; }
-            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+            get => _ID;
+            set => this.RaiseAndSetIfChanged(ref _ID, value);
         }
-        private int _LANGID;
+        int _LANGID;
         [JsonProperty]
         public int LANGID
         {
-            get { return _LANGID; }
-            set { this.RaiseAndSetIfChanged(ref _LANGID, value); }
+            get => _LANGID;
+            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
         }
-        private string _WORD;
+        string _WORD;
         [JsonProperty]
         public string WORD
         {
-            get { return _WORD; }
-            set { this.RaiseAndSetIfChanged(ref _WORD, value); }
+            get => _WORD;
+            set => this.RaiseAndSetIfChanged(ref _WORD, value);
         }
-        private string _NOTE;
+        string _NOTE;
         [JsonProperty]
         public string NOTE
         {
-            get { return _NOTE; }
-            set { this.RaiseAndSetIfChanged(ref _NOTE, value); }
+            get => _NOTE;
+            set => this.RaiseAndSetIfChanged(ref _NOTE, value);
         }
-        private int _FAMIID;
+        int _FAMIID;
         [JsonProperty]
         public int FAMIID
         {
-            get { return _FAMIID; }
-            set { this.RaiseAndSetIfChanged(ref _FAMIID, value); }
+            get => _FAMIID;
+            set => this.RaiseAndSetIfChanged(ref _FAMIID, value);
         }
-        private int _LEVEL;
+        int _LEVEL;
         [JsonProperty]
         public int LEVEL
         {
-            get { return _LEVEL; }
-            set { this.RaiseAndSetIfChanged(ref _LEVEL, value); }
+            get => _LEVEL;
+            set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
         }
 
         public MLangWord() { }

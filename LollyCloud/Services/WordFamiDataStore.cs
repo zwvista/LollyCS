@@ -8,16 +8,16 @@ namespace LollyShared
 {
     public class WordFamiDataStore : LollyDataStore<MWordFami>
     {
-        private async Task<IEnumerable<MWordFami>> getDataByUserWord(int userid, int wordid) =>
+        async Task<IEnumerable<MWordFami>> getDataByUserWord(int userid, int wordid) =>
         (await GetDataByUrl<MWordsFami>($"WORDSFAMI?transform=1&filter[]=USERID,eq,{userid}&filter[]=WORDID,eq,{wordid}")).WORDSFAMI;
 
-        private async Task<int> Create(MWordFami item) =>
+        async Task<int> Create(MWordFami item) =>
         await CreateByUrl($"WORDSFAMI", item);
 
-        private async Task<bool> Update(MWordFami item) =>
+        async Task<bool> Update(MWordFami item) =>
         await UpdateByUrl($"WORDSFAMI/{item.ID}", JsonConvert.SerializeObject(item));
 
-        private async Task<bool> Delete(int id) =>
+        async Task<bool> Delete(int id) =>
         await DeleteByUrl($"WORDSFAMI/{id}");
 
         public async Task<bool> Update(int wordid, int level)

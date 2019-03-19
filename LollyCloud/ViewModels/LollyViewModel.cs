@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -13,9 +12,9 @@ namespace LollyShared
             Title = "Browse";
         }
 
-        protected async Task<ObservableCollection<T>> GetData<T>(Func<Task<List<T>>> func)
+        protected async Task<List<T>> GetData<T>(Func<Task<List<T>>> func)
         {
-            var Items = new ObservableCollection<T>();
+            var Items = new List<T>();
 
             if (!IsBusy)
             {

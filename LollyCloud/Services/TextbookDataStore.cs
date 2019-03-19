@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
@@ -35,8 +34,8 @@ namespace LollyShared
             }
             lst.ForEach(o =>
             {
-                o.lstUnits = new ObservableCollection<MSelectItem>(f(o.UNITS).Select((s, i) => new MSelectItem(i + 1, s)));
-                o.lstParts = new ObservableCollection<MSelectItem>(o.PARTS.Split(',').Select((s, i) => new MSelectItem(i + 1, s)));
+                o.Units = f(o.UNITS).Select((s, i) => new MSelectItem(i + 1, s)).ToList();
+                o.Parts = o.PARTS.Split(',').Select((s, i) => new MSelectItem(i + 1, s)).ToList();
             });
             return lst;
         }

@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
 namespace LollyShared
@@ -11,43 +10,53 @@ namespace LollyShared
     }
     public class MTextbook : ReactiveObject
     {
-        private int _ID;
+        int _ID;
         [JsonProperty]
         public int ID
         {
-            get { return _ID; }
-            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+            get => _ID;
+            set => this.RaiseAndSetIfChanged(ref _ID, value);
         }
-        private int _LANGID;
+        int _LANGID;
         [JsonProperty]
         public int LANGID
         {
-            get { return _LANGID; }
-            set { this.RaiseAndSetIfChanged(ref _LANGID, value); }
+            get => _LANGID;
+            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
         }
-        private string _TEXTBOOKNAME;
+        string _TEXTBOOKNAME;
         [JsonProperty("NAME")]
         public string TEXTBOOKNAME
         {
-            get { return _TEXTBOOKNAME; }
-            set { this.RaiseAndSetIfChanged(ref _TEXTBOOKNAME, value); }
+            get => _TEXTBOOKNAME;
+            set => this.RaiseAndSetIfChanged(ref _TEXTBOOKNAME, value);
         }
-        private string _UNITS;
+        string _UNITS;
         [JsonProperty]
         public string UNITS
         {
-            get { return _UNITS; }
-            set { this.RaiseAndSetIfChanged(ref _UNITS, value); }
+            get => _UNITS;
+            set => this.RaiseAndSetIfChanged(ref _UNITS, value);
         }
-        private string _PARTS;
+        string _PARTS;
         [JsonProperty]
         public string PARTS
         {
-            get { return _PARTS; }
-            set { this.RaiseAndSetIfChanged(ref _PARTS, value); }
+            get => _PARTS;
+            set => this.RaiseAndSetIfChanged(ref _PARTS, value);
         }
 
-        public ObservableCollection<MSelectItem> lstUnits;
-        public ObservableCollection<MSelectItem> lstParts;
+        List<MSelectItem> _Units;
+        public List<MSelectItem> Units
+        {
+            get => _Units;
+            set => this.RaiseAndSetIfChanged(ref _Units, value);
+        }
+        List<MSelectItem> _Parts;
+        public List<MSelectItem> Parts
+        {
+            get => _Parts;
+            set => this.RaiseAndSetIfChanged(ref _Parts, value);
+        }
     }
 }

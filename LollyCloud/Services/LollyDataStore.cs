@@ -57,7 +57,7 @@ namespace LollyShared
             var buffer = Encoding.UTF8.GetBytes(serializedItem);
             var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(new Uri(url), byteContent);
+            var response = await client.PutAsync(url, byteContent);
 
             return response.IsSuccessStatusCode;
         }

@@ -17,7 +17,7 @@ namespace LollyShared
         public static string LollyUrl = "https://zwvista.tk/lolly/api.php/";
         public static string CssFolder = "https://zwvista.tk/lolly/css/";
         public static int UserId = 1;
-        private static readonly Dictionary<string, string> escapes = new Dictionary<string, string>()
+        static readonly Dictionary<string, string> escapes = new Dictionary<string, string>()
         {
             {"<delete>", ""}, {@"\t", "\t"}, {@"\r", "\r"}, {@"\n", "\n"},
         };

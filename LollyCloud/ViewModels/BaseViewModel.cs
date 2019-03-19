@@ -1,49 +1,25 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace LollyShared
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : ReactiveObject
     {
         bool isBusy = false;
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get => isBusy;
+            set => this.RaiseAndSetIfChanged(ref isBusy, value);
         }
 
         string title = string.Empty;
         public string Title
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get => title;
+            set => this.RaiseAndSetIfChanged(ref title, value);
         }
-
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
-            Action onChanged = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backingStore, value))
-                return false;
-
-            backingStore = value;
-            onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

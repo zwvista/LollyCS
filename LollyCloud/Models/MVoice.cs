@@ -10,40 +10,40 @@ namespace LollyShared
     }
     public class MVoice : ReactiveObject
     {
-        private int _ID;
+        int _ID;
         [JsonProperty]
         public int ID
         {
-            get { return _ID; }
-            set { this.RaiseAndSetIfChanged(ref _ID, value); }
+            get => _ID;
+            set => this.RaiseAndSetIfChanged(ref _ID, value);
         }
-        private int _LANGID;
+        int _LANGID;
         [JsonProperty]
         public int LANGID
         {
-            get { return _LANGID; }
-            set { this.RaiseAndSetIfChanged(ref _LANGID, value); }
+            get => _LANGID;
+            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
         }
-        private int _VOICETYPEID;
+        int _VOICETYPEID;
         [JsonProperty]
         public int VOICETYPEID
         {
-            get { return _VOICETYPEID; }
-            set { this.RaiseAndSetIfChanged(ref _VOICETYPEID, value); }
+            get => _VOICETYPEID;
+            set => this.RaiseAndSetIfChanged(ref _VOICETYPEID, value);
         }
-        private string _VOICELANG;
+        string _VOICELANG;
         [JsonProperty]
         public string VOICELANG
         {
-            get { return _VOICELANG; }
-            set { this.RaiseAndSetIfChanged(ref _VOICELANG, value); }
+            get => _VOICELANG;
+            set => this.RaiseAndSetIfChanged(ref _VOICELANG, value);
         }
-        private string _VOICENAME;
+        string _VOICENAME;
         [JsonProperty]
         public string VOICENAME
         {
-            get { return _VOICENAME; }
-            set { this.RaiseAndSetIfChanged(ref _VOICENAME, value); }
+            get => _VOICENAME;
+            set => this.RaiseAndSetIfChanged(ref _VOICENAME, value);
         }
     }
 }
