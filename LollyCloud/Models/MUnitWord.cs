@@ -96,10 +96,10 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
         }
 
-        public List<MSelectItem> lstUnits;
-        public List<MSelectItem> lstParts;
+        public List<MSelectItem> Units { get; set; }
+        public List<MSelectItem> Parts { get; set; }
 
-        public string UNITSTR => lstUnits.First(o => o.Value == UNIT).Label;
-        public string PARTSTR => lstParts.First(o => o.Value == PART).Label;
+        public string UNITSTR => Units.First(o => o.Value == UNIT).Label;
+        public string PARTSTR => Parts.First(o => o.Value == PART).Label;
     }
 }

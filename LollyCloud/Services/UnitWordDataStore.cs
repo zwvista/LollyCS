@@ -15,8 +15,8 @@ namespace LollyShared
             var lst = (await GetDataByUrl<MUnitWords>($"VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,{textbook.ID}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITWORDS;
             foreach (var o in lst)
             {
-                o.lstUnits = textbook.Units;
-                o.lstParts = textbook.Parts;
+                o.Units = textbook.Units;
+                o.Parts = textbook.Parts;
             }
             return lst;
         }
@@ -27,8 +27,8 @@ namespace LollyShared
             foreach (var o in lst)
             {
                 var o2 = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);
-                o.lstUnits = o2.Units;
-                o.lstParts = o2.Parts;
+                o.Units = o2.Units;
+                o.Parts = o2.Parts;
             }
             return lst;
         }

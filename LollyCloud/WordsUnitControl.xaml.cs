@@ -23,7 +23,7 @@ namespace LollyCloud
     public partial class WordsUnitControl : UserControl
     {
         SettingsViewModel vmSettings = new SettingsViewModel();
-        WordsUnitViewModel vmWords;
+        WordsUnitViewModel vm;
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
 
@@ -38,8 +38,8 @@ namespace LollyCloud
         {
             await vmSettings.GetData();
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
-            vmWords = await WordsUnitViewModel.CreateAsync(vmSettings);
-            dgWords.ItemsSource = vmWords.UnitWords;
+            vm = await WordsUnitViewModel.CreateAsync(vmSettings);
+            dgWords.ItemsSource = vm.UnitWords;
             for (int i = 0; i < vmSettings.DictItems.Count; i++)
             {
                 var b = new RadioButton
@@ -66,7 +66,7 @@ namespace LollyCloud
             if (sender is RadioButton)
                 selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWords.SelectedIndex;
-            SearchWord(vmWords.UnitWords[row].WORD);
+            SearchWord(vm.UnitWords[row].WORD);
         }
 
         async void SearchWord(string word)
@@ -101,7 +101,9 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            var dlg = new WordsUnitDetailDlg();
+            dlg.item = (sender as DataGridRow).Item as MUnitWord;
+            dlg.ShowDialog();
         }
     }
 }

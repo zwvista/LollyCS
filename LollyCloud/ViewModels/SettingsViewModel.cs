@@ -119,13 +119,19 @@ namespace LollyShared
         public MDictItem SelectedDictItem {
             get => _SelectedDictItem;
             set {
+                if (value == null) return;
                 this.RaiseAndSetIfChanged(ref _SelectedDictItem, value);
                 USDICTITEM = value.DICTID;
             }
         }
         public int SelectedDictItemIndex => DictItems.IndexOf(_SelectedDictItem);
 
-        public List<MDictNote> DictsNote { get; set; }
+        List<MDictNote> _DictsNote;
+        public List<MDictNote> DictsNote
+        {
+            get => _DictsNote;
+            set => this.RaiseAndSetIfChanged(ref _DictsNote, value);
+        }
         MDictNote _SelectedDictNote = new MDictNote();
         public MDictNote SelectedDictNote {
             get => _SelectedDictNote;
@@ -146,6 +152,7 @@ namespace LollyShared
         public MTextbook SelectedTextbook {
             get => _SelectedTextbook;
             set {
+                if (value == null) return;
                 this.RaiseAndSetIfChanged(ref _SelectedTextbook, value);
                 USTEXTBOOKID = value.ID;
                 SelectedUSTextbook = UserSettings.FirstOrDefault(o => o.KIND == 11 && o.ENTITYID == USTEXTBOOKID);
