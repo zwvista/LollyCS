@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        <Menu>
             <MenuItem Header="Learn">
                 <MenuItem Header="Search" />
                 <MenuItem Header="Settings" Click="miSettings_Click" />
@@ -27,14 +27,12 @@
                 <MenuItem Header="Phrases in Textbook" />
             </MenuItem>
         </Menu>
-        <StackPanel Grid.Row="1">
+        <DockPanel Grid.Row="1">
             <TabControl>
                 <TabItem Header="Words In Unit">
-                    <DockPanel>
-                      <local:WordsUnitControl VerticalAlignment="Center"/>
-                    </DockPanel>
+                    <local:WordsUnitControl />
                 </TabItem>
             </TabControl>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

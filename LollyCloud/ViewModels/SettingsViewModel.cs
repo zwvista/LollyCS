@@ -152,7 +152,7 @@ namespace LollyShared
                 this.RaisePropertyChanged("Units");
                 this.RaisePropertyChanged("UnitsInAll");
                 this.RaisePropertyChanged("Parts");
-                SelectedToType = IsSingleUnit ? 0 : IsSingleUnitPart ? 1 : 2;
+                ToType = IsSingleUnit ? 0 : IsSingleUnitPart ? 1 : 2;
             }
         }
         public int SelectedTextbookIndex => Textbooks.IndexOf(_SelectedTextbook);
@@ -167,15 +167,15 @@ namespace LollyShared
 
         public List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
         {
-            new MSelectItem(1, "Unit"),
-            new MSelectItem(2, "Part"),
-            new MSelectItem(3, "To"),
+            new MSelectItem(0, "Unit"),
+            new MSelectItem(1, "Part"),
+            new MSelectItem(2, "To"),
         };
-        int _SelectedToType = 1;
-        public int SelectedToType
+        int _ToType = 2;
+        public int ToType
         {
-            get => _SelectedToType;
-            set => this.RaiseAndSetIfChanged(ref _SelectedToType, value);
+            get => _ToType;
+            set => this.RaiseAndSetIfChanged(ref _ToType, value);
         }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }

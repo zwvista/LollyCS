@@ -26,33 +26,33 @@
         </Grid.ColumnDefinitions>
         <Label Content="Language:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" />
         <ComboBox ItemsSource="{Binding Languages}" DisplayMemberPath="LANGNAME" SelectedValue="{Binding SelectedLang}" SelectionChanged="cbLanguages_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Voice:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
+        <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Dictionary(Word):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
         <ComboBox ItemsSource="{Binding DictItems}" DisplayMemberPath="DICTNAME" SelectedValue="{Binding SelectedDictItem}" SelectionChanged="cbDictItems_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" />
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Dictionary(Note):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" />
         <ComboBox ItemsSource="{Binding DictsNote}" DisplayMemberPath="DICTNAME" SelectedValue="{Binding SelectedDictNote}" SelectionChanged="cbDictsNote_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" />
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Textbook:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" />
         <ComboBox ItemsSource="{Binding Textbooks}" DisplayMemberPath="TEXTBOOKNAME" SelectedValue="{Binding SelectedTextbook}" SelectionChanged="cbTextbooks_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" />
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Unit:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" />
-        <ComboBox ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITFROM}" SelectionChanged="cbUnitFrom_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <ComboBox Name="cbUnitFrom" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITFROM}" SelectionChanged="cbUnitFrom_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <Label Content="{Binding UnitsInAll}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" />
-        <ComboBox ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTFROM}" SelectionChanged="cbPartFrom_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" Grid.Column="3" />
-        <ComboBox ItemsSource="{Binding ToTypes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SelectedToType}" SelectionChanged="cbToTypes_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" />
-        <ComboBox ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITTO}" SelectionChanged="cbUnitTo_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <ComboBox Name="cbPartFrom" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTFROM}" SelectionChanged="cbPartFrom_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="3" />
+        <ComboBox Name="cbToTypes" ItemsSource="{Binding ToTypes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ToType}" SelectionChanged="cbToTypes_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" />
+        <ComboBox Name="cbUnitTo" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITTO}" SelectionChanged="cbUnitTo_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <Label Content="{Binding UnitsInAll}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" />
-        <ComboBox ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTFROM}" SelectionChanged="cbPartTo_SelectionChanged"
-                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Grid.Column="3" />
-        <Button Content="Previous" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="20" Grid.Row="7" Click="btnPrevious_Click"/>
-        <Button Content="Next" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Height="20" Grid.Row="7" Click="btnNext_Click"/>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Height="20" Grid.Row="7"/>
+        <ComboBox Name="cbPartTo" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTTO}" SelectionChanged="cbPartTo_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="3" />
+        <Button Name="btnPrevious" Content="Previous" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="20" Grid.Row="7" Click="btnPrevious_Click"/>
+        <Button Name="btnNext" Content="Next" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Height="20" Grid.Row="7" Click="btnNext_Click"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Height="20" Grid.Row="7" Click="btnClose_Click"/>
     </Grid>
 </Window>

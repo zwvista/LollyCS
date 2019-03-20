@@ -22,7 +22,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid Name="dgWords" AutoGenerateColumns="False" SelectionChanged="dgWords_SelectionChanged" CanUserAddRows="false" >
+            <DataGrid Name="dgWords" AutoGenerateColumns="False" SelectionChanged="dgWords_SelectionChanged" CanUserAddRows="false"
+                      >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
