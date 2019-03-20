@@ -22,7 +22,6 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsUnitControl : UserControl
     {
-        SettingsViewModel vmSettings = new SettingsViewModel();
         WordsUnitViewModel vm;
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
@@ -36,15 +35,14 @@ namespace LollyCloud
 
         async Task Init()
         {
-            await vmSettings.GetData();
-            selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
-            vm = await WordsUnitViewModel.CreateAsync(vmSettings);
+            vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings);
+            selectedDictItemIndex = vm.vmSettings.SelectedDictItemIndex;
             dgWords.ItemsSource = vm.UnitWords;
-            for (int i = 0; i < vmSettings.DictItems.Count; i++)
+            for (int i = 0; i < vm.vmSettings.DictItems.Count; i++)
             {
                 var b = new RadioButton
                 {
-                    Content = vmSettings.DictItems[i].DICTNAME,
+                    Content = vm.vmSettings.DictItems[i].DICTNAME,
                     GroupName = "DICT",
                     Tag = i,
                 };
@@ -72,20 +70,20 @@ namespace LollyCloud
         async void SearchWord(string word)
         {
             status = DictWebBrowserStatus.Ready;
-            var item = vmSettings.DictItems[selectedDictItemIndex];
+            var item = vm.vmSettings.DictItems[selectedDictItemIndex];
             if (item.DICTNAME.StartsWith("Custom"))
             {
-                var str = vmSettings.DictHtml(word, item.DictIDs.ToList());
+                var str = vm.vmSettings.DictHtml(word, item.DictIDs.ToList());
                 wbDict.NavigateToString(str);
             }
             else
             {
-                var item2 = vmSettings.DictsMean.First(o => o.DICTNAME == item.DICTNAME);
-                var url = item2.UrlString(word, vmSettings.AutoCorrects.ToList());
+                var item2 = vm.vmSettings.DictsMean.First(o => o.DICTNAME == item.DICTNAME);
+                var url = item2.UrlString(word, vm.vmSettings.AutoCorrects.ToList());
                 if (item2.DICTNAME == "OFFLINE")
                 {
                     wbDict.Navigate("about:blank");
-                    var html = await vmSettings.client.GetStringAsync(url);
+                    var html = await vm.vmSettings.client.GetStringAsync(url);
                     var str = item2.HtmlString(html, word);
                     wbDict.Navigate(str);
                 }
