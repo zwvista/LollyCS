@@ -57,7 +57,7 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _CHCONV, value);
         }
         string _TRANSFORM;
-        [JsonProperty]
+        [JsonProperty("TRANSFORM_WIN")]
         public string TRANSFORM
         {
             get => _TRANSFORM;

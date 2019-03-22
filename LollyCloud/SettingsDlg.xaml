@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="480">
-    <Grid>
+        Title="Settings" Height="350" Width="560" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -22,7 +22,6 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Label Content="Language:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" />
         <ComboBox ItemsSource="{Binding Languages}" DisplayMemberPath="LANGNAME" SelectedValue="{Binding SelectedLang}" SelectionChanged="cbLanguages_SelectionChanged"
@@ -53,6 +52,6 @@
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="3" />
         <Button Name="btnPrevious" Content="Previous" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Grid.Column="1" Height="20" Grid.Row="7" Click="btnPrevious_Click"/>
         <Button Name="btnNext" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Height="20" Grid.Row="7" Click="btnNext_Click"/>
-        <Button Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Grid.Column="4" Height="20" Grid.Row="7" Click="btnClose_Click"/>
+        <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="20" Grid.Row="7" Click="btnClose_Click"/>
     </Grid>
 </Window>

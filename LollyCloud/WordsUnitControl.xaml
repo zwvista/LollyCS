@@ -40,8 +40,8 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
-            <WebBrowser Name="wbDict" Grid.Column="2" />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+            <WebBrowser Name="wbDict" Grid.Column="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />
         </Grid>
     </DockPanel>
 </UserControl>

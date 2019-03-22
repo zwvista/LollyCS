@@ -34,7 +34,7 @@ namespace LollyShared
             do
             {
                 if (string.IsNullOrEmpty(transfrom)) break;
-                var arr = transfrom.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                var arr = transfrom.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 var reg = new Regex(arr[0]);
                 var match = reg.Match(html);
                 if (!match.Success) break;
@@ -59,6 +59,9 @@ namespace LollyShared
 #if DEBUG_EXTRACT
             File.WriteAllText(logFolder + "4_cooked.txt", text);
 #endif
+                if (string.IsNullOrEmpty(template)) break;
+                text = templateHandler(text, template);
+
             } while (false);
 
 #if DEBUG_EXTRACT
@@ -67,14 +70,16 @@ namespace LollyShared
             return text;
         }
     }
-    public static class WebBrowserExt
+
+    // https://stackoverflow.com/questions/6138199/wpf-webbrowser-control-how-to-suppress-script-errors
+    public static class WebBrowserExtensions
     {
         public static void SetSilent(this WebBrowser browser, bool silent)
         {
             dynamic activeX = browser.GetType().InvokeMember("ActiveXInstance",
-                    BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                    null, browser, new object[] { });
-            activeX.Silent = true;
+                                BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                                null, browser, new object[] { });
+            activeX.Silent = silent;
         }
     }
 
@@ -98,6 +103,39 @@ namespace LollyShared
             var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
 
             SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
+        }
+    }
+
+    // https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall
+    public static class Reflection
+    {
+        /// <summary>
+        /// Extension for 'Object' that copies the properties to a destination object.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        public static void CopyProperties(this object source, object destination)
+        {
+            // If any this null throw an exception
+            if (source == null || destination == null)
+                throw new Exception("Source or/and Destination Objects are null");
+            // Getting the Types of the objects
+            Type typeDest = destination.GetType();
+            Type typeSrc = source.GetType();
+            // Collect all the valid properties to map
+            var results = from srcProp in typeSrc.GetProperties()
+                          let targetProperty = typeDest.GetProperty(srcProp.Name)
+                          where srcProp.CanRead
+                          && targetProperty != null
+                          && (targetProperty.GetSetMethod(true) != null && !targetProperty.GetSetMethod(true).IsPrivate)
+                          && (targetProperty.GetSetMethod().Attributes & MethodAttributes.Static) == 0
+                          && targetProperty.PropertyType.IsAssignableFrom(srcProp.PropertyType)
+                          select new { sourceProperty = srcProp, targetProperty = targetProperty };
+            //map the properties
+            foreach (var props in results)
+            {
+                props.targetProperty.SetValue(destination, props.sourceProperty.GetValue(source, null), null);
+            }
         }
     }
 }

@@ -21,7 +21,8 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsUnitDetailDlg : Window
     {
-        public MUnitWord item;
+        public MUnitWord itemOriginal;
+        MUnitWord item = new MUnitWord();
         public WordsUnitDetailDlg()
         {
             InitializeComponent();
@@ -29,9 +30,18 @@ namespace LollyCloud
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            itemOriginal.CopyProperties(item);
             DataContext = item;
         }
+
+        void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            item.CopyProperties(itemOriginal);
+            Close();
+        }
+
+        void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

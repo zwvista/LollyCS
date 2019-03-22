@@ -37,12 +37,14 @@ namespace LollyCloud
         void miSettings_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SettingsDlg();
+            dlg.Owner = this;
             dlg.ShowDialog();
         }
 
         void miWordsUnit_Click(object sender, RoutedEventArgs e)
         {
             tcMain.Items.Add(new TabItem { Header = "Words in Unit", Content = new WordsUnitControl() });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
         }
     }
 }

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="WordsUnitDetailDlg" Height="300" Width="480" Loaded="Window_Loaded">
-    <Grid Margin="8,0,-8,0">
+        Title="WordsUnitDetailDlg" Height="350" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -43,6 +43,9 @@
         <TextBox Text="{Binding FAMIID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" IsReadOnly="True" />
         <Label Content="LEVEL:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8" />
         <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
-
+        <StackPanel Grid.Column="1" Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+            <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>
+            <Button Content="Cancel" Width="75" Height="20" Click="btnCancel_Click" Margin="10,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

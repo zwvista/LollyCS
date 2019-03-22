@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using LollyShared;
+using mshtml;
 
 namespace LollyCloud
 {
@@ -25,6 +26,7 @@ namespace LollyCloud
         WordsUnitViewModel vm;
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
+        string newWord = "", selectedWord = "";
 
         public WordsUnitControl()
         {
@@ -51,7 +53,6 @@ namespace LollyCloud
                 if (i == selectedDictItemIndex)
                     b.IsChecked = true;
             }
-            wbDict.SetSilent(true);
         }
 
         void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,7 +65,8 @@ namespace LollyCloud
             if (sender is RadioButton)
                 selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWords.SelectedIndex;
-            SearchWord(vm.UnitWords[row].WORD);
+            selectedWord = vm.UnitWords[row].WORD;
+            SearchWord(selectedWord);
         }
 
         async void SearchWord(string word)
@@ -80,7 +82,7 @@ namespace LollyCloud
             {
                 var item2 = vm.vmSettings.DictsMean.First(o => o.DICTNAME == item.DICTNAME);
                 var url = item2.UrlString(word, vm.vmSettings.AutoCorrects.ToList());
-                if (item2.DICTNAME == "OFFLINE")
+                if (item2.DICTTYPENAME == "OFFLINE")
                 {
                     wbDict.Navigate("about:blank");
                     var html = await vm.vmSettings.client.GetStringAsync(url);
@@ -90,7 +92,7 @@ namespace LollyCloud
                 else
                 {
                     wbDict.Navigate(url);
-                    if (item2.DICTNAME == "OFFLINE-ONLINE")
+                    if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
                         status = DictWebBrowserStatus.Navigating;
                 }
             }
@@ -100,8 +102,27 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var dlg = new WordsUnitDetailDlg();
-            dlg.item = (sender as DataGridRow).Item as MUnitWord;
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            dlg.Owner = Window.GetWindow(this);
+            dlg.itemOriginal = (sender as DataGridRow).Item as MUnitWord;
             dlg.ShowDialog();
+        }
+
+        private void wbDict_Navigated(object sender, NavigationEventArgs e)
+        {
+            wbDict.SetSilent(true);
+        }
+
+        private void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            if (status != DictWebBrowserStatus.Navigating) return;
+            var item = vm.vmSettings.DictItems[selectedDictItemIndex];
+            var item2 = vm.vmSettings.DictsMean.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
+            var doc = (HTMLDocument)wbDict.Document;
+            var html = doc.documentElement.outerHTML;
+            var str = item2.HtmlString(html, selectedWord);
+            status = DictWebBrowserStatus.Ready;
+            wbDict.NavigateToString(str);
         }
     }
 }
