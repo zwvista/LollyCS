@@ -115,6 +115,7 @@
     <Compile Include="Services\TextbookDataStore.cs" />
     <Compile Include="Services\UnitWordDataStore.cs" />
     <Compile Include="Services\UserSettingDataStore.cs" />
+    <Compile Include="Shared\Interfaces.cs" />
     <Compile Include="WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
     </Compile>
@@ -188,6 +189,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

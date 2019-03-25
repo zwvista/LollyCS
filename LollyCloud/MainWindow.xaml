@@ -29,12 +29,19 @@
         </Menu>
         <DockPanel Grid.Row="1">
             <TabControl Name="tcMain">
-                <TabControl.ItemContainerStyle>
-                    <Style TargetType="TabItem">
-                        <Setter Property="Header" Value="{Binding Header}" />
-                        <Setter Property="Content" Value="{Binding Content}" />
-                    </Style>
-                </TabControl.ItemContainerStyle>
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Height="21" Width="100">
+                            <TextBlock Width="80" Text="{Binding Header}"/>
+                            <Image Source="Icons\close.png" Width="20" Height="20" MouseDown="Image_MouseDown"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
             </TabControl>
         </DockPanel>
     </Grid>
