@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsUnitControl : UserControl, ILollySettings
     {
-        SettingsViewModel vmSettings => MainWindow.vmSettings;
+        public SettingsViewModel vmSettings => MainWindow.vmSettings;
         WordsUnitViewModel vm;
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
@@ -33,10 +34,6 @@ namespace LollyCloud
         {
             InitializeComponent();
             OnSettingChanged();
-        }
-
-        async Task Init()
-        {
         }
 
         void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,6 +46,7 @@ namespace LollyCloud
             if (sender is RadioButton)
                 selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWords.SelectedIndex;
+            if (row == -1) return;
             selectedWord = vm.UnitWords[row].WORD;
             SearchWord(selectedWord);
         }
@@ -89,15 +87,34 @@ namespace LollyCloud
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = (sender as DataGridRow).Item as MUnitWord;
+            dlg.vm = vm;
             dlg.ShowDialog();
         }
 
-        private void wbDict_Navigated(object sender, NavigationEventArgs e)
+        void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new WordsUnitDetailDlg();
+            dlg.Owner = Window.GetWindow(this);
+            dlg.itemOriginal = vm.NewUnitWord();
+            dlg.vm = vm;
+            dlg.ShowDialog();
+        }
+
+        async void dgWords_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var item = vm.UnitWords[e.Row.GetIndex()];
+                await vm.Update(item);
+            }
+        }
+
+        void wbDict_Navigated(object sender, NavigationEventArgs e)
         {
             wbDict.SetSilent(true);
         }
 
-        private void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
+        void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
         {
             if (status != DictWebBrowserStatus.Navigating) return;
             var item = vmSettings.DictItems[selectedDictItemIndex];
@@ -109,7 +126,9 @@ namespace LollyCloud
             wbDict.NavigateToString(str);
         }
 
-        public async void OnSettingChanged()
+        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingChanged();
+
+        public async Task OnSettingChanged()
         {
             vm = await WordsUnitViewModel.CreateAsync(vmSettings);
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
@@ -128,6 +147,41 @@ namespace LollyCloud
                 if (i == selectedDictItemIndex)
                     b.IsChecked = true;
             }
+        }
+    }
+
+    // https://stackoverflow.com/questions/47871745/wpf-change-datagrid-cell-background-color-using-a-converter
+    public class LevelToBackgroundConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            var vmSettings = values[0] as SettingsViewModel;
+            var level = (int)values[1];
+            if (level == 0) return Binding.DoNothing;
+            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][0]);
+            return new SolidColorBrush(color);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+    }
+
+    public class LevelToForegroundConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            var vmSettings = values[0] as SettingsViewModel;
+            var level = (int)values[1];
+            if (level == 0) return Binding.DoNothing;
+            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][1]);
+            return new SolidColorBrush(color);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
         }
     }
 }

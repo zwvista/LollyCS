@@ -8,6 +8,6 @@ namespace LollyShared
 {
     public interface ILollySettings
     {
-        void OnSettingChanged();
+        Task OnSettingChanged();
     }
 }

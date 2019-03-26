@@ -22,6 +22,7 @@ namespace LollyCloud
     public partial class WordsUnitDetailDlg : Window
     {
         public MUnitWord itemOriginal;
+        public WordsUnitViewModel vm;
         MUnitWord item = new MUnitWord();
         public WordsUnitDetailDlg()
         {
@@ -36,8 +37,12 @@ namespace LollyCloud
             DataContext = item;
         }
 
-        void btnOK_Click(object sender, RoutedEventArgs e)
+        async void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            if (item.ID == 0)
+                item.ID = await vm.Create(item);
+            else
+                await vm.Update(item);
             item.CopyProperties(itemOriginal);
             Close();
         }

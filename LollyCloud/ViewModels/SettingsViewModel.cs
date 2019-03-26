@@ -27,7 +27,7 @@ namespace LollyShared
         public List<int> USROWSPERPAGEOPTIONS =>
             SelectedUSUser0.VALUE2.Split(',').Select(s => int.Parse(s)).ToList();
         public int USROWSPERPAGE => int.Parse(SelectedUSUser0.VALUE3);
-        public Dictionary<int, List<int>> USLEVELCOLORS;
+        public Dictionary<int, List<string>> USLEVELCOLORS;
         public int USREADINTERVAL => int.Parse(SelectedUSUser1.VALUE1);
         MUserSetting SelectedUSLang2;
         public int USTEXTBOOKID
@@ -195,9 +195,9 @@ namespace LollyShared
             SelectedUSUser0 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 0);
             SelectedUSUser1 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 1);
             var lst = SelectedUSUser0.VALUE4.Split(new [] { "\r\n" }, StringSplitOptions.None).Select(s => s.Split(',')).ToList();
-            USLEVELCOLORS = new Dictionary<int, List<int>>();
+            USLEVELCOLORS = new Dictionary<int, List<string>>();
             foreach (var v in lst)
-                USLEVELCOLORS[int.Parse(v[0])] = new List<int> { int.Parse(v[1], NumberStyles.HexNumber), int.Parse(v[2], NumberStyles.HexNumber) };
+                USLEVELCOLORS[int.Parse(v[0])] = new List<string> { v[1], v[2] };
             await SetSelectedLang(Languages.FirstOrDefault(o => o.ID == USLANGID));
         }
 
