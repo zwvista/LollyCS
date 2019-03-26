@@ -28,7 +28,7 @@ namespace LollyCloud
         WordsUnitViewModel vm;
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
-        string newWord = "", selectedWord = "";
+        string selectedWord = "";
 
         public WordsUnitControl()
         {
@@ -147,41 +147,6 @@ namespace LollyCloud
                 if (i == selectedDictItemIndex)
                     b.IsChecked = true;
             }
-        }
-    }
-
-    // https://stackoverflow.com/questions/47871745/wpf-change-datagrid-cell-background-color-using-a-converter
-    public class LevelToBackgroundConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var vmSettings = values[0] as SettingsViewModel;
-            var level = (int)values[1];
-            if (level == 0) return Binding.DoNothing;
-            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][0]);
-            return new SolidColorBrush(color);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-    }
-
-    public class LevelToForegroundConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var vmSettings = values[0] as SettingsViewModel;
-            var level = (int)values[1];
-            if (level == 0) return Binding.DoNothing;
-            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][1]);
-            return new SolidColorBrush(color);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
         }
     }
 }

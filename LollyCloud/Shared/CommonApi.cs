@@ -71,41 +71,6 @@ namespace LollyShared
         }
     }
 
-    // https://stackoverflow.com/questions/6138199/wpf-webbrowser-control-how-to-suppress-script-errors
-    public static class WebBrowserExtensions
-    {
-        public static void SetSilent(this WebBrowser browser, bool silent)
-        {
-            dynamic activeX = browser.GetType().InvokeMember("ActiveXInstance",
-                                BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                                null, browser, new object[] { });
-            activeX.Silent = silent;
-        }
-    }
-
-    // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
-    internal static class WindowExtensions
-    {
-        // from winuser.h
-        private const int GWL_STYLE = -16,
-                          WS_MAXIMIZEBOX = 0x10000,
-                          WS_MINIMIZEBOX = 0x20000;
-
-        [DllImport("user32.dll")]
-        extern private static int GetWindowLong(IntPtr hwnd, int index);
-
-        [DllImport("user32.dll")]
-        extern private static int SetWindowLong(IntPtr hwnd, int index, int value);
-
-        internal static void HideMinimizeAndMaximizeButtons(this Window window)
-        {
-            IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(window).Handle;
-            var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
-
-            SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
-        }
-    }
-
     // https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall
     public static class Reflection
     {
