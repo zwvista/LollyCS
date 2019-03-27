@@ -82,10 +82,9 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _TRANSLATION, value);
         }
 
-        public List<MSelectItem> lstUnits;
-        public List<MSelectItem> lstParts;
+        public MTextbook Textbook { get; set; }
 
-        public string UNITSTR => lstUnits.First(o => o.Value == UNIT).Label;
-        public string PARTSTR => lstParts.First(o => o.Value == PART).Label;
+        public string UNITSTR => Textbook.UNITSTR(UNIT);
+        public string PARTSTR => Textbook.PARTSTR(PART);
     }
 }

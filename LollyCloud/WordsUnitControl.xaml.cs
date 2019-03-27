@@ -33,7 +33,7 @@ namespace LollyCloud
         public WordsUnitControl()
         {
             InitializeComponent();
-            OnSettingChanged();
+            OnSettingsChanged();
         }
 
         void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -126,9 +126,9 @@ namespace LollyCloud
             wbDict.NavigateToString(str);
         }
 
-        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingChanged();
+        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
-        public async Task OnSettingChanged()
+        public async Task OnSettingsChanged()
         {
             vm = await WordsUnitViewModel.CreateAsync(vmSettings);
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
@@ -147,6 +147,16 @@ namespace LollyCloud
                 if (i == selectedDictItemIndex)
                     b.IsChecked = true;
             }
+        }
+
+        void miDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        void miGoogle_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -49,7 +49,7 @@ namespace LollyCloud
             dlg.ShowDialog();
             await vmSettings.GetData();
             foreach (var t in vmd.Tabs)
-                (t.Content as ILollySettings)?.OnSettingChanged();
+                (t.Content as ILollySettings)?.OnSettingsChanged();
         }
 
         void miWordsUnit_Click(object sender, RoutedEventArgs e)

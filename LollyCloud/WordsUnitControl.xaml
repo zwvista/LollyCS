@@ -59,6 +59,12 @@
                         </Setter>
                     </Style>
                 </DataGrid.Resources>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                        <MenuItem Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <WebBrowser x:Name="wbDict" Grid.Column="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />

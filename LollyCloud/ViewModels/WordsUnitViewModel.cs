@@ -110,8 +110,7 @@ namespace LollyShared
                 UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO,
                 PART = maxElem?.PART ?? vmSettings.USPARTTO,
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
-                Units = vmSettings.Units,
-                Parts = vmSettings.Parts
+                Textbook = vmSettings.SelectedTextbook,
             };
         }
     }

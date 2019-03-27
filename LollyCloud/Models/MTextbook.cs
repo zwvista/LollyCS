@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace LollyShared
@@ -58,5 +59,8 @@ namespace LollyShared
             get => _Parts;
             set => this.RaiseAndSetIfChanged(ref _Parts, value);
         }
+
+        public string UNITSTR(int UNIT) => Units.First(o => o.Value == UNIT).Label;
+        public string PARTSTR(int PART) => Parts.First(o => o.Value == PART).Label;
     }
 }

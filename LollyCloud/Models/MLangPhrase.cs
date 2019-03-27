@@ -49,7 +49,7 @@ namespace LollyShared
             TRANSLATION = item.TRANSLATION;
         }
 
-        public bool combineTranslation(string translation)
+        public bool CombineTranslation(string translation)
         {
             var oldTranslation = TRANSLATION;
             if (!string.IsNullOrEmpty(translation))

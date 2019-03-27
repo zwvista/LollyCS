@@ -117,6 +117,7 @@
     <Compile Include="Services\UnitWordDataStore.cs" />
     <Compile Include="Services\UserSettingDataStore.cs" />
     <Compile Include="Shared\Interfaces.cs" />
+    <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
     <Compile Include="WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
     </Compile>
