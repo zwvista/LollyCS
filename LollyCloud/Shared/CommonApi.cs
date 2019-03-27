@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Web;
 
 namespace LollyShared
 {
@@ -69,6 +71,9 @@ namespace LollyShared
 #endif
             return text;
         }
+
+        public static void GoogleString(string str) =>
+            Process.Start($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");
     }
 
     // https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall

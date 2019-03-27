@@ -1,0 +1,33 @@
+﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.ObjectModel;
+
+namespace LollyShared
+{
+    public class PhrasesLangViewModel : LollyViewModel
+    {
+        SettingsViewModel vmSettings;
+        LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
+
+        public ObservableCollection<MLangPhrase> LangPhrases { get; set; }
+
+        public static async Task<PhrasesLangViewModel> CreateAsync(SettingsViewModel vmSettings)
+        {
+            var o = new PhrasesLangViewModel();
+            o.vmSettings = vmSettings;
+            o.LangPhrases = new ObservableCollection<MLangPhrase>(await o.langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            return o;
+        }
+
+        public async Task<bool> Update(MLangPhrase item) => await langPhraseDS.Update(item);
+        public async Task<int> Create(MLangPhrase item) => await langPhraseDS.Create(item);
+        public async Task<bool> Delete(int id) => await langPhraseDS.Delete(id);
+
+        public MLangPhrase NewLangPhrase() =>
+            new MLangPhrase
+            {
+                LANGID = vmSettings.SelectedLang.ID,
+            };
+    }
+}

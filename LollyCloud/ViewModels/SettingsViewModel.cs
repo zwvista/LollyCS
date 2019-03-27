@@ -16,6 +16,7 @@ namespace LollyShared
         DictNoteDataStore DictNoteDS = new DictNoteDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
+        WordFamiDataStore WordFamiDS = new WordFamiDataStore();
 
         public List<MUserSetting> UserSettings { get; set; }
         MUserSetting SelectedUSUser0;
@@ -243,5 +244,7 @@ namespace LollyShared
         public async Task<bool> UpdatePartFrom() => await UserSettingDS.UpdatePartFrom(SelectedUSTextbook.ID, USPARTFROM);
         public async Task<bool> UpdateUnitTo() => await UserSettingDS.UpdateUnitTo(SelectedUSTextbook.ID, USUNITTO);
         public async Task<bool> UpdatePartTo() => await UserSettingDS.UpdatePartTo(SelectedUSTextbook.ID, USPARTTO);
+        public string AutoCorrect(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
+        public async Task<bool> UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
     }
 }

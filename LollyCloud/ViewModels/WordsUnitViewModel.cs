@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
@@ -7,11 +8,17 @@ namespace LollyShared
 {
     public class WordsUnitViewModel : LollyViewModel
     {
-        SettingsViewModel vmSettings;
+        public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
 
         public ObservableCollection<MUnitWord> UnitWords { get; set; }
+        string _NewWord = "";
+        public string NewWord
+        {
+            get => _NewWord;
+            set => this.RaiseAndSetIfChanged(ref _NewWord, value);
+        }
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public static async Task<WordsUnitViewModel> CreateAsync(SettingsViewModel vmSettings)

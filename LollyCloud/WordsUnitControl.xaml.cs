@@ -25,7 +25,7 @@ namespace LollyCloud
     public partial class WordsUnitControl : UserControl, ILollySettings
     {
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        WordsUnitViewModel vm;
+        public WordsUnitViewModel vm { get; set; }
         DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
         string selectedWord = "";
@@ -98,6 +98,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewUnitWord();
             dlg.vm = vm;
             dlg.ShowDialog();
+            vm.UnitWords.Add(dlg.itemOriginal);
         }
 
         async void dgWords_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
@@ -109,10 +110,7 @@ namespace LollyCloud
             }
         }
 
-        void wbDict_Navigated(object sender, NavigationEventArgs e)
-        {
-            wbDict.SetSilent(true);
-        }
+        void wbDict_Navigated(object sender, NavigationEventArgs e) => wbDict.SetSilent(true);
 
         void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
         {
@@ -149,14 +147,44 @@ namespace LollyCloud
             }
         }
 
-        void miDelete_Click(object sender, RoutedEventArgs e)
+        async void miDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            var row = dgWords.SelectedIndex;
+            if (row == -1) return;
+            var item = vm.UnitWords[row];
+            await vm.Delete(item);
         }
 
-        void miGoogle_Click(object sender, RoutedEventArgs e)
-        {
+        void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedWord);
 
+        async void tbNewWord_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Return || string.IsNullOrEmpty(vm.NewWord)) return;
+            var item = vm.NewUnitWord();
+            item.WORD = vmSettings.AutoCorrect(vm.NewWord);
+            vm.NewWord = "";
+            item.ID = await vm.Create(item);
+            vm.UnitWords.Add(item);
+        }
+
+        async Task ChangeLevel(int delta)
+        {
+            var row = dgWords.SelectedIndex;
+            if (row == -1) return;
+            var item = vm.UnitWords[row];
+            var newLevel = item.LEVEL + delta;
+            if (newLevel != 0 && !vmSettings.USLEVELCOLORS.ContainsKey(newLevel)) return;
+            item.LEVEL = newLevel;
+            await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
+        }
+
+        async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Alt && (e.SystemKey == Key.Up || e.SystemKey == Key.Down))
+            {
+                await ChangeLevel(e.SystemKey == Key.Up ? 1 : -1);
+                e.Handled = true;
+            }
         }
     }
 }
