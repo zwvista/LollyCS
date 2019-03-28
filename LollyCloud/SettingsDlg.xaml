@@ -38,20 +38,20 @@
         <ComboBox ItemsSource="{Binding Textbooks}" DisplayMemberPath="TEXTBOOKNAME" SelectedValue="{Binding SelectedTextbook}" SelectionChanged="cbTextbooks_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Unit:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" />
-        <ComboBox Name="cbUnitFrom" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITFROM}" SelectionChanged="cbUnitFrom_SelectionChanged"
+        <ComboBox x:Name="cbUnitFrom" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITFROM}" SelectionChanged="cbUnitFrom_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <Label Content="{Binding UnitsInAll}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" />
-        <ComboBox Name="cbPartFrom" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTFROM}" SelectionChanged="cbPartFrom_SelectionChanged"
+        <ComboBox x:Name="cbPartFrom" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTFROM}" SelectionChanged="cbPartFrom_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="3" />
-        <ComboBox Name="cbToTypes" ItemsSource="{Binding ToTypes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ToType}" SelectionChanged="cbToTypes_SelectionChanged"
+        <ComboBox x:Name="cbToTypes" ItemsSource="{Binding ToTypes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ToType}" SelectionChanged="cbToTypes_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" />
-        <ComboBox Name="cbUnitTo" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITTO}" SelectionChanged="cbUnitTo_SelectionChanged"
+        <ComboBox x:Name="cbUnitTo" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITTO}" SelectionChanged="cbUnitTo_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <Label Content="{Binding UnitsInAll}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" />
-        <ComboBox Name="cbPartTo" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTTO}" SelectionChanged="cbPartTo_SelectionChanged"
+        <ComboBox x:Name="cbPartTo" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTTO}" SelectionChanged="cbPartTo_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="3" />
-        <Button Name="btnPrevious" Content="Previous" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Grid.Column="1" Height="20" Grid.Row="7" Click="btnPrevious_Click"/>
-        <Button Name="btnNext" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Height="20" Grid.Row="7" Click="btnNext_Click"/>
+        <Button x:Name="btnPrevious" Content="Previous" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="75" Grid.Column="1" Height="20" Grid.Row="7" Click="btnPrevious_Click"/>
+        <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Height="20" Grid.Row="7" Click="btnNext_Click"/>
         <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75" Grid.Column="3" Height="20" Grid.Row="7" Click="btnClose_Click"/>
     </Grid>
 </Window>

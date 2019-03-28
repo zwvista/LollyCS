@@ -35,9 +35,9 @@
                 </DataGrid.Resources>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Name="miDelete" Header="Delete" Click="miDelete_Click" />
-                        <MenuItem Name="miCopy" Header="Copy" Click="miCopy_Click" />
-                        <MenuItem Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                        <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
+                        <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

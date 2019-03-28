@@ -14,21 +14,21 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Learn">
-                <MenuItem Header="Search" />
-                <MenuItem Header="Settings" Click="miSettings_Click" />
+                <MenuItem x:Name="miSearch" Header="Search" Click="miSearch_Click" />
+                <MenuItem x:Name="miSettings" Header="Settings" Click="miSettings_Click" />
                 <Separator />
-                <MenuItem Header="Words in Unit" Click="miWordsUnit_Click" />
-                <MenuItem Header="Phrases in Unit" Click="miPhrasesUnit_Click" />
+                <MenuItem x:Name="miWordsUnit" Header="Words in Unit" Click="miWordsUnit_Click" />
+                <MenuItem x:Name="miPhrasesUnit" Header="Phrases in Unit" Click="miPhrasesUnit_Click" />
                 <Separator />
-                <MenuItem Header="Words in Language" Click="miWordsLang_Click" />
-                <MenuItem Header="Phrases in Language" Click="miPhrasesLang_Click" />
+                <MenuItem x:Name="miWordsLang" Header="Words in Language" Click="miWordsLang_Click" />
+                <MenuItem x:Name="miPhrasesLang" Header="Phrases in Language" Click="miPhrasesLang_Click" />
                 <Separator />
-                <MenuItem Header="Words in Textbook" Click="miWordsTextbook_Click" />
-                <MenuItem Header="Phrases in Textbook" Click="miPhrasesTextbook_Click" />
+                <MenuItem x:Name="miWordsTextbook" Header="Words in Textbook" Click="miWordsTextbook_Click" />
+                <MenuItem x:Name="miPhrasesTextbook" Header="Phrases in Textbook" Click="miPhrasesTextbook_Click" />
             </MenuItem>
         </Menu>
         <DockPanel Grid.Row="1">
-            <TabControl Name="tcMain">
+            <TabControl x:Name="tcMain">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Height="21" Width="120">
