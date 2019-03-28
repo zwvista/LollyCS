@@ -17,15 +17,15 @@ using LollyShared;
 namespace LollyCloud
 {
     /// <summary>
-    /// WordsUnitDetailDlg.xaml の相互作用ロジック
+    /// PhrasesUnitDetailDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class WordsUnitDetailDlg : Window
+    public partial class PhrasesUnitDetailDlg : Window
     {
-        public MUnitWord itemOriginal;
+        public MUnitPhrase itemOriginal;
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        public WordsUnitViewModel vm;
-        MUnitWord item = new MUnitWord();
-        public WordsUnitDetailDlg()
+        public PhrasesUnitViewModel vm;
+        MUnitPhrase item = new MUnitPhrase();
+        public PhrasesUnitDetailDlg()
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
@@ -40,7 +40,7 @@ namespace LollyCloud
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            item.WORD = vmSettings.AutoCorrect(item.WORD);
+            item.PHRASE = vmSettings.AutoCorrect(item.PHRASE);
             if (item.ID == 0)
                 item.ID = await vm.Create(item);
             else

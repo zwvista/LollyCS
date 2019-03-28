@@ -36,10 +36,7 @@ namespace LollyCloud
             OnSettingsChanged();
         }
 
-        void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SearchDict(null, null);
-        }
+        void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
 
         void SearchDict(object sender, RoutedEventArgs e)
         {
@@ -154,6 +151,8 @@ namespace LollyCloud
             var item = vm.UnitWords[row];
             await vm.Delete(item);
         }
+
+        void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
 
         void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedWord);
 

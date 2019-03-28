@@ -58,6 +58,12 @@ namespace LollyCloud
             tcMain.SelectedIndex = tcMain.Items.Count - 1;
         }
 
+        void miPhrasesUnit_Click(object sender, RoutedEventArgs e)
+        {
+            vmd.Tabs.Add(new ActionTabItem { Header = "Phrases in Unit", Content = new PhrasesUnitControl() });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
+        }
+
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // This event will be thrown when on a close image clicked

@@ -120,6 +120,9 @@
     <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\PhrasesLangViewModel.cs" />
     <Compile Include="ViewModels\WordsLangViewMode.cs" />
+    <Compile Include="PhrasesUnitControl.xaml.cs">
+      <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,9 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\WordsUnitViewModel.cs" />
+    <Compile Include="PhrasesUnitDetailDlg.xaml.cs">
+      <DependentUpon>PhrasesUnitDetailDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WordsUnitDetailDlg.xaml.cs">
       <DependentUpon>WordsUnitDetailDlg.xaml</DependentUpon>
     </Compile>
@@ -147,9 +153,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PhrasesUnitControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="WordsUnitControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PhrasesUnitDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="WordsUnitDetailDlg.xaml">
       <SubType>Designer</SubType>
