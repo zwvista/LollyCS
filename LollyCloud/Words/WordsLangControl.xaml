@@ -25,10 +25,10 @@
             <DataGrid x:Name="dgWords" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgWords_SelectionChanged"
                       RowEditEnding="dgWords_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
                     <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
                     <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />

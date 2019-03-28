@@ -23,6 +23,7 @@
             <DataGrid x:Name="dgWords" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgWords_SelectionChanged"
                       RowEditEnding="dgWords_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>

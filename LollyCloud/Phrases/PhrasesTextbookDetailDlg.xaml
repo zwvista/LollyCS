@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="PhrasesTextbookDetailDlg" Height="350" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="PhrasesTextbookDetailDlg" Height="450" Width="650" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -20,24 +20,27 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" />
         <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
-        <Label Content="UNIT:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
-        <ComboBox Name="cbTextbook" ItemsSource="{Binding Textbook.Textbooks}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <Label Content="PART:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
+        <Label Content="TEXTBOOK:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
+        <TextBox Text="{Binding TEXTBOOKNAME}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="UNIT:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
+        <ComboBox Name="cbTextbook" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <Label Content="PART:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" />
         <ComboBox Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" />
-        <Label Content="SEQNUM:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
-        <Label Content="PHRASEID:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" />
-        <TextBox Text="{Binding PHRASEID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
-        <Label Content="PHRASE:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" />
-        <TextBox Text="{Binding PHRASE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
-        <Label Content="TRANSLATION:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" />
-        <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
-        <StackPanel Grid.Column="1" Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="3" />
+        <Label Content="SEQNUM:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" />
+        <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <Label Content="PHRASEID:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" />
+        <TextBox Text="{Binding PHRASEID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="PHRASE:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" />
+        <TextBox Text="{Binding PHRASE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <Label Content="TRANSLATION:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="7" />
+        <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" />
+        <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" Height="20" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

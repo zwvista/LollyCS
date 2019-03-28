@@ -31,8 +31,8 @@
             <TabControl Name="tcMain">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Height="21" Width="100">
-                            <TextBlock Width="80" Text="{Binding Header}"/>
+                        <StackPanel Orientation="Horizontal" Height="21" Width="120">
+                            <TextBlock Width="100" Text="{Binding Header}"/>
                             <Image Source="Icons\close.png" Width="20" Height="20" MouseDown="Image_MouseDown"/>
                         </StackPanel>
                     </DataTemplate>

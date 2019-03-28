@@ -19,13 +19,9 @@
             <DataGrid x:Name="dgPhrases" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgPhrases_SelectionChanged"
                       RowEditEnding="dgPhrases_RowEditEnding">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
                     <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PHRASEID}" Header="PHRASEID" IsReadOnly="True" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
