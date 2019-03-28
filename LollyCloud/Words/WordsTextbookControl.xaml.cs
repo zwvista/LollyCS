@@ -20,9 +20,9 @@ using mshtml;
 namespace LollyCloud
 {
     /// <summary>
-    /// WordsUnitControl.xaml の相互作用ロジック
+    /// WordsTextbookControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class WordsUnitControl : UserControl, ILollySettings
+    public partial class WordsTextbookControl : UserControl, ILollySettings
     {
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public WordsUnitViewModel vm { get; set; }
@@ -30,7 +30,7 @@ namespace LollyCloud
         int selectedDictItemIndex;
         string selectedWord = "";
 
-        public WordsUnitControl()
+        public WordsTextbookControl()
         {
             InitializeComponent();
             OnSettingsChanged();
@@ -44,7 +44,7 @@ namespace LollyCloud
                 selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            selectedWord = vm.UnitWords[row].WORD;
+            selectedWord = vm.Items[row].WORD;
             SearchWord(selectedWord);
         }
 
@@ -80,7 +80,7 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new WordsUnitDetailDlg();
+            var dlg = new WordsTextbookDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = (sender as DataGridRow).Item as MUnitWord;
@@ -88,21 +88,11 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
-        void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new WordsUnitDetailDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.itemOriginal = vm.NewUnitWord();
-            dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.UnitWords.Add(dlg.itemOriginal);
-        }
-
         async void dgWords_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.UnitWords[e.Row.GetIndex()];
+                var item = vm.Items[e.Row.GetIndex()];
                 await vm.Update(item);
             }
         }
@@ -125,9 +115,9 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = await WordsUnitViewModel.CreateAsync(vmSettings);
+            vm = await WordsUnitViewModel.CreateAsync(vmSettings, false);
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
-            dgWords.ItemsSource = vm.UnitWords;
+            dgWords.ItemsSource = vm.Items;
             ToolBar1.Items.Clear();
             for (int i = 0; i < vmSettings.DictItems.Count; i++)
             {
@@ -148,7 +138,7 @@ namespace LollyCloud
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = vm.UnitWords[row];
+            var item = vm.Items[row];
             await vm.Delete(item);
         }
 
@@ -156,21 +146,11 @@ namespace LollyCloud
 
         void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedWord);
 
-        async void tbNewWord_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Return || string.IsNullOrEmpty(vm.NewWord)) return;
-            var item = vm.NewUnitWord();
-            item.WORD = vmSettings.AutoCorrect(vm.NewWord);
-            vm.NewWord = "";
-            item.ID = await vm.Create(item);
-            vm.UnitWords.Add(item);
-        }
-
         async Task ChangeLevel(int delta)
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = vm.UnitWords[row];
+            var item = vm.Items[row];
             var newLevel = item.LEVEL + delta;
             if (newLevel != 0 && !vmSettings.USLEVELCOLORS.ContainsKey(newLevel)) return;
             item.LEVEL = newLevel;

@@ -20,11 +20,11 @@
                 <MenuItem Header="Words in Unit" Click="miWordsUnit_Click" />
                 <MenuItem Header="Phrases in Unit" Click="miPhrasesUnit_Click" />
                 <Separator />
-                <MenuItem Header="Words in Language" />
-                <MenuItem Header="Phrases in Language" />
+                <MenuItem Header="Words in Language" Click="miWordsLang_Click" />
+                <MenuItem Header="Phrases in Language" Click="miPhrasesLang_Click" />
                 <Separator />
-                <MenuItem Header="Words in Textbook" />
-                <MenuItem Header="Phrases in Textbook" />
+                <MenuItem Header="Words in Textbook" Click="miWordsTextbook_Click" />
+                <MenuItem Header="Phrases in Textbook" Click="miPhrasesTextbook_Click" />
             </MenuItem>
         </Menu>
         <DockPanel Grid.Row="1">

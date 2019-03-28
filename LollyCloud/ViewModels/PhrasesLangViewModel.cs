@@ -10,13 +10,13 @@ namespace LollyShared
         SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
-        public ObservableCollection<MLangPhrase> LangPhrases { get; set; }
+        public ObservableCollection<MLangPhrase> Items { get; set; }
 
         public static async Task<PhrasesLangViewModel> CreateAsync(SettingsViewModel vmSettings)
         {
             var o = new PhrasesLangViewModel();
             o.vmSettings = vmSettings;
-            o.LangPhrases = new ObservableCollection<MLangPhrase>(await o.langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            o.Items = new ObservableCollection<MLangPhrase>(await o.langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             return o;
         }
 

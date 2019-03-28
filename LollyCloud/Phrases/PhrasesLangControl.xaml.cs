@@ -20,15 +20,15 @@ using mshtml;
 namespace LollyCloud
 {
     /// <summary>
-    /// PhrasesUnitControl.xaml の相互作用ロジック
+    /// PhrasesLangControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class PhrasesUnitControl : UserControl, ILollySettings
+    public partial class PhrasesLangControl : UserControl, ILollySettings
     {
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        public PhrasesUnitViewModel vm { get; set; }
+        public PhrasesLangViewModel vm { get; set; }
         string selectedPhrase = "";
 
-        public PhrasesUnitControl()
+        public PhrasesLangControl()
         {
             InitializeComponent();
             OnSettingsChanged();
@@ -38,35 +38,35 @@ namespace LollyCloud
         {
             var row = dgPhrases.SelectedIndex;
             if (row == -1) return;
-            selectedPhrase = vm.UnitPhrases[row].PHRASE;
+            selectedPhrase = vm.Items[row].PHRASE;
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new PhrasesUnitDetailDlg();
+            var dlg = new PhrasesLangDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             dlg.Owner = Window.GetWindow(this);
-            dlg.itemOriginal = (sender as DataGridRow).Item as MUnitPhrase;
+            dlg.itemOriginal = (sender as DataGridRow).Item as MLangPhrase;
             dlg.vm = vm;
             dlg.ShowDialog();
         }
 
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PhrasesUnitDetailDlg();
+            var dlg = new PhrasesLangDetailDlg();
             dlg.Owner = Window.GetWindow(this);
-            dlg.itemOriginal = vm.NewUnitPhrase();
+            dlg.itemOriginal = vm.NewLangPhrase();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.UnitPhrases.Add(dlg.itemOriginal);
+            vm.Items.Add(dlg.itemOriginal);
         }
 
         async void dgPhrases_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.UnitPhrases[e.Row.GetIndex()];
+                var item = vm.Items[e.Row.GetIndex()];
                 await vm.Update(item);
             }
         }
@@ -75,16 +75,16 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = await PhrasesUnitViewModel.CreateAsync(vmSettings);
-            dgPhrases.ItemsSource = vm.UnitPhrases;
+            vm = await PhrasesLangViewModel.CreateAsync(vmSettings);
+            dgPhrases.ItemsSource = vm.Items;
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
         {
             var row = dgPhrases.SelectedIndex;
             if (row == -1) return;
-            var item = vm.UnitPhrases[row];
-            await vm.Delete(item);
+            var item = vm.Items[row];
+            await vm.Delete(item.ID);
         }
 
         void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPhrase);

@@ -11,14 +11,15 @@ namespace LollyShared
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
-        public ObservableCollection<MUnitPhrase> UnitPhrases { get; set; }
+        public ObservableCollection<MUnitPhrase> Items { get; set; }
 
-        public static async Task<PhrasesUnitViewModel> CreateAsync(SettingsViewModel vmSettings)
+        public static async Task<PhrasesUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook)
         {
             var o = new PhrasesUnitViewModel();
             o.vmSettings = vmSettings;
-            o.UnitPhrases = new ObservableCollection<MUnitPhrase>(await o.unitPhraseDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO));
+            o.Items = new ObservableCollection<MUnitPhrase>(await (inTextbook ? o.unitPhraseDS.GetDataByTextbookUnitPart(
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                o.unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
             return o;
         }
 
@@ -89,9 +90,9 @@ namespace LollyShared
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= UnitPhrases.Count; i++)
+            for (int i = 1; i <= Items.Count; i++)
             {
-                var item = UnitPhrases[i - 1];
+                var item = Items[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await UpdateSeqNum(item.ID, item.SEQNUM);
@@ -101,7 +102,7 @@ namespace LollyShared
 
         public MUnitPhrase NewUnitPhrase()
         {
-            var maxElem = UnitPhrases.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            var maxElem = Items.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
             return new MUnitPhrase
             {
                 LANGID = vmSettings.SelectedLang.ID,

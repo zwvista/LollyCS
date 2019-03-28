@@ -1,22 +1,28 @@
-﻿using System;
+﻿using ReactiveUI;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class WordsLangViewMode : LollyViewModel
+    public class WordsLangViewModel : LollyViewModel
     {
         SettingsViewModel vmSettings;
         LangWordDataStore langWordDS = new LangWordDataStore();
 
-        public ObservableCollection<MLangWord> LangWords { get; set; }
-
-        public static async Task<WordsLangViewMode> CreateAsync(SettingsViewModel vmSettings)
+        public ObservableCollection<MLangWord> Items { get; set; }
+        string _NewWord = "";
+        public string NewWord
         {
-            var o = new WordsLangViewMode();
+            get => _NewWord;
+            set => this.RaiseAndSetIfChanged(ref _NewWord, value);
+        }
+
+        public static async Task<WordsLangViewModel> CreateAsync(SettingsViewModel vmSettings)
+        {
+            var o = new WordsLangViewModel();
             o.vmSettings = vmSettings;
-            o.LangWords = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            o.Items = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             return o;
         }
 

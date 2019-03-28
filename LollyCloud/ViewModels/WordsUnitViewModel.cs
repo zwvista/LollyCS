@@ -12,7 +12,7 @@ namespace LollyShared
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
 
-        public ObservableCollection<MUnitWord> UnitWords { get; set; }
+        public ObservableCollection<MUnitWord> Items { get; set; }
         string _NewWord = "";
         public string NewWord
         {
@@ -21,12 +21,13 @@ namespace LollyShared
         }
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
-        public static async Task<WordsUnitViewModel> CreateAsync(SettingsViewModel vmSettings)
+        public static async Task<WordsUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook)
         {
             var o = new WordsUnitViewModel();
             o.vmSettings = vmSettings;
-            o.UnitWords = new ObservableCollection<MUnitWord>(await o.unitWordDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO));
+            o.Items = new ObservableCollection<MUnitWord>(await (inTextbook ? o.unitWordDS.GetDataByTextbookUnitPart(
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                o.unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
             return o;
         }
 
@@ -97,9 +98,9 @@ namespace LollyShared
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= UnitWords.Count; i++)
+            for (int i = 1; i <= Items.Count; i++)
             {
-                var item = UnitWords[i - 1];
+                var item = Items[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await UpdateSeqNum(item.ID, item.SEQNUM);
@@ -109,7 +110,7 @@ namespace LollyShared
 
         public MUnitWord NewUnitWord()
         {
-            var maxElem = UnitWords.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            var maxElem = Items.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
             return new MUnitWord
             {
                 LANGID = vmSettings.SelectedLang.ID,

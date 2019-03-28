@@ -64,6 +64,30 @@ namespace LollyCloud
             tcMain.SelectedIndex = tcMain.Items.Count - 1;
         }
 
+        void miWordsLang_Click(object sender, RoutedEventArgs e)
+        {
+            vmd.Tabs.Add(new ActionTabItem { Header = "Words in Language", Content = new WordsLangControl() });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
+        }
+
+        void miPhrasesLang_Click(object sender, RoutedEventArgs e)
+        {
+            vmd.Tabs.Add(new ActionTabItem { Header = "Phrases in Language", Content = new PhrasesLangControl() });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
+        }
+
+        void miWordsTextbook_Click(object sender, RoutedEventArgs e)
+        {
+            vmd.Tabs.Add(new ActionTabItem { Header = "Words in Textbook", Content = new WordsTextbookControl() });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
+        }
+
+        void miPhrasesTextbook_Click(object sender, RoutedEventArgs e)
+        {
+            vmd.Tabs.Add(new ActionTabItem { Header = "Phrases in Textbook", Content = new PhrasesTextbookControl() });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
+        }
+
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // This event will be thrown when on a close image clicked
