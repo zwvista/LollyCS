@@ -8,7 +8,7 @@ namespace LollyShared
 {
     public class MAutoCorrects
     {
-        public List<MAutoCorrect> AUTOCORRECT { get; set; }
+        public List<MAutoCorrect> records { get; set; }
     }
 
     public class MAutoCorrect : ReactiveObject

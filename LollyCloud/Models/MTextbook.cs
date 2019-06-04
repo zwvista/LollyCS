@@ -7,7 +7,7 @@ namespace LollyShared
 {
     public class MTextbooks
     {
-        public List<MTextbook> TEXTBOOKS { get; set; }
+        public List<MTextbook> records { get; set; }
     }
     public class MTextbook : ReactiveObject
     {

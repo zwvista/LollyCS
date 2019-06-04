@@ -6,7 +6,7 @@ namespace LollyShared
 {
     public class MUserSettings
     {
-        public List<MUserSetting> USERSETTINGS { get; set; }
+        public List<MUserSetting> records { get; set; }
     }
     public class MUserSetting : ReactiveObject
     {

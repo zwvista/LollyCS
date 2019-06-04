@@ -7,7 +7,7 @@ namespace LollyShared
 {
     public class MUnitPhrases
     {
-        public List<MUnitPhrase> VUNITPHRASES { get; set; }
+        public List<MUnitPhrase> records { get; set; }
     }
     public class MUnitPhrase : ReactiveObject
     {

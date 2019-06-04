@@ -13,7 +13,7 @@ namespace LollyShared
     public class UserSettingDataStore : LollyDataStore<MUserSetting>
     {
         public async Task<List<MUserSetting>> GetDataByUser(int userid) =>
-        (await GetDataByUrl<MUserSettings>($"USERSETTINGS?transform=1&filter=USERID,eq,{userid}")).USERSETTINGS;
+        (await GetDataByUrl<MUserSettings>($"USERSETTINGS?filter=USERID,eq,{userid}")).records;
 
         public async Task<bool> UpdateLang(int id, int langid) =>
         await UpdateByUrl($"USERSETTINGS/{id}", $"VALUE1={langid}");

@@ -6,7 +6,7 @@ namespace LollyShared
 {
     public class MVoices
     {
-        public List<MVoice> VVOICES { get; set; }
+        public List<MVoice> records { get; set; }
     }
     public class MVoice : ReactiveObject
     {

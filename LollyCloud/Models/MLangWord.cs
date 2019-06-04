@@ -7,7 +7,7 @@ namespace LollyShared
 {
     public class MLangWords
     {
-        public List<MLangWord> VLANGWORDS { get; set; }
+        public List<MLangWord> records { get; set; }
     }
     public class MLangWord : ReactiveObject
     {

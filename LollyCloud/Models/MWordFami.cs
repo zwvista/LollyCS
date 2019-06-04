@@ -5,7 +5,7 @@ namespace LollyShared
 {
     public class MWordsFami
     {
-        public List<MWordFami> WORDSFAMI { get; set; }
+        public List<MWordFami> records { get; set; }
     }
     public class MWordFami
     {

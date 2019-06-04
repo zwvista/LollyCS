@@ -14,13 +14,13 @@ namespace LollyShared
     public class LangPhraseDataStore : LollyDataStore<MLangPhrase>
     {
         public async Task<List<MLangPhrase>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?transform=1&filter=LANGID,eq,{langid}&order=PHRASE")).LANGPHRASES;
+        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&order=PHRASE")).records;
 
         public async Task<List<MLangPhrase>> GetDataByLangPhrase(int langid, string phrase) =>
-        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?transform=1&filter[]=LANGID,eq,{langid}&filter[]=PHRASE,eq,{HttpUtility.HtmlEncode(phrase)}")).LANGPHRASES;
+        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.HtmlEncode(phrase)}")).records;
 
         public async Task<List<MLangPhrase>> GetDataById(int id) =>
-        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?transform=1&filter[]=ID,eq,{id}")).LANGPHRASES;
+        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=ID,eq,{id}")).records;
 
         public async Task<int> Create(MLangPhrase item) =>
         await CreateByUrl($"LANGPHRASES", item);

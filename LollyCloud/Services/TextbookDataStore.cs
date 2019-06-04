@@ -10,7 +10,7 @@ namespace LollyShared
     {
         public async Task<List<MTextbook>> GetDataByLang(int langid)
         {
-            var lst = (await GetDataByUrl<MTextbooks>($"TEXTBOOKS?transform=1&filter=LANGID,eq,{langid}")).TEXTBOOKS;
+            var lst = (await GetDataByUrl<MTextbooks>($"TEXTBOOKS?filter=LANGID,eq,{langid}")).records;
             List<string> f(string units)
             {
                 var m = new Regex(@"UNITS,(\d+)").Match(units);

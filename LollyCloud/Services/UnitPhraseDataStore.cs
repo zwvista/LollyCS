@@ -12,7 +12,7 @@ namespace LollyShared
     {
         public async Task<List<MUnitPhrase>> GetDataByTextbookUnitPart(MTextbook textbook, int unitPartFrom, int unitPartTo)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,{textbook.ID}&filter[]=UNITPART,bt,{unitPartFrom},{unitPartTo}&order[]=UNITPART&order[]=SEQNUM")).VUNITPHRASES;
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}&order=UNITPART&order=SEQNUM")).records;
             foreach (var o in lst)
                 o.Textbook = textbook;
             return lst;
@@ -20,14 +20,14 @@ namespace LollyShared
 
         public async Task<List<MUnitPhrase>> GetDataByLang(int langid, List<MTextbook> lstTextbooks)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?transform=1&filter=LANGID,eq,{langid}&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM")).VUNITPHRASES;
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM")).records;
             foreach (var o in lst)
                 o.Textbook = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);
             return lst;
         }
 
         public async Task<List<MUnitPhrase>> GetDataByLangPhrase(int phraseid) =>
-        (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?transform=1&filter=PHRASEID,eq,{phraseid}")).VUNITPHRASES;
+        (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=PHRASEID,eq,{phraseid}")).records;
 
         public async Task<int> Create(MUnitPhrase item) =>
         await CreateByUrl($"UNITPHRASES", item);

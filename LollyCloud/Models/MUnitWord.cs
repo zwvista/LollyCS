@@ -7,7 +7,7 @@ namespace LollyShared
 {
     public class MUnitWords
     {
-        public List<MUnitWord> VUNITWORDS { get; set; }
+        public List<MUnitWord> records { get; set; }
     }
     public class MUnitWord : ReactiveObject
     {

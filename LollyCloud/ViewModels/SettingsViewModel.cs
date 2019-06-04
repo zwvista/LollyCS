@@ -12,7 +12,7 @@ namespace LollyShared
     {
         UserSettingDataStore UserSettingDS = new UserSettingDataStore();
         LanguageDataStore LanguageDS = new LanguageDataStore();
-        DictMeanDataStore DictMeanDS = new DictMeanDataStore();
+        DictReferenceDataStore DictReferenceDS = new DictReferenceDataStore();
         DictNoteDataStore DictNoteDS = new DictNoteDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
@@ -30,6 +30,7 @@ namespace LollyShared
         public int USROWSPERPAGE => int.Parse(SelectedUSUser0.VALUE3);
         public Dictionary<int, List<string>> USLEVELCOLORS;
         public int USREADINTERVAL => int.Parse(SelectedUSUser1.VALUE1);
+        public int USREVIEWINTERVAL => int.Parse(SelectedUSUser1.VALUE2);
         MUserSetting SelectedUSLang2;
         public int USTEXTBOOKID
         {
@@ -52,10 +53,16 @@ namespace LollyShared
             set => SelectedUSLang2.VALUE4 = value;
         }
         MUserSetting SelectedUSLang3;
-        public int USVOICEID
+        public int USDICTTRANSLATIONID
         {
             get => int.TryParse(SelectedUSLang3.VALUE1, out var v) ? v : 0;
-            set => SelectedUSLang2.VALUE1 = value.ToString();
+            set => SelectedUSLang3.VALUE1 = value.ToString();
+        }
+        MUserSetting SelectedUSLang4;
+        public int USVOICEID
+        {
+            get => int.TryParse(SelectedUSLang4.VALUE2, out var v) ? v : 0;
+            set => SelectedUSLang4.VALUE2 = value.ToString();
         }
         MUserSetting _SelectedUSTextbook;
         public MUserSetting SelectedUSTextbook
@@ -109,7 +116,7 @@ namespace LollyShared
         }
         public int SelectedLangIndex => Languages.IndexOf(_SelectedLang);
 
-        public List<MDictMean> DictsMean;
+        public List<MDictReference> DictsReference;
         List<MDictItem> _DictItems;
         public List<MDictItem> DictItems
         {
@@ -142,6 +149,24 @@ namespace LollyShared
             }
         }
         public int SelectedDictNoteIndex => DictsNote.IndexOf(_SelectedDictNote);
+
+        List<MDictTranslation> _DictsTranslation;
+        public List<MDictTranslation> DictsTranslation
+        {
+            get => _DictsTranslation;
+            set => this.RaiseAndSetIfChanged(ref _DictsTranslation, value);
+        }
+        MDictTranslation _SelectedDictTranslation = new MDictTranslation();
+        public MDictTranslation SelectedDictTranslation
+        {
+            get => _SelectedDictTranslation;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _SelectedDictTranslation, value);
+                USDICTTRANSLATIONID = value?.ID ?? 0;
+            }
+        }
+        public int SelectedDictTranslationIndex => DictsTranslation.IndexOf(_SelectedDictTranslation);
 
         List<MTextbook> _Textbooks;
         public List<MTextbook> Textbooks
@@ -207,14 +232,15 @@ namespace LollyShared
             USLANGID = SelectedLang.ID;
             SelectedUSLang2 = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
             SelectedUSLang3 = UserSettings.FirstOrDefault(o => o.KIND == 3 && o.ENTITYID == USLANGID);
+            SelectedUSLang4 = UserSettings.FirstOrDefault(o => o.KIND == 4 && o.ENTITYID == USLANGID);
             var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
-            DictsMean = await GetData(async () => await DictMeanDS.GetDataByLang(USLANGID));
+            DictsReference = await GetData(async () => await DictReferenceDS.GetDataByLang(USLANGID));
             DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
             Textbooks = await GetData(async () => await TextbookDS.GetDataByLang(USLANGID));
             AutoCorrects = await GetData(async () => await AutoCorrectDS.GetDataByLang(USLANGID));
             var i = 0;
             DictItems = lstDicts.SelectMany(d => d == "0" ?
-                DictsMean.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
+                DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
                 new List<MDictItem> { new MDictItem(d, $"Custom{++i}") }
             ).ToList();
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
@@ -227,7 +253,7 @@ namespace LollyShared
             var s = "<html><body>\n";
             foreach (var (dictid, i) in dictids.Select((dict, i) => (dict, i)))
             {
-                var item = DictsMean.First(o => o.DICTID.ToString() == dictid);
+                var item = DictsReference.First(o => o.DICTID.ToString() == dictid);
                 var ifrId = $"ifr{i + 1}";
                 var url = item.UrlString(word, AutoCorrects.ToList());
                 s += $"<iframe id='{ifrId}' frameborder='1' style='width:100%; height:500px; display:block' src='{url}'></iframe>\n";

@@ -8,6 +8,6 @@ namespace LollyShared
     public class LanguageDataStore : LollyDataStore<MLanguage>
     {
         public async Task<List<MLanguage>> GetData() =>
-        (await GetDataByUrl<MLanguages>($"LANGUAGES?transform=1&filter=ID,neq,0")).LANGUAGES;
+        (await GetDataByUrl<MLanguages>($"LANGUAGES?filter=ID,neq,0")).records;
     }
 }

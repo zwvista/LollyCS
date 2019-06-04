@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using LollyShared;
-using mshtml;
+using MSHTML;
 
 namespace LollyCloud
 {
@@ -59,7 +59,7 @@ namespace LollyCloud
             }
             else
             {
-                var item2 = vmSettings.DictsMean.First(o => o.DICTNAME == item.DICTNAME);
+                var item2 = vmSettings.DictsReference.First(o => o.DICTNAME == item.DICTNAME);
                 var url = item2.UrlString(word, vmSettings.AutoCorrects.ToList());
                 if (item2.DICTTYPENAME == "OFFLINE")
                 {
@@ -103,7 +103,7 @@ namespace LollyCloud
         {
             if (status != DictWebBrowserStatus.Navigating) return;
             var item = vmSettings.DictItems[selectedDictItemIndex];
-            var item2 = vmSettings.DictsMean.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
+            var item2 = vmSettings.DictsReference.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
             var doc = (HTMLDocument)wbDict.Document;
             var html = doc.documentElement.outerHTML;
             var str = item2.HtmlString(html, selectedWord);

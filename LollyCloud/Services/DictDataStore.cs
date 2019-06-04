@@ -10,14 +10,14 @@ using Plugin.Connectivity;
 
 namespace LollyShared
 {
-    public class DictMeanDataStore : LollyDataStore<MDictMean>
+    public class DictReferenceDataStore : LollyDataStore<MDictReference>
     {
-        public async Task<List<MDictMean>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<MDictsMean>($"VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSMEAN;
+        public async Task<List<MDictReference>> GetDataByLang(int langid) =>
+        (await GetDataByUrl<MDictsReference>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}")).records;
     }
     public class DictNoteDataStore : LollyDataStore<MDictNote>
     {
         public async Task<List<MDictNote>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,{langid}")).VDICTSNOTE;
+        (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).records;
     }
 }

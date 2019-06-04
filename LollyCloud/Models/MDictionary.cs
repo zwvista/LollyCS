@@ -28,6 +28,41 @@ namespace LollyShared
             get => _LANGIDFROM;
             set => this.RaiseAndSetIfChanged(ref _LANGIDFROM, value);
         }
+        string _LANGNAMEFROM;
+        [JsonProperty]
+        public string LANGNAMEFROM
+        {
+            get => _LANGNAMEFROM;
+            set => this.RaiseAndSetIfChanged(ref _LANGNAMEFROM, value);
+        }
+        int _LANGIDTO;
+        [JsonProperty]
+        public int LANGIDTO
+        {
+            get => _LANGIDTO;
+            set => this.RaiseAndSetIfChanged(ref _LANGIDTO, value);
+        }
+        string _LANGNAMETO;
+        [JsonProperty]
+        public string LANGNAMETO
+        {
+            get => _LANGNAMETO;
+            set => this.RaiseAndSetIfChanged(ref _LANGNAMETO, value);
+        }
+        int _SEQNUM;
+        [JsonProperty]
+        public int SEQNUM
+        {
+            get => _SEQNUM;
+            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
+        }
+        int _DICTTYPEID;
+        [JsonProperty]
+        public int DICTTYPEID
+        {
+            get => _DICTTYPEID;
+            set => this.RaiseAndSetIfChanged(ref _DICTTYPEID, value);
+        }
         string _DICTTYPENAME;
         [JsonProperty]
         public string DICTTYPENAME
@@ -93,11 +128,11 @@ namespace LollyShared
         }
     }
 
-    public class MDictsMean
+    public class MDictsReference
     {
-        public List<MDictMean> VDICTSMEAN { get; set; }
+        public List<MDictReference> records { get; set; }
     }
-    public class MDictMean : MDictionary
+    public class MDictReference : MDictionary
     {
         public string HtmlString(string html, string word, bool useTemplate2 = false)
         {
@@ -131,7 +166,13 @@ namespace LollyShared
 
     public class MDictsNote
     {
-        public List<MDictNote> VDICTSNOTE { get; set; }
+        public List<MDictNote> records { get; set; }
     }
     public class MDictNote : MDictionary{ }
+
+    public class MDictsTranslation
+    {
+        public List<MDictTranslation> records { get; set; }
+    }
+    public class MDictTranslation : MDictionary { }
 }

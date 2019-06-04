@@ -7,7 +7,7 @@ namespace LollyShared
 {
     public class MLangPhrases
     {
-        public List<MLangPhrase> LANGPHRASES { get; set; }
+        public List<MLangPhrase> records { get; set; }
     }
     public class MLangPhrase : ReactiveObject
     {

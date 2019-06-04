@@ -15,7 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using LollyShared;
-using mshtml;
 
 namespace LollyCloud
 {
