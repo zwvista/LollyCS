@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System;
 
 namespace LollyShared
 {
@@ -95,10 +96,25 @@ namespace LollyShared
             get => _LEVEL;
             set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
         }
+        int _CORRECT;
+        [JsonProperty]
+        public int CORRECT
+        {
+            get => _CORRECT;
+            set => this.RaiseAndSetIfChanged(ref _CORRECT, value);
+        }
+        int _TOTAL;
+        [JsonProperty]
+        public int TOTAL
+        {
+            get => _TOTAL;
+            set => this.RaiseAndSetIfChanged(ref _TOTAL, value);
+        }
 
         public MTextbook Textbook { get; set; }
 
         public string UNITSTR => Textbook.UNITSTR(UNIT);
         public string PARTSTR => Textbook.PARTSTR(PART);
+        public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
     }
 }

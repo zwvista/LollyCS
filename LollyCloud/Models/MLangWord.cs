@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System;
 
 namespace LollyShared
 {
@@ -53,6 +54,20 @@ namespace LollyShared
             get => _LEVEL;
             set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
         }
+        int _CORRECT;
+        [JsonProperty]
+        public int CORRECT
+        {
+            get => _CORRECT;
+            set => this.RaiseAndSetIfChanged(ref _CORRECT, value);
+        }
+        int _TOTAL;
+        [JsonProperty]
+        public int TOTAL
+        {
+            get => _TOTAL;
+            set => this.RaiseAndSetIfChanged(ref _TOTAL, value);
+        }
 
         public MLangWord() { }
         public MLangWord(MUnitWord item)
@@ -78,5 +93,6 @@ namespace LollyShared
                 }
             return oldNote != NOTE;
         }
+        public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
     }
 }

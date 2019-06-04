@@ -20,4 +20,9 @@ namespace LollyShared
         public async Task<List<MDictNote>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).records;
     }
+    public class DictTranslationDataStore : LollyDataStore<MDictTranslation>
+    {
+        public async Task<List<MDictTranslation>> GetDataByLang(int langid) =>
+        (await GetDataByUrl<MDictsTranslation>($"VDICTSTRANSLATION?filter=LANGIDFROM,eq,{langid}")).records;
+    }
 }

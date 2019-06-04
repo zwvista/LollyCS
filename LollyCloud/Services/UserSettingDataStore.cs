@@ -27,6 +27,9 @@ namespace LollyShared
         public async Task<bool> UpdateDictNote(int id, int dictnoteid) =>
         await UpdateByUrl($"USERSETTINGS/{id}", $"VALUE3={dictnoteid}");
 
+        public async Task<bool> UpdateDictTranslation(int id, int dicttranslationid) =>
+        await UpdateByUrl($"USERSETTINGS/{id}", $"VALUE1={dicttranslationid}");
+
         public async Task<bool> UpdateUnitFrom(int id, int unitfrom) =>
         await UpdateByUrl($"USERSETTINGS/{id}", $"VALUE1={unitfrom}");
 

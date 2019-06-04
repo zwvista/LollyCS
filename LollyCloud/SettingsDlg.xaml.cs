@@ -47,6 +47,9 @@ namespace LollyCloud
         async void cbDictsNote_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             await vm.UpdateDictNote();
 
+        async void cbDictsTranslation_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            await vm.UpdateDictTranslation();
+
         async void cbTextbooks_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             await vm.UpdateTextbook();
 

@@ -14,6 +14,7 @@ namespace LollyShared
         LanguageDataStore LanguageDS = new LanguageDataStore();
         DictReferenceDataStore DictReferenceDS = new DictReferenceDataStore();
         DictNoteDataStore DictNoteDS = new DictNoteDataStore();
+        DictTranslationDataStore DictTranslationDS = new DictTranslationDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
         WordFamiDataStore WordFamiDS = new WordFamiDataStore();
@@ -236,6 +237,7 @@ namespace LollyShared
             var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
             DictsReference = await GetData(async () => await DictReferenceDS.GetDataByLang(USLANGID));
             DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
+            DictsTranslation = await GetData(async () => await DictTranslationDS.GetDataByLang(USLANGID));
             Textbooks = await GetData(async () => await TextbookDS.GetDataByLang(USLANGID));
             AutoCorrects = await GetData(async () => await AutoCorrectDS.GetDataByLang(USLANGID));
             var i = 0;
@@ -245,6 +247,7 @@ namespace LollyShared
             ).ToList();
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
+            SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
         }
 
@@ -266,6 +269,7 @@ namespace LollyShared
         public async Task<bool> UpdateTextbook() => await UserSettingDS.UpdateTextbook(SelectedUSLang2.ID, USTEXTBOOKID);
         public async Task<bool> UpdateDictItem() => await UserSettingDS.UpdateDictItem(SelectedUSLang2.ID, USDICTITEM);
         public async Task<bool> UpdateDictNote() => await UserSettingDS.UpdateDictNote(SelectedUSLang2.ID, USDICTNOTEID);
+        public async Task<bool> UpdateDictTranslation() => await UserSettingDS.UpdateDictTranslation(SelectedUSLang3.ID, USDICTTRANSLATIONID);
         public async Task<bool> UpdateUnitFrom() => await UserSettingDS.UpdateUnitFrom(SelectedUSTextbook.ID, USUNITFROM);
         public async Task<bool> UpdatePartFrom() => await UserSettingDS.UpdatePartFrom(SelectedUSTextbook.ID, USPARTFROM);
         public async Task<bool> UpdateUnitTo() => await UserSettingDS.UpdateUnitTo(SelectedUSTextbook.ID, USUNITTO);
