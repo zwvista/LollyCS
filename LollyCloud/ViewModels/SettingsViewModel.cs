@@ -10,6 +10,7 @@ namespace LollyShared
 {
     public class SettingsViewModel : LollyViewModel
     {
+        USMappingDataStore USMappingDS = new USMappingDataStore();
         UserSettingDataStore UserSettingDS = new UserSettingDataStore();
         LanguageDataStore LanguageDS = new LanguageDataStore();
         DictReferenceDataStore DictReferenceDS = new DictReferenceDataStore();
@@ -18,85 +19,117 @@ namespace LollyShared
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
         WordFamiDataStore WordFamiDS = new WordFamiDataStore();
+        VoiceDataStore VoiceDS = new VoiceDataStore();
 
+        public event EventHandler OnGetData;
+        public event EventHandler OnUpdateLang;
+        public event EventHandler OnUpdateDictItem;
+        public event EventHandler OnUpdateDictNote;
+        public event EventHandler OnUpdateDictTranslation;
+        public event EventHandler OnUpdateTextbook;
+        public event EventHandler OnUpdateUnitFrom;
+        public event EventHandler OnUpdatePartFrom;
+        public event EventHandler OnUpdateUnitTo;
+        public event EventHandler OnUpdatePartTo;
+        public event EventHandler OnUpdateMacVoice;
+        public event EventHandler OnUpdateiOSVoice;
+
+        public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
-        MUserSetting SelectedUSUser0;
-        MUserSetting SelectedUSUser1;
-        public int USLANGID {
-            get => int.Parse(SelectedUSUser0.VALUE1);
-            set => SelectedUSUser0.VALUE1 = value.ToString();
+        private string GetUSValue(MUserSettingInfo info)
+        {
+            var o = UserSettings.First(v => v.ID == info.USERSETTINGID);
+            return o.GetType().GetProperty($"VALUE{info.VALUEID}").GetValue(o) as string;
         }
+        private void SetUSValue(MUserSettingInfo info, string value)
+        {
+            var o = UserSettings.First(v => v.ID == info.USERSETTINGID);
+            o.GetType().GetProperty($"VALUE{info.VALUEID}").SetValue(o, value);
+        }
+        private MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
+        public int USLANGID
+        {
+            get => int.Parse(GetUSValue(INFO_USLANGID));
+            set => SetUSValue(INFO_USLANGID, value.ToString());
+        }
+        private MUserSettingInfo INFO_USROWSPERPAGEOPTIONS = new MUserSettingInfo();
         public List<int> USROWSPERPAGEOPTIONS =>
-            SelectedUSUser0.VALUE2.Split(',').Select(s => int.Parse(s)).ToList();
-        public int USROWSPERPAGE => int.Parse(SelectedUSUser0.VALUE3);
+            GetUSValue(INFO_USROWSPERPAGEOPTIONS).Split(',').Select(s => int.Parse(s)).ToList();
+        private MUserSettingInfo INFO_USROWSPERPAGE = new MUserSettingInfo();
+        public int USROWSPERPAGE => int.Parse(GetUSValue(INFO_USROWSPERPAGE));
+        private MUserSettingInfo INFO_USLEVELCOLORS = new MUserSettingInfo();
         public Dictionary<int, List<string>> USLEVELCOLORS;
-        public int USREADINTERVAL => int.Parse(SelectedUSUser1.VALUE1);
-        public int USREVIEWINTERVAL => int.Parse(SelectedUSUser1.VALUE2);
-        MUserSetting SelectedUSLang2;
+        private MUserSettingInfo INFO_USSCANINTERVAL = new MUserSettingInfo();
+        public int USSCANINTERVAL
+        {
+            get => int.Parse(GetUSValue(INFO_USSCANINTERVAL));
+            set => SetUSValue(INFO_USSCANINTERVAL, value.ToString());
+        }
+        private MUserSettingInfo INFO_USREVIEWINTERVAL = new MUserSettingInfo();
+        public int USREVIEWINTERVAL
+        {
+            get => int.Parse(GetUSValue(INFO_USREVIEWINTERVAL));
+            set => SetUSValue(INFO_USREVIEWINTERVAL, value.ToString());
+        }
+        private MUserSettingInfo INFO_USTEXTBOOKID = new MUserSettingInfo();
         public int USTEXTBOOKID
         {
-            get => int.Parse(SelectedUSLang2.VALUE1);
-            set => SelectedUSLang2.VALUE1 = value.ToString();
+            get => int.Parse(GetUSValue(INFO_USTEXTBOOKID));
+            set => SetUSValue(INFO_USTEXTBOOKID, value.ToString());
         }
+        private MUserSettingInfo INFO_USDICTITEM = new MUserSettingInfo();
         public string USDICTITEM
         {
-            get => SelectedUSLang2.VALUE2;
-            set => SelectedUSLang2.VALUE2 = value;
+            get => GetUSValue(INFO_USDICTITEM);
+            set => SetUSValue(INFO_USDICTITEM, value);
         }
+        private MUserSettingInfo INFO_USDICTNOTEID = new MUserSettingInfo();
         public int USDICTNOTEID
         {
-            get => int.TryParse(SelectedUSLang2.VALUE3, out var v) ? v : 0;
-            set => SelectedUSLang2.VALUE3 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USDICTNOTEID), out var v) ? v : 0;
+            set => SetUSValue(INFO_USDICTNOTEID, value.ToString());
         }
+        private MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
         public string USDICTITEMS
         {
-            get => SelectedUSLang2.VALUE4 ?? "0";
-            set => SelectedUSLang2.VALUE4 = value;
+            get => GetUSValue(INFO_USDICTITEMS) ?? "0";
+            set => SetUSValue(INFO_USDICTITEMS, value);
         }
-        MUserSetting SelectedUSLang3;
+        private MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
         public int USDICTTRANSLATIONID
         {
-            get => int.TryParse(SelectedUSLang3.VALUE1, out var v) ? v : 0;
-            set => SelectedUSLang3.VALUE1 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USDICTTRANSLATIONID), out var v) ? v : 0;
+            set => SetUSValue(INFO_USDICTTRANSLATIONID, value.ToString());
         }
-        MUserSetting SelectedUSLang4;
+        private MUserSettingInfo INFO_USVOICEID = new MUserSettingInfo();
         public int USVOICEID
         {
-            get => int.TryParse(SelectedUSLang4.VALUE2, out var v) ? v : 0;
-            set => SelectedUSLang4.VALUE2 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USVOICEID), out var v) ? v : 0;
+            set => SetUSValue(INFO_USVOICEID, value.ToString());
         }
-        MUserSetting _SelectedUSTextbook;
-        public MUserSetting SelectedUSTextbook
-        {
-            get => _SelectedUSTextbook;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _SelectedUSTextbook, value);
-                this.RaisePropertyChanged("USUNITFROM");
-                this.RaisePropertyChanged("USPARTFROM");
-                this.RaisePropertyChanged("USUNITTO");
-                this.RaisePropertyChanged("USPARTTO");
-            }
-        }
+        private MUserSettingInfo INFO_USUNITFROM = new MUserSettingInfo();
         public int USUNITFROM
         {
-            get => int.TryParse(SelectedUSTextbook?.VALUE1, out var v) ? v : 0;
-            set => SelectedUSTextbook.VALUE1 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USUNITFROM), out var v) ? v : 0;
+            set => SetUSValue(INFO_USUNITFROM, value.ToString());
         }
+        private MUserSettingInfo INFO_USPARTFROM = new MUserSettingInfo();
         public int USPARTFROM
         {
-            get => int.TryParse(SelectedUSTextbook?.VALUE2, out var v) ? v : 0;
-            set => SelectedUSTextbook.VALUE2 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USPARTFROM), out var v) ? v : 0;
+            set => SetUSValue(INFO_USPARTFROM, value.ToString());
         }
+        private MUserSettingInfo INFO_USUNITTO = new MUserSettingInfo();
         public int USUNITTO
         {
-            get => int.TryParse(SelectedUSTextbook?.VALUE3, out var v) ? v : 0;
-            set => SelectedUSTextbook.VALUE3 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USUNITTO), out var v) ? v : 0;
+            set => SetUSValue(INFO_USUNITTO, value.ToString());
         }
+        private MUserSettingInfo INFO_USPARTTO = new MUserSettingInfo();
         public int USPARTTO
         {
-            get => int.TryParse(SelectedUSTextbook?.VALUE4, out var v) ? v : 0;
-            set => SelectedUSTextbook.VALUE4 = value.ToString();
+            get => int.TryParse(GetUSValue(INFO_USPARTTO), out var v) ? v : 0;
+            set => SetUSValue(INFO_USPARTTO, value.ToString());
         }
         public int USUNITPARTFROM => USUNITFROM * 10 + USPARTFROM;
         public int USUNITPARTTO => USUNITTO * 10 + USPARTTO;
@@ -116,6 +149,20 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _SelectedLang, value);
         }
         public int SelectedLangIndex => Languages.IndexOf(_SelectedLang);
+
+        List<MVoice> _Voices;
+        public List<MVoice> Voices
+        {
+            get => _Voices;
+            set => this.RaiseAndSetIfChanged(ref _Voices, value);
+        }
+        MVoice _SelectedVoice;
+        public MVoice SelectedVoice
+        {
+            get => _SelectedVoice;
+            set => this.RaiseAndSetIfChanged(ref _SelectedVoice, value);
+        }
+        public int SelectedVoiceIndex => _Voices.IndexOf(_SelectedVoice);
 
         public List<MDictReference> DictsReference;
         List<MDictItem> _DictItems;
@@ -182,7 +229,14 @@ namespace LollyShared
                 if (value == null) return;
                 this.RaiseAndSetIfChanged(ref _SelectedTextbook, value);
                 USTEXTBOOKID = value.ID;
-                SelectedUSTextbook = UserSettings.FirstOrDefault(o => o.KIND == 11 && o.ENTITYID == USTEXTBOOKID);
+                INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
+                INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
+                INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
+                INFO_USPARTTO = GetUSInfo(MUSMapping.NAME_USPARTTO);
+                this.RaisePropertyChanged("USUNITFROM");
+                this.RaisePropertyChanged("USPARTFROM");
+                this.RaisePropertyChanged("USUNITTO");
+                this.RaisePropertyChanged("USPARTTO");
                 this.RaisePropertyChanged("Units");
                 this.RaisePropertyChanged("UnitsInAll");
                 this.RaisePropertyChanged("Parts");
@@ -216,30 +270,49 @@ namespace LollyShared
 
         public HttpClient client = new HttpClient();
 
+        private MUserSettingInfo GetUSInfo(string name) {
+            var o = USMappings.First(v => v.NAME == name);
+            var entityid = o.ENTITYID != -1 ? o.ENTITYID :
+                o.LEVEL == 1 ? SelectedLang.ID :
+                o.LEVEL == 2 ? SelectedTextbook.ID :
+                0;
+            var o2 = UserSettings.First(v => v.KIND == o.KIND && v.ENTITYID == entityid);
+            return new MUserSettingInfo { USERSETTINGID = o2.ID, VALUEID = o.VALUEID };
+        }
+
         public async Task GetData() {
             Languages = await GetData(async () => await LanguageDS.GetData());
+            USMappings = await GetData(async () => await USMappingDS.GetData());
             UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(CommonApi.UserId));
-            SelectedUSUser0 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 0);
-            SelectedUSUser1 = UserSettings.FirstOrDefault(o => o.KIND == 1 && o.ENTITYID == 1);
-            var lst = SelectedUSUser0.VALUE4.Split(new [] { "\r\n" }, StringSplitOptions.None).Select(s => s.Split(',')).ToList();
-            USLEVELCOLORS = new Dictionary<int, List<string>>();
-            foreach (var v in lst)
-                USLEVELCOLORS[int.Parse(v[0])] = new List<string> { v[1], v[2] };
+            INFO_USLANGID = GetUSInfo(MUSMapping.NAME_USLANGID);
+            INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
+            INFO_USROWSPERPAGE = GetUSInfo(MUSMapping.NAME_USROWSPERPAGE);
+            INFO_USLEVELCOLORS = GetUSInfo(MUSMapping.NAME_USLEVELCOLORS);
+            INFO_USSCANINTERVAL = GetUSInfo(MUSMapping.NAME_USSCANINTERVAL);
+            INFO_USREVIEWINTERVAL = GetUSInfo(MUSMapping.NAME_USREVIEWINTERVAL);
+            USLEVELCOLORS = GetUSValue(INFO_USLEVELCOLORS).Split(new[] { "\r\n" }, StringSplitOptions.None)
+                .Select(s => s.Split(',')).ToDictionary(v => int.Parse(v[0]), v2 => new List<string> { v2[1], v2[2] });
+            OnGetData?.Invoke(this, null);
             await SetSelectedLang(Languages.FirstOrDefault(o => o.ID == USLANGID));
         }
 
         public async Task SetSelectedLang(MLanguage lang) {
+            var isinit = USLANGID == lang.ID;
+            USLANGID = lang.ID;
             SelectedLang = lang;
-            USLANGID = SelectedLang.ID;
-            SelectedUSLang2 = UserSettings.FirstOrDefault(o => o.KIND == 2 && o.ENTITYID == USLANGID);
-            SelectedUSLang3 = UserSettings.FirstOrDefault(o => o.KIND == 3 && o.ENTITYID == USLANGID);
-            SelectedUSLang4 = UserSettings.FirstOrDefault(o => o.KIND == 4 && o.ENTITYID == USLANGID);
+            INFO_USTEXTBOOKID = GetUSInfo(MUSMapping.NAME_USTEXTBOOKID);
+            INFO_USDICTITEM = GetUSInfo(MUSMapping.NAME_USDICTITEM);
+            INFO_USDICTNOTEID = GetUSInfo(MUSMapping.NAME_USDICTNOTEID);
+            INFO_USDICTITEMS = GetUSInfo(MUSMapping.NAME_USDICTITEMS);
+            INFO_USDICTTRANSLATIONID = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATIONID);
+            INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
             var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
             DictsReference = await GetData(async () => await DictReferenceDS.GetDataByLang(USLANGID));
             DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
             DictsTranslation = await GetData(async () => await DictTranslationDS.GetDataByLang(USLANGID));
             Textbooks = await GetData(async () => await TextbookDS.GetDataByLang(USLANGID));
             AutoCorrects = await GetData(async () => await AutoCorrectDS.GetDataByLang(USLANGID));
+            Voices = await GetData(async () => await VoiceDS.GetDataByLang(USLANGID));
             var i = 0;
             DictItems = lstDicts.SelectMany(d => d == "0" ?
                 DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
@@ -249,6 +322,11 @@ namespace LollyShared
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
+            SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? Voices.FirstOrDefault();
+            if (isinit)
+                OnUpdateLang?.Invoke(this, null);
+            else
+                await UpdateLang();
         }
 
         public string DictHtml(string word, List<string> dictids)
@@ -265,16 +343,72 @@ namespace LollyShared
             return s;
         }
 
-        public async Task<bool> UpdateLang() => await UserSettingDS.UpdateLang(SelectedUSUser0.ID, USLANGID);
-        public async Task<bool> UpdateTextbook() => await UserSettingDS.UpdateTextbook(SelectedUSLang2.ID, USTEXTBOOKID);
-        public async Task<bool> UpdateDictItem() => await UserSettingDS.UpdateDictItem(SelectedUSLang2.ID, USDICTITEM);
-        public async Task<bool> UpdateDictNote() => await UserSettingDS.UpdateDictNote(SelectedUSLang2.ID, USDICTNOTEID);
-        public async Task<bool> UpdateDictTranslation() => await UserSettingDS.UpdateDictTranslation(SelectedUSLang3.ID, USDICTTRANSLATIONID);
-        public async Task<bool> UpdateUnitFrom() => await UserSettingDS.UpdateUnitFrom(SelectedUSTextbook.ID, USUNITFROM);
-        public async Task<bool> UpdatePartFrom() => await UserSettingDS.UpdatePartFrom(SelectedUSTextbook.ID, USPARTFROM);
-        public async Task<bool> UpdateUnitTo() => await UserSettingDS.UpdateUnitTo(SelectedUSTextbook.ID, USUNITTO);
-        public async Task<bool> UpdatePartTo() => await UserSettingDS.UpdatePartTo(SelectedUSTextbook.ID, USPARTTO);
+        public async Task<bool> UpdateLang()
+        {
+            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateTextbook()
+        {
+            var v = await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID);
+            OnUpdateTextbook?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateDictItem()
+        {
+            var v = await UserSettingDS.Update(INFO_USDICTITEM, USDICTITEM);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateDictNote()
+        {
+            var v = await UserSettingDS.Update(INFO_USDICTNOTEID, USDICTNOTEID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateDictTranslation()
+        {
+            var v = await UserSettingDS.Update(INFO_USDICTTRANSLATIONID, USDICTTRANSLATIONID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateVoice()
+        {
+            var v = await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
         public string AutoCorrect(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
-        public async Task<bool> UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
+        public async Task<bool> UpdateUnitFrom()
+        {
+            var v = await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdatePartFrom()
+        {
+            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateUnitTo()
+        {
+            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdatePartTo()
+        {
+            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
+        public async Task<bool> UpdateLevel(int wordid, int level)
+        {
+            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            OnUpdateLang?.Invoke(this, null);
+            return v;
+        }
     }
 }

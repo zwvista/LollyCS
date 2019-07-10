@@ -67,4 +67,9 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _VALUE4, value);
         }
     }
+    public class MUserSettingInfo
+    {
+        public int USERSETTINGID { get; set; }
+        public int VALUEID { get; set; }
+    }
 }

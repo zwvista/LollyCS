@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\MLangPhrase.cs" />
+    <Compile Include="Models\MUSMapping.cs" />
     <Compile Include="Models\MUnitPhrase.cs" />
     <Compile Include="Models\MLangWord.cs" />
     <Compile Include="Models\MSelectItem.cs" />
@@ -105,6 +106,7 @@
       <DependentUpon>PhrasesTextbookDetailDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\LangPhraseDataStore.cs" />
+    <Compile Include="Services\USMappingDataStore.cs" />
     <Compile Include="Services\WordFamiDataStore.cs" />
     <Compile Include="Services\VoiceDataStore.cs" />
     <Compile Include="Services\UnitPhraseDataStore.cs" />
