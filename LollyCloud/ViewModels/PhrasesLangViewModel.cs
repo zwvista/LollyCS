@@ -20,9 +20,9 @@ namespace LollyShared
             return o;
         }
 
-        public async Task<bool> Update(MLangPhrase item) => await langPhraseDS.Update(item);
+        public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);
         public async Task<int> Create(MLangPhrase item) => await langPhraseDS.Create(item);
-        public async Task<bool> Delete(int id) => await langPhraseDS.Delete(id);
+        public async Task Delete(int id) => await langPhraseDS.Delete(id);
 
         public MLangPhrase NewLangPhrase() =>
             new MLangPhrase

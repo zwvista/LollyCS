@@ -23,17 +23,20 @@ namespace LollyShared
             return o;
         }
 
-        public async Task<bool> UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
-        public async Task<bool> UpdateTranslation(int phraseid, string note) => await langPhraseDS.UpdateTranslation(phraseid, note);
-        public async Task<bool> Update(MUnitPhrase item)
+        public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
+        public async Task UpdateTranslation(int phraseid, string note) => await langPhraseDS.UpdateTranslation(phraseid, note);
+        public async Task Update(MUnitPhrase item)
         {
             var phraseid = item.PHRASEID;
             var lstUnit = await unitPhraseDS.GetDataByLangPhrase(phraseid);
-            if (lstUnit.IsEmpty()) return true;
+            if (lstUnit.IsEmpty()) return;
             var itemLang = new MLangPhrase(item);
             var lstLangOld = await langPhraseDS.GetDataById(phraseid);
             if (!lstLangOld.IsEmpty() && lstLangOld[0].PHRASE == item.PHRASE)
-                return await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
+            {
+                await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
+                return;
+            }
             var lstLangNew = await langPhraseDS.GetDataByLangPhrase(item.LANGID, item.PHRASE);
             async Task f()
             {
@@ -59,7 +62,7 @@ namespace LollyShared
             else
                 await f();
             item.PHRASEID = phraseid;
-            return await unitPhraseDS.Update(item);
+            await unitPhraseDS.Update(item);
         }
         public async Task<int> Create(MUnitPhrase item)
         {
@@ -81,11 +84,12 @@ namespace LollyShared
             item.PHRASEID = phraseid;
             return await unitPhraseDS.Create(item);
         }
-        public async Task<bool> Delete(MUnitPhrase item)
+        public async Task Delete(MUnitPhrase item)
         {
             await unitPhraseDS.Delete(item.ID);
             var lst = await unitPhraseDS.GetDataByLangPhrase(item.PHRASEID);
-            return !lst.IsEmpty() || await langPhraseDS.Delete(item.PHRASEID);
+            if (lst.IsEmpty())
+                await langPhraseDS.Delete(item.PHRASEID);
         }
 
         public async Task Reindex(Action<int> complete)

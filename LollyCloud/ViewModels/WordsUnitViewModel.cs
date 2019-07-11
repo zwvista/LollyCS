@@ -31,17 +31,20 @@ namespace LollyShared
             return o;
         }
 
-        public async Task<bool> UpdateSeqNum(int id, int seqnum) => await unitWordDS.UpdateSeqNum(id, seqnum);
-        public async Task<bool> UpdateNote(int wordid, string note) => await langWordDS.UpdateNote(wordid, note);
-        public async Task<bool> Update(MUnitWord item)
+        public async Task UpdateSeqNum(int id, int seqnum) => await unitWordDS.UpdateSeqNum(id, seqnum);
+        public async Task UpdateNote(int wordid, string note) => await langWordDS.UpdateNote(wordid, note);
+        public async Task Update(MUnitWord item)
         {
             var wordid = item.WORDID;
             var lstUnit = await unitWordDS.GetDataByLangWord(wordid);
-            if (lstUnit.IsEmpty()) return true;
+            if (lstUnit.IsEmpty()) return;
             var itemLang = new MLangWord(item);
             var lstLangOld = await langWordDS.GetDataById(wordid);
             if (!lstLangOld.IsEmpty() && lstLangOld[0].WORD == item.WORD)
-                return await langWordDS.UpdateNote(wordid, item.NOTE);
+            {
+                await langWordDS.UpdateNote(wordid, item.NOTE);
+                return;
+            }
             var lstLangNew = await langWordDS.GetDataByLangWord(item.LANGID, item.WORD);
             async Task f()
             {
@@ -67,7 +70,7 @@ namespace LollyShared
             else
                 await f();
             item.WORDID = wordid;
-            return await unitWordDS.Update(item);
+            await unitWordDS.Update(item);
         }
         public async Task<int> Create(MUnitWord item)
         {
@@ -89,11 +92,12 @@ namespace LollyShared
             item.WORDID = wordid;
             return await unitWordDS.Create(item);
         }
-        public async Task<bool> Delete(MUnitWord item)
+        public async Task Delete(MUnitWord item)
         {
             await unitWordDS.Delete(item.ID);
             var lst = await unitWordDS.GetDataByLangWord(item.WORDID);
-            return !lst.IsEmpty() || await langWordDS.Delete(item.WORDID);
+            if (lst.IsEmpty())
+                await langWordDS.Delete(item.WORDID);
         }
 
         public async Task Reindex(Action<int> complete)

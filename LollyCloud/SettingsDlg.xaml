@@ -28,9 +28,10 @@
         <ComboBox ItemsSource="{Binding Languages}" DisplayMemberPath="LANGNAME" SelectedValue="{Binding SelectedLang}" SelectionChanged="cbLanguages_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Voice:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
-        <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
+        <ComboBox ItemsSource="{Binding Voices}" DisplayMemberPath="VOICENAME" SelectedValue="{Binding SelectedVoice}" SelectionChanged="cbVoices_SelectionChanged"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Dictionary(Reference):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
-        <ComboBox ItemsSource="{Binding DictItems}" DisplayMemberPath="DICTNAME" SelectedValue="{Binding SelectedDictItem}" SelectionChanged="cbDictItems_SelectionChanged"
+        <ComboBox ItemsSource="{Binding DictItems}" DisplayMemberPath="DICTNAME" SelectedValue="{Binding SelectedDictItem}" SelectionChanged="cbDictsReference_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Dictionary(Note):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" />
         <ComboBox ItemsSource="{Binding DictsNote}" DisplayMemberPath="DICTNAME" SelectedValue="{Binding SelectedDictNote}" SelectionChanged="cbDictsNote_SelectionChanged"

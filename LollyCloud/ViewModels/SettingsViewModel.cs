@@ -31,20 +31,19 @@ namespace LollyShared
         public event EventHandler OnUpdatePartFrom;
         public event EventHandler OnUpdateUnitTo;
         public event EventHandler OnUpdatePartTo;
-        public event EventHandler OnUpdateMacVoice;
-        public event EventHandler OnUpdateiOSVoice;
+        public event EventHandler OnUpdateVoice;
 
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
         private string GetUSValue(MUserSettingInfo info)
         {
-            var o = UserSettings.First(v => v.ID == info.USERSETTINGID);
-            return o.GetType().GetProperty($"VALUE{info.VALUEID}").GetValue(o) as string;
+            var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
+            return o?.GetType().GetProperty($"VALUE{info.VALUEID}").GetValue(o) as string;
         }
         private void SetUSValue(MUserSettingInfo info, string value)
         {
-            var o = UserSettings.First(v => v.ID == info.USERSETTINGID);
-            o.GetType().GetProperty($"VALUE{info.VALUEID}").SetValue(o, value);
+            var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
+            o?.GetType().GetProperty($"VALUE{info.VALUEID}").SetValue(o, value);
         }
         private MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
         public int USLANGID
@@ -356,22 +355,22 @@ namespace LollyShared
         public async Task UpdateDictItem()
         {
             await UserSettingDS.Update(INFO_USDICTITEM, USDICTITEM);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdateDictItem?.Invoke(this, null);
         }
         public async Task UpdateDictNote()
         {
             await UserSettingDS.Update(INFO_USDICTNOTEID, USDICTNOTEID);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdateDictNote?.Invoke(this, null);
         }
         public async Task UpdateDictTranslation()
         {
             await UserSettingDS.Update(INFO_USDICTTRANSLATIONID, USDICTTRANSLATIONID);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdateDictTranslation?.Invoke(this, null);
         }
         public async Task UpdateVoice()
         {
             await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdateVoice?.Invoke(this, null);
         }
         public string AutoCorrectInput(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
         public async Task UpdateUnitFrom()
@@ -399,6 +398,13 @@ namespace LollyShared
             await DoUpdateUnitFrom(USPARTTO);
             if (IsInvalidUnitPart)
                 await DoUpdateUnitPartFrom();
+        }
+        public async Task UpdateToType()
+        {
+            if (ToType == UnitPartToType.Unit)
+                await DoUpdateSingleUnit();
+            else if (ToType == UnitPartToType.Part)
+                await DoUpdateUnitPartTo();
         }
         public async Task ToggleToType(int part)
         {
@@ -476,22 +482,22 @@ namespace LollyShared
         private async Task DoUpdateUnitFrom(int v)
         {
             await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdateUnitFrom?.Invoke(this, null);
         }
         private async Task DoUpdatePartFrom(int v)
         {
             await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdatePartFrom?.Invoke(this, null);
         }
         private async Task DoUpdateUnitTo(int v)
         {
             await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdateUnitTo?.Invoke(this, null);
         }
         private async Task DoUpdatePartTo(int v)
         {
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
-            OnUpdateLang?.Invoke(this, null);
+            OnUpdatePartTo?.Invoke(this, null);
         }
         public async Task UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
     }
