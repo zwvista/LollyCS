@@ -1,13 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-
-using Newtonsoft.Json;
-using Plugin.Connectivity;
 
 namespace LollyShared
 {
@@ -25,13 +20,13 @@ namespace LollyShared
         public async Task<int> Create(MLangWord item) =>
         await CreateByUrl($"LANGWORDS", item);
 
-        public async Task<bool> UpdateNote(int id, string note) =>
-        await UpdateByUrl($"LANGWORDS/{id}", $"NOTE={note}");
+        public async Task UpdateNote(int id, string note) =>
+        Debug.WriteLine(await UpdateByUrl($"LANGWORDS/{id}", $"NOTE={note}"));
 
-        public async Task<bool> Update(MLangWord item) =>
-        await UpdateByUrl($"LANGWORDS/{item.ID}", JsonConvert.SerializeObject(item));
+        public async Task Update(MLangWord item) =>
+        Debug.WriteLine(await UpdateByUrl($"LANGWORDS/{item.ID}", JsonConvert.SerializeObject(item)));
 
-        public async Task<bool> Delete(int id) =>
-        await DeleteByUrl($"LANGWORDS/{id}");
+        public async Task Delete(int id) =>
+        Debug.WriteLine(await DeleteByUrl($"LANGWORDS/{id}"));
     }
 }

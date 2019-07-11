@@ -160,7 +160,7 @@ namespace LollyCloud
         {
             if (e.Key != Key.Return || string.IsNullOrEmpty(vm.NewWord)) return;
             var item = vm.NewUnitWord();
-            item.WORD = vmSettings.AutoCorrect(vm.NewWord);
+            item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
             vm.NewWord = "";
             item.ID = await vm.Create(item);
             vm.Items.Add(item);

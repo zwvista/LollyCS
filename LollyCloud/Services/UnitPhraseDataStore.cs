@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Linq;
-
-using Newtonsoft.Json;
-using Plugin.Connectivity;
+using System.Threading.Tasks;
 
 namespace LollyShared
 {
@@ -32,16 +30,16 @@ namespace LollyShared
         public async Task<int> Create(MUnitPhrase item) =>
         await CreateByUrl($"UNITPHRASES", item);
 
-        public async Task<bool> UpdateSeqNum(int id, int seqnum) =>
-        await UpdateByUrl($"UNITPHRASES/{id}", $"SEQNUM={seqnum}");
+        public async Task UpdateSeqNum(int id, int seqnum) =>
+        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"SEQNUM={seqnum}"));
 
-        public async Task<bool> UpdateNote(int id, string note) =>
-        await UpdateByUrl($"UNITPHRASES/{id}", $"NOTE={note}");
+        public async Task UpdateNote(int id, string note) =>
+        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"NOTE={note}"));
 
-        public async Task<bool> Update(MUnitPhrase item) =>
-        await UpdateByUrl($"UNITPHRASES/{item.ID}", JsonConvert.SerializeObject(item));
+        public async Task Update(MUnitPhrase item) =>
+        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{item.ID}", JsonConvert.SerializeObject(item)));
 
-        public async Task<bool> Delete(int id) =>
-        await DeleteByUrl($"UNITPHRASES/{id}");
+        public async Task Delete(int id) =>
+        Debug.WriteLine(await DeleteByUrl($"UNITPHRASES/{id}"));
     }
 }

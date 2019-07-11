@@ -40,7 +40,7 @@ namespace LollyCloud
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            item.PHRASE = vmSettings.AutoCorrect(item.PHRASE);
+            item.PHRASE = vmSettings.AutoCorrectInput(item.PHRASE);
             if (item.ID == 0)
                 item.ID = await vm.Create(item);
             else

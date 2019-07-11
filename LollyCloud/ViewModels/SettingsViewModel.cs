@@ -240,7 +240,7 @@ namespace LollyShared
                 this.RaisePropertyChanged("Units");
                 this.RaisePropertyChanged("UnitsInAll");
                 this.RaisePropertyChanged("Parts");
-                ToType = IsSingleUnit ? 0 : IsSingleUnitPart ? 1 : 2;
+                ToType = IsSingleUnit ? UnitPartToType.Unit : IsSingleUnitPart ? UnitPartToType.Part : UnitPartToType.To;
             }
         }
         public int SelectedTextbookIndex => Textbooks.IndexOf(_SelectedTextbook);
@@ -259,8 +259,8 @@ namespace LollyShared
             new MSelectItem(1, "Part"),
             new MSelectItem(2, "To"),
         };
-        int _ToType = 2;
-        public int ToType
+        UnitPartToType _ToType = UnitPartToType.Unit;
+        public UnitPartToType ToType
         {
             get => _ToType;
             set => this.RaiseAndSetIfChanged(ref _ToType, value);
@@ -343,72 +343,156 @@ namespace LollyShared
             return s;
         }
 
-        public async Task<bool> UpdateLang()
+        public async Task UpdateLang()
         {
-            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            await UserSettingDS.Update(INFO_USLANGID, USLANGID);
             OnUpdateLang?.Invoke(this, null);
-            return v;
         }
-        public async Task<bool> UpdateTextbook()
+        public async Task UpdateTextbook()
         {
-            var v = await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID);
+            await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID);
             OnUpdateTextbook?.Invoke(this, null);
-            return v;
         }
-        public async Task<bool> UpdateDictItem()
+        public async Task UpdateDictItem()
         {
-            var v = await UserSettingDS.Update(INFO_USDICTITEM, USDICTITEM);
+            await UserSettingDS.Update(INFO_USDICTITEM, USDICTITEM);
             OnUpdateLang?.Invoke(this, null);
-            return v;
         }
-        public async Task<bool> UpdateDictNote()
+        public async Task UpdateDictNote()
         {
-            var v = await UserSettingDS.Update(INFO_USDICTNOTEID, USDICTNOTEID);
+            await UserSettingDS.Update(INFO_USDICTNOTEID, USDICTNOTEID);
             OnUpdateLang?.Invoke(this, null);
-            return v;
         }
-        public async Task<bool> UpdateDictTranslation()
+        public async Task UpdateDictTranslation()
         {
-            var v = await UserSettingDS.Update(INFO_USDICTTRANSLATIONID, USDICTTRANSLATIONID);
+            await UserSettingDS.Update(INFO_USDICTTRANSLATIONID, USDICTTRANSLATIONID);
             OnUpdateLang?.Invoke(this, null);
-            return v;
         }
-        public async Task<bool> UpdateVoice()
+        public async Task UpdateVoice()
         {
-            var v = await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
+            await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
             OnUpdateLang?.Invoke(this, null);
-            return v;
         }
-        public string AutoCorrect(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
-        public async Task<bool> UpdateUnitFrom()
+        public string AutoCorrectInput(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
+        public async Task UpdateUnitFrom()
         {
-            var v = await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
-            OnUpdateLang?.Invoke(this, null);
-            return v;
+            await DoUpdateUnitFrom(USUNITFROM);
+            if (ToType == UnitPartToType.Unit)
+                await DoUpdateSingleUnit();
+            else if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
+                await DoUpdateUnitPartTo();
         }
-        public async Task<bool> UpdatePartFrom()
+        public async Task UpdatePartFrom()
         {
-            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
-            OnUpdateLang?.Invoke(this, null);
-            return v;
+            await DoUpdatePartFrom(USPARTFROM);
+            if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
+                await DoUpdateUnitPartTo();
         }
-        public async Task<bool> UpdateUnitTo()
+        public async Task UpdateUnitTo()
         {
-            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
-            OnUpdateLang?.Invoke(this, null);
-            return v;
+            await DoUpdateUnitFrom(USUNITTO);
+            if (IsInvalidUnitPart)
+                await DoUpdateUnitPartFrom();
         }
-        public async Task<bool> UpdatePartTo()
+        public async Task UpdatePartTo()
         {
-            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
-            OnUpdateLang?.Invoke(this, null);
-            return v;
+            await DoUpdateUnitFrom(USPARTTO);
+            if (IsInvalidUnitPart)
+                await DoUpdateUnitPartFrom();
         }
-        public async Task<bool> UpdateLevel(int wordid, int level)
+        public async Task ToggleToType(int part)
         {
-            var v = await UserSettingDS.Update(INFO_USLANGID, USLANGID);
-            OnUpdateLang?.Invoke(this, null);
-            return v;
+            if (ToType == UnitPartToType.Unit)
+            {
+                ToType = UnitPartToType.Part;
+                await DoUpdatePartFrom(part);
+            }
+            else if (ToType == UnitPartToType.Part)
+            {
+                ToType = UnitPartToType.Unit;
+                await DoUpdateSingleUnit();
+            }
         }
+        public async Task PreviousUnitPart()
+        {
+            if (ToType == UnitPartToType.Unit)
+            {
+                if (USUNITFROM > 1)
+                {
+                    await DoUpdateUnitFrom(USUNITFROM - 1);
+                    await DoUpdateUnitTo(USUNITFROM);
+                }
+            }
+            else if (USPARTFROM > 1)
+            {
+                await DoUpdatePartFrom(USPARTFROM - 1);
+                await DoUpdateUnitPartTo();
+            }
+            else if (USUNITFROM > 1)
+            {
+                await DoUpdateUnitFrom(USUNITFROM - 1);
+                await DoUpdatePartFrom(PartCount);
+                await DoUpdateUnitPartTo();
+            }
+        }
+        public async Task NextUnitPart()
+        {
+            if (ToType == UnitPartToType.Unit)
+            {
+                if (USUNITFROM < UnitCount)
+                {
+                    await DoUpdateUnitFrom(USUNITFROM + 1);
+                    await DoUpdateUnitTo(USUNITFROM);
+                }
+            }
+            else if (USPARTFROM < PartCount)
+            {
+                await DoUpdatePartFrom(USPARTFROM + 1);
+                await DoUpdateUnitPartTo();
+            }
+            else if (USUNITFROM < UnitCount)
+            {
+                await DoUpdateUnitFrom(USUNITFROM + 1);
+                await DoUpdatePartFrom(1);
+                await DoUpdateUnitPartTo();
+            }
+        }
+        private async Task DoUpdateUnitPartFrom()
+        {
+            await DoUpdateUnitFrom(USUNITTO);
+            await DoUpdatePartFrom(USPARTTO);
+        }
+        private async Task DoUpdateUnitPartTo()
+        {
+            await DoUpdateUnitTo(USUNITFROM);
+            await DoUpdatePartTo(USPARTFROM);
+        }
+        private async Task DoUpdateSingleUnit()
+        {
+            await DoUpdateUnitTo(USUNITFROM);
+            await DoUpdatePartFrom(1);
+            await DoUpdatePartTo(PartCount);
+        }
+        private async Task DoUpdateUnitFrom(int v)
+        {
+            await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
+            OnUpdateLang?.Invoke(this, null);
+        }
+        private async Task DoUpdatePartFrom(int v)
+        {
+            await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
+            OnUpdateLang?.Invoke(this, null);
+        }
+        private async Task DoUpdateUnitTo(int v)
+        {
+            await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
+            OnUpdateLang?.Invoke(this, null);
+        }
+        private async Task DoUpdatePartTo(int v)
+        {
+            await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
+            OnUpdateLang?.Invoke(this, null);
+        }
+        public async Task UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
     }
 }

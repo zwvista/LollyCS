@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace LollyShared
 {
@@ -14,13 +14,13 @@ namespace LollyShared
         async Task<int> Create(MWordFami item) =>
         await CreateByUrl($"WORDSFAMI", item);
 
-        async Task<bool> Update(MWordFami item) =>
-        await UpdateByUrl($"WORDSFAMI/{item.ID}", JsonConvert.SerializeObject(item));
+        async Task Update(MWordFami item) =>
+        Debug.WriteLine(await UpdateByUrl($"WORDSFAMI/{item.ID}", JsonConvert.SerializeObject(item)));
 
-        async Task<bool> Delete(int id) =>
-        await DeleteByUrl($"WORDSFAMI/{id}");
+        async Task Delete(int id) =>
+        Debug.WriteLine(await DeleteByUrl($"WORDSFAMI/{id}"));
 
-        public async Task<bool> Update(int wordid, int level)
+        public async Task Update(int wordid, int level)
         {
             var userid = CommonApi.UserId;
             var lst = (await getDataByUserWord(userid, wordid)).ToList();
@@ -32,18 +32,18 @@ namespace LollyShared
             };
             if (lst.IsEmpty())
                 if (level == 0)
-                    return true;
+                    return;
                 else
-                    return await Create(item) != 0;
+                    await Create(item);
             else
             {
                 var id = lst[0].ID;
                 if (level == 0)
-                    return await Delete(id);
+                    await Delete(id);
                 else
                 {
                     item.ID = id;
-                    return await Update(item);
+                    await Update(item);
                 }
             }
         }
