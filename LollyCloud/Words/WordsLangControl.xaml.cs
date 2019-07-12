@@ -26,7 +26,7 @@ namespace LollyCloud
     {
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public WordsLangViewModel vm { get; set; }
-        DictWebBrowserStatus status = DictWebBrowserStatus.Ready;
+        DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         int selectedDictItemIndex;
         string selectedWord = "";
 
@@ -50,7 +50,7 @@ namespace LollyCloud
 
         async void SearchWord(string word)
         {
-            status = DictWebBrowserStatus.Ready;
+            dictStatus = DictWebBrowserStatus.Ready;
             var item = vmSettings.DictItems[selectedDictItemIndex];
             if (item.DICTNAME.StartsWith("Custom"))
             {
@@ -71,8 +71,10 @@ namespace LollyCloud
                 else
                 {
                     wbDict.Navigate(url);
-                    if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
-                        status = DictWebBrowserStatus.Navigating;
+                    if (item2.AUTOMATION != null)
+                        dictStatus = DictWebBrowserStatus.Automating;
+                    else if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
+                        dictStatus = DictWebBrowserStatus.Navigating;
                 }
             }
         }
@@ -111,14 +113,27 @@ namespace LollyCloud
 
         void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            if (status != DictWebBrowserStatus.Navigating) return;
+            if (dictStatus == DictWebBrowserStatus.Ready) return;
             var item = vmSettings.DictItems[selectedDictItemIndex];
             var item2 = vmSettings.DictsReference.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
-            var doc = (HTMLDocument)wbDict.Document;
-            var html = doc.documentElement.outerHTML;
-            var str = item2.HtmlString(html, selectedWord);
-            status = DictWebBrowserStatus.Ready;
-            wbDict.NavigateToString(str);
+            switch (dictStatus)
+            {
+                case DictWebBrowserStatus.Automating:
+                    var s = item2.AUTOMATION.Replace("{0}", selectedWord);
+                    // https://stackoverflow.com/questions/7998996/how-to-inject-javascript-in-webbrowser-control
+                    wbDict.InvokeScript("execScript", new[] { s, "JavaScript" });
+                    dictStatus = DictWebBrowserStatus.Ready;
+                    if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
+                        dictStatus = DictWebBrowserStatus.Navigating;
+                    break;
+                case DictWebBrowserStatus.Navigating:
+                    var doc = (HTMLDocument)wbDict.Document;
+                    var html = doc.documentElement.outerHTML;
+                    var str = item2.HtmlString(html, selectedWord);
+                    dictStatus = DictWebBrowserStatus.Ready;
+                    wbDict.NavigateToString(str);
+                    break;
+            }
         }
 
         async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();

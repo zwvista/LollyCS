@@ -91,6 +91,13 @@ namespace LollyShared
             get => _CHCONV;
             set => this.RaiseAndSetIfChanged(ref _CHCONV, value);
         }
+        string _AUTOMATION;
+        [JsonProperty]
+        public string AUTOMATION
+        {
+            get => _AUTOMATION;
+            set => this.RaiseAndSetIfChanged(ref _AUTOMATION, value);
+        }
         string _TRANSFORM;
         [JsonProperty("TRANSFORM_WIN")]
         public string TRANSFORM

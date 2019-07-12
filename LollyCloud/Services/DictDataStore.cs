@@ -13,7 +13,7 @@ namespace LollyShared
     public class DictReferenceDataStore : LollyDataStore<MDictReference>
     {
         public async Task<List<MDictReference>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<MDictsReference>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}")).records;
+        (await GetDataByUrl<MDictsReference>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).records;
     }
     public class DictNoteDataStore : LollyDataStore<MDictNote>
     {
