@@ -66,7 +66,7 @@ namespace LollyCloud
                     wbDict.Navigate("about:blank");
                     var html = await vmSettings.client.GetStringAsync(url);
                     var str = item2.HtmlString(html, word);
-                    wbDict.Navigate(str);
+                    wbDict.NavigateToString(str);
                 }
                 else
                 {

@@ -28,7 +28,7 @@ namespace LollyShared
         {
             {"<delete>", ""}, {@"\t", "\t"}, {@"\r", "\r"}, {@"\n", "\n"},
         };
-        public static string ExtractTextFromHtml(string html, string transfrom, string template, Func<string, string, string> templateHandler)
+        public static string ExtractTextFromHtml(string html, string transform, string template, Func<string, string, string> templateHandler)
         {
 #if DEBUG_EXTRACT
             var logFolder = Settings.Default.LogFolder + "\\";
@@ -36,31 +36,27 @@ namespace LollyShared
             transfrom = File.ReadAllText(logFolder + "1_transform.txt");
             template = File.ReadAllText(logFolder + "5_template.txt");
 #endif
-            var text = "";
+            var text = html.Replace("\r\n", "\n");
             do
             {
-                if (string.IsNullOrEmpty(transfrom)) break;
-                var arr = transfrom.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                var reg = new Regex(arr[0]);
-                var match = reg.Match(html);
-                if (!match.Success) break;
-
-                text = match.Groups[0].Value;
-                void f(string replacer)
+                if (string.IsNullOrEmpty(transform)) break;
+                var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < arr.Length; i += 2)
                 {
+                    var reg = new Regex(arr[i].Replace("\r\n", "\n"));
+                    var replacer = arr[i + 1];
+                    if (replacer.StartsWith("<extract>"))
+                    {
+                        replacer = replacer.Substring("<extract>".Length);
+                        text = string.Join("", reg.Matches(html).Cast<Match>().Select(m => m.Groups[0]));
+                    }
                     foreach (var entry in escapes)
                         replacer = replacer.Replace(entry.Key, entry.Value);
                     text = reg.Replace(text, replacer);
-                };
 
-                f(arr[1]);
 #if DEBUG_EXTRACT
-            File.WriteAllText(logFolder + "2_extracted.txt", text);
+                    File.WriteAllText(logFolder + "2_extracted.txt", text);
 #endif
-                for (int i = 2; i < arr.Length;)
-                {
-                    reg = new Regex(arr[i++]);
-                    f(arr[i++]);
                 }
 #if DEBUG_EXTRACT
             File.WriteAllText(logFolder + "4_cooked.txt", text);

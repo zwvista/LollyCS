@@ -98,8 +98,15 @@ namespace LollyShared
             get => _AUTOMATION;
             set => this.RaiseAndSetIfChanged(ref _AUTOMATION, value);
         }
+        string _TRANSFORM_WIN;
+        [JsonProperty]
+        public string TRANSFORM_WIN
+        {
+            get => _TRANSFORM_WIN;
+            set => this.RaiseAndSetIfChanged(ref _TRANSFORM_WIN, value);
+        }
         string _TRANSFORM;
-        [JsonProperty("TRANSFORM_WIN")]
+        [JsonProperty]
         public string TRANSFORM
         {
             get => _TRANSFORM;
