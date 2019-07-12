@@ -32,6 +32,7 @@ namespace LollyShared
         public event EventHandler OnUpdateUnitTo;
         public event EventHandler OnUpdatePartTo;
         public event EventHandler OnUpdateVoice;
+        public event EventHandler OnUpdateToType;
 
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
@@ -40,16 +41,17 @@ namespace LollyShared
             var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
             return o?.GetType().GetProperty($"VALUE{info.VALUEID}").GetValue(o) as string;
         }
-        private void SetUSValue(MUserSettingInfo info, string value)
+        private void SetUSValue(MUserSettingInfo info, string value, string name)
         {
             var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
             o?.GetType().GetProperty($"VALUE{info.VALUEID}").SetValue(o, value);
+            this.RaisePropertyChanged(name);
         }
         private MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
         public int USLANGID
         {
             get => int.Parse(GetUSValue(INFO_USLANGID));
-            set => SetUSValue(INFO_USLANGID, value.ToString());
+            set => SetUSValue(INFO_USLANGID, value.ToString(), nameof(USLANGID));
         }
         private MUserSettingInfo INFO_USROWSPERPAGEOPTIONS = new MUserSettingInfo();
         public List<int> USROWSPERPAGEOPTIONS =>
@@ -62,73 +64,73 @@ namespace LollyShared
         public int USSCANINTERVAL
         {
             get => int.Parse(GetUSValue(INFO_USSCANINTERVAL));
-            set => SetUSValue(INFO_USSCANINTERVAL, value.ToString());
+            set => SetUSValue(INFO_USSCANINTERVAL, value.ToString(), nameof(USSCANINTERVAL));
         }
         private MUserSettingInfo INFO_USREVIEWINTERVAL = new MUserSettingInfo();
         public int USREVIEWINTERVAL
         {
             get => int.Parse(GetUSValue(INFO_USREVIEWINTERVAL));
-            set => SetUSValue(INFO_USREVIEWINTERVAL, value.ToString());
+            set => SetUSValue(INFO_USREVIEWINTERVAL, value.ToString(), nameof(USREVIEWINTERVAL));
         }
         private MUserSettingInfo INFO_USTEXTBOOKID = new MUserSettingInfo();
         public int USTEXTBOOKID
         {
             get => int.Parse(GetUSValue(INFO_USTEXTBOOKID));
-            set => SetUSValue(INFO_USTEXTBOOKID, value.ToString());
+            set => SetUSValue(INFO_USTEXTBOOKID, value.ToString(), nameof(USTEXTBOOKID));
         }
         private MUserSettingInfo INFO_USDICTITEM = new MUserSettingInfo();
         public string USDICTITEM
         {
             get => GetUSValue(INFO_USDICTITEM);
-            set => SetUSValue(INFO_USDICTITEM, value);
+            set => SetUSValue(INFO_USDICTITEM, value, nameof(USDICTITEM));
         }
         private MUserSettingInfo INFO_USDICTNOTEID = new MUserSettingInfo();
         public int USDICTNOTEID
         {
             get => int.TryParse(GetUSValue(INFO_USDICTNOTEID), out var v) ? v : 0;
-            set => SetUSValue(INFO_USDICTNOTEID, value.ToString());
+            set => SetUSValue(INFO_USDICTNOTEID, value.ToString(), nameof(USDICTNOTEID));
         }
         private MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
         public string USDICTITEMS
         {
             get => GetUSValue(INFO_USDICTITEMS) ?? "0";
-            set => SetUSValue(INFO_USDICTITEMS, value);
+            set => SetUSValue(INFO_USDICTITEMS, value, nameof(USDICTITEMS));
         }
         private MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
         public int USDICTTRANSLATIONID
         {
             get => int.TryParse(GetUSValue(INFO_USDICTTRANSLATIONID), out var v) ? v : 0;
-            set => SetUSValue(INFO_USDICTTRANSLATIONID, value.ToString());
+            set => SetUSValue(INFO_USDICTTRANSLATIONID, value.ToString(), nameof(USDICTTRANSLATIONID));
         }
         private MUserSettingInfo INFO_USVOICEID = new MUserSettingInfo();
         public int USVOICEID
         {
             get => int.TryParse(GetUSValue(INFO_USVOICEID), out var v) ? v : 0;
-            set => SetUSValue(INFO_USVOICEID, value.ToString());
+            set => SetUSValue(INFO_USVOICEID, value.ToString(), nameof(USVOICEID));
         }
         private MUserSettingInfo INFO_USUNITFROM = new MUserSettingInfo();
         public int USUNITFROM
         {
             get => int.TryParse(GetUSValue(INFO_USUNITFROM), out var v) ? v : 0;
-            set => SetUSValue(INFO_USUNITFROM, value.ToString());
+            set => SetUSValue(INFO_USUNITFROM, value.ToString(), nameof(USUNITFROM));
         }
         private MUserSettingInfo INFO_USPARTFROM = new MUserSettingInfo();
         public int USPARTFROM
         {
             get => int.TryParse(GetUSValue(INFO_USPARTFROM), out var v) ? v : 0;
-            set => SetUSValue(INFO_USPARTFROM, value.ToString());
+            set => SetUSValue(INFO_USPARTFROM, value.ToString(), nameof(USPARTFROM));
         }
         private MUserSettingInfo INFO_USUNITTO = new MUserSettingInfo();
         public int USUNITTO
         {
             get => int.TryParse(GetUSValue(INFO_USUNITTO), out var v) ? v : 0;
-            set => SetUSValue(INFO_USUNITTO, value.ToString());
+            set => SetUSValue(INFO_USUNITTO, value.ToString(), nameof(USUNITTO));
         }
         private MUserSettingInfo INFO_USPARTTO = new MUserSettingInfo();
         public int USPARTTO
         {
             get => int.TryParse(GetUSValue(INFO_USPARTTO), out var v) ? v : 0;
-            set => SetUSValue(INFO_USPARTTO, value.ToString());
+            set => SetUSValue(INFO_USPARTTO, value.ToString(), nameof(USPARTTO));
         }
         public int USUNITPARTFROM => USUNITFROM * 10 + USPARTFROM;
         public int USUNITPARTTO => USUNITTO * 10 + USPARTTO;
@@ -225,21 +227,21 @@ namespace LollyShared
         public MTextbook SelectedTextbook {
             get => _SelectedTextbook;
             set {
-                if (value == null) return;
+                if (value == null || value == _SelectedTextbook) return;
                 this.RaiseAndSetIfChanged(ref _SelectedTextbook, value);
                 USTEXTBOOKID = value.ID;
                 INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
                 INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
                 INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
                 INFO_USPARTTO = GetUSInfo(MUSMapping.NAME_USPARTTO);
-                this.RaisePropertyChanged("USUNITFROM");
-                this.RaisePropertyChanged("USPARTFROM");
-                this.RaisePropertyChanged("USUNITTO");
-                this.RaisePropertyChanged("USPARTTO");
-                this.RaisePropertyChanged("Units");
-                this.RaisePropertyChanged("UnitsInAll");
-                this.RaisePropertyChanged("Parts");
                 ToType = IsSingleUnit ? UnitPartToType.Unit : IsSingleUnitPart ? UnitPartToType.Part : UnitPartToType.To;
+                this.RaisePropertyChanged(nameof(Units));
+                this.RaisePropertyChanged(nameof(UnitsInAll));
+                this.RaisePropertyChanged(nameof(Parts));
+                this.RaisePropertyChanged(nameof(USUNITFROM));
+                this.RaisePropertyChanged(nameof(USPARTFROM));
+                this.RaisePropertyChanged(nameof(USUNITTO));
+                this.RaisePropertyChanged(nameof(USPARTTO));
             }
         }
         public int SelectedTextbookIndex => Textbooks.IndexOf(_SelectedTextbook);
@@ -262,7 +264,11 @@ namespace LollyShared
         public UnitPartToType ToType
         {
             get => _ToType;
-            set => this.RaiseAndSetIfChanged(ref _ToType, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _ToType, value);
+                OnUpdateToType?.Invoke(this, null);
+            }
         }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
@@ -395,7 +401,7 @@ namespace LollyShared
         }
         public async Task UpdatePartTo()
         {
-            await DoUpdateUnitFrom(USPARTTO);
+            await DoUpdatePartTo(USPARTTO);
             if (IsInvalidUnitPart)
                 await DoUpdateUnitPartFrom();
         }
@@ -481,21 +487,25 @@ namespace LollyShared
         }
         private async Task DoUpdateUnitFrom(int v)
         {
+            if (USUNITFROM == v) return;
             await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
             OnUpdateUnitFrom?.Invoke(this, null);
         }
         private async Task DoUpdatePartFrom(int v)
         {
+            if (USPARTFROM == v) return;
             await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
             OnUpdatePartFrom?.Invoke(this, null);
         }
         private async Task DoUpdateUnitTo(int v)
         {
+            if (USUNITTO == v) return;
             await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
             OnUpdateUnitTo?.Invoke(this, null);
         }
         private async Task DoUpdatePartTo(int v)
         {
+            if (USPARTTO == v) return;
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
             OnUpdatePartTo?.Invoke(this, null);
         }
