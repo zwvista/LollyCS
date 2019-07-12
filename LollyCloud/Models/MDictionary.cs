@@ -148,10 +148,11 @@ namespace LollyShared
     }
     public class MDictReference : MDictionary
     {
-        public string HtmlString(string html, string word, bool useTemplate2 = false)
+        public string HtmlString(string html, string word, bool useTransformWin = false, bool useTemplate2 = false)
         {
             var template = useTemplate2 && !string.IsNullOrEmpty(TEMPLATE2) ? TEMPLATE2 : TEMPLATE;
-            return CommonApi.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
+            var transform = useTransformWin ? TRANSFORM_WIN : TRANSFORM;
+            return CommonApi.ExtractTextFromHtml(html, transform, template, (text, template2) =>
                 string.Format(template2, word, CommonApi.CssFolder, text));
         }
     }
