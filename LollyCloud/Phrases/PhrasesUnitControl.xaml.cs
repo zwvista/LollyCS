@@ -89,5 +89,23 @@ namespace LollyCloud
         void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPhrase);
 
         void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPhrase);
+
+        async void btnToggleToType_Click(object sender, RoutedEventArgs e)
+        {
+            var row = dgPhrases.SelectedIndex;
+            var part = row == -1 ? vmSettings.Parts[0].Value : vm.Items[row].PART;
+            await vmSettings.ToggleToType(part);
+            btnRefresh_Click(sender, e);
+        }
+        async void btnPreviousUnitPart_Click(object sender, RoutedEventArgs e)
+        {
+            await vmSettings.PreviousUnitPart();
+            btnRefresh_Click(sender, e);
+        }
+        async void btnNextUnitPart_Click(object sender, RoutedEventArgs e)
+        {
+            await vmSettings.NextUnitPart();
+            btnRefresh_Click(sender, e);
+        }
     }
 }

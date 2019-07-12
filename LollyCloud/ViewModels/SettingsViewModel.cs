@@ -418,6 +418,7 @@ namespace LollyShared
             {
                 ToType = UnitPartToType.Part;
                 await DoUpdatePartFrom(part);
+                await DoUpdateUnitPartTo();
             }
             else if (ToType == UnitPartToType.Part)
             {

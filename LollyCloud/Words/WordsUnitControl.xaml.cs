@@ -200,5 +200,23 @@ namespace LollyCloud
                 e.Handled = true;
             }
         }
+
+        async void btnToggleToType_Click(object sender, RoutedEventArgs e)
+        {
+            var row = dgWords.SelectedIndex;
+            var part = row == -1 ? vmSettings.Parts[0].Value : vm.Items[row].PART;
+            await vmSettings.ToggleToType(part);
+            btnRefresh_Click(sender, e);
+        }
+        async void btnPreviousUnitPart_Click(object sender, RoutedEventArgs e)
+        {
+            await vmSettings.PreviousUnitPart();
+            btnRefresh_Click(sender, e);
+        }
+        async void btnNextUnitPart_Click(object sender, RoutedEventArgs e)
+        {
+            await vmSettings.NextUnitPart();
+            btnRefresh_Click(sender, e);
+        }
     }
 }

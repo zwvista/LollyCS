@@ -119,7 +119,7 @@ namespace LollyCloud
                 case DictWebBrowserStatus.Navigating:
                     var doc = (HTMLDocument)wbDict.Document;
                     var html = doc.documentElement.outerHTML;
-                    var str = item2.HtmlString(html, selectedWord);
+                    var str = item2.HtmlString(html, selectedWord, useTransformWin: true);
                     dictStatus = DictWebBrowserStatus.Ready;
                     wbDict.NavigateToString(str);
                     break;

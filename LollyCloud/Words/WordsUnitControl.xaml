@@ -14,6 +14,9 @@
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
                 <TextBox x:Name="tbNewWord" Text="{Binding vm.NewWord}"  Width="96" KeyDown="tbNewWord_KeyDown"></TextBox>
+                <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
+                <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
+                <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid>
