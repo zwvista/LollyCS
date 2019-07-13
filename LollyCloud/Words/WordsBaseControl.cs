@@ -18,7 +18,7 @@ namespace LollyCloud
         public virtual MWordInterface ItemForRow(int row) => null;
         public virtual SettingsViewModel vmSettings => null;
         public virtual WebBrowser wbDictBase => null;
-        public virtual ToolBar ToolBar1Base => null;
+        public virtual ToolBar ToolBarDictBase => null;
         public void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
 
         public void SearchDict(object sender, RoutedEventArgs e)
@@ -119,7 +119,7 @@ namespace LollyCloud
         public virtual async Task OnSettingsChanged()
         {
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
-            ToolBar1Base.Items.Clear();
+            ToolBarDictBase.Items.Clear();
             for (int i = 0; i < vmSettings.DictItems.Count; i++)
             {
                 var b = new RadioButton
@@ -129,7 +129,7 @@ namespace LollyCloud
                     Tag = i,
                 };
                 b.Click += SearchDict;
-                ToolBar1Base.Items.Add(b);
+                ToolBarDictBase.Items.Add(b);
                 if (i == selectedDictItemIndex)
                     b.IsChecked = true;
             }

@@ -16,7 +16,7 @@ namespace LollyCloud
         public override MWordInterface ItemForRow(int row) => vm.Items[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
-        public override ToolBar ToolBar1Base => ToolBar1;
+        public override ToolBar ToolBarDictBase => ToolBarDict;
 
         public WordsUnitControl()
         {
