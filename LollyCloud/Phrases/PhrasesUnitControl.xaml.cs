@@ -54,7 +54,7 @@ namespace LollyCloud
 
         public override async Task OnSettingsChanged()
         {
-            vm = await PhrasesUnitViewModel.CreateAsync(MainWindow.vmSettings, true);
+            vm = await PhrasesUnitViewModel.CreateAsync(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             dgPhrases.ItemsSource = vm.Items;
             await base.OnSettingsChanged();
         }

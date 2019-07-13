@@ -34,6 +34,11 @@ namespace LollyShared
         public event EventHandler OnUpdateVoice;
         public event EventHandler OnUpdateToType;
 
+        public SettingsViewModel ShallowCopy()
+        {
+            return (SettingsViewModel)this.MemberwiseClone();
+        }
+
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
         private string GetUSValue(MUserSettingInfo info)

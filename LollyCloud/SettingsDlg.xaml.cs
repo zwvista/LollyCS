@@ -1,16 +1,19 @@
 ﻿using LollyShared;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace LollyCloud
 {
+    public enum SettingsDlgResult { ApplyToAll, ApplyToCurrent, ApplyToNone };
     /// <summary>
     /// SettingsDlg.xaml の相互作用ロジック
     /// </summary>
     public partial class SettingsDlg : Window
     {
         SettingsViewModel vm = new SettingsViewModel();
+        public SettingsDlgResult Result { get; private set; }
 
         public SettingsDlg()
         {
@@ -77,7 +80,11 @@ namespace LollyCloud
         async void btnNext_Click(object sender, RoutedEventArgs e) =>
             await vm.NextUnitPart();
 
-        void btnClose_Click(object sender, RoutedEventArgs e) => this.Close();
+        void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Result = (SettingsDlgResult)(sender as Button).Tag;
+            this.Close();
+        }
 
     }
 }

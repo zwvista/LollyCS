@@ -18,10 +18,10 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _NewWord, value);
         }
 
-        public static async Task<WordsLangViewModel> CreateAsync(SettingsViewModel vmSettings)
+        public static async Task<WordsLangViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
         {
             var o = new WordsLangViewModel();
-            o.vmSettings = vmSettings;
+            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             o.Items = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             return o;
         }

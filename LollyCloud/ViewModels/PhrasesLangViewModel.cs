@@ -12,10 +12,10 @@ namespace LollyShared
 
         public ObservableCollection<MLangPhrase> Items { get; set; }
 
-        public static async Task<PhrasesLangViewModel> CreateAsync(SettingsViewModel vmSettings)
+        public static async Task<PhrasesLangViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
         {
             var o = new PhrasesLangViewModel();
-            o.vmSettings = vmSettings;
+            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             o.Items = new ObservableCollection<MLangPhrase>(await o.langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             return o;
         }

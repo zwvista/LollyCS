@@ -62,8 +62,20 @@
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="3" />
         <Button x:Name="btnPrevious" Content="Previous" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="120" Grid.Column="1" Height="20" Grid.Row="8" Click="btnPrevious_Click"/>
         <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Grid.Column="2" Height="20" Grid.Row="8" Click="btnNext_Click"/>
-        <Button Content="Apply to All Windows" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Grid.Column="1" Height="20" Grid.Row="9"  Click="btnClose_Click"/>
-        <Button Content="Apply to Current Window" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Grid.Column="2" Height="20" Grid.Row="9" Click="btnClose_Click"/>
-        <Button Content="Apply to None" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Grid.Column="3" Height="20" Grid.Row="9" Click="btnClose_Click"/>
+        <Button Content="Apply to All Windows" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Grid.Column="1" Height="20" Grid.Row="9" Click="btnClose_Click">
+            <Button.Tag>
+                <x:Static Member="local:SettingsDlgResult.ApplyToAll"/>
+            </Button.Tag>
+        </Button>
+        <Button Content="Apply to Current Window" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Grid.Column="2" Height="20" Grid.Row="9" Click="btnClose_Click">
+            <Button.Tag>
+                <x:Static Member="local:SettingsDlgResult.ApplyToCurrent"/>
+            </Button.Tag>
+        </Button>
+        <Button Content="Apply to None" HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Grid.Column="3" Height="20" Grid.Row="9" Click="btnClose_Click">
+            <Button.Tag>
+                <x:Static Member="local:SettingsDlgResult.ApplyToNone"/>
+            </Button.Tag>
+        </Button>
     </Grid>
 </Window>

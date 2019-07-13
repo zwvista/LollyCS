@@ -13,10 +13,10 @@ namespace LollyShared
 
         public ObservableCollection<MUnitPhrase> Items { get; set; }
 
-        public static async Task<PhrasesUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook)
+        public static async Task<PhrasesUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
             var o = new PhrasesUnitViewModel();
-            o.vmSettings = vmSettings;
+            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             o.Items = new ObservableCollection<MUnitPhrase>(await (inTextbook ? o.unitPhraseDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
                 o.unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
