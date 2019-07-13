@@ -1,24 +1,22 @@
 ﻿using LollyShared;
-using MSHTML;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace LollyCloud
 {
     /// <summary>
     /// WordsUnitControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class WordsUnitControl : WordsBaseControl, ILollySettings
+    public partial class WordsUnitControl : WordsBaseControl
     {
         public WordsUnitViewModel vm { get; set; }
-        public override DataGrid dgWordsBase { get => dgWords; }
-        public override MWordInterface ItemForRow(int row) { return vm.Items[row]; }
-        public override SettingsViewModel vmSettings { get => vm.vmSettings; }
-        public override WebBrowser wbDictBase { get => wbDict; }
+        public override DataGrid dgWordsBase => dgWords;
+        public override MWordInterface ItemForRow(int row) => vm.Items[row];
+        public override SettingsViewModel vmSettings => vm.vmSettings;
+        public override WebBrowser wbDictBase => wbDict;
+        public override ToolBar ToolBar1Base => ToolBar1;
 
         public WordsUnitControl()
         {
@@ -56,27 +54,11 @@ namespace LollyCloud
             }
         }
 
-        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
-
-        public async Task OnSettingsChanged()
+        public override async Task OnSettingsChanged()
         {
             vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings, true);
-            selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
             dgWords.ItemsSource = vm.Items;
-            ToolBar1.Items.Clear();
-            for (int i = 0; i < vmSettings.DictItems.Count; i++)
-            {
-                var b = new RadioButton
-                {
-                    Content = vmSettings.DictItems[i].DICTNAME,
-                    GroupName = "DICT",
-                    Tag = i,
-                };
-                b.Click += SearchDict;
-                ToolBar1.Items.Add(b);
-                if (i == selectedDictItemIndex)
-                    b.IsChecked = true;
-            }
+            await base.OnSettingsChanged();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
@@ -97,24 +79,10 @@ namespace LollyCloud
             vm.Items.Add(item);
         }
 
-        async Task ChangeLevel(int delta)
+        public async override Task LevelChanged(int row)
         {
-            var row = dgWords.SelectedIndex;
-            if (row == -1) return;
             var item = vm.Items[row];
-            var newLevel = item.LEVEL + delta;
-            if (newLevel != 0 && !vmSettings.USLEVELCOLORS.ContainsKey(newLevel)) return;
-            item.LEVEL = newLevel;
             await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
-        }
-
-        async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyboardDevice.Modifiers == ModifierKeys.Alt && (e.SystemKey == Key.Up || e.SystemKey == Key.Down))
-            {
-                await ChangeLevel(e.SystemKey == Key.Up ? 1 : -1);
-                e.Handled = true;
-            }
         }
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)

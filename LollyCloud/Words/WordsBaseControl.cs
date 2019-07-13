@@ -1,25 +1,24 @@
 ﻿using LollyShared;
 using MSHTML;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace LollyCloud
 {
-    public class WordsBaseControl: UserControl
+    public class WordsBaseControl: UserControl, ILollySettings
     {
         protected DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         protected int selectedDictItemIndex;
         protected string selectedWord = "";
-        public virtual DataGrid dgWordsBase { get => null; }
-        public virtual MWordInterface ItemForRow(int row) { return null; }
-        public virtual SettingsViewModel vmSettings { get => null; }
-        public virtual WebBrowser wbDictBase { get => null; }
+        public virtual DataGrid dgWordsBase => null;
+        public virtual MWordInterface ItemForRow(int row) => null;
+        public virtual SettingsViewModel vmSettings => null;
+        public virtual WebBrowser wbDictBase => null;
+        public virtual ToolBar ToolBar1Base => null;
         public void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
 
         public void SearchDict(object sender, RoutedEventArgs e)
@@ -92,5 +91,48 @@ namespace LollyCloud
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
 
         public void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedWord);
+
+        public async Task ChangeLevel(int delta)
+        {
+            var row = dgWordsBase.SelectedIndex;
+            if (row == -1) return;
+            var item = ItemForRow(row);
+            var newLevel = item.LEVEL + delta;
+            if (newLevel != 0 && !vmSettings.USLEVELCOLORS.ContainsKey(newLevel)) return;
+            item.LEVEL = newLevel;
+            await LevelChanged(row);
+        }
+
+        public virtual async Task LevelChanged(int row) { }
+
+        public async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Alt && (e.SystemKey == Key.Up || e.SystemKey == Key.Down))
+            {
+                await ChangeLevel(e.SystemKey == Key.Up ? 1 : -1);
+                e.Handled = true;
+            }
+        }
+
+        public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
+
+        public virtual async Task OnSettingsChanged()
+        {
+            selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
+            ToolBar1Base.Items.Clear();
+            for (int i = 0; i < vmSettings.DictItems.Count; i++)
+            {
+                var b = new RadioButton
+                {
+                    Content = vmSettings.DictItems[i].DICTNAME,
+                    GroupName = "DICT",
+                    Tag = i,
+                };
+                b.Click += SearchDict;
+                ToolBar1Base.Items.Add(b);
+                if (i == selectedDictItemIndex)
+                    b.IsChecked = true;
+            }
+        }
     }
 }
