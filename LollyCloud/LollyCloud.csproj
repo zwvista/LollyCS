@@ -93,6 +93,7 @@
     <Compile Include="Models\MSelectItem.cs" />
     <Compile Include="Models\MWordFami.cs" />
     <Compile Include="Models\MVoice.cs" />
+    <Compile Include="Models\MWordPhrase.cs" />
     <Compile Include="Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
     </Compile>
@@ -137,6 +138,7 @@
     <Compile Include="Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Words\WordsBaseControl.cs" />
     <Compile Include="Words\WordsLangControl.xaml.cs">
       <DependentUpon>WordsLangControl.xaml</DependentUpon>
     </Compile>

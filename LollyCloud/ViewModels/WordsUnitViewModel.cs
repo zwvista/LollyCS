@@ -8,7 +8,7 @@ namespace LollyShared
 {
     public class WordsUnitViewModel : LollyViewModel
     {
-        SettingsViewModel vmSettings;
+        public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
 

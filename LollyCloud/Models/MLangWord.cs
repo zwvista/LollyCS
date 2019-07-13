@@ -10,7 +10,7 @@ namespace LollyShared
     {
         public List<MLangWord> records { get; set; }
     }
-    public class MLangWord : ReactiveObject
+    public class MLangWord : ReactiveObject, MWordInterface
     {
         int _ID;
         [JsonProperty]

@@ -1,82 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using LollyShared;
+using MSHTML;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using LollyShared;
-using MSHTML;
 
 namespace LollyCloud
 {
     /// <summary>
     /// WordsTextbookControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class WordsTextbookControl : UserControl, ILollySettings
+    public partial class WordsTextbookControl : WordsBaseControl, ILollySettings
     {
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public WordsUnitViewModel vm { get; set; }
-        DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
-        int selectedDictItemIndex;
-        string selectedWord = "";
+        public override DataGrid dgWordsBase { get => dgWords; }
+        public override MWordInterface ItemForRow(int row) { return vm.Items[row]; }
+        public override SettingsViewModel vmSettings { get => vm.vmSettings; }
+        public override WebBrowser wbDictBase { get => wbDict; }
 
         public WordsTextbookControl()
         {
             InitializeComponent();
             OnSettingsChanged();
-        }
-
-        void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
-
-        void SearchDict(object sender, RoutedEventArgs e)
-        {
-            if (sender is RadioButton)
-                selectedDictItemIndex = (int)(sender as RadioButton).Tag;
-            var row = dgWords.SelectedIndex;
-            if (row == -1) return;
-            selectedWord = vm.Items[row].WORD;
-            SearchWord(selectedWord);
-        }
-
-        async void SearchWord(string word)
-        {
-            dictStatus = DictWebBrowserStatus.Ready;
-            var item = vmSettings.DictItems[selectedDictItemIndex];
-            if (item.DICTNAME.StartsWith("Custom"))
-            {
-                var str = vmSettings.DictHtml(word, item.DictIDs.ToList());
-                wbDict.NavigateToString(str);
-            }
-            else
-            {
-                var item2 = vmSettings.DictsReference.First(o => o.DICTNAME == item.DICTNAME);
-                var url = item2.UrlString(word, vmSettings.AutoCorrects.ToList());
-                if (item2.DICTTYPENAME == "OFFLINE")
-                {
-                    wbDict.Navigate("about:blank");
-                    var html = await vmSettings.client.GetStringAsync(url);
-                    var str = item2.HtmlString(html, word);
-                    wbDict.NavigateToString(str);
-                }
-                else
-                {
-                    wbDict.Navigate(url);
-                    if (item2.AUTOMATION != null)
-                        dictStatus = DictWebBrowserStatus.Automating;
-                    else if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                }
-            }
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
@@ -99,38 +46,11 @@ namespace LollyCloud
             }
         }
 
-        void wbDict_Navigated(object sender, NavigationEventArgs e) => wbDict.SetSilent(true);
-
-        void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
-        {
-            if (dictStatus == DictWebBrowserStatus.Ready) return;
-            var item = vmSettings.DictItems[selectedDictItemIndex];
-            var item2 = vmSettings.DictsReference.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
-            switch (dictStatus)
-            {
-                case DictWebBrowserStatus.Automating:
-                    var s = item2.AUTOMATION.Replace("{0}", selectedWord);
-                    // https://stackoverflow.com/questions/7998996/how-to-inject-javascript-in-webbrowser-control
-                    wbDict.InvokeScript("execScript", new[] { s, "JavaScript" });
-                    dictStatus = DictWebBrowserStatus.Ready;
-                    if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                    break;
-                case DictWebBrowserStatus.Navigating:
-                    var doc = (HTMLDocument)wbDict.Document;
-                    var html = doc.documentElement.outerHTML;
-                    var str = item2.HtmlString(html, selectedWord, useTransformWin: true);
-                    dictStatus = DictWebBrowserStatus.Ready;
-                    wbDict.NavigateToString(str);
-                    break;
-            }
-        }
-
         async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
         public async Task OnSettingsChanged()
         {
-            vm = await WordsUnitViewModel.CreateAsync(vmSettings, false);
+            vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings, false);
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
             dgWords.ItemsSource = vm.Items;
             ToolBar1.Items.Clear();
@@ -156,10 +76,6 @@ namespace LollyCloud
             var item = vm.Items[row];
             await vm.Delete(item);
         }
-
-        void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
-
-        void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedWord);
 
         async Task ChangeLevel(int delta)
         {

@@ -9,7 +9,7 @@ namespace LollyShared
     {
         public List<MUnitPhrase> records { get; set; }
     }
-    public class MUnitPhrase : ReactiveObject
+    public class MUnitPhrase : ReactiveObject, MPhraseInterface
     {
         int _ID;
         [JsonProperty]

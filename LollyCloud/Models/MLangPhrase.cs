@@ -9,7 +9,7 @@ namespace LollyShared
     {
         public List<MLangPhrase> records { get; set; }
     }
-    public class MLangPhrase : ReactiveObject
+    public class MLangPhrase : ReactiveObject, MPhraseInterface
     {
         int _ID;
         [JsonProperty]
