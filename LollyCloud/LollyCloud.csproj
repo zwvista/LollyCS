@@ -94,6 +94,7 @@
     <Compile Include="Models\MWordFami.cs" />
     <Compile Include="Models\MVoice.cs" />
     <Compile Include="Models\MWordPhrase.cs" />
+    <Compile Include="Phrases\PhrasesBaseControl.cs" />
     <Compile Include="Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
     </Compile>

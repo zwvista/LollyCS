@@ -7,7 +7,7 @@ namespace LollyShared
 {
     public class PhrasesLangViewModel : LollyViewModel
     {
-        SettingsViewModel vmSettings;
+        public SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
         public ObservableCollection<MLangPhrase> Items { get; set; }

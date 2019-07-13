@@ -1,43 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using LollyShared;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using LollyShared;
 
 namespace LollyCloud
 {
     /// <summary>
     /// PhrasesUnitControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class PhrasesTextbookControl : UserControl, ILollySettings
+    public partial class PhrasesTextbookControl : PhrasesBaseControl
     {
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public PhrasesUnitViewModel vm { get; set; }
-        string selectedPhrase = "";
+        public override SettingsViewModel vmSettings => vm.vmSettings;
+        public override DataGrid dgPhrasesBase => dgPhrases;
+        public override MPhraseInterface ItemForRow(int row) => vm.Items[row];
 
         public PhrasesTextbookControl()
         {
             InitializeComponent();
             OnSettingsChanged();
-        }
-
-        void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var row = dgPhrases.SelectedIndex;
-            if (row == -1) return;
-            selectedPhrase = vm.Items[row].PHRASE;
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
@@ -70,12 +52,11 @@ namespace LollyCloud
             }
         }
 
-        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
-
-        public async Task OnSettingsChanged()
+        public override async Task OnSettingsChanged()
         {
-            vm = await PhrasesUnitViewModel.CreateAsync(vmSettings, true);
+            vm = await PhrasesUnitViewModel.CreateAsync(MainWindow.vmSettings, true);
             dgPhrases.ItemsSource = vm.Items;
+            await base.OnSettingsChanged();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
@@ -85,9 +66,5 @@ namespace LollyCloud
             var item = vm.Items[row];
             await vm.Delete(item);
         }
-
-        void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPhrase);
-
-        void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPhrase);
     }
 }
