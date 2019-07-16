@@ -21,7 +21,7 @@
         </ToolBarTray>
         <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgPhrases_SelectionChanged"
-                      RowEditEnding="dgPhrases_RowEditEnding"
+                      RowEditEnding="dgPhrases_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />

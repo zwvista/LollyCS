@@ -106,7 +106,7 @@ namespace LollyCloud
 
         public virtual async Task LevelChanged(int row) { }
 
-        public async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        public virtual async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Alt && (e.SystemKey == Key.Up || e.SystemKey == Key.Down))
             {

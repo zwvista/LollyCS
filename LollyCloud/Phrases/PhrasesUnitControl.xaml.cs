@@ -85,6 +85,14 @@ namespace LollyCloud
             await vmSettings.NextUnitPart();
             btnRefresh_Click(sender, e);
         }
+        public void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape && IsDragging)
+            {
+                ResetDragDrop();
+                e.Handled = true;
+            }
+        }
 
         #region DraggedPhraseItem
 

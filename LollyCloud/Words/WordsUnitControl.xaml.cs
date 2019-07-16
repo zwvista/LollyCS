@@ -121,6 +121,15 @@ namespace LollyCloud
             if (row == -1) return;
             await vm.ClearNote(row);
         }
+        public override void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            base.dgWords_PreviewKeyDown(sender, e);
+            if (e.Key == Key.Escape && IsDragging)
+            {
+                ResetDragDrop();
+                e.Handled = true;
+            }
+        }
 
         #region DraggedWordItem
 
