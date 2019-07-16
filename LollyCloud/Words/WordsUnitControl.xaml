@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             x:Name="me">
+             d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar x:Name="ToolBarDict" Band="1">
@@ -14,10 +13,13 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <TextBox x:Name="tbNewWord" Text="{Binding vm.NewWord}"  Width="96" KeyDown="tbNewWord_KeyDown"></TextBox>
+                <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown"></TextBox>
                 <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
                 <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding vmSettings.ScopeWordFilters}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="CbScopeFilter_SelectionChanged" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown"></TextBox>
+                <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" />
             </ToolBar>
         </ToolBarTray>
         <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
@@ -81,11 +83,11 @@
             <WebBrowser x:Name="wbDict" Grid.Column="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />
         </Grid>
         <!-- Drag and Drop Popup -->
-        <Popup x:Name="popup1" IsHitTestVisible="False" Placement="RelativePoint" PlacementTarget="{Binding ElementName=me}" AllowsTransparency="True">
+        <Popup x:Name="popup1" IsHitTestVisible="False" Placement="RelativePoint" PlacementTarget="{Binding}" AllowsTransparency="True">
             <Border BorderBrush="LightSteelBlue" BorderThickness="2" Background="White" Opacity="0.75">
                 <StackPanel Orientation="Horizontal" Margin="4,3,8,3">
                     <Image Source="/DragInsert.png" Width="16" Height="16" />
-                    <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding ElementName=me, Path=DraggedWordItem.WORD}" Margin="8,0,0,0" />
+                    <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding Path=DraggedWordItem.WORD}" Margin="8,0,0,0" />
                 </StackPanel>
             </Border>
         </Popup>

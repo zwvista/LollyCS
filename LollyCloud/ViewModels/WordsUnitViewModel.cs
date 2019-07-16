@@ -15,11 +15,36 @@ namespace LollyShared
         MDictNote DictNote => vmNote.DictNote;
 
         public ObservableCollection<MUnitWord> Items { get; set; }
+        public ObservableCollection<MUnitWord> ItemsFiltered { get; set; }
         string _NewWord = "";
         public string NewWord
         {
             get => _NewWord;
             set => this.RaiseAndSetIfChanged(ref _NewWord, value);
+        }
+        string _TextFilter = "";
+        public string TextFilter
+        {
+            get => _TextFilter;
+            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
+        }
+        string _ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
+        public string ScopeFilter
+        {
+            get => _ScopeFilter;
+            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
+        }
+        bool _Levelge0only;
+        public bool Levelge0only
+        {
+            get => _Levelge0only;
+            set => this.RaiseAndSetIfChanged(ref _Levelge0only, value);
+        }
+        int _TextbookFilter;
+        public int TextbookFilter
+        {
+            get => _TextbookFilter;
+            set => this.RaiseAndSetIfChanged(ref _TextbookFilter, value);
         }
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
@@ -95,6 +120,22 @@ namespace LollyShared
             item.WORDID = wordid;
             return await unitWordDS.Create(item);
         }
+
+        public void ApplyFilters() {
+            if (string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0)
+                ItemsFiltered = null;
+            else
+            {
+                ItemsFiltered = Items;
+                if (!string.IsNullOrEmpty(TextFilter))
+                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
+                if (Levelge0only)
+                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => o.LEVEL >= 0));
+                if (TextbookFilter != 0)
+                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => o.TEXTBOOKID == TextbookFilter));
+            }
+        }
+
         public async Task Delete(MUnitWord item)
         {
             await unitWordDS.Delete(item.ID);

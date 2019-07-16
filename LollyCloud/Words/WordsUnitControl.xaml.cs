@@ -1,5 +1,6 @@
 ﻿using Hardcodet.Wpf.Util;
 using LollyShared;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,8 +14,10 @@ namespace LollyCloud
     public partial class WordsUnitControl : WordsBaseControl
     {
         public WordsUnitViewModel vm { get; set; }
+        public ObservableCollection<MUnitWord> Items =>
+            string.IsNullOrEmpty(vm.TextFilter) ? vm.Items : vm.ItemsFiltered;
         public override DataGrid dgWordsBase => dgWords;
-        public override MWordInterface ItemForRow(int row) => vm.Items[row];
+        public override MWordInterface ItemForRow(int row) => Items[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -56,7 +59,7 @@ namespace LollyCloud
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.Items[e.Row.GetIndex()];
+                var item = Items[e.Row.GetIndex()];
                 await vm.Update(item);
             }
         }
@@ -64,7 +67,8 @@ namespace LollyCloud
         public override async Task OnSettingsChanged()
         {
             vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings, inTextbook: true, needCopy: true);
-            dgWords.ItemsSource = vm.Items;
+            DataContext = this;
+            dgWords.ItemsSource = Items;
             await base.OnSettingsChanged();
         }
 
@@ -72,7 +76,7 @@ namespace LollyCloud
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = Items[row];
             await vm.Delete(item);
         }
 
@@ -86,16 +90,36 @@ namespace LollyCloud
             vm.Items.Add(item);
         }
 
+        void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Return) return;
+            if (string.IsNullOrEmpty(vm.TextFilter))
+                vm.ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
+            else if (vm.ScopeFilter == SettingsViewModel.ScopeWordFilters[0])
+                vm.ScopeFilter = SettingsViewModel.ScopeWordFilters[1];
+            vm.ApplyFilters();
+        }
+
+        private void CbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            vm.ApplyFilters();
+        }
+
+        private void ChkLevelge0only_Click(object sender, RoutedEventArgs e)
+        {
+            vm.ApplyFilters();
+        }
+
         public async override Task LevelChanged(int row)
         {
-            var item = vm.Items[row];
+            var item = Items[row];
             await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
         }
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)
         {
             var row = dgWords.SelectedIndex;
-            var part = row == -1 ? vmSettings.Parts[0].Value : vm.Items[row].PART;
+            var part = row == -1 ? vmSettings.Parts[0].Value : Items[row].PART;
             await vmSettings.ToggleToType(part);
             btnRefresh_Click(sender, e);
         }

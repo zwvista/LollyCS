@@ -259,7 +259,7 @@ namespace LollyShared
         public bool IsSingleUnit => USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == PartCount;
         public bool IsSinglePart => PartCount == 1;
 
-        public List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
+        public static List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Unit"),
             new MSelectItem(1, "Part"),
@@ -277,6 +277,8 @@ namespace LollyShared
         }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
+        public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
+        public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
 
         public HttpClient client = new HttpClient();
 
