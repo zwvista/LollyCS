@@ -143,7 +143,7 @@ namespace LollyCloud
             if (IsEditing) return;
 
             var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(dgPhrases));
-            if (row == null || row.IsEditing) return;
+            if (row == null) return;
 
             //set flag that indicates we're capturing mouse movements
             IsDragging = true;

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="me">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar x:Name="ToolBarDict" Band="1">
@@ -66,7 +67,11 @@
                 </DataGrid.Resources>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem x:Name="miGetNote" Header="Retrieve Note" Click="miGetNote_Click" />
+                        <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
+                        <Separator />
                         <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                        <Separator />
                         <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
                         <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
                     </ContextMenu>

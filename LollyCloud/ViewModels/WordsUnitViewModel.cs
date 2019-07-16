@@ -11,6 +11,8 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
+        NoteViewModel vmNote;
+        MDictNote DictNote => vmNote.DictNote;
 
         public ObservableCollection<MUnitWord> Items { get; set; }
         string _NewWord = "";
@@ -28,6 +30,7 @@ namespace LollyShared
             o.Items = new ObservableCollection<MUnitWord>(await (inTextbook ? o.unitWordDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
                 o.unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
+            o.vmNote = new NoteViewModel(o.vmSettings);
             return o;
         }
 
@@ -124,6 +127,24 @@ namespace LollyShared
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
                 Textbook = vmSettings.SelectedTextbook,
             };
+        }
+
+        public async Task GetNote(int index)
+        {
+            var item = Items[index];
+            var note = await vmNote.GetNote(item.WORD);
+            item.NOTE = note;
+            await Update(item);
+        }
+
+        public async Task GetNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete)
+        {
+            vmNote.GetNotes(Items.Count, i => !ifEmpty || string.IsNullOrEmpty(Items[i].NOTE),
+                async i =>
+                {
+                    await GetNote(i);
+                    oneComplete(i);
+                }, allComplete);
         }
     }
 }

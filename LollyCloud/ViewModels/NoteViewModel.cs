@@ -8,7 +8,8 @@ namespace LollyShared
     public class NoteViewModel : LollyViewModel
     {
         public SettingsViewModel vmSettings;
-        MDictNote DictNote => vmSettings.SelectedDictNote;
+        public MDictNote DictNote => vmSettings.SelectedDictNote;
+        public const string ZeroNote = "O";
 
         public NoteViewModel(SettingsViewModel vmSettings)
         {
@@ -23,12 +24,13 @@ namespace LollyShared
             return CommonApi.ExtractTextFromHtml(html, DictNote.TRANSFORM, "", (text, _) => text);
         }
 
-        public void GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Action<int> getOne, Action allComplete)
+        public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne, Action allComplete)
         {
+            if (DictNote == null) return;
             var i = 0;
             var interval = Observable.Interval(TimeSpan.FromMilliseconds((double)DictNote.WAIT));
             IDisposable disposable = null;
-            disposable = interval.Subscribe(_ =>
+            disposable = interval.Subscribe(async _ =>
             {
                 while (i < wordCount && !isNoteEmpty(i)) i++;
                 if (i > wordCount)
@@ -38,7 +40,8 @@ namespace LollyShared
                 }
                 else
                 {
-                    if (i < wordCount) getOne(i);
+                    if (i < wordCount)
+                        await getOne(i);
                     i++;
                 }
             });

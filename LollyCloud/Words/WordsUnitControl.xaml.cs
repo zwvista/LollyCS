@@ -109,6 +109,16 @@ namespace LollyCloud
             await vmSettings.NextUnitPart();
             btnRefresh_Click(sender, e);
         }
+        async void miGetNote_Click(object sender, RoutedEventArgs e)
+        {
+            var row = dgWords.SelectedIndex;
+            if (row == -1) return;
+            await vm.GetNote(row);
+        }
+        async void miClearNote_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         #region DraggedWordItem
 
@@ -167,7 +177,7 @@ namespace LollyCloud
             if (IsEditing) return;
 
             var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(dgWords));
-            if (row == null || row.IsEditing) return;
+            if (row == null) return;
 
             //set flag that indicates we're capturing mouse movements
             IsDragging = true;
