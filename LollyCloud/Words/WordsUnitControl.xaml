@@ -19,14 +19,15 @@
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
             </ToolBar>
         </ToolBarTray>
-        <Grid>
+        <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgWords" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgWords_SelectionChanged"
-                      RowEditEnding="dgWords_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown">
+            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgWords_SelectionChanged"
+                      RowEditEnding="dgWords_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
@@ -74,5 +75,14 @@
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
             <WebBrowser x:Name="wbDict" Grid.Column="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />
         </Grid>
+        <!-- Drag and Drop Popup -->
+        <Popup x:Name="popup1" IsHitTestVisible="False" Placement="RelativePoint" PlacementTarget="{Binding ElementName=me}" AllowsTransparency="True">
+            <Border BorderBrush="LightSteelBlue" BorderThickness="2" Background="White" Opacity="0.75">
+                <StackPanel Orientation="Horizontal" Margin="4,3,8,3">
+                    <Image Source="/DragInsert.png" Width="16" Height="16" />
+                    <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding ElementName=me, Path=DraggedItem.Name}" Margin="8,0,0,0" />
+                </StackPanel>
+            </Border>
+        </Popup>
     </DockPanel>
 </local:WordsBaseControl>

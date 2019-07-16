@@ -116,6 +116,7 @@
     <Compile Include="SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shared\UIHelpers.cs" />
     <Compile Include="Shared\WindowsExtensions.cs" />
     <Compile Include="Shared\CommonApi.cs" />
     <Compile Include="Models\MAutoCorrect.cs" />
@@ -271,6 +272,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DragInsert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

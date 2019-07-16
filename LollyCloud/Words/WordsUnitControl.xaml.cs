@@ -1,4 +1,5 @@
-﻿using LollyShared;
+﻿using Hardcodet.Wpf.Util;
+using LollyShared;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,12 @@ namespace LollyCloud
         {
             InitializeComponent();
             OnSettingsChanged();
+        }
+
+        public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!popup1.IsOpen)
+                base.dgWords_SelectionChanged(sender, e);
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
@@ -102,5 +109,146 @@ namespace LollyCloud
             await vmSettings.NextUnitPart();
             btnRefresh_Click(sender, e);
         }
+
+        #region DraggedItem
+
+        /// <summary>
+        /// DraggedItem Dependency Property
+        /// </summary>
+        public static readonly DependencyProperty DraggedItemProperty =
+            DependencyProperty.Register("DraggedItem", typeof(MUnitWord), typeof(WordsUnitControl));
+
+        /// <summary>
+        /// Gets or sets the DraggedItem property.  This dependency property 
+        /// indicates ....
+        /// </summary>
+        public MUnitWord DraggedItem
+        {
+            get { return (MUnitWord)GetValue(DraggedItemProperty); }
+            set { SetValue(DraggedItemProperty, value); }
+        }
+
+        #endregion
+
+        #region edit mode monitoring
+
+        /// <summary>
+        /// State flag which indicates whether the grid is in edit
+        /// mode or not.
+        /// </summary>
+        public bool IsEditing { get; set; }
+
+        private void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            IsEditing = true;
+            //in case we are in the middle of a drag/drop operation, cancel it...
+            if (IsDragging) ResetDragDrop();
+        }
+
+        private void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            IsEditing = false;
+        }
+
+        #endregion
+
+        #region Drag and Drop Rows
+
+        /// <summary>
+        /// Keeps in mind whether
+        /// </summary>
+        public bool IsDragging { get; set; }
+
+        /// <summary>
+        /// Initiates a drag action if the grid is not in edit mode.
+        /// </summary>
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IsEditing) return;
+
+            var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(dgWords));
+            if (row == null || row.IsEditing) return;
+
+            //set flag that indicates we're capturing mouse movements
+            IsDragging = true;
+            DraggedItem = (MUnitWord)row.Item;
+        }
+
+
+        /// <summary>
+        /// Completes a drag/drop operation.
+        /// </summary>
+        private async void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsDragging || IsEditing)
+            {
+                return;
+            }
+
+            //get the target item
+            MUnitWord targetItem = (MUnitWord)dgWords.SelectedItem;
+
+            if (targetItem == null || !ReferenceEquals(DraggedItem, targetItem))
+            {
+                //remove the source from the list
+                vm.Items.Remove(DraggedItem);
+
+                //get target index
+                var targetIndex = vm.Items.IndexOf(targetItem);
+
+                //move source at the target's location
+                vm.Items.Insert(targetIndex, DraggedItem);
+
+                //select the dropped item
+                dgWords.SelectedItem = DraggedItem;
+
+                await vm.Reindex(_ => { });
+            }
+
+            //reset
+            ResetDragDrop();
+        }
+
+
+        /// <summary>
+        /// Closes the popup and resets the
+        /// grid to read-enabled mode.
+        /// </summary>
+        private void ResetDragDrop()
+        {
+            IsDragging = false;
+            popup1.IsOpen = false;
+            dgWords.IsReadOnly = false;
+        }
+
+
+        /// <summary>
+        /// Updates the popup's position in case of a drag/drop operation.
+        /// </summary>
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!IsDragging || e.LeftButton != MouseButtonState.Pressed) return;
+
+            //display the popup if it hasn't been opened yet
+            if (!popup1.IsOpen)
+            {
+                //switch to read-only mode
+                dgWords.IsReadOnly = true;
+
+                //make sure the popup is visible
+                popup1.IsOpen = true;
+            }
+
+
+            Size popupSize = new Size(popup1.ActualWidth, popup1.ActualHeight);
+            popup1.PlacementRectangle = new Rect(e.GetPosition(this), popupSize);
+
+            //make sure the row under the grid is being selected
+            Point position = e.GetPosition(dgWords);
+            var row = UIHelpers.TryFindFromPoint<DataGridRow>(dgWords, position);
+            if (row != null) dgWords.SelectedItem = row.Item;
+        }
+
+        #endregion
     }
 }

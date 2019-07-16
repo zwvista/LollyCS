@@ -19,7 +19,8 @@ namespace LollyCloud
         public virtual SettingsViewModel vmSettings => null;
         public virtual WebBrowser wbDictBase => null;
         public virtual ToolBar ToolBarDictBase => null;
-        public void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
+
+        public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
 
         public void SearchDict(object sender, RoutedEventArgs e)
         {

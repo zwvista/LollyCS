@@ -19,7 +19,7 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <DataGrid x:Name="dgPhrases" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgPhrases_SelectionChanged"
+            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgPhrases_SelectionChanged"
                       RowEditEnding="dgPhrases_RowEditEnding">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
