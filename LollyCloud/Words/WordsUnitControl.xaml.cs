@@ -117,7 +117,9 @@ namespace LollyCloud
         }
         async void miClearNote_Click(object sender, RoutedEventArgs e)
         {
-
+            var row = dgWords.SelectedIndex;
+            if (row == -1) return;
+            await vm.ClearNote(row);
         }
 
         #region DraggedWordItem

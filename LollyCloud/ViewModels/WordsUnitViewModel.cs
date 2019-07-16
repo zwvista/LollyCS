@@ -136,15 +136,26 @@ namespace LollyShared
             item.NOTE = note;
             await Update(item);
         }
-
-        public async Task GetNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete)
+        public async Task ClearNote(int index)
         {
-            vmNote.GetNotes(Items.Count, i => !ifEmpty || string.IsNullOrEmpty(Items[i].NOTE),
+            var item = Items[index];
+            item.NOTE = NoteViewModel.ZeroNote;
+            await Update(item);
+        }
+
+        public async Task GetNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete) =>
+            await vmNote.GetNotes(Items.Count, i => !ifEmpty || string.IsNullOrEmpty(Items[i].NOTE),
                 async i =>
                 {
                     await GetNote(i);
                     oneComplete(i);
                 }, allComplete);
-        }
+        public async Task ClearNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete) =>
+            await vmNote.GetNotes(Items.Count, i => !ifEmpty || string.IsNullOrEmpty(Items[i].NOTE),
+                async i =>
+                {
+                    await ClearNote(i);
+                    oneComplete(i);
+                }, allComplete);
     }
 }

@@ -27,16 +27,14 @@ namespace LollyShared
         public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne, Action allComplete)
         {
             if (DictNote == null) return;
-            var i = 0;
-            var interval = Observable.Interval(TimeSpan.FromMilliseconds((double)DictNote.WAIT));
-            IDisposable disposable = null;
-            disposable = interval.Subscribe(async _ =>
+            for (int i = 0; ;)
             {
+                await Task.Delay((int)DictNote.WAIT);
                 while (i < wordCount && !isNoteEmpty(i)) i++;
                 if (i > wordCount)
                 {
                     allComplete();
-                    disposable.Dispose();
+                    break;
                 }
                 else
                 {
@@ -44,7 +42,18 @@ namespace LollyShared
                         await getOne(i);
                     i++;
                 }
-            });
+            }
+        }
+        public async Task ClearNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne, Action allComplete)
+        {
+            if (DictNote == null) return;
+            for (int i = 0; ;)
+            {
+                while (i < wordCount && !isNoteEmpty(i)) i++;
+                if (i < wordCount)
+                    await getOne(i);
+                i++;
+            }
         }
     }
 }
