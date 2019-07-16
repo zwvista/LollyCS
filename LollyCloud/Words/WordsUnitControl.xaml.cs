@@ -110,22 +110,22 @@ namespace LollyCloud
             btnRefresh_Click(sender, e);
         }
 
-        #region DraggedItem
+        #region DraggedWordItem
 
         /// <summary>
-        /// DraggedItem Dependency Property
+        /// DraggedWordItem Dependency Property
         /// </summary>
-        public static readonly DependencyProperty DraggedItemProperty =
-            DependencyProperty.Register("DraggedItem", typeof(MUnitWord), typeof(WordsUnitControl));
+        public static readonly DependencyProperty DraggedWordItemProperty =
+            DependencyProperty.Register("DraggedWordItem", typeof(MUnitWord), typeof(WordsUnitControl));
 
         /// <summary>
-        /// Gets or sets the DraggedItem property.  This dependency property 
+        /// Gets or sets the DraggedWordItem property.  This dependency property 
         /// indicates ....
         /// </summary>
-        public MUnitWord DraggedItem
+        public MUnitWord DraggedWordItem
         {
-            get { return (MUnitWord)GetValue(DraggedItemProperty); }
-            set { SetValue(DraggedItemProperty, value); }
+            get { return (MUnitWord)GetValue(DraggedWordItemProperty); }
+            set { SetValue(DraggedWordItemProperty, value); }
         }
 
         #endregion
@@ -171,7 +171,7 @@ namespace LollyCloud
 
             //set flag that indicates we're capturing mouse movements
             IsDragging = true;
-            DraggedItem = (MUnitWord)row.Item;
+            DraggedWordItem = (MUnitWord)row.Item;
         }
 
 
@@ -188,19 +188,19 @@ namespace LollyCloud
             //get the target item
             MUnitWord targetItem = (MUnitWord)dgWords.SelectedItem;
 
-            if (targetItem == null || !ReferenceEquals(DraggedItem, targetItem))
+            if (targetItem == null || !ReferenceEquals(DraggedWordItem, targetItem))
             {
                 //remove the source from the list
-                vm.Items.Remove(DraggedItem);
+                vm.Items.Remove(DraggedWordItem);
 
                 //get target index
                 var targetIndex = vm.Items.IndexOf(targetItem);
 
                 //move source at the target's location
-                vm.Items.Insert(targetIndex, DraggedItem);
+                vm.Items.Insert(targetIndex, DraggedWordItem);
 
                 //select the dropped item
-                dgWords.SelectedItem = DraggedItem;
+                dgWords.SelectedItem = DraggedWordItem;
 
                 await vm.Reindex(_ => { });
             }
