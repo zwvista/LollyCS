@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
@@ -11,16 +12,51 @@ namespace LollyShared
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
-        public ObservableCollection<MUnitPhrase> Items { get; set; }
+        public ObservableCollection<MUnitPhrase> ItemsAll { get; set; }
+        public ObservableCollection<MUnitPhrase> ItemsFiltered { get; set; }
+        public ObservableCollection<MUnitPhrase> Items => ItemsFiltered ?? ItemsAll;
+        string _TextFilter = "";
+        public string TextFilter
+        {
+            get => _TextFilter;
+            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
+        }
+        string _ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
+        public string ScopeFilter
+        {
+            get => _ScopeFilter;
+            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
+        }
+        int _TextbookFilter;
+        public int TextbookFilter
+        {
+            get => _TextbookFilter;
+            set => this.RaiseAndSetIfChanged(ref _TextbookFilter, value);
+        }
 
         public static async Task<PhrasesUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
             var o = new PhrasesUnitViewModel();
             o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.Items = new ObservableCollection<MUnitPhrase>(await (inTextbook ? o.unitPhraseDS.GetDataByTextbookUnitPart(
+            o.ItemsAll = new ObservableCollection<MUnitPhrase>(await (inTextbook ? o.unitPhraseDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
                 o.unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
+            o.ApplyFilters();
             return o;
+        }
+        public void ApplyFilters()
+        {
+            if (string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0)
+                ItemsFiltered = null;
+            else
+            {
+                ItemsFiltered = ItemsAll;
+                if (!string.IsNullOrEmpty(TextFilter))
+                    ItemsFiltered = new ObservableCollection<MUnitPhrase>(ItemsFiltered.Where(o => (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())));
+                if (TextbookFilter != 0)
+                    ItemsFiltered = new ObservableCollection<MUnitPhrase>(ItemsFiltered.Where(o => o.TEXTBOOKID == TextbookFilter));
+            }
+            this.RaisePropertyChanged(nameof(Items));
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
@@ -94,9 +130,9 @@ namespace LollyShared
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= Items.Count; i++)
+            for (int i = 1; i <= ItemsAll.Count; i++)
             {
-                var item = Items[i - 1];
+                var item = ItemsAll[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await UpdateSeqNum(item.ID, item.SEQNUM);
@@ -106,7 +142,7 @@ namespace LollyShared
 
         public MUnitPhrase NewUnitPhrase()
         {
-            var maxElem = Items.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            var maxElem = ItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
             return new MUnitPhrase
             {
                 LANGID = vmSettings.SelectedLang.ID,

@@ -10,7 +10,9 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         LangWordDataStore langWordDS = new LangWordDataStore();
 
-        public ObservableCollection<MLangWord> Items { get; set; }
+        public ObservableCollection<MLangWord> ItemsAll { get; set; }
+        public ObservableCollection<MLangWord> ItemsFiltered { get; set; }
+        public ObservableCollection<MLangWord> Items => ItemsFiltered ?? ItemsAll;
         string _NewWord = "";
         public string NewWord
         {
@@ -40,11 +42,23 @@ namespace LollyShared
         {
             var o = new WordsLangViewModel();
             o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.Items = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            o.ItemsAll = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            o.ApplyFilters();
             return o;
         }
         public void ApplyFilters()
         {
+            if (string.IsNullOrEmpty(TextFilter) && !Levelge0only)
+                ItemsFiltered = null;
+            else
+            {
+                ItemsFiltered = ItemsAll;
+                if (!string.IsNullOrEmpty(TextFilter))
+                    ItemsFiltered = new ObservableCollection<MLangWord>(ItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
+                if (Levelge0only)
+                    ItemsFiltered = new ObservableCollection<MLangWord>(ItemsFiltered.Where(o => o.LEVEL >= 0));
+            }
+            this.RaisePropertyChanged(nameof(Items));
         }
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);
