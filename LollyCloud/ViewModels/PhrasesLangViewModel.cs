@@ -20,7 +20,7 @@ namespace LollyShared
             get => _TextFilter;
             set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
         }
-        string _ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
+        string _ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
         public string ScopeFilter
         {
             get => _ScopeFilter;

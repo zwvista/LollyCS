@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
+             xmlns:shared="clr-namespace:LollyShared"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -16,11 +17,17 @@
                 <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
                 <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="CbScopeFilter_SelectionChanged" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>Filter</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
             </ToolBar>
         </ToolBarTray>
         <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgPhrases_SelectionChanged"
-                      RowEditEnding="dgPhrases_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown"
+                      RowEditEnding="dgPhrases_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
