@@ -14,8 +14,9 @@ namespace LollyShared
         NoteViewModel vmNote;
         MDictNote DictNote => vmNote.DictNote;
 
-        public ObservableCollection<MUnitWord> Items { get; set; }
+        public ObservableCollection<MUnitWord> ItemsAll { get; set; }
         public ObservableCollection<MUnitWord> ItemsFiltered { get; set; }
+        public ObservableCollection<MUnitWord> Items => ItemsFiltered ?? ItemsAll;
         string _NewWord = "";
         public string NewWord
         {
@@ -52,11 +53,29 @@ namespace LollyShared
         {
             var o = new WordsUnitViewModel();
             o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.Items = new ObservableCollection<MUnitWord>(await (inTextbook ? o.unitWordDS.GetDataByTextbookUnitPart(
+            o.ItemsAll = new ObservableCollection<MUnitWord>(await (inTextbook ? o.unitWordDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
                 o.unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
             o.vmNote = new NoteViewModel(o.vmSettings);
+            o.ApplyFilters();
             return o;
+        }
+
+        public void ApplyFilters()
+        {
+            if (string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0)
+                ItemsFiltered = null;
+            else
+            {
+                ItemsFiltered = ItemsAll;
+                if (!string.IsNullOrEmpty(TextFilter))
+                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
+                if (Levelge0only)
+                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => o.LEVEL >= 0));
+                if (TextbookFilter != 0)
+                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => o.TEXTBOOKID == TextbookFilter));
+            }
+            this.RaisePropertyChanged(nameof(Items));
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitWordDS.UpdateSeqNum(id, seqnum);
@@ -121,21 +140,6 @@ namespace LollyShared
             return await unitWordDS.Create(item);
         }
 
-        public void ApplyFilters() {
-            if (string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0)
-                ItemsFiltered = null;
-            else
-            {
-                ItemsFiltered = Items;
-                if (!string.IsNullOrEmpty(TextFilter))
-                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
-                if (Levelge0only)
-                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => o.LEVEL >= 0));
-                if (TextbookFilter != 0)
-                    ItemsFiltered = new ObservableCollection<MUnitWord>(ItemsFiltered.Where(o => o.TEXTBOOKID == TextbookFilter));
-            }
-        }
-
         public async Task Delete(MUnitWord item)
         {
             await unitWordDS.Delete(item.ID);
@@ -146,9 +150,9 @@ namespace LollyShared
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= Items.Count; i++)
+            for (int i = 1; i <= ItemsAll.Count; i++)
             {
-                var item = Items[i - 1];
+                var item = ItemsAll[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await UpdateSeqNum(item.ID, item.SEQNUM);
@@ -158,7 +162,7 @@ namespace LollyShared
 
         public MUnitWord NewUnitWord()
         {
-            var maxElem = Items.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            var maxElem = ItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
             return new MUnitWord
             {
                 LANGID = vmSettings.SelectedLang.ID,
@@ -172,27 +176,27 @@ namespace LollyShared
 
         public async Task GetNote(int index)
         {
-            var item = Items[index];
+            var item = ItemsAll[index];
             var note = await vmNote.GetNote(item.WORD);
             item.NOTE = note;
             await Update(item);
         }
         public async Task ClearNote(int index)
         {
-            var item = Items[index];
+            var item = ItemsAll[index];
             item.NOTE = NoteViewModel.ZeroNote;
             await Update(item);
         }
 
         public async Task GetNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete) =>
-            await vmNote.GetNotes(Items.Count, i => !ifEmpty || string.IsNullOrEmpty(Items[i].NOTE),
+            await vmNote.GetNotes(ItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(ItemsAll[i].NOTE),
                 async i =>
                 {
                     await GetNote(i);
                     oneComplete(i);
                 }, allComplete);
         public async Task ClearNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete) =>
-            await vmNote.GetNotes(Items.Count, i => !ifEmpty || string.IsNullOrEmpty(Items[i].NOTE),
+            await vmNote.GetNotes(ItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(ItemsAll[i].NOTE),
                 async i =>
                 {
                     await ClearNote(i);

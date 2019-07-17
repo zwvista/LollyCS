@@ -14,10 +14,8 @@ namespace LollyCloud
     public partial class WordsUnitControl : WordsBaseControl
     {
         public WordsUnitViewModel vm { get; set; }
-        public ObservableCollection<MUnitWord> Items =>
-            string.IsNullOrEmpty(vm.TextFilter) ? vm.Items : vm.ItemsFiltered;
         public override DataGrid dgWordsBase => dgWords;
-        public override MWordInterface ItemForRow(int row) => Items[row];
+        public override MWordInterface ItemForRow(int row) => vm.Items[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -59,7 +57,7 @@ namespace LollyCloud
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = Items[e.Row.GetIndex()];
+                var item = vm.Items[e.Row.GetIndex()];
                 await vm.Update(item);
             }
         }
@@ -68,7 +66,6 @@ namespace LollyCloud
         {
             vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             DataContext = this;
-            dgWords.ItemsSource = Items;
             await base.OnSettingsChanged();
         }
 
@@ -76,7 +73,7 @@ namespace LollyCloud
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = Items[row];
+            var item = vm.Items[row];
             await vm.Delete(item);
         }
 
@@ -100,26 +97,22 @@ namespace LollyCloud
             vm.ApplyFilters();
         }
 
-        private void CbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        private void CbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
-        }
 
-        private void ChkLevelge0only_Click(object sender, RoutedEventArgs e)
-        {
+        private void ChkLevelge0only_Click(object sender, RoutedEventArgs e) =>
             vm.ApplyFilters();
-        }
 
         public async override Task LevelChanged(int row)
         {
-            var item = Items[row];
+            var item = vm.Items[row];
             await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
         }
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)
         {
             var row = dgWords.SelectedIndex;
-            var part = row == -1 ? vmSettings.Parts[0].Value : Items[row].PART;
+            var part = row == -1 ? vmSettings.Parts[0].Value : vm.Items[row].PART;
             await vmSettings.ToggleToType(part);
             btnRefresh_Click(sender, e);
         }

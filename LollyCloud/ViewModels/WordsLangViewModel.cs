@@ -17,6 +17,24 @@ namespace LollyShared
             get => _NewWord;
             set => this.RaiseAndSetIfChanged(ref _NewWord, value);
         }
+        string _TextFilter = "";
+        public string TextFilter
+        {
+            get => _TextFilter;
+            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
+        }
+        string _ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
+        public string ScopeFilter
+        {
+            get => _ScopeFilter;
+            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
+        }
+        bool _Levelge0only;
+        public bool Levelge0only
+        {
+            get => _Levelge0only;
+            set => this.RaiseAndSetIfChanged(ref _Levelge0only, value);
+        }
 
         public static async Task<WordsLangViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
         {
@@ -24,6 +42,9 @@ namespace LollyShared
             o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             o.Items = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             return o;
+        }
+        public void ApplyFilters()
+        {
         }
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);
