@@ -250,6 +250,7 @@ namespace LollyShared
             }
         }
         public int SelectedTextbookIndex => Textbooks.IndexOf(_SelectedTextbook);
+        public List<MSelectItem> TextbookFilters { get; set; } = new List<MSelectItem>();
 
         public List<MSelectItem> Units => SelectedTextbook?.Units;
         public int UnitCount => Units?.Count ?? 0;
@@ -334,6 +335,8 @@ namespace LollyShared
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
+            TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
+                .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
             SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? Voices.FirstOrDefault();
             if (isinit)
                 OnUpdateLang?.Invoke(this, null);

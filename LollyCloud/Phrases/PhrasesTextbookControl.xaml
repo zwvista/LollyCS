@@ -14,12 +14,14 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="CbScopeFilter_SelectionChanged" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
                 <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
                     </local:WatermarkService.Watermark>
                 </TextBox>
+                <ComboBox x:Name="cbTextbookFilter" ItemsSource="{Binding vmSettings.TextbookFilters}" DisplayMemberPath="Label" SelectedValuePath="Value"
+                          SelectedValue="{Binding vm.TextbookFilter}" SelectionChanged="cbTextbookFilter_SelectionChanged" />
             </ToolBar>
         </ToolBarTray>
         <Grid>

@@ -66,10 +66,13 @@ namespace LollyCloud
             await vm.Delete(item);
         }
 
-        private void CbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        private void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
         private void ChkLevelge0only_Click(object sender, RoutedEventArgs e) =>
+            vm.ApplyFilters();
+
+        private void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
         void tbTextFilter_KeyDown(object sender, KeyEventArgs e)

@@ -85,7 +85,7 @@ namespace LollyCloud
             vm.Items.Add(item);
         }
 
-        private void CbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        private void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
         private void ChkLevelge0only_Click(object sender, RoutedEventArgs e) =>

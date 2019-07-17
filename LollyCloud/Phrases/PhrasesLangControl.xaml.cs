@@ -62,7 +62,7 @@ namespace LollyCloud
             vm.ApplyFilters();
         }
 
-        private void CbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        private void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
         public override async Task OnSettingsChanged()
