@@ -13,9 +13,17 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <TextBox x:Name="tbNewWord" Text="{Binding vm.NewWord}"  Width="96" KeyDown="tbNewWord_KeyDown"></TextBox>
+                <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>New Word</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding vmSettings.ScopeWordFilters}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="CbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown"></TextBox>
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>Filter</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding vm.Levelge0only}" />
             </ToolBar>
         </ToolBarTray>

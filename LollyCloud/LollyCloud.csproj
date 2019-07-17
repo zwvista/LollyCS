@@ -117,6 +117,7 @@
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\UIHelpers.cs" />
+    <Compile Include="Shared\WatermarkAdorner.cs" />
     <Compile Include="Shared\WindowsExtensions.cs" />
     <Compile Include="Shared\CommonApi.cs" />
     <Compile Include="Models\MAutoCorrect.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Shared\Interfaces.cs" />
     <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\PhrasesLangViewModel.cs" />
+    <Compile Include="Shared\WatermarkService.cs" />
     <Compile Include="ViewModels\WordsLangViewModel.cs" />
     <Compile Include="Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
