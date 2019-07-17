@@ -1,5 +1,6 @@
 ﻿using LollyShared;
 using MSHTML;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace LollyCloud
         public virtual SettingsViewModel vmSettings => null;
         public virtual WebBrowser wbDictBase => null;
         public virtual ToolBar ToolBarDictBase => null;
+        public virtual TextBox tbURLBase => null;
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
 
@@ -66,6 +68,7 @@ namespace LollyCloud
 
         public void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
         {
+            tbURLBase.Text = e.Uri.AbsoluteUri;
             if (dictStatus == DictWebBrowserStatus.Ready) return;
             var item = vmSettings.DictItems[selectedDictItemIndex];
             var item2 = vmSettings.DictsReference.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
@@ -116,6 +119,8 @@ namespace LollyCloud
         }
 
         public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
+
+        public void btnOpenURL_Click(object sender, RoutedEventArgs e) => Process.Start(tbURLBase.Text);
 
         public virtual async Task OnSettingsChanged()
         {

@@ -22,6 +22,12 @@
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding vm.Levelge0only}" />
                 <ComboBox x:Name="cbTextbookFilter" ItemsSource="{Binding vmSettings.TextbookFilters}" DisplayMemberPath="Label" SelectedValuePath="Value"
                           SelectedValue="{Binding vm.TextbookFilter}" SelectionChanged="cbTextbookFilter_SelectionChanged" />
+                <TextBox x:Name="tbURL" IsReadOnly="True"  Width="200">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>URL</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <Button x:Name="btnOpenURL" Click="btnOpenURL_Click">Open</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid>

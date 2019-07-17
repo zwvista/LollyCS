@@ -19,6 +19,7 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
         public override ToolBar ToolBarDictBase => ToolBarDict;
+        public override TextBox tbURLBase => tbURL;
 
         public WordsUnitControl()
         {

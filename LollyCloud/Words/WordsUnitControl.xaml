@@ -29,6 +29,12 @@
                     </local:WatermarkService.Watermark>
                 </TextBox>
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding vm.Levelge0only}" />
+                <TextBox x:Name="tbURL" IsReadOnly="True"  Width="200">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>URL</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <Button x:Name="btnOpenURL" Click="btnOpenURL_Click">Open</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
