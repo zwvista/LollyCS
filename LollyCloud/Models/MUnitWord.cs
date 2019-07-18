@@ -110,6 +110,12 @@ namespace LollyShared
             get => _TOTAL;
             set => this.RaiseAndSetIfChanged(ref _TOTAL, value);
         }
+        bool _IsChecked;
+        public bool IsChecked
+        {
+            get => _IsChecked;
+            set => this.RaiseAndSetIfChanged(ref _IsChecked, value);
+        }
 
         public MTextbook Textbook { get; set; }
 

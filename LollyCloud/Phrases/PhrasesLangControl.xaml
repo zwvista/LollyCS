@@ -23,7 +23,7 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgPhrases_SelectionChanged"
+            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
                       RowEditEnding="dgPhrases_RowEditEnding" ItemsSource="{Binding vm.Items}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />

@@ -44,6 +44,14 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
+        void btnBatch_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new WordsUnitBatchDlg();
+            dlg.Owner = Window.GetWindow(this);
+            dlg.vmBatch.vm = vm;
+            dlg.ShowDialog();
+        }
+
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new WordsUnitDetailDlg();

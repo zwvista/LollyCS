@@ -81,6 +81,12 @@ namespace LollyShared
             get => _TRANSLATION;
             set => this.RaiseAndSetIfChanged(ref _TRANSLATION, value);
         }
+        bool _IsChecked;
+        public bool IsChecked
+        {
+            get => _IsChecked;
+            set => this.RaiseAndSetIfChanged(ref _IsChecked, value);
+        }
 
         public MTextbook Textbook { get; set; }
 

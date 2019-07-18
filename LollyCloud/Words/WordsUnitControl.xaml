@@ -14,14 +14,17 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+                <Button x:Name="btnBatch" Click="btnBatch_Click">Batch</Button>
+                <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
+                <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
+                <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
+            </ToolBar>
+            <ToolBar Band="2">
                 <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>New Word</TextBlock>
                     </local:WatermarkService.Watermark>
                 </TextBox>
-                <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
-                <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
-                <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
                 <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
                     <local:WatermarkService.Watermark>
@@ -43,7 +46,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" SelectionChanged="dgWords_SelectionChanged"
+            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
                       RowEditEnding="dgWords_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>

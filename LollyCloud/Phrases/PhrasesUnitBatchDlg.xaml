@@ -9,10 +9,11 @@
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -20,14 +21,62 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="UNIT:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" />
-        <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
+        <ComboBox ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
+                  IsEnabled="{Binding IsUnitChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
+        <CheckBox Content="Use" IsChecked="{Binding IsUnitChecked}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" />
         <Label Content="PART:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
-        <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <Label Content="SEQNUM:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
-        <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <ComboBox ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
+                  IsEnabled="{Binding IsPartChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <CheckBox Content="Use" IsChecked="{Binding IsPartChecked}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
+        <Label Content="SEQNUM(+):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
+        <TextBox Text="{Binding SEQNUM}" IsEnabled="{Binding IsSeqNumChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <CheckBox Content="Use" IsChecked="{Binding IsSeqNumChecked}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" />
+        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Center" >
+            <Button Content="Check All" Tag="0" Width="100" Height="20" Click="btnCheckItems_Click"/>
+            <Button Content="Uncheck All" Tag="1" Width="100" Height="20" Click="btnCheckItems_Click"/>
+            <Button Content="Check Selected" Tag="2" Width="100" Height="20" Click="btnCheckItems_Click"/>
+            <Button Content="Uncheck Selected" Tag="3" Width="100" Height="20" Click="btnCheckItems_Click"/>
+        </StackPanel>
+        <DataGrid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" x:Name="dgWords" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
+                      ItemsSource="{Binding vm.Items}">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{Binding IsChecked}" />
+                <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
+                <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
+                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                         AncestorType=UserControl}"/>
+                                <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
+                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                         AncestorType=UserControl}"/>
+                                <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" Height="20" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>
