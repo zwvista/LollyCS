@@ -145,6 +145,7 @@
     <Compile Include="Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\PhrasesUnitBatchViewModel.cs" />
     <Compile Include="ViewModels\WordsUnitBatchViewModel.cs" />
     <Compile Include="Words\WordsBaseControl.cs" />
     <Compile Include="Words\WordsLangControl.xaml.cs">
