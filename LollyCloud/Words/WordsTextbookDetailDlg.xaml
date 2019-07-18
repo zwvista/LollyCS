@@ -23,6 +23,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" />
         <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
@@ -46,7 +47,9 @@
         <TextBox Text="{Binding FAMIID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" IsReadOnly="True" />
         <Label Content="LEVEL:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="9" />
         <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" />
-        <StackPanel Grid.Column="1" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <Label Content="ACCURACY:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="10" />
+        <TextBox Text="{Binding Path=ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" IsReadOnly="True" />
+        <StackPanel Grid.Column="1" Grid.Row="11" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" Height="20" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>
