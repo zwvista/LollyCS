@@ -35,8 +35,8 @@
                     <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
                     <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
                     <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PHRASEID}" Header="PHRASEID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">

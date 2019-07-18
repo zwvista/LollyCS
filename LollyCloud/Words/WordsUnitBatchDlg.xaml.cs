@@ -38,6 +38,11 @@ namespace LollyCloud
             DataContext = item;
         }
 
+        void btnCheckItems_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
             item.WORD = vmSettings.AutoCorrectInput(item.WORD);

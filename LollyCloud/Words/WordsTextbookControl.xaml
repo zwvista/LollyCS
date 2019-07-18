@@ -47,8 +47,8 @@
                     <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
                     <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
                     <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
