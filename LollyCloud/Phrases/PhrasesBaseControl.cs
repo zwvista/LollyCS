@@ -12,6 +12,7 @@ namespace LollyCloud
     public class PhrasesBaseControl : UserControl, ILollySettings
     {
         public string selectedPhrase = "";
+        protected string originalText = "";
         public virtual SettingsViewModel vmSettings => null;
         public virtual DataGrid dgPhrasesBase => null;
         public virtual MPhraseInterface ItemForRow(int row) => null;

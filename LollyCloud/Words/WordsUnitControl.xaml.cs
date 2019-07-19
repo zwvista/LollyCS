@@ -62,15 +62,6 @@ namespace LollyCloud
             vm.Items.Add(dlg.itemOriginal);
         }
 
-        async void dgWords_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            if (e.EditAction == DataGridEditAction.Commit)
-            {
-                var item = vm.Items[e.Row.GetIndex()];
-                await vm.Update(item);
-            }
-        }
-
         public override async Task OnSettingsChanged()
         {
             vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings, inTextbook: true, needCopy: true);
@@ -185,16 +176,27 @@ namespace LollyCloud
         /// </summary>
         public bool IsEditing { get; set; }
 
-        private void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             IsEditing = true;
+            originalText = ((TextBlock)e.EditingEventArgs.Source).Text;
             //in case we are in the middle of a drag/drop operation, cancel it...
             if (IsDragging) ResetDragDrop();
         }
 
-        private void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
             IsEditing = false;
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var text = ((TextBox)e.EditingElement).Text;
+                if (text != originalText)
+                {
+                    var item = vm.Items[e.Row.GetIndex()];
+                    await vm.Update(item);
+                }
+                dgWords.CancelEdit(DataGridEditingUnit.Row);
+            }
         }
 
         #endregion

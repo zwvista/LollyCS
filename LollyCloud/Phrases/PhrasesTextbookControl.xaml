@@ -26,7 +26,7 @@
         </ToolBarTray>
         <Grid>
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      RowEditEnding="dgPhrases_RowEditEnding" ItemsSource="{Binding vm.Items}">
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.Items}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />

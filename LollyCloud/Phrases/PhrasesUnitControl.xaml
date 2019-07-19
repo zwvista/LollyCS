@@ -30,7 +30,7 @@
         </ToolBarTray>
         <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      RowEditEnding="dgPhrases_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}"
+                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />

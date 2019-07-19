@@ -143,16 +143,27 @@ namespace LollyCloud
         /// </summary>
         public bool IsEditing { get; set; }
 
-        private void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             IsEditing = true;
+            originalText = ((TextBlock)e.EditingEventArgs.Source).Text;
             //in case we are in the middle of a drag/drop operation, cancel it...
             if (IsDragging) ResetDragDrop();
         }
 
-        private void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
             IsEditing = false;
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var text = ((TextBox)e.EditingElement).Text;
+                if (text != originalText)
+                {
+                    var item = vm.Items[e.Row.GetIndex()];
+                    await vm.Update(item);
+                }
+                dgPhrases.CancelEdit(DataGridEditingUnit.Row);
+            }
         }
 
         #endregion

@@ -59,12 +59,22 @@ namespace LollyCloud
         private void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
-        async void dgPhrases_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            originalText = ((TextBlock)e.EditingEventArgs.Source).Text;
+        }
+
+        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.Items[e.Row.GetIndex()];
-                await vm.Update(item);
+                var text = ((TextBox)e.EditingElement).Text;
+                if (text != originalText)
+                {
+                    var item = vm.Items[e.Row.GetIndex()];
+                    await vm.Update(item);
+                }
+                dgPhrases.CancelEdit(DataGridEditingUnit.Row);
             }
         }
 

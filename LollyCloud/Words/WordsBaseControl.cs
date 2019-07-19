@@ -15,6 +15,7 @@ namespace LollyCloud
         protected DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         protected int selectedDictItemIndex;
         protected string selectedWord = "";
+        protected string originalText = "";
         public virtual DataGrid dgWordsBase => null;
         public virtual MWordInterface ItemForRow(int row) => null;
         public virtual SettingsViewModel vmSettings => null;

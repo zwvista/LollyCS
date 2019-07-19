@@ -37,7 +37,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      RowEditEnding="dgWords_RowEditEnding" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}">
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
