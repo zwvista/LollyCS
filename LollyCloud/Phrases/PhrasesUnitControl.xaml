@@ -42,6 +42,7 @@
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="dgPhrases_RowDoubleClick"/>
                     </Style>

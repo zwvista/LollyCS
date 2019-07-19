@@ -9,8 +9,7 @@
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -20,18 +19,15 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Content="UNIT:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" />
+        <CheckBox Content="UNIT:" IsChecked="{Binding IsUnitChecked}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
         <ComboBox ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
                   IsEnabled="{Binding IsUnitChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-        <CheckBox Content="Use" IsChecked="{Binding IsUnitChecked}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" />
-        <Label Content="PART:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" />
+        <CheckBox Content="PART:" IsChecked="{Binding IsPartChecked}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
         <ComboBox ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
                   IsEnabled="{Binding IsPartChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <CheckBox Content="Use" IsChecked="{Binding IsPartChecked}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
-        <Label Content="SEQNUM(+):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
+        <CheckBox Content="SEQNUM(+):" IsChecked="{Binding IsSeqNumChecked}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
         <TextBox Text="{Binding SEQNUM}" IsEnabled="{Binding IsSeqNumChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <CheckBox Content="Use" IsChecked="{Binding IsSeqNumChecked}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" />
-        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Center" >
+        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
             <Button Content="Check All" Tag="0" Width="100" Height="20" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck All" Tag="1" Width="100" Height="20" Click="btnCheckItems_Click"/>
             <Button Content="Check Selected" Tag="2" Width="100" Height="20" Click="btnCheckItems_Click"/>
@@ -76,7 +72,7 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <StackPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" Height="20" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

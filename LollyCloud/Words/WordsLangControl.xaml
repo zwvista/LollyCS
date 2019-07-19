@@ -52,6 +52,7 @@
                 <DataGrid.Resources>
                     <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
                     <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
                         <Setter Property="Background">
