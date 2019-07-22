@@ -1,0 +1,114 @@
+﻿<local:WordsBaseControl x:Class="LollyCloud.WordsSearchControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LollyCloud"
+             xmlns:shared="clr-namespace:LollyShared"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
+            <ToolBar x:Name="ToolBarDict" Band="1">
+            </ToolBar>
+            <ToolBar Band="2">
+                <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
+                <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+                <Button x:Name="btnBatch" Click="btnBatch_Click">Batch</Button>
+                <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
+                <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
+                <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
+            </ToolBar>
+            <ToolBar Band="2">
+                <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>New Word</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>Filter</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding vm.Levelge0only}" />
+                <TextBox x:Name="tbURL" IsReadOnly="True"  Width="200">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>URL</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <Button x:Name="btnOpenURL" Click="btnOpenURL_Click">Open</Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
+                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
+                    <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
+                    <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
+                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
+                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
+                    <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
+                    <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
+                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                         AncestorType=UserControl}"/>
+                                    <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Foreground">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
+                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                         AncestorType=UserControl}"/>
+                                    <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="miGetNote" Header="Retrieve Note" Click="miGetNote_Click" />
+                        <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
+                        <Separator />
+                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                        <Separator />
+                        <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
+                        <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+            <WebBrowser x:Name="wbDict" Grid.Column="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />
+        </Grid>
+        <!-- Drag and Drop Popup -->
+        <Popup x:Name="popup1" IsHitTestVisible="False" Placement="RelativePoint" PlacementTarget="{Binding}" AllowsTransparency="True">
+            <Border BorderBrush="LightSteelBlue" BorderThickness="2" Background="White" Opacity="0.75">
+                <StackPanel Orientation="Horizontal" Margin="4,3,8,3">
+                    <Image Source="/DragInsert.png" Width="16" Height="16" />
+                    <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding Path=DraggedWordItem.WORD}" Margin="8,0,0,0" />
+                </StackPanel>
+            </Border>
+        </Popup>
+    </DockPanel>
+</local:WordsBaseControl>

@@ -203,6 +203,7 @@ namespace LollyShared
             }
         }
         public int SelectedDictNoteIndex => DictsNote.IndexOf(_SelectedDictNote);
+        public bool HasDictNote => SelectedDictNote != null;
 
         List<MDictTranslation> _DictsTranslation;
         public List<MDictTranslation> DictsTranslation
@@ -221,6 +222,7 @@ namespace LollyShared
             }
         }
         public int SelectedDictTranslationIndex => DictsTranslation.IndexOf(_SelectedDictTranslation);
+        public bool HasDictTranslation => SelectedDictTranslation != null;
 
         List<MTextbook> _Textbooks;
         public List<MTextbook> Textbooks

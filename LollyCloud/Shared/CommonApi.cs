@@ -8,12 +8,17 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Web;
+using System.Security.Cryptography;
 
 namespace LollyShared
 {
     public enum DictWebBrowserStatus
     {
         Ready, Navigating, Automating
+    }
+    public enum ReviewMode
+    {
+        ReviewAuto, Test, ReviewManual
     }
     public enum UnitPartToType
     {
@@ -74,6 +79,24 @@ namespace LollyShared
 
         public static void GoogleString(string str) =>
             Process.Start($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");
+
+        // https://stackoverflow.com/questions/273313/randomize-a-listt
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+            int n = list.Count;
+            while (n > 1)
+            {
+                byte[] box = new byte[1];
+                do provider.GetBytes(box);
+                while (!(box[0] < n * (Byte.MaxValue / n)));
+                int k = (box[0] % n);
+                n--;
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 
     // https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall

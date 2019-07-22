@@ -110,6 +110,9 @@
     <Compile Include="Phrases\PhrasesUnitBatchDlg.xaml.cs">
       <DependentUpon>PhrasesUnitBatchDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Phrases\PhrasesReviewControl.xaml.cs">
+      <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\LangPhraseDataStore.cs" />
     <Compile Include="Services\USMappingDataStore.cs" />
     <Compile Include="Services\WordFamiDataStore.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="Services\UnitWordDataStore.cs" />
     <Compile Include="Services\UserSettingDataStore.cs" />
     <Compile Include="Shared\Interfaces.cs" />
+    <Compile Include="ViewModels\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\PhrasesLangViewModel.cs" />
     <Compile Include="Shared\WatermarkService.cs" />
@@ -147,12 +151,20 @@
     </Compile>
     <Compile Include="ViewModels\PhrasesUnitBatchViewModel.cs" />
     <Compile Include="ViewModels\WordsUnitBatchViewModel.cs" />
+    <Compile Include="ViewModels\WordsSearchModel.cs" />
+    <Compile Include="ViewModels\WordsReviewViewModel.cs" />
     <Compile Include="Words\WordsBaseControl.cs" />
     <Compile Include="Words\WordsLangControl.xaml.cs">
       <DependentUpon>WordsLangControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Words\WordsTextbookControl.xaml.cs">
       <DependentUpon>WordsTextbookControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsSearchControl.xaml.cs">
+      <DependentUpon>WordsSearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Words\WordsReviewControl.xaml.cs">
+      <DependentUpon>WordsReviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Words\WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
@@ -209,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Phrases\PhrasesReviewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SettingsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +238,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Words\WordsTextbookControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Words\WordsSearchControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Words\WordsReviewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
