@@ -25,7 +25,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
-        <ComboBox x:Name="cbModes" ItemsSource="{Binding ReviewModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Mode, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type shared:ReviewMode}}"  SelectionChanged="cbModes_SelectionChanged"
+        <ComboBox x:Name="cbModes" ItemsSource="{Binding ReviewModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Mode, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type shared:ReviewMode}}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
         <CheckBox Content="LEVEL >= 0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <CheckBox Content="Shuffled" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />

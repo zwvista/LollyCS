@@ -28,7 +28,9 @@ namespace LollyCloud
 
         void btnNewTest_Click(object sender, RoutedEventArgs e)
         {
-
+            var dlg = new ReviewOptionsDlg();
+            dlg.Owner = UIHelpers.TryFindParent<Window>(this);
+            dlg.ShowDialog();
         }
 
         void chkSpeak_Click(object sender, RoutedEventArgs e)

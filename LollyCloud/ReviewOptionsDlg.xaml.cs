@@ -21,10 +21,8 @@ namespace LollyCloud
     /// </summary>
     public partial class ReviewOptionsDlg : Window
     {
-        public MUnitWord itemOriginal;
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        public WordsUnitViewModel vm;
-        MUnitWord item = new MUnitWord();
+        public MReviewOptions optionsOriginal;
+        MReviewOptions options = new MReviewOptions();
         public ReviewOptionsDlg()
         {
             InitializeComponent();
@@ -34,25 +32,16 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            itemOriginal.CopyProperties(item);
-            DataContext = item;
+            optionsOriginal.CopyProperties(options);
+            DataContext = options;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            item.WORD = vmSettings.AutoCorrectInput(item.WORD);
-            if (item.ID == 0)
-                item.ID = await vm.Create(item);
-            else
-                await vm.Update(item);
-            item.CopyProperties(itemOriginal);
+            options.CopyProperties(optionsOriginal);
             Close();
         }
 
         void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
-        void cbModes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

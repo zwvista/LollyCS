@@ -21,6 +21,7 @@ namespace LollyShared
             get => _Index;
             set => this.RaiseAndSetIfChanged(ref _Index, value);
         }
+        public string IndexCount => $"{Index}/{Count}";
         public bool HasNext => Index < Count;
         public MUnitWord CurrentItem => HasNext ? Items[Index] : null;
         public string CurrentWord => HasNext ? Items[Index].WORD : "";
