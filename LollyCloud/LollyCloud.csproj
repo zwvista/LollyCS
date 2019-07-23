@@ -153,6 +153,9 @@
     <Compile Include="ViewModels\WordsUnitBatchViewModel.cs" />
     <Compile Include="ViewModels\WordsSearchModel.cs" />
     <Compile Include="ViewModels\WordsReviewViewModel.cs" />
+    <Compile Include="ReviewOptionsDlg.xaml.cs">
+      <DependentUpon>ReviewOptionsDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Words\WordsBaseControl.cs" />
     <Compile Include="Words\WordsLangControl.xaml.cs">
       <DependentUpon>WordsLangControl.xaml</DependentUpon>
@@ -230,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Phrases\PhrasesUnitControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReviewOptionsDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

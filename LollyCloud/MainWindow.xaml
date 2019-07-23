@@ -20,6 +20,9 @@
                 <MenuItem x:Name="miWordsUnit" Header="Words in Unit" Click="miWordsUnit_Click" />
                 <MenuItem x:Name="miPhrasesUnit" Header="Phrases in Unit" Click="miPhrasesUnit_Click" />
                 <Separator />
+                <MenuItem x:Name="miWordsReview" Header="Words Review" Click="miWordsReview_Click" />
+                <MenuItem x:Name="miPhrasesReview" Header="Phrases Review" Click="miPhrasesReview_Click" />
+                <Separator />
                 <MenuItem x:Name="miWordsTextbook" Header="Words in Textbook" Click="miWordsTextbook_Click" />
                 <MenuItem x:Name="miPhrasesTextbook" Header="Phrases in Textbook" Click="miPhrasesTextbook_Click" />
                 <Separator />

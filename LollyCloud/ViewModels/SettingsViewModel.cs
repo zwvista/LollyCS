@@ -282,6 +282,12 @@ namespace LollyShared
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
+        public static List<MSelectItem> ReviewModes { get; set; } = new List<MSelectItem>
+        {
+            new MSelectItem(0, "Review(Auto)"),
+            new MSelectItem(1, "Test"),
+            new MSelectItem(2, "Review(Manual)"),
+        };
 
         public HttpClient client = new HttpClient();
 

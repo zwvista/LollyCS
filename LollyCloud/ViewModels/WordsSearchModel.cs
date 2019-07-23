@@ -19,7 +19,7 @@ namespace LollyShared
         }
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
-        public WordsSearchModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
+        public WordsSearchModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             ItemsAll = new ObservableCollection<MUnitWord>();

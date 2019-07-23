@@ -24,12 +24,7 @@ namespace LollyShared
         public bool HasNext => Index < Count;
         public MUnitWord CurrentItem => HasNext ? Items[Index] : null;
         public string CurrentWord => HasNext ? Items[Index].WORD : "";
-        ReviewMode _Mode = ReviewMode.ReviewAuto;
-        public ReviewMode Mode
-        {
-            get => _Mode;
-            set => this.RaiseAndSetIfChanged(ref _Mode, value);
-        }
+        public ReviewMode Mode { get; set; } = ReviewMode.ReviewAuto;
         public bool IsTestMode => Mode == ReviewMode.Test;
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
