@@ -27,6 +27,7 @@ namespace LollyShared
         public string CurrentWord => HasNext ? Items[Index].WORD : "";
         public ReviewMode Mode { get; set; } = ReviewMode.ReviewAuto;
         public bool IsTestMode => Mode == ReviewMode.Test;
+        public MReviewOptions Options { get; set; } = new MReviewOptions();
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public static async Task<WordsReviewViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
@@ -36,16 +37,16 @@ namespace LollyShared
             return o;
         }
 
-        public async void NewTest(bool shuffled, bool levelge0only, int groupSelected, int groupCount)
+        public async Task NewTest()
         {
             Items = await unitWordDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
-            if (levelge0only)
+            if (Options.Levelge0only)
                 Items = Items.Where(o => o.LEVEL >= 0).ToList();
-            int nFrom = Count * (groupSelected - 1) / groupCount;
-            int nTo = Count * groupSelected / groupCount;
+            int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
+            int nTo = Count * Options.GroupSelected / Options.GroupCount;
             Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
-            if (shuffled)
+            if (Options.Shuffled)
                 Items.Shuffle();
             CorrectIDs = new List<int>();
             Index = 0;

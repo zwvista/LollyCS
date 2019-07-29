@@ -28,6 +28,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Label x:Name="lblIndex"/>
@@ -38,11 +39,12 @@
                 <Label x:Name="lblAccuracy" HorizontalAlignment="Right" />
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Label Content="{Binding WordTarget}" Foreground="Orange" />
-                <Label Content="{Binding Note}" Foreground="Pink" />
+                <Label x:Name="lblWordTarget" Content="{Binding WordTarget}" Foreground="Orange" />
+                <Label x:Name="lblNoteTarget" Content="{Binding Note}" Foreground="Pink" />
             </StackPanel>
-            <TextBox Text="{Binding Translation}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" />
-            <TextBox Text="{Binding WordInput}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" />
+            <TextBox x:Name="tbTranslation" Text="{Binding Translation}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" />
+            <TextBox x:Name="tbWordInput" Text="{Binding WordInput}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" />
+            <Button Grid.Row="4" x:Name="btnCheck" Width="100" HorizontalAlignment="Right" Height="20" Click="btnCheck_Click"/>
         </Grid>
     </DockPanel>
 </UserControl>
