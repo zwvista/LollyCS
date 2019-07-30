@@ -36,8 +36,9 @@ namespace LollyCloud
             DataContext = options;
         }
 
-        async void btnOK_Click(object sender, RoutedEventArgs e)
+        void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
             options.CopyProperties(optionsOriginal);
             Close();
         }

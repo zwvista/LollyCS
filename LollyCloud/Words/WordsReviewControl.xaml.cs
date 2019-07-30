@@ -73,7 +73,7 @@ namespace LollyCloud
                 if (vm.Mode == ReviewMode.ReviewAuto)
                 {
                     _timer = new DispatcherTimer();
-                    _timer.Interval = new TimeSpan(0, 0, 1);
+                    _timer.Interval = new TimeSpan(0, 0, 3);
                     _timer.Tick += (s, e2) => btnCheck_Click(sender, e);
                     _timer.Start();
                 }
@@ -90,6 +90,20 @@ namespace LollyCloud
             else if (!lblCorrect.IsVisible && lblIncorrect.IsVisible)
             {
                 tbWordInput.Text = vmSettings.AutoCorrectInput(tbWordInput.Text);
+                lblWordTarget.Visibility = Visibility.Hidden;
+                lblNoteTarget.Visibility = Visibility.Hidden;
+                if (tbWordInput.Text == vm.CurrentWord)
+                    lblCorrect.Visibility = Visibility.Visible;
+                else
+                    lblIncorrect.Visibility = Visibility.Visible;
+                btnCheck.Content = "Next";
+                await vm.Check(tbWordInput.Text);
+            }
+            else
+            {
+                vm.Next();
+                await DoTest();
+                btnCheck.Content = "Check";
             }
         }
 

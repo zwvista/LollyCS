@@ -67,7 +67,7 @@ namespace LollyShared
             var html = await vmSettings.client.GetStringAsync(url);
             return CommonApi.ExtractTextFromHtml(html, DictTranslation.TRANSFORM, "", (text, _) => text);
         }
-        public async void Check(string wordInput)
+        public async Task Check(string wordInput)
         {
             if (!HasNext) return;
             var o = CurrentItem;
