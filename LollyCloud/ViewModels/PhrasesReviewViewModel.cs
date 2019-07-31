@@ -21,13 +21,8 @@ namespace LollyShared
         public bool HasNext => Index < Count;
         public MUnitPhrase CurrentItem => HasNext ? Items[Index] : null;
         public string CurrentPhrase => HasNext ? Items[Index].PHRASE : "";
-        ReviewMode _Mode = ReviewMode.ReviewAuto;
-        public ReviewMode Mode
-        {
-            get => _Mode;
-            set => this.RaiseAndSetIfChanged(ref _Mode, value);
-        }
-        public bool IsTestMode => Mode == ReviewMode.Test;
+        public bool IsTestMode => Options.Mode == ReviewMode.Test;
+        public MReviewOptions Options { get; set; } = new MReviewOptions();
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public PhrasesReviewViewModel(SettingsViewModel vmSettings, bool needCopy)
@@ -35,14 +30,14 @@ namespace LollyShared
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
         }
 
-        public async void NewTest(bool shuffled, int groupSelected, int groupCount)
+        public async void NewTest()
         {
             Items = await unitPhraseDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
-            int nFrom = Count * (groupSelected - 1) / groupCount;
-            int nTo = Count * groupSelected / groupCount;
+            int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
+            int nTo = Count * Options.GroupSelected / Options.GroupCount;
             Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
-            if (shuffled)
+            if (Options.Shuffled)
                 Items.Shuffle();
             CorrectIDs = new List<int>();
             Index = 0;

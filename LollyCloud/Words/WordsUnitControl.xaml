@@ -20,7 +20,7 @@
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown">
+                <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>New Word</TextBlock>
                     </local:WatermarkService.Watermark>

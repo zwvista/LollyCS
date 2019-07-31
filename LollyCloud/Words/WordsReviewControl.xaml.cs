@@ -1,7 +1,6 @@
 ﻿using Hardcodet.Wpf.Util;
 using LollyShared;
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,9 +38,9 @@ namespace LollyCloud
             lblAccuracy.Visibility = vm.IsTestMode && b ? Visibility.Visible : Visibility.Hidden;
             btnCheck.IsEnabled = b;
             lblWordTarget.Content = vm.CurrentWord;
-            lblNoteTarget.Content = vm.CurrentItem?.NOTE ?? "";
+            lblNote.Content = vm.CurrentItem?.NOTE ?? "";
             lblWordTarget.Visibility = !vm.IsTestMode ? Visibility.Visible : Visibility.Hidden;
-            lblNoteTarget.Visibility = !vm.IsTestMode ? Visibility.Visible : Visibility.Hidden;
+            lblNote.Visibility = !vm.IsTestMode ? Visibility.Visible : Visibility.Hidden;
             tbTranslation.Text = "";
             tbWordInput.Text = "";
             tbWordInput.Focus();
@@ -54,10 +53,8 @@ namespace LollyCloud
                 //}
                 tbTranslation.Text = await vm.GetTranslation();
             }
-            else
-            {
+            else if (vm.Options.Mode == ReviewMode.ReviewAuto)
                 _timer.Stop();
-            }
         }
 
         async void btnNewTest_Click(object sender, RoutedEventArgs e)
@@ -70,7 +67,7 @@ namespace LollyCloud
                 await vm.NewTest();
                 await DoTest();
                 btnCheck.Content = vm.IsTestMode ? "Check" : "Next";
-                if (vm.Mode == ReviewMode.ReviewAuto)
+                if (vm.Options.Mode == ReviewMode.ReviewAuto)
                 {
                     _timer = new DispatcherTimer();
                     _timer.Interval = new TimeSpan(0, 0, 3);
@@ -91,7 +88,7 @@ namespace LollyCloud
             {
                 tbWordInput.Text = vmSettings.AutoCorrectInput(tbWordInput.Text);
                 lblWordTarget.Visibility = Visibility.Hidden;
-                lblNoteTarget.Visibility = Visibility.Hidden;
+                lblNote.Visibility = Visibility.Hidden;
                 if (tbWordInput.Text == vm.CurrentWord)
                     lblCorrect.Visibility = Visibility.Visible;
                 else
@@ -105,6 +102,12 @@ namespace LollyCloud
                 await DoTest();
                 btnCheck.Content = "Check";
             }
+        }
+
+        void tbWordInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Return) return;
+            btnCheck_Click(sender, null);
         }
 
         void chkSpeak_Click(object sender, RoutedEventArgs e)
