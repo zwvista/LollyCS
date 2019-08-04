@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 
 namespace LollyCloud
 {
-    public class WordsBaseControl: UserControl, ILollySettings
+    public class WordsBaseControl : UserControl, ILollySettings
     {
         protected DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         protected int selectedDictItemIndex;
@@ -23,7 +23,11 @@ namespace LollyCloud
         public virtual ToolBar ToolBarDictBase => null;
         public virtual TextBox tbURLBase => null;
 
-        public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchDict(null, null);
+        public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SearchDict(null, null);
+            App.Speak(vmSettings, selectedWord);
+        }
 
         public void SearchDict(object sender, RoutedEventArgs e)
         {
