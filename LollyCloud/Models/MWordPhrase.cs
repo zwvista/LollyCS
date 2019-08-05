@@ -1,17 +1,34 @@
-﻿namespace LollyShared
+﻿using ReactiveUI;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace LollyShared
 {
-    public interface MWordInterface
+    public class MWordsPhrases
     {
-        int LANGID { get; set; }
-        string WORD { get; set; }
-        string NOTE { get; set; }
-        int FAMIID { get; set; }
-        int LEVEL { get; set; }
+        public List<MWordPhrase> records { get; set; }
     }
-    public interface MPhraseInterface
+    public class MWordPhrase : ReactiveObject
     {
-        int LANGID { get; set; }
-        string PHRASE { get; set; }
-        string TRANSLATION { get; set; }
+        int _ID;
+        [JsonProperty]
+        public int ID
+        {
+            get => _ID;
+            set => this.RaiseAndSetIfChanged(ref _ID, value);
+        }
+        int _WORDID;
+        public int WORDID
+        {
+            get => _WORDID;
+            set => this.RaiseAndSetIfChanged(ref _WORDID, value);
+        }
+        int _PHRASEID;
+        public int PHRASEID
+        {
+            get => _PHRASEID;
+            set => this.RaiseAndSetIfChanged(ref _PHRASEID, value);
+        }
+
     }
 }

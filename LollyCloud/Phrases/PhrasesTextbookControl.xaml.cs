@@ -53,10 +53,10 @@ namespace LollyCloud
             vm.ApplyFilters();
         }
 
-        private void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
-        private void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             vm.ApplyFilters();
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)

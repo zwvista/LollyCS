@@ -22,7 +22,7 @@ namespace LollyCloud
     public partial class WordsLangDetailDlg : Window
     {
         public MLangWord itemOriginal;
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
+        public SettingsViewModel vmSettings => vm.vmSettings;
         public WordsLangViewModel vm;
         MLangWord item = new MLangWord();
         public WordsLangDetailDlg()

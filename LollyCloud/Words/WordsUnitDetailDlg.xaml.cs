@@ -22,7 +22,7 @@ namespace LollyCloud
     public partial class WordsUnitDetailDlg : Window
     {
         public MUnitWord itemOriginal;
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
+        public SettingsViewModel vmSettings => vm.vmSettings;
         public WordsUnitViewModel vm;
         MUnitWord item = new MUnitWord();
         public WordsUnitDetailDlg()

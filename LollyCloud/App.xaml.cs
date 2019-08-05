@@ -15,14 +15,12 @@ namespace LollyCloud
     /// </summary>
     public partial class App : Application
     {
-        private static SpeechSynthesizer synth = new SpeechSynthesizer();
-        public static void InitVoices()
-        {
-            var voices = synth.GetInstalledVoices();
-        }
+        static SpeechSynthesizer synth = new SpeechSynthesizer();
+        static List<InstalledVoice> voices = synth.GetInstalledVoices().ToList();
 
         public static void Speak(SettingsViewModel vmSettings, string text)
         {
+            if (!App.voices.Any(o => o.VoiceInfo.Name == vmSettings.SelectedVoice.VOICENAME)) return;
             synth.SpeakAsyncCancelAll();
             synth.SelectVoice(vmSettings.SelectedVoice.VOICENAME);
             synth.SpeakAsync(text);

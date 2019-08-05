@@ -13,12 +13,11 @@ namespace LollyCloud
     public partial class MainWindow : Window
     {
         public static SettingsViewModel vmSettings = new SettingsViewModel();
-        private ActionTabViewModal vmActionTabs;
+        ActionTabViewModal vmActionTabs;
 
         public MainWindow()
         {
             InitializeComponent();
-            App.InitVoices();
             // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
             Style = (Style)FindResource(typeof(Window));
             // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
@@ -67,7 +66,7 @@ namespace LollyCloud
         void miWordsTextbook_Click(object sender, RoutedEventArgs e) => AddTab<WordsTextbookControl>("Words in Textbook");
         void miPhrasesTextbook_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesTextbookControl>("Phrases in Textbook");
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // This event will be thrown when on a close image clicked
             vmActionTabs.Tabs.RemoveAt(tcMain.SelectedIndex);
