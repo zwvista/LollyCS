@@ -1,4 +1,4 @@
-﻿<Window x:Class="LollyCloud.PhrasesUnitBatchDlg"
+﻿<Window x:Class="LollyCloud.PhrasesSelectDlg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,14 +19,8 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <CheckBox Content="UNIT:" IsChecked="{Binding IsUnitChecked}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-        <ComboBox ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
-                  IsEnabled="{Binding IsUnitChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-        <CheckBox Content="PART:" IsChecked="{Binding IsPartChecked}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <ComboBox ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
-                  IsEnabled="{Binding IsPartChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <CheckBox Content="SEQNUM(+):" IsChecked="{Binding IsSeqNumChecked}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-        <TextBox Text="{Binding SEQNUM}" IsEnabled="{Binding IsSeqNumChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <Label Content="Filter:" VerticalAlignment="Center" Grid.Row="2" />
+        <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}" KeyDown="tbTextFilter_KeyDown"  Grid.Row="2" Grid.Column="1" />
         <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
             <Button Content="Check All" Tag="0" Width="100" Height="20" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck All" Tag="1" Width="100" Height="20" Click="btnCheckItems_Click"/>
