@@ -91,7 +91,7 @@
     <Compile Include="Models\MUSMapping.cs" />
     <Compile Include="Models\MUnitPhrase.cs" />
     <Compile Include="Models\MLangWord.cs" />
-    <Compile Include="Models\MSelectItem.cs" />
+    <Compile Include="Models\MCommon.cs" />
     <Compile Include="Models\MWordFami.cs" />
     <Compile Include="Models\MVoice.cs" />
     <Compile Include="Models\MWordPhrase.cs" />
@@ -108,6 +108,9 @@
     <Compile Include="Phrases\PhrasesTextbookDetailDlg.xaml.cs">
       <DependentUpon>PhrasesTextbookDetailDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Phrases\PhrasesSelectDlg.xaml.cs">
+      <DependentUpon>PhrasesSelectDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Phrases\PhrasesUnitBatchDlg.xaml.cs">
       <DependentUpon>PhrasesUnitBatchDlg.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,7 @@
     </Compile>
     <Compile Include="Services\LangPhraseDataStore.cs" />
     <Compile Include="Services\USMappingDataStore.cs" />
+    <Compile Include="Services\WordPhraseDataStore.cs" />
     <Compile Include="Services\WordFamiDataStore.cs" />
     <Compile Include="Services\VoiceDataStore.cs" />
     <Compile Include="Services\UnitPhraseDataStore.cs" />
@@ -219,6 +223,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Phrases\PhrasesTextbookDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Phrases\PhrasesSelectDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
