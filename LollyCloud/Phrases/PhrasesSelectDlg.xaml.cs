@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LollyCloud
 {
@@ -10,8 +11,8 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesSelectDlg : Window
     {
-        public PhrasesUnitBatchViewModel vmBatch = new PhrasesUnitBatchViewModel();
-        public SettingsViewModel vmSettings => vmBatch.vm.vmSettings;
+        public PhrasesUnitViewModel vm = new PhrasesUnitViewModel();
+        public SettingsViewModel vmSettings => vm.vmSettings;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         public PhrasesSelectDlg()
         {
@@ -22,16 +23,16 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var o in vmBatch.vm.Items)
+            foreach (var o in vm.Items)
                 o.IsChecked = false;
-            DataContext = vmBatch;
+            //DataContext = vmBatch;
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
         {
             int n = int.Parse((string)((Button)sender).Tag);
             var checkedItems = dgWords.SelectedItems.Cast<MUnitPhrase>();
-            foreach (var o in vmBatch.vm.Items)
+            foreach (var o in vm.Items)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
                     !checkedItems.Contains(o) ? o.IsChecked :
                     n == 2;
@@ -39,15 +40,23 @@ namespace LollyCloud
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var o in vmBatch.vm.Items)
-                if (vmBatch.IsUnitChecked || vmBatch.IsPartChecked || vmBatch.IsSeqNumChecked)
-                {
-                    if (vmBatch.IsUnitChecked) o.UNIT = vmBatch.UNIT;
-                    if (vmBatch.IsPartChecked) o.PART = vmBatch.PART;
-                    if (vmBatch.IsSeqNumChecked) o.SEQNUM += vmBatch.SEQNUM;
-                    await unitPhraseDS.Update(o);
-                }
             Close();
+        }
+
+        void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            vm.ApplyFilters();
+
+        void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            vm.ApplyFilters();
+
+        void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Return) return;
+            if (string.IsNullOrEmpty(vm.TextFilter))
+                vm.ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
+            else if (vm.ScopeFilter == SettingsViewModel.ScopePhraseFilters[0])
+                vm.ScopeFilter = SettingsViewModel.ScopePhraseFilters[1];
+            vm.ApplyFilters();
         }
 
         void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
