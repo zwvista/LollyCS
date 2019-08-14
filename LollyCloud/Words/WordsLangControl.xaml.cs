@@ -13,7 +13,7 @@ namespace LollyCloud
     {
         public WordsLangViewModel vm { get; set; }
         public override DataGrid dgWordsBase => dgWords;
-        public override MWordInterface ItemForRow(int row) => vm.Items[row];
+        public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -43,7 +43,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewLangWord();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.Items.Add(dlg.itemOriginal);
+            vm.WordItems.Add(dlg.itemOriginal);
         }
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
@@ -58,7 +58,7 @@ namespace LollyCloud
                 var text = ((TextBox)e.EditingElement).Text;
                 if (text != originalText)
                 {
-                    var item = vm.Items[e.Row.GetIndex()];
+                    var item = vm.WordItems[e.Row.GetIndex()];
                     await vm.Update(item);
                 }
                 dgWords.CancelEdit(DataGridEditingUnit.Row);
@@ -67,7 +67,7 @@ namespace LollyCloud
 
         public async override Task LevelChanged(int row)
         {
-            var item = vm.Items[row];
+            var item = vm.WordItems[row];
             await vmSettings.UpdateLevel(item.ID, item.LEVEL);
         }
 
@@ -82,7 +82,7 @@ namespace LollyCloud
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = vm.WordItems[row];
             await vm.Delete(item.ID);
         }
 
@@ -93,7 +93,7 @@ namespace LollyCloud
             item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
             vm.NewWord = "";
             item.ID = await vm.Create(item);
-            vm.Items.Add(item);
+            vm.WordItems.Add(item);
         }
 
         private void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>

@@ -10,9 +10,9 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         LangWordDataStore langWordDS = new LangWordDataStore();
 
-        public ObservableCollection<MLangWord> ItemsAll { get; set; }
-        public ObservableCollection<MLangWord> ItemsFiltered { get; set; }
-        public ObservableCollection<MLangWord> Items => ItemsFiltered ?? ItemsAll;
+        public ObservableCollection<MLangWord> WordItemsAll { get; set; }
+        public ObservableCollection<MLangWord> WordItemsFiltered { get; set; }
+        public ObservableCollection<MLangWord> WordItems => WordItemsFiltered ?? WordItemsAll;
         string _NewWord = "";
         public string NewWord
         {
@@ -42,23 +42,23 @@ namespace LollyShared
         {
             var o = new WordsLangViewModel();
             o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.ItemsAll = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            o.WordItemsAll = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             o.ApplyFilters();
             return o;
         }
         public void ApplyFilters()
         {
             if (string.IsNullOrEmpty(TextFilter) && !Levelge0only)
-                ItemsFiltered = null;
+                WordItemsFiltered = null;
             else
             {
-                ItemsFiltered = ItemsAll;
+                WordItemsFiltered = WordItemsAll;
                 if (!string.IsNullOrEmpty(TextFilter))
-                    ItemsFiltered = new ObservableCollection<MLangWord>(ItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
+                    WordItemsFiltered = new ObservableCollection<MLangWord>(WordItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
                 if (Levelge0only)
-                    ItemsFiltered = new ObservableCollection<MLangWord>(ItemsFiltered.Where(o => o.LEVEL >= 0));
+                    WordItemsFiltered = new ObservableCollection<MLangWord>(WordItemsFiltered.Where(o => o.LEVEL >= 0));
             }
-            this.RaisePropertyChanged(nameof(Items));
+            this.RaisePropertyChanged(nameof(WordItems));
         }
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);

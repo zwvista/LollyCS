@@ -14,7 +14,7 @@ namespace LollyCloud
         public PhrasesLangViewModel vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
-        public override MPhraseInterface ItemForRow(int row) => vm.Items[row];
+        public override MPhraseInterface ItemForRow(int row) => vm.PhraseItems[row];
 
         public PhrasesLangControl()
         {
@@ -40,7 +40,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewLangPhrase();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.Items.Add(dlg.itemOriginal);
+            vm.PhraseItems.Add(dlg.itemOriginal);
         }
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
@@ -55,7 +55,7 @@ namespace LollyCloud
                 var text = ((TextBox)e.EditingElement).Text;
                 if (text != originalText)
                 {
-                    var item = vm.Items[e.Row.GetIndex()];
+                    var item = vm.PhraseItems[e.Row.GetIndex()];
                     await vm.Update(item);
                 }
                 dgPhrases.CancelEdit(DataGridEditingUnit.Row);
@@ -86,7 +86,7 @@ namespace LollyCloud
         {
             var row = dgPhrases.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = vm.PhraseItems[row];
             await vm.Delete(item.ID);
         }
     }

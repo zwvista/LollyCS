@@ -11,9 +11,9 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
-        public ObservableCollection<MLangPhrase> ItemsAll { get; set; }
-        public ObservableCollection<MLangPhrase> ItemsFiltered { get; set; }
-        public ObservableCollection<MLangPhrase> Items => ItemsFiltered ?? ItemsAll;
+        public ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; }
+        public ObservableCollection<MLangPhrase> PhraseItemsFiltered { get; set; }
+        public ObservableCollection<MLangPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
         string _TextFilter = "";
         public string TextFilter
         {
@@ -31,21 +31,21 @@ namespace LollyShared
         {
             var o = new PhrasesLangViewModel();
             o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.ItemsAll = new ObservableCollection<MLangPhrase>(await o.langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
+            o.PhraseItemsAll = new ObservableCollection<MLangPhrase>(await o.langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
             o.ApplyFilters();
             return o;
         }
         public void ApplyFilters()
         {
             if (string.IsNullOrEmpty(TextFilter))
-                ItemsFiltered = null;
+                PhraseItemsFiltered = null;
             else
             {
-                ItemsFiltered = ItemsAll;
+                PhraseItemsFiltered = PhraseItemsAll;
                 if (!string.IsNullOrEmpty(TextFilter))
-                    ItemsFiltered = new ObservableCollection<MLangPhrase>(ItemsFiltered.Where(o => (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())));
+                    PhraseItemsFiltered = new ObservableCollection<MLangPhrase>(PhraseItemsFiltered.Where(o => (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())));
             }
-            this.RaisePropertyChanged(nameof(Items));
+            this.RaisePropertyChanged(nameof(PhraseItems));
         }
 
         public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);

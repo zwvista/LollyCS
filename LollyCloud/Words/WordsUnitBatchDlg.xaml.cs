@@ -23,7 +23,7 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var o in vmBatch.vm.Items)
+            foreach (var o in vmBatch.vm.WordItems)
                 o.IsChecked = false;
             DataContext = vmBatch;
         }
@@ -32,7 +32,7 @@ namespace LollyCloud
         {
             int n = int.Parse((string)((Button)sender).Tag);
             var checkedItems = dgWords.SelectedItems.Cast<MUnitWord>();
-            foreach (var o in vmBatch.vm.Items)
+            foreach (var o in vmBatch.vm.WordItems)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
                     !checkedItems.Contains(o) ? o.IsChecked :
                     n == 2;
@@ -40,7 +40,7 @@ namespace LollyCloud
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var o in vmBatch.vm.Items)
+            foreach (var o in vmBatch.vm.WordItems)
             {
                 if (vmBatch.IsUnitChecked || vmBatch.IsPartChecked || vmBatch.IsSeqNumChecked)
                 {

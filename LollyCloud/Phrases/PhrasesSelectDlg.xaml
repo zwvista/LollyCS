@@ -40,7 +40,7 @@
             <Button Content="Uncheck Selected" Tag="3" Width="100" Height="20" Click="btnCheckItems_Click"/>
         </StackPanel>
         <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" x:Name="dgWords" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
-                      ItemsSource="{Binding vm.Items}">
+                      ItemsSource="{Binding vm.PhraseItems}">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding IsChecked}" />
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />

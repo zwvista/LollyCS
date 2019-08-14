@@ -14,7 +14,7 @@ namespace LollyCloud
         public PhrasesUnitViewModel vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
-        public override MPhraseInterface ItemForRow(int row) => vm.Items[row];
+        public override MPhraseInterface ItemForRow(int row) => vm.PhraseItems[row];
 
         public PhrasesTextbookControl()
         {
@@ -40,7 +40,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewUnitPhrase();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.Items.Add(dlg.itemOriginal);
+            vm.PhraseItems.Add(dlg.itemOriginal);
         }
 
         void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
@@ -71,7 +71,7 @@ namespace LollyCloud
                 var text = ((TextBox)e.EditingElement).Text;
                 if (text != originalText)
                 {
-                    var item = vm.Items[e.Row.GetIndex()];
+                    var item = vm.PhraseItems[e.Row.GetIndex()];
                     await vm.Update(item);
                 }
                 dgPhrases.CancelEdit(DataGridEditingUnit.Row);
@@ -89,7 +89,7 @@ namespace LollyCloud
         {
             var row = dgPhrases.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = vm.PhraseItems[row];
             await vm.Delete(item);
         }
     }

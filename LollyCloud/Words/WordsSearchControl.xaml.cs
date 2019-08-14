@@ -15,7 +15,7 @@ namespace LollyCloud
     {
         public WordsUnitViewModel vm { get; set; }
         public override DataGrid dgWordsBase => dgWords;
-        public override MWordInterface ItemForRow(int row) => vm.Items[row];
+        public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -59,7 +59,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewUnitWord();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.Items.Add(dlg.itemOriginal);
+            vm.WordItems.Add(dlg.itemOriginal);
         }
 
         public override async Task OnSettingsChanged()
@@ -73,7 +73,7 @@ namespace LollyCloud
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = vm.WordItems[row];
             await vm.Delete(item);
         }
 
@@ -84,7 +84,7 @@ namespace LollyCloud
             item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
             vm.NewWord = "";
             item.ID = await vm.Create(item);
-            vm.Items.Add(item);
+            vm.WordItems.Add(item);
         }
 
         void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
@@ -105,14 +105,14 @@ namespace LollyCloud
 
         public async override Task LevelChanged(int row)
         {
-            var item = vm.Items[row];
+            var item = vm.WordItems[row];
             await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
         }
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)
         {
             var row = dgWords.SelectedIndex;
-            var part = row == -1 ? vmSettings.Parts[0].Value : vm.Items[row].PART;
+            var part = row == -1 ? vmSettings.Parts[0].Value : vm.WordItems[row].PART;
             await vmSettings.ToggleToType(part);
             btnRefresh_Click(sender, e);
         }
@@ -192,7 +192,7 @@ namespace LollyCloud
                 var text = ((TextBox)e.EditingElement).Text;
                 if (text != originalText)
                 {
-                    var item = vm.Items[e.Row.GetIndex()];
+                    var item = vm.WordItems[e.Row.GetIndex()];
                     await vm.Update(item);
                 }
                 dgWords.CancelEdit(DataGridEditingUnit.Row);
@@ -240,13 +240,13 @@ namespace LollyCloud
             if (targetItem == null || !ReferenceEquals(DraggedWordItem, targetItem))
             {
                 //remove the source from the list
-                vm.Items.Remove(DraggedWordItem);
+                vm.WordItems.Remove(DraggedWordItem);
 
                 //get target index
-                var targetIndex = vm.Items.IndexOf(targetItem);
+                var targetIndex = vm.WordItems.IndexOf(targetItem);
 
                 //move source at the target's location
-                vm.Items.Insert(targetIndex, DraggedWordItem);
+                vm.WordItems.Insert(targetIndex, DraggedWordItem);
 
                 //select the dropped item
                 dgWords.SelectedItem = DraggedWordItem;

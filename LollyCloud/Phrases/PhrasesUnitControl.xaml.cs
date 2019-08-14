@@ -15,7 +15,7 @@ namespace LollyCloud
         public PhrasesUnitViewModel vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
-        public override MPhraseInterface ItemForRow(int row) => vm.Items[row];
+        public override MPhraseInterface ItemForRow(int row) => vm.PhraseItems[row];
 
         public PhrasesUnitControl()
         {
@@ -49,14 +49,14 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewUnitPhrase();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.Items.Add(dlg.itemOriginal);
+            vm.PhraseItems.Add(dlg.itemOriginal);
         }
 
         async void dgPhrases_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.Items[e.Row.GetIndex()];
+                var item = vm.PhraseItems[e.Row.GetIndex()];
                 await vm.Update(item);
             }
         }
@@ -85,14 +85,14 @@ namespace LollyCloud
         {
             var row = dgPhrases.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = vm.PhraseItems[row];
             await vm.Delete(item);
         }
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)
         {
             var row = dgPhrases.SelectedIndex;
-            var part = row == -1 ? vmSettings.Parts[0].Value : vm.Items[row].PART;
+            var part = row == -1 ? vmSettings.Parts[0].Value : vm.PhraseItems[row].PART;
             await vmSettings.ToggleToType(part);
             btnRefresh_Click(sender, e);
         }
@@ -159,7 +159,7 @@ namespace LollyCloud
                 var text = ((TextBox)e.EditingElement).Text;
                 if (text != originalText)
                 {
-                    var item = vm.Items[e.Row.GetIndex()];
+                    var item = vm.PhraseItems[e.Row.GetIndex()];
                     await vm.Update(item);
                 }
                 dgPhrases.CancelEdit(DataGridEditingUnit.Row);
@@ -207,13 +207,13 @@ namespace LollyCloud
             if (targetItem == null || !ReferenceEquals(DraggedPhraseItem, targetItem))
             {
                 //remove the source from the list
-                vm.Items.Remove(DraggedPhraseItem);
+                vm.PhraseItems.Remove(DraggedPhraseItem);
 
                 //get target index
-                var targetIndex = vm.Items.IndexOf(targetItem);
+                var targetIndex = vm.PhraseItems.IndexOf(targetItem);
 
                 //move source at the target's location
-                vm.Items.Insert(targetIndex, DraggedPhraseItem);
+                vm.PhraseItems.Insert(targetIndex, DraggedPhraseItem);
 
                 //select the dropped item
                 dgPhrases.SelectedItem = DraggedPhraseItem;

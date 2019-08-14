@@ -13,7 +13,7 @@ namespace LollyCloud
     {
         public WordsUnitViewModel vm { get; set; }
         public override DataGrid dgWordsBase => dgWords;
-        public override MWordInterface ItemForRow(int row) => vm.Items[row];
+        public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override WebBrowser wbDictBase => wbDict;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -48,7 +48,7 @@ namespace LollyCloud
                 var text = ((TextBox)e.EditingElement).Text;
                 if (text != originalText)
                 {
-                    var item = vm.Items[e.Row.GetIndex()];
+                    var item = vm.WordItems[e.Row.GetIndex()];
                     await vm.Update(item);
                 }
                 dgWords.CancelEdit(DataGridEditingUnit.Row);
@@ -57,7 +57,7 @@ namespace LollyCloud
 
         public override async Task LevelChanged(int row)
         {
-            var item = vm.Items[row];
+            var item = vm.WordItems[row];
             await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
         }
 
@@ -73,7 +73,7 @@ namespace LollyCloud
         {
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
-            var item = vm.Items[row];
+            var item = vm.WordItems[row];
             await vm.Delete(item);
         }
 
