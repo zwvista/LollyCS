@@ -9,10 +9,12 @@ namespace LollyShared
     {
         public SettingsViewModel vmSettings;
         LangWordDataStore langWordDS = new LangWordDataStore();
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         public ObservableCollection<MLangWord> WordItemsAll { get; set; }
         public ObservableCollection<MLangWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MLangWord> WordItems => WordItemsFiltered ?? WordItemsAll;
+        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
         string _NewWord = "";
         public string NewWord
         {
@@ -70,5 +72,8 @@ namespace LollyShared
             {
                 LANGID = vmSettings.SelectedLang.ID,
             };
+
+        public async Task SearchPhrases(int wordid) =>
+            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWord(wordid));
     }
 }

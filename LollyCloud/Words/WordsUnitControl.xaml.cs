@@ -147,6 +147,8 @@ namespace LollyCloud
                 e.Handled = true;
             }
         }
+        public override async Task SearchPhrases() =>
+            await vm.SearchPhrases(selectedWordID);
 
         #region DraggedWordItem
 

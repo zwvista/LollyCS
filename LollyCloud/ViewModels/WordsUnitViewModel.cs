@@ -11,12 +11,14 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
         NoteViewModel vmNote;
         MDictNote DictNote => vmNote.DictNote;
 
         public ObservableCollection<MUnitWord> WordItemsAll { get; set; }
         public ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
+        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
         string _NewWord = "";
         public string NewWord
         {
@@ -202,5 +204,11 @@ namespace LollyShared
                     await ClearNote(i);
                     oneComplete(i);
                 }, allComplete);
+
+        public async Task SearchPhrases(int wordid)
+        {
+            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWord(wordid));
+            this.RaisePropertyChanged(nameof(PhraseItems));
+        }
     }
 }

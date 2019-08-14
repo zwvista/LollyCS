@@ -16,6 +16,7 @@ namespace LollyShared
     public interface MWordInterface
     {
         int LANGID { get; set; }
+        int WORDID { get; }
         string WORD { get; set; }
         string NOTE { get; set; }
         int FAMIID { get; set; }
@@ -24,6 +25,7 @@ namespace LollyShared
     public interface MPhraseInterface
     {
         int LANGID { get; set; }
+        int PHRASEID { get; }
         string PHRASE { get; set; }
         string TRANSLATION { get; set; }
     }

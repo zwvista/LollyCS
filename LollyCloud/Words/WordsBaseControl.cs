@@ -15,6 +15,7 @@ namespace LollyCloud
         protected DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         protected int selectedDictItemIndex;
         protected string selectedWord = "";
+        protected int selectedWordID = 0;
         protected string originalText = "";
         public virtual DataGrid dgWordsBase => null;
         public virtual MWordInterface ItemForRow(int row) => null;
@@ -26,6 +27,7 @@ namespace LollyCloud
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SearchDict(null, null);
+            SearchPhrases();
             App.Speak(vmSettings, selectedWord);
         }
 
@@ -34,9 +36,18 @@ namespace LollyCloud
             if (sender is RadioButton)
                 selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWordsBase.SelectedIndex;
-            if (row == -1) return;
-            selectedWord = ItemForRow(row).WORD;
-            SearchWord(selectedWord);
+            if (row == -1)
+            {
+                selectedWord = "";
+                selectedWordID = 0;
+            }
+            else
+            {
+                var item = ItemForRow(row);
+                selectedWord = item.WORD;
+                selectedWordID = item.WORDID;
+                SearchWord(selectedWord);
+            }
         }
 
         public async void SearchWord(string word)
@@ -145,5 +156,7 @@ namespace LollyCloud
                     b.IsChecked = true;
             }
         }
+
+        public virtual async Task SearchPhrases() { }
     }
 }
