@@ -36,8 +36,8 @@
         </ToolBarTray>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
@@ -83,8 +83,27 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
-            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
-            <WebBrowser x:Name="wbDict" Grid.Column="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />
+            <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
+                      ItemsSource="{Binding vm.PhraseItems}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
+                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
+                <WebBrowser x:Name="wbDict" Grid.Row="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted"/>
+            </Grid>
         </Grid>
     </DockPanel>
 </local:WordsBaseControl>

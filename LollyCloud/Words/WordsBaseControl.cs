@@ -84,6 +84,7 @@ namespace LollyCloud
 
         public void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
         {
+            if (e.Uri == null) return;
             tbURLBase.Text = e.Uri.AbsoluteUri;
             if (dictStatus == DictWebBrowserStatus.Ready) return;
             var item = vmSettings.DictItems[selectedDictItemIndex];
