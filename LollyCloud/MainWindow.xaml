@@ -29,6 +29,10 @@
                 <MenuItem x:Name="miWordsLang" Header="Words in Language" Click="miWordsLang_Click" />
                 <MenuItem x:Name="miPhrasesLang" Header="Phrases in Language" Click="miPhrasesLang_Click" />
             </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem x:Name="miBlog" Header="Search" Click="miBlog_Click" />
+                <Separator />
+            </MenuItem>
         </Menu>
         <DockPanel Grid.Row="1">
             <TabControl x:Name="tcMain">
