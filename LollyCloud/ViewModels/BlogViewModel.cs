@@ -33,7 +33,7 @@ namespace LollyShared
         readonly Regex regMarkedEntry = new Regex(@"(\*\*?)\s*(.*?)：(.*?)：(.*)");
         readonly Regex regMarkedB = new Regex("<B>(.+?)</B>");
         readonly Regex regMarkedI = new Regex("<I>(.+?)</I>");
-        string MarkedToHtml(string text)
+        public string MarkedToHtml(string text)
         {
             var lst = text.Split('\n').ToList();
             for (int i = 0; i < lst.Count; i++)
@@ -73,7 +73,7 @@ namespace LollyShared
         Regex regHtmlB => new Regex(HtmlBWith("(.+?)"));
         Regex regHtmlI => new Regex(HtmlIWith("(.+?)"));
         Regex regHtmlEntry => new Regex($"(<li>|<br>){HtmlWordWith("(.*?)")}(?:{HtmlE1With("(.*?)")})?(?:{HtmlE2With("(.*?)")})?(?:</li>)?");
-        string HtmlToMarked(string text)
+        public string HtmlToMarked(string text)
         {
             var lst = text.Split('\n').ToList();
             for (int i = 0; i < lst.Count; i++)
@@ -109,6 +109,56 @@ namespace LollyShared
                 }
             }
             return string.Join("\n", lst);
+        }
+        public string AddTagB(string text) => $"<B>{text}</B>";
+        public string AddTagI(string text) => $"<I>{text}</I>";
+        public string RemoveTagBI(string text) => new Regex("</?[BI]>").Replace(text, "");
+        public string ExchangeTagBI(string text)
+        {
+            text = new Regex("<(/)?B>").Replace(text, "<$1Temp>");
+            text = new Regex("<(/)?I>").Replace(text, "<$1B>");
+            text = new Regex("<(/)?Temp>").Replace(text, "<$1I>");
+            return text;
+        }
+        public readonly string explanation = "* ：：\n";
+        public string GetHtml(string text) => $"<html><body>{text}</body></html>";
+        public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
+        public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
+        readonly string bigDigits = "０１２３４５６７８９";
+        public async Task AddNotes(string text, Action<string> complete)
+        {
+            string F(string s)
+            {
+                for (int i = 0; i < 10; i++)
+                    s = s.Replace(i.ToString()[0], bigDigits[i]);
+                return s;
+            }
+            var items = text.Split('\n');
+            await vmNote.GetNotes(items.Length, i =>
+            {
+                var m = regMarkedEntry.Match(items[i]);
+                if (!m.Success) return false;
+                var word = m.Groups[2].Value;
+                return word.All(ch => ch != '（' && !bigDigits.Contains(ch));
+            },
+            async i =>
+            {
+                var m = regMarkedEntry.Match(items[i]);
+                var s1 = m.Groups[1].Value;
+                var word = m.Groups[2].Value;
+                var s3 = m.Groups[3].Value;
+                var s4 = m.Groups[4].Value;
+                var note = await vmNote.GetNote(word);
+                int j = note.ToList().FindIndex(char.IsDigit);
+                var s21 = j == -1 ? note : note.Substring(0, j);
+                var s22 = j == -1 ? "" : note.Substring(j);
+                var s2 = word + (s21 == word || string.IsNullOrEmpty(s21) ? "" : $"（{s21}）") + s22;
+                items[i] = $"{s1} {s2}：{s3}：{s4}";
+            }, () =>
+            {
+                var result = string.Join("\n", items);
+                complete(result);
+            });
         }
     }
 }
