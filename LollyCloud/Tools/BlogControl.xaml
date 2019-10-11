@@ -10,8 +10,14 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
+                <Button x:Name="btnHtmlToMarked" Click="btnHtmlToMarked_Click">HtmlToMarked</Button>
+                <Button x:Name="btnAddTagB" Click="btnAddTagB_Click">Add B</Button>
+                <Button x:Name="btnAddTagI" Click="btnAddTagI_Click">Add I</Button>
+                <Button x:Name="btnRemoveTagBI" Click="btnRemoveTagBI_Click">Remove BI</Button>
+                <Button x:Name="btnExchangeTagBI" Click="btnExchangeTagBI_Click">Exchange BI</Button>
+                <Button x:Name="btnAddExplanation" Click="btnAddExplanation_Click">AddExplanation</Button>
             </ToolBar>
-        </ToolBarTray>
+        </ToolBarTray>  
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

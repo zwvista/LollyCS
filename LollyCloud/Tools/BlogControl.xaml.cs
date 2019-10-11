@@ -11,7 +11,7 @@ namespace LollyCloud
     /// </summary>
     public partial class BlogControl : UserControl, ILollySettings
     {
-        public WordsUnitViewModel vm { get; set; }
+        public BlogViewModel vm { get; set; }
 
         public BlogControl()
         {
@@ -20,6 +20,36 @@ namespace LollyCloud
         }
 
         public async Task OnSettingsChanged()
+        {
+            vm = new BlogViewModel(MainWindow.vmSettings, true);
+        }
+
+        private void btnHtmlToMarked_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddTagB_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddTagI_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRemoveTagBI_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnExchangeTagBI_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddExplanation_Click(object sender, RoutedEventArgs e)
         {
 
         }

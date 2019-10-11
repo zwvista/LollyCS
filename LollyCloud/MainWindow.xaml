@@ -30,7 +30,7 @@
                 <MenuItem x:Name="miPhrasesLang" Header="Phrases in Language" Click="miPhrasesLang_Click" />
             </MenuItem>
             <MenuItem Header="Tools">
-                <MenuItem x:Name="miBlog" Header="Search" Click="miBlog_Click" />
+                <MenuItem x:Name="miBlog" Header="Blog" Click="miBlog_Click" />
                 <Separator />
             </MenuItem>
         </Menu>
