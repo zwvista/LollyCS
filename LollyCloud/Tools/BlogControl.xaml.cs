@@ -42,7 +42,7 @@ namespace LollyCloud
             tbHtml.Text = vm.MarkedToHtml(tbMarked.Text);
             var str = vm.GetHtml(tbHtml.Text);
             wbBlog.NavigateToString(str);
-            Clipboard.SetText(tbHtml.Text);
+            Clipboard.SetDataObject(tbHtml.Text);
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e)
         {
@@ -54,7 +54,7 @@ namespace LollyCloud
         void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e)
         {
             var text = vm.GetPatternMarkDown(tbPatternText.Text);
-            Clipboard.SetText(text);
+            Clipboard.SetDataObject(text);
         }
         async void btnAddNotes_Click(object sender, RoutedEventArgs e) =>
             await vm.AddNotes(tbMarked.Text, s => tbMarked.Text = s);
