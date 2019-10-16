@@ -16,6 +16,20 @@
                 <Button x:Name="btnRemoveTagBI" Click="btnRemoveTagBI_Click">Remove BI</Button>
                 <Button x:Name="btnExchangeTagBI" Click="btnExchangeTagBI_Click">Exchange BI</Button>
                 <Button x:Name="btnAddExplanation" Click="btnAddExplanation_Click">AddExplanation</Button>
+                <Button x:Name="btnMarkedToHtml" Click="btnMarkedToHtml_Click">MarkedToHtml</Button>
+                <Button x:Name="btnPatternToHtml" Click="btnPatternToHtml_Click">PatternToHtml</Button>
+                <TextBox x:Name="tbPatternNo" Width="60" Text="001">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>Pattern No.</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <Button x:Name="btnCopyPatternMarkDown" Click="btnCopyPatternMarkDown_Click">PatternMarkDown</Button>
+                <TextBox x:Name="tbPatternText" Width="96">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>Pattern Text</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+                <Button x:Name="btnAddNotes" Click="btnAddNotes_Click">AddNotes</Button>
             </ToolBar>
         </ToolBarTray>  
         <Grid>
@@ -30,12 +44,12 @@
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" AcceptsReturn="True"></TextBox>
+                <TextBox x:Name="tbMarked" Grid.Row="0" AcceptsReturn="True"></TextBox>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <TextBox Grid.Row="2" AcceptsReturn="True"></TextBox>
+                <TextBox x:Name="tbHtml" Grid.Row="2" AcceptsReturn="True"></TextBox>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
-            <WebBrowser x:Name="wbBlog" Grid.Column="2" />
+            <WebBrowser x:Name="wbBlog" Grid.Column="2" Navigated="WbBlog_Navigated" />
         </Grid>
     </DockPanel>
 </UserControl>

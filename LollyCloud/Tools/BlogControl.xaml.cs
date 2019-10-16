@@ -1,4 +1,5 @@
 ﻿using LollyShared;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,39 +20,43 @@ namespace LollyCloud
             OnSettingsChanged();
         }
 
-        public async Task OnSettingsChanged()
-        {
+        public async Task OnSettingsChanged() =>
             vm = new BlogViewModel(MainWindow.vmSettings, true);
-        }
 
-        private void btnHtmlToMarked_Click(object sender, RoutedEventArgs e)
+        void btnHtmlToMarked_Click(object sender, RoutedEventArgs e) =>
+            tbMarked.Text = vm.HtmlToMarked(tbHtml.Text);
+        void ReplaceSelection(Func<string, string> f) =>
+            tbMarked.SelectedText = f(tbMarked.SelectedText);
+        void btnAddTagB_Click(object sender, RoutedEventArgs e) =>
+            ReplaceSelection(vm.AddTagB);
+        void btnAddTagI_Click(object sender, RoutedEventArgs e) =>
+            ReplaceSelection(vm.AddTagI);
+        void btnRemoveTagBI_Click(object sender, RoutedEventArgs e) =>
+            ReplaceSelection(vm.RemoveTagBI);
+        void btnExchangeTagBI_Click(object sender, RoutedEventArgs e) =>
+            ReplaceSelection(vm.ExchangeTagBI);
+        void btnAddExplanation_Click(object sender, RoutedEventArgs e) =>
+            ReplaceSelection(_ => vm.explanation);
+        void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {
-
+            tbHtml.Text = vm.MarkedToHtml(tbMarked.Text);
+            var str = vm.GetHtml(tbHtml.Text);
+            wbBlog.NavigateToString(str);
+            Clipboard.SetText(tbHtml.Text);
         }
-
-        private void btnAddTagB_Click(object sender, RoutedEventArgs e)
+        void btnPatternToHtml_Click(object sender, RoutedEventArgs e)
         {
-
+            var url = vm.GetPatternUrl(tbPatternNo.Text);
+            wbBlog.Navigate(url);
         }
-
-        private void btnAddTagI_Click(object sender, RoutedEventArgs e)
+        void WbBlog_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) =>
+            wbBlog.SetSilent(true);
+        void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e)
         {
-
+            var text = vm.GetPatternMarkDown(tbPatternText.Text);
+            Clipboard.SetText(text);
         }
-
-        private void btnRemoveTagBI_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnExchangeTagBI_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAddExplanation_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        async void btnAddNotes_Click(object sender, RoutedEventArgs e) =>
+            await vm.AddNotes(tbMarked.Text, s => tbMarked.Text = s);
     }
 }
