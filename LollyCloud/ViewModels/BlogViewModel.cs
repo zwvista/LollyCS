@@ -75,7 +75,7 @@ namespace LollyShared
         Regex regHtmlEntry => new Regex($"(<li>|<br>){HtmlWordWith("(.*?)")}(?:{HtmlE1With("(.*?)")})?(?:{HtmlE2With("(.*?)")})?(?:</li>)?");
         public string HtmlToMarked(string text)
         {
-            var lst = text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var lst = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
             for (int i = 0; i < lst.Count; i++)
             {
                 var s = lst[i];
