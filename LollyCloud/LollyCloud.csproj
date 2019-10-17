@@ -160,7 +160,7 @@
     <Compile Include="ViewModels\PhrasesUnitBatchViewModel.cs" />
     <Compile Include="Models\MReviewOptions.cs" />
     <Compile Include="ViewModels\WordsUnitBatchViewModel.cs" />
-    <Compile Include="ViewModels\WordsSearchModel.cs" />
+    <Compile Include="ViewModels\WordsSearchViewModel.cs" />
     <Compile Include="ViewModels\WordsReviewViewModel.cs" />
     <Compile Include="ReviewOptionsDlg.xaml.cs">
       <DependentUpon>ReviewOptionsDlg.xaml</DependentUpon>

@@ -6,11 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class WordsSearchModel : LollyViewModel
+    public class WordsSearchViewModel : LollyViewModel
     {
         public SettingsViewModel vmSettings;
 
-        public ObservableCollection<MUnitWord> ItemsAll { get; set; }
+        public ObservableCollection<MUnitWord> WordItems { get; set; }
         string _NewWord = "";
         public string NewWord
         {
@@ -19,10 +19,10 @@ namespace LollyShared
         }
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
-        public WordsSearchModel(SettingsViewModel vmSettings, bool needCopy)
+        public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            ItemsAll = new ObservableCollection<MUnitWord>();
+            WordItems = new ObservableCollection<MUnitWord>();
         }
     }
 }

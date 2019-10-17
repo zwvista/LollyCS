@@ -55,7 +55,7 @@ namespace LollyCloud
                 tcMain.SelectedIndex = i;
         }
 
-        void miSearch_Click(object sender, RoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
+        void miSearch_Click(object sender, RoutedEventArgs e) => AddTab<WordsSearchControl>("Search");
 
         void miWordsUnit_Click(object sender, RoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
         void miPhrasesUnit_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesUnitControl>("Phrases in Unit");
