@@ -35,7 +35,7 @@ namespace LollyShared
         readonly Regex regMarkedI = new Regex("<I>(.+?)</I>");
         public string MarkedToHtml(string text)
         {
-            var lst = text.Split('\n').ToList();
+            var lst = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
             for (int i = 0; i < lst.Count; i++)
             {
                 var s = lst[i];
@@ -67,7 +67,7 @@ namespace LollyShared
                     lst[i] = $"<div>{s}</div>";
                 }
             }
-            return string.Join("\n", lst);
+            return string.Join("\r\n", lst);
         }
         readonly Regex regLine = new Regex("<div>(.*?)</div>");
         Regex regHtmlB => new Regex(HtmlBWith("(.+?)"));
@@ -108,7 +108,7 @@ namespace LollyShared
                     }
                 }
             }
-            return string.Join("\n", lst);
+            return string.Join("\r\n", lst);
         }
         public string AddTagB(string text) => $"<B>{text}</B>";
         public string AddTagI(string text) => $"<I>{text}</I>";
@@ -120,7 +120,7 @@ namespace LollyShared
             text = new Regex("<(/)?Temp>").Replace(text, "<$1I>");
             return text;
         }
-        public readonly string explanation = "* ：：\n";
+        public string GetExplanation(string text) => $"* ：{text}：\r\n";
         public string GetHtml(string text) => $"<html><body>{text}</body></html>";
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
         public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
@@ -133,8 +133,8 @@ namespace LollyShared
                     s = s.Replace(i.ToString()[0], bigDigits[i]);
                 return s;
             }
-            var items = text.Split('\n');
-            await vmNote.GetNotes(items.Length, i =>
+            var items = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
+            await vmNote.GetNotes(items.Count, i =>
             {
                 var m = regMarkedEntry.Match(items[i]);
                 if (!m.Success) return false;
@@ -156,7 +156,7 @@ namespace LollyShared
                 items[i] = $"{s1} {s2}：{s3}：{s4}";
             }, () =>
             {
-                var result = string.Join("\n", items);
+                var result = string.Join("\r\n", items);
                 complete(result);
             });
         }

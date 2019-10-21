@@ -35,8 +35,11 @@ namespace LollyCloud
             ReplaceSelection(vm.RemoveTagBI);
         void btnExchangeTagBI_Click(object sender, RoutedEventArgs e) =>
             ReplaceSelection(vm.ExchangeTagBI);
-        void btnAddExplanation_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(_ => vm.explanation);
+        void btnAddExplanation_Click(object sender, RoutedEventArgs e)
+        {
+            var text = Clipboard.GetText();
+            ReplaceSelection(_ => vm.GetExplanation(text));
+        }
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {
             tbHtml.Text = vm.MarkedToHtml(tbMarked.Text);

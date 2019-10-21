@@ -53,5 +53,11 @@ namespace LollyCloud
             vm.WordItems.Add(item);
         }
 
+        public void SearchWord(string word)
+        {
+            vm.NewWord = word;
+            tbNewWord_KeyDown(null, null);
+        }
+
     }
 }
