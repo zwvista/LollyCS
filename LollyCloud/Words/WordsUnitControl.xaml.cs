@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
 
 namespace LollyCloud
 {
@@ -85,6 +86,7 @@ namespace LollyCloud
             vm.NewWord = "";
             item.ID = await vm.Create(item);
             vm.WordItems.Add(item);
+            dgWords.SelectedItem = vm.WordItems.Last();
         }
 
         void tbTextFilter_KeyDown(object sender, KeyEventArgs e)

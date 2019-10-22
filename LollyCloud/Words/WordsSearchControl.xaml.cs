@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
 
 namespace LollyCloud
 {
@@ -43,7 +44,13 @@ namespace LollyCloud
 
         void tbNewWord_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key != Key.Return || string.IsNullOrEmpty(vm.NewWord)) return;
+            if (!(e.Key == Key.Return || e.Key == Key.System) || string.IsNullOrEmpty(vm.NewWord)) return;
+            SearchWord(vm.NewWord);
+            vm.NewWord = "";
+        }
+
+        public void SearchWord(string word)
+        {
             var item = new MUnitWord
             {
                 WORD = vmSettings.AutoCorrectInput(vm.NewWord),
@@ -51,12 +58,7 @@ namespace LollyCloud
                 NOTE = ""
             };
             vm.WordItems.Add(item);
-        }
-
-        public void SearchWord(string word)
-        {
-            vm.NewWord = word;
-            tbNewWord_KeyDown(null, null);
+            dgWords.SelectedItem = vm.WordItems.Last();
         }
 
     }

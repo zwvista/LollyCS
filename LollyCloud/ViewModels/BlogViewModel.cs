@@ -120,7 +120,7 @@ namespace LollyShared
             text = new Regex("<(/)?Temp>").Replace(text, "<$1I>");
             return text;
         }
-        public string GetExplanation(string text) => $"* ：{text}：\r\n";
+        public string GetExplanation(string text) => $"* {text}：：\r\n";
         public string GetHtml(string text) => $"<html><body>{text}</body></html>";
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
         public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
