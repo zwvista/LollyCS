@@ -53,7 +53,7 @@ namespace LollyShared
                         lst.Insert(i++, "<ul>");
                     var isLast = i == lst.Count - 1;
                     var m2 = isLast ? null : regMarkedEntry.Match(lst[i + 1]);
-                    if (isLast || m2 == null || !m2.Success || m2.Groups[2].Value != "**")
+                    if (isLast || m2 == null || !m2.Success || m2.Groups[1].Value != "**")
                         lst[i] += "</li>";
                     if (isLast || m2 == null || !m2.Success)
                         lst.Insert(++i, "</ul>");
@@ -121,7 +121,17 @@ namespace LollyShared
             return text;
         }
         public string GetExplanation(string text) => $"* {text}：：\r\n";
-        public string GetHtml(string text) => $"<html><body>{text}</body></html>";
+        public string GetHtml(string text) =>
+            $@"<!doctype html>
+<html>
+<head>
+  <meta charset=""utf-8"">
+  <meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">
+</head>
+<body>
+{text}
+</body>
+</html>";
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
         public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
         readonly string bigDigits = "０１２３４５６７８９";
