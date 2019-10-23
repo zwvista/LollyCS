@@ -39,6 +39,8 @@ namespace LollyCloud
         {
             var text = Clipboard.GetText();
             ReplaceSelection(_ => vm.GetExplanation(text));
+            var w = (MainWindow)Window.GetWindow(this);
+            w.SearchWord(text);
         }
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {

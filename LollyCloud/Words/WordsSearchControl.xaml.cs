@@ -53,7 +53,7 @@ namespace LollyCloud
         {
             var item = new MUnitWord
             {
-                WORD = vmSettings.AutoCorrectInput(vm.NewWord),
+                WORD = vmSettings.AutoCorrectInput(word),
                 SEQNUM = vm.WordItems.Count + 1,
                 NOTE = ""
             };
