@@ -135,7 +135,7 @@ namespace LollyCloud
             }
         }
 
-        public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
+        public virtual async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
         public void btnOpenURL_Click(object sender, RoutedEventArgs e) => Process.Start(tbURLBase.Text);
 

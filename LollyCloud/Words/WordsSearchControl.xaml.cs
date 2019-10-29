@@ -60,6 +60,9 @@ namespace LollyCloud
             vm.WordItems.Add(item);
             dgWords.SelectedItem = vm.WordItems.Last();
         }
-
+        public override void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            vm.WordItems.Clear();
+        }
     }
 }
