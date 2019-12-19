@@ -55,7 +55,7 @@ namespace LollyCloud
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var vmSettings = values[0] as SettingsViewModel;
-            var level = (int)values[1];
+            var level = values[1] as int? ?? 0;
             if (level == 0) return Binding.DoNothing;
             var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][0]);
             return new SolidColorBrush(color);
@@ -72,7 +72,7 @@ namespace LollyCloud
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var vmSettings = values[0] as SettingsViewModel;
-            var level = (int)values[1];
+            var level = values[1] as int? ?? 0;
             if (level == 0) return Binding.DoNothing;
             var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][1]);
             return new SolidColorBrush(color);
