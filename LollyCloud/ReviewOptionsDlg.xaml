@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LollyCloud"
         xmlns:shared="clr-namespace:LollyShared"
         mc:Ignorable="d"
-        Title="WordsUnitDetailDlg" Height="200" Width="360" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Review Options" Height="200" Width="360" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <local:EnumConverter x:Key="EnumConverter"></local:EnumConverter>
     </Window.Resources>

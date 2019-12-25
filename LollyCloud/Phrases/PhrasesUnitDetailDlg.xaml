@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="PhrasesUnitDetailDlg" Height="350" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Phrases in Unit Details" Height="350" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
