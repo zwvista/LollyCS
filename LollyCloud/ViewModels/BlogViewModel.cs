@@ -140,7 +140,7 @@ namespace LollyShared
             string F(string s)
             {
                 for (int i = 0; i < 10; i++)
-                    s = s.Replace(i.ToString()[0], bigDigits[i]);
+                    s = s.Replace((char)(i + '0'), bigDigits[i]);
                 return s;
             }
             var items = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
@@ -154,14 +154,11 @@ namespace LollyShared
             async i =>
             {
                 var m = regMarkedEntry.Match(items[i]);
-                var s1 = m.Groups[1].Value;
-                var word = m.Groups[2].Value;
-                var s3 = m.Groups[3].Value;
-                var s4 = m.Groups[4].Value;
+                var (s1, word, s3, s4) = (m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value, m.Groups[4].Value);
                 var note = await vmNote.GetNote(word);
                 int j = note.ToList().FindIndex(char.IsDigit);
                 var s21 = j == -1 ? note : note.Substring(0, j);
-                var s22 = j == -1 ? "" : note.Substring(j);
+                var s22 = j == -1 ? "" : F(note.Substring(j));
                 var s2 = word + (s21 == word || string.IsNullOrEmpty(s21) ? "" : $"（{s21}）") + s22;
                 items[i] = $"{s1} {s2}：{s3}：{s4}";
             }, () =>
