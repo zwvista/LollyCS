@@ -39,7 +39,7 @@
             <Button Content="Check Selected" Tag="2" Width="100" Height="20" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck Selected" Tag="3" Width="100" Height="20" Click="btnCheckItems_Click"/>
         </StackPanel>
-        <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" x:Name="dgWords" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
+        <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" x:Name="dgPhrases" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
                       ItemsSource="{Binding vm.PhraseItems}">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding IsChecked}" />
@@ -52,30 +52,6 @@
                 <DataGridTextColumn Binding="{Binding PHRASEID}" Header="PHRASEID" IsReadOnly="True" />
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
             </DataGrid.Columns>
-            <DataGrid.Resources>
-                <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
-                <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
-                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
-                                                         AncestorType=UserControl}"/>
-                                <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                            </MultiBinding>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Foreground">
-                        <Setter.Value>
-                            <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
-                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
-                                                         AncestorType=UserControl}"/>
-                                <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                            </MultiBinding>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </DataGrid.Resources>
         </DataGrid>
         <StackPanel Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>

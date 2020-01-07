@@ -31,7 +31,7 @@ namespace LollyCloud
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
         {
             int n = int.Parse((string)((Button)sender).Tag);
-            var checkedItems = dgWords.SelectedItems.Cast<MUnitPhrase>();
+            var checkedItems = dgPhrases.SelectedItems.Cast<MUnitPhrase>();
             foreach (var o in vm.PhraseItems)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
                     !checkedItems.Contains(o) ? o.IsChecked :
