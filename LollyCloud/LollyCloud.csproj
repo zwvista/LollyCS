@@ -87,6 +87,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MPatternPhrase.cs" />
+    <Compile Include="Models\MPatternWebPage.cs" />
     <Compile Include="Models\MPattern.cs" />
     <Compile Include="Models\MLangPhrase.cs" />
     <Compile Include="Models\MUSMapping.cs" />
@@ -124,6 +126,8 @@
     <Compile Include="Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\PatternPhraseDataStore.cs" />
+    <Compile Include="Services\PatternWebPageDataStore.cs" />
     <Compile Include="Services\PatternDataStore.cs" />
     <Compile Include="Services\LangPhraseDataStore.cs" />
     <Compile Include="Services\USMappingDataStore.cs" />
