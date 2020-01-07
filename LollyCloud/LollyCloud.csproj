@@ -87,6 +87,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MPattern.cs" />
     <Compile Include="Models\MLangPhrase.cs" />
     <Compile Include="Models\MUSMapping.cs" />
     <Compile Include="Models\MUnitPhrase.cs" />
@@ -95,6 +96,12 @@
     <Compile Include="Models\MWordFami.cs" />
     <Compile Include="Models\MVoice.cs" />
     <Compile Include="Models\MWordPhrase.cs" />
+    <Compile Include="Patterns\PatternsControl.xaml.cs">
+      <DependentUpon>PatternsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Patterns\PatternsDetailDlg.xaml.cs">
+      <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Phrases\PhrasesBaseControl.cs" />
     <Compile Include="Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
@@ -117,6 +124,7 @@
     <Compile Include="Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\PatternDataStore.cs" />
     <Compile Include="Services\LangPhraseDataStore.cs" />
     <Compile Include="Services\USMappingDataStore.cs" />
     <Compile Include="Services\WordPhraseDataStore.cs" />
@@ -149,6 +157,7 @@
     <Compile Include="Tools\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\PatternsViewModel.cs" />
     <Compile Include="ViewModels\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\PhrasesLangViewModel.cs" />
@@ -214,6 +223,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Patterns\PatternsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Patterns\PatternsDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Phrases\PhrasesLangControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

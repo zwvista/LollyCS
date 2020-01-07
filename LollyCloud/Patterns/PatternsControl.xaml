@@ -14,7 +14,7 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
                 <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
@@ -23,8 +23,8 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <DataGrid x:Name="dgPatterns" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.PhraseItems}">
+            <DataGrid x:Name="dgPatterns" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.PatternItems}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
@@ -33,7 +33,7 @@
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
                     <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="dgPhrases_RowDoubleClick"/>
+                        <EventSetter Event="MouseDoubleClick" Handler="dgPatterns_RowDoubleClick"/>
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.ContextMenu>

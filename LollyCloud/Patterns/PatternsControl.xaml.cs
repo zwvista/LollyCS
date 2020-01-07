@@ -12,7 +12,9 @@ namespace LollyCloud
     public partial class PatternsControl : UserControl, ILollySettings
     {
         public PatternsViewModel vm { get; set; }
-        protected string originalText = "";
+        public string selectedPattern = "";
+        public string originalText = "";
+        public SettingsViewModel vmSettings => vm.vmSettings;
 
         public PatternsControl()
         {
@@ -40,6 +42,14 @@ namespace LollyCloud
             dlg.ShowDialog();
             vm.PatternItems.Add(dlg.itemOriginal);
         }
+
+        public void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var row = dgPatterns.SelectedIndex;
+            if (row == -1) return;
+            selectedPattern = vm.PatternItems[row].PATTERN;
+        }
+        public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
@@ -86,5 +96,8 @@ namespace LollyCloud
             var item = vm.PatternItems[row];
             await vm.Delete(item.ID);
         }
+        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
+
+        public void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPattern);
     }
 }
