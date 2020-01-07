@@ -269,7 +269,7 @@ namespace LollyShared
             new MSelectItem(1, "Part"),
             new MSelectItem(2, "To"),
         };
-        UnitPartToType _ToType = UnitPartToType.Unit;
+        UnitPartToType _ToType = UnitPartToType.To;
         public UnitPartToType ToType
         {
             get => _ToType;
@@ -416,7 +416,7 @@ namespace LollyShared
         }
         public async Task UpdateUnitTo()
         {
-            await DoUpdateUnitFrom(USUNITTO);
+            await DoUpdateUnitTo(USUNITTO);
             if (IsInvalidUnitPart)
                 await DoUpdateUnitPartFrom();
         }
