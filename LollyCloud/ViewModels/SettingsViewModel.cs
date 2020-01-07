@@ -20,6 +20,7 @@ namespace LollyShared
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
         WordFamiDataStore WordFamiDS = new WordFamiDataStore();
         VoiceDataStore VoiceDS = new VoiceDataStore();
+        DictTypeDataStore DictDS = new DictTypeDataStore();
 
         public event EventHandler OnGetData;
         public event EventHandler OnUpdateLang;
@@ -280,6 +281,7 @@ namespace LollyShared
         }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
+        public List<MDictType> DictTypes { get; set; }
         public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
         public static List<MSelectItem> ReviewModes { get; set; } = new List<MSelectItem>
@@ -305,6 +307,7 @@ namespace LollyShared
             Languages = await GetData(async () => await LanguageDS.GetData());
             USMappings = await GetData(async () => await USMappingDS.GetData());
             UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(CommonApi.UserId));
+            DictTypes = await GetData(async () => await DictDS.GetData());
             INFO_USLANGID = GetUSInfo(MUSMapping.NAME_USLANGID);
             INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
             INFO_USROWSPERPAGE = GetUSInfo(MUSMapping.NAME_USROWSPERPAGE);
