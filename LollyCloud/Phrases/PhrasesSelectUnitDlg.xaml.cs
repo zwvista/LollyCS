@@ -7,14 +7,14 @@ using System.Windows.Input;
 namespace LollyCloud
 {
     /// <summary>
-    /// PhrasesSelectDlg.xaml の相互作用ロジック
+    /// PhrasesSelectLangDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class PhrasesSelectDlg : Window
+    public partial class PhrasesSelectUnitDlg : Window
     {
         public PhrasesUnitViewModel vm = new PhrasesUnitViewModel();
         public SettingsViewModel vmSettings => vm.vmSettings;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
-        public PhrasesSelectDlg()
+        public PhrasesSelectUnitDlg()
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
