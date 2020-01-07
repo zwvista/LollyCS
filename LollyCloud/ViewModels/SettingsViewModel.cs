@@ -284,6 +284,7 @@ namespace LollyShared
         public List<MDictType> DictTypes { get; set; }
         public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
+        public static List<string> ScopePatternFilters { get; } = new List<string> { "None", "Pattern", "Note" };
         public static List<MSelectItem> ReviewModes { get; set; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Review(Auto)"),

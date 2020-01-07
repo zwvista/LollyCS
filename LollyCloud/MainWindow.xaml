@@ -28,6 +28,8 @@
                 <Separator />
                 <MenuItem x:Name="miWordsLang" Header="Words in Language" Click="miWordsLang_Click" />
                 <MenuItem x:Name="miPhrasesLang" Header="Phrases in Language" Click="miPhrasesLang_Click" />
+                <Separator />
+                <MenuItem x:Name="miPatterns" Header="Patterns in Language" Click="miPatterns_Click" />
             </MenuItem>
             <MenuItem Header="Tools">
                 <MenuItem x:Name="miBlog" Header="Blog" Click="miBlog_Click" />
