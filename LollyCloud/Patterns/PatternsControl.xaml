@@ -9,9 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
-            <ToolBar x:Name="ToolBar1" Band="1">
-            </ToolBar>
-            <ToolBar Band="2">
+            <ToolBar>
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
@@ -23,27 +21,75 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <DataGrid x:Name="dgPatterns" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="dgPatterns" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.PatternItems}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
-                    <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                </DataGrid.Columns>
-                <DataGrid.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="dgPatterns_RowDoubleClick"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
-                        <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
-                        <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
+                        <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgPatterns_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                            <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
+                            <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
+                <DataGrid x:Name="dgWebPages" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWebPages_SelectionChanged"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.WebPageItems}" Grid.Row="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding WEBPAGE}" Header="WEBPAGE"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgWebPages_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </Grid>
+            <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.PhraseItems}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
+                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                    </DataGrid.Resources>
+                </DataGrid>
+                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
+                <WebBrowser x:Name="wbWebPage" Grid.Row="2"/>
+            </Grid>
         </Grid>
     </DockPanel>
 </UserControl>

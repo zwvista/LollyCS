@@ -24,7 +24,7 @@ namespace LollyShared
         public async Task<int> Create(MPatternPhrase item) =>
         await CreateByUrl($"PATTERNSPHRASES", item);
 
-        public async Task Update(MPattern item) =>
+        public async Task Update(MPatternPhrase item) =>
         Debug.WriteLine(await UpdateByUrl($"PATTERNSPHRASES/{item.ID}", JsonConvert.SerializeObject(item)));
 
         public async Task Delete(int id) =>

@@ -10,10 +10,14 @@ namespace LollyShared
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
+        PatternWebPageDataStore patternWebPageDS = new PatternWebPageDataStore();
+        PatternPhraseDataStore patternPhraseDS = new PatternPhraseDataStore();
 
         public ObservableCollection<MPattern> PatternItemsAll { get; set; }
         public ObservableCollection<MPattern> PatternItemsFiltered { get; set; }
         public ObservableCollection<MPattern> PatternItems => PatternItemsFiltered ?? PatternItemsAll;
+        public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
+        public ObservableCollection<MPatternPhrase> PhraseItems { get; set; }
         string _TextFilter = "";
         public string TextFilter
         {
@@ -57,5 +61,26 @@ namespace LollyShared
             {
                 LANGID = vmSettings.SelectedLang.ID,
             };
+
+        public async Task GetWebPages(int patternid) =>
+            WebPageItems = new ObservableCollection<MPatternWebPage>(await patternWebPageDS.GetDataByPattern(patternid));
+        public async Task UpdateWebPage(MPatternWebPage item) =>
+            await patternWebPageDS.Update(item);
+        public async Task CreateWebPage(MPatternWebPage item) =>
+            await patternWebPageDS.Create(item);
+        public async Task DeleteWebPage(int id) =>
+            await patternWebPageDS.Delete(id);
+        public MPatternWebPage NewPatternWebPage(int patternid, string pattern) =>
+            new MPatternWebPage
+            {
+                PATTERNID = patternid,
+                PATTERN = pattern,
+                SEQNUM = (WebPageItems.MaxBy(o => o.SEQNUM).FirstOrDefault()?.SEQNUM ?? 0) + 1
+            };
+
+        public async Task UpdatePhrase(MPatternPhrase item) =>
+            await patternPhraseDS.Update(item);
+        public async Task SearchPhrases(int patternid) =>
+            PhraseItems = new ObservableCollection<MPatternPhrase>(await patternPhraseDS.GetDataByPatternId(patternid));
     }
 }

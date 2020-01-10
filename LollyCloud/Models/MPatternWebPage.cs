@@ -18,7 +18,13 @@ namespace LollyShared
             get => _ID;
             set => this.RaiseAndSetIfChanged(ref _ID, value);
         }
-        public int PATTERNID => _ID;
+        int _PATTERNID;
+        [JsonProperty]
+        public int PATTERNID
+        {
+            get => _PATTERNID;
+            set => this.RaiseAndSetIfChanged(ref _PATTERNID, value);
+        }
         int _LANGID;
         [JsonProperty]
         public int LANGID

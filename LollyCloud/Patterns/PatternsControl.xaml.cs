@@ -13,6 +13,7 @@ namespace LollyCloud
     {
         public PatternsViewModel vm { get; set; }
         public string selectedPattern = "";
+        public int selectedPatternID = 0;
         public string originalText = "";
         public SettingsViewModel vmSettings => vm.vmSettings;
 
@@ -46,8 +47,19 @@ namespace LollyCloud
         public void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var row = dgPatterns.SelectedIndex;
-            if (row == -1) return;
-            selectedPattern = vm.PatternItems[row].PATTERN;
+            if (row == -1)
+            {
+                selectedPattern = "";
+                selectedPatternID = 0;
+            }
+            else
+            {
+                var o = vm.PatternItems[row];
+                selectedPattern = o.PATTERN;
+                selectedPatternID = o.ID;
+                vm.GetWebPages(selectedPatternID);
+                SearchPhrase();
+            }
         }
         public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
@@ -99,5 +111,24 @@ namespace LollyCloud
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
 
         public void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPattern);
+
+        void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var dlg = new PatternsDetailDlg();
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            dlg.Owner = Window.GetWindow(this);
+            dlg.itemOriginal = (sender as DataGridRow).Item as MPattern;
+            dlg.vm = vm;
+            dlg.ShowDialog();
+        }
+
+        public void dgWebPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var row = dgPatterns.SelectedIndex;
+            if (row == -1) return;
+            selectedPattern = vm.PatternItems[row].PATTERN;
+        }
+        async Task SearchPhrase() =>
+            await vm.SearchPhrases(selectedPatternID);
     }
 }

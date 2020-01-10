@@ -8,7 +8,7 @@ namespace LollyShared
 {
     public class PatternWebPageDataStore : LollyDataStore<MPatternWebPage>
     {
-        public async Task<List<MPatternWebPage>> getDataByPattern(int patternid) =>
+        public async Task<List<MPatternWebPage>> GetDataByPattern(int patternid) =>
         (await GetDataByUrl<MPatternWebPages>($"PATTERNSWEBPAGES?filter=PATTERNID,eq,{patternid}")).records;
 
         public async Task<List<MPatternWebPage>> GetDataById(int id) =>
