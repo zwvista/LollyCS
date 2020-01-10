@@ -62,8 +62,11 @@ namespace LollyShared
                 LANGID = vmSettings.SelectedLang.ID,
             };
 
-        public async Task GetWebPages(int patternid) =>
+        public async Task GetWebPages(int patternid)
+        {
             WebPageItems = new ObservableCollection<MPatternWebPage>(await patternWebPageDS.GetDataByPattern(patternid));
+            this.RaisePropertyChanged(nameof(WebPageItems));
+        }
         public async Task UpdateWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Update(item);
         public async Task CreateWebPage(MPatternWebPage item) =>
@@ -80,7 +83,10 @@ namespace LollyShared
 
         public async Task UpdatePhrase(MPatternPhrase item) =>
             await patternPhraseDS.Update(item);
-        public async Task SearchPhrases(int patternid) =>
+        public async Task SearchPhrases(int patternid)
+        {
             PhraseItems = new ObservableCollection<MPatternPhrase>(await patternPhraseDS.GetDataByPatternId(patternid));
+            this.RaisePropertyChanged(nameof(PhraseItems));
+        }
     }
 }

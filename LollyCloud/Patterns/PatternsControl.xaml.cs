@@ -44,7 +44,7 @@ namespace LollyCloud
             vm.PatternItems.Add(dlg.itemOriginal);
         }
 
-        public void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var row = dgPatterns.SelectedIndex;
             if (row == -1)
@@ -57,8 +57,8 @@ namespace LollyCloud
                 var o = vm.PatternItems[row];
                 selectedPattern = o.PATTERN;
                 selectedPatternID = o.ID;
-                vm.GetWebPages(selectedPatternID);
-                SearchPhrase();
+                await vm.GetWebPages(selectedPatternID);
+                await SearchPhrase();
             }
         }
         public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();

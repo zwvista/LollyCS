@@ -64,10 +64,6 @@
                             <EventSetter Event="MouseDoubleClick" Handler="dgWebPages_RowDoubleClick"/>
                         </Style>
                     </DataGrid.Resources>
-                    <DataGrid.ContextMenu>
-                        <ContextMenu>
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
                 </DataGrid>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
@@ -84,8 +80,6 @@
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
                         <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
                     </DataGrid.Columns>
-                    <DataGrid.Resources>
-                    </DataGrid.Resources>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
                 <WebBrowser x:Name="wbWebPage" Grid.Row="2"/>
