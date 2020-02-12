@@ -20,18 +20,18 @@
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding Path=vm.NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown">
+                <TextBox x:Name="tbNewWord" Text="{Binding Path=NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>New Word</TextBlock>
                     </local:WatermarkService.Watermark>
                 </TextBox>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
                     </local:WatermarkService.Watermark>
                 </TextBox>
-                <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding vm.Levelge0only}" />
+                <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding Levelge0only}" />
                 <TextBox x:Name="tbURL" IsReadOnly="True"  Width="200">
                     <local:WatermarkService.Watermark>
                         <TextBlock>URL</TextBlock>
@@ -47,7 +47,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.WordItems}"
+                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding WordItems}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
@@ -106,7 +106,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                      ItemsSource="{Binding vm.PhraseItems}">
+                      ItemsSource="{Binding PhraseItems}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>

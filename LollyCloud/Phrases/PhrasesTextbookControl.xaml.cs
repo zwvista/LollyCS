@@ -81,7 +81,7 @@ namespace LollyCloud
         public override async Task OnSettingsChanged()
         {
             vm = await PhrasesUnitViewModel.CreateAsync(MainWindow.vmSettings, inTextbook: false, needCopy: true);
-            DataContext = this;
+            DataContext = vm;
             await base.OnSettingsChanged();
         }
 

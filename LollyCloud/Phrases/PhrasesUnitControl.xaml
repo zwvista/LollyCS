@@ -20,8 +20,8 @@
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
             </ToolBar>
             <ToolBar Band="2">
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
                     </local:WatermarkService.Watermark>
@@ -30,7 +30,7 @@
         </ToolBarTray>
         <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding vm.Items}"
+                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding Items}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
