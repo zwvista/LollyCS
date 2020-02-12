@@ -31,7 +31,7 @@ namespace LollyCloud
         public override async Task OnSettingsChanged()
         {
             vm = new WordsSearchViewModel(MainWindow.vmSettings, needCopy: true);
-            DataContext = this;
+            DataContext = vm;
             await base.OnSettingsChanged();
         }
 
