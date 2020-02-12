@@ -12,8 +12,8 @@
             <ToolBar>
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
                     </local:WatermarkService.Watermark>
@@ -33,7 +33,7 @@
                     <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPatterns" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.PatternItems}">
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding PatternItems}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
@@ -54,7 +54,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
                 <DataGrid x:Name="dgWebPages" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWebPages_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.WebPageItems}" Grid.Row="2">
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding WebPageItems}" Grid.Row="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding WEBPAGE}" Header="WEBPAGE"/>
@@ -73,8 +73,8 @@
                     <RowDefinition Height="5"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vm.PhraseItems}">
+                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding PhraseItems}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>

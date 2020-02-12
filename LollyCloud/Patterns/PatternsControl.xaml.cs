@@ -44,7 +44,7 @@ namespace LollyCloud
             vm.PatternItems.Add(dlg.itemOriginal);
         }
 
-        public async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var row = dgPatterns.SelectedIndex;
             if (row == -1)
@@ -61,7 +61,7 @@ namespace LollyCloud
                 await SearchPhrase();
             }
         }
-        public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
+        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
@@ -98,7 +98,7 @@ namespace LollyCloud
         public async Task OnSettingsChanged()
         {
             vm = await PatternsViewModel.CreateAsync(MainWindow.vmSettings, needCopy: true);
-            DataContext = this;
+            DataContext = vm;
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
@@ -108,9 +108,9 @@ namespace LollyCloud
             var item = vm.PatternItems[row];
             await vm.Delete(item.ID);
         }
-        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
+        void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
 
-        public void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPattern);
+        void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPattern);
 
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -122,13 +122,22 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
-        public void dgWebPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void dgWebPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var row = dgPatterns.SelectedIndex;
             if (row == -1) return;
-            selectedPattern = vm.PatternItems[row].PATTERN;
+            var item = vm.WebPageItems[row];
+            wbWebPage.Navigate(item.WEBPAGE);
         }
         async Task SearchPhrase() =>
             await vm.SearchPhrases(selectedPatternID);
+
+        void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var row = dgPhrases.SelectedIndex;
+            if (row == -1) return;
+            var item = vm.PhraseItems[row];
+            App.Speak(vmSettings, item.PHRASE);
+        }
     }
 }

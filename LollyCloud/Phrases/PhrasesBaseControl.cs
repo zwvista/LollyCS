@@ -22,6 +22,7 @@ namespace LollyCloud
             var row = dgPhrasesBase.SelectedIndex;
             if (row == -1) return;
             selectedPhrase = ItemForRow(row).PHRASE;
+            App.Speak(vmSettings, selectedPhrase);
         }
 
         public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
