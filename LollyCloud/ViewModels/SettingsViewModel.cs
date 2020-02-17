@@ -35,10 +35,7 @@ namespace LollyShared
         public event EventHandler OnUpdateVoice;
         public event EventHandler OnUpdateToType;
 
-        public SettingsViewModel ShallowCopy()
-        {
-            return (SettingsViewModel)this.MemberwiseClone();
-        }
+        public SettingsViewModel ShallowCopy() => (SettingsViewModel)this.MemberwiseClone();
 
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
