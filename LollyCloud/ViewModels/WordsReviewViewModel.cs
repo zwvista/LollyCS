@@ -5,70 +5,74 @@ using System.Threading.Tasks;
 
 namespace LollyShared
 {
-    public static class ReadNumber
+    public class WordsReviewViewModel : LollyViewModel
     {
-        public static string readInJapanese(int num)
+        public SettingsViewModel vmSettings;
+        UnitWordDataStore unitWordDS = new UnitWordDataStore();
+        WordFamiDataStore wordFamiDS = new WordFamiDataStore();
+        MDictTranslation DictTranslation => vmSettings.SelectedDictTranslation;
+
+        public List<MUnitWord> Items { get; set; }
+        public int Count => Items.Count;
+        public List<int> CorrectIDs { get; set; }
+        int _Index;
+        public int Index
         {
-            var numbers1 = new [] { "ゼロ", "いち", "に", "さん", "よん", "ご", "ろく", "なな", "はち", "きゅう", "じゅう", "まん", "おく", "ちょう" };
-            var numbers3 = new [] { "ひゃく", "にひゃく", "さんびゃく", "よんひゃく", "ごひゃく", "ろっぴゃく", "ななひゃく", "はっぴゃく", "きゅうひゃく" };
-            var numbers4 = new [] { "せん", "にせん", "さんぜん", "よんせん", "ごせん", "ろっせん", "ななせん", "はっせん", "きゅうせん" };
-            num = num % 1_0000_0000;
-            string f(int n, string unit) {
-                var (n4, n3, n2, n1) = (n / 1000, n % 1000 / 100, n % 100 / 10, n % 10);
-                var s = n4 == 0 ? "" : numbers4[n4];
-                s += n3 == 0 ? "" : numbers3[n3];
-                s += n2 == 0 ? "" : n2 == 1 ? numbers1[10] : numbers1[n2] + numbers1[10];
-                s += n1 == 0 ? "" : numbers1[n1];
-                return s + unit;
-            }
-            if (num == 0)
-                return numbers1[0];
-            else
+            get => _Index;
+            set => this.RaiseAndSetIfChanged(ref _Index, value);
+        }
+        public string IndexCount => $"{Index}/{Count}";
+        public bool HasNext => Index < Count;
+        public MUnitWord CurrentItem => HasNext ? Items[Index] : null;
+        public string CurrentWord => HasNext ? Items[Index].WORD : "";
+        public bool IsTestMode => Options.Mode == ReviewMode.Test;
+        public MReviewOptions Options { get; set; } = new MReviewOptions();
+
+        // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
+        public static async Task<WordsReviewViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
+        {
+            var o = new WordsReviewViewModel();
+            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            return o;
+        }
+
+        public async Task NewTest()
+        {
+            Items = await unitWordDS.GetDataByTextbookUnitPart(
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
+            if (Options.Levelge0only)
+                Items = Items.Where(o => o.LEVEL >= 0).ToList();
+            int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
+            int nTo = Count * Options.GroupSelected / Options.GroupCount;
+            Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
+            if (Options.Shuffled)
+                Items.Shuffle();
+            CorrectIDs = new List<int>();
+            Index = 0;
+        }
+        public void Next()
+        {
+            Index++;
+            if (IsTestMode && !HasNext)
             {
-                var n5 = num / 10000;
-                var s1 = n5 == 0 ? "" : f(n: n5, unit: numbers1[11]);
-                var n1 = num % 10000;
-                var s2 = n1 == 0 ? "" : f(n: n1, unit: "");
-                return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
+                Index = 0;
+                Items = Items.Where(o => CorrectIDs.Contains(o.ID)).ToList();
             }
         }
-        public static string readInNativeKorean(int num)
+        public async Task<string> GetTranslation()
         {
-            var numbers1 = new[] { "", "하나", "둘", "셋", "넷", "다섯", "여섯", "일곱", "여덟", "아홉" };
-            var numbers2 = new [] { "", "열", "스물", "서른", "마흔", "쉰", "예순", "일흔", "여든", "아흔" };
-            num = num % 100;
-            var (n2, n1) = (num / 10, num % 10);
-            var s1 = numbers2[n2];
-            var s2 = numbers1[n1];
-            return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
+            if (!vmSettings.HasDictTranslation) return "";
+            var url = DictTranslation.UrlString(CurrentWord, vmSettings.AutoCorrects);
+            var html = await vmSettings.client.GetStringAsync(url);
+            return CommonApi.ExtractTextFromHtml(html, DictTranslation.TRANSFORM, "", (text, _) => text);
         }
-        public static string readInSinoKorean(int num)
+        public async Task Check(string wordInput)
         {
-            var numbers = new[] { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구", "십", "백", "천", "만", "억", "조" };
-            num = num % 1_0000_0000;
-            string g(int n, int unit) =>
-                n == 0 ? "" : n == 1 ? numbers[unit] : numbers[n] + numbers[unit];
-            string f(int n, string unit) {
-                var (n4, n3, n2, n1) = (n / 1000, n % 1000 / 100, n % 100 / 10, n % 10);
-                var s = g(n: n4, unit: 12);
-                s += g(n: n3, unit: 11);
-                s += g(n: n2, unit: 10);
-                s += n1 == 0 ? "" : numbers[n1];
-                return s + unit;
-            }
-            if (num == 0)
-                return numbers[0];
-            else
-            {
-                var n5 = num / 10000;
-                var s1 = n5 == 0 ? "" : n5 == 1 ? numbers[13] : f(n: n5, unit: numbers[13]);
-                var n1 = num % 10000;
-                var s2 = n1 == 0 ? "" : f(n: n1, unit: "");
-                return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
-            }
+            if (!HasNext) return;
+            var o = CurrentItem;
+            var isCorrect = o.WORD == wordInput;
+            if (isCorrect) CorrectIDs.Add(o.ID);
+            await wordFamiDS.Update(o.WORDID, o.LEVEL);
         }
-    }
-    public class ReadNumberViewModel : ReactiveObject
-    {
     }
 }

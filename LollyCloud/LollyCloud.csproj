@@ -164,11 +164,15 @@
     <Compile Include="Tools\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\ReadNumberControl.xaml.cs">
+      <DependentUpon>ReadNumberControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\PatternsViewModel.cs" />
     <Compile Include="ViewModels\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\PhrasesLangViewModel.cs" />
     <Compile Include="Shared\WatermarkService.cs" />
+    <Compile Include="ViewModels\ReadNumberViewModel.cs" />
     <Compile Include="ViewModels\WordsLangViewModel.cs" />
     <Compile Include="Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
@@ -283,6 +287,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Tools\BlogControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\ReadNumberControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
