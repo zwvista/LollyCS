@@ -33,6 +33,7 @@
             </MenuItem>
             <MenuItem Header="Tools">
                 <MenuItem x:Name="miBlog" Header="Blog" Click="miBlog_Click" />
+                <MenuItem x:Name="miReadNumber" Header="Read Number" Click="miReadNumber_Click" />
                 <Separator />
             </MenuItem>
         </Menu>

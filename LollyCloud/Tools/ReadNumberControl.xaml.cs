@@ -26,6 +26,8 @@ namespace LollyCloud
             get => ViewModel;
             set => ViewModel = (ReadNumberViewModel)value;
         }
+        private int selectedReadNumberIndex;
+        private SettingsViewModel vmSettings => ViewModel.vmSettings;
 
         public ReadNumberControl()
         {
@@ -33,8 +35,29 @@ namespace LollyCloud
             OnSettingsChanged();
         }
 
-        public async Task OnSettingsChanged() =>
+        public async Task OnSettingsChanged()
+        {
             ViewModel = new ReadNumberViewModel(MainWindow.vmSettings, true);
+            selectedReadNumberIndex = vmSettings.SelectedReadNumberIndex;
+            ToolBar1.Items.Clear();
+            for (int i = 0; i < vmSettings.ReadNumberTypes.Count; i++)
+            {
+                var b = new RadioButton
+                {
+                    Content = vmSettings.ReadNumberTypes[i].NAME,
+                    GroupName = "READNUMBER",
+                    Tag = i,
+                };
+                b.Click += ReadNumber;
+                ToolBar1.Items.Add(b);
+                if (i == selectedReadNumberIndex)
+                    b.IsChecked = true;
+            }
+        }
 
+        private void ReadNumber(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

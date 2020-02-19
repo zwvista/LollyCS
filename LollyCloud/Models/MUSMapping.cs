@@ -59,6 +59,7 @@ namespace LollyShared
         public static string NAME_USLEVELCOLORS = "USLEVELCOLORS";
         public static string NAME_USSCANINTERVAL = "USSCANINTERVAL";
         public static string NAME_USREVIEWINTERVAL = "USREVIEWINTERVAL";
+        public static string NAME_USREADNUMBERID = "USREADNUMBERID";
 
         public static string NAME_USTEXTBOOKID = "USTEXTBOOKID";
         public static string NAME_USDICTITEM = "USDICTITEM";

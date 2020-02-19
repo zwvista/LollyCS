@@ -75,6 +75,12 @@ namespace LollyShared
             get => int.Parse(GetUSValue(INFO_USREVIEWINTERVAL));
             set => SetUSValue(INFO_USREVIEWINTERVAL, value.ToString(), nameof(USREVIEWINTERVAL));
         }
+        private MUserSettingInfo INFO_USREADNUMBERID = new MUserSettingInfo();
+        public int USREADNUMBERID
+        {
+            get => int.Parse(GetUSValue(INFO_USREADNUMBERID));
+            set => SetUSValue(INFO_USREADNUMBERID, value.ToString(), nameof(USREADNUMBERID));
+        }
         private MUserSettingInfo INFO_USTEXTBOOKID = new MUserSettingInfo();
         public int USTEXTBOOKID
         {
@@ -280,6 +286,17 @@ namespace LollyShared
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictTypes { get; set; }
         public List<MCode> ReadNumberTypes { get; set; }
+        MCode _SelectedReadNumber = new MCode();
+        public MCode SelectedReadNumber
+        {
+            get => _SelectedReadNumber;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _SelectedReadNumber, value);
+                USREADNUMBERID = value?.CODE ?? 1;
+            }
+        }
+        public int SelectedReadNumberIndex => ReadNumberTypes.IndexOf(_SelectedReadNumber);
         public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
         public static List<string> ScopePatternFilters { get; } = new List<string> { "None", "Pattern", "Note" };
@@ -314,6 +331,7 @@ namespace LollyShared
             INFO_USLEVELCOLORS = GetUSInfo(MUSMapping.NAME_USLEVELCOLORS);
             INFO_USSCANINTERVAL = GetUSInfo(MUSMapping.NAME_USSCANINTERVAL);
             INFO_USREVIEWINTERVAL = GetUSInfo(MUSMapping.NAME_USREVIEWINTERVAL);
+            INFO_USREADNUMBERID = GetUSInfo(MUSMapping.NAME_USREADNUMBERID);
             USLEVELCOLORS = GetUSValue(INFO_USLEVELCOLORS).Split(new[] { "\r\n" }, StringSplitOptions.None)
                 .Select(s => s.Split(',')).ToDictionary(v => int.Parse(v[0]), v2 => new List<string> { v2[1], v2[2] });
             OnGetData?.Invoke(this, null);

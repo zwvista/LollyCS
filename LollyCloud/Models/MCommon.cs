@@ -44,6 +44,7 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _CODE, value);
         }
         string _NAME;
+        [JsonProperty]
         public string NAME
         {
             get => _NAME;
