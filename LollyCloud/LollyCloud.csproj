@@ -129,6 +129,7 @@
     <Compile Include="Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\CodeDataStore.cs" />
     <Compile Include="Services\PatternPhraseDataStore.cs" />
     <Compile Include="Services\PatternWebPageDataStore.cs" />
     <Compile Include="Services\PatternDataStore.cs" />

@@ -191,24 +191,4 @@ namespace LollyShared
     }
     public class MDictTranslation : MDictionary { }
 
-    public class MDictTypes
-    {
-        public List<MDictType> records { get; set; }
-    }
-    public class MDictType : ReactiveObject
-    {
-        int _CODE;
-        [JsonProperty]
-        public int CODE
-        {
-            get => _CODE;
-            set => this.RaiseAndSetIfChanged(ref _CODE, value);
-        }
-        string _NAME;
-        public string NAME
-        {
-            get => _NAME;
-            set => this.RaiseAndSetIfChanged(ref _NAME, value);
-        }
-    }
 }

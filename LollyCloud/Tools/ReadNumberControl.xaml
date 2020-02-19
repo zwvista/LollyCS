@@ -13,6 +13,14 @@
             </ToolBar>
         </ToolBarTray>  
         <Grid>
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="24" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="FontSize" Value="24" />
+                </Style>
+            </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="5"/>

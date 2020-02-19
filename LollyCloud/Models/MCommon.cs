@@ -1,5 +1,6 @@
-﻿using System;
+﻿using ReactiveUI;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace LollyShared
 {
@@ -28,5 +29,25 @@ namespace LollyShared
         int PHRASEID { get; }
         string PHRASE { get; set; }
         string TRANSLATION { get; set; }
+    }
+    public class MCodes
+    {
+        public List<MCode> records { get; set; }
+    }
+    public class MCode : ReactiveObject
+    {
+        int _CODE;
+        [JsonProperty]
+        public int CODE
+        {
+            get => _CODE;
+            set => this.RaiseAndSetIfChanged(ref _CODE, value);
+        }
+        string _NAME;
+        public string NAME
+        {
+            get => _NAME;
+            set => this.RaiseAndSetIfChanged(ref _NAME, value);
+        }
     }
 }
