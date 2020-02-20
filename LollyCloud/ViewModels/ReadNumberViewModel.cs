@@ -71,6 +71,18 @@ namespace LollyShared
     public class ReadNumberViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
+        int _Number;
+        public int Number
+        {
+            get => _Number;
+            set => this.RaiseAndSetIfChanged(ref _Number, value);
+        }
+        string _Text;
+        public string Text
+        {
+            get => _Text;
+            set => this.RaiseAndSetIfChanged(ref _Text, value);
+        }
         public ReadNumberViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();

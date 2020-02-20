@@ -22,12 +22,13 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Grid>
-            </Grid>
+            <TextBox x:Name="tbNumber" Text="{Binding Number}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" />
+            <TextBox x:Name="tbText" Text="{Binding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" />
+            <Button Grid.Row="2" x:Name="btnRead" Content="Read" Width="100" HorizontalAlignment="Right" Height="20" Click="btnRead_Click"/>
         </Grid>
     </DockPanel>
 </UserControl>

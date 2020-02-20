@@ -38,6 +38,7 @@ namespace LollyCloud
         public async Task OnSettingsChanged()
         {
             ViewModel = new ReadNumberViewModel(MainWindow.vmSettings, true);
+            DataContext = ViewModel;
             selectedReadNumberIndex = vmSettings.SelectedReadNumberIndex;
             ToolBar1.Items.Clear();
             for (int i = 0; i < vmSettings.ReadNumberTypes.Count; i++)
@@ -48,16 +49,19 @@ namespace LollyCloud
                     GroupName = "READNUMBER",
                     Tag = i,
                 };
-                b.Click += ReadNumber;
+                b.Click += (o, e) => vmSettings.SelectedReadNumber = vmSettings.ReadNumberTypes[(int)(o as RadioButton).Tag];
                 ToolBar1.Items.Add(b);
                 if (i == selectedReadNumberIndex)
                     b.IsChecked = true;
             }
         }
 
-        private void ReadNumber(object sender, RoutedEventArgs e)
+        private void btnRead_Click(object sender, RoutedEventArgs e)
         {
-
+            int i = vmSettings.SelectedReadNumberIndex;
+            ViewModel.Text = i == 0 ? ReadNumber.readInJapanese(ViewModel.Number) :
+                i == 1 ? ReadNumber.readInNativeKorean(ViewModel.Number) :
+                ReadNumber.readInSinoKorean(ViewModel.Number);
         }
     }
 }
