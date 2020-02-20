@@ -15,8 +15,8 @@ namespace LollyShared
             num = num % 1_0000_0000;
             string f(int n, string unit) {
                 var (n4, n3, n2, n1) = (n / 1000, n % 1000 / 100, n % 100 / 10, n % 10);
-                var s = n4 == 0 ? "" : numbers4[n4];
-                s += n3 == 0 ? "" : numbers3[n3];
+                var s = n4 == 0 ? "" : numbers4[n4 - 1];
+                s += n3 == 0 ? "" : numbers3[n3 - 1];
                 s += n2 == 0 ? "" : n2 == 1 ? numbers1[10] : numbers1[n2] + numbers1[10];
                 s += n1 == 0 ? "" : numbers1[n1];
                 return s + unit;
@@ -26,9 +26,9 @@ namespace LollyShared
             else
             {
                 var n5 = num / 10000;
-                var s1 = n5 == 0 ? "" : f(n: n5, unit: numbers1[11]);
+                var s1 = n5 == 0 ? "" : f(n5, numbers1[11]);
                 var n1 = num % 10000;
-                var s2 = n1 == 0 ? "" : f(n: n1, unit: "");
+                var s2 = n1 == 0 ? "" : f(n1, "");
                 return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
             }
         }
