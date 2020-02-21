@@ -20,13 +20,11 @@ namespace LollyCloud
             get => (ReadNumberViewModel)GetValue(ViewModelProperty);
             set => SetValue(ViewModelProperty, value);
         }
-
         object IViewFor.ViewModel
         {
             get => ViewModel;
             set => ViewModel = (ReadNumberViewModel)value;
         }
-        private int selectedReadNumberIndex;
         private SettingsViewModel vmSettings => ViewModel.vmSettings;
 
         public ReadNumberControl()
@@ -39,28 +37,27 @@ namespace LollyCloud
         {
             ViewModel = new ReadNumberViewModel(MainWindow.vmSettings, true);
             DataContext = ViewModel;
-            selectedReadNumberIndex = vmSettings.SelectedReadNumberIndex;
             ToolBar1.Items.Clear();
-            for (int i = 0; i < vmSettings.ReadNumberTypes.Count; i++)
+            foreach (var o in vmSettings.ReadNumberTypes)
             {
                 var b = new RadioButton
                 {
-                    Content = vmSettings.ReadNumberTypes[i].NAME,
+                    Content = o.NAME,
                     GroupName = "READNUMBER",
-                    Tag = i,
+                    Tag = o.CODE,
                 };
-                b.Click += (o, e) => vmSettings.SelectedReadNumber = vmSettings.ReadNumberTypes[(int)(o as RadioButton).Tag];
+                b.Click += (o2, e) => vmSettings.USREADNUMBERID = (int)((RadioButton)o2).Tag;
                 ToolBar1.Items.Add(b);
-                if (i == selectedReadNumberIndex)
+                if (o.CODE == vmSettings.USREADNUMBERID)
                     b.IsChecked = true;
             }
         }
 
         private void btnRead_Click(object sender, RoutedEventArgs e)
         {
-            int i = vmSettings.SelectedReadNumberIndex;
-            ViewModel.Text = i == 0 ? ReadNumber.readInJapanese(ViewModel.Number) :
-                i == 1 ? ReadNumber.readInNativeKorean(ViewModel.Number) :
+            int i = vmSettings.USREADNUMBERID;
+            ViewModel.Text = i == 1 ? ReadNumber.readInJapanese(ViewModel.Number) :
+                i == 2 ? ReadNumber.readInNativeKorean(ViewModel.Number) :
                 ReadNumber.readInSinoKorean(ViewModel.Number);
         }
     }

@@ -286,17 +286,6 @@ namespace LollyShared
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictTypes { get; set; }
         public List<MCode> ReadNumberTypes { get; set; }
-        MCode _SelectedReadNumber = new MCode();
-        public MCode SelectedReadNumber
-        {
-            get => _SelectedReadNumber;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _SelectedReadNumber, value);
-                USREADNUMBERID = value?.CODE ?? 1;
-            }
-        }
-        public int SelectedReadNumberIndex => ReadNumberTypes.IndexOf(_SelectedReadNumber);
         public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
         public static List<string> ScopePatternFilters { get; } = new List<string> { "None", "Pattern", "Note" };
@@ -550,5 +539,6 @@ namespace LollyShared
             OnUpdatePartTo?.Invoke(this, null);
         }
         public async Task UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
+        public async Task UpdateReadNumberId() => await UserSettingDS.Update(INFO_USREADNUMBERID, USREADNUMBERID);
     }
 }
