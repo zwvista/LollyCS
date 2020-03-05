@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -12,63 +13,31 @@ namespace LollyShared
     }
     public class MLangWord : ReactiveObject, MWordInterface
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        public int WORDID => _ID;
-        int _LANGID;
+        public int ID { get; set; }
+        public int WORDID => ID;
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        string _WORD;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string WORD
-        {
-            get => _WORD;
-            set => this.RaiseAndSetIfChanged(ref _WORD, value);
-        }
-        string _NOTE;
+        public string WORD { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string NOTE
-        {
-            get => _NOTE;
-            set => this.RaiseAndSetIfChanged(ref _NOTE, value);
-        }
-        int _FAMIID;
+        public string NOTE { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int FAMIID
-        {
-            get => _FAMIID;
-            set => this.RaiseAndSetIfChanged(ref _FAMIID, value);
-        }
-        int _LEVEL;
+        public int FAMIID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LEVEL
-        {
-            get => _LEVEL;
-            set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
-        }
-        int _CORRECT;
+        public int LEVEL { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int CORRECT
-        {
-            get => _CORRECT;
-            set => this.RaiseAndSetIfChanged(ref _CORRECT, value);
-        }
-        int _TOTAL;
+        public int CORRECT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int TOTAL
-        {
-            get => _TOTAL;
-            set => this.RaiseAndSetIfChanged(ref _TOTAL, value);
-        }
+        public int TOTAL { get; set; }
 
         public MLangWord() { }
         public MLangWord(MUnitWord item)

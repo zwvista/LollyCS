@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
 
 namespace LollyShared
@@ -10,47 +11,23 @@ namespace LollyShared
     }
     public class MWordFami : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _USERID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int USERID
-        {
-            get => _USERID;
-            set => this.RaiseAndSetIfChanged(ref _USERID, value);
-        }
-        int _WORDID;
+        public int USERID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int WORDID
-        {
-            get => _WORDID;
-            set => this.RaiseAndSetIfChanged(ref _WORDID, value);
-        }
-        int _LEVEL;
+        public int WORDID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LEVEL
-        {
-            get => _LEVEL;
-            set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
-        }
-        int _CORRECT;
+        public int LEVEL { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int CORRECT
-        {
-            get => _CORRECT;
-            set => this.RaiseAndSetIfChanged(ref _CORRECT, value);
-        }
-        int _TOTAL;
+        public int CORRECT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int TOTAL
-        {
-            get => _TOTAL;
-            set => this.RaiseAndSetIfChanged(ref _TOTAL, value);
-        }
+        public int TOTAL { get; set; }
     }
 }

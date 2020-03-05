@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -11,54 +12,26 @@ namespace LollyShared
     }
     public class MTextbook : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _LANGID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        string _TEXTBOOKNAME;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty("NAME")]
-        public string TEXTBOOKNAME
-        {
-            get => _TEXTBOOKNAME;
-            set => this.RaiseAndSetIfChanged(ref _TEXTBOOKNAME, value);
-        }
-        string _UNITS;
+        public string TEXTBOOKNAME { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string UNITS
-        {
-            get => _UNITS;
-            set => this.RaiseAndSetIfChanged(ref _UNITS, value);
-        }
-        string _PARTS;
+        public string UNITS { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string PARTS
-        {
-            get => _PARTS;
-            set => this.RaiseAndSetIfChanged(ref _PARTS, value);
-        }
+        public string PARTS { get; set; }
 
-        List<MSelectItem> _Units;
-        public List<MSelectItem> Units
-        {
-            get => _Units;
-            set => this.RaiseAndSetIfChanged(ref _Units, value);
-        }
-        List<MSelectItem> _Parts;
-        public List<MSelectItem> Parts
-        {
-            get => _Parts;
-            set => this.RaiseAndSetIfChanged(ref _Parts, value);
-        }
+        [Reactive]
+        public List<MSelectItem> Units { get; set; }
+        [Reactive]
+        public List<MSelectItem> Parts { get; set; }
 
         public string UNITSTR(int UNIT) => Units.First(o => o.Value == UNIT).Label;
         public string PARTSTR(int PART) => Parts.First(o => o.Value == PART).Label;

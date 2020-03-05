@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -11,82 +12,38 @@ namespace LollyShared
     }
     public class MUnitPhrase : ReactiveObject, MPhraseInterface
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _LANGID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        int _TEXTBOOKID;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int TEXTBOOKID
-        {
-            get => _TEXTBOOKID;
-            set => this.RaiseAndSetIfChanged(ref _TEXTBOOKID, value);
-        }
-        string _TEXTBOOKNAME;
+        public int TEXTBOOKID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TEXTBOOKNAME
-        {
-            get => _TEXTBOOKNAME;
-            set => this.RaiseAndSetIfChanged(ref _TEXTBOOKNAME, value);
-        }
-        int _UNIT;
+        public string TEXTBOOKNAME { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int UNIT
-        {
-            get => _UNIT;
-            set => this.RaiseAndSetIfChanged(ref _UNIT, value);
-        }
-        int _PART;
+        public int UNIT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int PART
-        {
-            get => _PART;
-            set => this.RaiseAndSetIfChanged(ref _PART, value);
-        }
-        int _SEQNUM;
+        public int PART { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int SEQNUM
-        {
-            get => _SEQNUM;
-            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
-        }
-        int _PHRASEID;
+        public int SEQNUM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int PHRASEID
-        {
-            get => _PHRASEID;
-            set => this.RaiseAndSetIfChanged(ref _PHRASEID, value);
-        }
-        string _PHRASE;
+        public int PHRASEID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string PHRASE
-        {
-            get => _PHRASE;
-            set => this.RaiseAndSetIfChanged(ref _PHRASE, value);
-        }
-        string _TRANSLATION;
+        public string PHRASE { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TRANSLATION
-        {
-            get => _TRANSLATION;
-            set => this.RaiseAndSetIfChanged(ref _TRANSLATION, value);
-        }
-        bool _IsChecked;
-        public bool IsChecked
-        {
-            get => _IsChecked;
-            set => this.RaiseAndSetIfChanged(ref _IsChecked, value);
-        }
+        public string TRANSLATION { get; set; }
+        [Reactive]
+        public bool IsChecked { get; set; }
 
         public MTextbook Textbook { get; set; }
 

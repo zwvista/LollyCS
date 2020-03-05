@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -10,48 +11,24 @@ namespace LollyShared
     }
     public class MUSMapping : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        string _NAME;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string NAME
-        {
-            get => _NAME;
-            set => this.RaiseAndSetIfChanged(ref _NAME, value);
-        }
-        int _KIND;
+        public string NAME { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int KIND
-        {
-            get => _KIND;
-            set => this.RaiseAndSetIfChanged(ref _KIND, value);
-        }
-        int _ENTITYID;
+        public int KIND { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int ENTITYID
-        {
-            get => _ENTITYID;
-            set => this.RaiseAndSetIfChanged(ref _ENTITYID, value);
-        }
-        int _VALUEID;
+        public int ENTITYID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int VALUEID
-        {
-            get => _VALUEID;
-            set => this.RaiseAndSetIfChanged(ref _VALUEID, value);
-        }
-        int _LEVEL;
+        public int VALUEID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LEVEL
-        {
-            get => _LEVEL;
-            set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
-        }
+        public int LEVEL { get; set; }
 
         public static string NAME_USLANGID = "USLANGID";
         public static string NAME_USROWSPERPAGEOPTIONS = "USROWSPERPAGEOPTIONS";

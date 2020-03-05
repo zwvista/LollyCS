@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -10,62 +11,30 @@ namespace LollyShared
     }
     public class MUserSetting : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _USERID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int USERID
-        {
-            get => _USERID;
-            set => this.RaiseAndSetIfChanged(ref _USERID, value);
-        }
-        int _KIND;
+        public int USERID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int KIND
-        {
-            get => _KIND;
-            set => this.RaiseAndSetIfChanged(ref _KIND, value);
-        }
-        int _ENTITYID;
+        public int KIND { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int ENTITYID
-        {
-            get => _ENTITYID;
-            set => this.RaiseAndSetIfChanged(ref _ENTITYID, value);
-        }
-        string _VALUE1;
+        public int ENTITYID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string VALUE1
-        {
-            get => _VALUE1;
-            set => this.RaiseAndSetIfChanged(ref _VALUE1, value);
-        }
-        string _VALUE2;
+        public string VALUE1 { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string VALUE2
-        {
-            get => _VALUE2;
-            set => this.RaiseAndSetIfChanged(ref _VALUE2, value);
-        }
-        string _VALUE3;
+        public string VALUE2 { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string VALUE3
-        {
-            get => _VALUE3;
-            set => this.RaiseAndSetIfChanged(ref _VALUE3, value);
-        }
-        string _VALUE4;
+        public string VALUE3 { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string VALUE4
-        {
-            get => _VALUE4;
-            set => this.RaiseAndSetIfChanged(ref _VALUE4, value);
-        }
+        public string VALUE4 { get; set; }
     }
     public class MUserSettingInfo
     {

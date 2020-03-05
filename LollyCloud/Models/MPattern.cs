@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -11,35 +12,19 @@ namespace LollyShared
     }
     public class MPattern : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        public int PATTERNID => _ID;
-        int _LANGID;
+        public int ID { get; set; }
+        public int PATTERNID => ID;
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        string _PATTERN;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string PATTERN
-        {
-            get => _PATTERN;
-            set => this.RaiseAndSetIfChanged(ref _PATTERN, value);
-        }
-        string _NOTE;
+        public string PATTERN { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string NOTE
-        {
-            get => _NOTE;
-            set => this.RaiseAndSetIfChanged(ref _NOTE, value);
-        }
+        public string NOTE { get; set; }
 
     }
 }

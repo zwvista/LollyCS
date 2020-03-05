@@ -2,137 +2,66 @@
 using System.Collections.Generic;
 using System.Web;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
     public class MDictionary : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _DICTID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int DICTID
-        {
-            get => _DICTID;
-            set => this.RaiseAndSetIfChanged(ref _DICTID, value);
-        }
-        int _LANGIDFROM;
+        public int DICTID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGIDFROM
-        {
-            get => _LANGIDFROM;
-            set => this.RaiseAndSetIfChanged(ref _LANGIDFROM, value);
-        }
-        string _LANGNAMEFROM;
+        public int LANGIDFROM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string LANGNAMEFROM
-        {
-            get => _LANGNAMEFROM;
-            set => this.RaiseAndSetIfChanged(ref _LANGNAMEFROM, value);
-        }
-        int _LANGIDTO;
+        public string LANGNAMEFROM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGIDTO
-        {
-            get => _LANGIDTO;
-            set => this.RaiseAndSetIfChanged(ref _LANGIDTO, value);
-        }
-        string _LANGNAMETO;
+        public int LANGIDTO { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string LANGNAMETO
-        {
-            get => _LANGNAMETO;
-            set => this.RaiseAndSetIfChanged(ref _LANGNAMETO, value);
-        }
-        int _SEQNUM;
+        public string LANGNAMETO { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int SEQNUM
-        {
-            get => _SEQNUM;
-            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
-        }
-        int _DICTTYPEID;
+        public int SEQNUM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int DICTTYPEID
-        {
-            get => _DICTTYPEID;
-            set => this.RaiseAndSetIfChanged(ref _DICTTYPEID, value);
-        }
-        string _DICTTYPENAME;
+        public int DICTTYPEID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string DICTTYPENAME
-        {
-            get => _DICTTYPENAME;
-            set => this.RaiseAndSetIfChanged(ref _DICTTYPENAME, value);
-        }
-        string _DICTNAME;
+        public string DICTTYPENAME { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string DICTNAME
-        {
-            get => _DICTNAME;
-            set => this.RaiseAndSetIfChanged(ref _DICTNAME, value);
-        }
-        string _URL;
+        public string DICTNAME { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string URL
-        {
-            get => _URL;
-            set => this.RaiseAndSetIfChanged(ref _URL, value);
-        }
-        string _CHCONV;
+        public string URL { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string CHCONV
-        {
-            get => _CHCONV;
-            set => this.RaiseAndSetIfChanged(ref _CHCONV, value);
-        }
-        string _AUTOMATION;
+        public string CHCONV { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string AUTOMATION
-        {
-            get => _AUTOMATION;
-            set => this.RaiseAndSetIfChanged(ref _AUTOMATION, value);
-        }
-        string _TRANSFORM_WIN;
+        public string AUTOMATION { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TRANSFORM_WIN
-        {
-            get => _TRANSFORM_WIN;
-            set => this.RaiseAndSetIfChanged(ref _TRANSFORM_WIN, value);
-        }
-        string _TRANSFORM;
+        public string TRANSFORM_WIN { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TRANSFORM
-        {
-            get => _TRANSFORM;
-            set => this.RaiseAndSetIfChanged(ref _TRANSFORM, value);
-        }
-        int? _WAIT;
+        public string TRANSFORM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int? WAIT
-        {
-            get => _WAIT;
-            set => this.RaiseAndSetIfChanged(ref _WAIT, value);
-        }
-        string _TEMPLATE;
+        public int? WAIT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TEMPLATE
-        {
-            get => _TEMPLATE;
-            set => this.RaiseAndSetIfChanged(ref _TEMPLATE, value);
-        }
-        string _TEMPLATE2;
+        public string TEMPLATE { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TEMPLATE2
-        {
-            get => _TEMPLATE2;
-            set => this.RaiseAndSetIfChanged(ref _TEMPLATE2, value);
-        }
+        public string TEMPLATE2 { get; set; }
 
         public string UrlString(string word, List<MAutoCorrect> lstAutoCorrects)
         {
@@ -159,18 +88,10 @@ namespace LollyShared
 
     public class MDictItem : ReactiveObject
     {
-        string _DICTID;
-        public string DICTID
-        {
-            get => _DICTID;
-            set => this.RaiseAndSetIfChanged(ref _DICTID, value);
-        }
-        string _DICTNAME;
-        public string DICTNAME
-        {
-            get => _DICTNAME;
-            set => this.RaiseAndSetIfChanged(ref _DICTNAME, value);
-        }
+        [Reactive]
+        public string DICTID { get; set; }
+        [Reactive]
+        public string DICTNAME { get; set; }
         public MDictItem(string id, string name)
         {
             DICTID = id;

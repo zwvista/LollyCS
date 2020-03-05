@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -13,48 +14,24 @@ namespace LollyShared
 
     public class MAutoCorrect : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _LANGID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        int _SEQNUM;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int SEQNUM
-        {
-            get => _SEQNUM;
-            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
-        }
-        string _INPUT;
+        public int SEQNUM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string INPUT
-        {
-            get => _INPUT;
-            set => this.RaiseAndSetIfChanged(ref _INPUT, value);
-        }
-        string _EXTENDED;
+        public string INPUT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string EXTENDED
-        {
-            get => _EXTENDED;
-            set => this.RaiseAndSetIfChanged(ref _EXTENDED, value);
-        }
-        string _BASIC;
+        public string EXTENDED { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string BASIC
-        {
-            get => _BASIC;
-            set => this.RaiseAndSetIfChanged(ref _BASIC, value);
-        }
+        public string BASIC { get; set; }
 
         public static string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,
                                   Func<MAutoCorrect, string> colFunc1, Func<MAutoCorrect, string> colFunc2) =>

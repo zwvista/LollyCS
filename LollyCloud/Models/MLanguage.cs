@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -10,19 +11,11 @@ namespace LollyShared
     }
     public class MLanguage : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        string _LANGNAME;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty("NAME")]
-        public string LANGNAME
-        {
-            get => _LANGNAME;
-            set => this.RaiseAndSetIfChanged(ref _LANGNAME, value);
-        }
+        public string LANGNAME { get; set; }
     }
 }

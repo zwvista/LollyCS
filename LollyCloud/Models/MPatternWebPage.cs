@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -11,48 +12,24 @@ namespace LollyShared
     }
     public class MPatternWebPage : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _PATTERNID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int PATTERNID
-        {
-            get => _PATTERNID;
-            set => this.RaiseAndSetIfChanged(ref _PATTERNID, value);
-        }
-        int _LANGID;
+        public int PATTERNID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        string _PATTERN;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string PATTERN
-        {
-            get => _PATTERN;
-            set => this.RaiseAndSetIfChanged(ref _PATTERN, value);
-        }
-        int _SEQNUM;
+        public string PATTERN { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int SEQNUM
-        {
-            get => _SEQNUM;
-            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
-        }
-        string _WEBPAGE;
+        public int SEQNUM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string WEBPAGE
-        {
-            get => _WEBPAGE;
-            set => this.RaiseAndSetIfChanged(ref _WEBPAGE, value);
-        }
+        public string WEBPAGE { get; set; }
 
     }
 }

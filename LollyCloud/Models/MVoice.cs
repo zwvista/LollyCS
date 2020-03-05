@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -10,40 +11,20 @@ namespace LollyShared
     }
     public class MVoice : ReactiveObject
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _LANGID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        int _VOICETYPEID;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int VOICETYPEID
-        {
-            get => _VOICETYPEID;
-            set => this.RaiseAndSetIfChanged(ref _VOICETYPEID, value);
-        }
-        string _VOICELANG;
+        public int VOICETYPEID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string VOICELANG
-        {
-            get => _VOICELANG;
-            set => this.RaiseAndSetIfChanged(ref _VOICELANG, value);
-        }
-        string _VOICENAME;
+        public string VOICELANG { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string VOICENAME
-        {
-            get => _VOICENAME;
-            set => this.RaiseAndSetIfChanged(ref _VOICENAME, value);
-        }
+        public string VOICENAME { get; set; }
     }
 }

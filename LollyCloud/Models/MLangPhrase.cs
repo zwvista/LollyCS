@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -11,35 +12,19 @@ namespace LollyShared
     }
     public class MLangPhrase : ReactiveObject, MPhraseInterface
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        public int PHRASEID => _ID;
-        int _LANGID;
+        public int ID { get; set; }
+        public int PHRASEID => ID;
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        string _PHRASE;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string PHRASE
-        {
-            get => _PHRASE;
-            set => this.RaiseAndSetIfChanged(ref _PHRASE, value);
-        }
-        string _TRANSLATION;
+        public string PHRASE { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TRANSLATION
-        {
-            get => _TRANSLATION;
-            set => this.RaiseAndSetIfChanged(ref _TRANSLATION, value);
-        }
+        public string TRANSLATION { get; set; }
 
         public MLangPhrase() { }
         public MLangPhrase(MUnitPhrase item)

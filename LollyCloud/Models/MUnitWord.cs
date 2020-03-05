@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -12,110 +13,50 @@ namespace LollyShared
     }
     public class MUnitWord : ReactiveObject, MWordInterface
     {
-        int _ID;
+        [Reactive]
         [JsonProperty]
-        public int ID
-        {
-            get => _ID;
-            set => this.RaiseAndSetIfChanged(ref _ID, value);
-        }
-        int _LANGID;
+        public int ID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LANGID
-        {
-            get => _LANGID;
-            set => this.RaiseAndSetIfChanged(ref _LANGID, value);
-        }
-        int _TEXTBOOKID;
+        public int LANGID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int TEXTBOOKID
-        {
-            get => _TEXTBOOKID;
-            set => this.RaiseAndSetIfChanged(ref _TEXTBOOKID, value);
-        }
-        string _TEXTBOOKNAME;
+        public int TEXTBOOKID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string TEXTBOOKNAME
-        {
-            get => _TEXTBOOKNAME;
-            set => this.RaiseAndSetIfChanged(ref _TEXTBOOKNAME, value);
-        }
-        int _UNIT;
+        public string TEXTBOOKNAME { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int UNIT
-        {
-            get => _UNIT;
-            set => this.RaiseAndSetIfChanged(ref _UNIT, value);
-        }
-        int _PART;
+        public int UNIT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int PART
-        {
-            get => _PART;
-            set => this.RaiseAndSetIfChanged(ref _PART, value);
-        }
-        int _SEQNUM;
+        public int PART { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int SEQNUM
-        {
-            get => _SEQNUM;
-            set => this.RaiseAndSetIfChanged(ref _SEQNUM, value);
-        }
-        int _WORDID;
+        public int SEQNUM { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int WORDID
-        {
-            get => _WORDID;
-            set => this.RaiseAndSetIfChanged(ref _WORDID, value);
-        }
-        string _WORD;
+        public int WORDID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string WORD
-        {
-            get => _WORD;
-            set => this.RaiseAndSetIfChanged(ref _WORD, value);
-        }
-        string _NOTE;
+        public string WORD { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string NOTE
-        {
-            get => _NOTE;
-            set => this.RaiseAndSetIfChanged(ref _NOTE, value);
-        }
-        int _FAMIID;
+        public string NOTE { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int FAMIID
-        {
-            get => _FAMIID;
-            set => this.RaiseAndSetIfChanged(ref _FAMIID, value);
-        }
-        int _LEVEL;
+        public int FAMIID { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int LEVEL
-        {
-            get => _LEVEL;
-            set => this.RaiseAndSetIfChanged(ref _LEVEL, value);
-        }
-        int _CORRECT;
+        public int LEVEL { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int CORRECT
-        {
-            get => _CORRECT;
-            set => this.RaiseAndSetIfChanged(ref _CORRECT, value);
-        }
-        int _TOTAL;
+        public int CORRECT { get; set; }
+        [Reactive]
         [JsonProperty]
-        public int TOTAL
-        {
-            get => _TOTAL;
-            set => this.RaiseAndSetIfChanged(ref _TOTAL, value);
-        }
-        bool _IsChecked;
-        public bool IsChecked
-        {
-            get => _IsChecked;
-            set => this.RaiseAndSetIfChanged(ref _IsChecked, value);
-        }
+        public int TOTAL { get; set; }
+        [Reactive]
+        public bool IsChecked { get; set; }
 
         public MTextbook Textbook { get; set; }
 
