@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -36,19 +37,11 @@ namespace LollyShared
     }
     public class MCode : ReactiveObject
     {
-        int _CODE;
+        [Reactive]
         [JsonProperty]
-        public int CODE
-        {
-            get => _CODE;
-            set => this.RaiseAndSetIfChanged(ref _CODE, value);
-        }
-        string _NAME;
+        public int CODE { get; set; }
+        [Reactive]
         [JsonProperty]
-        public string NAME
-        {
-            get => _NAME;
-            set => this.RaiseAndSetIfChanged(ref _NAME, value);
-        }
+        public string NAME { get; set; }
     }
 }
