@@ -56,9 +56,9 @@ namespace LollyCloud
         private void btnRead_Click(object sender, RoutedEventArgs e)
         {
             int i = vmSettings.USREADNUMBERID;
-            ViewModel.Text = i == 1 ? ReadNumber.readInJapanese(ViewModel.Number) :
-                i == 2 ? ReadNumber.readInNativeKorean(ViewModel.Number) :
-                ReadNumber.readInSinoKorean(ViewModel.Number);
+            ViewModel.Text = i == 1 ? ReadNumberService.readInJapanese(ViewModel.Number) :
+                i == 2 ? ReadNumberService.readInNativeKorean(ViewModel.Number) :
+                ReadNumberService.readInSinoKorean(ViewModel.Number);
         }
     }
 }

@@ -139,6 +139,7 @@
     <Compile Include="Models\MWordFami.cs" />
     <Compile Include="Models\MVoice.cs" />
     <Compile Include="Models\MWordPhrase.cs" />
+    <Compile Include="Models\MReadNumber.cs" />
     <Compile Include="Patterns\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>
@@ -170,17 +171,18 @@
     <Compile Include="Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\CodeDataStore.cs" />
-    <Compile Include="Services\PatternPhraseDataStore.cs" />
-    <Compile Include="Services\PatternWebPageDataStore.cs" />
-    <Compile Include="Services\PatternDataStore.cs" />
-    <Compile Include="Services\LangPhraseDataStore.cs" />
-    <Compile Include="Services\USMappingDataStore.cs" />
-    <Compile Include="Services\WordPhraseDataStore.cs" />
-    <Compile Include="Services\WordFamiDataStore.cs" />
-    <Compile Include="Services\VoiceDataStore.cs" />
-    <Compile Include="Services\UnitPhraseDataStore.cs" />
-    <Compile Include="Services\LangWordDataStore.cs" />
+    <Compile Include="DataStores\CodeDataStore.cs" />
+    <Compile Include="DataStores\PatternPhraseDataStore.cs" />
+    <Compile Include="DataStores\PatternWebPageDataStore.cs" />
+    <Compile Include="DataStores\PatternDataStore.cs" />
+    <Compile Include="DataStores\LangPhraseDataStore.cs" />
+    <Compile Include="DataStores\USMappingDataStore.cs" />
+    <Compile Include="DataStores\WordPhraseDataStore.cs" />
+    <Compile Include="DataStores\WordFamiDataStore.cs" />
+    <Compile Include="DataStores\VoiceDataStore.cs" />
+    <Compile Include="DataStores\UnitPhraseDataStore.cs" />
+    <Compile Include="DataStores\LangWordDataStore.cs" />
+    <Compile Include="Services\ReadNumberService.cs" />
     <Compile Include="SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
@@ -194,14 +196,14 @@
     <Compile Include="Models\MTextbook.cs" />
     <Compile Include="Models\MUnitWord.cs" />
     <Compile Include="Models\MUserSetting.cs" />
-    <Compile Include="Services\AutoCorrectDataStore.cs" />
-    <Compile Include="Services\DictDataStore.cs" />
-    <Compile Include="Services\IDataStore.cs" />
-    <Compile Include="Services\LanguageDataStore.cs" />
-    <Compile Include="Services\LollyDataStore.cs" />
-    <Compile Include="Services\TextbookDataStore.cs" />
-    <Compile Include="Services\UnitWordDataStore.cs" />
-    <Compile Include="Services\UserSettingDataStore.cs" />
+    <Compile Include="DataStores\AutoCorrectDataStore.cs" />
+    <Compile Include="DataStores\DictDataStore.cs" />
+    <Compile Include="DataStores\IDataStore.cs" />
+    <Compile Include="DataStores\LanguageDataStore.cs" />
+    <Compile Include="DataStores\LollyDataStore.cs" />
+    <Compile Include="DataStores\TextbookDataStore.cs" />
+    <Compile Include="DataStores\UnitWordDataStore.cs" />
+    <Compile Include="DataStores\UserSettingDataStore.cs" />
     <Compile Include="Shared\Interfaces.cs" />
     <Compile Include="Tools\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
@@ -421,6 +423,7 @@
   <ItemGroup>
     <Resource Include="DragInsert.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.1.1\build\Fody.targets" Condition="Exists('..\packages\Fody.6.1.1\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
