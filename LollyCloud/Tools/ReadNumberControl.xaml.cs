@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace LollyCloud
@@ -28,16 +29,17 @@ namespace LollyCloud
             ToolBar1.Items.Clear();
             foreach (var o in vmSettings.ReadNumberType)
             {
-                var b = new RadioButton
+                var btn = new RadioButton
                 {
                     Content = o.NAME,
                     GroupName = "READNUMBER",
-                    Tag = o.CODE,
                 };
-                b.Click += (o2, e) => vmSettings.USREADNUMBERID = (int)((RadioButton)o2).Tag;
-                ToolBar1.Items.Add(b);
-                if (o.CODE == vmSettings.USREADNUMBERID)
-                    b.IsChecked = true;
+                btn.SetBinding(RadioButton.IsCheckedProperty, new Binding("Type")
+                {
+                    Converter = new EnumBooleanConverter(),
+                    ConverterParameter = ((ReadNumberType)o.CODE).ToString(),
+                });
+                ToolBar1.Items.Add(btn);
             }
         }
     }
