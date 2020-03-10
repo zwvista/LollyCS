@@ -14,7 +14,7 @@ namespace LollyShared
     {
         public async Task<List<MCode>> GetDictTypes() =>
         (await GetDataByUrl<MCodes>($"CODES?filter=KIND,eq,1")).records;
-        public async Task<List<MCode>> GetReadNumberTypes() =>
+        public async Task<List<MCode>> GetReadNumberType() =>
         (await GetDataByUrl<MCodes>($"CODES?filter=KIND,eq,3")).records;
     }
 }

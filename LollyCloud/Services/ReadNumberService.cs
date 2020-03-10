@@ -8,7 +8,7 @@ namespace LollyShared
 {
     public static class ReadNumberService
     {
-        public static string readInJapanese(int num)
+        public static string ReadInJapanese(int num)
         {
             var numbers1 = new[] { "ゼロ", "いち", "に", "さん", "よん", "ご", "ろく", "なな", "はち", "きゅう", "じゅう", "まん", "おく", "ちょう" };
             var numbers3 = new[] { "ひゃく", "にひゃく", "さんびゃく", "よんひゃく", "ごひゃく", "ろっぴゃく", "ななひゃく", "はっぴゃく", "きゅうひゃく" };
@@ -34,7 +34,7 @@ namespace LollyShared
                 return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
             }
         }
-        public static string readInNativeKorean(int num)
+        public static string ReadInNativeKorean(int num)
         {
             var numbers1 = new[] { "", "하나", "둘", "셋", "넷", "다섯", "여섯", "일곱", "여덟", "아홉" };
             var numbers2 = new[] { "", "열", "스물", "서른", "마흔", "쉰", "예순", "일흔", "여든", "아흔" };
@@ -44,7 +44,7 @@ namespace LollyShared
             var s2 = numbers1[n1];
             return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
         }
-        public static string readInSinoKorean(int num)
+        public static string ReadInSinoKorean(int num)
         {
             var numbers = new[] { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구", "십", "백", "천", "만", "억", "조" };
             num = num % 1_0000_0000;

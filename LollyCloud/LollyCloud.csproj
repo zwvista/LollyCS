@@ -186,6 +186,7 @@
     <Compile Include="SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shared\EnumBooleanConverter.cs" />
     <Compile Include="Shared\UIHelpers.cs" />
     <Compile Include="Shared\WatermarkAdorner.cs" />
     <Compile Include="Shared\WindowsExtensions.cs" />

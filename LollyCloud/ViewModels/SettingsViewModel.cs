@@ -285,7 +285,7 @@ namespace LollyShared
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictTypes { get; set; }
-        public List<MCode> ReadNumberTypes { get; set; }
+        public List<MCode> ReadNumberType { get; set; }
         public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
         public static List<string> ScopePatternFilters { get; } = new List<string> { "None", "Pattern", "Note" };
@@ -313,7 +313,7 @@ namespace LollyShared
             USMappings = await GetData(async () => await USMappingDS.GetData());
             UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(CommonApi.UserId));
             DictTypes = await GetData(async () => await CodeDS.GetDictTypes());
-            ReadNumberTypes = await GetData(async () => await CodeDS.GetReadNumberTypes());
+            ReadNumberType = await GetData(async () => await CodeDS.GetReadNumberType());
             INFO_USLANGID = GetUSInfo(MUSMapping.NAME_USLANGID);
             INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
             INFO_USROWSPERPAGE = GetUSInfo(MUSMapping.NAME_USROWSPERPAGE);
