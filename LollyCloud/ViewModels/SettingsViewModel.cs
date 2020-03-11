@@ -8,7 +8,7 @@ using System.Net.Http;
 
 namespace LollyShared
 {
-    public class SettingsViewModel : BaseViewModel
+    public class SettingsViewModel : ReactiveObject
     {
         USMappingDataStore USMappingDS = new USMappingDataStore();
         UserSettingDataStore UserSettingDS = new UserSettingDataStore();

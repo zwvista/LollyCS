@@ -2,7 +2,7 @@
 
 namespace LollyShared
 {
-    public class PhrasesUnitBatchViewModel : BaseViewModel
+    public class PhrasesUnitBatchViewModel : ReactiveObject
     {
         public PhrasesUnitViewModel vm { get; set; }
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;

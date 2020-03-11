@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class PhrasesLangViewModel : BaseViewModel
+    public class PhrasesLangViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();

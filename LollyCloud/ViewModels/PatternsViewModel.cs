@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class PatternsViewModel : BaseViewModel
+    public class PatternsViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();

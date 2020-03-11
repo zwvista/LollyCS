@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace LollyShared
 {
-    public class BlogViewModel : BaseViewModel
+    public class BlogViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         NoteViewModel vmNote;

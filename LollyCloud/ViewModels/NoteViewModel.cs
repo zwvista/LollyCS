@@ -1,11 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using ReactiveUI;
+using System;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace LollyShared
 {
-    public class NoteViewModel : BaseViewModel
+    public class NoteViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         public MDictNote DictNote => vmSettings.SelectedDictNote;

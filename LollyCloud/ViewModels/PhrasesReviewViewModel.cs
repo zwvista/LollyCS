@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LollyShared
 {
-    public class PhrasesReviewViewModel : BaseViewModel
+    public class PhrasesReviewViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();

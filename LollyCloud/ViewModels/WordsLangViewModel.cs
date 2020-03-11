@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class WordsLangViewModel : BaseViewModel
+    public class WordsLangViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         LangWordDataStore langWordDS = new LangWordDataStore();

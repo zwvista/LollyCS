@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class WordsSearchViewModel : BaseViewModel
+    public class WordsSearchViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
 
