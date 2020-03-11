@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -18,18 +19,10 @@ namespace LollyShared
         public ObservableCollection<MPattern> PatternItems => PatternItemsFiltered ?? PatternItemsAll;
         public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
         public ObservableCollection<MPatternPhrase> PhraseItems { get; set; }
-        string _TextFilter = "";
-        public string TextFilter
-        {
-            get => _TextFilter;
-            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
-        }
-        string _ScopeFilter = SettingsViewModel.ScopePatternFilters[0];
-        public string ScopeFilter
-        {
-            get => _ScopeFilter;
-            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
-        }
+        [Reactive]
+        public string TextFilter { get; set; }
+        [Reactive]
+        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
 
         public static async Task<PatternsViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
         {

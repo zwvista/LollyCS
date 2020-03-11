@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,12 +16,8 @@ namespace LollyShared
         public List<MUnitWord> Items { get; set; }
         public int Count => Items.Count;
         public List<int> CorrectIDs { get; set; }
-        int _Index;
-        public int Index
-        {
-            get => _Index;
-            set => this.RaiseAndSetIfChanged(ref _Index, value);
-        }
+        [Reactive]
+        public int Index { get; set; }
         public string IndexCount => $"{Index}/{Count}";
         public bool HasNext => Index < Count;
         public MUnitWord CurrentItem => HasNext ? Items[Index] : null;

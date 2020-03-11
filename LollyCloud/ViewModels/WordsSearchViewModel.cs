@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -11,12 +12,8 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
 
         public ObservableCollection<MUnitWord> WordItems { get; set; }
-        string _NewWord = "";
-        public string NewWord
-        {
-            get => _NewWord;
-            set => this.RaiseAndSetIfChanged(ref _NewWord, value);
-        }
+        [Reactive]
+        public string NewWord { get; set; } = "";
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy)

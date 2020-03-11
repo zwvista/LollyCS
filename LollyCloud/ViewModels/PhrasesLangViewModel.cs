@@ -1,8 +1,8 @@
 ﻿using ReactiveUI;
-using System;
-using System.Threading.Tasks;
-using System.Linq;
+using ReactiveUI.Fody.Helpers;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LollyShared
 {
@@ -14,18 +14,10 @@ namespace LollyShared
         public ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; }
         public ObservableCollection<MLangPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MLangPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
-        string _TextFilter = "";
-        public string TextFilter
-        {
-            get => _TextFilter;
-            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
-        }
-        string _ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
-        public string ScopeFilter
-        {
-            get => _ScopeFilter;
-            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
-        }
+        [Reactive]
+        public string TextFilter { get; set; } = "";
+        [Reactive]
+        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
 
         public static async Task<PhrasesLangViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
         {

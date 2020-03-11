@@ -1,8 +1,9 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
-using System.Threading.Tasks;
-using System.Linq;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LollyShared
 {
@@ -19,36 +20,16 @@ namespace LollyShared
         public ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
-        string _NewWord = "";
-        public string NewWord
-        {
-            get => _NewWord;
-            set => this.RaiseAndSetIfChanged(ref _NewWord, value);
-        }
-        string _TextFilter = "";
-        public string TextFilter
-        {
-            get => _TextFilter;
-            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
-        }
-        string _ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
-        public string ScopeFilter
-        {
-            get => _ScopeFilter;
-            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
-        }
-        bool _Levelge0only;
-        public bool Levelge0only
-        {
-            get => _Levelge0only;
-            set => this.RaiseAndSetIfChanged(ref _Levelge0only, value);
-        }
-        int _TextbookFilter;
-        public int TextbookFilter
-        {
-            get => _TextbookFilter;
-            set => this.RaiseAndSetIfChanged(ref _TextbookFilter, value);
-        }
+        [Reactive]
+        public string NewWord { get; set; } = "";
+        [Reactive]
+        public string TextFilter { get; set; } = "";
+        [Reactive]
+        public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
+        [Reactive]
+        public bool Levelge0only { get; set; }
+        [Reactive]
+        public int TextbookFilter { get; set; }
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public static async Task<WordsUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
