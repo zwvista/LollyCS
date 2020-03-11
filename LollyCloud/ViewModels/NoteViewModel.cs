@@ -5,7 +5,7 @@ using System.Reactive.Linq;
 
 namespace LollyShared
 {
-    public class NoteViewModel : LollyViewModel
+    public class NoteViewModel : BaseViewModel
     {
         public SettingsViewModel vmSettings;
         public MDictNote DictNote => vmSettings.SelectedDictNote;

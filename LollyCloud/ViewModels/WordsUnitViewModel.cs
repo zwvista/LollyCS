@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace LollyShared
 {
-    public class WordsUnitViewModel : LollyViewModel
+    public class WordsUnitViewModel : BaseViewModel
     {
         public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();

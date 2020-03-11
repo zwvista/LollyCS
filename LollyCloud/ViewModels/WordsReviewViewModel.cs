@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LollyShared
 {
-    public class WordsReviewViewModel : LollyViewModel
+    public class WordsReviewViewModel : BaseViewModel
     {
         public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();

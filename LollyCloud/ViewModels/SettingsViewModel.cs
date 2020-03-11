@@ -8,7 +8,7 @@ using System.Net.Http;
 
 namespace LollyShared
 {
-    public class SettingsViewModel : LollyViewModel
+    public class SettingsViewModel : BaseViewModel
     {
         USMappingDataStore USMappingDS = new USMappingDataStore();
         UserSettingDataStore UserSettingDS = new UserSettingDataStore();
@@ -309,11 +309,11 @@ namespace LollyShared
         }
 
         public async Task GetData() {
-            Languages = await GetData(async () => await LanguageDS.GetData());
-            USMappings = await GetData(async () => await USMappingDS.GetData());
-            UserSettings = await GetData(async () => await UserSettingDS.GetDataByUser(CommonApi.UserId));
-            DictCodes = await GetData(async () => await CodeDS.GetDictCodes());
-            ReadNumberCodes = await GetData(async () => await CodeDS.GetReadNumberCodes());
+            Languages = await LanguageDS.GetData();
+            USMappings = await USMappingDS.GetData();
+            UserSettings = await UserSettingDS.GetDataByUser(CommonApi.UserId);
+            DictCodes = await CodeDS.GetDictCodes();
+            ReadNumberCodes = await CodeDS.GetReadNumberCodes();
             INFO_USLANGID = GetUSInfo(MUSMapping.NAME_USLANGID);
             INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
             INFO_USROWSPERPAGE = GetUSInfo(MUSMapping.NAME_USROWSPERPAGE);
@@ -338,12 +338,12 @@ namespace LollyShared
             INFO_USDICTTRANSLATIONID = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATIONID);
             INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
             var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
-            DictsReference = await GetData(async () => await DictReferenceDS.GetDataByLang(USLANGID));
-            DictsNote = await GetData(async () => await DictNoteDS.GetDataByLang(USLANGID));
-            DictsTranslation = await GetData(async () => await DictTranslationDS.GetDataByLang(USLANGID));
-            Textbooks = await GetData(async () => await TextbookDS.GetDataByLang(USLANGID));
-            AutoCorrects = await GetData(async () => await AutoCorrectDS.GetDataByLang(USLANGID));
-            Voices = await GetData(async () => await VoiceDS.GetDataByLang(USLANGID));
+            DictsReference = await DictReferenceDS.GetDataByLang(USLANGID);
+            DictsNote = await DictNoteDS.GetDataByLang(USLANGID);
+            DictsTranslation = await DictTranslationDS.GetDataByLang(USLANGID);
+            Textbooks = await TextbookDS.GetDataByLang(USLANGID);
+            AutoCorrects = await AutoCorrectDS.GetDataByLang(USLANGID);
+            Voices = await VoiceDS.GetDataByLang(USLANGID);
             var i = 0;
             DictItems = lstDicts.SelectMany(d => d == "0" ?
                 DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
