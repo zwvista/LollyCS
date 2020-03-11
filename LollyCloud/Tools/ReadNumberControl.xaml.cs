@@ -27,7 +27,7 @@ namespace LollyCloud
             ViewModel = new ReadNumberViewModel(MainWindow.vmSettings, true);
             DataContext = ViewModel;
             ToolBar1.Items.Clear();
-            foreach (var o in vmSettings.ReadNumberType)
+            foreach (var o in vmSettings.ReadNumberCodes)
             {
                 var btn = new RadioButton
                 {
