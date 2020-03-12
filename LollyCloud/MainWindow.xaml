@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         xmlns:shared="clr-namespace:LollyShared"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
     <Grid>
@@ -37,22 +38,20 @@
                 <Separator />
             </MenuItem>
         </Menu>
-        <DockPanel Grid.Row="1">
-            <TabControl x:Name="tcMain">
-                <TabControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Height="21" Width="120">
-                            <TextBlock Width="100" Text="{Binding Header}"/>
-                            <Image Source="Icons\close.png" Width="20" Height="20" MouseDown="Image_MouseDown"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </TabControl.ItemTemplate>
-                <TabControl.ContentTemplate>
-                    <DataTemplate>
-                        <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                    </DataTemplate>
-                </TabControl.ContentTemplate>
-            </TabControl>
-        </DockPanel>
+        <dragablz:TabablzControl Grid.Row="1" x:Name="tcMain" ShowDefaultCloseButton="True">
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController />
+            </dragablz:TabablzControl.InterTabController>
+            <dragablz:TabablzControl.HeaderItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}"/>
+                </DataTemplate>
+            </dragablz:TabablzControl.HeaderItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </dragablz:TabablzControl>
     </Grid>
 </Window>
