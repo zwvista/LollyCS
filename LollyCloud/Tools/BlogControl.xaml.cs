@@ -1,4 +1,5 @@
 ﻿using LollyShared;
+using ReactiveUI;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,58 +11,51 @@ namespace LollyCloud
     /// <summary>
     /// BlogControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class BlogControl : UserControl, ILollySettings
+    public partial class BlogControl : ReactiveUserControl<BlogViewModel>, ILollySettings
     {
-        public BlogViewModel vm { get; set; }
-
         public BlogControl()
         {
             InitializeComponent();
             OnSettingsChanged();
         }
 
-        public async Task OnSettingsChanged() =>
-            vm = new BlogViewModel(MainWindow.vmSettings, true);
+        public async Task OnSettingsChanged()
+        {
+            ViewModel = new BlogViewModel(MainWindow.vmSettings, true);
+            DataContext = ViewModel;
+        }
 
-        void btnHtmlToMarked_Click(object sender, RoutedEventArgs e) =>
-            tbMarked.Text = vm.HtmlToMarked(tbHtml.Text);
-        void ReplaceSelection(Func<string, string> f) =>
-            tbMarked.SelectedText = f(tbMarked.SelectedText);
+        void ReplaceSelection(ReactiveCommand<string, string> cmd) =>
+            cmd.Execute(tbMarked.SelectedText).Subscribe(str => tbMarked.SelectedText = str);
         void btnAddTagB_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.AddTagB);
+            ReplaceSelection(ViewModel.AddTagBCommand);
         void btnAddTagI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.AddTagI);
+            ReplaceSelection(ViewModel.AddTagICommand);
         void btnRemoveTagBI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.RemoveTagBI);
+            ReplaceSelection(ViewModel.RemoveTagBICommand);
         void btnExchangeTagBI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.ExchangeTagBI);
+            ReplaceSelection(ViewModel.ExchangeTagBICommand);
         void btnAddExplanation_Click(object sender, RoutedEventArgs e)
         {
             var text = Clipboard.GetText();
-            ReplaceSelection(_ => vm.GetExplanation(text));
-            var w = (MainWindow)Window.GetWindow(this);
-            w.SearchWord(text);
+            ViewModel.GetExplanationCommand.Execute(text).Subscribe(str =>
+            {
+                tbMarked.SelectedText = str;
+                var w = (MainWindow)Window.GetWindow(this);
+                w.SearchWord(text);
+            });
         }
-        void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
-        {
-            tbHtml.Text = vm.MarkedToHtml(tbMarked.Text);
-            var str = vm.GetHtml(tbHtml.Text);
-            wbBlog.NavigateToString(str);
-            Clipboard.SetDataObject(tbHtml.Text);
-        }
-        void btnPatternToHtml_Click(object sender, RoutedEventArgs e)
-        {
-            var url = vm.GetPatternUrl(tbPatternNo.Text);
-            wbBlog.Navigate(url);
-        }
+        void btnMarkedToHtml_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.MarkedToHtmlCommand.Execute().Subscribe(str =>
+            {
+                wbBlog.NavigateToString(str);
+                Clipboard.SetDataObject(ViewModel.HtmlText);
+            });
+        void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
+            wbBlog.Navigate(ViewModel.PatternUrl);
         void WbBlog_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) =>
             wbBlog.SetSilent(true);
-        void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e)
-        {
-            var text = vm.GetPatternMarkDown(tbPatternText.Text);
-            Clipboard.SetDataObject(text);
-        }
-        async void btnAddNotes_Click(object sender, RoutedEventArgs e) =>
-            await vm.AddNotes(tbMarked.Text, s => tbMarked.Text = s);
+        void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e) =>
+            Clipboard.SetDataObject(ViewModel.PatternMarkDown);
     }
 }

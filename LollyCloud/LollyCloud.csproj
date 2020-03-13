@@ -146,6 +146,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MBlog.cs" />
     <Compile Include="Models\MPatternPhrase.cs" />
     <Compile Include="Models\MPatternWebPage.cs" />
     <Compile Include="Models\MPattern.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="DataStores\VoiceDataStore.cs" />
     <Compile Include="DataStores\UnitPhraseDataStore.cs" />
     <Compile Include="DataStores\LangWordDataStore.cs" />
+    <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\ReadNumberService.cs" />
     <Compile Include="SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>

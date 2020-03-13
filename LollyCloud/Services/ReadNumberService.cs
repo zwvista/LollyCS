@@ -53,9 +53,9 @@ namespace LollyShared
             string f(int n, string unit)
             {
                 var (n4, n3, n2, n1) = (n / 1000, n % 1000 / 100, n % 100 / 10, n % 10);
-                var s = g(n: n4, unit: 12);
-                s += g(n: n3, unit: 11);
-                s += g(n: n2, unit: 10);
+                var s = g(n4, 12);
+                s += g(n3, 11);
+                s += g(n2, 10);
                 s += n1 == 0 ? "" : numbers[n1];
                 return s + unit;
             }
@@ -64,9 +64,9 @@ namespace LollyShared
             else
             {
                 var n5 = num / 10000;
-                var s1 = n5 == 0 ? "" : n5 == 1 ? numbers[13] : f(n: n5, unit: numbers[13]);
+                var s1 = n5 == 0 ? "" : n5 == 1 ? numbers[13] : f(n5, numbers[13]);
                 var n1 = num % 10000;
-                var s2 = n1 == 0 ? "" : f(n: n1, unit: "");
+                var s2 = n1 == 0 ? "" : f(n1, "");
                 return string.IsNullOrEmpty(s1) || string.IsNullOrEmpty(s2) ? s1 + s2 : s1 + " " + s2;
             }
         }
