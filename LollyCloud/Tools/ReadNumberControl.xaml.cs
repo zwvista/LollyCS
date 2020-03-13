@@ -12,9 +12,10 @@ namespace LollyCloud
     /// <summary>
     /// BlogControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class ReadNumberControl : ReactiveUserControl<ReadNumberViewModel>, ILollySettings
+    public partial class ReadNumberControl : UserControl, ILollySettings
     {
-        private SettingsViewModel vmSettings => ViewModel.vmSettings;
+        ReadNumberViewModel vm;
+        private SettingsViewModel vmSettings => vm.vmSettings;
 
         public ReadNumberControl()
         {
@@ -24,8 +25,8 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            ViewModel = new ReadNumberViewModel(MainWindow.vmSettings, true);
-            DataContext = ViewModel;
+            vm = new ReadNumberViewModel(MainWindow.vmSettings, true);
+            DataContext = vm;
             ToolBar1.Items.Clear();
             foreach (var o in vmSettings.ReadNumberCodes)
             {

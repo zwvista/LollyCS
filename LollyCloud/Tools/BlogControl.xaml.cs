@@ -11,8 +11,10 @@ namespace LollyCloud
     /// <summary>
     /// BlogControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class BlogControl : ReactiveUserControl<BlogViewModel>, ILollySettings
+    public partial class BlogControl : UserControl, ILollySettings
     {
+        BlogViewModel vm;
+
         public BlogControl()
         {
             InitializeComponent();
@@ -21,24 +23,24 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            ViewModel = new BlogViewModel(MainWindow.vmSettings, true);
-            DataContext = ViewModel;
+            vm = new BlogViewModel(MainWindow.vmSettings, true);
+            DataContext = vm;
         }
 
         void ReplaceSelection(ReactiveCommand<string, string> cmd) =>
             cmd.Execute(tbMarked.SelectedText).Subscribe(str => tbMarked.SelectedText = str);
         void btnAddTagB_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(ViewModel.AddTagBCommand);
+            ReplaceSelection(vm.AddTagBCommand);
         void btnAddTagI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(ViewModel.AddTagICommand);
+            ReplaceSelection(vm.AddTagICommand);
         void btnRemoveTagBI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(ViewModel.RemoveTagBICommand);
+            ReplaceSelection(vm.RemoveTagBICommand);
         void btnExchangeTagBI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(ViewModel.ExchangeTagBICommand);
+            ReplaceSelection(vm.ExchangeTagBICommand);
         void btnAddExplanation_Click(object sender, RoutedEventArgs e)
         {
             var text = Clipboard.GetText();
-            ViewModel.GetExplanationCommand.Execute(text).Subscribe(str =>
+            vm.GetExplanationCommand.Execute(text).Subscribe(str =>
             {
                 tbMarked.SelectedText = str;
                 var w = (MainWindow)Window.GetWindow(this);
@@ -46,16 +48,16 @@ namespace LollyCloud
             });
         }
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e) =>
-            ViewModel.MarkedToHtmlCommand.Execute().Subscribe(str =>
+            vm.MarkedToHtmlCommand.Execute().Subscribe(str =>
             {
                 wbBlog.NavigateToString(str);
-                Clipboard.SetDataObject(ViewModel.HtmlText);
+                Clipboard.SetDataObject(vm.HtmlText);
             });
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
-            wbBlog.Navigate(ViewModel.PatternUrl);
+            wbBlog.Navigate(vm.PatternUrl);
         void WbBlog_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) =>
             wbBlog.SetSilent(true);
         void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e) =>
-            Clipboard.SetDataObject(ViewModel.PatternMarkDown);
+            Clipboard.SetDataObject(vm.PatternMarkDown);
     }
 }
