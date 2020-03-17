@@ -409,7 +409,7 @@ namespace LollyShared
         public string AutoCorrectInput(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
         public async Task UpdateUnitFrom()
         {
-            await DoUpdateUnitFrom(USUNITFROM);
+            await DoUpdateUnitFrom(USUNITFROM, check: false);
             if (ToType == UnitPartToType.Unit)
                 await DoUpdateSingleUnit();
             else if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
@@ -417,19 +417,19 @@ namespace LollyShared
         }
         public async Task UpdatePartFrom()
         {
-            await DoUpdatePartFrom(USPARTFROM);
+            await DoUpdatePartFrom(USPARTFROM, check: false);
             if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
                 await DoUpdateUnitPartTo();
         }
         public async Task UpdateUnitTo()
         {
-            await DoUpdateUnitTo(USUNITTO);
+            await DoUpdateUnitTo(USUNITTO, check: false);
             if (IsInvalidUnitPart)
                 await DoUpdateUnitPartFrom();
         }
         public async Task UpdatePartTo()
         {
-            await DoUpdatePartTo(USPARTTO);
+            await DoUpdatePartTo(USPARTTO, check: false);
             if (IsInvalidUnitPart)
                 await DoUpdateUnitPartFrom();
         }
@@ -514,27 +514,27 @@ namespace LollyShared
             await DoUpdatePartFrom(1);
             await DoUpdatePartTo(PartCount);
         }
-        private async Task DoUpdateUnitFrom(int v)
+        private async Task DoUpdateUnitFrom(int v, bool check = true)
         {
-            if (USUNITFROM == v) return;
+            if (check && USUNITFROM == v) return;
             await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
             OnUpdateUnitFrom?.Invoke(this, null);
         }
-        private async Task DoUpdatePartFrom(int v)
+        private async Task DoUpdatePartFrom(int v, bool check = true)
         {
-            if (USPARTFROM == v) return;
+            if (check && USPARTFROM == v) return;
             await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
             OnUpdatePartFrom?.Invoke(this, null);
         }
-        private async Task DoUpdateUnitTo(int v)
+        private async Task DoUpdateUnitTo(int v, bool check = true)
         {
-            if (USUNITTO == v) return;
+            if (check && USUNITTO == v) return;
             await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
             OnUpdateUnitTo?.Invoke(this, null);
         }
-        private async Task DoUpdatePartTo(int v)
+        private async Task DoUpdatePartTo(int v, bool check = true)
         {
-            if (USPARTTO == v) return;
+            if (check && USPARTTO == v) return;
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
             OnUpdatePartTo?.Invoke(this, null);
         }
