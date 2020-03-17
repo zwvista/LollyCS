@@ -11,7 +11,7 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesSelectUnitDlg : Window
     {
-        public PhrasesUnitViewModel vm = new PhrasesUnitViewModel();
+        public PhrasesUnitViewModel vm;
         public SettingsViewModel vmSettings => vm.vmSettings;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         public PhrasesSelectUnitDlg()

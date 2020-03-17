@@ -3,6 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace LollyShared
@@ -19,7 +20,7 @@ namespace LollyShared
         public ObservableCollection<MUnitWord> WordItemsAll { get; set; }
         public ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
-        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
+        public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
         [Reactive]
         public string NewWord { get; set; } = "";
         [Reactive]
@@ -31,17 +32,19 @@ namespace LollyShared
         [Reactive]
         public int TextbookFilter { get; set; }
 
-        // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
-        public static async Task<WordsUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
+        public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
-            var o = new WordsUnitViewModel();
-            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.WordItemsAll = new ObservableCollection<MUnitWord>(await (inTextbook ? o.unitWordDS.GetDataByTextbookUnitPart(
+            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            (inTextbook ? unitWordDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                o.unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
-            o.vmNote = new NoteViewModel(o.vmSettings);
-            o.ApplyFilters();
-            return o;
+                unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
+            .ToObservable().Subscribe(lst => 
+            {
+                WordItemsAll = new ObservableCollection<MUnitWord>(lst);
+                this.RaisePropertyChanged(nameof(WordItems));
+            });
+            vmNote = new NoteViewModel(vmSettings);
+            ApplyFilters();
         }
 
         public void ApplyFilters()

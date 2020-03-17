@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Reactive.Threading.Tasks;
 
 namespace LollyShared
 {
@@ -34,15 +35,18 @@ namespace LollyShared
             set => this.RaiseAndSetIfChanged(ref _TextbookFilter, value);
         }
 
-        public static async Task<PhrasesUnitViewModel> CreateAsync(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
+        public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
-            var o = new PhrasesUnitViewModel();
-            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.PhraseItemsAll = new ObservableCollection<MUnitPhrase>(await (inTextbook ? o.unitPhraseDS.GetDataByTextbookUnitPart(
+            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            (inTextbook ? unitPhraseDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                o.unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks)));
-            o.ApplyFilters();
-            return o;
+                unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
+            .ToObservable().Subscribe(lst =>
+            {
+                PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
+                this.RaisePropertyChanged(nameof(PhraseItems));
+            });
+            ApplyFilters();
         }
         public void ApplyFilters()
         {

@@ -97,7 +97,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = await PatternsViewModel.CreateAsync(MainWindow.vmSettings, needCopy: true);
+            vm = new PatternsViewModel(MainWindow.vmSettings, needCopy: true);
             DataContext = vm;
         }
 

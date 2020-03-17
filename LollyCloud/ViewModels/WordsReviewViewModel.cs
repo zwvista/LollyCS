@@ -25,12 +25,9 @@ namespace LollyShared
         public bool IsTestMode => Options.Mode == ReviewMode.Test;
         public MReviewOptions Options { get; set; } = new MReviewOptions();
 
-        // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
-        public static async Task<WordsReviewViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
+        public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
-            var o = new WordsReviewViewModel();
-            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            return o;
+            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
         }
 
         public async Task NewTest()

@@ -1,9 +1,10 @@
 ﻿using ReactiveUI;
-using System;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.ObjectModel;
 using ReactiveUI.Fody.Helpers;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace LollyShared
 {
@@ -24,13 +25,15 @@ namespace LollyShared
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
 
-        public static async Task<PatternsViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
+        public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
-            var o = new PatternsViewModel();
-            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.PatternItemsAll = new ObservableCollection<MPattern>(await o.patternDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
-            o.ApplyFilters();
-            return o;
+            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            patternDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            {
+                PatternItemsAll = new ObservableCollection<MPattern>(lst);
+                this.RaisePropertyChanged(nameof(PatternItems));
+            });
+            ApplyFilters();
         }
         public void ApplyFilters()
         {

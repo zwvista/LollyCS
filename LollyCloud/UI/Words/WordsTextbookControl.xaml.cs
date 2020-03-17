@@ -63,7 +63,7 @@ namespace LollyCloud
 
         public override async Task OnSettingsChanged()
         {
-            vm = await WordsUnitViewModel.CreateAsync(MainWindow.vmSettings, inTextbook: false, needCopy: true);
+            vm = new WordsUnitViewModel(MainWindow.vmSettings, inTextbook: false, needCopy: true);
             DataContext = vm;
             selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
             await base.OnSettingsChanged();

@@ -26,7 +26,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = await WordsReviewViewModel.CreateAsync(MainWindow.vmSettings, needCopy: true);
+            vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true);
         }
 
         async Task DoTest()

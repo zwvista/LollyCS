@@ -1,7 +1,9 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace LollyShared
@@ -15,7 +17,7 @@ namespace LollyShared
         public ObservableCollection<MLangWord> WordItemsAll { get; set; }
         public ObservableCollection<MLangWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MLangWord> WordItems => WordItemsFiltered ?? WordItemsAll;
-        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
+        public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
         [Reactive]
         public string NewWord { get; set; } = "";
         [Reactive]
@@ -25,13 +27,15 @@ namespace LollyShared
         [Reactive]
         public bool Levelge0only { get; set; }
 
-        public static async Task<WordsLangViewModel> CreateAsync(SettingsViewModel vmSettings, bool needCopy)
+        public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
-            var o = new WordsLangViewModel();
-            o.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            o.WordItemsAll = new ObservableCollection<MLangWord>(await o.langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
-            o.ApplyFilters();
-            return o;
+            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            {
+                WordItemsAll = new ObservableCollection<MLangWord>(lst);
+                this.RaisePropertyChanged(nameof(WordItems));
+            });
+            ApplyFilters();
         }
         public void ApplyFilters()
         {
@@ -58,7 +62,10 @@ namespace LollyShared
                 LANGID = vmSettings.SelectedLang.ID,
             };
 
-        public async Task SearchPhrases(int wordid) =>
+        public async Task SearchPhrases(int wordid)
+        {
             PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWord(wordid));
+            this.RaisePropertyChanged(nameof(PhraseItems));
+        }
     }
 }
