@@ -9,22 +9,18 @@ namespace LollyShared
     {
         public List<MVoice> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MVoice : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LANGID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int VOICETYPEID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string VOICELANG { get; set; }
         [Reactive]
-        [JsonProperty]
         public string VOICENAME { get; set; }
     }
 }

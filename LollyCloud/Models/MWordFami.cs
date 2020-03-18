@@ -9,25 +9,20 @@ namespace LollyShared
     {
         public List<MWordFami> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MWordFami : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int USERID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int WORDID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LEVEL { get; set; }
         [Reactive]
-        [JsonProperty]
         public int CORRECT { get; set; }
         [Reactive]
-        [JsonProperty]
         public int TOTAL { get; set; }
     }
 }

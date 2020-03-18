@@ -9,25 +9,20 @@ namespace LollyShared
     {
         public List<MUSMapping> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MUSMapping : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string NAME { get; set; }
         [Reactive]
-        [JsonProperty]
         public int KIND { get; set; }
         [Reactive]
-        [JsonProperty]
         public int ENTITYID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int VALUEID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LEVEL { get; set; }
 
         public static string NAME_USLANGID = "USLANGID";

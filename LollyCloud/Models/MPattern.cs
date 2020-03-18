@@ -10,20 +10,17 @@ namespace LollyShared
     {
         public List<MPattern> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MPattern : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         public int PATTERNID => ID;
         [Reactive]
-        [JsonProperty]
         public int LANGID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string PATTERN { get; set; }
         [Reactive]
-        [JsonProperty]
         public string NOTE { get; set; }
 
     }

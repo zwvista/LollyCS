@@ -35,13 +35,12 @@ namespace LollyShared
     {
         public List<MCode> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MCode : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int CODE { get; set; }
         [Reactive]
-        [JsonProperty]
         public string NAME { get; set; }
     }
 }

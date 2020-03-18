@@ -6,61 +6,44 @@ using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
+    [JsonObject(MemberSerialization.OptOut)]
     public class MDictionary : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int DICTID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LANGIDFROM { get; set; }
         [Reactive]
-        [JsonProperty]
         public string LANGNAMEFROM { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LANGIDTO { get; set; }
         [Reactive]
-        [JsonProperty]
         public string LANGNAMETO { get; set; }
         [Reactive]
-        [JsonProperty]
         public int SEQNUM { get; set; }
         [Reactive]
-        [JsonProperty]
         public int DICTTYPEID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string DICTTYPENAME { get; set; }
         [Reactive]
-        [JsonProperty]
         public string DICTNAME { get; set; }
         [Reactive]
-        [JsonProperty]
         public string URL { get; set; }
         [Reactive]
-        [JsonProperty]
         public string CHCONV { get; set; }
         [Reactive]
-        [JsonProperty]
         public string AUTOMATION { get; set; }
         [Reactive]
-        [JsonProperty]
         public string TRANSFORM_WIN { get; set; }
         [Reactive]
-        [JsonProperty]
         public string TRANSFORM { get; set; }
         [Reactive]
-        [JsonProperty]
         public int? WAIT { get; set; }
         [Reactive]
-        [JsonProperty]
         public string TEMPLATE { get; set; }
         [Reactive]
-        [JsonProperty]
         public string TEMPLATE2 { get; set; }
 
         public string UrlString(string word, List<MAutoCorrect> lstAutoCorrects)

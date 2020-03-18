@@ -13,8 +13,8 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
-        public ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; }
-        public ObservableCollection<MLangPhrase> PhraseItemsFiltered { get; set; }
+        ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; }
+        ObservableCollection<MLangPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MLangPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
         [Reactive]
         public string TextFilter { get; set; } = "";

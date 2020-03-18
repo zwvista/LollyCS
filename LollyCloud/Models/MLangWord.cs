@@ -11,32 +11,25 @@ namespace LollyShared
     {
         public List<MLangWord> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MLangWord : ReactiveObject, MWordInterface
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         public int WORDID => ID;
         [Reactive]
-        [JsonProperty]
         public int LANGID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string WORD { get; set; }
         [Reactive]
-        [JsonProperty]
         public string NOTE { get; set; }
         [Reactive]
-        [JsonProperty]
         public int FAMIID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LEVEL { get; set; }
         [Reactive]
-        [JsonProperty]
         public int CORRECT { get; set; }
         [Reactive]
-        [JsonProperty]
         public int TOTAL { get; set; }
 
         public MLangWord() { }

@@ -12,25 +12,20 @@ namespace LollyShared
         public List<MAutoCorrect> records { get; set; }
     }
 
+    [JsonObject(MemberSerialization.OptOut)]
     public class MAutoCorrect : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LANGID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int SEQNUM { get; set; }
         [Reactive]
-        [JsonProperty]
         public string INPUT { get; set; }
         [Reactive]
-        [JsonProperty]
         public string EXTENDED { get; set; }
         [Reactive]
-        [JsonProperty]
         public string BASIC { get; set; }
 
         public static string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,

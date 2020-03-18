@@ -15,10 +15,9 @@ namespace LollyShared
         LangWordDataStore langWordDS = new LangWordDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
         NoteViewModel vmNote;
-        MDictNote DictNote => vmNote.DictNote;
 
-        public ObservableCollection<MUnitWord> WordItemsAll { get; set; }
-        public ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
+        ObservableCollection<MUnitWord> WordItemsAll { get; set; }
+        ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
         [Reactive]
@@ -44,24 +43,16 @@ namespace LollyShared
                 this.RaisePropertyChanged(nameof(WordItems));
             });
             vmNote = new NoteViewModel(vmSettings);
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
-        }
-
-        void ApplyFilters()
-        {
-            if (string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0)
-                WordItemsFiltered = null;
-            else
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only, x => x.TextbookFilter).Subscribe(_ =>
             {
-                WordItemsFiltered = WordItemsAll;
-                if (!string.IsNullOrEmpty(TextFilter))
-                    WordItemsFiltered = new ObservableCollection<MUnitWord>(WordItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
-                if (Levelge0only)
-                    WordItemsFiltered = new ObservableCollection<MUnitWord>(WordItemsFiltered.Where(o => o.LEVEL >= 0));
-                if (TextbookFilter != 0)
-                    WordItemsFiltered = new ObservableCollection<MUnitWord>(WordItemsFiltered.Where(o => o.TEXTBOOKID == TextbookFilter));
-            }
-            this.RaisePropertyChanged(nameof(WordItems));
+                WordItemsFiltered = string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0 ? null :
+                new ObservableCollection<MUnitWord>(WordItemsAll.Where(o =>
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                    (!Levelge0only || o.LEVEL >= 0) &&
+                    (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
+                ));
+                this.RaisePropertyChanged(nameof(WordItems));
+            });
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitWordDS.UpdateSeqNum(id, seqnum);

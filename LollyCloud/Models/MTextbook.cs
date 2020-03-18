@@ -10,22 +10,19 @@ namespace LollyShared
     {
         public List<MTextbook> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MTextbook : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int LANGID { get; set; }
         [Reactive]
         [JsonProperty("NAME")]
         public string TEXTBOOKNAME { get; set; }
         [Reactive]
-        [JsonProperty]
         public string UNITS { get; set; }
         [Reactive]
-        [JsonProperty]
         public string PARTS { get; set; }
 
         [Reactive]

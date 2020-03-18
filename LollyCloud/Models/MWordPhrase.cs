@@ -9,16 +9,14 @@ namespace LollyShared
     {
         public List<MWordPhrase> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MWordPhrase : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int WORDID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int PHRASEID { get; set; }
 
     }

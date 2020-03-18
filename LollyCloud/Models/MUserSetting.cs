@@ -9,31 +9,24 @@ namespace LollyShared
     {
         public List<MUserSetting> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MUserSetting : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int USERID { get; set; }
         [Reactive]
-        [JsonProperty]
         public int KIND { get; set; }
         [Reactive]
-        [JsonProperty]
         public int ENTITYID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string VALUE1 { get; set; }
         [Reactive]
-        [JsonProperty]
         public string VALUE2 { get; set; }
         [Reactive]
-        [JsonProperty]
         public string VALUE3 { get; set; }
         [Reactive]
-        [JsonProperty]
         public string VALUE4 { get; set; }
     }
     public class MUserSettingInfo

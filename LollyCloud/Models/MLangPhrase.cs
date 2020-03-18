@@ -10,20 +10,17 @@ namespace LollyShared
     {
         public List<MLangPhrase> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MLangPhrase : ReactiveObject, MPhraseInterface
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         public int PHRASEID => ID;
         [Reactive]
-        [JsonProperty]
         public int LANGID { get; set; }
         [Reactive]
-        [JsonProperty]
         public string PHRASE { get; set; }
         [Reactive]
-        [JsonProperty]
         public string TRANSLATION { get; set; }
 
         public MLangPhrase() { }

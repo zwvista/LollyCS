@@ -14,8 +14,8 @@ namespace LollyShared
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
-        public ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
-        public ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
+        ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
+        ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MUnitPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
         [Reactive]
         public string TextFilter { get; set; } = "";

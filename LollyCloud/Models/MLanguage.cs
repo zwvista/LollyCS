@@ -9,10 +9,10 @@ namespace LollyShared
     {
         public List<MLanguage> records { get; set; }
     }
+    [JsonObject(MemberSerialization.OptOut)]
     public class MLanguage : ReactiveObject
     {
         [Reactive]
-        [JsonProperty]
         public int ID { get; set; }
         [Reactive]
         [JsonProperty("NAME")]

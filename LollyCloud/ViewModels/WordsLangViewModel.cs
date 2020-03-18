@@ -14,8 +14,8 @@ namespace LollyShared
         LangWordDataStore langWordDS = new LangWordDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
-        public ObservableCollection<MLangWord> WordItemsAll { get; set; }
-        public ObservableCollection<MLangWord> WordItemsFiltered { get; set; }
+        ObservableCollection<MLangWord> WordItemsAll { get; set; }
+        ObservableCollection<MLangWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MLangWord> WordItems => WordItemsFiltered ?? WordItemsAll;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
         [Reactive]
