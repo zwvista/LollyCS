@@ -29,19 +29,14 @@ namespace LollyShared
                 PhraseItemsAll = new ObservableCollection<MLangPhrase>(lst);
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
-        }
-        void ApplyFilters()
-        {
-            if (string.IsNullOrEmpty(TextFilter))
-                PhraseItemsFiltered = null;
-            else
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ =>
             {
-                PhraseItemsFiltered = PhraseItemsAll;
-                if (!string.IsNullOrEmpty(TextFilter))
-                    PhraseItemsFiltered = new ObservableCollection<MLangPhrase>(PhraseItemsFiltered.Where(o => (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())));
-            }
-            this.RaisePropertyChanged(nameof(PhraseItems));
+                PhraseItemsFiltered = string.IsNullOrEmpty(TextFilter) ? null :
+                new ObservableCollection<MLangPhrase>(PhraseItemsAll.Where(o =>
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower()))
+                ));
+                this.RaisePropertyChanged(nameof(PhraseItems));
+            });
         }
 
         public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);

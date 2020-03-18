@@ -35,21 +35,15 @@ namespace LollyShared
                 WordItemsAll = new ObservableCollection<MLangWord>(lst);
                 this.RaisePropertyChanged(nameof(WordItems));
             });
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only).Subscribe(_ => ApplyFilters());
-        }
-        void ApplyFilters()
-        {
-            if (string.IsNullOrEmpty(TextFilter) && !Levelge0only)
-                WordItemsFiltered = null;
-            else
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only).Subscribe(_ =>
             {
-                WordItemsFiltered = WordItemsAll;
-                if (!string.IsNullOrEmpty(TextFilter))
-                    WordItemsFiltered = new ObservableCollection<MLangWord>(WordItemsFiltered.Where(o => (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
-                if (Levelge0only)
-                    WordItemsFiltered = new ObservableCollection<MLangWord>(WordItemsFiltered.Where(o => o.LEVEL >= 0));
-            }
-            this.RaisePropertyChanged(nameof(WordItems));
+                WordItemsFiltered = string.IsNullOrEmpty(TextFilter) && !Levelge0only ? null :
+                new ObservableCollection<MLangWord>(WordItemsAll.Where(o =>
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                    (!Levelge0only || o.LEVEL >= 0)
+                ));
+                this.RaisePropertyChanged(nameof(WordItems));
+            });
         }
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);

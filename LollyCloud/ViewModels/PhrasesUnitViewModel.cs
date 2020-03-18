@@ -35,21 +35,15 @@ namespace LollyShared
                 PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
-        }
-        void ApplyFilters()
-        {
-            if (string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0)
-                PhraseItemsFiltered = null;
-            else
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ =>
             {
-                PhraseItemsFiltered = PhraseItemsAll;
-                if (!string.IsNullOrEmpty(TextFilter))
-                    PhraseItemsFiltered = new ObservableCollection<MUnitPhrase>(PhraseItemsFiltered.Where(o => (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())));
-                if (TextbookFilter != 0)
-                    PhraseItemsFiltered = new ObservableCollection<MUnitPhrase>(PhraseItemsFiltered.Where(o => o.TEXTBOOKID == TextbookFilter));
-            }
-            this.RaisePropertyChanged(nameof(PhraseItems));
+                PhraseItemsFiltered = string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? null :
+                new ObservableCollection<MUnitPhrase>(PhraseItemsAll.Where(o =>
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                    (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
+                ));
+                this.RaisePropertyChanged(nameof(PhraseItems));
+            });
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
