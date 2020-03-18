@@ -286,9 +286,9 @@ namespace LollyShared
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictCodes { get; set; }
         public List<MCode> ReadNumberCodes { get; set; }
-        public static List<string> ScopeWordFilters { get; } = new List<string> { "None", "Word", "Note" };
-        public static List<string> ScopePhraseFilters { get; } = new List<string> { "None", "Phrase", "Translation" };
-        public static List<string> ScopePatternFilters { get; } = new List<string> { "None", "Pattern", "Note" };
+        public static List<string> ScopeWordFilters { get; } = new List<string> { "Word", "Note" };
+        public static List<string> ScopePhraseFilters { get; } = new List<string> { "Phrase", "Translation" };
+        public static List<string> ScopePatternFilters { get; } = new List<string> { "Pattern", "Note" };
         public static List<MSelectItem> ReviewModes { get; set; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Review(Auto)"),

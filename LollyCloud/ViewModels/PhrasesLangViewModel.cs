@@ -29,9 +29,9 @@ namespace LollyShared
                 PhraseItemsAll = new ObservableCollection<MLangPhrase>(lst);
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
-            ApplyFilters();
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
         }
-        public void ApplyFilters()
+        void ApplyFilters()
         {
             if (string.IsNullOrEmpty(TextFilter))
                 PhraseItemsFiltered = null;

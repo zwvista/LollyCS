@@ -35,9 +35,9 @@ namespace LollyShared
                 WordItemsAll = new ObservableCollection<MLangWord>(lst);
                 this.RaisePropertyChanged(nameof(WordItems));
             });
-            ApplyFilters();
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only).Subscribe(_ => ApplyFilters());
         }
-        public void ApplyFilters()
+        void ApplyFilters()
         {
             if (string.IsNullOrEmpty(TextFilter) && !Levelge0only)
                 WordItemsFiltered = null;

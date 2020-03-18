@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Reactive.Threading.Tasks;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -16,24 +17,12 @@ namespace LollyShared
         public ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
         public ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MUnitPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
-        string _TextFilter = "";
-        public string TextFilter
-        {
-            get => _TextFilter;
-            set => this.RaiseAndSetIfChanged(ref _TextFilter, value);
-        }
-        string _ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
-        public string ScopeFilter
-        {
-            get => _ScopeFilter;
-            set => this.RaiseAndSetIfChanged(ref _ScopeFilter, value);
-        }
-        int _TextbookFilter;
-        public int TextbookFilter
-        {
-            get => _TextbookFilter;
-            set => this.RaiseAndSetIfChanged(ref _TextbookFilter, value);
-        }
+        [Reactive]
+        public string TextFilter { get; set; } = "";
+        [Reactive]
+        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
+        [Reactive]
+        public int TextbookFilter { get; set; }
 
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -46,9 +35,9 @@ namespace LollyShared
                 PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
-            ApplyFilters();
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
         }
-        public void ApplyFilters()
+        void ApplyFilters()
         {
             if (string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0)
                 PhraseItemsFiltered = null;

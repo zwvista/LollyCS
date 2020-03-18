@@ -43,22 +43,6 @@ namespace LollyCloud
             Close();
         }
 
-        void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            vm.ApplyFilters();
-
-        void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            vm.ApplyFilters();
-
-        void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Return) return;
-            if (string.IsNullOrEmpty(vm.TextFilter))
-                vm.ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
-            else if (vm.ScopeFilter == SettingsViewModel.ScopePhraseFilters[0])
-                vm.ScopeFilter = SettingsViewModel.ScopePhraseFilters[1];
-            vm.ApplyFilters();
-        }
-
         void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

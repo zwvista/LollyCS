@@ -44,10 +44,10 @@ namespace LollyShared
                 this.RaisePropertyChanged(nameof(WordItems));
             });
             vmNote = new NoteViewModel(vmSettings);
-            ApplyFilters();
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
         }
 
-        public void ApplyFilters()
+        void ApplyFilters()
         {
             if (string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0)
                 WordItemsFiltered = null;

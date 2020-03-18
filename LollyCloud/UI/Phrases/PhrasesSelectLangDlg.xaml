@@ -24,9 +24,9 @@
         <Label Content="Phrase Scope:" VerticalAlignment="Center" Grid.Row="0" />
         <Label Content="Language" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" />
         <Label Content="Filter Scope:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <ComboBox x:Name="cbScopeFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
+        <ComboBox x:Name="cbScopeFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" />
         <Label Content="Filter Text:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
-        <TextBox x:Name="tbTextFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}" KeyDown="tbTextFilter_KeyDown" />
+        <TextBox x:Name="tbTextFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Center" >
             <Button Content="Check All" Tag="0" Width="100" Height="20" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck All" Tag="1" Width="100" Height="20" Click="btnCheckItems_Click"/>

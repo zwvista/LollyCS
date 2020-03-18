@@ -19,13 +19,13 @@
                         <TextBlock>New Word</TextBlock>
                     </local:WatermarkService.Watermark>
                 </TextBox>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
                     </local:WatermarkService.Watermark>
                 </TextBox>
-                <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" Click="ChkLevelge0only_Click" IsChecked="{Binding Levelge0only}" />
+                <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" IsChecked="{Binding Levelge0only}" />
                 <TextBox x:Name="tbURL" IsReadOnly="True"  Width="200">
                     <local:WatermarkService.Watermark>
                         <TextBlock>URL</TextBlock>

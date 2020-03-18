@@ -14,8 +14,8 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown">
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96">
                     <local:WatermarkService.Watermark>
                         <TextBlock>Filter</TextBlock>
                     </local:WatermarkService.Watermark>

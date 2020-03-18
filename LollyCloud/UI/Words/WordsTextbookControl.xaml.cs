@@ -76,24 +76,5 @@ namespace LollyCloud
             var item = vm.WordItems[row];
             await vm.Delete(item);
         }
-
-        private void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            vm.ApplyFilters();
-
-        private void ChkLevelge0only_Click(object sender, RoutedEventArgs e) =>
-            vm.ApplyFilters();
-
-        private void cbTextbookFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            vm.ApplyFilters();
-
-        void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Return) return;
-            if (string.IsNullOrEmpty(vm.TextFilter))
-                vm.ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
-            else if (vm.ScopeFilter == SettingsViewModel.ScopeWordFilters[0])
-                vm.ScopeFilter = SettingsViewModel.ScopeWordFilters[1];
-            vm.ApplyFilters();
-        }
     }
 }
