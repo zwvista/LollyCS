@@ -38,9 +38,11 @@ namespace LollyCloud
             dlg.ShowDialog();
             await vmSettings.GetData();
             if (dlg.Result == SettingsDlgResult.ApplyToNone) return;
-            foreach (var (t, i) in vmActionTabs.Tabs.Select((t, i) => (t, i)))
+            vmActionTabs.Tabs.ForEach((t, i) =>
+            {
                 if (dlg.Result == SettingsDlgResult.ApplyToAll || i == tcMain.SelectedIndex)
                     (t.Content as ILollySettings)?.OnSettingsChanged();
+            });
         }
 
         void AddTab<TUserControl>(string header) where TUserControl : UserControl, new()

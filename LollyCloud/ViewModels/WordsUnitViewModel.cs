@@ -55,8 +55,6 @@ namespace LollyShared
             });
         }
 
-        public async Task UpdateSeqNum(int id, int seqnum) => await unitWordDS.UpdateSeqNum(id, seqnum);
-        public async Task UpdateNote(int wordid, string note) => await langWordDS.UpdateNote(wordid, note);
         public async Task Update(MUnitWord item)
         {
             var wordid = item.WORDID;
@@ -132,7 +130,7 @@ namespace LollyShared
                 var item = WordItemsAll[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
-                await UpdateSeqNum(item.ID, item.SEQNUM);
+                await unitWordDS.UpdateSeqNum(item.ID, item.SEQNUM);
                 complete(i - 1);
             }
         }

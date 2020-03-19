@@ -39,103 +39,103 @@ namespace LollyShared
 
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
-        private string GetUSValue(MUserSettingInfo info)
+        string GetUSValue(MUserSettingInfo info)
         {
             var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
             return o?.GetType().GetProperty($"VALUE{info.VALUEID}").GetValue(o) as string;
         }
-        private void SetUSValue(MUserSettingInfo info, string value, string name)
+        void SetUSValue(MUserSettingInfo info, string value, string name)
         {
             var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
             o?.GetType().GetProperty($"VALUE{info.VALUEID}").SetValue(o, value);
             this.RaisePropertyChanged(name);
         }
-        private MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
+        MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
         public int USLANGID
         {
             get => int.Parse(GetUSValue(INFO_USLANGID));
             set => SetUSValue(INFO_USLANGID, value.ToString(), nameof(USLANGID));
         }
-        private MUserSettingInfo INFO_USROWSPERPAGEOPTIONS = new MUserSettingInfo();
+        MUserSettingInfo INFO_USROWSPERPAGEOPTIONS = new MUserSettingInfo();
         public List<int> USROWSPERPAGEOPTIONS =>
             GetUSValue(INFO_USROWSPERPAGEOPTIONS).Split(',').Select(s => int.Parse(s)).ToList();
-        private MUserSettingInfo INFO_USROWSPERPAGE = new MUserSettingInfo();
+        MUserSettingInfo INFO_USROWSPERPAGE = new MUserSettingInfo();
         public int USROWSPERPAGE => int.Parse(GetUSValue(INFO_USROWSPERPAGE));
-        private MUserSettingInfo INFO_USLEVELCOLORS = new MUserSettingInfo();
+        MUserSettingInfo INFO_USLEVELCOLORS = new MUserSettingInfo();
         public Dictionary<int, List<string>> USLEVELCOLORS;
-        private MUserSettingInfo INFO_USSCANINTERVAL = new MUserSettingInfo();
+        MUserSettingInfo INFO_USSCANINTERVAL = new MUserSettingInfo();
         public int USSCANINTERVAL
         {
             get => int.Parse(GetUSValue(INFO_USSCANINTERVAL));
             set => SetUSValue(INFO_USSCANINTERVAL, value.ToString(), nameof(USSCANINTERVAL));
         }
-        private MUserSettingInfo INFO_USREVIEWINTERVAL = new MUserSettingInfo();
+        MUserSettingInfo INFO_USREVIEWINTERVAL = new MUserSettingInfo();
         public int USREVIEWINTERVAL
         {
             get => int.Parse(GetUSValue(INFO_USREVIEWINTERVAL));
             set => SetUSValue(INFO_USREVIEWINTERVAL, value.ToString(), nameof(USREVIEWINTERVAL));
         }
-        private MUserSettingInfo INFO_USREADNUMBERID = new MUserSettingInfo();
+        MUserSettingInfo INFO_USREADNUMBERID = new MUserSettingInfo();
         public int USREADNUMBERID
         {
             get => int.Parse(GetUSValue(INFO_USREADNUMBERID));
             set => SetUSValue(INFO_USREADNUMBERID, value.ToString(), nameof(USREADNUMBERID));
         }
-        private MUserSettingInfo INFO_USTEXTBOOKID = new MUserSettingInfo();
+        MUserSettingInfo INFO_USTEXTBOOKID = new MUserSettingInfo();
         public int USTEXTBOOKID
         {
             get => int.Parse(GetUSValue(INFO_USTEXTBOOKID));
             set => SetUSValue(INFO_USTEXTBOOKID, value.ToString(), nameof(USTEXTBOOKID));
         }
-        private MUserSettingInfo INFO_USDICTITEM = new MUserSettingInfo();
+        MUserSettingInfo INFO_USDICTITEM = new MUserSettingInfo();
         public string USDICTITEM
         {
             get => GetUSValue(INFO_USDICTITEM);
             set => SetUSValue(INFO_USDICTITEM, value, nameof(USDICTITEM));
         }
-        private MUserSettingInfo INFO_USDICTNOTEID = new MUserSettingInfo();
+        MUserSettingInfo INFO_USDICTNOTEID = new MUserSettingInfo();
         public int USDICTNOTEID
         {
             get => int.TryParse(GetUSValue(INFO_USDICTNOTEID), out var v) ? v : 0;
             set => SetUSValue(INFO_USDICTNOTEID, value.ToString(), nameof(USDICTNOTEID));
         }
-        private MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
+        MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
         public string USDICTITEMS
         {
             get => GetUSValue(INFO_USDICTITEMS) ?? "0";
             set => SetUSValue(INFO_USDICTITEMS, value, nameof(USDICTITEMS));
         }
-        private MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
+        MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
         public int USDICTTRANSLATIONID
         {
             get => int.TryParse(GetUSValue(INFO_USDICTTRANSLATIONID), out var v) ? v : 0;
             set => SetUSValue(INFO_USDICTTRANSLATIONID, value.ToString(), nameof(USDICTTRANSLATIONID));
         }
-        private MUserSettingInfo INFO_USVOICEID = new MUserSettingInfo();
+        MUserSettingInfo INFO_USVOICEID = new MUserSettingInfo();
         public int USVOICEID
         {
             get => int.TryParse(GetUSValue(INFO_USVOICEID), out var v) ? v : 0;
             set => SetUSValue(INFO_USVOICEID, value.ToString(), nameof(USVOICEID));
         }
-        private MUserSettingInfo INFO_USUNITFROM = new MUserSettingInfo();
+        MUserSettingInfo INFO_USUNITFROM = new MUserSettingInfo();
         public int USUNITFROM
         {
             get => int.TryParse(GetUSValue(INFO_USUNITFROM), out var v) ? v : 0;
             set => SetUSValue(INFO_USUNITFROM, value.ToString(), nameof(USUNITFROM));
         }
-        private MUserSettingInfo INFO_USPARTFROM = new MUserSettingInfo();
+        MUserSettingInfo INFO_USPARTFROM = new MUserSettingInfo();
         public int USPARTFROM
         {
             get => int.TryParse(GetUSValue(INFO_USPARTFROM), out var v) ? v : 0;
             set => SetUSValue(INFO_USPARTFROM, value.ToString(), nameof(USPARTFROM));
         }
-        private MUserSettingInfo INFO_USUNITTO = new MUserSettingInfo();
+        MUserSettingInfo INFO_USUNITTO = new MUserSettingInfo();
         public int USUNITTO
         {
             get => int.TryParse(GetUSValue(INFO_USUNITTO), out var v) ? v : 0;
             set => SetUSValue(INFO_USUNITTO, value.ToString(), nameof(USUNITTO));
         }
-        private MUserSettingInfo INFO_USPARTTO = new MUserSettingInfo();
+        MUserSettingInfo INFO_USPARTTO = new MUserSettingInfo();
         public int USPARTTO
         {
             get => int.TryParse(GetUSValue(INFO_USPARTTO), out var v) ? v : 0;
@@ -298,7 +298,7 @@ namespace LollyShared
 
         public HttpClient client = new HttpClient();
 
-        private MUserSettingInfo GetUSInfo(string name) {
+        MUserSettingInfo GetUSInfo(string name) {
             var o = USMappings.First(v => v.NAME == name);
             var entityid = o.ENTITYID != -1 ? o.ENTITYID :
                 o.LEVEL == 1 ? SelectedLang.ID :
@@ -498,41 +498,41 @@ namespace LollyShared
                 await DoUpdateUnitPartTo();
             }
         }
-        private async Task DoUpdateUnitPartFrom()
+        async Task DoUpdateUnitPartFrom()
         {
             await DoUpdateUnitFrom(USUNITTO);
             await DoUpdatePartFrom(USPARTTO);
         }
-        private async Task DoUpdateUnitPartTo()
+        async Task DoUpdateUnitPartTo()
         {
             await DoUpdateUnitTo(USUNITFROM);
             await DoUpdatePartTo(USPARTFROM);
         }
-        private async Task DoUpdateSingleUnit()
+        async Task DoUpdateSingleUnit()
         {
             await DoUpdateUnitTo(USUNITFROM);
             await DoUpdatePartFrom(1);
             await DoUpdatePartTo(PartCount);
         }
-        private async Task DoUpdateUnitFrom(int v, bool check = true)
+        async Task DoUpdateUnitFrom(int v, bool check = true)
         {
             if (check && USUNITFROM == v) return;
             await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
             OnUpdateUnitFrom?.Invoke(this, null);
         }
-        private async Task DoUpdatePartFrom(int v, bool check = true)
+        async Task DoUpdatePartFrom(int v, bool check = true)
         {
             if (check && USPARTFROM == v) return;
             await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
             OnUpdatePartFrom?.Invoke(this, null);
         }
-        private async Task DoUpdateUnitTo(int v, bool check = true)
+        async Task DoUpdateUnitTo(int v, bool check = true)
         {
             if (check && USUNITTO == v) return;
             await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
             OnUpdateUnitTo?.Invoke(this, null);
         }
-        private async Task DoUpdatePartTo(int v, bool check = true)
+        async Task DoUpdatePartTo(int v, bool check = true)
         {
             if (check && USPARTTO == v) return;
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);

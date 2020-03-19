@@ -27,32 +27,29 @@ namespace LollyCloud
             DataContext = vm;
         }
 
-        void ReplaceSelection(ReactiveCommand<string, string> cmd) =>
-            cmd.Execute(tbMarked.SelectedText).Subscribe(str => tbMarked.SelectedText = str);
+        void ReplaceSelection(Func<string, string> f) =>
+            tbMarked.SelectedText = f(tbMarked.SelectedText);
         void btnAddTagB_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.AddTagBCommand);
+            ReplaceSelection(vm.AddTagB);
         void btnAddTagI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.AddTagICommand);
+            ReplaceSelection(vm.AddTagI);
         void btnRemoveTagBI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.RemoveTagBICommand);
+            ReplaceSelection(vm.RemoveTagBI);
         void btnExchangeTagBI_Click(object sender, RoutedEventArgs e) =>
-            ReplaceSelection(vm.ExchangeTagBICommand);
+            ReplaceSelection(vm.ExchangeTagBI);
         void btnAddExplanation_Click(object sender, RoutedEventArgs e)
         {
             var text = Clipboard.GetText();
-            vm.GetExplanationCommand.Execute(text).Subscribe(str =>
-            {
-                tbMarked.SelectedText = str;
-                var w = (MainWindow)Window.GetWindow(this);
-                w.SearchWord(text);
-            });
+            tbMarked.SelectedText = vm.GetExplanation(text);
+            var w = (MainWindow)Window.GetWindow(this);
+            w.SearchWord(text);
         }
-        void btnMarkedToHtml_Click(object sender, RoutedEventArgs e) =>
-            vm.MarkedToHtmlCommand.Execute().Subscribe(str =>
-            {
-                wbBlog.NavigateToString(str);
-                Clipboard.SetDataObject(vm.HtmlText);
-            });
+        void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
+        {
+            var str = vm.MarkedToHtml();
+            wbBlog.NavigateToString(str);
+            Clipboard.SetDataObject(vm.HtmlText);
+        }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
             wbBlog.Navigate(vm.PatternUrl);
         void WbBlog_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) =>
