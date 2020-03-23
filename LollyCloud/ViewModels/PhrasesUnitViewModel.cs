@@ -47,7 +47,6 @@ namespace LollyShared
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
-        public async Task UpdateTranslation(int phraseid, string note) => await langPhraseDS.UpdateTranslation(phraseid, note);
         public async Task Update(MUnitPhrase item)
         {
             var phraseid = item.PHRASEID;

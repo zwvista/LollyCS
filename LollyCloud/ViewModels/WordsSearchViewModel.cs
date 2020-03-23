@@ -15,7 +15,6 @@ namespace LollyShared
         [Reactive]
         public string NewWord { get; set; } = "";
 
-        // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
