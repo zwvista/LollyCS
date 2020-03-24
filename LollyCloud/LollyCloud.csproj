@@ -233,6 +233,9 @@
     <Compile Include="UI\Misc\ReadNumberControl.xaml.cs">
       <DependentUpon>ReadNumberControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Words\WordsDictControl.xaml.cs">
+      <DependentUpon>WordsDictControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\PatternsViewModel.cs" />
     <Compile Include="ViewModels\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
@@ -357,6 +360,10 @@
     <Page Include="UI\Misc\ReadNumberControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Words\WordsDictControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Words\WordsLangControl.xaml">
       <Generator>MSBuild:Compile</Generator>

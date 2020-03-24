@@ -20,9 +20,7 @@ namespace LollyCloud
         public virtual DataGrid dgWordsBase => null;
         public virtual MWordInterface ItemForRow(int row) => null;
         public virtual SettingsViewModel vmSettings => null;
-        public virtual WebBrowser wbDictBase => null;
         public virtual ToolBar ToolBarDictBase => null;
-        public virtual TextBox tbURLBase => null;
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -46,60 +44,10 @@ namespace LollyCloud
                 var item = ItemForRow(row);
                 selectedWord = item.WORD;
                 selectedWordID = item.WORDID;
-                SearchWord(selectedWord);
+                //SearchWord(selectedWord);
             }
         }
 
-        public async void SearchWord(string word)
-        {
-            dictStatus = DictWebBrowserStatus.Ready;
-            var item = vmSettings.DictItems[selectedDictItemIndex];
-            var item2 = vmSettings.DictsReference.First(o => o.DICTNAME == item.DICTNAME);
-            var url = item2.UrlString(word, vmSettings.AutoCorrects.ToList());
-            if (item2.DICTTYPENAME == "OFFLINE")
-            {
-                wbDictBase.Navigate("about:blank");
-                var html = await vmSettings.client.GetStringAsync(url);
-                var str = item2.HtmlString(html, word);
-                wbDictBase.NavigateToString(str);
-            }
-            else
-            {
-                wbDictBase.Navigate(url);
-                if (item2.AUTOMATION != null)
-                    dictStatus = DictWebBrowserStatus.Automating;
-                else if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
-                    dictStatus = DictWebBrowserStatus.Navigating;
-            }
-        }
-        public void wbDict_Navigated(object sender, NavigationEventArgs e) => wbDictBase.SetSilent(true);
-
-        public void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
-        {
-            if (e.Uri == null) return;
-            tbURLBase.Text = e.Uri.AbsoluteUri;
-            if (dictStatus == DictWebBrowserStatus.Ready) return;
-            var item = vmSettings.DictItems[selectedDictItemIndex];
-            var item2 = vmSettings.DictsReference.FirstOrDefault(o => o.DICTNAME == item.DICTNAME);
-            switch (dictStatus)
-            {
-                case DictWebBrowserStatus.Automating:
-                    var s = item2.AUTOMATION.Replace("{0}", selectedWord);
-                    // https://stackoverflow.com/questions/7998996/how-to-inject-javascript-in-webbrowser-control
-                    wbDictBase.InvokeScript("execScript", new[] { s, "JavaScript" });
-                    dictStatus = DictWebBrowserStatus.Ready;
-                    if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                    break;
-                case DictWebBrowserStatus.Navigating:
-                    var doc = (HTMLDocument)wbDictBase.Document;
-                    var html = doc.documentElement.outerHTML;
-                    var str = item2.HtmlString(html, selectedWord, useTransformWin: true);
-                    dictStatus = DictWebBrowserStatus.Ready;
-                    wbDictBase.NavigateToString(str);
-                    break;
-            }
-        }
 
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
 
@@ -129,7 +77,6 @@ namespace LollyCloud
 
         public virtual async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
 
-        public void btnOpenURL_Click(object sender, RoutedEventArgs e) => Process.Start(tbURLBase.Text);
 
         public virtual async Task OnSettingsChanged()
         {

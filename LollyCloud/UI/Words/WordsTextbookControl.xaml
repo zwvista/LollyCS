@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:shared="clr-namespace:LollyShared"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -22,12 +23,6 @@
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" IsChecked="{Binding Levelge0only}" />
                 <ComboBox x:Name="cbTextbookFilter" ItemsSource="{Binding vmSettings.TextbookFilters}" DisplayMemberPath="Label" SelectedValuePath="Value"
                           SelectedValue="{Binding TextbookFilter}" />
-                <TextBox x:Name="tbURL" IsReadOnly="True"  Width="200">
-                    <local:WatermarkService.Watermark>
-                        <TextBlock>URL</TextBlock>
-                    </local:WatermarkService.Watermark>
-                </TextBox>
-                <Button x:Name="btnOpenURL" Click="btnOpenURL_Click">Open</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -103,7 +98,21 @@
                     </DataGrid.Resources>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <WebBrowser x:Name="wbDict" Grid.Row="2" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted"/>
+                <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True">
+                    <dragablz:TabablzControl.InterTabController>
+                        <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
+                    </dragablz:TabablzControl.InterTabController>
+                    <dragablz:TabablzControl.HeaderItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Header}"/>
+                        </DataTemplate>
+                    </dragablz:TabablzControl.HeaderItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </dragablz:TabablzControl>
             </Grid>
         </Grid>
     </DockPanel>
