@@ -54,30 +54,22 @@ namespace LollyCloud
         {
             dictStatus = DictWebBrowserStatus.Ready;
             var item = vmSettings.DictItems[selectedDictItemIndex];
-            if (item.DICTNAME.StartsWith("Custom"))
+            var item2 = vmSettings.DictsReference.First(o => o.DICTNAME == item.DICTNAME);
+            var url = item2.UrlString(word, vmSettings.AutoCorrects.ToList());
+            if (item2.DICTTYPENAME == "OFFLINE")
             {
-                var str = vmSettings.DictHtml(word, item.DictIDs.ToList());
+                wbDictBase.Navigate("about:blank");
+                var html = await vmSettings.client.GetStringAsync(url);
+                var str = item2.HtmlString(html, word);
                 wbDictBase.NavigateToString(str);
             }
             else
             {
-                var item2 = vmSettings.DictsReference.First(o => o.DICTNAME == item.DICTNAME);
-                var url = item2.UrlString(word, vmSettings.AutoCorrects.ToList());
-                if (item2.DICTTYPENAME == "OFFLINE")
-                {
-                    wbDictBase.Navigate("about:blank");
-                    var html = await vmSettings.client.GetStringAsync(url);
-                    var str = item2.HtmlString(html, word);
-                    wbDictBase.NavigateToString(str);
-                }
-                else
-                {
-                    wbDictBase.Navigate(url);
-                    if (item2.AUTOMATION != null)
-                        dictStatus = DictWebBrowserStatus.Automating;
-                    else if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                }
+                wbDictBase.Navigate(url);
+                if (item2.AUTOMATION != null)
+                    dictStatus = DictWebBrowserStatus.Automating;
+                else if (item2.DICTTYPENAME == "OFFLINE-ONLINE")
+                    dictStatus = DictWebBrowserStatus.Navigating;
             }
         }
         public void wbDict_Navigated(object sender, NavigationEventArgs e) => wbDictBase.SetSilent(true);

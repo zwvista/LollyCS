@@ -344,11 +344,7 @@ namespace LollyShared
             Textbooks = await TextbookDS.GetDataByLang(USLANGID);
             AutoCorrects = await AutoCorrectDS.GetDataByLang(USLANGID);
             Voices = await VoiceDS.GetDataByLang(USLANGID);
-            var i = 0;
-            DictItems = lstDicts.SelectMany(d => d == "0" ?
-                DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)) :
-                new List<MDictItem> { new MDictItem(d, $"Custom{++i}") }
-            ).ToList();
+            DictItems = DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)).ToList();
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
@@ -360,20 +356,6 @@ namespace LollyShared
                 OnUpdateLang?.Invoke(this, null);
             else
                 await UpdateLang();
-        }
-
-        public string DictHtml(string word, List<string> dictids)
-        {
-            var s = "<html><body>\n";
-            foreach (var (dictid, i) in dictids.Select((dict, i) => (dict, i)))
-            {
-                var item = DictsReference.First(o => o.DICTID.ToString() == dictid);
-                var ifrId = $"ifr{i + 1}";
-                var url = item.UrlString(word, AutoCorrects.ToList());
-                s += $"<iframe id='{ifrId}' frameborder='1' style='width:100%; height:500px; display:block' src='{url}'></iframe>\n";
-            }
-            s += "</body></html>\n";
-            return s;
         }
 
         public async Task UpdateLang()
