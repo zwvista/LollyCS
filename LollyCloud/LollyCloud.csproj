@@ -159,10 +159,11 @@
     <Compile Include="Models\MVoice.cs" />
     <Compile Include="Models\MWordPhrase.cs" />
     <Compile Include="Models\MReadNumber.cs" />
-    <Compile Include="UI\Patterns\PatternsControl.xaml.cs">
+    <Compile Include="Shared\ActionTab.cs" />
+    <Compile Include="UI\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Patterns\PatternsDetailDlg.xaml.cs">
+    <Compile Include="UI\Misc\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Phrases\PhrasesBaseControl.cs" />
@@ -226,10 +227,10 @@
     <Compile Include="DataStores\UnitWordDataStore.cs" />
     <Compile Include="DataStores\UserSettingDataStore.cs" />
     <Compile Include="Shared\Interfaces.cs" />
-    <Compile Include="UI\Tools\BlogControl.xaml.cs">
+    <Compile Include="UI\Misc\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Tools\ReadNumberControl.xaml.cs">
+    <Compile Include="UI\Misc\ReadNumberControl.xaml.cs">
       <DependentUpon>ReadNumberControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\PatternsViewModel.cs" />
@@ -297,11 +298,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Patterns\PatternsControl.xaml">
+    <Page Include="UI\Misc\PatternsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Patterns\PatternsDetailDlg.xaml">
+    <Page Include="UI\Misc\PatternsDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -349,11 +350,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Tools\BlogControl.xaml">
+    <Page Include="UI\Misc\BlogControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Tools\ReadNumberControl.xaml">
+    <Page Include="UI\Misc\ReadNumberControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

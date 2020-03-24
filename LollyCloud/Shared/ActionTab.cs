@@ -1,0 +1,30 @@
+﻿using Dragablz;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace LollyShared
+{
+    // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
+    // This class will be the Tab in the TabControl
+    public class ActionTabItem
+    {
+        // This will be the text in the tab control
+        public string Header { get; set; }
+        // This will be the content of the tab control It is a UserControl whits you need to create manually
+        public UserControl Content { get; set; }
+    }
+    /// view model for the TabControl To bind on
+    public class ActionTabViewModal
+    {
+        // These Are the tabs that will be bound to the TabControl 
+        public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
+
+    }
+    // https://github.com/ButchersBoy/Dragablz/issues/13
+    public class ActionInterTabClient : DefaultInterTabClient
+    {
+        public override TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window) =>
+            TabEmptiedResponse.DoNothing;
+    }
+}

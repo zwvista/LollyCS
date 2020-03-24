@@ -1,6 +1,4 @@
-﻿using Dragablz;
-using LollyShared;
-using System.Collections.ObjectModel;
+﻿using LollyShared;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +12,7 @@ namespace LollyCloud
     public partial class MainWindow : Window
     {
         public static SettingsViewModel vmSettings = new SettingsViewModel();
-        ActionTabViewModal vmActionTabs;
+        ActionTabViewModal vmActionTabs = new ActionTabViewModal();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
         public MainWindow()
@@ -23,8 +21,6 @@ namespace LollyCloud
             // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
             Style = (Style)FindResource(typeof(Window));
             // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
-            // Initialize viewModel
-            vmActionTabs = new ActionTabViewModal();
             // Bind the xaml TabControl to view model tabs
             tcMain.ItemsSource = vmActionTabs.Tabs;
             tcMain.DataContext = this;
@@ -82,33 +78,6 @@ namespace LollyCloud
         {
             // This event will be thrown when on a close image clicked
             vmActionTabs.Tabs.RemoveAt(tcMain.SelectedIndex);
-        }
-    }
-    // This class will be the Tab in the TabControl
-    public class ActionTabItem
-    {
-        // This will be the text in the tab control
-        public string Header { get; set; }
-        // This will be the content of the tab control It is a UserControl whits you need to create manually
-        public UserControl Content { get; set; }
-    }
-    /// view model for the TabControl To bind on
-    public class ActionTabViewModal
-    {
-        // These Are the tabs that will be bound to the TabControl 
-        public ObservableCollection<ActionTabItem> Tabs { get; set; }
-
-        public ActionTabViewModal()
-        {
-            Tabs = new ObservableCollection<ActionTabItem>();
-        }
-    }
-    // https://github.com/ButchersBoy/Dragablz/issues/13
-    public class ActionInterTabClient : DefaultInterTabClient
-    {
-        public override TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window)
-        {
-            return TabEmptiedResponse.DoNothing;
         }
     }
 }
