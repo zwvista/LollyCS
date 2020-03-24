@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Globalization;
 using System.Net.Http;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyShared
 {
@@ -146,41 +147,21 @@ namespace LollyShared
         public bool IsSingleUnitPart => USUNITPARTFROM == USUNITPARTTO;
         public bool IsInvalidUnitPart => USUNITPARTFROM > USUNITPARTTO;
 
-        List<MLanguage> _Languages;
-        public List<MLanguage> Languages
-        {
-            get => _Languages;
-            set => this.RaiseAndSetIfChanged(ref _Languages, value);
-        }
-        MLanguage _SelectedLang;
-        public MLanguage SelectedLang
-        {
-            get => _SelectedLang;
-            set => this.RaiseAndSetIfChanged(ref _SelectedLang, value);
-        }
-        public int SelectedLangIndex => Languages.IndexOf(_SelectedLang);
+        [Reactive]
+        public List<MLanguage> Languages { get; set; }
+        [Reactive]
+        public MLanguage SelectedLang { get; set; }
+        public int SelectedLangIndex => Languages.IndexOf(SelectedLang);
 
-        List<MVoice> _Voices;
-        public List<MVoice> Voices
-        {
-            get => _Voices;
-            set => this.RaiseAndSetIfChanged(ref _Voices, value);
-        }
-        MVoice _SelectedVoice;
-        public MVoice SelectedVoice
-        {
-            get => _SelectedVoice;
-            set => this.RaiseAndSetIfChanged(ref _SelectedVoice, value);
-        }
-        public int SelectedVoiceIndex => _Voices.IndexOf(_SelectedVoice);
+        [Reactive]
+        public List<MVoice> Voices { get; set; }
+        [Reactive]
+        public MVoice SelectedVoice { get; set; }
+        public int SelectedVoiceIndex => Voices.IndexOf(SelectedVoice);
 
         public List<MDictReference> DictsReference;
-        List<MDictItem> _DictItems;
-        public List<MDictItem> DictItems
-        {
-            get => _DictItems;
-            set => this.RaiseAndSetIfChanged(ref _DictItems, value);
-        }
+        [Reactive]
+        public List<MDictItem> DictItems { get; set; }
         MDictItem _SelectedDictItem;
         public MDictItem SelectedDictItem {
             get => _SelectedDictItem;
@@ -192,12 +173,8 @@ namespace LollyShared
         }
         public int SelectedDictItemIndex => DictItems.IndexOf(_SelectedDictItem);
 
-        List<MDictNote> _DictsNote;
-        public List<MDictNote> DictsNote
-        {
-            get => _DictsNote;
-            set => this.RaiseAndSetIfChanged(ref _DictsNote, value);
-        }
+        [Reactive]
+        public List<MDictNote> DictsNote { get; set; }
         MDictNote _SelectedDictNote = new MDictNote();
         public MDictNote SelectedDictNote {
             get => _SelectedDictNote;
@@ -228,12 +205,8 @@ namespace LollyShared
         public int SelectedDictTranslationIndex => DictsTranslation.IndexOf(_SelectedDictTranslation);
         public bool HasDictTranslation => SelectedDictTranslation != null;
 
-        List<MTextbook> _Textbooks;
-        public List<MTextbook> Textbooks
-        {
-            get => _Textbooks;
-            set => this.RaiseAndSetIfChanged(ref _Textbooks, value);
-        }
+        [Reactive]
+        public List<MTextbook> Textbooks { get; set; }
         MTextbook _SelectedTextbook;
         public MTextbook SelectedTextbook {
             get => _SelectedTextbook;
