@@ -1,4 +1,5 @@
 ﻿using LollyShared;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,9 @@ namespace LollyCloud
     public partial class MainWindow : Window
     {
         public static SettingsViewModel vmSettings = new SettingsViewModel();
-        ActionTabViewModal vmActionTabs = new ActionTabViewModal();
+        // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
+        // These are the tabs that will be bound to the TabControl 
+        public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
         public MainWindow()
@@ -20,10 +23,7 @@ namespace LollyCloud
             InitializeComponent();
             // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
             Style = (Style)FindResource(typeof(Window));
-            // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
-            // Bind the xaml TabControl to view model tabs
-            tcMain.ItemsSource = vmActionTabs.Tabs;
-            tcMain.DataContext = this;
+            DataContext = this;
             Init();
         }
 
@@ -36,7 +36,7 @@ namespace LollyCloud
             dlg.ShowDialog();
             await vmSettings.GetData();
             if (dlg.Result == SettingsDlgResult.ApplyToNone) return;
-            vmActionTabs.Tabs.ForEach((t, i) =>
+            Tabs.ForEach((t, i) =>
             {
                 if (dlg.Result == SettingsDlgResult.ApplyToAll || i == tcMain.SelectedIndex)
                     (t.Content as ILollySettings)?.OnSettingsChanged();
@@ -45,10 +45,10 @@ namespace LollyCloud
 
         void AddTab<TUserControl>(string header) where TUserControl : UserControl, new()
         {
-            var i = vmActionTabs.Tabs.ToList().FindIndex(o => o.Content is TUserControl);
+            var i = Tabs.ToList().FindIndex(o => o.Content is TUserControl);
             if (i == -1)
             {
-                vmActionTabs.Tabs.Add(new ActionTabItem { Header = header, Content = new TUserControl() });
+                Tabs.Add(new ActionTabItem { Header = header, Content = new TUserControl() });
                 tcMain.SelectedIndex = tcMain.Items.Count - 1;
             }
             else
@@ -59,7 +59,7 @@ namespace LollyCloud
         public void SearchWord(string word)
         {
             miSearch_Click(this, null);
-            var c = (WordsSearchControl)vmActionTabs.Tabs[tcMain.SelectedIndex].Content;
+            var c = (WordsSearchControl)Tabs[tcMain.SelectedIndex].Content;
             c.SearchWord(word);
         }
         void miWordsUnit_Click(object sender, RoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
@@ -74,10 +74,5 @@ namespace LollyCloud
         void miBlog_Click(object sender, RoutedEventArgs e) => AddTab<BlogControl>("Blog");
         void miReadNumber_Click(object sender, RoutedEventArgs e) => AddTab<ReadNumberControl>("Read Number");
 
-        void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // This event will be thrown when on a close image clicked
-            vmActionTabs.Tabs.RemoveAt(tcMain.SelectedIndex);
-        }
     }
 }

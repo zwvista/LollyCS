@@ -38,7 +38,7 @@
                 <Separator />
             </MenuItem>
         </Menu>
-        <dragablz:TabablzControl Grid.Row="1" x:Name="tcMain" ShowDefaultCloseButton="True">
+        <dragablz:TabablzControl Grid.Row="1" x:Name="tcMain" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True">
             <dragablz:TabablzControl.InterTabController>
                 <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
             </dragablz:TabablzControl.InterTabController>

@@ -14,13 +14,6 @@ namespace LollyShared
         // This will be the content of the tab control It is a UserControl whits you need to create manually
         public UserControl Content { get; set; }
     }
-    /// view model for the TabControl To bind on
-    public class ActionTabViewModal
-    {
-        // These Are the tabs that will be bound to the TabControl 
-        public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
-
-    }
     // https://github.com/ButchersBoy/Dragablz/issues/13
     public class ActionInterTabClient : DefaultInterTabClient
     {
