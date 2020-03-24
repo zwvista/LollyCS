@@ -1,4 +1,5 @@
-﻿using LollyShared;
+﻿using Dragablz;
+using LollyShared;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -14,6 +15,7 @@ namespace LollyCloud
     {
         public static SettingsViewModel vmSettings = new SettingsViewModel();
         ActionTabViewModal vmActionTabs;
+        public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
         public MainWindow()
         {
@@ -25,7 +27,7 @@ namespace LollyCloud
             vmActionTabs = new ActionTabViewModal();
             // Bind the xaml TabControl to view model tabs
             tcMain.ItemsSource = vmActionTabs.Tabs;
-
+            tcMain.DataContext = this;
             Init();
         }
 
@@ -99,6 +101,14 @@ namespace LollyCloud
         public ActionTabViewModal()
         {
             Tabs = new ObservableCollection<ActionTabItem>();
+        }
+    }
+    // https://github.com/ButchersBoy/Dragablz/issues/13
+    public class ActionInterTabClient : DefaultInterTabClient
+    {
+        public override TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window)
+        {
+            return TabEmptiedResponse.DoNothing;
         }
     }
 }
