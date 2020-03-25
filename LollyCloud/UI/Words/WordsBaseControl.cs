@@ -97,8 +97,8 @@ namespace LollyCloud
                 };
                 b.Click += (s, e) =>
                 {
-                    var j = Tabs.ToList().FindIndex(o => o.Header == name);
-                    if (j == -1)
+                    var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
+                    if (o == null)
                     {
                         var c = new WordsDictControl
                         {
@@ -110,7 +110,7 @@ namespace LollyCloud
                         c.SearchWord(selectedWord);
                     }
                     else
-                        tcDictsBase.SelectedIndex = j;
+                        Tabs.Remove(o);
                 };
                 ToolBarDictBase.Items.Add(b);
                 if (i == selectedDictItemIndex)
@@ -120,6 +120,13 @@ namespace LollyCloud
                 }
             }
         }
+        public ItemActionCallback ClosingTabItemHandler { get; } = args =>
+        {
+            var name = ((ActionTabItem)args.DragablzItem.Content).Header;
+            var self = UIHelper.FindVisualParent<WordsBaseControl>(args.DragablzItem);
+            var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
+            o.IsChecked = false;
+        };
 
         public virtual async Task SearchPhrases() { }
     }
