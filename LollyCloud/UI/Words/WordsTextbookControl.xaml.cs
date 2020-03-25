@@ -65,7 +65,6 @@ namespace LollyCloud
         {
             vm = new WordsUnitViewModel(MainWindow.vmSettings, inTextbook: false, needCopy: true);
             DataContext = vm;
-            selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
             await base.OnSettingsChanged();
         }
 

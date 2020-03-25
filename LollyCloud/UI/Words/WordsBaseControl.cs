@@ -15,7 +15,6 @@ namespace LollyCloud
     public class WordsBaseControl : UserControl, ILollySettings
     {
         protected DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
-        protected int selectedDictItemIndex;
         protected string selectedWord = "";
         protected int selectedWordID = 0;
         protected string originalText = "";
@@ -36,8 +35,6 @@ namespace LollyCloud
 
         public void SearchDict(object sender, RoutedEventArgs e)
         {
-            if (sender is RadioButton)
-                selectedDictItemIndex = (int)(sender as RadioButton).Tag;
             var row = dgWordsBase.SelectedIndex;
             if (row == -1)
             {
@@ -85,25 +82,26 @@ namespace LollyCloud
 
         public virtual async Task OnSettingsChanged()
         {
-            selectedDictItemIndex = vmSettings.SelectedDictItemIndex;
             ToolBarDictBase.Items.Clear();
-            for (int i = 0; i < vmSettings.DictItems.Count; i++)
+            foreach (var item in vmSettings.DictItems)
             {
-                var name = vmSettings.DictItems[i].DICTNAME;
+                var name = item.DICTNAME;
                 var b = new CheckBox
                 {
                     Content = name,
-                    Tag = i,
+                    Tag = item,
                 };
                 b.Click += (s, e) =>
                 {
                     var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
                     if (o == null)
                     {
+                        var item2 = (MDictItem)((CheckBox)s).Tag;
+                        var item3 = vmSettings.DictsReference.First(o2 => o2.DICTNAME == item2.DICTNAME);
                         var c = new WordsDictControl
                         {
                             vmSettings = vmSettings,
-                            selectedDictItemIndex = (int)((CheckBox)s).Tag
+                            Dict = item3
                         };
                         Tabs.Add(new ActionTabItem { Header = name, Content = c });
                         tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
@@ -113,7 +111,7 @@ namespace LollyCloud
                         Tabs.Remove(o);
                 };
                 ToolBarDictBase.Items.Add(b);
-                if (i == selectedDictItemIndex)
+                if (item == vmSettings.SelectedDictItem)
                 {
                     b.IsChecked = true;
                     b.PerformClick();

@@ -171,7 +171,6 @@ namespace LollyShared
                 USDICTITEM = value.DICTID;
             }
         }
-        public int SelectedDictItemIndex => DictItems.IndexOf(_SelectedDictItem);
 
         [Reactive]
         public List<MDictNote> DictsNote { get; set; }
