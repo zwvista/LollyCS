@@ -1,4 +1,5 @@
-﻿using LollyShared;
+﻿using Dragablz;
+using LollyShared;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ namespace LollyCloud
         public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
+        public override TabablzControl tcDictsBase => tcDicts;
 
         public WordsLangControl()
         {

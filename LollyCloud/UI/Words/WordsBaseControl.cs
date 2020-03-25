@@ -1,5 +1,7 @@
-﻿using LollyShared;
+﻿using Dragablz;
+using LollyShared;
 using MSHTML;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +23,9 @@ namespace LollyCloud
         public virtual MWordInterface ItemForRow(int row) => null;
         public virtual SettingsViewModel vmSettings => null;
         public virtual ToolBar ToolBarDictBase => null;
+        public virtual TabablzControl tcDictsBase => null;
+        public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
+        public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -84,13 +89,13 @@ namespace LollyCloud
             ToolBarDictBase.Items.Clear();
             for (int i = 0; i < vmSettings.DictItems.Count; i++)
             {
-                var b = new RadioButton
+                var name = vmSettings.DictItems[i].DICTNAME;
+                var b = new CheckBox
                 {
-                    Content = vmSettings.DictItems[i].DICTNAME,
-                    GroupName = "DICT",
+                    Content = name,
                     Tag = i,
                 };
-                b.Click += SearchDict;
+                b.Click += (o, e) => AddTab(name);
                 ToolBarDictBase.Items.Add(b);
                 if (i == selectedDictItemIndex)
                     b.IsChecked = true;
@@ -98,5 +103,16 @@ namespace LollyCloud
         }
 
         public virtual async Task SearchPhrases() { }
+        void AddTab(string header)
+        {
+            var i = Tabs.ToList().FindIndex(o => o.Header == header);
+            if (i == -1)
+            {
+                Tabs.Add(new ActionTabItem { Header = header, Content = new WordsDictControl() });
+                tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
+            }
+            else
+                tcDictsBase.SelectedIndex = i;
+        }
     }
 }
