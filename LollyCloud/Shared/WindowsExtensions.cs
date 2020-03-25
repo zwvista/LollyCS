@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+﻿using Dragablz;
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media;
-
-using LollyShared;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace LollyCloud
 {
@@ -23,6 +17,14 @@ namespace LollyCloud
                                 BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
                                 null, browser, new object[] { });
             activeX.Silent = silent;
+        }
+    }
+    // https://stackoverflow.com/questions/4734482/button1-performclick-in-wpf
+    public static class ButtonExtensions
+    {
+        public static void PerformClick(this ButtonBase btn)
+        {
+            btn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
     }
 
@@ -48,64 +50,20 @@ namespace LollyCloud
             SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
         }
     }
-
-    // https://stackoverflow.com/questions/47871745/wpf-change-datagrid-cell-background-color-using-a-converter
-    public class LevelToBackgroundConverter : IMultiValueConverter
+    // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
+    // This class will be the Tab in the TabControl
+    public class ActionTabItem
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var vmSettings = values[0] as SettingsViewModel;
-            var level = values[1] as int? ?? 0;
-            if (level == 0) return Binding.DoNothing;
-            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][0]);
-            return new SolidColorBrush(color);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+        // This will be the text in the tab control
+        public string Header { get; set; }
+        // This will be the content of the tab control It is a UserControl whits you need to create manually
+        public UserControl Content { get; set; }
+    }
+    // https://github.com/ButchersBoy/Dragablz/issues/13
+    public class ActionInterTabClient : DefaultInterTabClient
+    {
+        public override TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window) =>
+            TabEmptiedResponse.DoNothing;
     }
 
-    public class LevelToForegroundConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var vmSettings = values[0] as SettingsViewModel;
-            var level = values[1] as int? ?? 0;
-            if (level == 0) return Binding.DoNothing;
-            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][1]);
-            return new SolidColorBrush(color);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-    }
-    // https://stackoverflow.com/questions/20707160/data-binding-int-property-to-enum-in-wpf
-    public class EnumConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter,
-                              System.Globalization.CultureInfo culture)
-        {
-            int returnValue = 0;
-            if (parameter is Type)
-            {
-                returnValue = (int)Enum.Parse((Type)parameter, value.ToString());
-            }
-            return returnValue;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter,
-                                  System.Globalization.CultureInfo culture)
-        {
-            Enum enumValue = default(Enum);
-            if (parameter is Type)
-            {
-                enumValue = (Enum)Enum.Parse((Type)parameter, value.ToString());
-            }
-            return enumValue;
-        }
-    }
 }

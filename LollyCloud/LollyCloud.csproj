@@ -159,7 +159,7 @@
     <Compile Include="Models\MVoice.cs" />
     <Compile Include="Models\MWordPhrase.cs" />
     <Compile Include="Models\MReadNumber.cs" />
-    <Compile Include="Shared\ActionTab.cs" />
+    <Compile Include="Shared\Converters.cs" />
     <Compile Include="UI\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>

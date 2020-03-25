@@ -49,7 +49,7 @@ namespace LollyCloud
                 var item = ItemForRow(row);
                 selectedWord = item.WORD;
                 selectedWordID = item.WORDID;
-                //SearchWord(selectedWord);
+                Tabs.ForEach(o => ((WordsDictControl)o.Content).SearchWord(selectedWord));
             }
         }
 
@@ -95,24 +95,32 @@ namespace LollyCloud
                     Content = name,
                     Tag = i,
                 };
-                b.Click += (o, e) => AddTab(name);
+                b.Click += (s, e) =>
+                {
+                    var j = Tabs.ToList().FindIndex(o => o.Header == name);
+                    if (j == -1)
+                    {
+                        var c = new WordsDictControl
+                        {
+                            vmSettings = vmSettings,
+                            selectedDictItemIndex = (int)((CheckBox)s).Tag
+                        };
+                        Tabs.Add(new ActionTabItem { Header = name, Content = c });
+                        tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
+                        c.SearchWord(selectedWord);
+                    }
+                    else
+                        tcDictsBase.SelectedIndex = j;
+                };
                 ToolBarDictBase.Items.Add(b);
                 if (i == selectedDictItemIndex)
+                {
                     b.IsChecked = true;
+                    b.PerformClick();
+                }
             }
         }
 
         public virtual async Task SearchPhrases() { }
-        void AddTab(string header)
-        {
-            var i = Tabs.ToList().FindIndex(o => o.Header == header);
-            if (i == -1)
-            {
-                Tabs.Add(new ActionTabItem { Header = header, Content = new WordsDictControl() });
-                tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-            }
-            else
-                tcDictsBase.SelectedIndex = i;
-        }
     }
 }

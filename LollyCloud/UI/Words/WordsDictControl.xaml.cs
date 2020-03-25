@@ -33,6 +33,7 @@ namespace LollyCloud
         }
         public async void SearchWord(string word)
         {
+            selectedWord = word;
             dictStatus = DictWebBrowserStatus.Ready;
             var item = vmSettings.DictItems[selectedDictItemIndex];
             var item2 = vmSettings.DictsReference.First(o => o.DICTNAME == item.DICTNAME);
