@@ -111,11 +111,11 @@ namespace LollyCloud
                         Tabs.Remove(o);
                 };
                 ToolBarDictBase.Items.Add(b);
-                if (item == vmSettings.SelectedDictItem)
-                {
-                    b.IsChecked = true;
-                    b.PerformClick();
-                }
+                //if (item == vmSettings.SelectedDictItem)
+                //{
+                //    b.IsChecked = true;
+                //    b.PerformClick();
+                //}
             }
         }
         public ItemActionCallback ClosingTabItemHandler { get; } = args =>
