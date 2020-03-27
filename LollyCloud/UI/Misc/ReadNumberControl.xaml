@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
             <TextBox Text="{Binding Number}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" />
             <TextBox Text="{Binding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" />
-            <Button Grid.Row="2" Content="Read" Width="100" HorizontalAlignment="Right" Height="20" Command="{Binding ReadNumberCommand}"/>
+            <Button Grid.Row="2" Content="Read" Width="100" HorizontalAlignment="Right" Command="{Binding ReadNumberCommand}"/>
         </Grid>
     </DockPanel>
 </UserControl>
