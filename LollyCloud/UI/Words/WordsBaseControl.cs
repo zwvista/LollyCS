@@ -50,7 +50,6 @@ namespace LollyCloud
             }
         }
 
-
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
 
         public void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedWord);

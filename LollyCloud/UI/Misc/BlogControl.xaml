@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:shared="clr-namespace:LollyShared"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -18,17 +19,9 @@
                 <Button x:Name="btnAddExplanation" Click="btnAddExplanation_Click">AddExplanation</Button>
                 <Button x:Name="btnMarkedToHtml" Click="btnMarkedToHtml_Click">MarkedToHtml</Button>
                 <Button x:Name="btnPatternToHtml" Click="btnPatternToHtml_Click">PatternToHtml</Button>
-                <TextBox Text="{Binding PatternNo}" Width="60">
-                    <local:WatermarkService.Watermark>
-                        <TextBlock>Pattern No.</TextBlock>
-                    </local:WatermarkService.Watermark>
-                </TextBox>
+                <TextBox Text="{Binding PatternNo}" Width="60" wpf:HintAssist.Hint="Pattern No." />
                 <Button x:Name="btnCopyPatternMarkDown" Click="btnCopyPatternMarkDown_Click">PatternMarkDown</Button>
-                <TextBox Text="{Binding PatternText}" Width="96">
-                    <local:WatermarkService.Watermark>
-                        <TextBlock>Pattern Text</TextBlock>
-                    </local:WatermarkService.Watermark>
-                </TextBox>
+                <TextBox Text="{Binding PatternText}" Width="96" wpf:HintAssist.Hint="Pattern Text" />
                 <Button Command="{Binding AddNotesCommand}">AddNotes</Button>
             </ToolBar>
         </ToolBarTray>  

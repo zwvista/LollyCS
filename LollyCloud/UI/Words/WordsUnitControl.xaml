@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:shared="clr-namespace:LollyShared"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -21,17 +22,9 @@
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding Path=NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown">
-                    <local:WatermarkService.Watermark>
-                        <TextBlock>New Word</TextBlock>
-                    </local:WatermarkService.Watermark>
-                </TextBox>
+                <TextBox x:Name="tbNewWord" Text="{Binding Path=NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96">
-                    <local:WatermarkService.Watermark>
-                        <TextBlock>Filter</TextBlock>
-                    </local:WatermarkService.Watermark>
-                </TextBox>
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" IsChecked="{Binding Levelge0only}" />
             </ToolBar>
         </ToolBarTray>

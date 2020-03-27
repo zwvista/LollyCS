@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -15,12 +16,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="tbURL" IsReadOnly="True">
-            <local:WatermarkService.Watermark>
-                <TextBlock>URL</TextBlock>
-            </local:WatermarkService.Watermark>
-        </TextBox>
-        <Button Grid.Column="1" x:Name="btnOpenURL" Width="60" Click="btnOpenURL_Click">Open</Button>
+        <TextBox x:Name="tbURL" IsReadOnly="True" wpf:HintAssist.Hint="URL" />
+        <Button Grid.Column="1" x:Name="btnOpenURL" Click="btnOpenURL_Click">Open</Button>
         <WebBrowser Grid.Row="1" Grid.ColumnSpan="2" x:Name="wbDict" Navigated="wbDict_Navigated" LoadCompleted="wbDict_LoadCompleted" />
     </Grid>
 </UserControl>
