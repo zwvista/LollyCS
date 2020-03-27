@@ -13,8 +13,8 @@
             <ToolBar>
                 <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
                 <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding ScopeFilter}" SelectionChanged="cbScopeFilter_SelectionChanged" />
-                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbTextFilter_KeyDown" wpf:HintAssist.Hint="Filter" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
         </ToolBarTray>
         <Grid>

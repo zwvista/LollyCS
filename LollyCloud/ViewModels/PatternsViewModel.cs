@@ -33,19 +33,14 @@ namespace LollyShared
                 PatternItemsAll = new ObservableCollection<MPattern>(lst);
                 this.RaisePropertyChanged(nameof(PatternItems));
             });
-            ApplyFilters();
-        }
-        public void ApplyFilters()
-        {
-            if (string.IsNullOrEmpty(TextFilter))
-                PatternItemsFiltered = null;
-            else
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ =>
             {
-                PatternItemsFiltered = PatternItemsAll;
-                if (!string.IsNullOrEmpty(TextFilter))
-                    PatternItemsFiltered = new ObservableCollection<MPattern>(PatternItemsFiltered.Where(o => (ScopeFilter == "Pattern" ? o.PATTERN : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())));
-            }
-            this.RaisePropertyChanged(nameof(PatternItems));
+                PatternItemsFiltered = string.IsNullOrEmpty(TextFilter) ? null :
+                new ObservableCollection<MPattern>(PatternItemsAll.Where(o =>
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower()))
+                ));
+                this.RaisePropertyChanged(nameof(PatternItems));
+            });
         }
 
         public async Task Update(MPattern item) => await patternDS.Update(item);

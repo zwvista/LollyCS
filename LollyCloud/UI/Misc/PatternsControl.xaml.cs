@@ -82,19 +82,6 @@ namespace LollyCloud
             }
         }
 
-        void tbTextFilter_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Return) return;
-            if (string.IsNullOrEmpty(vm.TextFilter))
-                vm.ScopeFilter = SettingsViewModel.ScopePatternFilters[0];
-            else if (vm.ScopeFilter == SettingsViewModel.ScopePatternFilters[0])
-                vm.ScopeFilter = SettingsViewModel.ScopePatternFilters[1];
-            vm.ApplyFilters();
-        }
-
-        void cbScopeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            vm.ApplyFilters();
-
         public async Task OnSettingsChanged()
         {
             vm = new PatternsViewModel(MainWindow.vmSettings, needCopy: true);
