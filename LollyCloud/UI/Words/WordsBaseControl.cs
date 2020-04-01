@@ -81,8 +81,10 @@ namespace LollyCloud
 
         public virtual async Task OnSettingsChanged()
         {
+            Tabs.Clear();
             ToolBarDictBase.Items.Clear();
-            foreach (var item in vmSettings.DictItems)
+            int j = -1;
+            vmSettings.DictItems.ForEach((item, i) =>
             {
                 var name = item.DICTNAME;
                 var b = new CheckBox
@@ -110,11 +112,13 @@ namespace LollyCloud
                         Tabs.Remove(o);
                 };
                 ToolBarDictBase.Items.Add(b);
-                //if (item == vmSettings.SelectedDictItem)
-                //{
-                //    b.IsChecked = true;
-                //    b.PerformClick();
-                //}
+                if (item == vmSettings.SelectedDictItem) j = i;
+            });
+            if (j != -1)
+            {
+                var b = (CheckBox)ToolBarDictBase.Items[j];
+                b.IsChecked = true;
+                b.PerformClick();
             }
         }
         public ItemActionCallback ClosingTabItemHandler { get; } = args =>
