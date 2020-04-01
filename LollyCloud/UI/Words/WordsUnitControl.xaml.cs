@@ -101,17 +101,17 @@ namespace LollyCloud
             var row = dgWords.SelectedIndex;
             var part = row == -1 ? vmSettings.Parts[0].Value : vm.WordItems[row].PART;
             await vmSettings.ToggleToType(part);
-            btnRefresh_Click(sender, e);
+            vm.Reload();
         }
         async void btnPreviousUnitPart_Click(object sender, RoutedEventArgs e)
         {
             await vmSettings.PreviousUnitPart();
-            btnRefresh_Click(sender, e);
+            vm.Reload();
         }
         async void btnNextUnitPart_Click(object sender, RoutedEventArgs e)
         {
             await vmSettings.NextUnitPart();
-            btnRefresh_Click(sender, e);
+            vm.Reload();
         }
         async void miGetNote_Click(object sender, RoutedEventArgs e)
         {

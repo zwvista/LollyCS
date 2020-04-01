@@ -17,6 +17,7 @@ namespace LollyShared
         ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
         ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MUnitPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
+        bool inTextbook;
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
@@ -27,14 +28,7 @@ namespace LollyShared
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            (inTextbook ? unitPhraseDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
-            .ToObservable().Subscribe(lst =>
-            {
-                PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
-                this.RaisePropertyChanged(nameof(PhraseItems));
-            });
+            this.inTextbook = inTextbook;
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ =>
             {
                 PhraseItemsFiltered = string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? null :
@@ -42,6 +36,19 @@ namespace LollyShared
                     (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
                     (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
                 ));
+                this.RaisePropertyChanged(nameof(PhraseItems));
+            });
+            Reload();
+        }
+
+        public void Reload()
+        {
+            (inTextbook ? unitPhraseDS.GetDataByTextbookUnitPart(
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
+            .ToObservable().Subscribe(lst =>
+            {
+                PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
         }

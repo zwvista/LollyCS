@@ -20,6 +20,7 @@ namespace LollyShared
         ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
+        bool inTextbook;
         [Reactive]
         public string NewWord { get; set; } = "";
         [Reactive]
@@ -34,14 +35,7 @@ namespace LollyShared
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            (inTextbook ? unitWordDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
-            .ToObservable().Subscribe(lst => 
-            {
-                WordItemsAll = new ObservableCollection<MUnitWord>(lst);
-                this.RaisePropertyChanged(nameof(WordItems));
-            });
+            this.inTextbook = inTextbook;
             vmNote = new NoteViewModel(vmSettings);
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only, x => x.TextbookFilter).Subscribe(_ =>
             {
@@ -51,6 +45,19 @@ namespace LollyShared
                     (!Levelge0only || o.LEVEL >= 0) &&
                     (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
                 ));
+                this.RaisePropertyChanged(nameof(WordItems));
+            });
+            Reload();
+        }
+
+        public void Reload()
+        {
+            (inTextbook ? unitWordDS.GetDataByTextbookUnitPart(
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
+            .ToObservable().Subscribe(lst =>
+            {
+                WordItemsAll = new ObservableCollection<MUnitWord>(lst);
                 this.RaisePropertyChanged(nameof(WordItems));
             });
         }
