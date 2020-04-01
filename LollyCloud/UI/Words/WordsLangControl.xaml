@@ -46,8 +46,7 @@
                         <Setter Property="Background">
                             <Setter.Value>
                                 <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
-                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
-                                                         AncestorType=UserControl}"/>
+                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
                                     <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
                                 </MultiBinding>
                             </Setter.Value>
@@ -55,8 +54,7 @@
                         <Setter Property="Foreground">
                             <Setter.Value>
                                 <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
-                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
-                                                         AncestorType=UserControl}"/>
+                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
                                     <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
                                 </MultiBinding>
                             </Setter.Value>

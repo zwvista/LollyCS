@@ -35,10 +35,10 @@
         <CheckBox Content="Level = 0 Only" IsChecked="{Binding IsLevel0OnlyChecked}" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
         <Label Content="ACCURACY:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" />
         <StackPanel Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Center" >
-            <Button Content="Check All" Tag="0" Width="100" Height="20" Click="btnCheckItems_Click"/>
-            <Button Content="Uncheck All" Tag="1" Width="100" Height="20" Click="btnCheckItems_Click"/>
-            <Button Content="Check Selected" Tag="2" Width="100" Height="20" Click="btnCheckItems_Click"/>
-            <Button Content="Uncheck Selected" Tag="3" Width="100" Height="20" Click="btnCheckItems_Click"/>
+            <Button Content="Check All" Tag="0" Click="btnCheckItems_Click"/>
+            <Button Content="Uncheck All" Tag="1" Click="btnCheckItems_Click"/>
+            <Button Content="Check Selected" Tag="2" Click="btnCheckItems_Click"/>
+            <Button Content="Uncheck Selected" Tag="3" Click="btnCheckItems_Click"/>
         </StackPanel>
         <DataGrid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" x:Name="dgWords" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
                       ItemsSource="{Binding vm.WordItems}">
@@ -61,8 +61,7 @@
                     <Setter Property="Background">
                         <Setter.Value>
                             <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
-                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
-                                                         AncestorType=UserControl}"/>
+                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
                                 <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
                             </MultiBinding>
                         </Setter.Value>
@@ -70,8 +69,7 @@
                     <Setter Property="Foreground">
                         <Setter.Value>
                             <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
-                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor,
-                                                         AncestorType=UserControl}"/>
+                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
                                 <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
                             </MultiBinding>
                         </Setter.Value>

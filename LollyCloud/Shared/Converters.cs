@@ -14,7 +14,7 @@ namespace LollyCloud
         {
             var vmSettings = values[0] as SettingsViewModel;
             var level = values[1] as int? ?? 0;
-            if (level == 0) return Binding.DoNothing;
+            if (level == 0) return SystemColors.ControlLightColor;
             var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][0]);
             return new SolidColorBrush(color);
         }
@@ -31,7 +31,7 @@ namespace LollyCloud
         {
             var vmSettings = values[0] as SettingsViewModel;
             var level = values[1] as int? ?? 0;
-            if (level == 0) return Binding.DoNothing;
+            if (level == 0) return SystemColors.ControlTextColor;
             var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][1]);
             return new SolidColorBrush(color);
         }
