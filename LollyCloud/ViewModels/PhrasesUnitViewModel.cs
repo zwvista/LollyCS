@@ -11,6 +11,7 @@ namespace LollyShared
     public class PhrasesUnitViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
+        bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
@@ -18,7 +19,6 @@ namespace LollyShared
         ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MUnitPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
         public bool CanReorder => vmSettings.IsSingleUnitPart && PhraseItemsFiltered == null;
-        bool inTextbook;
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]

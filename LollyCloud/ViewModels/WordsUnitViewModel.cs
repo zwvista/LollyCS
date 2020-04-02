@@ -11,6 +11,7 @@ namespace LollyShared
     public class WordsUnitViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
+        bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
@@ -21,7 +22,6 @@ namespace LollyShared
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
         public bool CanReorder => vmSettings.IsSingleUnitPart && WordItemsFiltered == null;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
-        bool inTextbook;
         [Reactive]
         public string NewWord { get; set; } = "";
         [Reactive]
