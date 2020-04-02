@@ -1,4 +1,6 @@
-﻿using LollyShared;
+﻿using CefSharp;
+using CefSharp.Wpf;
+using LollyShared;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -21,6 +23,7 @@ namespace LollyCloud
         public MainWindow()
         {
             InitializeComponent();
+            Cef.Initialize(new CefSettings());
             // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
             Style = (Style)FindResource(typeof(Window));
             DataContext = this;

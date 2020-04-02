@@ -1,4 +1,5 @@
-﻿using LollyShared;
+﻿using CefSharp;
+using LollyShared;
 using MSHTML;
 using System.Diagnostics;
 using System.Linq;
@@ -23,48 +24,50 @@ namespace LollyCloud
         }
         public async void SearchWord(string word)
         {
+            if (string.IsNullOrEmpty(word)) return;
             Word = word;
             dictStatus = DictWebBrowserStatus.Ready;
             var url = Dict.UrlString(word, vmSettings.AutoCorrects.ToList());
             if (Dict.DICTTYPENAME == "OFFLINE")
             {
-                wbDict.Navigate("about:blank");
+                wbDict.Load("about:blank");
                 var html = await vmSettings.client.GetStringAsync(url);
                 var str = Dict.HtmlString(html, word);
-                wbDict.NavigateToString(str);
+                wbDict.LoadHtml(str);
             }
             else
             {
-                wbDict.Navigate(url);
+                wbDict.Load(url);
                 if (Dict.AUTOMATION != null)
                     dictStatus = DictWebBrowserStatus.Automating;
                 else if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
                     dictStatus = DictWebBrowserStatus.Navigating;
             }
         }
-        public void wbDict_Navigated(object sender, NavigationEventArgs e) => wbDict.SetSilent(true);
 
-        public void wbDict_LoadCompleted(object sender, NavigationEventArgs e)
+        public async void wbDict_LoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
-            if (e.Uri == null) return;
-            tbURL.Text = e.Uri.AbsoluteUri;
+            if (args.IsLoading) return;
+            var frame = args.Browser.MainFrame;
+            Dispatcher.Invoke(() => {
+                tbURL.Text = frame.Url;
+            });
             if (dictStatus == DictWebBrowserStatus.Ready) return;
             switch (dictStatus)
             {
                 case DictWebBrowserStatus.Automating:
                     var s = Dict.AUTOMATION.Replace("{0}", Word);
                     // https://stackoverflow.com/questions/7998996/how-to-inject-javascript-in-webbrowser-control
-                    wbDict.InvokeScript("execScript", new[] { s, "JavaScript" });
+                    frame.ExecuteJavaScriptAsync(s);
                     dictStatus = DictWebBrowserStatus.Ready;
                     if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
                         dictStatus = DictWebBrowserStatus.Navigating;
                     break;
                 case DictWebBrowserStatus.Navigating:
-                    var doc = (HTMLDocument)wbDict.Document;
-                    var html = doc.documentElement.outerHTML;
-                    var str = Dict.HtmlString(html, Word, useTransformWin: true);
+                    var html = await frame.GetSourceAsync();
+                    var str = Dict.HtmlString(html, Word);
                     dictStatus = DictWebBrowserStatus.Ready;
-                    wbDict.NavigateToString(str);
+                    wbDict.LoadHtml(str);
                     break;
             }
         }

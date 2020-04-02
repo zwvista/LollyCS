@@ -1,4 +1,5 @@
-﻿using LollyShared;
+﻿using CefSharp;
+using LollyShared;
 using ReactiveUI;
 using System;
 using System.Threading.Tasks;
@@ -47,13 +48,11 @@ namespace LollyCloud
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {
             var str = vm.MarkedToHtml();
-            wbBlog.NavigateToString(str);
+            wbBlog.LoadHtml(str);
             Clipboard.SetDataObject(vm.HtmlText);
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
-            wbBlog.Navigate(vm.PatternUrl);
-        void WbBlog_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) =>
-            wbBlog.SetSilent(true);
+            wbBlog.Load(vm.PatternUrl);
         void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e) =>
             Clipboard.SetDataObject(vm.PatternMarkDown);
     }
