@@ -22,6 +22,7 @@ namespace LollyCloud
             InitializeComponent();
             OnSettingsChanged();
         }
+        public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
@@ -92,14 +93,6 @@ namespace LollyCloud
         {
             await vmSettings.NextUnitPart();
             vm.Reload();
-        }
-        public void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape && IsDragging)
-            {
-                ResetDragDrop();
-                e.Handled = true;
-            }
         }
 
         #region DraggedPhraseItem
@@ -250,6 +243,14 @@ namespace LollyCloud
             Point position = e.GetPosition(dgPhrases);
             var row = UIHelpers.TryFindFromPoint<DataGridRow>(dgPhrases, position);
             if (row != null) dgPhrases.SelectedItem = row.Item;
+        }
+        public void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape && IsDragging)
+            {
+                ResetDragDrop();
+                e.Handled = true;
+            }
         }
 
         #endregion

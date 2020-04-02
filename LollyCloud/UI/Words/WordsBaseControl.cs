@@ -76,9 +76,6 @@ namespace LollyCloud
             }
         }
 
-        public virtual async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
-
-
         public virtual async Task OnSettingsChanged()
         {
             Tabs.Clear();

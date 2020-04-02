@@ -40,9 +40,7 @@ namespace LollyShared
             });
             Reload();
         }
-
-        public void Reload()
-        {
+        public void Reload() =>
             (inTextbook ? unitPhraseDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
                 unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
@@ -51,7 +49,6 @@ namespace LollyShared
                 PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
-        }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
         public async Task Update(MUnitPhrase item)

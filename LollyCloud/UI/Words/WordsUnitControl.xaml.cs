@@ -62,6 +62,7 @@ namespace LollyCloud
             dlg.ShowDialog();
             vm.WordItems.Add(dlg.itemOriginal);
         }
+        public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
         public override async Task OnSettingsChanged()
         {
@@ -125,15 +126,10 @@ namespace LollyCloud
             if (row == -1) return;
             await vm.ClearNote(row);
         }
-        public override void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            base.dgWords_PreviewKeyDown(sender, e);
-            if (e.Key == Key.Escape && IsDragging)
-            {
-                ResetDragDrop();
-                e.Handled = true;
-            }
-        }
+        async void btnGetNotes_Click(object sender, RoutedEventArgs e) =>
+            await vm.GetNotes(true, _ => { }, () => { });
+        async void btnClearNotes_Click(object sender, RoutedEventArgs e) =>
+            await vm.ClearNotes(true, _ => { }, () => { });
         public override async Task SearchPhrases() =>
             await vm.SearchPhrases(selectedWordID);
 
@@ -285,6 +281,15 @@ namespace LollyCloud
             Point position = e.GetPosition(dgWords);
             var row = UIHelpers.TryFindFromPoint<DataGridRow>(dgWords, position);
             if (row != null) dgWords.SelectedItem = row.Item;
+        }
+        public override void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            base.dgWords_PreviewKeyDown(sender, e);
+            if (e.Key == Key.Escape && IsDragging)
+            {
+                ResetDragDrop();
+                e.Handled = true;
+            }
         }
 
         #endregion

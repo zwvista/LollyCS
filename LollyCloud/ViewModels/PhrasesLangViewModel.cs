@@ -24,11 +24,6 @@ namespace LollyShared
         public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
-            {
-                PhraseItemsAll = new ObservableCollection<MLangPhrase>(lst);
-                this.RaisePropertyChanged(nameof(PhraseItems));
-            });
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ =>
             {
                 PhraseItemsFiltered = string.IsNullOrEmpty(TextFilter) ? null :
@@ -37,7 +32,14 @@ namespace LollyShared
                 ));
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
+            Reload();
         }
+        public void Reload() =>
+            langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            {
+                PhraseItemsAll = new ObservableCollection<MLangPhrase>(lst);
+                this.RaisePropertyChanged(nameof(PhraseItems));
+            });
 
         public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);
         public async Task<int> Create(MLangPhrase item) => await langPhraseDS.Create(item);

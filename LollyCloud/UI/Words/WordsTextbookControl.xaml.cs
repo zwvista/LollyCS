@@ -24,6 +24,7 @@ namespace LollyCloud
             InitializeComponent();
             OnSettingsChanged();
         }
+        public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)

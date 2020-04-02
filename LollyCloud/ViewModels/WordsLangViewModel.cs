@@ -30,11 +30,6 @@ namespace LollyShared
         public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
-            {
-                WordItemsAll = new ObservableCollection<MLangWord>(lst);
-                this.RaisePropertyChanged(nameof(WordItems));
-            });
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only).Subscribe(_ =>
             {
                 WordItemsFiltered = string.IsNullOrEmpty(TextFilter) && !Levelge0only ? null :
@@ -44,7 +39,14 @@ namespace LollyShared
                 ));
                 this.RaisePropertyChanged(nameof(WordItems));
             });
+            Reload();
         }
+        public void Reload() =>
+            langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            {
+                WordItemsAll = new ObservableCollection<MLangWord>(lst);
+                this.RaisePropertyChanged(nameof(WordItems));
+            });
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);
         public async Task<int> Create(MLangWord item) => await langWordDS.Create(item);

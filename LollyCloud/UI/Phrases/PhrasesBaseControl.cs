@@ -25,8 +25,6 @@ namespace LollyCloud
             App.Speak(vmSettings, selectedPhrase);
         }
 
-        public async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
-
         public virtual async Task OnSettingsChanged()
         {
         }
