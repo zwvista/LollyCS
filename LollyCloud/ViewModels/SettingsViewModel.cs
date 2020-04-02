@@ -6,6 +6,7 @@ using System.Linq;
 using System.Globalization;
 using System.Net.Http;
 using ReactiveUI.Fody.Helpers;
+using System.Reflection;
 
 namespace LollyShared
 {
@@ -40,15 +41,21 @@ namespace LollyShared
 
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
-        string GetUSValue(MUserSettingInfo info)
+        (MUserSetting, PropertyInfo) GetUS(MUserSettingInfo info)
         {
             var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
-            return o?.GetType().GetProperty($"VALUE{info.VALUEID}").GetValue(o) as string;
+            var pi = o?.GetType().GetProperty($"VALUE{info.VALUEID}");
+            return (o, pi);
+        }
+        string GetUSValue(MUserSettingInfo info)
+        {
+            var (o, pi) = GetUS(info);
+            return pi?.GetValue(o) as string;
         }
         void SetUSValue(MUserSettingInfo info, string value, string name)
         {
-            var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
-            o?.GetType().GetProperty($"VALUE{info.VALUEID}").SetValue(o, value);
+            var (o, pi) = GetUS(info);
+            pi?.SetValue(o, value);
             this.RaisePropertyChanged(name);
         }
         MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
@@ -145,83 +152,33 @@ namespace LollyShared
         public List<MLanguage> Languages { get; set; }
         [Reactive]
         public MLanguage SelectedLang { get; set; }
-        public int SelectedLangIndex => Languages.IndexOf(SelectedLang);
 
         [Reactive]
         public List<MVoice> Voices { get; set; }
         [Reactive]
         public MVoice SelectedVoice { get; set; }
-        public int SelectedVoiceIndex => Voices.IndexOf(SelectedVoice);
 
         public List<MDictReference> DictsReference;
         [Reactive]
         public List<MDictItem> DictItems { get; set; }
-        MDictItem _SelectedDictItem;
-        public MDictItem SelectedDictItem {
-            get => _SelectedDictItem;
-            set {
-                if (value == null) return;
-                this.RaiseAndSetIfChanged(ref _SelectedDictItem, value);
-                USDICTITEM = value.DICTID;
-            }
-        }
+        [Reactive]
+        public MDictItem SelectedDictItem { get; set; }
 
         [Reactive]
         public List<MDictNote> DictsNote { get; set; }
-        MDictNote _SelectedDictNote = new MDictNote();
-        public MDictNote SelectedDictNote {
-            get => _SelectedDictNote;
-            set {
-                this.RaiseAndSetIfChanged(ref _SelectedDictNote, value);
-                USDICTNOTEID = value?.ID ?? 0;
-            }
-        }
-        public int SelectedDictNoteIndex => DictsNote.IndexOf(_SelectedDictNote);
-        public bool HasDictNote => SelectedDictNote != null;
+        [Reactive]
+        public MDictNote SelectedDictNote { get; set; }
 
-        List<MDictTranslation> _DictsTranslation;
-        public List<MDictTranslation> DictsTranslation
-        {
-            get => _DictsTranslation;
-            set => this.RaiseAndSetIfChanged(ref _DictsTranslation, value);
-        }
-        MDictTranslation _SelectedDictTranslation = new MDictTranslation();
-        public MDictTranslation SelectedDictTranslation
-        {
-            get => _SelectedDictTranslation;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _SelectedDictTranslation, value);
-                USDICTTRANSLATIONID = value?.ID ?? 0;
-            }
-        }
-        public int SelectedDictTranslationIndex => DictsTranslation.IndexOf(_SelectedDictTranslation);
+        [Reactive]
+        public List<MDictTranslation> DictsTranslation { get; set; }
+        [Reactive]
+        public MDictTranslation SelectedDictTranslation { get; set; }
         public bool HasDictTranslation => SelectedDictTranslation != null;
 
         [Reactive]
         public List<MTextbook> Textbooks { get; set; }
-        MTextbook _SelectedTextbook;
-        public MTextbook SelectedTextbook {
-            get => _SelectedTextbook;
-            set {
-                if (value == null || value == _SelectedTextbook) return;
-                this.RaiseAndSetIfChanged(ref _SelectedTextbook, value);
-                USTEXTBOOKID = value.ID;
-                INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
-                INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
-                INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
-                INFO_USPARTTO = GetUSInfo(MUSMapping.NAME_USPARTTO);
-                ToType = IsSingleUnit ? UnitPartToType.Unit : IsSingleUnitPart ? UnitPartToType.Part : UnitPartToType.To;
-                this.RaisePropertyChanged(nameof(Units));
-                this.RaisePropertyChanged(nameof(UnitsInAll));
-                this.RaisePropertyChanged(nameof(Parts));
-                this.RaisePropertyChanged(nameof(USUNITFROM));
-                this.RaisePropertyChanged(nameof(USPARTFROM));
-                this.RaisePropertyChanged(nameof(USUNITTO));
-                this.RaisePropertyChanged(nameof(USPARTTO));
-            }
-        }
-        public int SelectedTextbookIndex => Textbooks.IndexOf(_SelectedTextbook);
+        [Reactive]
+        public MTextbook SelectedTextbook { get; set; }
         public List<MSelectItem> TextbookFilters { get; set; } = new List<MSelectItem>();
 
         public List<MSelectItem> Units => SelectedTextbook?.Units;
@@ -238,16 +195,8 @@ namespace LollyShared
             new MSelectItem(1, "Part"),
             new MSelectItem(2, "To"),
         };
-        UnitPartToType _ToType = UnitPartToType.To;
-        public UnitPartToType ToType
-        {
-            get => _ToType;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _ToType, value);
-                OnUpdateToType?.Invoke(this, null);
-            }
-        }
+        [Reactive]
+        public UnitPartToType ToType { get; set; } = UnitPartToType.To;
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictCodes { get; set; }
@@ -263,6 +212,31 @@ namespace LollyShared
         };
 
         public HttpClient client = new HttpClient();
+
+        public SettingsViewModel()
+        {
+            this.WhenAnyValue(x => x.SelectedDictItem, v => USDICTITEM = v.DICTID);
+            this.WhenAnyValue(x => x.SelectedDictNote, v => USDICTNOTEID = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedDictTranslation, v => USDICTTRANSLATIONID = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedTextbook).Subscribe(v =>
+            {
+                if (v == null) return;
+                USTEXTBOOKID = v.ID;
+                INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
+                INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
+                INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
+                INFO_USPARTTO = GetUSInfo(MUSMapping.NAME_USPARTTO);
+                ToType = IsSingleUnit ? UnitPartToType.Unit : IsSingleUnitPart ? UnitPartToType.Part : UnitPartToType.To;
+                this.RaisePropertyChanged(nameof(Units));
+                this.RaisePropertyChanged(nameof(UnitsInAll));
+                this.RaisePropertyChanged(nameof(Parts));
+                this.RaisePropertyChanged(nameof(USUNITFROM));
+                this.RaisePropertyChanged(nameof(USPARTFROM));
+                this.RaisePropertyChanged(nameof(USUNITTO));
+                this.RaisePropertyChanged(nameof(USPARTTO));
+            });
+            this.WhenAnyValue(x => x.ToType).Subscribe(_ => OnUpdateToType?.Invoke(this, null));
+        }
 
         MUserSettingInfo GetUSInfo(string name) {
             var o = USMappings.First(v => v.NAME == name);
