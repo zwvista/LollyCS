@@ -160,7 +160,7 @@ namespace LollyCloud
         /// </summary>
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (IsEditing) return;
+            if (IsEditing || !vm.CanReorder) return;
 
             var row = UIHelpers.TryFindFromPoint<DataGridRow>((UIElement)sender, e.GetPosition(dgPhrases));
             if (row == null) return;

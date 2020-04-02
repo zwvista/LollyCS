@@ -19,6 +19,7 @@ namespace LollyShared
         ObservableCollection<MUnitWord> WordItemsAll { get; set; }
         ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
+        public bool CanReorder => vmSettings.IsSingleUnitPart && WordItemsFiltered == null;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
         bool inTextbook;
         [Reactive]
