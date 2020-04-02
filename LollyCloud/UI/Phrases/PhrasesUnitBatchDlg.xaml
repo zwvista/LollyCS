@@ -47,8 +47,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
-            <Button Content="OK" Width="75" Click="btnOK_Click"/>
-            <Button Content="Cancel" Width="75" Click="btnCancel_Click" Margin="10,0,0,0"/>
+            <Button Content="OK" Click="btnOK_Click"/>
+            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

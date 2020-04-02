@@ -34,10 +34,10 @@
         <Label Content="Filter Text:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
         <TextBox x:Name="tbTextFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Center" >
-            <Button Content="Check All" Tag="0" Width="100" Height="20" Click="btnCheckItems_Click"/>
-            <Button Content="Uncheck All" Tag="1" Width="100" Height="20" Click="btnCheckItems_Click"/>
-            <Button Content="Check Selected" Tag="2" Width="100" Height="20" Click="btnCheckItems_Click"/>
-            <Button Content="Uncheck Selected" Tag="3" Width="100" Height="20" Click="btnCheckItems_Click"/>
+            <Button Content="Check All" Tag="0" Click="btnCheckItems_Click"/>
+            <Button Content="Uncheck All" Tag="1" Click="btnCheckItems_Click"/>
+            <Button Content="Check Selected" Tag="2" Click="btnCheckItems_Click"/>
+            <Button Content="Uncheck Selected" Tag="3" Click="btnCheckItems_Click"/>
         </StackPanel>
         <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" x:Name="dgPhrases" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
                       ItemsSource="{Binding vm.PhraseItems}">
@@ -54,8 +54,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
-            <Button Content="OK" Width="75" Height="20" Click="btnOK_Click"/>
-            <Button Content="Cancel" Width="75" Height="20" Click="btnCancel_Click" Margin="10,0,0,0"/>
+            <Button Content="OK" Click="btnOK_Click"/>
+            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>
 </Window>
