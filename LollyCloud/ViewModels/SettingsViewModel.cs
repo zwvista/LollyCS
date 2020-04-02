@@ -100,12 +100,6 @@ namespace LollyShared
             get => int.TryParse(GetUSValue(INFO_USDICTNOTEID), out var v) ? v : 0;
             set => SetUSValue(INFO_USDICTNOTEID, value.ToString(), nameof(USDICTNOTEID));
         }
-        MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
-        public string USDICTITEMS
-        {
-            get => GetUSValue(INFO_USDICTITEMS) ?? "0";
-            set => SetUSValue(INFO_USDICTITEMS, value, nameof(USDICTITEMS));
-        }
         MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
         public int USDICTTRANSLATIONID
         {
@@ -306,10 +300,8 @@ namespace LollyShared
             INFO_USTEXTBOOKID = GetUSInfo(MUSMapping.NAME_USTEXTBOOKID);
             INFO_USDICTITEM = GetUSInfo(MUSMapping.NAME_USDICTITEM);
             INFO_USDICTNOTEID = GetUSInfo(MUSMapping.NAME_USDICTNOTEID);
-            INFO_USDICTITEMS = GetUSInfo(MUSMapping.NAME_USDICTITEMS);
             INFO_USDICTTRANSLATIONID = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATIONID);
             INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
-            var lstDicts = USDICTITEMS.Split(new[] { "\r\n" }, StringSplitOptions.None);
             DictsReference = await DictReferenceDS.GetDataByLang(USLANGID);
             DictsNote = await DictNoteDS.GetDataByLang(USLANGID);
             DictsTranslation = await DictTranslationDS.GetDataByLang(USLANGID);
