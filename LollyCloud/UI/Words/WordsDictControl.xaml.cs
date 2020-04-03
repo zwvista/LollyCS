@@ -63,7 +63,6 @@ namespace LollyCloud
             {
                 case DictWebBrowserStatus.Automating:
                     var s = Dict.AUTOMATION.Replace("{0}", Word);
-                    // https://stackoverflow.com/questions/7998996/how-to-inject-javascript-in-webbrowser-control
                     frame.ExecuteJavaScriptAsync(s);
                     dictStatus = DictWebBrowserStatus.Ready;
                     if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")

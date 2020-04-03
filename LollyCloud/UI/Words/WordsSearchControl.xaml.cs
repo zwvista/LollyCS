@@ -16,6 +16,7 @@ namespace LollyCloud
     public partial class WordsSearchControl : WordsBaseControl
     {
         public WordsSearchViewModel vm { get; set; }
+        protected override string NewWord => vm.NewWord;
         public override DataGrid dgWordsBase => dgWords;
         public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
@@ -32,6 +33,7 @@ namespace LollyCloud
         {
             vm = new WordsSearchViewModel(MainWindow.vmSettings, needCopy: true);
             DataContext = vm;
+            tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }
 

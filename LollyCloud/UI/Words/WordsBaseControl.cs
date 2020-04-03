@@ -18,6 +18,7 @@ namespace LollyCloud
         protected string selectedWord = "";
         protected int selectedWordID = 0;
         protected string originalText = "";
+        protected virtual string NewWord => null;
         public virtual DataGrid dgWordsBase => null;
         public virtual MWordInterface ItemForRow(int row) => null;
         public virtual SettingsViewModel vmSettings => null;
@@ -35,18 +36,22 @@ namespace LollyCloud
 
         public void SearchDict(object sender, RoutedEventArgs e)
         {
+            void f(string word) =>
+                Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
+
             var row = dgWordsBase.SelectedIndex;
             if (row == -1)
             {
                 selectedWord = "";
                 selectedWordID = 0;
+                f(NewWord);
             }
             else
             {
                 var item = ItemForRow(row);
                 selectedWord = item.WORD;
                 selectedWordID = item.WORDID;
-                Tabs.ForEach(o => ((WordsDictControl)o.Content).SearchWord(selectedWord));
+                f(selectedWord);
             }
         }
 
@@ -109,6 +114,8 @@ namespace LollyCloud
                         Tabs.Remove(o);
                 };
                 ToolBarDictBase.Items.Add(b);
+                // I don't know why, but if we click the button here,
+                // buttons to be added later will not be added to the toolbar.
                 if (item == vmSettings.SelectedDictItem) j = i;
             });
             if (j != -1)

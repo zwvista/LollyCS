@@ -13,6 +13,7 @@ namespace LollyCloud
     public partial class WordsTextbookControl : WordsBaseControl
     {
         public WordsUnitViewModel vm { get; set; }
+        protected override string NewWord => vm.NewWord;
         public override DataGrid dgWordsBase => dgWords;
         public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
@@ -66,6 +67,7 @@ namespace LollyCloud
         {
             vm = new WordsUnitViewModel(MainWindow.vmSettings, inTextbook: false, needCopy: true);
             DataContext = vm;
+            tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }
 

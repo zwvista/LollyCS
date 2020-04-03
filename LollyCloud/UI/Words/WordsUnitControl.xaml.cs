@@ -16,6 +16,7 @@ namespace LollyCloud
     public partial class WordsUnitControl : WordsBaseControl
     {
         public WordsUnitViewModel vm { get; set; }
+        protected override string NewWord => vm.NewWord;
         public override DataGrid dgWordsBase => dgWords;
         public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;

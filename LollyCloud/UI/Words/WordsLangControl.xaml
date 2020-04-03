@@ -80,8 +80,8 @@
                       ItemsSource="{Binding PhraseItems}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
-                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
+                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION" Width="1*"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
