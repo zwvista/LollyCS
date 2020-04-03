@@ -19,7 +19,7 @@ namespace LollyCloud
         public MDictReference Dict;
         public string Word = "";
         public SettingsViewModel vmSettings;
-        Action LoadAsync;
+        string Url;
         public WordsDictControl()
         {
             InitializeComponent();
@@ -28,33 +28,33 @@ namespace LollyCloud
         {
             Word = word;
             dictStatus = DictWebBrowserStatus.Ready;
-            var url = Dict.UrlString(word, vmSettings.AutoCorrects.ToList());
-            LoadAsync = async () =>
-            {
-                if (Dict.DICTTYPENAME == "OFFLINE")
-                {
-                    wbDict.Load("about:blank");
-                    var html = await vmSettings.client.GetStringAsync(url);
-                    var str = Dict.HtmlString(html, word);
-                    wbDict.LoadHtml(str);
-                }
-                else
-                {
-                    wbDict.Load(url);
-                    if (Dict.AUTOMATION != null)
-                        dictStatus = DictWebBrowserStatus.Automating;
-                    else if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                }
-            };
-            DoLoadAsync();
+            Url = Dict.UrlString(word, vmSettings.AutoCorrects.ToList());
+            Load();
         }
-        void DoLoadAsync()
+        async void Load()
         {
-            if (wbDict.IsBrowserInitialized)
-                LoadAsync();
+            if (!wbDict.IsBrowserInitialized) return;
+            if (Dict.DICTTYPENAME == "OFFLINE")
+            {
+                wbDict.Load("about:blank");
+                var html = await vmSettings.client.GetStringAsync(Url);
+                var str = Dict.HtmlString(html, Word);
+                wbDict.LoadHtml(str);
+            }
+            else
+            {
+                wbDict.Load(Url);
+                if (Dict.AUTOMATION != null)
+                    dictStatus = DictWebBrowserStatus.Automating;
+                else if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
+                    dictStatus = DictWebBrowserStatus.Navigating;
+            }
         }
-        void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e) => DoLoadAsync();
+        void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Url))
+                Load();
+        }
         async void wbDict_LoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
             if (args.IsLoading) return;
