@@ -33,7 +33,7 @@ namespace LollyCloud
         }
         async void Load()
         {
-            if (!wbDict.IsBrowserInitialized) return;
+            if (!wbDict.IsBrowserInitialized || string.IsNullOrEmpty(Url)) return;
             if (Dict.DICTTYPENAME == "OFFLINE")
             {
                 wbDict.Load("about:blank");
@@ -50,11 +50,7 @@ namespace LollyCloud
                     dictStatus = DictWebBrowserStatus.Navigating;
             }
         }
-        void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(Url))
-                Load();
-        }
+        void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e) => Load();
         async void wbDict_LoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
             if (args.IsLoading) return;
