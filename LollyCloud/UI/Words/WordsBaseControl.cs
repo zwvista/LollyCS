@@ -89,7 +89,7 @@ namespace LollyCloud
                     Content = name,
                     Tag = item,
                 };
-                b.Click += (s, e) =>
+                b.Click += async (s, e) =>
                 {
                     var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
                     if (o == null)
@@ -103,7 +103,7 @@ namespace LollyCloud
                         };
                         Tabs.Add(new ActionTabItem { Header = name, Content = c });
                         tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-                        c.SearchWord(selectedWord);
+                        await c.SearchWord(selectedWord);
                     }
                     else
                         Tabs.Remove(o);

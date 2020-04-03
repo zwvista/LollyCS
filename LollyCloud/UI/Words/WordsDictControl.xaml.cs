@@ -1,12 +1,10 @@
 ﻿using CefSharp;
 using LollyShared;
-using MSHTML;
-using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace LollyCloud
 {
@@ -24,14 +22,15 @@ namespace LollyCloud
         {
             InitializeComponent();
         }
-        public void SearchWord(string word)
+        public async         Task
+SearchWord(string word)
         {
             Word = word;
             dictStatus = DictWebBrowserStatus.Ready;
             Url = Dict.UrlString(word, vmSettings.AutoCorrects.ToList());
-            Load();
+            await Load();
         }
-        async void Load()
+        async Task Load()
         {
             if (!wbDict.IsBrowserInitialized || string.IsNullOrEmpty(Url)) return;
             if (Dict.DICTTYPENAME == "OFFLINE")
@@ -50,7 +49,7 @@ namespace LollyCloud
                     dictStatus = DictWebBrowserStatus.Navigating;
             }
         }
-        void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e) => Load();
+        async void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e) => await Load();
         async void wbDict_LoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
             if (args.IsLoading) return;
