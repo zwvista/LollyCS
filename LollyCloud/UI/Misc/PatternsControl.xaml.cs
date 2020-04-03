@@ -114,7 +114,7 @@ namespace LollyCloud
             var row = dgPatterns.SelectedIndex;
             if (row == -1) return;
             var item = vm.WebPageItems[row];
-            wbWebPage.Navigate(item.WEBPAGE);
+            wbWebPage.Load(item.WEBPAGE);
         }
         async Task SearchPhrase() =>
             await vm.SearchPhrases(selectedPatternID);

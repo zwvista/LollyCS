@@ -9,17 +9,6 @@ using System.Windows.Media;
 
 namespace LollyCloud
 {
-    // https://stackoverflow.com/questions/6138199/wpf-webbrowser-control-how-to-suppress-script-errors
-    public static class WebBrowserExtensions
-    {
-        public static void SetSilent(this WebBrowser browser, bool silent)
-        {
-            dynamic activeX = browser.GetType().InvokeMember("ActiveXInstance",
-                                BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                                null, browser, new object[] { });
-            activeX.Silent = silent;
-        }
-    }
     // https://stackoverflow.com/questions/4734482/button1-performclick-in-wpf
     public static class ButtonExtensions
     {

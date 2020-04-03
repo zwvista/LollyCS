@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:shared="clr-namespace:LollyShared"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -79,7 +80,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <WebBrowser x:Name="wbWebPage" Grid.Row="2"/>
+                <cef:ChromiumWebBrowser x:Name="wbWebPage" Grid.Row="2"/>
             </Grid>
         </Grid>
     </DockPanel>
