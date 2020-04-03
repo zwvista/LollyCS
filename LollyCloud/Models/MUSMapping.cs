@@ -36,6 +36,7 @@ namespace LollyShared
         public static string NAME_USTEXTBOOKID = "USTEXTBOOKID";
         public static string NAME_USDICTITEM = "USDICTITEM";
         public static string NAME_USDICTNOTEID = "USDICTNOTEID";
+        public static string NAME_USDICTITEMS = "USDICTITEMS";
         public static string NAME_USDICTTRANSLATIONID = "USDICTTRANSLATIONID";
         public static string NAME_USMACVOICEID = "USMACVOICEID";
         public static string NAME_USIOSVOICEID = "USIOSVOICEID";

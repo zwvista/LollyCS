@@ -107,6 +107,12 @@ namespace LollyShared
             get => int.TryParse(GetUSValue(INFO_USDICTNOTEID), out var v) ? v : 0;
             set => SetUSValue(INFO_USDICTNOTEID, value.ToString(), nameof(USDICTNOTEID));
         }
+        MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
+        public string USDICTITEMS
+        {
+            get => GetUSValue(INFO_USDICTITEMS);
+            set => SetUSValue(INFO_USDICTITEMS, value, nameof(USDICTITEMS));
+        }
         MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
         public int USDICTTRANSLATIONID
         {
@@ -163,6 +169,8 @@ namespace LollyShared
         public List<MDictItem> DictItems { get; set; }
         [Reactive]
         public MDictItem SelectedDictItem { get; set; }
+        [Reactive]
+        public List<MDictItem> SelectedDictItems { get; set; }
 
         [Reactive]
         public List<MDictNote> DictsNote { get; set; }
@@ -274,6 +282,7 @@ namespace LollyShared
             INFO_USTEXTBOOKID = GetUSInfo(MUSMapping.NAME_USTEXTBOOKID);
             INFO_USDICTITEM = GetUSInfo(MUSMapping.NAME_USDICTITEM);
             INFO_USDICTNOTEID = GetUSInfo(MUSMapping.NAME_USDICTNOTEID);
+            INFO_USDICTITEMS = GetUSInfo(MUSMapping.NAME_USDICTITEMS);
             INFO_USDICTTRANSLATIONID = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATIONID);
             INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
             DictsReference = await DictReferenceDS.GetDataByLang(USLANGID);
@@ -285,6 +294,8 @@ namespace LollyShared
             DictItems = DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)).ToList();
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
+            var dictitems = USDICTITEM.Split(',').ToList();
+            SelectedDictItems = DictItems.Where(o => dictitems.Contains(o.DICTID)).ToList();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
             TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
