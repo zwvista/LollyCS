@@ -11,12 +11,12 @@ namespace LollyShared
     public class MBlog : ReactiveObject
     {
         [Reactive]
-        public string MarkedText { get; set; }
+        public string MarkedText { get; set; } = "";
         [Reactive]
-        public string HtmlText { get; set; }
+        public string HtmlText { get; set; } = "";
         [Reactive]
         public string PatternNo { get; set; } = "001";
         [Reactive]
-        public string PatternText { get; set; }
+        public string PatternText { get; set; } = "";
     }
 }
