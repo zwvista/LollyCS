@@ -227,7 +227,7 @@
     <Compile Include="DataStores\LangWordDataStore.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\ReadNumberService.cs" />
-    <Compile Include="SettingsDlg.xaml.cs">
+    <Compile Include="UI\Misc\SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\UIHelpers.cs" />
@@ -271,7 +271,7 @@
     <Compile Include="ViewModels\WordsUnitBatchViewModel.cs" />
     <Compile Include="ViewModels\WordsSearchViewModel.cs" />
     <Compile Include="ViewModels\WordsReviewViewModel.cs" />
-    <Compile Include="ReviewOptionsDlg.xaml.cs">
+    <Compile Include="UI\Misc\ReviewOptionsDlg.xaml.cs">
       <DependentUpon>ReviewOptionsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BlogViewModel.cs" />
@@ -361,7 +361,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingsDlg.xaml">
+    <Page Include="UI\Misc\SettingsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,7 +369,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReviewOptionsDlg.xaml">
+    <Page Include="UI\Misc\ReviewOptionsDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -452,17 +452,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="MSHTML">
-      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\DragInsert.png" />
