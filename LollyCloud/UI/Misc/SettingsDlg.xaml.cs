@@ -34,9 +34,6 @@ namespace LollyCloud
         async void cbVoices_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             await vm.UpdateVoice();
 
-        async void cbDictsReference_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            await vm.UpdateDictItem();
-
         async void cbDictsNote_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             await vm.UpdateDictNote();
 
@@ -83,8 +80,15 @@ namespace LollyCloud
         void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Result = (SettingsDlgResult)(sender as Button).Tag;
-            this.Close();
+            Close();
         }
 
+        void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new SelectDictsDlg();
+            dlg.Owner = this;
+            dlg.vmSettings = vm;
+            dlg.ShowDialog();
+        }
     }
 }

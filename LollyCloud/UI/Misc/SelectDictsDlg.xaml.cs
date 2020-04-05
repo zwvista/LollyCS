@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LollyShared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,13 @@ namespace LollyCloud
     /// </summary>
     public partial class SelectDictsDlg : Window
     {
+        public SettingsViewModel vmSettings;
+        SelectDictsViewModel vm;
         public SelectDictsDlg()
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
-            DataContext = this;
+            DataContext = vm = new SelectDictsViewModel(vmSettings);
             // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
         }
