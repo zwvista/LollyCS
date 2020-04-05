@@ -2,6 +2,7 @@
 using LollyShared;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -80,9 +81,26 @@ namespace LollyCloud
 
         public virtual async Task OnSettingsChanged()
         {
+            async Task F(string name)
+            {
+                var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
+                if (o == null)
+                {
+                    var c = new WordsDictControl
+                    {
+                        vmSettings = vmSettings,
+                        Dict = vmSettings.DictsReference.First(o2 => o2.DICTNAME == name)
+                    };
+                    Tabs.Add(new ActionTabItem { Header = name, Content = c });
+                    tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
+                    await c.SearchWord(selectedWord);
+                }
+                else
+                    Tabs.Remove(o);
+            }
+
             Tabs.Clear();
             ToolBarDictBase.Items.Clear();
-            int j = -1;
             vmSettings.DictsReference.ForEach((item, i) =>
             {
                 var name = item.DICTNAME;
@@ -91,35 +109,14 @@ namespace LollyCloud
                     Content = name,
                     Tag = item,
                 };
-                b.Click += async (s, e) =>
-                {
-                    var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
-                    if (o == null)
-                    {
-                        var item2 = (MDictionary)((CheckBox)s).Tag;
-                        var item3 = vmSettings.DictsReference.First(o2 => o2.DICTNAME == item2.DICTNAME);
-                        var c = new WordsDictControl
-                        {
-                            vmSettings = vmSettings,
-                            Dict = item3
-                        };
-                        Tabs.Add(new ActionTabItem { Header = name, Content = c });
-                        tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-                        await c.SearchWord(selectedWord);
-                    }
-                    else
-                        Tabs.Remove(o);
-                };
+                b.Click += async (s, e) => await F(name);
                 ToolBarDictBase.Items.Add(b);
-                // I don't know why, but if we click the button here,
-                // buttons to be added later will not be added to the toolbar.
-                if (item == vmSettings.SelectedDictReference) j = i;
             });
-            if (j != -1)
+            foreach (var o in vmSettings.SelectedDictsReference)
             {
-                var b = (CheckBox)ToolBarDictBase.Items[j];
+                var b = ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => o2.Tag == o);
                 b.IsChecked = true;
-                b.PerformClick();
+                await F(o.DICTNAME);
             }
         }
         public ItemActionCallback ClosingTabItemHandler { get; } = args =>

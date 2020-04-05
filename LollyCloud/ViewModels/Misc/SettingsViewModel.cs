@@ -25,6 +25,7 @@ namespace LollyShared
         public event EventHandler OnGetData;
         public event EventHandler OnUpdateLang;
         public event EventHandler OnUpdateDictReference;
+        public event EventHandler OnUpdateDictsReference;
         public event EventHandler OnUpdateDictNote;
         public event EventHandler OnUpdateDictTranslation;
         public event EventHandler OnUpdateTextbook;
@@ -93,29 +94,29 @@ namespace LollyShared
             get => int.Parse(GetUSValue(INFO_USTEXTBOOKID));
             set => SetUSValue(INFO_USTEXTBOOKID, value.ToString(), nameof(USTEXTBOOKID));
         }
-        MUserSettingInfo INFO_USDICTITEM = new MUserSettingInfo();
-        public string USDICTITEM
+        MUserSettingInfo INFO_USDICTREFERENCE = new MUserSettingInfo();
+        public string USDICTREFERENCE
         {
-            get => GetUSValue(INFO_USDICTITEM);
-            set => SetUSValue(INFO_USDICTITEM, value, nameof(USDICTITEM));
+            get => GetUSValue(INFO_USDICTREFERENCE);
+            set => SetUSValue(INFO_USDICTREFERENCE, value, nameof(USDICTREFERENCE));
         }
-        MUserSettingInfo INFO_USDICTNOTEID = new MUserSettingInfo();
-        public int USDICTNOTEID
+        MUserSettingInfo INFO_USDICTNOTE = new MUserSettingInfo();
+        public int USDICTNOTE
         {
-            get => int.TryParse(GetUSValue(INFO_USDICTNOTEID), out var v) ? v : 0;
-            set => SetUSValue(INFO_USDICTNOTEID, value.ToString(), nameof(USDICTNOTEID));
+            get => int.TryParse(GetUSValue(INFO_USDICTNOTE), out var v) ? v : 0;
+            set => SetUSValue(INFO_USDICTNOTE, value.ToString(), nameof(USDICTNOTE));
         }
-        MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
-        public string USDICTITEMS
+        MUserSettingInfo INFO_USDICTSREFERENCE = new MUserSettingInfo();
+        public string USDICTSREFERENCE
         {
-            get => GetUSValue(INFO_USDICTITEMS) ?? "";
-            set => SetUSValue(INFO_USDICTITEMS, value, nameof(USDICTITEMS));
+            get => GetUSValue(INFO_USDICTSREFERENCE) ?? "";
+            set => SetUSValue(INFO_USDICTSREFERENCE, value, nameof(USDICTSREFERENCE));
         }
-        MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
-        public int USDICTTRANSLATIONID
+        MUserSettingInfo INFO_USDICTTRANSLATION = new MUserSettingInfo();
+        public int USDICTTRANSLATION
         {
-            get => int.TryParse(GetUSValue(INFO_USDICTTRANSLATIONID), out var v) ? v : 0;
-            set => SetUSValue(INFO_USDICTTRANSLATIONID, value.ToString(), nameof(USDICTTRANSLATIONID));
+            get => int.TryParse(GetUSValue(INFO_USDICTTRANSLATION), out var v) ? v : 0;
+            set => SetUSValue(INFO_USDICTTRANSLATION, value.ToString(), nameof(USDICTTRANSLATION));
         }
         MUserSettingInfo INFO_USVOICEID = new MUserSettingInfo();
         public int USVOICEID
@@ -220,9 +221,9 @@ namespace LollyShared
 
         public SettingsViewModel()
         {
-            this.WhenAnyValue(x => x.SelectedDictReference, v => USDICTITEM = v.DICTID.ToString());
-            this.WhenAnyValue(x => x.SelectedDictNote, v => USDICTNOTEID = v?.ID ?? 0);
-            this.WhenAnyValue(x => x.SelectedDictTranslation, v => USDICTTRANSLATIONID = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedDictReference, v => USDICTREFERENCE = v.DICTID.ToString());
+            this.WhenAnyValue(x => x.SelectedDictNote, v => USDICTNOTE = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedDictTranslation, v => USDICTTRANSLATION = v?.ID ?? 0);
             this.WhenAnyValue(x => x.SelectedTextbook).Subscribe(v =>
             {
                 if (v == null) return;
@@ -277,10 +278,10 @@ namespace LollyShared
             USLANGID = lang.ID;
             SelectedLang = lang;
             INFO_USTEXTBOOKID = GetUSInfo(MUSMapping.NAME_USTEXTBOOKID);
-            INFO_USDICTITEM = GetUSInfo(MUSMapping.NAME_USDICTITEM);
-            INFO_USDICTNOTEID = GetUSInfo(MUSMapping.NAME_USDICTNOTEID);
-            INFO_USDICTITEMS = GetUSInfo(MUSMapping.NAME_USDICTITEMS);
-            INFO_USDICTTRANSLATIONID = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATIONID);
+            INFO_USDICTREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTREFERENCE);
+            INFO_USDICTNOTE = GetUSInfo(MUSMapping.NAME_USDICTNOTE);
+            INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
+            INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
             INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
             DictsReference = await DictionaryDS.GetDictsReferenceByLang(USLANGID);
             DictsNote = await DictionaryDS.GetDictsNoteByLang(USLANGID);
@@ -288,14 +289,14 @@ namespace LollyShared
             Textbooks = await TextbookDS.GetDataByLang(USLANGID);
             AutoCorrects = await AutoCorrectDS.GetDataByLang(USLANGID);
             Voices = await VoiceDS.GetDataByLang(USLANGID);
-            SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTITEM);
-            SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
-            SelectedDictsReference = USDICTITEMS.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
-            SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
+            SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTREFERENCE);
+            SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
+            SelectedDictsReference = USDICTSREFERENCE.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
+            SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
             TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
                 .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
-            SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? Voices.FirstOrDefault();
+            SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? Voices.FirstOrDefault();
             if (isinit)
                 OnUpdateLang?.Invoke(this, null);
             else
@@ -314,17 +315,22 @@ namespace LollyShared
         }
         public async Task UpdateDictReference()
         {
-            await UserSettingDS.Update(INFO_USDICTITEM, USDICTITEM);
+            await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE);
             OnUpdateDictReference?.Invoke(this, null);
+        }
+        public async Task UpdateDictsReference()
+        {
+            await UserSettingDS.Update(INFO_USDICTSREFERENCE, USDICTSREFERENCE);
+            OnUpdateDictsReference?.Invoke(this, null);
         }
         public async Task UpdateDictNote()
         {
-            await UserSettingDS.Update(INFO_USDICTNOTEID, USDICTNOTEID);
+            await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE);
             OnUpdateDictNote?.Invoke(this, null);
         }
         public async Task UpdateDictTranslation()
         {
-            await UserSettingDS.Update(INFO_USDICTTRANSLATIONID, USDICTTRANSLATIONID);
+            await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION);
             OnUpdateDictTranslation?.Invoke(this, null);
         }
         public async Task UpdateVoice()

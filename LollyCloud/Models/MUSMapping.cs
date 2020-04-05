@@ -34,10 +34,10 @@ namespace LollyShared
         public static string NAME_USREADNUMBERID = "USREADNUMBERID";
 
         public static string NAME_USTEXTBOOKID = "USTEXTBOOKID";
-        public static string NAME_USDICTITEM = "USDICTITEM";
-        public static string NAME_USDICTNOTEID = "USDICTNOTEID";
-        public static string NAME_USDICTITEMS = "USDICTITEMS";
-        public static string NAME_USDICTTRANSLATIONID = "USDICTTRANSLATIONID";
+        public static string NAME_USDICTREFERENCE = "USDICTREFERENCE";
+        public static string NAME_USDICTNOTE = "USDICTNOTE";
+        public static string NAME_USDICTSREFERENCE = "USDICTSREFERENCE";
+        public static string NAME_USDICTTRANSLATION = "USDICTTRANSLATION";
         public static string NAME_USMACVOICEID = "USMACVOICEID";
         public static string NAME_USIOSVOICEID = "USIOSVOICEID";
         public static string NAME_USANDROIDVOICEID = "USANDROIDVOICEID";
