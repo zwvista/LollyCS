@@ -7,6 +7,7 @@
              xmlns:shared="clr-namespace:LollyShared"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -30,15 +31,15 @@
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" IsChecked="{Binding Levelge0only}" />
             </ToolBar>
         </ToolBarTray>
-        <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding WordItems}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
+                      ItemsSource="{Binding WordItems}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
@@ -122,14 +123,5 @@
                 </dragablz:TabablzControl>
             </Grid>
         </Grid>
-        <!-- Drag and Drop Popup -->
-        <Popup x:Name="popup1" IsHitTestVisible="False" Placement="RelativePoint" PlacementTarget="{Binding}" AllowsTransparency="True">
-            <Border BorderBrush="LightSteelBlue" BorderThickness="2" Background="White" Opacity="0.75">
-                <StackPanel Orientation="Horizontal" Margin="4,3,8,3">
-                    <Image Source="/Icons/DragInsert.png" Width="16" Height="16" />
-                    <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding Path=DraggedWordItem.WORD}" Margin="8,0,0,0" />
-                </StackPanel>
-            </Border>
-        </Popup>
     </DockPanel>
 </local:WordsBaseControl>

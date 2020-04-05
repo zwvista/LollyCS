@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:shared="clr-namespace:LollyShared"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -25,10 +26,10 @@
                 <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
         </ToolBarTray>
-        <Grid MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
+        <Grid>
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding Items}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown">
+                      ItemsSource="{Binding Items}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
@@ -53,14 +54,5 @@
                 </DataGrid.ContextMenu>
             </DataGrid>
         </Grid>
-        <!-- Drag and Drop Popup -->
-        <Popup x:Name="popup1" IsHitTestVisible="False" Placement="RelativePoint" PlacementTarget="{Binding}" AllowsTransparency="True">
-            <Border BorderBrush="LightSteelBlue" BorderThickness="2" Background="White" Opacity="0.75">
-                <StackPanel Orientation="Horizontal" Margin="4,3,8,3">
-                    <Image Source="/Icons/DragInsert.png" Width="16" Height="16" />
-                    <TextBlock FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Text="{Binding Path=DraggedPhraseItem.PHRASE}" Margin="8,0,0,0" />
-                </StackPanel>
-            </Border>
-        </Popup>
     </DockPanel>
 </local:PhrasesBaseControl>

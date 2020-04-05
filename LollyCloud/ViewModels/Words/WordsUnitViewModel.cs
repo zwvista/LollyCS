@@ -1,14 +1,18 @@
-﻿using ReactiveUI;
+﻿using GongSolutions.Wpf.DragDrop;
+using GongSolutions.Wpf.DragDrop.Utilities;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LollyShared
 {
-    public class WordsUnitViewModel : ReactiveObject
+    public class WordsUnitViewModel : ReactiveObject, IDragSource
     {
         public SettingsViewModel vmSettings;
         bool inTextbook;
@@ -32,6 +36,7 @@ namespace LollyShared
         public bool Levelge0only { get; set; }
         [Reactive]
         public int TextbookFilter { get; set; }
+        public bool IsEditing { get; set; }
 
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -188,5 +193,37 @@ namespace LollyShared
             PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWord(wordid));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
+
+        // Copied from DefaultDragHandler
+        // https://github.com/punker76/gong-wpf-dragdrop/blob/dev/src/GongSolutions.WPF.DragDrop/DefaultDragHandler.cs
+        void IDragSource.StartDrag(IDragInfo dragInfo)
+        {
+            var items = TypeUtilities.CreateDynamicallyTypedList(dragInfo.SourceItems).Cast<object>().ToList();
+            if (items.Count > 1)
+            {
+                dragInfo.Data = items;
+            }
+            else
+            {
+                // special case: if the single item is an enumerable then we can not drop it as single item
+                var singleItem = items.FirstOrDefault();
+                if (singleItem is IEnumerable && !(singleItem is string))
+                {
+                    dragInfo.Data = items;
+                }
+                else
+                {
+                    dragInfo.Data = singleItem;
+                }
+            }
+
+            dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
+        }
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && CanReorder;
+        void IDragSource.Dropped(IDropInfo dropInfo) { }
+        async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
+            await Reindex(_ => { });
+        void IDragSource.DragCancelled() { }
+        bool IDragSource.TryCatchOccurredException(Exception exception) => false;
     }
 }
