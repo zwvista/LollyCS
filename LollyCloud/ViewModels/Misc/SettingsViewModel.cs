@@ -110,7 +110,7 @@ namespace LollyShared
         MUserSettingInfo INFO_USDICTITEMS = new MUserSettingInfo();
         public string USDICTITEMS
         {
-            get => GetUSValue(INFO_USDICTITEMS);
+            get => GetUSValue(INFO_USDICTITEMS) ?? "";
             set => SetUSValue(INFO_USDICTITEMS, value, nameof(USDICTITEMS));
         }
         MUserSettingInfo INFO_USDICTTRANSLATIONID = new MUserSettingInfo();
@@ -294,8 +294,7 @@ namespace LollyShared
             DictItems = DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)).ToList();
             SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
-            var dictitems = USDICTITEM.Split(',').ToList();
-            SelectedDictItems = DictItems.Where(o => dictitems.Contains(o.DICTID)).ToList();
+            SelectedDictItems = USDICTITEM.Split(',').SelectMany(d => DictItems.Where(o => o.DICTID == d)).ToList();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
             TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))

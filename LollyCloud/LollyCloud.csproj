@@ -192,6 +192,9 @@
     <Compile Include="UI\Misc\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Misc\SelectDictsDlg.xaml.cs">
+      <DependentUpon>SelectDictsDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Phrases\PhrasesBaseControl.cs" />
     <Compile Include="UI\Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
@@ -260,24 +263,25 @@
     <Compile Include="UI\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PatternsViewModel.cs" />
-    <Compile Include="ViewModels\PhrasesReviewViewModel.cs" />
-    <Compile Include="ViewModels\PhrasesUnitViewModel.cs" />
-    <Compile Include="ViewModels\PhrasesLangViewModel.cs" />
-    <Compile Include="ViewModels\ReadNumberViewModel.cs" />
-    <Compile Include="ViewModels\WordsLangViewModel.cs" />
+    <Compile Include="ViewModels\Misc\PatternsViewModel.cs" />
+    <Compile Include="ViewModels\Misc\SelectDictsViewModel.cs" />
+    <Compile Include="ViewModels\Phrases\PhrasesReviewViewModel.cs" />
+    <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
+    <Compile Include="ViewModels\Phrases\PhrasesLangViewModel.cs" />
+    <Compile Include="ViewModels\Misc\ReadNumberViewModel.cs" />
+    <Compile Include="ViewModels\Words\WordsLangViewModel.cs" />
     <Compile Include="UI\Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PhrasesUnitBatchViewModel.cs" />
+    <Compile Include="ViewModels\Phrases\PhrasesUnitBatchViewModel.cs" />
     <Compile Include="Models\MReviewOptions.cs" />
-    <Compile Include="ViewModels\WordsUnitBatchViewModel.cs" />
-    <Compile Include="ViewModels\WordsSearchViewModel.cs" />
-    <Compile Include="ViewModels\WordsReviewViewModel.cs" />
+    <Compile Include="ViewModels\Words\WordsUnitBatchViewModel.cs" />
+    <Compile Include="ViewModels\Words\WordsSearchViewModel.cs" />
+    <Compile Include="ViewModels\Words\WordsReviewViewModel.cs" />
     <Compile Include="UI\Misc\ReviewOptionsDlg.xaml.cs">
       <DependentUpon>ReviewOptionsDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BlogViewModel.cs" />
+    <Compile Include="ViewModels\Misc\BlogViewModel.cs" />
     <Compile Include="UI\Words\WordsBaseControl.cs" />
     <Compile Include="UI\Words\WordsLangControl.xaml.cs">
       <DependentUpon>WordsLangControl.xaml</DependentUpon>
@@ -294,9 +298,9 @@
     <Compile Include="UI\Words\WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\NoteViewModel.cs" />
-    <Compile Include="ViewModels\WordsUnitViewModel.cs" />
+    <Compile Include="ViewModels\Misc\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Misc\NoteViewModel.cs" />
+    <Compile Include="ViewModels\Words\WordsUnitViewModel.cs" />
     <Compile Include="UI\Phrases\PhrasesUnitDetailDlg.xaml.cs">
       <DependentUpon>PhrasesUnitDetailDlg.xaml</DependentUpon>
     </Compile>
@@ -331,6 +335,10 @@
     <Page Include="UI\Misc\PatternsDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Misc\SelectDictsDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Phrases\PhrasesLangControl.xaml">
       <Generator>MSBuild:Compile</Generator>
