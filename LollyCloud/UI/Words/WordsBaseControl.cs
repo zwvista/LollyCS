@@ -83,7 +83,7 @@ namespace LollyCloud
             Tabs.Clear();
             ToolBarDictBase.Items.Clear();
             int j = -1;
-            vmSettings.DictItems.ForEach((item, i) =>
+            vmSettings.DictsReference.ForEach((item, i) =>
             {
                 var name = item.DICTNAME;
                 var b = new CheckBox
@@ -96,7 +96,7 @@ namespace LollyCloud
                     var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
                     if (o == null)
                     {
-                        var item2 = (MDictItem)((CheckBox)s).Tag;
+                        var item2 = (MDictionary)((CheckBox)s).Tag;
                         var item3 = vmSettings.DictsReference.First(o2 => o2.DICTNAME == item2.DICTNAME);
                         var c = new WordsDictControl
                         {
@@ -113,7 +113,7 @@ namespace LollyCloud
                 ToolBarDictBase.Items.Add(b);
                 // I don't know why, but if we click the button here,
                 // buttons to be added later will not be added to the toolbar.
-                if (item == vmSettings.SelectedDictItem) j = i;
+                if (item == vmSettings.SelectedDictReference) j = i;
             });
             if (j != -1)
             {

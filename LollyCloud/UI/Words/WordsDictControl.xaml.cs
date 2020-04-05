@@ -14,7 +14,7 @@ namespace LollyCloud
     public partial class WordsDictControl : UserControl
     {
         public DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
-        public MDictReference Dict;
+        public MDictionary Dict;
         public string Word = "";
         public SettingsViewModel vmSettings;
         string Url;

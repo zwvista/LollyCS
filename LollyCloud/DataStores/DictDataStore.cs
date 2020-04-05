@@ -10,19 +10,13 @@ using Plugin.Connectivity;
 
 namespace LollyShared
 {
-    public class DictReferenceDataStore : LollyDataStore<MDictReference>
+    public class DictionaryDataStore : LollyDataStore<MDictionary>
     {
-        public async Task<List<MDictReference>> GetDataByLang(int langid) =>
+        public async Task<List<MDictionary>> GetDictsReferenceByLang(int langid) =>
         (await GetDataByUrl<MDictsReference>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).records;
-    }
-    public class DictNoteDataStore : LollyDataStore<MDictNote>
-    {
-        public async Task<List<MDictNote>> GetDataByLang(int langid) =>
+        public async Task<List<MDictionary>> GetDictsNoteByLang(int langid) =>
         (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).records;
-    }
-    public class DictTranslationDataStore : LollyDataStore<MDictTranslation>
-    {
-        public async Task<List<MDictTranslation>> GetDataByLang(int langid) =>
+        public async Task<List<MDictionary>> GetDictsTranslationByLang(int langid) =>
         (await GetDataByUrl<MDictsTranslation>($"VDICTSTRANSLATION?filter=LANGIDFROM,eq,{langid}")).records;
     }
 }

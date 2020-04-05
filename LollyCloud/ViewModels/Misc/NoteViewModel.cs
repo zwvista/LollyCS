@@ -9,7 +9,7 @@ namespace LollyShared
     public class NoteViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
-        public MDictNote DictNote => vmSettings.SelectedDictNote;
+        public MDictionary DictNote => vmSettings.SelectedDictNote;
         public const string ZeroNote = "O";
 
         public NoteViewModel(SettingsViewModel vmSettings)

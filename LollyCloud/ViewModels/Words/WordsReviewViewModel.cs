@@ -11,7 +11,7 @@ namespace LollyShared
         public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         WordFamiDataStore wordFamiDS = new WordFamiDataStore();
-        MDictTranslation DictTranslation => vmSettings.SelectedDictTranslation;
+        MDictionary DictTranslation => vmSettings.SelectedDictTranslation;
 
         public List<MUnitWord> Items { get; set; }
         public int Count => Items.Count;

@@ -15,9 +15,7 @@ namespace LollyShared
         USMappingDataStore USMappingDS = new USMappingDataStore();
         UserSettingDataStore UserSettingDS = new UserSettingDataStore();
         LanguageDataStore LanguageDS = new LanguageDataStore();
-        DictReferenceDataStore DictReferenceDS = new DictReferenceDataStore();
-        DictNoteDataStore DictNoteDS = new DictNoteDataStore();
-        DictTranslationDataStore DictTranslationDS = new DictTranslationDataStore();
+        DictionaryDataStore DictionaryDS = new DictionaryDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
         WordFamiDataStore WordFamiDS = new WordFamiDataStore();
@@ -164,23 +162,22 @@ namespace LollyShared
         [Reactive]
         public MVoice SelectedVoice { get; set; }
 
-        public List<MDictReference> DictsReference;
         [Reactive]
-        public List<MDictItem> DictItems { get; set; }
+        public List<MDictionary> DictsReference { get; set; }
         [Reactive]
-        public MDictItem SelectedDictItem { get; set; }
+        public MDictionary SelectedDictReference { get; set; }
         [Reactive]
-        public List<MDictItem> SelectedDictItems { get; set; }
+        public List<MDictionary> SelectedDictsReference { get; set; }
 
         [Reactive]
-        public List<MDictNote> DictsNote { get; set; }
+        public List<MDictionary> DictsNote { get; set; }
         [Reactive]
-        public MDictNote SelectedDictNote { get; set; }
+        public MDictionary SelectedDictNote { get; set; }
 
         [Reactive]
-        public List<MDictTranslation> DictsTranslation { get; set; }
+        public List<MDictionary> DictsTranslation { get; set; }
         [Reactive]
-        public MDictTranslation SelectedDictTranslation { get; set; }
+        public MDictionary SelectedDictTranslation { get; set; }
         public bool HasDictTranslation => SelectedDictTranslation != null;
 
         [Reactive]
@@ -223,7 +220,7 @@ namespace LollyShared
 
         public SettingsViewModel()
         {
-            this.WhenAnyValue(x => x.SelectedDictItem, v => USDICTITEM = v.DICTID);
+            this.WhenAnyValue(x => x.SelectedDictReference, v => USDICTITEM = v.DICTID.ToString());
             this.WhenAnyValue(x => x.SelectedDictNote, v => USDICTNOTEID = v?.ID ?? 0);
             this.WhenAnyValue(x => x.SelectedDictTranslation, v => USDICTTRANSLATIONID = v?.ID ?? 0);
             this.WhenAnyValue(x => x.SelectedTextbook).Subscribe(v =>
@@ -285,16 +282,15 @@ namespace LollyShared
             INFO_USDICTITEMS = GetUSInfo(MUSMapping.NAME_USDICTITEMS);
             INFO_USDICTTRANSLATIONID = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATIONID);
             INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
-            DictsReference = await DictReferenceDS.GetDataByLang(USLANGID);
-            DictsNote = await DictNoteDS.GetDataByLang(USLANGID);
-            DictsTranslation = await DictTranslationDS.GetDataByLang(USLANGID);
+            DictsReference = await DictionaryDS.GetDictsReferenceByLang(USLANGID);
+            DictsNote = await DictionaryDS.GetDictsNoteByLang(USLANGID);
+            DictsTranslation = await DictionaryDS.GetDictsTranslationByLang(USLANGID);
             Textbooks = await TextbookDS.GetDataByLang(USLANGID);
             AutoCorrects = await AutoCorrectDS.GetDataByLang(USLANGID);
             Voices = await VoiceDS.GetDataByLang(USLANGID);
-            DictItems = DictsReference.Select(o => new MDictItem(o.DICTID.ToString(), o.DICTNAME)).ToList();
-            SelectedDictItem = DictItems.FirstOrDefault(o => o.DICTID == USDICTITEM);
+            SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
-            SelectedDictItems = USDICTITEM.Split(',').SelectMany(d => DictItems.Where(o => o.DICTID == d)).ToList();
+            SelectedDictsReference = USDICTITEM.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
             TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))

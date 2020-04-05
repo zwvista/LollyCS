@@ -15,6 +15,8 @@ namespace LollyShared
         public SelectDictsViewModel(SettingsViewModel vmSettings)
         {
             this.vmSettings = vmSettings;
+            DictsSelected = new ObservableCollection<MDictionary>();
+            DictsAvailable = new ObservableCollection<MDictionary>(vmSettings.DictsReference);
         }
     }
 }
