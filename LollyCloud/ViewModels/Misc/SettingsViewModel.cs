@@ -24,7 +24,7 @@ namespace LollyShared
 
         public event EventHandler OnGetData;
         public event EventHandler OnUpdateLang;
-        public event EventHandler OnUpdateDictItem;
+        public event EventHandler OnUpdateDictReference;
         public event EventHandler OnUpdateDictNote;
         public event EventHandler OnUpdateDictTranslation;
         public event EventHandler OnUpdateTextbook;
@@ -290,7 +290,7 @@ namespace LollyShared
             Voices = await VoiceDS.GetDataByLang(USLANGID);
             SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTITEM);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTEID) ?? DictsNote.FirstOrDefault();
-            SelectedDictsReference = USDICTITEM.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
+            SelectedDictsReference = USDICTITEMS.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
             SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATIONID) ?? DictsTranslation.FirstOrDefault();
             SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
             TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
@@ -312,10 +312,10 @@ namespace LollyShared
             await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID);
             OnUpdateTextbook?.Invoke(this, null);
         }
-        public async Task UpdateDictItem()
+        public async Task UpdateDictReference()
         {
             await UserSettingDS.Update(INFO_USDICTITEM, USDICTITEM);
-            OnUpdateDictItem?.Invoke(this, null);
+            OnUpdateDictReference?.Invoke(this, null);
         }
         public async Task UpdateDictNote()
         {

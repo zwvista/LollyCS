@@ -37,7 +37,7 @@
         <ComboBox ItemsSource="{Binding Voices}" DisplayMemberPath="VOICENAME" SelectedValue="{Binding SelectedVoice}" SelectionChanged="cbVoices_SelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
         <Label Content="Dictionary(Reference):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" />
-        <ListBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+        <ListBox ItemsSource="{Binding SelectedDictsReference}" DisplayMemberPath="DICTNAME" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" />
         <Button x:Name="btnEdit" Content="Edit" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnEdit_Click" />
         <Label Content="Dictionary(Note):" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" />
         <ComboBox ItemsSource="{Binding DictsNote}" DisplayMemberPath="DICTNAME" SelectedValue="{Binding SelectedDictNote}" SelectionChanged="cbDictsNote_SelectionChanged"

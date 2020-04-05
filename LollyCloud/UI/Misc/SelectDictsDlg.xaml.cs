@@ -26,9 +26,13 @@ namespace LollyCloud
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
-            DataContext = vm = new SelectDictsViewModel(vmSettings);
             // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = vm = new SelectDictsViewModel(vmSettings);
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
