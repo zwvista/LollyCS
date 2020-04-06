@@ -27,18 +27,28 @@ namespace LollyShared
         public int FAMIID { get; set; }
         [Reactive]
         public int LEVEL { get; set; }
+        public bool LevelNotZero { [ObservableAsProperty] get; }
         [Reactive]
         public int CORRECT { get; set; }
         [Reactive]
         public int TOTAL { get; set; }
+        public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
 
-        public MLangWord() { }
+        void WhenAnyValueChanged()
+        {
+            this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
+        }
+        public MLangWord()
+        {
+            WhenAnyValueChanged();
+        }
         public MLangWord(MUnitWord item)
         {
             ID = item.WORDID;
             LANGID = item.LANGID;
             WORD = item.WORD;
             NOTE = item.NOTE;
+            WhenAnyValueChanged();
         }
 
         public bool CombineNote(string note)
@@ -56,6 +66,5 @@ namespace LollyShared
                 }
             return oldNote != NOTE;
         }
-        public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
     }
 }

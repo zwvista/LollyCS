@@ -46,24 +46,28 @@
                 <DataGrid.Resources>
                     <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
                     <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
-                    <Style TargetType="DataGridRow">
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                         <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
-                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
-                                    <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                                </MultiBinding>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="Foreground">
-                            <Setter.Value>
-                                <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
-                                    <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
-                                    <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                                </MultiBinding>
-                            </Setter.Value>
-                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding LevelNotZero}" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
+                                            <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
+                                            <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
+                                            <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
+                                            <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.ContextMenu>

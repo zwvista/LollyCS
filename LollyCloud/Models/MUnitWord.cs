@@ -38,6 +38,7 @@ namespace LollyShared
         public int FAMIID { get; set; }
         [Reactive]
         public int LEVEL { get; set; }
+        public bool LevelNotZero { [ObservableAsProperty] get; }
         [Reactive]
         public int CORRECT { get; set; }
         [Reactive]
@@ -50,5 +51,10 @@ namespace LollyShared
         public string UNITSTR => Textbook.UNITSTR(UNIT);
         public string PARTSTR => Textbook.PARTSTR(PART);
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
+
+        public MUnitWord()
+        {
+            this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
+        }
     }
 }
