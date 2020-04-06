@@ -22,7 +22,6 @@ namespace LollyShared
         ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
         ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
         public ObservableCollection<MUnitPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
-        public bool CanReorder => vmSettings.IsSingleUnitPart && PhraseItemsFiltered == null;
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
@@ -175,7 +174,7 @@ namespace LollyShared
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && CanReorder;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && vmSettings.IsSingleUnitPart && PhraseItemsFiltered == null;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

@@ -24,7 +24,6 @@ namespace LollyShared
         ObservableCollection<MUnitWord> WordItemsAll { get; set; }
         ObservableCollection<MUnitWord> WordItemsFiltered { get; set; }
         public ObservableCollection<MUnitWord> WordItems => WordItemsFiltered ?? WordItemsAll;
-        public bool CanReorder => vmSettings.IsSingleUnitPart && WordItemsFiltered == null;
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; }
         [Reactive]
         public string NewWord { get; set; } = "";
@@ -219,7 +218,7 @@ namespace LollyShared
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && CanReorder;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && vmSettings.IsSingleUnitPart && WordItemsFiltered == null;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

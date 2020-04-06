@@ -43,18 +43,17 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
-                    <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
-                    <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
-                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
+                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" />
+                    <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" />
+                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
                     <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
-                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
                         <Setter Property="Background">
@@ -102,7 +101,6 @@
                         <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION" Width="1*"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
                     </DataGrid.Resources>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>

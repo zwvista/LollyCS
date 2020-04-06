@@ -246,7 +246,7 @@
     <Compile Include="Models\MUnitWord.cs" />
     <Compile Include="Models\MUserSetting.cs" />
     <Compile Include="DataStores\AutoCorrectDataStore.cs" />
-    <Compile Include="DataStores\DictDataStore.cs" />
+    <Compile Include="DataStores\DictionaryDataStore.cs" />
     <Compile Include="DataStores\IDataStore.cs" />
     <Compile Include="DataStores\LanguageDataStore.cs" />
     <Compile Include="DataStores\LollyDataStore.cs" />
