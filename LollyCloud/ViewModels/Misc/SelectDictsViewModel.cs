@@ -18,10 +18,7 @@ namespace LollyShared
             DictsSelected = new ObservableCollection<MDictionary>(vmSettings.SelectedDictsReference);
             DictsAvailable = new ObservableCollection<MDictionary>(vmSettings.DictsReference.Except(vmSettings.SelectedDictsReference));
         }
-        public async void OnOK()
-        {
-            vmSettings.SelectedDictsReference = DictsSelected.ToList();
-            await vmSettings.UpdateDictsReference();
-        }
+        public async void OnOK() =>
+            await vmSettings.UpdateDictsReference(DictsSelected.ToList());
     }
 }

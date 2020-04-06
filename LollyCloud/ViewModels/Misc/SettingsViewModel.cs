@@ -1,12 +1,12 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
-using System.Globalization;
 using System.Net.Http;
-using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace LollyShared
 {
@@ -221,12 +221,13 @@ namespace LollyShared
 
         public SettingsViewModel()
         {
-            this.WhenAnyValue(x => x.SelectedDictReference, v => USDICTREFERENCE = v.DICTID.ToString());
-            this.WhenAnyValue(x => x.SelectedDictNote, v => USDICTNOTE = v?.ID ?? 0);
-            this.WhenAnyValue(x => x.SelectedDictTranslation, v => USDICTTRANSLATION = v?.ID ?? 0);
-            this.WhenAnyValue(x => x.SelectedTextbook).Subscribe(v =>
+            this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(v => USDICTREFERENCE = v.DICTID.ToString());
+            this.WhenAnyValue(x => x.SelectedDictsReference).Where(v => v != null)
+                .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
+            this.WhenAnyValue(x => x.SelectedDictNote).Subscribe(v => USDICTNOTE = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedDictTranslation).Subscribe(v => USDICTTRANSLATION = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(v =>
             {
-                if (v == null) return;
                 USTEXTBOOKID = v.ID;
                 INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
                 INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
@@ -318,8 +319,10 @@ namespace LollyShared
             await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE);
             OnUpdateDictReference?.Invoke(this, null);
         }
-        public async Task UpdateDictsReference()
+        public async Task UpdateDictsReference(List<MDictionary> lst)
         {
+            SelectedDictsReference = lst;
+            this.RaisePropertyChanged(nameof(SelectedDictsReference));
             await UserSettingDS.Update(INFO_USDICTSREFERENCE, USDICTSREFERENCE);
             OnUpdateDictsReference?.Invoke(this, null);
         }
