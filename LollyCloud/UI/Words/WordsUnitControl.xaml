@@ -27,6 +27,7 @@
             <ToolBar Band="2">
                 <TextBox x:Name="tbNewWord" Text="{Binding Path=NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{Binding Path=TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
                 <CheckBox x:Name="chkLevelge0only" Content="Level >= 0" IsChecked="{Binding Levelge0only}" />
             </ToolBar>
