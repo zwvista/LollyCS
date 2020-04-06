@@ -221,6 +221,9 @@ namespace LollyShared
 
         public SettingsViewModel()
         {
+            // https://stackoverflow.com/questions/35685063/httpclient-getasync-method-403-error
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "http://developer.github.com/v3/#user-agent-required");
+
             this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(v => USDICTREFERENCE = v.DICTID.ToString());
             this.WhenAnyValue(x => x.SelectedDictsReference).Where(v => v != null)
                 .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
