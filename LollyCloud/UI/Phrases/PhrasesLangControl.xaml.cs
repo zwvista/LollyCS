@@ -46,7 +46,9 @@ namespace LollyCloud
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            originalText = ((TextBlock)e.EditingEventArgs.Source).Text;
+            var o = e.EditingEventArgs.Source;
+            var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
+            originalText = o2.Text;
         }
 
         async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
