@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding WordItems}" >
+            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" SelectionChanged="dgWords_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
@@ -38,8 +38,8 @@
                     <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
                     <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
                     <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
-                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
+                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                 </DataGrid.Columns>

@@ -28,9 +28,9 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      ItemsSource="{Binding Items}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
+            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
+                      dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgPhrases_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />

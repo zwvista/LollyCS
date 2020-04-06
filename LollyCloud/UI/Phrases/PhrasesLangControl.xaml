@@ -21,8 +21,8 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding PhraseItems}">
+            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgPhrases_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>

@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" ItemsSource="{Binding WordItems}">
+            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" SelectionChanged="dgWords_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
