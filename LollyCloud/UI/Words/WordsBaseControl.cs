@@ -1,4 +1,5 @@
-﻿using Dragablz;
+﻿using CefSharp;
+using Dragablz;
 using LollyShared;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -91,6 +92,8 @@ namespace LollyCloud
                         vmSettings = vmSettings,
                         Dict = vmSettings.DictsReference.First(o2 => o2.DICTNAME == name)
                     };
+                    // Disable image loading
+                    // c.wbDict.BrowserSettings.ImageLoading = CefState.Disabled;
                     Tabs.Add(new ActionTabItem { Header = name, Content = c });
                     tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
                     await c.SearchWord(selectedWord);

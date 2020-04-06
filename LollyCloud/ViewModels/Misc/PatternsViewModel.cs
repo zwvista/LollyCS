@@ -60,7 +60,7 @@ namespace LollyShared
         }
         public async Task UpdateWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Update(item);
-        public async Task CreateWebPage(MPatternWebPage item) =>
+        public async Task<int> CreateWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Create(item);
         public async Task DeleteWebPage(int id) =>
             await patternWebPageDS.Delete(id);

@@ -34,7 +34,7 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
-        void btnAdd_Click(object sender, RoutedEventArgs e)
+        void btnAddPattern_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new PatternsDetailDlg();
             dlg.Owner = Window.GetWindow(this);
@@ -42,6 +42,16 @@ namespace LollyCloud
             dlg.vm = vm;
             dlg.ShowDialog();
             vm.PatternItems.Add(dlg.itemOriginal);
+        }
+
+        void btnAddWebPage_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new PatternsWebPageDlg();
+            dlg.Owner = Window.GetWindow(this);
+            dlg.itemOriginal = vm.NewPatternWebPage(selectedPatternID, selectedPattern);
+            dlg.vm = vm;
+            dlg.ShowDialog();
+            vm.WebPageItems.Add(dlg.itemOriginal);
         }
 
         async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -101,10 +111,10 @@ namespace LollyCloud
 
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new PatternsDetailDlg();
+            var dlg = new PatternsWebPageDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             dlg.Owner = Window.GetWindow(this);
-            dlg.itemOriginal = (sender as DataGridRow).Item as MPattern;
+            dlg.itemOriginal = (sender as DataGridRow).Item as MPatternWebPage;
             dlg.vm = vm;
             dlg.ShowDialog();
         }

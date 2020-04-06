@@ -189,6 +189,9 @@
     <Compile Include="UI\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Misc\PatternsWebPageDlg.xaml.cs">
+      <DependentUpon>PatternsWebPageDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Misc\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\Misc\PatternsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Misc\PatternsWebPageDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

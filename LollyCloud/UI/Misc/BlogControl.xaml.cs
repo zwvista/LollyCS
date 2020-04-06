@@ -19,6 +19,8 @@ namespace LollyCloud
         public BlogControl()
         {
             InitializeComponent();
+            // Disable image loading
+            // wbBlog.BrowserSettings.ImageLoading = CefState.Disabled;
             OnSettingsChanged();
         }
 
