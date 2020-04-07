@@ -37,7 +37,7 @@
             <Label Content="/" VerticalAlignment="Center" Grid.Row="3" />
             <TextBox Text="{Binding GroupCount}" Width="75" VerticalAlignment="Center" />
         </StackPanel>
-        <Button Content="OK" Width="75" Click="btnOK_Click" Grid.Row="0" Grid.Column="3" IsDefault="True"/>
-        <Button Content="Cancel" Width="75" Click="btnCancel_Click" Grid.Row="1" Grid.Column="3" IsCancel="True"/>
+        <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Grid.Row="0" Grid.Column="3" />
+        <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Grid.Row="1" Grid.Column="3" />
     </Grid>
 </Window>

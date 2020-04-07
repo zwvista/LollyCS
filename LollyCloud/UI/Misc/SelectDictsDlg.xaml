@@ -21,8 +21,8 @@
         <ListBox ItemsSource="{Binding DictsAvailable}" DisplayMemberPath="DICTNAME" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Grid.Row="1" Margin="10" />
         <ListBox ItemsSource="{Binding DictsSelected}" DisplayMemberPath="DICTNAME" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Grid.Row="1" Grid.Column="1" Margin="10" />
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
-            <Button Content="OK" Click="btnOK_Click"/>
-            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,10,0"/>
+            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click"/>
+            <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,10,0"/>
         </StackPanel>
     </Grid>
 </Window>
