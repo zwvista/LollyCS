@@ -4,8 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
         Title="LollyCloud" Height="450" Width="800" WindowState="Maximized">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.ShowSettingsCommand}" Executed="ShowSettingsCommand_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.WordsUnitCommand}" Executed="WordsUnitCommand_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.PhrasesUnitCommand}" Executed="PhrasesUnitCommand_Executed"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl+Alt" Key="S" Command="{x:Static local:MainWindow.ShowSettingsCommand}" />
+        <KeyBinding Modifiers="Ctrl+Alt" Key="W" Command="{x:Static local:MainWindow.WordsUnitCommand}" />
+        <KeyBinding Modifiers="Ctrl+Alt" Key="P" Command="{x:Static local:MainWindow.PhrasesUnitCommand}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -14,10 +25,10 @@
         <Menu>
             <MenuItem Header="Learn">
                 <MenuItem x:Name="miSearch" Header="Search" Click="miSearch_Click" />
-                <MenuItem x:Name="miSettings" Header="Settings" Click="miSettings_Click" />
+                <MenuItem Command="{x:Static local:MainWindow.ShowSettingsCommand}" Header="Settings" InputGestureText="Ctrl+Alt+S"/>
                 <Separator />
-                <MenuItem x:Name="miWordsUnit" Header="Words in Unit" Click="miWordsUnit_Click" />
-                <MenuItem x:Name="miPhrasesUnit" Header="Phrases in Unit" Click="miPhrasesUnit_Click" />
+                <MenuItem Command="{x:Static local:MainWindow.WordsUnitCommand}" Header="Words in Unit" InputGestureText="Ctrl+Alt+W"/>
+                <MenuItem Command="{x:Static local:MainWindow.PhrasesUnitCommand}" Header="Phrases in Unit" InputGestureText="Ctrl+Alt+P"/>
                 <Separator />
                 <MenuItem x:Name="miWordsReview" Header="Words Review" Click="miWordsReview_Click" />
                 <MenuItem x:Name="miPhrasesReview" Header="Phrases Review" Click="miPhrasesReview_Click" />

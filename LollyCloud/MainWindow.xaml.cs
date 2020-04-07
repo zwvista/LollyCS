@@ -19,6 +19,10 @@ namespace LollyCloud
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
+        public static RoutedCommand ShowSettingsCommand = new RoutedCommand();
+        public static RoutedCommand WordsUnitCommand = new RoutedCommand();
+        public static RoutedCommand PhrasesUnitCommand = new RoutedCommand();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +35,7 @@ namespace LollyCloud
 
         async void Init() => await vmSettings.GetData();
 
-        async void miSettings_Click(object sender, RoutedEventArgs e)
+        async void ShowSettingsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var dlg = new SettingsDlg();
             dlg.Owner = this;
@@ -64,8 +68,8 @@ namespace LollyCloud
             var c = (WordsSearchControl)Tabs[tcMain.SelectedIndex].Content;
             c.SearchWord(word);
         }
-        void miWordsUnit_Click(object sender, RoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
-        void miPhrasesUnit_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesUnitControl>("Phrases in Unit");
+        void WordsUnitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
+        void PhrasesUnitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => AddTab<PhrasesUnitControl>("Phrases in Unit");
         void miWordsReview_Click(object sender, RoutedEventArgs e) => AddTab<WordsReviewControl>("Words Review");
         void miPhrasesReview_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesReviewControl>("Phrases Review");
         void miWordsLang_Click(object sender, RoutedEventArgs e) => AddTab<WordsLangControl>("Words in Language");
