@@ -38,7 +38,7 @@ namespace LollyCloud
             DataContext = item;
         }
 
-        public async void btnOK_Click(object sender, RoutedEventArgs e)
+        async void btnOK_Click(object sender, RoutedEventArgs e)
         {
             item.WORD = vmSettings.AutoCorrectInput(item.WORD);
             if (item.ID == 0)
@@ -48,5 +48,7 @@ namespace LollyCloud
             item.CopyProperties(itemOriginal);
             Close();
         }
+
+        void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

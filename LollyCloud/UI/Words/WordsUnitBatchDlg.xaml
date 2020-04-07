@@ -77,6 +77,9 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <ContentControl ContentTemplate="{StaticResource OkCancel}" Grid.Row="8" Grid.Column="1" />
+        <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
+            <Button Content="OK" Click="btnOK_Click"/>
+            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

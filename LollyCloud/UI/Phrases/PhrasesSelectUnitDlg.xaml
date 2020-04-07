@@ -53,6 +53,9 @@
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <ContentControl ContentTemplate="{StaticResource OkCancel}" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="4" />
+        <StackPanel Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+            <Button Content="OK" Click="btnOK_Click"/>
+            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

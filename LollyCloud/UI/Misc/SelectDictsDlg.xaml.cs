@@ -35,10 +35,12 @@ namespace LollyCloud
             DataContext = vm = new SelectDictsViewModel(vmSettings);
         }
 
-        public async void btnOK_Click(object sender, RoutedEventArgs e)
+        async void btnOK_Click(object sender, RoutedEventArgs e)
         {
             vm.OnOK();
             Close();
         }
+
+        void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

@@ -49,6 +49,9 @@
         <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" />
         <Label Content="ACCURACY:" VerticalAlignment="Center" Grid.Row="10" />
         <TextBox Text="{Binding Path=ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" IsReadOnly="True" />
-        <ContentControl ContentTemplate="{StaticResource OkCancel}" Grid.Row="11" Grid.Column="1" />
+        <StackPanel Grid.Column="1" Grid.Row="11" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+            <Button Content="OK" Click="btnOK_Click"/>
+            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

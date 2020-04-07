@@ -37,7 +37,7 @@ namespace LollyCloud
                     n == 2;
         }
 
-        public async void btnOK_Click(object sender, RoutedEventArgs e)
+        async void btnOK_Click(object sender, RoutedEventArgs e)
         {
             foreach (var o in vmBatch.vm.PhraseItems)
                 if (vmBatch.IsUnitChecked || vmBatch.IsPartChecked || vmBatch.IsSeqNumChecked)
@@ -49,5 +49,7 @@ namespace LollyCloud
                 }
             Close();
         }
+
+        void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

@@ -38,7 +38,7 @@ namespace LollyCloud
                     n == 2;
         }
 
-        public async void btnOK_Click(object sender, RoutedEventArgs e)
+        async void btnOK_Click(object sender, RoutedEventArgs e)
         {
             foreach (var o in vmBatch.vm.WordItems)
             {
@@ -54,5 +54,7 @@ namespace LollyCloud
             }
             Close();
         }
+
+        void btnCancel_Click(object sender, RoutedEventArgs e) => Close();
     }
 }
