@@ -37,9 +37,6 @@
         <TextBox Text="{Binding PHRASE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <Label Content="TRANSLATION:" VerticalAlignment="Center" Grid.Row="6" />
         <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
-        <StackPanel Grid.Column="1" Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
-            <Button Content="OK" Click="btnOK_Click"/>
-            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,0,0"/>
-        </StackPanel>
+        <ContentControl ContentTemplate="{StaticResource OkCancel}" Grid.Row="7" Grid.Column="1" />
     </Grid>
 </Window>

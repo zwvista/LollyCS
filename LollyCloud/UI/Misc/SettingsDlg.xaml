@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LollyCloud"
         xmlns:shared="clr-namespace:LollyShared"
         mc:Ignorable="d"
-        Title="Settings" Height="400" Width="640" WindowStartupLocation="CenterOwner">
+        Title="Settings" Height="480" Width="720" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <local:EnumConverter x:Key="EnumConverter"></local:EnumConverter>
     </Window.Resources>
@@ -64,17 +64,17 @@
         <Button x:Name="btnPrevious" Content="Previous" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="120" Grid.Column="1" Grid.Row="9" Click="btnPrevious_Click"/>
         <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Grid.Column="2" Grid.Row="9" Click="btnNext_Click"/>
         <StackPanel Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Apply to All Windows" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnClose_Click" Margin="0,0,10,0">
+            <Button Content="Apply to All Windows" VerticalAlignment="Center" Click="btnClose_Click" Margin="0,0,10,0">
                 <Button.Tag>
                     <x:Static Member="local:SettingsDlgResult.ApplyToAll"/>
                 </Button.Tag>
             </Button>
-            <Button Content="Apply to Current Window" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnClose_Click" Margin="0,0,10,0">
+            <Button Content="Apply to Current Window" VerticalAlignment="Center" Click="btnClose_Click" Margin="0,0,10,0">
                 <Button.Tag>
                     <x:Static Member="local:SettingsDlgResult.ApplyToCurrent"/>
                 </Button.Tag>
             </Button>
-            <Button Content="Apply to None" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnClose_Click">
+            <Button Content="Apply to None" VerticalAlignment="Center" Click="btnClose_Click">
                 <Button.Tag>
                     <x:Static Member="local:SettingsDlgResult.ApplyToNone"/>
                 </Button.Tag>

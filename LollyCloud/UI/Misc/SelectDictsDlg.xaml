@@ -20,9 +20,6 @@
         <Label Content="Selected" Grid.Column="1" Margin="10,0,0,0" />
         <ListBox ItemsSource="{Binding DictsAvailable}" DisplayMemberPath="DICTNAME" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Grid.Row="1" Margin="10" />
         <ListBox ItemsSource="{Binding DictsSelected}" DisplayMemberPath="DICTNAME" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Grid.Row="1" Grid.Column="1" Margin="10" />
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
-            <Button Content="OK" Click="btnOK_Click"/>
-            <Button Content="Cancel" Click="btnCancel_Click" Margin="10,0,10,0"/>
-        </StackPanel>
+        <ContentControl ContentTemplate="{StaticResource OkCancel}" Grid.Row="2" Grid.ColumnSpan="2" Margin="10" />
     </Grid>
 </Window>
