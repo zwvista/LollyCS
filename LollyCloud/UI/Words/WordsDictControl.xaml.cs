@@ -1,5 +1,4 @@
 ﻿using CefSharp;
-using LollyShared;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;

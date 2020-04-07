@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
-             xmlns:shared="clr-namespace:LollyShared"
         mc:Ignorable="d"
-        Title="PhrasesUnitDetailDlg" Height="350" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="PhrasesUnitDetailDlg" Height="450" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -24,7 +23,7 @@
         <Label Content="Phrase Scope:" VerticalAlignment="Center" Grid.Row="0" />
         <Label Content="Language" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" />
         <Label Content="Filter Scope:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-        <ComboBox x:Name="cbScopeFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" />
+        <ComboBox x:Name="cbScopeFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" />
         <Label Content="Filter Text:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
         <TextBox x:Name="tbTextFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Path=vm.TextFilter, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Center" >
@@ -42,7 +41,7 @@
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

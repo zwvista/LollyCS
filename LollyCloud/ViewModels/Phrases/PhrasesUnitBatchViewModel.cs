@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class PhrasesUnitBatchViewModel : ReactiveObject
     {

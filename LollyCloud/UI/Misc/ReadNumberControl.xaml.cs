@@ -1,5 +1,4 @@
-﻿using LollyShared;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
 using System.Threading.Tasks;
 using System.Windows;

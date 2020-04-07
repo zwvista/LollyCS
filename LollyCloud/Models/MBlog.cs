@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class MBlog : ReactiveObject
     {

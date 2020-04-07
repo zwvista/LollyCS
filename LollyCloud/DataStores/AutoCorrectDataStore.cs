@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class AutoCorrectDataStore : LollyDataStore<MAutoCorrect>
     {

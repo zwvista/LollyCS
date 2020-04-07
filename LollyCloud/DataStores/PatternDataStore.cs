@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class PatternDataStore : LollyDataStore<MPattern>
     {

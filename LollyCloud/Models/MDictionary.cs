@@ -4,7 +4,7 @@ using System.Web;
 using Newtonsoft.Json;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyShared
+namespace LollyCloud
 {
     [JsonObject(MemberSerialization.OptOut)]
     public class MDictionary : ReactiveObject

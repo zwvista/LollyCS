@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class USMappingDataStore : LollyDataStore<MUSMapping>
     {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Linq;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class PatternPhraseDataStore : LollyDataStore<MPatternPhrase>
     {

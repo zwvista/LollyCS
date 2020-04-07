@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class TextbookDataStore : LollyDataStore<MTextbook>
     {

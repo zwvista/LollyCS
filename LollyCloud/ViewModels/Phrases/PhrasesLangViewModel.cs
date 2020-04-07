@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class PhrasesLangViewModel : ReactiveObject
     {

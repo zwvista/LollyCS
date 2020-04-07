@@ -3,7 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class PhrasesReviewViewModel : ReactiveObject
     {

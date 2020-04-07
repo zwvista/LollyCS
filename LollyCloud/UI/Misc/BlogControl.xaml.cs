@@ -1,5 +1,4 @@
 ﻿using CefSharp;
-using LollyShared;
 using ReactiveUI;
 using System;
 using System.Threading.Tasks;

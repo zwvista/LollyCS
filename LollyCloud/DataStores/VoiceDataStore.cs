@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class VoiceDataStore : LollyDataStore<MVoice>
     {

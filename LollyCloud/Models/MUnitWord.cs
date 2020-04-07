@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class MUnitWords
     {

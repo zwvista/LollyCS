@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Reactive;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class BlogViewModel : MBlog
     {

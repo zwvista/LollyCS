@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class NoteViewModel : ReactiveObject
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class ReadNumberViewModel : MReadNumber
     {

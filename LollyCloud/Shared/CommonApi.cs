@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Web;
 using System.Security.Cryptography;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public enum DictWebBrowserStatus
     {

@@ -1,6 +1,5 @@
 ﻿using CefSharp;
 using CefSharp.Wpf;
-using LollyShared;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;

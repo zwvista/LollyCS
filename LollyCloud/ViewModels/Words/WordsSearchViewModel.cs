@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyShared
+namespace LollyCloud
 {
     public class WordsSearchViewModel : ReactiveObject
     {

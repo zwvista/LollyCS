@@ -1,5 +1,4 @@
 ﻿using Hardcodet.Wpf.Util;
-using LollyShared;
 using System;
 using System.Threading.Tasks;
 using System.Windows;

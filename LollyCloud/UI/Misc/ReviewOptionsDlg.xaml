@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
-        xmlns:shared="clr-namespace:LollyShared"
         mc:Ignorable="d"
         Title="Review Options" Height="300" Width="500" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>
@@ -25,7 +24,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
-        <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static shared:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Mode, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type shared:ReviewMode}}"
+        <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Mode, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type local:ReviewMode}}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
         <CheckBox Content="LEVEL >= 0" IsChecked="{Binding Levelge0only}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
