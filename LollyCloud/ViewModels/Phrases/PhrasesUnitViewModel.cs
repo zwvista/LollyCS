@@ -141,7 +141,7 @@ namespace LollyCloud
             return new MUnitPhrase
             {
                 LANGID = vmSettings.SelectedLang.ID,
-                TEXTBOOKID = maxElem?.UNIT ?? vmSettings.USUNITTO,
+                TEXTBOOKID = vmSettings.USTEXTBOOKID,
                 UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO,
                 PART = maxElem?.PART ?? vmSettings.USPARTTO,
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,

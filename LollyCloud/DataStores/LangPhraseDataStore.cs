@@ -12,7 +12,7 @@ namespace LollyCloud
         (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&order=PHRASE")).records;
 
         public async Task<List<MLangPhrase>> GetDataByLangPhrase(int langid, string phrase) =>
-        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.HtmlEncode(phrase)}")).records;
+        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.UrlEncode(phrase)}")).records;
 
         public async Task<List<MLangPhrase>> GetDataById(int id) =>
         (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=ID,eq,{id}")).records;
