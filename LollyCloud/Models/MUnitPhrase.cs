@@ -45,7 +45,7 @@ namespace LollyCloud
         public string PARTSTR => Textbook.PARTSTR(PART);
 
         public ValidationContext ValidationContext { get; } = new ValidationContext();
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
 
         public MUnitPhrase()
         {

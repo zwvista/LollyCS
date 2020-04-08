@@ -56,7 +56,7 @@ namespace LollyCloud
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
 
         public ValidationContext ValidationContext { get; } = new ValidationContext();
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
 
         public MUnitWord()
         {
