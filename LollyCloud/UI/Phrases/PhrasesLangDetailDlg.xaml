@@ -20,7 +20,7 @@
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
         <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" VerticalAlignment="Center" Grid.Row="1" />
-        <TextBox Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <Label Content="TRANSLATION:" VerticalAlignment="Center" Grid.Row="2" />
         <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
         <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >

@@ -37,7 +37,7 @@
         <Label Content="PHRASEID:" VerticalAlignment="Center" Grid.Row="5" />
         <TextBox Text="{Binding PHRASEID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" VerticalAlignment="Center" Grid.Row="6" />
-        <TextBox Text="{Binding PHRASE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <Label Content="TRANSLATION:" VerticalAlignment="Center" Grid.Row="7" />
         <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" />
         <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >

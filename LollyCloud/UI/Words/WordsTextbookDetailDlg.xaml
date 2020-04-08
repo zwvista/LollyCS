@@ -40,7 +40,7 @@
         <Label Content="WORDID:" VerticalAlignment="Center" Grid.Row="5" />
         <TextBox Text="{Binding WORDID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
         <Label Content="WORD:" VerticalAlignment="Center" Grid.Row="6" />
-        <TextBox Text="{Binding WORD}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <TextBox x:Name="tbWord" Text="{Binding WORD}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <Label Content="NOTE:" VerticalAlignment="Center" Grid.Row="7" />
         <TextBox Text="{Binding NOTE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" />
         <Label Content="FAMIID:" VerticalAlignment="Center" Grid.Row="8" />
