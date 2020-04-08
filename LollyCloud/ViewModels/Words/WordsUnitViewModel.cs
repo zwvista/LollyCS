@@ -146,7 +146,7 @@ namespace LollyCloud
 
         public MUnitWord NewUnitWord()
         {
-            var maxElem = WordItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            var maxElem = WordItemsAll.IsEmpty() ? null : WordItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).First();
             return new MUnitWord
             {
                 LANGID = vmSettings.SelectedLang.ID,

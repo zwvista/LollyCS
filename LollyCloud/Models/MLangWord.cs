@@ -20,7 +20,7 @@ namespace LollyCloud
         [Reactive]
         public int LANGID { get; set; }
         [Reactive]
-        public string WORD { get; set; }
+        public string WORD { get; set; } = "";
         [Reactive]
         public string NOTE { get; set; }
         [Reactive]

@@ -137,7 +137,7 @@ namespace LollyCloud
 
         public MUnitPhrase NewUnitPhrase()
         {
-            var maxElem = PhraseItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).FirstOrDefault();
+            var maxElem = PhraseItemsAll.IsEmpty() ? null : PhraseItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).First();
             return new MUnitPhrase
             {
                 LANGID = vmSettings.SelectedLang.ID,

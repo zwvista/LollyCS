@@ -1,9 +1,12 @@
-﻿using ReactiveUI;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Abstractions;
+using ReactiveUI.Validation.Contexts;
+using ReactiveUI.Validation.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Reactive;
 
 namespace LollyCloud
 {
@@ -12,7 +15,7 @@ namespace LollyCloud
         public List<MUnitWord> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptOut)]
-    public class MUnitWord : ReactiveObject, MWordInterface
+    public class MUnitWord : ReactiveObject, MWordInterface, IValidatableViewModel
     {
         [Reactive]
         public int ID { get; set; }
@@ -52,9 +55,14 @@ namespace LollyCloud
         public string PARTSTR => Textbook.PARTSTR(PART);
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
 
+        public ValidationContext ValidationContext { get; } = new ValidationContext();
+        public ReactiveCommand<Unit, Unit> Save { get; }
+
         public MUnitWord()
         {
             this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
+            this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }
