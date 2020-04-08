@@ -1,8 +1,10 @@
-﻿using ReactiveUI;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
+using System.Collections.Generic;
+using System.Reactive;
 
 namespace LollyCloud
 {
@@ -11,7 +13,7 @@ namespace LollyCloud
         public List<MPatternWebPage> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptOut)]
-    public class MPatternWebPage : ReactiveObject
+    public class MPatternWebPage : ReactiveValidationObject<MPatternWebPage>
     {
         [Reactive]
         public int ID { get; set; }
@@ -24,7 +26,15 @@ namespace LollyCloud
         [Reactive]
         public int SEQNUM { get; set; }
         [Reactive]
-        public string WEBPAGE { get; set; }
+        public string WEBPAGE { get; set; } = "";
+
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+
+        public MPatternWebPage()
+        {
+            this.ValidationRule(x => x.WEBPAGE, v => !string.IsNullOrWhiteSpace(v), "WEBPAGE must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
+        }
 
     }
 }

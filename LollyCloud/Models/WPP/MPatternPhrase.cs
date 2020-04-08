@@ -1,8 +1,10 @@
-﻿using ReactiveUI;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
+using System.Collections.Generic;
+using System.Reactive;
 
 namespace LollyCloud
 {
@@ -11,7 +13,7 @@ namespace LollyCloud
         public List<MPatternPhrase> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptOut)]
-    public class MPatternPhrase : ReactiveObject
+    public class MPatternPhrase : ReactiveValidationObject<MPatternPhrase>
     {
         [Reactive]
         public int PATTERNID { get; set; }
@@ -28,9 +30,17 @@ namespace LollyCloud
         [Reactive]
         public int PHRASEID { get; set; }
         [Reactive]
-        public string PHRASE { get; set; }
+        public string PHRASE { get; set; } = "";
         [Reactive]
         public string TRANSLATION { get; set; }
+
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+
+        public MPatternPhrase()
+        {
+            this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
+        }
 
     }
 }

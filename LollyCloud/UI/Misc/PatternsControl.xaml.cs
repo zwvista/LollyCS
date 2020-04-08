@@ -39,8 +39,8 @@ namespace LollyCloud
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = vm.NewPattern();
             dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.PatternItems.Add(dlg.itemOriginal);
+            if (dlg.ShowDialog() == true)
+                vm.PatternItems.Add(dlg.itemOriginal);
         }
 
         void btnAddWebPage_Click(object sender, RoutedEventArgs e)
@@ -49,8 +49,8 @@ namespace LollyCloud
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = vm.NewPatternWebPage(selectedPatternID, selectedPattern);
             dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.WebPageItems.Add(dlg.itemOriginal);
+            if (dlg.ShowDialog() == true)
+                vm.WebPageItems.Add(dlg.itemOriginal);
         }
 
         async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
