@@ -200,19 +200,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\MBlog.cs" />
-    <Compile Include="Models\MPatternPhrase.cs" />
-    <Compile Include="Models\MPatternWebPage.cs" />
-    <Compile Include="Models\MPattern.cs" />
-    <Compile Include="Models\MLangPhrase.cs" />
-    <Compile Include="Models\MUSMapping.cs" />
-    <Compile Include="Models\MUnitPhrase.cs" />
-    <Compile Include="Models\MLangWord.cs" />
-    <Compile Include="Models\MCommon.cs" />
-    <Compile Include="Models\MWordFami.cs" />
-    <Compile Include="Models\MVoice.cs" />
-    <Compile Include="Models\MWordPhrase.cs" />
-    <Compile Include="Models\MReadNumber.cs" />
+    <Compile Include="Models\Misc\MBlog.cs" />
+    <Compile Include="Models\WPP\MPatternPhrase.cs" />
+    <Compile Include="Models\WPP\MPatternWebPage.cs" />
+    <Compile Include="Models\WPP\MPattern.cs" />
+    <Compile Include="Models\WPP\MLangPhrase.cs" />
+    <Compile Include="Models\Misc\MUSMapping.cs" />
+    <Compile Include="Models\WPP\MUnitPhrase.cs" />
+    <Compile Include="Models\WPP\MLangWord.cs" />
+    <Compile Include="Models\Misc\MCommon.cs" />
+    <Compile Include="Models\WPP\MWordFami.cs" />
+    <Compile Include="Models\Misc\MVoice.cs" />
+    <Compile Include="Models\WPP\MWordPhrase.cs" />
+    <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Shared\Converters.cs" />
     <Compile Include="UI\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
@@ -270,12 +270,12 @@
     <Compile Include="Shared\UIHelpers.cs" />
     <Compile Include="Shared\WindowsExtensions.cs" />
     <Compile Include="Shared\CommonApi.cs" />
-    <Compile Include="Models\MAutoCorrect.cs" />
-    <Compile Include="Models\MDictionary.cs" />
-    <Compile Include="Models\MLanguage.cs" />
-    <Compile Include="Models\MTextbook.cs" />
-    <Compile Include="Models\MUnitWord.cs" />
-    <Compile Include="Models\MUserSetting.cs" />
+    <Compile Include="Models\Misc\MAutoCorrect.cs" />
+    <Compile Include="Models\Misc\MDictionary.cs" />
+    <Compile Include="Models\Misc\MLanguage.cs" />
+    <Compile Include="Models\Misc\MTextbook.cs" />
+    <Compile Include="Models\WPP\MUnitWord.cs" />
+    <Compile Include="Models\Misc\MUserSetting.cs" />
     <Compile Include="DataStores\AutoCorrectDataStore.cs" />
     <Compile Include="DataStores\DictionaryDataStore.cs" />
     <Compile Include="DataStores\IDataStore.cs" />
@@ -305,7 +305,7 @@
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Phrases\PhrasesUnitBatchViewModel.cs" />
-    <Compile Include="Models\MReviewOptions.cs" />
+    <Compile Include="Models\Misc\MReviewOptions.cs" />
     <Compile Include="ViewModels\Words\WordsUnitBatchViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsSearchViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsReviewViewModel.cs" />
