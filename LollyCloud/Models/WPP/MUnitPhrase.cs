@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using ReactiveUI.Validation.Abstractions;
-using ReactiveUI.Validation.Contexts;
 using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
 using System.Reactive;
 
@@ -14,7 +13,7 @@ namespace LollyCloud
         public List<MUnitPhrase> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptOut)]
-    public class MUnitPhrase : ReactiveObject, MPhraseInterface, IValidatableViewModel
+    public class MUnitPhrase : ReactiveValidationObject<MUnitPhrase>, MPhraseInterface
     {
         [Reactive]
         public int ID { get; set; }
@@ -44,7 +43,6 @@ namespace LollyCloud
         public string UNITSTR => Textbook.UNITSTR(UNIT);
         public string PARTSTR => Textbook.PARTSTR(PART);
 
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
 
         public MUnitPhrase()

@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using ReactiveUI.Validation.Abstractions;
-using ReactiveUI.Validation.Contexts;
 using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
@@ -15,7 +14,7 @@ namespace LollyCloud
         public List<MLangPhrase> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptOut)]
-    public class MLangPhrase : ReactiveObject, MPhraseInterface, IValidatableViewModel
+    public class MLangPhrase : ReactiveValidationObject<MLangPhrase>, MPhraseInterface
     {
         [Reactive]
         public int ID { get; set; }
@@ -27,7 +26,6 @@ namespace LollyCloud
         [Reactive]
         public string TRANSLATION { get; set; }
 
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
 
         void WhenAnyValueChanged()

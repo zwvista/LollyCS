@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using ReactiveUI.Validation.Abstractions;
-using ReactiveUI.Validation.Contexts;
 using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Reactive;
@@ -15,7 +14,7 @@ namespace LollyCloud
         public List<MUnitWord> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptOut)]
-    public class MUnitWord : ReactiveObject, MWordInterface, IValidatableViewModel
+    public class MUnitWord : ReactiveValidationObject<MUnitWord>, MWordInterface
     {
         [Reactive]
         public int ID { get; set; }
@@ -55,7 +54,6 @@ namespace LollyCloud
         public string PARTSTR => Textbook.PARTSTR(PART);
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
 
-        public ValidationContext ValidationContext { get; } = new ValidationContext();
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
 
         public MUnitWord()
