@@ -48,8 +48,8 @@ namespace LollyCloud
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = vm.NewUnitPhrase();
             dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.PhraseItems.Add(dlg.itemOriginal);
+            if (dlg.ShowDialog() == true)
+                vm.PhraseItems.Add(dlg.itemOriginal);
         }
 
         async void dgPhrases_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)

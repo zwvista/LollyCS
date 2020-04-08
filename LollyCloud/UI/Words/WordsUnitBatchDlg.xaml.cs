@@ -51,6 +51,7 @@ namespace LollyCloud
                 if (vmBatch.IsLevelChecked && (!vmBatch.IsLevel0OnlyChecked || o.LEVEL == 0))
                     await wordFamiDS.Update(o.WORDID, vmBatch.LEVEL);
             }
+            DialogResult = true;
             Close();
         }
 

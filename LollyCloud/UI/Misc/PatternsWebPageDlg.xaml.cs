@@ -45,6 +45,7 @@ namespace LollyCloud
             else
                 await vm.UpdateWebPage(item);
             item.CopyProperties(itemOriginal);
+            DialogResult = true;
             Close();
         }
 

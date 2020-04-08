@@ -46,6 +46,7 @@ namespace LollyCloud
                     if (vmBatch.IsSeqNumChecked) o.SEQNUM += vmBatch.SEQNUM;
                     await unitPhraseDS.Update(o);
                 }
+            DialogResult = true;
             Close();
         }
 

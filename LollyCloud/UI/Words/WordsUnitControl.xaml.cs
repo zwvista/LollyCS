@@ -53,8 +53,8 @@ namespace LollyCloud
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = vm.NewUnitWord();
             dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.WordItems.Add(dlg.itemOriginal);
+            if (dlg.ShowDialog() == true)
+                vm.WordItems.Add(dlg.itemOriginal);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 

@@ -38,8 +38,8 @@ namespace LollyCloud
             dlg.Owner = Window.GetWindow(this);
             dlg.itemOriginal = vm.NewLangPhrase();
             dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.PhraseItems.Add(dlg.itemOriginal);
+            if (dlg.ShowDialog() == true)
+                vm.PhraseItems.Add(dlg.itemOriginal);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 

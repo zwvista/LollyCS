@@ -39,6 +39,7 @@ namespace LollyCloud
         {
             DialogResult = true;
             options.CopyProperties(optionsOriginal);
+            DialogResult = true;
             Close();
         }
 

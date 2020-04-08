@@ -31,7 +31,7 @@ namespace LollyCloud
         [Reactive]
         public int WORDID { get; set; }
         [Reactive]
-        public string WORD { get; set; }
+        public string WORD { get; set; } = "";
         [Reactive]
         public string NOTE { get; set; }
         [Reactive]
