@@ -18,6 +18,7 @@ namespace LollyCloud
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
+        WordFamiDataStore wordFamiDS = new WordFamiDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
         NoteViewModel vmNote;
 
@@ -118,10 +119,22 @@ namespace LollyCloud
                 wordid = itemLang.ID;
                 var b = itemLang.CombineNote(item.NOTE);
                 item.NOTE = itemLang.NOTE;
+                var lstFami = await wordFamiDS.GetDataByUserWord(CommonApi.UserId, wordid);
+                if (lstFami.Any())
+                {
+                    item.CORRECT = lstFami[0].CORRECT;
+                    item.TOTAL = lstFami[0].TOTAL;
+                }
                 if (b) await langWordDS.UpdateNote(wordid, item.NOTE);
             }
             item.WORDID = wordid;
             return await unitWordDS.Create(item);
+        }
+
+        public void Add(MUnitWord item)
+        {
+            WordItemsAll.Add(item);
+            this.RaisePropertyChanged(nameof(WordItems));
         }
 
         public async Task Delete(MUnitWord item)

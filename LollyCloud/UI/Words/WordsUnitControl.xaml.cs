@@ -54,7 +54,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewUnitWord();
             dlg.vm = vm;
             if (dlg.ShowDialog() == true)
-                vm.WordItems.Add(dlg.itemOriginal);
+                vm.Add(dlg.itemOriginal);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
@@ -81,7 +81,7 @@ namespace LollyCloud
             item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
             vm.NewWord = "";
             item.ID = await vm.Create(item);
-            vm.WordItems.Add(item);
+            vm.Add(item);
             dgWords.SelectedItem = vm.WordItems.Last();
         }
 

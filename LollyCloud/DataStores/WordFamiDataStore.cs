@@ -8,7 +8,7 @@ namespace LollyCloud
 {
     public class WordFamiDataStore : LollyDataStore<MWordFami>
     {
-        async Task<IEnumerable<MWordFami>> GetDataByUserWord(int userid, int wordid) =>
+        public async Task<List<MWordFami>> GetDataByUserWord(int userid, int wordid) =>
         (await GetDataByUrl<MWordsFami>($"WORDSFAMI?filter=USERID,eq,{userid}&filter=WORDID,eq,{wordid}")).records;
 
         async Task<int> Create(MWordFami item) =>

@@ -41,11 +41,13 @@ namespace LollyCloud
             if (item == null || !CrossConnectivity.Current.IsConnected)
                 return 0;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            // When posting(creating) a new record, its id must be null.
+            // Otherwise the generated id will not be returned.
+            var serializedItem = JsonConvert.SerializeObject(item).Replace("\"ID\":0,", "").Replace(",\"ID\":0", "");
 
             var response = await client.PostAsync(url, new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
-            return !response.IsSuccessStatusCode || !int.TryParse(response.ToString(), out var v) ? 0 : v;
+            return !response.IsSuccessStatusCode || !int.TryParse(await response.Content.ReadAsStringAsync(), out var v) ? 0 : v;
         }
 
         protected async Task<bool> UpdateByUrl(string url, string body)
