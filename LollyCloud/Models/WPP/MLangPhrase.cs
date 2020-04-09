@@ -13,16 +13,20 @@ namespace LollyCloud
     {
         public List<MLangPhrase> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MLangPhrase : ReactiveValidationObject<MLangPhrase>, MPhraseInterface
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
         public int PHRASEID => ID;
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string PHRASE { get; set; } = "";
+        [JsonProperty]
         [Reactive]
         public string TRANSLATION { get; set; }
 

@@ -9,13 +9,14 @@ namespace LollyCloud
     {
         public List<MLanguage> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MLanguage : ReactiveObject
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
-        [Reactive]
         [JsonProperty("NAME")]
+        [Reactive]
         public string LANGNAME { get; set; }
     }
 }

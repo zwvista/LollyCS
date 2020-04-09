@@ -10,18 +10,22 @@ namespace LollyCloud
     {
         public List<MTextbook> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MTextbook : ReactiveObject
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
-        [Reactive]
         [JsonProperty("NAME")]
+        [Reactive]
         public string TEXTBOOKNAME { get; set; }
+        [JsonProperty]
         [Reactive]
         public string UNITS { get; set; }
+        [JsonProperty]
         [Reactive]
         public string PARTS { get; set; }
 

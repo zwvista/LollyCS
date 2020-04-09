@@ -12,25 +12,34 @@ namespace LollyCloud
     {
         public List<MPatternPhrase> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MPatternPhrase : ReactiveValidationObject<MPatternPhrase>
     {
+        [JsonProperty]
         [Reactive]
         public int PATTERNID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string PATTERN { get; set; }
+        [JsonProperty]
         [Reactive]
         public string NOTE { get; set; }
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int SEQNUM { get; set; }
+        [JsonProperty]
         [Reactive]
         public int PHRASEID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string PHRASE { get; set; } = "";
+        [JsonProperty]
         [Reactive]
         public string TRANSLATION { get; set; }
 

@@ -14,25 +14,33 @@ namespace LollyCloud
     {
         public List<MLangWord> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MLangWord : ReactiveValidationObject<MLangWord>, MWordInterface
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
         public int WORDID => ID;
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string WORD { get; set; } = "";
+        [JsonProperty]
         [Reactive]
         public string NOTE { get; set; }
+        [JsonProperty]
         [Reactive]
         public int FAMIID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LEVEL { get; set; }
         public bool LevelNotZero { [ObservableAsProperty] get; }
+        [JsonProperty]
         [Reactive]
         public int CORRECT { get; set; }
+        [JsonProperty]
         [Reactive]
         public int TOTAL { get; set; }
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";

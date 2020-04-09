@@ -13,36 +13,50 @@ namespace LollyCloud
     {
         public List<MUnitWord> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MUnitWord : ReactiveValidationObject<MUnitWord>, MWordInterface
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int TEXTBOOKID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string TEXTBOOKNAME { get; set; }
+        [JsonProperty]
         [Reactive]
         public int UNIT { get; set; }
+        [JsonProperty]
         [Reactive]
         public int PART { get; set; }
+        [JsonProperty]
         [Reactive]
         public int SEQNUM { get; set; }
+        [JsonProperty]
         [Reactive]
         public int WORDID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string WORD { get; set; } = "";
+        [JsonProperty]
         [Reactive]
         public string NOTE { get; set; }
+        [JsonProperty]
         [Reactive]
         public int FAMIID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LEVEL { get; set; }
         public bool LevelNotZero { [ObservableAsProperty] get; }
+        [JsonProperty]
         [Reactive]
         public int CORRECT { get; set; }
+        [JsonProperty]
         [Reactive]
         public int TOTAL { get; set; }
         [Reactive]

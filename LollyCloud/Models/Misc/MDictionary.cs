@@ -6,41 +6,58 @@ using ReactiveUI.Fody.Helpers;
 
 namespace LollyCloud
 {
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MDictionary : ReactiveObject
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int DICTID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGIDFROM { get; set; }
+        [JsonProperty]
         [Reactive]
         public string LANGNAMEFROM { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGIDTO { get; set; }
+        [JsonProperty]
         [Reactive]
         public string LANGNAMETO { get; set; }
+        [JsonProperty]
         [Reactive]
         public int SEQNUM { get; set; }
+        [JsonProperty]
         [Reactive]
         public int DICTTYPEID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string DICTTYPENAME { get; set; }
+        [JsonProperty]
         [Reactive]
         public string DICTNAME { get; set; }
+        [JsonProperty]
         [Reactive]
         public string URL { get; set; }
+        [JsonProperty]
         [Reactive]
         public string CHCONV { get; set; }
+        [JsonProperty]
         [Reactive]
         public string AUTOMATION { get; set; }
+        [JsonProperty]
         [Reactive]
         public string TRANSFORM { get; set; }
+        [JsonProperty]
         [Reactive]
         public int? WAIT { get; set; }
+        [JsonProperty]
         [Reactive]
         public string TEMPLATE { get; set; }
+        [JsonProperty]
         [Reactive]
         public string TEMPLATE2 { get; set; }
 

@@ -12,19 +12,25 @@ namespace LollyCloud
         public List<MAutoCorrect> records { get; set; }
     }
 
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MAutoCorrect : ReactiveObject
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int SEQNUM { get; set; }
+        [JsonProperty]
         [Reactive]
         public string INPUT { get; set; }
+        [JsonProperty]
         [Reactive]
         public string EXTENDED { get; set; }
+        [JsonProperty]
         [Reactive]
         public string BASIC { get; set; }
 

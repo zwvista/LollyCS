@@ -19,11 +19,13 @@ namespace LollyCloud
     {
         public List<MCode> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MCode : ReactiveObject
     {
+        [JsonProperty]
         [Reactive]
         public int CODE { get; set; }
+        [JsonProperty]
         [Reactive]
         public string NAME { get; set; }
     }

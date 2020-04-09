@@ -9,19 +9,25 @@ namespace LollyCloud
     {
         public List<MUSMapping> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MUSMapping : ReactiveObject
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string NAME { get; set; }
+        [JsonProperty]
         [Reactive]
         public int KIND { get; set; }
+        [JsonProperty]
         [Reactive]
         public int ENTITYID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int VALUEID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LEVEL { get; set; }
 

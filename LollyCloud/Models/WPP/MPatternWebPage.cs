@@ -12,19 +12,25 @@ namespace LollyCloud
     {
         public List<MPatternWebPage> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MPatternWebPage : ReactiveValidationObject<MPatternWebPage>
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int PATTERNID { get; set; }
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string PATTERN { get; set; }
+        [JsonProperty]
         [Reactive]
         public int SEQNUM { get; set; }
+        [JsonProperty]
         [Reactive]
         public string WEBPAGE { get; set; } = "";
 

@@ -12,16 +12,20 @@ namespace LollyCloud
     {
         public List<MPattern> records { get; set; }
     }
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MPattern : ReactiveValidationObject<MPattern>
     {
+        [JsonProperty]
         [Reactive]
         public int ID { get; set; }
         public int PATTERNID => ID;
+        [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
+        [JsonProperty]
         [Reactive]
         public string PATTERN { get; set; } = "";
+        [JsonProperty]
         [Reactive]
         public string NOTE { get; set; }
 
