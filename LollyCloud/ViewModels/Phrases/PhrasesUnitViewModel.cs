@@ -115,6 +115,11 @@ namespace LollyCloud
             item.PHRASEID = phraseid;
             return await unitPhraseDS.Create(item);
         }
+        public void Add(MUnitPhrase item)
+        {
+            PhraseItemsAll.Add(item);
+            this.RaisePropertyChanged(nameof(PhraseItems));
+        }
         public async Task Delete(MUnitPhrase item)
         {
             await unitPhraseDS.Delete(item.ID);

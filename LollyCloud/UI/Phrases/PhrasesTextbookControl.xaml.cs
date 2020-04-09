@@ -39,7 +39,7 @@ namespace LollyCloud
             dlg.itemOriginal = vm.NewUnitPhrase();
             dlg.vm = vm;
             dlg.ShowDialog();
-            vm.PhraseItems.Add(dlg.itemOriginal);
+            vm.Add(dlg.itemOriginal);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
