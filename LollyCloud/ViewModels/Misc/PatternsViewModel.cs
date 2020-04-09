@@ -28,11 +28,6 @@ namespace LollyCloud
         public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            patternDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
-            {
-                PatternItemsAll = new ObservableCollection<MPattern>(lst);
-                this.RaisePropertyChanged(nameof(PatternItems));
-            });
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ =>
             {
                 PatternItemsFiltered = string.IsNullOrEmpty(TextFilter) ? null :
@@ -41,7 +36,14 @@ namespace LollyCloud
                 ));
                 this.RaisePropertyChanged(nameof(PatternItems));
             });
+            Reload();
         }
+        public void Reload() =>
+            patternDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            {
+                PatternItemsAll = new ObservableCollection<MPattern>(lst);
+                this.RaisePropertyChanged(nameof(PatternItems));
+            });
 
         public async Task Update(MPattern item) => await patternDS.Update(item);
         public async Task<int> Create(MPattern item) => await patternDS.Create(item);

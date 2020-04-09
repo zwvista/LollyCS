@@ -17,6 +17,14 @@ namespace LollyCloud
         async Task Delete(int id) =>
         Debug.WriteLine(await DeleteByUrl($"WORDSPHRASES/{id}"));
 
+        public async Task DeleteByWordId(int wordid)
+        {
+            var lst = await GetPhrasesByWordId(wordid);
+            if (lst.IsEmpty()) return;
+            var ids = string.Join(",", lst.Select(o => o.ID));
+            await DeleteByUrl($"WORDSPHRASES/{ids}");
+        }
+
         public async Task Connect(int wordid, int phraseid)
         {
             var lst = await GetDataByWordPhrase(wordid, phraseid);
@@ -36,7 +44,7 @@ namespace LollyCloud
                 await Delete(o.ID);
         }
 
-        public async Task<List<MLangPhrase>> GetPhrasesByWord(int wordid) =>
+        public async Task<List<MLangPhrase>> GetPhrasesByWordId(int wordid) =>
         (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).records;
 
         public async Task<List<MLangWord>> GetWordsByPhrase(int phraseid) =>

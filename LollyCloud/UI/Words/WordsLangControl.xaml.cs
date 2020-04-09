@@ -88,7 +88,7 @@ namespace LollyCloud
             var row = dgWords.SelectedIndex;
             if (row == -1) return;
             var item = vm.WordItems[row];
-            await vm.Delete(item.ID);
+            await vm.Delete(item);
         }
 
         async void tbNewWord_KeyDown(object sender, KeyEventArgs e)

@@ -17,7 +17,7 @@ namespace LollyCloud
         async Task Update(MWordFami item) =>
         Debug.WriteLine(await UpdateByUrl($"WORDSFAMI/{item.ID}", JsonConvert.SerializeObject(item)));
 
-        async Task Delete(int id) =>
+        public async Task Delete(int id) =>
         Debug.WriteLine(await DeleteByUrl($"WORDSFAMI/{id}"));
 
         public async Task Update(int wordid, int level)

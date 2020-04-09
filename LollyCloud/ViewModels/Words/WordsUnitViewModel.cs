@@ -146,9 +146,13 @@ namespace LollyCloud
         public async Task Delete(MUnitWord item)
         {
             await unitWordDS.Delete(item.ID);
-            var lst = await unitWordDS.GetDataByWordId(item.WORDID);
-            if (lst.IsEmpty())
+            var lst1 = await unitWordDS.GetDataByWordId(item.WORDID);
+            var lst2 = await wordPhraseDS.GetPhrasesByWordId(item.WORDID);
+            if (lst1.IsEmpty() && lst2.IsEmpty())
+            {
                 await langWordDS.Delete(item.WORDID);
+                await wordFamiDS.Delete(item.FAMIID);
+            }
         }
 
         public async Task Reindex(Action<int> complete)
@@ -208,7 +212,7 @@ namespace LollyCloud
 
         public async Task SearchPhrases(int wordid)
         {
-            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWord(wordid));
+            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWordId(wordid));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
 

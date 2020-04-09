@@ -71,7 +71,7 @@ namespace LollyCloud
                 await SearchPhrase();
             }
         }
-        async void btnRefresh_Click(object sender, RoutedEventArgs e) => await OnSettingsChanged();
+        void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {

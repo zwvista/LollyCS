@@ -12,6 +12,7 @@ namespace LollyCloud
     {
         public SettingsViewModel vmSettings;
         LangWordDataStore langWordDS = new LangWordDataStore();
+        WordFamiDataStore wordFamiDS = new WordFamiDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         ObservableCollection<MLangWord> WordItemsAll { get; set; }
@@ -50,7 +51,12 @@ namespace LollyCloud
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);
         public async Task<int> Create(MLangWord item) => await langWordDS.Create(item);
-        public async Task Delete(int id) => await langWordDS.Delete(id);
+        public async Task Delete(MLangWord item)
+        {
+            await langWordDS.Delete(item.ID);
+            await wordFamiDS.Delete(item.FAMIID);
+            await wordPhraseDS.DeleteByWordId(item.ID);
+        }
 
         public MLangWord NewLangWord() =>
             new MLangWord
@@ -60,7 +66,7 @@ namespace LollyCloud
 
         public async Task SearchPhrases(int wordid)
         {
-            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWord(wordid));
+            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWordId(wordid));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
     }
