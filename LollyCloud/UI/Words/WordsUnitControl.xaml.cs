@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using Dragablz;
+using System.Windows.Data;
 
 namespace LollyCloud
 {
@@ -139,12 +140,12 @@ namespace LollyCloud
             vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
+                var item = vm.WordItems[e.Row.GetIndex()];
                 var text = ((TextBox)e.EditingElement).Text;
+                if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "WORD")
+                    text = item.WORD = vm.vmSettings.AutoCorrectInput(text);
                 if (text != originalText)
-                {
-                    var item = vm.WordItems[e.Row.GetIndex()];
                     await vm.Update(item);
-                }
                 dgWords.CancelEdit(DataGridEditingUnit.Row);
             }
         }

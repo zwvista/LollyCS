@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace LollyCloud
@@ -107,12 +108,12 @@ namespace LollyCloud
             vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
+                var item = vm.PhraseItems[e.Row.GetIndex()];
                 var text = ((TextBox)e.EditingElement).Text;
+                if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "PHRASE")
+                    text = item.PHRASE = vm.vmSettings.AutoCorrectInput(text);
                 if (text != originalText)
-                {
-                    var item = vm.PhraseItems[e.Row.GetIndex()];
                     await vm.Update(item);
-                }
                 dgPhrases.CancelEdit(DataGridEditingUnit.Row);
             }
         }

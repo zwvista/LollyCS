@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace LollyCloud
@@ -83,12 +84,12 @@ namespace LollyCloud
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
+                var item = vm.PatternItems[e.Row.GetIndex()];
                 var text = ((TextBox)e.EditingElement).Text;
+                if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "PATTERN")
+                    text = item.PATTERN = vm.vmSettings.AutoCorrectInput(text);
                 if (text != originalText)
-                {
-                    var item = vm.PatternItems[e.Row.GetIndex()];
                     await vm.Update(item);
-                }
                 dgPatterns.CancelEdit(DataGridEditingUnit.Row);
             }
         }

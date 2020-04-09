@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -12,7 +13,8 @@ namespace LollyCloud
         (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&order=PHRASE")).records;
 
         public async Task<List<MLangPhrase>> GetDataByLangPhrase(int langid, string phrase) =>
-        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.UrlEncode(phrase)}")).records;
+        (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.UrlEncode(phrase)}")).records
+        .Where(o => o.PHRASE == phrase).ToList();
 
         public async Task<List<MLangPhrase>> GetDataById(int id) =>
         (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=ID,eq,{id}")).records;

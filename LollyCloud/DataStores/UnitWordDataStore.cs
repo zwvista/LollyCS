@@ -24,7 +24,7 @@ namespace LollyCloud
             return lst;
         }
 
-        public async Task<List<MUnitWord>> GetDataByLangWord(int wordid) =>
+        public async Task<List<MUnitWord>> GetDataByWordId(int wordid) =>
         (await GetDataByUrl<MUnitWords>($"VUNITWORDS?filter=WORDID,eq,{wordid}")).records;
 
         public async Task<int> Create(MUnitWord item) =>
