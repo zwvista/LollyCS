@@ -36,6 +36,7 @@ namespace LollyCloud
         {
             itemOriginal.CopyProperties(item);
             DataContext = item;
+            dgWords.DataContext = new SingleWordViewModel(item.WORD, vmSettings);
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)

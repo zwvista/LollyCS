@@ -27,7 +27,7 @@
                   IsEnabled="{Binding IsPartChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <CheckBox Content="SEQNUM(+):" IsChecked="{Binding IsSeqNumChecked}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
         <TextBox Text="{Binding SEQNUM}" IsEnabled="{Binding IsSeqNumChecked}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
             <Button Content="Check All" Tag="0" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck All" Tag="1" Click="btnCheckItems_Click"/>
             <Button Content="Check Selected" Tag="2" Click="btnCheckItems_Click"/>
@@ -46,7 +46,7 @@
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

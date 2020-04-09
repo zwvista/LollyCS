@@ -299,6 +299,8 @@
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesLangViewModel.cs" />
     <Compile Include="ViewModels\Misc\ReadNumberViewModel.cs" />
+    <Compile Include="ViewModels\Phrases\SinglePhraseViewModel.cs" />
+    <Compile Include="ViewModels\Words\SingleWordViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsLangViewModel.cs" />
     <Compile Include="UI\Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>

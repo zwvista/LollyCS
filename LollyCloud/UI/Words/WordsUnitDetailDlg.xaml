@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Words in Unit Details" Height="450" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Words in Unit Details" Height="600" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -22,6 +22,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
@@ -46,7 +47,47 @@
         <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
         <Label Content="ACCURACY:" VerticalAlignment="Center" Grid.Row="9" />
         <TextBox Text="{Binding ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" IsReadOnly="True" />
-        <StackPanel Grid.Column="1" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}" IsReadOnly="True" Grid.Row="10" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
+                <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" />
+                <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" />
+                <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" />
+                <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" />
+                <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" />
+                <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" />
+                <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" />
+                <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" />
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
+                <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LevelNotZero}" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
+                                        <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
+                                        <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
+                                        <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
+                                        <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+        <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Phrases in Language Details" Height="200" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Phrases in Language Details" Height="350" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
@@ -23,7 +24,19 @@
         <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <Label Content="TRANSLATION:" VerticalAlignment="Center" Grid.Row="2" />
         <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}" IsReadOnly="True" Grid.Row="3" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
+                <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" />
+                <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" />
+                <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" />
+                <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE" />
+                <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION" />
+                <DataGridTextColumn Binding="{Binding PHRASEID}" Header="PHRASEID" />
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

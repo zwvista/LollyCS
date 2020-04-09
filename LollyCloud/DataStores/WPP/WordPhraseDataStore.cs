@@ -22,7 +22,7 @@ namespace LollyCloud
             var lst = await GetPhrasesByWordId(wordid);
             if (lst.IsEmpty()) return;
             var ids = string.Join(",", lst.Select(o => o.ID));
-            await DeleteByUrl($"WORDSPHRASES/{ids}");
+            Debug.WriteLine(await DeleteByUrl($"WORDSPHRASES/{ids}"));
         }
 
         public async Task Connect(int wordid, int phraseid)
