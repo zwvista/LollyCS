@@ -278,7 +278,6 @@
     <Compile Include="Models\Misc\MUserSetting.cs" />
     <Compile Include="DataStores\Misc\AutoCorrectDataStore.cs" />
     <Compile Include="DataStores\Misc\DictionaryDataStore.cs" />
-    <Compile Include="DataStores\Misc\IDataStore.cs" />
     <Compile Include="DataStores\Misc\LanguageDataStore.cs" />
     <Compile Include="DataStores\Misc\LollyDataStore.cs" />
     <Compile Include="DataStores\Misc\TextbookDataStore.cs" />

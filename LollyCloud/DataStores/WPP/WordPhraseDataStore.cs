@@ -47,7 +47,7 @@ namespace LollyCloud
         public async Task<List<MLangPhrase>> GetPhrasesByWordId(int wordid) =>
         (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).records;
 
-        public async Task<List<MLangWord>> GetWordsByPhrase(int phraseid) =>
+        public async Task<List<MLangWord>> GetWordsByPhraseId(int phraseid) =>
         (await GetDataByUrl<MLangWords>($"VPHRASESWORD?filter=PHRASEID,eq,{phraseid}")).records;
     }
 }
