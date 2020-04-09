@@ -251,17 +251,17 @@
     <Compile Include="UI\Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataStores\CodeDataStore.cs" />
-    <Compile Include="DataStores\PatternPhraseDataStore.cs" />
-    <Compile Include="DataStores\PatternWebPageDataStore.cs" />
-    <Compile Include="DataStores\PatternDataStore.cs" />
-    <Compile Include="DataStores\LangPhraseDataStore.cs" />
-    <Compile Include="DataStores\USMappingDataStore.cs" />
-    <Compile Include="DataStores\WordPhraseDataStore.cs" />
-    <Compile Include="DataStores\WordFamiDataStore.cs" />
-    <Compile Include="DataStores\VoiceDataStore.cs" />
-    <Compile Include="DataStores\UnitPhraseDataStore.cs" />
-    <Compile Include="DataStores\LangWordDataStore.cs" />
+    <Compile Include="DataStores\Misc\CodeDataStore.cs" />
+    <Compile Include="DataStores\WPP\PatternPhraseDataStore.cs" />
+    <Compile Include="DataStores\WPP\PatternWebPageDataStore.cs" />
+    <Compile Include="DataStores\WPP\PatternDataStore.cs" />
+    <Compile Include="DataStores\WPP\LangPhraseDataStore.cs" />
+    <Compile Include="DataStores\Misc\USMappingDataStore.cs" />
+    <Compile Include="DataStores\WPP\WordPhraseDataStore.cs" />
+    <Compile Include="DataStores\WPP\WordFamiDataStore.cs" />
+    <Compile Include="DataStores\Misc\VoiceDataStore.cs" />
+    <Compile Include="DataStores\WPP\UnitPhraseDataStore.cs" />
+    <Compile Include="DataStores\WPP\LangWordDataStore.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\ReadNumberService.cs" />
     <Compile Include="UI\Misc\SettingsDlg.xaml.cs">
@@ -276,14 +276,14 @@
     <Compile Include="Models\Misc\MTextbook.cs" />
     <Compile Include="Models\WPP\MUnitWord.cs" />
     <Compile Include="Models\Misc\MUserSetting.cs" />
-    <Compile Include="DataStores\AutoCorrectDataStore.cs" />
-    <Compile Include="DataStores\DictionaryDataStore.cs" />
-    <Compile Include="DataStores\IDataStore.cs" />
-    <Compile Include="DataStores\LanguageDataStore.cs" />
-    <Compile Include="DataStores\LollyDataStore.cs" />
-    <Compile Include="DataStores\TextbookDataStore.cs" />
-    <Compile Include="DataStores\UnitWordDataStore.cs" />
-    <Compile Include="DataStores\UserSettingDataStore.cs" />
+    <Compile Include="DataStores\Misc\AutoCorrectDataStore.cs" />
+    <Compile Include="DataStores\Misc\DictionaryDataStore.cs" />
+    <Compile Include="DataStores\Misc\IDataStore.cs" />
+    <Compile Include="DataStores\Misc\LanguageDataStore.cs" />
+    <Compile Include="DataStores\Misc\LollyDataStore.cs" />
+    <Compile Include="DataStores\Misc\TextbookDataStore.cs" />
+    <Compile Include="DataStores\WPP\UnitWordDataStore.cs" />
+    <Compile Include="DataStores\Misc\UserSettingDataStore.cs" />
     <Compile Include="Shared\Interfaces.cs" />
     <Compile Include="UI\Misc\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>

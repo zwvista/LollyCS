@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace LollyCloud
 {
@@ -26,6 +27,15 @@ namespace LollyCloud
 
         public async Task<List<MUnitWord>> GetDataByWordId(int wordid) =>
         (await GetDataByUrl<MUnitWords>($"VUNITWORDS?filter=WORDID,eq,{wordid}")).records;
+
+        public async Task<List<MUnitWord>> GetDataByLangWord(int langid, string word, List<MTextbook> lstTextbooks)
+        {
+            var lst = (await GetDataByUrl<MUnitWords>($"VUNITWORDS?filter=LANGID,eq,{langid}&filter=WORD,eq,{HttpUtility.UrlEncode(word)}")).records
+                .Where(o => o.WORD == word).ToList();
+            foreach (var o in lst)
+                o.Textbook = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);
+            return lst;
+        }
 
         public async Task<int> Create(MUnitWord item) =>
         await CreateByUrl($"UNITWORDS", item);

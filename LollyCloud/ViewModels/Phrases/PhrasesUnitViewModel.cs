@@ -59,7 +59,7 @@ namespace LollyCloud
         public async Task Update(MUnitPhrase item)
         {
             var phraseid = item.PHRASEID;
-            var lstUnit = await unitPhraseDS.GetDataByLangPhrase(phraseid);
+            var lstUnit = await unitPhraseDS.GetDataByPhraseId(phraseid);
             if (lstUnit.IsEmpty()) return;
             var itemLang = new MLangPhrase(item);
             var lstLangOld = await langPhraseDS.GetDataById(phraseid);
@@ -123,7 +123,7 @@ namespace LollyCloud
         public async Task Delete(MUnitPhrase item)
         {
             await unitPhraseDS.Delete(item.ID);
-            var lst = await unitPhraseDS.GetDataByLangPhrase(item.PHRASEID);
+            var lst = await unitPhraseDS.GetDataByPhraseId(item.PHRASEID);
             if (lst.IsEmpty())
                 await langPhraseDS.Delete(item.PHRASEID);
         }

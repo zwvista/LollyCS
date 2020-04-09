@@ -18,7 +18,7 @@ namespace LollyCloud
         public async Task<List<MPatternPhrase>> GetDataByPhraseId(int phraseid) =>
         (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PHRASEID,eq,{phraseid}")).records;
 
-        public async Task<List<MPatternPhrase>> GetDataBy(int id) =>
+        public async Task<List<MPatternPhrase>> GetDataById(int id) =>
         (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=ID,eq,{id}")).records;
 
         public async Task<int> Create(MPatternPhrase item) =>
