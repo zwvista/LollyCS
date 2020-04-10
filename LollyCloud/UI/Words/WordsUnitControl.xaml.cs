@@ -7,6 +7,8 @@ using System.Windows.Input;
 using System.Linq;
 using Dragablz;
 using System.Windows.Data;
+using System.Windows.Threading;
+using System;
 
 namespace LollyCloud
 {
@@ -22,6 +24,8 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
+        public MReviewOptions Options { get; set; } = new MReviewOptions();
+        DispatcherTimer _timer;
 
         public WordsUnitControl()
         {
@@ -122,9 +126,18 @@ namespace LollyCloud
             await vm.ClearNote(row);
         }
         async void btnGetNotes_Click(object sender, RoutedEventArgs e) =>
-            await vm.GetNotes(true, _ => { }, () => { });
+            await vm.GetNotes(true, _ => { });
         async void btnClearNotes_Click(object sender, RoutedEventArgs e) =>
-            await vm.ClearNotes(true, _ => { }, () => { });
+            await vm.ClearNotes(true, _ => { });
+        void btnReview_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new ReviewOptionsDlg();
+            dlg.Owner = UIHelpers.TryFindParent<Window>(this);
+            dlg.optionsOriginal = Options;
+            if (dlg.ShowDialog() == true)
+            {
+            }
+        }
         public override async Task SearchPhrases() =>
             await vm.SearchPhrases(selectedWordID);
 

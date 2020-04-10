@@ -25,7 +25,7 @@ namespace LollyCloud
             return CommonApi.ExtractTextFromHtml(html, DictNote.TRANSFORM, "", (text, _) => text);
         }
 
-        public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne, Action allComplete)
+        public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
         {
             if (DictNote == null) return;
             for (int i = 0; ;)
@@ -33,19 +33,13 @@ namespace LollyCloud
                 await Task.Delay((int)DictNote.WAIT);
                 while (i < wordCount && !isNoteEmpty(i)) i++;
                 if (i > wordCount)
-                {
-                    allComplete();
                     break;
-                }
-                else
-                {
-                    if (i < wordCount)
-                        await getOne(i);
-                    i++;
-                }
+                if (i < wordCount)
+                    await getOne(i);
+                i++;
             }
         }
-        public async Task ClearNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne, Action allComplete)
+        public async Task ClearNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
         {
             if (DictNote == null) return;
             for (int i = 0; ;)

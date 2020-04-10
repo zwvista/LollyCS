@@ -195,20 +195,20 @@ namespace LollyCloud
             await Update(item);
         }
 
-        public async Task GetNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete) =>
+        public async Task GetNotes(bool ifEmpty, Action<int> oneComplete) =>
             await vmNote.GetNotes(WordItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
                     await GetNote(i);
                     oneComplete(i);
-                }, allComplete);
-        public async Task ClearNotes(bool ifEmpty, Action<int> oneComplete, Action allComplete) =>
-            await vmNote.GetNotes(WordItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+                });
+        public async Task ClearNotes(bool ifEmpty, Action<int> oneComplete) =>
+            await vmNote.ClearNotes(WordItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
                     await ClearNote(i);
                     oneComplete(i);
-                }, allComplete);
+                });
 
         public async Task SearchPhrases(int wordid)
         {

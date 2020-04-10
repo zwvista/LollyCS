@@ -295,6 +295,7 @@
     </Compile>
     <Compile Include="ViewModels\Misc\PatternsViewModel.cs" />
     <Compile Include="ViewModels\Misc\SelectDictsViewModel.cs" />
+    <Compile Include="ViewModels\Misc\EmbeddedReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesLangViewModel.cs" />

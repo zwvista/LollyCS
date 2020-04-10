@@ -22,6 +22,7 @@
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
                 <Button x:Name="btnGetNotes" Click="btnGetNotes_Click">Get Notes</Button>
                 <Button x:Name="btnClearNotes" Click="btnClearNotes_Click">Clear Notes</Button>
+                <Button x:Name="btnReview" Click="btnReview_Click">Review</Button>
             </ToolBar>
             <ToolBar Band="2">
                 <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />

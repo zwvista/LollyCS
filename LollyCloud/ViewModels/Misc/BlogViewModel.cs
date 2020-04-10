@@ -29,8 +29,9 @@ namespace LollyCloud
                 MarkedText = service.HtmlToMarked(HtmlText);
             });
             AddNotesCommand = ReactiveCommand.CreateFromTask(async () =>
-                await service.AddNotes(vmNote, MarkedText, s => MarkedText = s)
-            );
+            {
+                MarkedText = await service.AddNotes(vmNote, MarkedText);
+            });
         }
         public string AddTagB(string str) => service.AddTagB(str);
         public string AddTagI(string str) => service.AddTagI(str);

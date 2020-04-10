@@ -125,7 +125,7 @@ namespace LollyCloud
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
         public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
         readonly string bigDigits = "０１２３４５６７８９";
-        public async Task AddNotes(NoteViewModel vmNote, string text, Action<string> complete)
+        public async Task<string> AddNotes(NoteViewModel vmNote, string text)
         {
             string F(string s)
             {
@@ -151,11 +151,9 @@ namespace LollyCloud
                 var s22 = j == -1 ? "" : F(note.Substring(j));
                 var s2 = word + (s21 == word || string.IsNullOrEmpty(s21) ? "" : $"（{s21}）") + s22;
                 items[i] = $"{s1} {s2}：{s3}：{s4}";
-            }, () =>
-            {
-                var result = string.Join("\r\n", items);
-                complete(result);
             });
+            var result = string.Join("\r\n", items);
+            return result;
         }
     }
 }
