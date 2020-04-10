@@ -29,13 +29,11 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Label x:Name="lblIndex"/>
-                <Grid>
-                    <Label x:Name="lblCorrect" Content="Correct" Foreground="Green" />
-                    <Label x:Name="lblIncorrect" Content="Incorrect" Foreground="Red" />
-                </Grid>
-            </StackPanel>
+            <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
+                <Label x:Name="lblIndex" DockPanel.Dock="Left"/>
+                <Label x:Name="lblCorrect" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
+                <Label x:Name="lblIncorrect" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
+            </DockPanel>
             <Label x:Name="lblPhraseTarget" Content="{Binding PhraseTarget}" Foreground="Orange" Grid.Row="1" />
             <Label x:Name="lblTranslation" Content="{Binding Translation}" Foreground="Pink" Grid.Row="2" />
             <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInput}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />

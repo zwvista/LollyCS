@@ -37,7 +37,6 @@ namespace LollyCloud
 
         void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
             options.CopyProperties(optionsOriginal);
             DialogResult = true;
             Close();

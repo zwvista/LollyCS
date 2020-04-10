@@ -45,7 +45,7 @@ namespace LollyCloud
             if (IsTestMode && !HasNext)
             {
                 Index = 0;
-                Items = Items.Where(o => CorrectIDs.Contains(o.ID)).ToList();
+                Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
             }
         }
         public void Check(string phraseInput)

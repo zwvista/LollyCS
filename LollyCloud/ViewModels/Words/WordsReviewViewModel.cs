@@ -34,11 +34,11 @@ namespace LollyCloud
         {
             Items = await unitWordDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
-            if (Options.Levelge0only)
-                Items = Items.Where(o => o.LEVEL >= 0).ToList();
             int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
             int nTo = Count * Options.GroupSelected / Options.GroupCount;
             Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
+            if (Options.Levelge0only)
+                Items = Items.Where(o => o.LEVEL >= 0).ToList();
             if (Options.Shuffled)
                 Items.Shuffle();
             CorrectIDs = new List<int>();
@@ -50,7 +50,7 @@ namespace LollyCloud
             if (IsTestMode && !HasNext)
             {
                 Index = 0;
-                Items = Items.Where(o => CorrectIDs.Contains(o.ID)).ToList();
+                Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
             }
         }
         public async Task<string> GetTranslation()
@@ -66,7 +66,9 @@ namespace LollyCloud
             var o = CurrentItem;
             var isCorrect = o.WORD == wordInput;
             if (isCorrect) CorrectIDs.Add(o.ID);
-            await wordFamiDS.Update(o.WORDID, o.LEVEL);
+            var o2 = await wordFamiDS.Update(o.WORDID, isCorrect);
+            o.CORRECT = o2.CORRECT;
+            o.TOTAL = o2.TOTAL;
         }
     }
 }
