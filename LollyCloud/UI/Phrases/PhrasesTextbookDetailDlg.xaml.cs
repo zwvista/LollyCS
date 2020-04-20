@@ -37,7 +37,7 @@ namespace LollyCloud
             var o = item.VM;
             itemOriginal.CopyProperties(o);
             DataContext = item;
-            dgPhrases.DataContext = new SingleWordViewModel(o.PHRASE, vmSettings);
+            dgPhrases.DataContext = new SinglePhraseViewModel(o.PHRASE, vmSettings);
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)

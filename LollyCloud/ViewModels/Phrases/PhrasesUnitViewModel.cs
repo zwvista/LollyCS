@@ -51,7 +51,7 @@ namespace LollyCloud
                 unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
             .ToObservable().Subscribe(lst =>
             {
-                PhraseItemsAll = new ObservableCollection<MUnitPhrase>();
+                PhraseItemsAll = new ObservableCollection<MUnitPhrase>(lst);
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
 
