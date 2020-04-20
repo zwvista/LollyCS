@@ -73,7 +73,7 @@ namespace LollyCloud
             this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
         }
     }
-    public class MUnitWord2 : ReactiveValidationObject2<MUnitWord>
+    public class MUnitWord2 : ReactiveValidationObject2<MUnitWord, MUnitWord2>
     {
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MUnitWord2()

@@ -78,7 +78,7 @@ namespace LollyCloud
             return oldNote != NOTE;
         }
     }
-    public class MLangWord2 : ReactiveValidationObject2<MLangWord>
+    public class MLangWord2 : ReactiveValidationObject2<MLangWord, MLangWord2>
     {
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MLangWord2()

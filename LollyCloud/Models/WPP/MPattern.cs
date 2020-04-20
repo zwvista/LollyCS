@@ -34,7 +34,7 @@ namespace LollyCloud
         }
 
     }
-    public class MPattern2 : ReactiveValidationObject2<MPattern>
+    public class MPattern2 : ReactiveValidationObject2<MPattern, MPattern2>
     {
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MPattern2()

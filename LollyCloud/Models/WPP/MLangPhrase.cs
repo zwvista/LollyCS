@@ -57,7 +57,7 @@ namespace LollyCloud
             return oldTranslation != TRANSLATION;
         }
     }
-    public class MLangPhrase2 : ReactiveValidationObject2<MLangPhrase>
+    public class MLangPhrase2 : ReactiveValidationObject2<MLangPhrase, MLangPhrase2>
     {
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MLangPhrase2()

@@ -57,7 +57,7 @@ namespace LollyCloud
         {
         }
     }
-    public class MUnitPhrase2 : ReactiveValidationObject2<MUnitPhrase>
+    public class MUnitPhrase2 : ReactiveValidationObject2<MUnitPhrase, MUnitPhrase2>
     {
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MUnitPhrase2()

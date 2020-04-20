@@ -19,7 +19,7 @@ namespace LollyCloud
     /// Base class for ReactiveObjects that support INotifyDataErrorInfo validation.
     /// </summary>
     /// <typeparam name="TViewModel">The parent view model.</typeparam>
-    public abstract class ReactiveValidationObject2<TViewModel> : ReactiveObject, IValidatableViewModel, INotifyDataErrorInfo where TViewModel : new ()
+    public abstract class ReactiveValidationObject2<TViewModel, TViewModel2> : ReactiveObject, IValidatableViewModel, INotifyDataErrorInfo where TViewModel : new ()
     {
         private readonly ObservableAsPropertyHelper<bool> _hasErrors;
         public TViewModel VM { get; set; } = new TViewModel();
@@ -71,13 +71,15 @@ namespace LollyCloud
 
             var relatedPropertyValidations = ValidationContext
                 .Validations
-                .OfType<IPropertyValidationComponent<TViewModel>>()
-                .Where(validation => validation.ContainsPropertyName(memberInfoName));
+                .OfType<IPropertyValidationComponent<TViewModel2>>()
+                .Where(validation => validation.ContainsPropertyName(memberInfoName))
+                .ToList();
 
-            return relatedPropertyValidations
+            var result = relatedPropertyValidations
                 .Where(validation => !validation.IsValid)
                 .SelectMany(validation => validation.Text)
                 .ToList();
+            return result;
         }
     }
 }
