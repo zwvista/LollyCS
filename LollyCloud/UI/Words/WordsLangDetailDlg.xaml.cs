@@ -23,7 +23,7 @@ namespace LollyCloud
         public MLangWord itemOriginal;
         public SettingsViewModel vmSettings => vm.vmSettings;
         public WordsLangViewModel vm;
-        MLangWord item = new MLangWord();
+        MLangWord2 item = new MLangWord2();
         public WordsLangDetailDlg()
         {
             InitializeComponent();
@@ -34,19 +34,21 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            itemOriginal.CopyProperties(item);
+            var o = item.VM;
+            itemOriginal.CopyProperties(o);
             DataContext = item;
-            dgWords.DataContext = new SingleWordViewModel(item.WORD, vmSettings);
+            dgWords.DataContext = new SingleWordViewModel(o.WORD, vmSettings);
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            item.WORD = vmSettings.AutoCorrectInput(item.WORD);
-            if (item.ID == 0)
-                item.ID = await vm.Create(item);
+            var o = item.VM;
+            o.WORD = vmSettings.AutoCorrectInput(o.WORD);
+            if (o.ID == 0)
+                o.ID = await vm.Create(o);
             else
-                await vm.Update(item);
-            item.CopyProperties(itemOriginal);
+                await vm.Update(o);
+            o.CopyProperties(itemOriginal);
             DialogResult = true;
             Close();
         }

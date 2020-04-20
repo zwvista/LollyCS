@@ -14,7 +14,7 @@ namespace LollyCloud
         public List<MUnitWord> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MUnitWord : ReactiveValidationObject<MUnitWord>, MWordInterface
+    public class MUnitWord : ReactiveObject, MWordInterface
     {
         [JsonProperty]
         [Reactive]
@@ -68,12 +68,17 @@ namespace LollyCloud
         public string PARTSTR => Textbook.PARTSTR(PART);
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
 
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
-
         public MUnitWord()
         {
             this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
-            this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
+        }
+    }
+    public class MUnitWord2 : ReactiveValidationObject2<MUnitWord>
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MUnitWord2()
+        {
+            this.ValidationRule(x => x.VM.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

@@ -14,7 +14,7 @@ namespace LollyCloud
         public List<MLangPhrase> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangPhrase : ReactiveValidationObject<MLangPhrase>, MPhraseInterface
+    public class MLangPhrase : ReactiveObject, MPhraseInterface
     {
         [JsonProperty]
         [Reactive]
@@ -30,17 +30,8 @@ namespace LollyCloud
         [Reactive]
         public string TRANSLATION { get; set; }
 
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
-
-        void WhenAnyValueChanged()
-        {
-            this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
-        }
-
         public MLangPhrase()
         {
-            WhenAnyValueChanged();
         }
         public MLangPhrase(MUnitPhrase item)
         {
@@ -48,7 +39,6 @@ namespace LollyCloud
             LANGID = item.LANGID;
             PHRASE = item.PHRASE;
             TRANSLATION = item.TRANSLATION;
-            WhenAnyValueChanged();
         }
 
         public bool CombineTranslation(string translation)
@@ -65,6 +55,15 @@ namespace LollyCloud
                     TRANSLATION = string.Join(",", lst);
                 }
             return oldTranslation != TRANSLATION;
+        }
+    }
+    public class MLangPhrase2 : ReactiveValidationObject2<MLangPhrase>
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MLangPhrase2()
+        {
+            this.ValidationRule(x => x.VM.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }

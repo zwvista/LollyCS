@@ -15,7 +15,7 @@ namespace LollyCloud
         public List<MLangWord> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangWord : ReactiveValidationObject<MLangWord>, MWordInterface
+    public class MLangWord : ReactiveObject, MWordInterface
     {
         [JsonProperty]
         [Reactive]
@@ -45,13 +45,9 @@ namespace LollyCloud
         public int TOTAL { get; set; }
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
 
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
-
         void WhenAnyValueChanged()
         {
             this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
-            this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
         public MLangWord()
         {
@@ -80,6 +76,15 @@ namespace LollyCloud
                     NOTE = string.Join(",", lst);
                 }
             return oldNote != NOTE;
+        }
+    }
+    public class MLangWord2 : ReactiveValidationObject2<MLangWord>
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MLangWord2()
+        {
+            this.ValidationRule(x => x.VM.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }

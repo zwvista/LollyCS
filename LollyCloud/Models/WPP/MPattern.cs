@@ -13,7 +13,7 @@ namespace LollyCloud
         public List<MPattern> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MPattern : ReactiveValidationObject<MPattern>
+    public class MPattern : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
@@ -29,13 +29,18 @@ namespace LollyCloud
         [Reactive]
         public string NOTE { get; set; }
 
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
-
         public MPattern()
         {
-            this.ValidationRule(x => x.PATTERN, v => !string.IsNullOrWhiteSpace(v), "PATTERN must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
 
+    }
+    public class MPattern2 : ReactiveValidationObject2<MPattern>
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MPattern2()
+        {
+            this.ValidationRule(x => x.VM.PATTERN, v => !string.IsNullOrWhiteSpace(v), "PATTERN must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
+        }
     }
 }

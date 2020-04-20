@@ -26,27 +26,27 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding VM.ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="UNIT:" VerticalAlignment="Center" Grid.Row="1" />
-        <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
+        <ComboBox x:Name="cbUnit" ItemsSource="{Binding VM.Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding VM.UNIT}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <Label Content="PART:" VerticalAlignment="Center" Grid.Row="2" />
-        <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
+        <ComboBox x:Name="cbPart" ItemsSource="{Binding VM.Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding VM.PART}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" />
         <Label Content="SEQNUM:" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBox Text="{Binding VM.SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
         <Label Content="WORDID:" VerticalAlignment="Center" Grid.Row="4" />
-        <TextBox Text="{Binding WORDID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding VM.WORDID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="WORD:" VerticalAlignment="Center" Grid.Row="5" />
-        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbWord" Text="{Binding VM.WORD, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <Label Content="NOTE:" VerticalAlignment="Center" Grid.Row="6" />
-        <TextBox Text="{Binding NOTE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <TextBox Text="{Binding VM.NOTE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <Label Content="FAMIID:" VerticalAlignment="Center" Grid.Row="7" />
-        <TextBox Text="{Binding FAMIID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding VM.FAMIID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" IsReadOnly="True" />
         <Label Content="LEVEL:" VerticalAlignment="Center" Grid.Row="8" />
-        <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
+        <TextBox Text="{Binding VM.LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" />
         <Label Content="ACCURACY:" VerticalAlignment="Center" Grid.Row="9" />
-        <TextBox Text="{Binding ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding VM.ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" IsReadOnly="True" />
         <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}" IsReadOnly="True" Grid.Row="10" Grid.Column="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
@@ -65,7 +65,7 @@
                 <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding LevelNotZero}" Value="True">
+                        <DataTrigger Binding="{Binding VM.LevelNotZero}" Value="True">
                             <Setter Property="Background">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">

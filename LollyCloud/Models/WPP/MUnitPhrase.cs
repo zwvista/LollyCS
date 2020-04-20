@@ -13,7 +13,7 @@ namespace LollyCloud
         public List<MUnitPhrase> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MUnitPhrase : ReactiveValidationObject<MUnitPhrase>, MPhraseInterface
+    public class MUnitPhrase : ReactiveObject, MPhraseInterface
     {
         [JsonProperty]
         [Reactive]
@@ -53,11 +53,16 @@ namespace LollyCloud
         public string UNITSTR => Textbook.UNITSTR(UNIT);
         public string PARTSTR => Textbook.PARTSTR(PART);
 
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
-
         public MUnitPhrase()
         {
-            this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
+        }
+    }
+    public class MUnitPhrase2 : ReactiveValidationObject2<MUnitPhrase>
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MUnitPhrase2()
+        {
+            this.ValidationRule(x => x.VM.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
