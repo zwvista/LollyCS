@@ -214,7 +214,6 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Shared\Converters.cs" />
-    <Compile Include="Shared\ReactiveValidationObject2.cs" />
     <Compile Include="UI\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>

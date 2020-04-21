@@ -34,12 +34,18 @@ namespace LollyCloud
         }
 
     }
-    public class MPattern2 : ReactiveValidationObject2<MPattern, MPattern2>
+    public class MPatternEdit : ReactiveValidationObject<MPatternEdit>
     {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public string PATTERN { get; set; } = "";
+        [Reactive]
+        public string NOTE { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
-        public MPattern2()
+        public MPatternEdit()
         {
-            this.ValidationRule(x => x.VM.PATTERN, v => !string.IsNullOrWhiteSpace(v), "PATTERN must not be empty");
+            this.ValidationRule(x => x.PATTERN, v => !string.IsNullOrWhiteSpace(v), "PATTERN must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

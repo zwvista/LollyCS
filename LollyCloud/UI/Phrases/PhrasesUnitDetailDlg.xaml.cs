@@ -20,10 +20,10 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesUnitDetailDlg : Window
     {
-        public MUnitPhrase itemOriginal;
+        public MUnitPhrase Item;
         public SettingsViewModel vmSettings => vm.vmSettings;
         public PhrasesUnitViewModel vm;
-        MUnitPhrase2 item = new MUnitPhrase2();
+        MUnitPhraseEdit itemEdit = new MUnitPhraseEdit();
         public PhrasesUnitDetailDlg()
         {
             InitializeComponent();
@@ -34,21 +34,19 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var o = item.VM;
-            itemOriginal.CopyProperties(o);
-            DataContext = item;
-            dgPhrases.DataContext = new SinglePhraseViewModel(o.PHRASE, vmSettings);
+            Item.CopyProperties(itemEdit);
+            DataContext = itemEdit;
+            dgPhrases.DataContext = new SinglePhraseViewModel(Item.PHRASE, vmSettings);
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            var o = item.VM;
-            o.PHRASE = vmSettings.AutoCorrectInput(o.PHRASE);
-            if (o.ID == 0)
-                o.ID = await vm.Create(o);
+            itemEdit.CopyProperties(Item);
+            Item.PHRASE = vmSettings.AutoCorrectInput(Item.PHRASE);
+            if (Item.ID == 0)
+                Item.ID = await vm.Create(Item);
             else
-                await vm.Update(o);
-            o.CopyProperties(itemOriginal);
+                await vm.Update(Item);
             DialogResult = true;
             Close();
         }

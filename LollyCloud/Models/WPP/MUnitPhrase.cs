@@ -57,12 +57,29 @@ namespace LollyCloud
         {
         }
     }
-    public class MUnitPhrase2 : ReactiveValidationObject2<MUnitPhrase, MUnitPhrase2>
+    public class MUnitPhraseEdit : ReactiveValidationObject<MUnitPhraseEdit>
     {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public string TEXTBOOKNAME { get; set; }
+        [Reactive]
+        public int UNIT { get; set; }
+        [Reactive]
+        public int PART { get; set; }
+        [Reactive]
+        public int SEQNUM { get; set; }
+        [Reactive]
+        public int PHRASEID { get; set; }
+        [Reactive]
+        public string PHRASE { get; set; } = "";
+        [Reactive]
+        public string TRANSLATION { get; set; }
+        public MTextbook Textbook { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
-        public MUnitPhrase2()
+        public MUnitPhraseEdit()
         {
-            this.ValidationRule(x => x.VM.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
+            this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

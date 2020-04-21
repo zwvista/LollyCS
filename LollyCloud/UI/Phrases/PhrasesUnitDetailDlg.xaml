@@ -23,21 +23,21 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
-        <TextBox Text="{Binding VM.ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="UNIT:" VerticalAlignment="Center" Grid.Row="1" />
-        <ComboBox x:Name="cbUnit" ItemsSource="{Binding VM.Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding VM.UNIT}"
+        <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <Label Content="PART:" VerticalAlignment="Center" Grid.Row="2" />
-        <ComboBox x:Name="cbPart" ItemsSource="{Binding VM.Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding VM.PART}"
+        <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" />
         <Label Content="SEQNUM:" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox Text="{Binding VM.SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
         <Label Content="PHRASEID:" VerticalAlignment="Center" Grid.Row="4" />
-        <TextBox Text="{Binding VM.PHRASEID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding PHRASEID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" VerticalAlignment="Center" Grid.Row="5" />
-        <TextBox x:Name="tbPhrase" Text="{Binding VM.PHRASE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
         <Label Content="TRANSLATION:" VerticalAlignment="Center" Grid.Row="6" />
-        <TextBox Text="{Binding VM.TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <TextBox Text="{Binding TRANSLATION}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
         <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}" IsReadOnly="True" Grid.Row="7" Grid.Column="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
@@ -51,7 +51,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
-            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding VM.Save}"/>
+            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>

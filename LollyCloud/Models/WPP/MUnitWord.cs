@@ -73,12 +73,35 @@ namespace LollyCloud
             this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
         }
     }
-    public class MUnitWord2 : ReactiveValidationObject2<MUnitWord, MUnitWord2>
+    public class MUnitWordEdit : ReactiveValidationObject<MUnitWordEdit>
     {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public string TEXTBOOKNAME { get; set; }
+        [Reactive]
+        public int UNIT { get; set; }
+        [Reactive]
+        public int PART { get; set; }
+        [Reactive]
+        public int SEQNUM { get; set; }
+        [Reactive]
+        public int WORDID { get; set; }
+        [Reactive]
+        public string WORD { get; set; } = "";
+        [Reactive]
+        public string NOTE { get; set; }
+        [Reactive]
+        public int FAMIID { get; set; }
+        [Reactive]
+        public int LEVEL { get; set; }
+        public MTextbook Textbook { get; set; }
+        [Reactive]
+        public string ACCURACY { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
-        public MUnitWord2()
+        public MUnitWordEdit()
         {
-            this.ValidationRule(x => x.VM.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
+            this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

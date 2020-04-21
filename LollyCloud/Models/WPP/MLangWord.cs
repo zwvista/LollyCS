@@ -78,12 +78,25 @@ namespace LollyCloud
             return oldNote != NOTE;
         }
     }
-    public class MLangWord2 : ReactiveValidationObject2<MLangWord, MLangWord2>
+    public class MLangWordEdit : ReactiveValidationObject<MLangWordEdit>
     {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public string WORD { get; set; } = "";
+        [Reactive]
+        public string NOTE { get; set; }
+        [Reactive]
+        public int FAMIID { get; set; }
+        [Reactive]
+        public int LEVEL { get; set; }
+        public MTextbook Textbook { get; set; }
+        [Reactive]
+        public string ACCURACY { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
-        public MLangWord2()
+        public MLangWordEdit()
         {
-            this.ValidationRule(x => x.VM.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
+            this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

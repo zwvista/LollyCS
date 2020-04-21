@@ -13,7 +13,7 @@ namespace LollyCloud
         public List<MPatternWebPage> records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MPatternWebPage : ReactiveValidationObject<MPatternWebPage>
+    public class MPatternWebPage : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
@@ -34,13 +34,27 @@ namespace LollyCloud
         [Reactive]
         public string WEBPAGE { get; set; } = "";
 
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
-
         public MPatternWebPage()
+        {
+        }
+    }
+    public class MPatternWebPageEdit : ReactiveValidationObject<MPatternWebPageEdit>
+    {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public int PATTERNID { get; set; }
+        [Reactive]
+        public string PATTERN { get; set; } = "";
+        [Reactive]
+        public int SEQNUM { get; set; }
+        [Reactive]
+        public string WEBPAGE { get; set; } = "";
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MPatternWebPageEdit()
         {
             this.ValidationRule(x => x.WEBPAGE, v => !string.IsNullOrWhiteSpace(v), "WEBPAGE must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
-
     }
 }

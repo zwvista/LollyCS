@@ -57,12 +57,18 @@ namespace LollyCloud
             return oldTranslation != TRANSLATION;
         }
     }
-    public class MLangPhrase2 : ReactiveValidationObject2<MLangPhrase, MLangPhrase2>
+    public class MLangPhraseEdit : ReactiveValidationObject<MLangPhraseEdit>
     {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public string PHRASE { get; set; } = "";
+        [Reactive]
+        public string TRANSLATION { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
-        public MLangPhrase2()
+        public MLangPhraseEdit()
         {
-            this.ValidationRule(x => x.VM.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
+            this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

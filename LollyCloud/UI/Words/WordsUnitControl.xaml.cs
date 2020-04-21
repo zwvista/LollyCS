@@ -39,7 +39,7 @@ namespace LollyCloud
             var dlg = new WordsUnitDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             dlg.Owner = Window.GetWindow(this);
-            dlg.itemOriginal = (sender as DataGridRow).Item as MUnitWord;
+            dlg.Item = (sender as DataGridRow).Item as MUnitWord;
             dlg.vm = vm;
             dlg.ShowDialog();
         }
@@ -56,10 +56,10 @@ namespace LollyCloud
         {
             var dlg = new WordsUnitDetailDlg();
             dlg.Owner = Window.GetWindow(this);
-            dlg.itemOriginal = vm.NewUnitWord();
+            dlg.Item = vm.NewUnitWord();
             dlg.vm = vm;
             if (dlg.ShowDialog() == true)
-                vm.Add(dlg.itemOriginal);
+                vm.Add(dlg.Item);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 

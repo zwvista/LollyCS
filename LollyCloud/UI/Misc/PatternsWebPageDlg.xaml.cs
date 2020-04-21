@@ -20,10 +20,10 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsWebPageDlg : Window
     {
-        public MPatternWebPage itemOriginal;
+        public MPatternWebPage Item;
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public PatternsViewModel vm;
-        MPatternWebPage item = new MPatternWebPage();
+        MPatternWebPageEdit itemEdit = new MPatternWebPageEdit();
         public PatternsWebPageDlg()
         {
             InitializeComponent();
@@ -34,18 +34,18 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            itemOriginal.CopyProperties(item);
-            DataContext = item;
+            Item.CopyProperties(itemEdit);
+            DataContext = itemEdit;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            item.PATTERN = vmSettings.AutoCorrectInput(item.PATTERN);
-            if (item.ID == 0)
-                item.ID = await vm.CreateWebPage(item);
+            itemEdit.CopyProperties(Item);
+            Item.PATTERN = vmSettings.AutoCorrectInput(Item.PATTERN);
+            if (Item.ID == 0)
+                Item.ID = await vm.CreateWebPage(Item);
             else
-                await vm.UpdateWebPage(item);
-            item.CopyProperties(itemOriginal);
+                await vm.UpdateWebPage(Item);
             DialogResult = true;
             Close();
         }

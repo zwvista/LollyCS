@@ -20,10 +20,10 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsDetailDlg : Window
     {
-        public MPattern itemOriginal;
+        public MPattern Item;
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public PatternsViewModel vm;
-        MPattern item = new MPattern();
+        MPatternEdit itemEdit = new MPatternEdit();
         public PatternsDetailDlg()
         {
             InitializeComponent();
@@ -34,18 +34,18 @@ namespace LollyCloud
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            itemOriginal.CopyProperties(item);
-            DataContext = item;
+            Item.CopyProperties(itemEdit);
+            DataContext = itemEdit;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            item.PATTERN = vmSettings.AutoCorrectInput(item.PATTERN);
-            if (item.ID == 0)
-                item.ID = await vm.Create(item);
+            itemEdit.CopyProperties(Item);
+            Item.PATTERN = vmSettings.AutoCorrectInput(Item.PATTERN);
+            if (Item.ID == 0)
+                Item.ID = await vm.Create(Item);
             else
-                await vm.Update(item);
-            item.CopyProperties(itemOriginal);
+                await vm.Update(Item);
             DialogResult = true;
             Close();
         }
