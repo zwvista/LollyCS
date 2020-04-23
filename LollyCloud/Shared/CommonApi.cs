@@ -48,12 +48,12 @@ namespace LollyCloud
                 var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < arr.Length; i += 2)
                 {
-                    var reg = new Regex(arr[i].Replace("\r\n", "\n"));
+                    var reg = new Regex(arr[i].Replace("\\r\\n", "\\n"));
                     var replacer = arr[i + 1];
                     if (replacer.StartsWith("<extract>"))
                     {
                         replacer = replacer.Substring("<extract>".Length);
-                        text = string.Join("", reg.Matches(html).Cast<Match>().Select(m => m.Groups[0]));
+                        text = string.Join("", reg.Matches(text).Cast<Match>().Select(m => m.Groups[0]));
                     }
                     foreach (var entry in escapes)
                         replacer = replacer.Replace(entry.Key, entry.Value);
