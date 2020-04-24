@@ -20,6 +20,7 @@
                 <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
                 <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
                 <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
+                <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{Binding IfEmpty}" />
                 <Button x:Name="btnGetNotes" Click="btnGetNotes_Click">Get Notes</Button>
                 <Button x:Name="btnClearNotes" Click="btnClearNotes_Click">Clear Notes</Button>
                 <Button x:Name="btnReview" Click="btnReview_Click">Review</Button>

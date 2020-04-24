@@ -37,6 +37,7 @@ namespace LollyCloud
         [Reactive]
         public int TextbookFilter { get; set; }
         public bool IsEditing { get; set; }
+        public bool IfEmpty { get; set; } = true;
 
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -195,15 +196,15 @@ namespace LollyCloud
             await Update(item);
         }
 
-        public async Task GetNotes(bool ifEmpty, Action<int> oneComplete) =>
-            await vmNote.GetNotes(WordItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+        public async Task GetNotes(Action<int> oneComplete) =>
+            await vmNote.GetNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
                     await GetNote(i);
                     oneComplete(i);
                 });
-        public async Task ClearNotes(bool ifEmpty, Action<int> oneComplete) =>
-            await vmNote.ClearNotes(WordItemsAll.Count, i => !ifEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+        public async Task ClearNotes(Action<int> oneComplete) =>
+            await vmNote.ClearNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
                     await ClearNote(i);

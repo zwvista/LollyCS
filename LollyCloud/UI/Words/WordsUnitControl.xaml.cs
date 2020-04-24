@@ -25,7 +25,6 @@ namespace LollyCloud
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
         public MReviewOptions Options { get; set; } = new MReviewOptions();
-        DispatcherTimer _timer;
 
         public WordsUnitControl()
         {
@@ -126,9 +125,9 @@ namespace LollyCloud
             await vm.ClearNote(row);
         }
         async void btnGetNotes_Click(object sender, RoutedEventArgs e) =>
-            await vm.GetNotes(true, _ => { });
+            await vm.GetNotes(_ => { });
         async void btnClearNotes_Click(object sender, RoutedEventArgs e) =>
-            await vm.ClearNotes(true, _ => { });
+            await vm.ClearNotes(_ => { });
         void btnReview_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ReviewOptionsDlg();
