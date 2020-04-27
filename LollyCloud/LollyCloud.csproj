@@ -214,41 +214,41 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Shared\Converters.cs" />
-    <Compile Include="UI\Misc\PatternsControl.xaml.cs">
+    <Compile Include="Views\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Misc\PatternsWebPageDlg.xaml.cs">
+    <Compile Include="Views\Misc\PatternsWebPageDlg.xaml.cs">
       <DependentUpon>PatternsWebPageDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Misc\PatternsDetailDlg.xaml.cs">
+    <Compile Include="Views\Misc\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Misc\SelectDictsDlg.xaml.cs">
+    <Compile Include="Views\Misc\SelectDictsDlg.xaml.cs">
       <DependentUpon>SelectDictsDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesBaseControl.cs" />
-    <Compile Include="UI\Phrases\PhrasesLangControl.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesBaseControl.cs" />
+    <Compile Include="Views\Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesSelectUnitDlg.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesSelectUnitDlg.xaml.cs">
       <DependentUpon>PhrasesSelectUnitDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesTextbookControl.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesTextbookControl.xaml.cs">
       <DependentUpon>PhrasesTextbookControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesLangDetailDlg.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesLangDetailDlg.xaml.cs">
       <DependentUpon>PhrasesLangDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesTextbookDetailDlg.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesTextbookDetailDlg.xaml.cs">
       <DependentUpon>PhrasesTextbookDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesSelectLangDlg.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesSelectLangDlg.xaml.cs">
       <DependentUpon>PhrasesSelectLangDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesUnitBatchDlg.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesUnitBatchDlg.xaml.cs">
       <DependentUpon>PhrasesUnitBatchDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Phrases\PhrasesReviewControl.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataStores\Misc\CodeDataStore.cs" />
@@ -264,7 +264,7 @@
     <Compile Include="DataStores\WPP\LangWordDataStore.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\ReadNumberService.cs" />
-    <Compile Include="UI\Misc\SettingsDlg.xaml.cs">
+    <Compile Include="Views\Misc\SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\UIHelpers.cs" />
@@ -284,13 +284,13 @@
     <Compile Include="DataStores\WPP\UnitWordDataStore.cs" />
     <Compile Include="DataStores\Misc\UserSettingDataStore.cs" />
     <Compile Include="Shared\Interfaces.cs" />
-    <Compile Include="UI\Misc\BlogControl.xaml.cs">
+    <Compile Include="Views\Misc\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Misc\ReadNumberControl.xaml.cs">
+    <Compile Include="Views\Misc\ReadNumberControl.xaml.cs">
       <DependentUpon>ReadNumberControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsDictControl.xaml.cs">
+    <Compile Include="Views\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Misc\PatternsViewModel.cs" />
@@ -303,7 +303,7 @@
     <Compile Include="ViewModels\Phrases\SinglePhraseViewModel.cs" />
     <Compile Include="ViewModels\Words\SingleWordViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsLangViewModel.cs" />
-    <Compile Include="UI\Phrases\PhrasesUnitControl.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Phrases\PhrasesUnitBatchViewModel.cs" />
@@ -311,42 +311,42 @@
     <Compile Include="ViewModels\Words\WordsUnitBatchViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsSearchViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsReviewViewModel.cs" />
-    <Compile Include="UI\Misc\ReviewOptionsDlg.xaml.cs">
+    <Compile Include="Views\Misc\ReviewOptionsDlg.xaml.cs">
       <DependentUpon>ReviewOptionsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Misc\BlogViewModel.cs" />
-    <Compile Include="UI\Words\WordsBaseControl.cs" />
-    <Compile Include="UI\Words\WordsLangControl.xaml.cs">
+    <Compile Include="Views\Words\WordsBaseControl.cs" />
+    <Compile Include="Views\Words\WordsLangControl.xaml.cs">
       <DependentUpon>WordsLangControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsTextbookControl.xaml.cs">
+    <Compile Include="Views\Words\WordsTextbookControl.xaml.cs">
       <DependentUpon>WordsTextbookControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsSearchControl.xaml.cs">
+    <Compile Include="Views\Words\WordsSearchControl.xaml.cs">
       <DependentUpon>WordsSearchControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsReviewControl.xaml.cs">
+    <Compile Include="Views\Words\WordsReviewControl.xaml.cs">
       <DependentUpon>WordsReviewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsUnitControl.xaml.cs">
+    <Compile Include="Views\Words\WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Misc\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Misc\NoteViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsUnitViewModel.cs" />
-    <Compile Include="UI\Phrases\PhrasesUnitDetailDlg.xaml.cs">
+    <Compile Include="Views\Phrases\PhrasesUnitDetailDlg.xaml.cs">
       <DependentUpon>PhrasesUnitDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsLangDetailDlg.xaml.cs">
+    <Compile Include="Views\Words\WordsLangDetailDlg.xaml.cs">
       <DependentUpon>WordsLangDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsTextbookDetailDlg.xaml.cs">
+    <Compile Include="Views\Words\WordsTextbookDetailDlg.xaml.cs">
       <DependentUpon>WordsTextbookDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsUnitBatchDlg.xaml.cs">
+    <Compile Include="Views\Words\WordsUnitBatchDlg.xaml.cs">
       <DependentUpon>WordsUnitBatchDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Words\WordsUnitDetailDlg.xaml.cs">
+    <Compile Include="Views\Words\WordsUnitDetailDlg.xaml.cs">
       <DependentUpon>WordsUnitDetailDlg.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -361,115 +361,115 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Misc\PatternsControl.xaml">
+    <Page Include="Views\Misc\PatternsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\PatternsWebPageDlg.xaml">
+    <Page Include="Views\Misc\PatternsWebPageDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\PatternsDetailDlg.xaml">
+    <Page Include="Views\Misc\PatternsDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\SelectDictsDlg.xaml">
+    <Page Include="Views\Misc\SelectDictsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Phrases\PhrasesLangControl.xaml">
+    <Page Include="Views\Phrases\PhrasesLangControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesSelectUnitDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesSelectUnitDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesTextbookControl.xaml">
+    <Page Include="Views\Phrases\PhrasesTextbookControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesLangDetailDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesLangDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesTextbookDetailDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesTextbookDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesSelectLangDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesSelectLangDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesUnitBatchDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesUnitBatchDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Phrases\PhrasesReviewControl.xaml">
+    <Page Include="Views\Phrases\PhrasesReviewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\SettingsDlg.xaml">
+    <Page Include="Views\Misc\SettingsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Phrases\PhrasesUnitControl.xaml">
+    <Page Include="Views\Phrases\PhrasesUnitControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\ReviewOptionsDlg.xaml">
+    <Page Include="Views\Misc\ReviewOptionsDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\BlogControl.xaml">
+    <Page Include="Views\Misc\BlogControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Misc\ReadNumberControl.xaml">
+    <Page Include="Views\Misc\ReadNumberControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsDictControl.xaml">
+    <Page Include="Views\Words\WordsDictControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Words\WordsLangControl.xaml">
+    <Page Include="Views\Words\WordsLangControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsTextbookControl.xaml">
+    <Page Include="Views\Words\WordsTextbookControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsSearchControl.xaml">
+    <Page Include="Views\Words\WordsSearchControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsReviewControl.xaml">
+    <Page Include="Views\Words\WordsReviewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsUnitControl.xaml">
+    <Page Include="Views\Words\WordsUnitControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Phrases\PhrasesUnitDetailDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesUnitDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsLangDetailDlg.xaml">
+    <Page Include="Views\Words\WordsLangDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsTextbookDetailDlg.xaml">
+    <Page Include="Views\Words\WordsTextbookDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsUnitBatchDlg.xaml">
+    <Page Include="Views\Words\WordsUnitBatchDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Words\WordsUnitDetailDlg.xaml">
+    <Page Include="Views\Words\WordsUnitDetailDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
