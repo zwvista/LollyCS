@@ -39,59 +39,64 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
-                      dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" SelectionChanged="dgWords_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" />
-                    <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" />
-                    <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                </DataGrid.Columns>
-                <DataGrid.Resources>
-                    <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
-                    <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
-                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                        <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding LevelNotZero}" Value="True">
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
-                                            <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
-                                            <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                                        </MultiBinding>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Foreground">
-                                    <Setter.Value>
-                                        <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
-                                            <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
-                                            <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                                        </MultiBinding>
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="miGetNote" Header="Retrieve Note" Click="miGetNote_Click" />
-                        <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
-                        <Separator />
-                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
-                        <Separator />
-                        <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
-                        <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
+            <DockPanel>
+                <StatusBar DockPanel.Dock="Bottom">
+                    <Label Content="{Binding StatusText}"/>
+                </StatusBar>
+                <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
+                          dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" SelectionChanged="dgWords_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" />
+                        <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" />
+                        <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
+                        <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding LevelNotZero}" Value="True">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
+                                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
+                                                <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
+                                                <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
+                                                <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="miGetNote" Header="Retrieve Note" Click="miGetNote_Click" />
+                            <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
+                            <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2" >
                 <Grid.RowDefinitions>

@@ -29,6 +29,7 @@ namespace LollyCloud
         [Reactive]
         public int TextbookFilter { get; set; }
         public bool IsEditing { get; set; }
+        public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {vmSettings.UNITINFO}";
 
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -43,6 +44,7 @@ namespace LollyCloud
                 ));
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
+            this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() =>

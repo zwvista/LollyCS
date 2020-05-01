@@ -20,6 +20,7 @@ namespace LollyCloud
         public string TextFilter { get; set; } = "";
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
+        public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {vmSettings.UNITINFO}";
 
         public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
@@ -32,6 +33,7 @@ namespace LollyCloud
                 ));
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
+            this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() =>

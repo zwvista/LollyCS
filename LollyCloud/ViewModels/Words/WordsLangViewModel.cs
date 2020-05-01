@@ -27,6 +27,7 @@ namespace LollyCloud
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
         [Reactive]
         public bool Levelge0only { get; set; }
+        public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.UNITINFO}";
 
         public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
@@ -40,6 +41,7 @@ namespace LollyCloud
                 ));
                 this.RaisePropertyChanged(nameof(WordItems));
             });
+            this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() =>

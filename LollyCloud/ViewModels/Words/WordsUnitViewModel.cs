@@ -38,6 +38,7 @@ namespace LollyCloud
         public int TextbookFilter { get; set; }
         public bool IsEditing { get; set; }
         public bool IfEmpty { get; set; } = true;
+        public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.UNITINFO}";
 
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -54,6 +55,7 @@ namespace LollyCloud
                 ));
                 this.RaisePropertyChanged(nameof(WordItems));
             });
+            this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() =>

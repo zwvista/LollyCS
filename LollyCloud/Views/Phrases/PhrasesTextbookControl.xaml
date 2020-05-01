@@ -21,7 +21,10 @@
                           SelectedValue="{Binding TextbookFilter}" />
             </ToolBar>
         </ToolBarTray>
-        <Grid>
+        <DockPanel>
+            <StatusBar DockPanel.Dock="Bottom">
+                <Label Content="{Binding StatusText}"/>
+            </StatusBar>
             <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgPhrases_SelectionChanged">
                 <DataGrid.Columns>
@@ -47,6 +50,6 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
-        </Grid>
+        </DockPanel>
     </DockPanel>
 </local:PhrasesBaseControl>

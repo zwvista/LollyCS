@@ -130,24 +130,28 @@ namespace LollyCloud
             get => int.TryParse(GetUSValue(INFO_USUNITFROM), out var v) ? v : 0;
             set => SetUSValue(INFO_USUNITFROM, value.ToString(), nameof(USUNITFROM));
         }
+        public string USUNITFROMSTR => SelectedTextbook.UNITSTR(USUNITFROM);
         MUserSettingInfo INFO_USPARTFROM = new MUserSettingInfo();
         public int USPARTFROM
         {
             get => int.TryParse(GetUSValue(INFO_USPARTFROM), out var v) ? v : 0;
             set => SetUSValue(INFO_USPARTFROM, value.ToString(), nameof(USPARTFROM));
         }
+        public string USPARTFROMSTR => SelectedTextbook.PARTSTR(USPARTFROM);
         MUserSettingInfo INFO_USUNITTO = new MUserSettingInfo();
         public int USUNITTO
         {
             get => int.TryParse(GetUSValue(INFO_USUNITTO), out var v) ? v : 0;
             set => SetUSValue(INFO_USUNITTO, value.ToString(), nameof(USUNITTO));
         }
+        public string USUNITTOSTR => SelectedTextbook.UNITSTR(USUNITTO);
         MUserSettingInfo INFO_USPARTTO = new MUserSettingInfo();
         public int USPARTTO
         {
             get => int.TryParse(GetUSValue(INFO_USPARTTO), out var v) ? v : 0;
             set => SetUSValue(INFO_USPARTTO, value.ToString(), nameof(USPARTTO));
         }
+        public string USPARTTOSTR => SelectedTextbook.PARTSTR(USPARTTO);
         public int USUNITPARTFROM => USUNITFROM * 10 + USPARTFROM;
         public int USUNITPARTTO => USUNITTO * 10 + USPARTTO;
         public bool IsSingleUnitPart => USUNITPARTFROM == USUNITPARTTO;
@@ -194,6 +198,9 @@ namespace LollyCloud
         public int PartCount => Parts?.Count ?? 0;
         public bool IsSingleUnit => USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == PartCount;
         public bool IsSinglePart => PartCount == 1;
+        public string LANGINFO => SelectedLang.LANGNAME;
+        public string TEXTBOOKINFO => $"{LANGINFO}/{SelectedTextbook.TEXTBOOKNAME}";
+        public string UNITINFO => $"{TEXTBOOKINFO}/{USUNITFROMSTR} {USPARTFROMSTR} ~ {USUNITTOSTR} {USPARTTOSTR}";
 
         public static List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
         {

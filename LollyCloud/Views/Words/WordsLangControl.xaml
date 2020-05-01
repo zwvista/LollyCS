@@ -28,7 +28,11 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
+            <DockPanel>
+                <StatusBar DockPanel.Dock="Bottom">
+                    <Label Content="{Binding StatusText}"/>
+                </StatusBar>
+                <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" PreviewKeyDown="dgWords_PreviewKeyDown" SelectionChanged="dgWords_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
@@ -72,7 +76,8 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
-            <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
+        </DockPanel>
+        <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
