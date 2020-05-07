@@ -214,6 +214,14 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Shared\Converters.cs" />
+    <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
+    <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
+    <Compile Include="Views\Misc\TextbooksDetailDlg.xaml.cs">
+      <DependentUpon>TextbooksDetailDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\DictsDetailDlg.xaml.cs">
+      <DependentUpon>DictsDetailDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Misc\TextbooksControl.xaml.cs">
       <DependentUpon>TextbooksControl.xaml</DependentUpon>
     </Compile>
@@ -367,6 +375,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Misc\TextbooksDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Misc\DictsDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Misc\TextbooksControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

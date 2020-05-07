@@ -1,8 +1,11 @@
-﻿using ReactiveUI;
-using System.Collections.Generic;
-using System.Web;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
+using System.Collections.Generic;
+using System.Reactive;
+using System.Web;
 
 namespace LollyCloud
 {
@@ -73,6 +76,19 @@ namespace LollyCloud
             var template = useTemplate2 && !string.IsNullOrEmpty(TEMPLATE2) ? TEMPLATE2 : TEMPLATE;
             return CommonApi.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
                 string.Format(template2, word, CommonApi.CssFolder, text));
+        }
+    }
+    public class MDictionaryEdit : ReactiveValidationObject<MDictionaryEdit>
+    {
+        [Reactive]
+        public int ID { get; set; }
+        [Reactive]
+        public string DICTNAME { get; set; }
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public MDictionaryEdit()
+        {
+            this.ValidationRule(x => x.DICTNAME, v => !string.IsNullOrWhiteSpace(v), "DICTNAME must not be empty");
+            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 
