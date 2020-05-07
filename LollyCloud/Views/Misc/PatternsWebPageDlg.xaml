@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Phrases in Language Details" Height="300" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Pattern WebPage Details" Height="300" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

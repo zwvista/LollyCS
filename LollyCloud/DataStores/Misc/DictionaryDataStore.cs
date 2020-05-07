@@ -12,11 +12,19 @@ namespace LollyCloud
 {
     public class DictionaryDataStore : LollyDataStore<MDictionary>
     {
+        public async Task<List<MDictionary>> GetDictsByLang(int langid) =>
+        (await GetDataByUrl<MDictsReference>($"VDICTIONARIES?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).records;
         public async Task<List<MDictionary>> GetDictsReferenceByLang(int langid) =>
         (await GetDataByUrl<MDictsReference>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).records;
         public async Task<List<MDictionary>> GetDictsNoteByLang(int langid) =>
         (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).records;
         public async Task<List<MDictionary>> GetDictsTranslationByLang(int langid) =>
         (await GetDataByUrl<MDictsTranslation>($"VDICTSTRANSLATION?filter=LANGIDFROM,eq,{langid}")).records;
+        public async Task<int> Create(MDictionary item) =>
+        await CreateByUrl($"DICTIONARIES", item);
+        public async Task Update(MDictionary item) =>
+        Debug.WriteLine(await UpdateByUrl($"DICTIONARIES/{item.ID}", JsonConvert.SerializeObject(item)));
+        public async Task Delete(int id) =>
+        Debug.WriteLine(await DeleteByUrl($"DICTIONARIES/{id}"));
     }
 }

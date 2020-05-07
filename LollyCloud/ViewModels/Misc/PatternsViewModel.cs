@@ -39,7 +39,7 @@ namespace LollyCloud
             Reload();
         }
         public void Reload() =>
-            patternDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            patternDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
                 PatternItemsAll = new ObservableCollection<MPattern>(lst);
                 this.RaisePropertyChanged(nameof(PatternItems));

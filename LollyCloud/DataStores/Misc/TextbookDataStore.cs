@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace LollyCloud
 {
@@ -39,5 +41,11 @@ namespace LollyCloud
             });
             return lst;
         }
+        public async Task<int> Create(MTextbook item) =>
+        await CreateByUrl($"TEXTBOOKS", item);
+        public async Task Update(MTextbook item) =>
+        Debug.WriteLine(await UpdateByUrl($"TEXTBOOKS/{item.ID}", JsonConvert.SerializeObject(item)));
+        public async Task Delete(int id) =>
+        Debug.WriteLine(await DeleteByUrl($"TEXTBOOKS/{id}"));
     }
 }

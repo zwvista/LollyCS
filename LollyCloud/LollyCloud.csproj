@@ -214,6 +214,9 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Shared\Converters.cs" />
+    <Compile Include="Views\Misc\TextbooksControl.xaml.cs">
+      <DependentUpon>TextbooksControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Misc\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,9 @@
     </Compile>
     <Compile Include="Views\Misc\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\DictsControl.xaml.cs">
+      <DependentUpon>DictsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Misc\SelectDictsDlg.xaml.cs">
       <DependentUpon>SelectDictsDlg.xaml</DependentUpon>
@@ -361,6 +367,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Misc\TextbooksControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Misc\PatternsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -370,6 +380,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Misc\PatternsDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Misc\DictsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

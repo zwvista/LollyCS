@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="LollyCloud.DictsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LollyCloud"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
+            <ToolBar x:Name="ToolBar1" Band="1">
+            </ToolBar>
+        </ToolBarTray>
+        <DockPanel>
+            <StatusBar DockPanel.Dock="Bottom">
+                <Label Content="{Binding StatusText}"/>
+            </StatusBar>
+            <DataGrid x:Name="dgDicts" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
+                      dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE" />
+                    <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION" />
+                    <DataGridTextColumn Binding="{Binding PHRASEID}" Header="PHRASEID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="dgDicts_RowDoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+        </DockPanel>
+    </DockPanel>
+</UserControl>
