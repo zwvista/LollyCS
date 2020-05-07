@@ -29,7 +29,7 @@ namespace LollyCloud
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
-            tbWebPage.Focus();
+            tbTitle.Focus();
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)

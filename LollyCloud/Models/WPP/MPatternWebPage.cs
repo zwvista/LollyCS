@@ -32,7 +32,10 @@ namespace LollyCloud
         public int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
-        public string WEBPAGE { get; set; } = "";
+        public string TITLE { get; set; } = "";
+        [JsonProperty]
+        [Reactive]
+        public string URL { get; set; } = "";
 
         public MPatternWebPage()
         {
@@ -49,11 +52,14 @@ namespace LollyCloud
         [Reactive]
         public int SEQNUM { get; set; }
         [Reactive]
-        public string WEBPAGE { get; set; } = "";
+        public string TITLE { get; set; } = "";
+        [Reactive]
+        public string URL { get; set; } = "";
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MPatternWebPageEdit()
         {
-            this.ValidationRule(x => x.WEBPAGE, v => !string.IsNullOrWhiteSpace(v), "WEBPAGE must not be empty");
+            this.ValidationRule(x => x.TITLE, v => !string.IsNullOrWhiteSpace(v), "TITLE must not be empty");
+            this.ValidationRule(x => x.URL, v => !string.IsNullOrWhiteSpace(v), "URL must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }

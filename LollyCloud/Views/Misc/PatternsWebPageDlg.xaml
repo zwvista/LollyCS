@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Phrases in Language Details" Height="230" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Phrases in Language Details" Height="300" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -27,9 +28,11 @@
         <TextBox Text="{Binding PATTERN}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" IsReadOnly="True" />
         <Label Content="SEQNUM:" VerticalAlignment="Center" Grid.Row="3" />
         <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
-        <Label Content="WEBPAGE:" VerticalAlignment="Center" Grid.Row="4" />
-        <TextBox x:Name="tbWebPage" Text="{Binding WEBPAGE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
-        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <Label Content="TITLE:" VerticalAlignment="Center" Grid.Row="4" />
+        <TextBox x:Name="tbTitle" Text="{Binding TITLE, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
+        <Label Content="URL:" VerticalAlignment="Center" Grid.Row="5" />
+        <TextBox Text="{Binding URL, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>
