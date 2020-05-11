@@ -213,7 +213,7 @@
     <Compile Include="Models\Misc\MVoice.cs" />
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
-    <Compile Include="Shared\Converters.cs" />
+    <Compile Include="Helpers\Converters.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
     <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
     <Compile Include="Views\Misc\TextbooksDetailDlg.xaml.cs">
@@ -281,9 +281,9 @@
     <Compile Include="Views\Misc\SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shared\UIHelpers.cs" />
-    <Compile Include="Shared\WindowsExtensions.cs" />
-    <Compile Include="Shared\CommonApi.cs" />
+    <Compile Include="Helpers\UIHelpers.cs" />
+    <Compile Include="Helpers\WindowsExtensions.cs" />
+    <Compile Include="Helpers\CommonApi.cs" />
     <Compile Include="Models\Misc\MAutoCorrect.cs" />
     <Compile Include="Models\Misc\MDictionary.cs" />
     <Compile Include="Models\Misc\MLanguage.cs" />
@@ -297,7 +297,7 @@
     <Compile Include="DataStores\Misc\TextbookDataStore.cs" />
     <Compile Include="DataStores\WPP\UnitWordDataStore.cs" />
     <Compile Include="DataStores\Misc\UserSettingDataStore.cs" />
-    <Compile Include="Shared\Interfaces.cs" />
+    <Compile Include="Helpers\Interfaces.cs" />
     <Compile Include="Views\Misc\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
     </Compile>
