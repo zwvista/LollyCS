@@ -36,9 +36,9 @@
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="tbMarked" Text="{Binding MarkedText}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                <TextBox x:Name="tbMarked" Text="{Binding MarkedText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <TextBox Text="{Binding HtmlText}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                <TextBox Text="{Binding HtmlText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <cef:ChromiumWebBrowser x:Name="wbBlog" Grid.Column="2" />

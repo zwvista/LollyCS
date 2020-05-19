@@ -123,7 +123,7 @@ namespace LollyCloud
 
         void dgWebPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var row = dgPatterns.SelectedIndex;
+            var row = dgWebPages.SelectedIndex;
             if (row == -1) return;
             var item = vm.WebPageItems[row];
             wbWebPage.Load(item.URL);
