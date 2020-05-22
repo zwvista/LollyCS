@@ -23,7 +23,8 @@ namespace LollyCloud
     }
     public class MWordsPhrases
     {
-        public List<MWordPhrase> records { get; set; }
+        [JsonProperty("records")]
+        public List<MWordPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MWordPhrase : ReactiveObject

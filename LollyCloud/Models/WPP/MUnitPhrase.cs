@@ -10,7 +10,8 @@ namespace LollyCloud
 {
     public class MUnitPhrases
     {
-        public List<MUnitPhrase> records { get; set; }
+        [JsonProperty("records")]
+        public List<MUnitPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MUnitPhrase : ReactiveObject, MPhraseInterface

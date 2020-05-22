@@ -10,7 +10,8 @@ namespace LollyCloud
 {
     public class MPatternWebPages
     {
-        public List<MPatternWebPage> records { get; set; }
+        [JsonProperty("records")]
+        public List<MPatternWebPage> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MPatternWebPage : ReactiveObject

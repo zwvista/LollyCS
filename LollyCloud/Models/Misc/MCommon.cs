@@ -17,7 +17,8 @@ namespace LollyCloud
     }
     public class MCodes
     {
-        public List<MCode> records { get; set; }
+        [JsonProperty("records")]
+        public List<MCode> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MCode : ReactiveObject

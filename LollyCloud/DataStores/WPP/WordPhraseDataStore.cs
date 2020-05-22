@@ -9,7 +9,7 @@ namespace LollyCloud
     public class WordPhraseDataStore : LollyDataStore<MWordPhrase>
     {
         async Task<List<MWordPhrase>> GetDataByWordPhrase(int wordid, int phraseid) =>
-        (await GetDataByUrl<MWordsPhrases>($"WORDSPHRASES?filter=WORDID,eq,{wordid}&filter=PHRASEID,eq,{phraseid}")).records;
+        (await GetDataByUrl<MWordsPhrases>($"WORDSPHRASES?filter=WORDID,eq,{wordid}&filter=PHRASEID,eq,{phraseid}")).Records;
 
         async Task<int> Create(MWordPhrase item) =>
         await CreateByUrl($"WORDSPHRASES", item);
@@ -45,9 +45,9 @@ namespace LollyCloud
         }
 
         public async Task<List<MLangPhrase>> GetPhrasesByWordId(int wordid) =>
-        (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).records;
+        (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).Records;
 
         public async Task<List<MLangWord>> GetWordsByPhraseId(int phraseid) =>
-        (await GetDataByUrl<MLangWords>($"VPHRASESWORD?filter=PHRASEID,eq,{phraseid}")).records;
+        (await GetDataByUrl<MLangWords>($"VPHRASESWORD?filter=PHRASEID,eq,{phraseid}")).Records;
     }
 }

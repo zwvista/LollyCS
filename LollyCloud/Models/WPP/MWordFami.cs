@@ -7,7 +7,8 @@ namespace LollyCloud
 {
     public class MWordsFami
     {
-        public List<MWordFami> records { get; set; }
+        [JsonProperty("records")]
+        public List<MWordFami> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MWordFami : ReactiveObject

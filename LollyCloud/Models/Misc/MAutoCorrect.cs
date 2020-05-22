@@ -9,7 +9,8 @@ namespace LollyCloud
 {
     public class MAutoCorrects
     {
-        public List<MAutoCorrect> records { get; set; }
+        [JsonProperty("records")]
+        public List<MAutoCorrect> Records { get; set; }
     }
 
     [JsonObject(MemberSerialization.OptIn)]

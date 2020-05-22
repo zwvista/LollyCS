@@ -12,7 +12,8 @@ namespace LollyCloud
 {
     public class MLangWords
     {
-        public List<MLangWord> records { get; set; }
+        [JsonProperty("records")]
+        public List<MLangWord> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MLangWord : ReactiveObject, MWordInterface

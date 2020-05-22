@@ -9,10 +9,10 @@ namespace LollyCloud
     public class PatternDataStore : LollyDataStore<MPattern>
     {
         public async Task<List<MPattern>> GetDataByLang(int langid) =>
-        (await GetDataByUrl<MPatterns>($"PATTERNS?filter=LANGID,eq,{langid}&order=PATTERN")).records;
+        (await GetDataByUrl<MPatterns>($"PATTERNS?filter=LANGID,eq,{langid}&order=PATTERN")).Records;
 
         public async Task<List<MPattern>> GetDataById(int id) =>
-        (await GetDataByUrl<MPatterns>($"PATTERNS?filter=ID,eq,{id}")).records;
+        (await GetDataByUrl<MPatterns>($"PATTERNS?filter=ID,eq,{id}")).Records;
 
         public async Task<int> Create(MPattern item) =>
         await CreateByUrl($"PATTERNS", item);

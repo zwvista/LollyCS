@@ -11,7 +11,8 @@ namespace LollyCloud
 {
     public class MTextbooks
     {
-        public List<MTextbook> records { get; set; }
+        [JsonProperty("records")]
+        public List<MTextbook> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MTextbook : ReactiveObject

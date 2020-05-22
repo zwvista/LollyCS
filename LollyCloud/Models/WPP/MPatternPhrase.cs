@@ -10,7 +10,8 @@ namespace LollyCloud
 {
     public class MPatternPhrases
     {
-        public List<MPatternPhrase> records { get; set; }
+        [JsonProperty("records")]
+        public List<MPatternPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MPatternPhrase : ReactiveValidationObject<MPatternPhrase>

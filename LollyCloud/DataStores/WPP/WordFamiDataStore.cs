@@ -9,7 +9,7 @@ namespace LollyCloud
     public class WordFamiDataStore : LollyDataStore<MWordFami>
     {
         public async Task<List<MWordFami>> GetDataByUserWord(int userid, int wordid) =>
-        (await GetDataByUrl<MWordsFami>($"WORDSFAMI?filter=USERID,eq,{userid}&filter=WORDID,eq,{wordid}")).records;
+        (await GetDataByUrl<MWordsFami>($"WORDSFAMI?filter=USERID,eq,{userid}&filter=WORDID,eq,{wordid}")).Records;
 
         async Task<int> Create(MWordFami item) =>
         await CreateByUrl($"WORDSFAMI", item);

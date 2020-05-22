@@ -12,7 +12,7 @@ namespace LollyCloud
     {
         public async Task<List<MTextbook>> GetDataByLang(int langid)
         {
-            var lst = (await GetDataByUrl<MTextbooks>($"TEXTBOOKS?filter=LANGID,eq,{langid}")).records;
+            var lst = (await GetDataByUrl<MTextbooks>($"TEXTBOOKS?filter=LANGID,eq,{langid}")).Records;
             List<string> f(string units)
             {
                 var m = new Regex(@"UNITS,(\d+)").Match(units);

@@ -10,16 +10,16 @@ namespace LollyCloud
     public class PatternPhraseDataStore : LollyDataStore<MPatternPhrase>
     {
         public async Task<List<MPatternPhrase>> GetDataByPatternId(int patternid) =>
-        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PATTERNID,eq,{patternid}")).records;
+        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PATTERNID,eq,{patternid}")).Records;
 
         public async Task<List<MPatternPhrase>> GetDataByPatternIdPhraseId(int patternid, int phraseid) =>
-        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PATTERNID,eq,{patternid}&filter=PHRASEID,eq,{phraseid}")).records;
+        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PATTERNID,eq,{patternid}&filter=PHRASEID,eq,{phraseid}")).Records;
 
         public async Task<List<MPatternPhrase>> GetDataByPhraseId(int phraseid) =>
-        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PHRASEID,eq,{phraseid}")).records;
+        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=PHRASEID,eq,{phraseid}")).Records;
 
         public async Task<List<MPatternPhrase>> GetDataById(int id) =>
-        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=ID,eq,{id}")).records;
+        (await GetDataByUrl<MPatternPhrases>($"VPATTERNSPHRASES?filter=ID,eq,{id}")).Records;
 
         public async Task<int> Create(MPatternPhrase item) =>
         await CreateByUrl($"PATTERNSPHRASES", item);
@@ -28,7 +28,7 @@ namespace LollyCloud
         Debug.WriteLine(await UpdateByUrl($"PATTERNSPHRASES/{item.ID}", JsonConvert.SerializeObject(item)));
 
         public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"PATTERNCreateSPHRASES/{id}"));
+        Debug.WriteLine(await DeleteByUrl($"PATTERNSPHRASES/{id}"));
         public async Task DeleteByPhraseId(int phraseid)
         {
             var items = await GetDataByPhraseId(phraseid);

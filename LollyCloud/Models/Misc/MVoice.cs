@@ -7,7 +7,8 @@ namespace LollyCloud
 {
     public class MVoices
     {
-        public List<MVoice> records { get; set; }
+        [JsonProperty("records")]
+        public List<MVoice> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MVoice : ReactiveObject

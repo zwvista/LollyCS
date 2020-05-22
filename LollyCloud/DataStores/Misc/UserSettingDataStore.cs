@@ -7,7 +7,7 @@ namespace LollyCloud
     public class UserSettingDataStore : LollyDataStore<MUserSetting>
     {
         public async Task<List<MUserSetting>> GetDataByUser(int userid) =>
-        (await GetDataByUrl<MUserSettings>($"USERSETTINGS?filter=USERID,eq,{userid}")).records;
+        (await GetDataByUrl<MUserSettings>($"USERSETTINGS?filter=USERID,eq,{userid}")).Records;
 
         public async Task Update(MUserSettingInfo info, int v) =>
         await Update(info, v.ToString());

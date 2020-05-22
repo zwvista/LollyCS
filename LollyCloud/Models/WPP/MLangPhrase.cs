@@ -11,7 +11,8 @@ namespace LollyCloud
 {
     public class MLangPhrases
     {
-        public List<MLangPhrase> records { get; set; }
+        [JsonProperty("records")]
+        public List<MLangPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MLangPhrase : ReactiveObject, MPhraseInterface

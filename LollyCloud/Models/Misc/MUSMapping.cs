@@ -7,7 +7,8 @@ namespace LollyCloud
 {
     public class MUSMappings
     {
-        public List<MUSMapping> records { get; set; }
+        [JsonProperty("records")]
+        public List<MUSMapping> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MUSMapping : ReactiveObject

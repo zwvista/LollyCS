@@ -7,7 +7,8 @@ namespace LollyCloud
 {
     public class MLanguages
     {
-        public List<MLanguage> records { get; set; }
+        [JsonProperty("records")]
+        public List<MLanguage> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MLanguage : ReactiveObject

@@ -10,7 +10,8 @@ namespace LollyCloud
 {
     public class MPatterns
     {
-        public List<MPattern> records { get; set; }
+        [JsonProperty("records")]
+        public List<MPattern> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MPattern : ReactiveObject

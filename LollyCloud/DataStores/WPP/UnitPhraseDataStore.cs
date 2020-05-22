@@ -11,7 +11,7 @@ namespace LollyCloud
     {
         public async Task<List<MUnitPhrase>> GetDataByTextbookUnitPart(MTextbook textbook, int unitPartFrom, int unitPartTo)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}&order=UNITPART&order=SEQNUM")).records;
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}&order=UNITPART&order=SEQNUM")).Records;
             foreach (var o in lst)
                 o.Textbook = textbook;
             return lst;
@@ -19,17 +19,17 @@ namespace LollyCloud
 
         public async Task<List<MUnitPhrase>> GetDataByLang(int langid, List<MTextbook> lstTextbooks)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM")).records;
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM")).Records;
             foreach (var o in lst)
                 o.Textbook = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);
             return lst;
         }
 
         public async Task<List<MUnitPhrase>> GetDataByPhraseId(int phraseid) =>
-        (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=PHRASEID,eq,{phraseid}")).records;
+        (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=PHRASEID,eq,{phraseid}")).Records;
         public async Task<List<MUnitPhrase>> GetDataByLangPhrase(int langid, string phrase, List<MTextbook> lstTextbooks)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.UrlEncode(phrase)}")).records
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.UrlEncode(phrase)}")).Records
                 .Where(o => o.PHRASE == phrase).ToList();
             foreach (var o in lst)
                 o.Textbook = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);

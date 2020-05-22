@@ -94,17 +94,20 @@ namespace LollyCloud
 
     public class MDictsReference
     {
-        public List<MDictionary> records { get; set; }
+        [JsonProperty("records")]
+        public List<MDictionary> Records { get; set; }
     }
 
     public class MDictsNote
     {
-        public List<MDictionary> records { get; set; }
+        [JsonProperty("records")]
+        public List<MDictionary> Records { get; set; }
     }
 
     public class MDictsTranslation
     {
-        public List<MDictionary> records { get; set; }
+        [JsonProperty("records")]
+        public List<MDictionary> Records { get; set; }
     }
 
 }

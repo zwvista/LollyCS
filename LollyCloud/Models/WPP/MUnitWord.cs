@@ -11,7 +11,8 @@ namespace LollyCloud
 {
     public class MUnitWords
     {
-        public List<MUnitWord> records { get; set; }
+        [JsonProperty("records")]
+        public List<MUnitWord> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MUnitWord : ReactiveObject, MWordInterface

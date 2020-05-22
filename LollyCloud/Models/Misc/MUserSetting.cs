@@ -7,7 +7,8 @@ namespace LollyCloud
 {
     public class MUserSettings
     {
-        public List<MUserSetting> records { get; set; }
+        [JsonProperty("records")]
+        public List<MUserSetting> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MUserSetting : ReactiveObject
