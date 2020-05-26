@@ -43,5 +43,7 @@ namespace LollyCloud
                 ToolBar1.Items.Add(btn);
             }
         }
+
+        private void btnRead_Click(object sender, RoutedEventArgs e) => vm.Read();
     }
 }

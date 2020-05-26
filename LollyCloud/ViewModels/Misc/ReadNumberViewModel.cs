@@ -15,14 +15,14 @@ namespace LollyCloud
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             Type = (ReadNumberType)this.vmSettings.USREADNUMBERID;
-            ReadNumberCommand = ReactiveCommand.Create(() =>
-            {
-                Text = 
-                    Type == ReadNumberType.Japanese ? ReadNumberService.ReadInJapanese(Number) :
-                    Type == ReadNumberType.KoreanNative ? ReadNumberService.ReadInNativeKorean(Number) :
-                    Type == ReadNumberType.KoreanSino ? ReadNumberService.ReadInSinoKorean(Number):
-                    "";
-            });
+        }
+        public void Read()
+        {
+            Text =
+                Type == ReadNumberType.Japanese ? ReadNumberService.ReadInJapanese(Number) :
+                Type == ReadNumberType.KoreanNative ? ReadNumberService.ReadInNativeKorean(Number) :
+                Type == ReadNumberType.KoreanSino ? ReadNumberService.ReadInSinoKorean(Number) :
+                "";
         }
     }
 }
