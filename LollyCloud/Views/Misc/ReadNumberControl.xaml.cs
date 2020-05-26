@@ -15,6 +15,7 @@ namespace LollyCloud
     {
         ReadNumberViewModel vm;
         private SettingsViewModel vmSettings => vm.vmSettings;
+        private ComparisonConverter converter = new ComparisonConverter();
 
         public ReadNumberControl()
         {
@@ -36,7 +37,7 @@ namespace LollyCloud
                 };
                 btn.SetBinding(RadioButton.IsCheckedProperty, new Binding("Type")
                 {
-                    Converter = new ComparisonConverter(),
+                    Converter = converter,
                     ConverterParameter = (ReadNumberType)o.CODE,
                 });
                 ToolBar1.Items.Add(btn);
