@@ -36,8 +36,8 @@ namespace LollyCloud
                 };
                 btn.SetBinding(RadioButton.IsCheckedProperty, new Binding("Type")
                 {
-                    Converter = new EnumBooleanConverter(),
-                    ConverterParameter = ((ReadNumberType)o.CODE).ToString(),
+                    Converter = new ComparisonConverter(),
+                    ConverterParameter = (ReadNumberType)o.CODE,
                 });
                 ToolBar1.Items.Add(btn);
             }
