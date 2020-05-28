@@ -44,6 +44,5 @@ namespace LollyCloud
             }
         }
 
-        private void btnRead_Click(object sender, RoutedEventArgs e) => vm.Read();
     }
 }

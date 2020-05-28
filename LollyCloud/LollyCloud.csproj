@@ -139,6 +139,9 @@
     <Reference Include="ReactiveUI.Validation, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveUI.Validation.1.4.15\lib\net461\ReactiveUI.Validation.dll</HintPath>
     </Reference>
+    <Reference Include="ReactiveUI.WPF">
+      <HintPath>..\packages\ReactiveUI.WPF.11.4.1\lib\net461\ReactiveUI.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Splat, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.9.4.5\lib\net461\Splat.dll</HintPath>
     </Reference>
