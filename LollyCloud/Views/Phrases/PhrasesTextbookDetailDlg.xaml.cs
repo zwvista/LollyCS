@@ -27,7 +27,6 @@ namespace LollyCloud
         public PhrasesTextbookDetailDlg()
         {
             InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbPhrase.Focus();
         }

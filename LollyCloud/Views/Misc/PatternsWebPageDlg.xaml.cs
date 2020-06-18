@@ -27,7 +27,6 @@ namespace LollyCloud
         public PatternsWebPageDlg()
         {
             InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
         }

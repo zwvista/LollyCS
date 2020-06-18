@@ -16,7 +16,6 @@ namespace LollyCloud
         public PhrasesSelectUnitDlg()
         {
             InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
         }
 

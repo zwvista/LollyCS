@@ -37,5 +37,14 @@ namespace LollyCloud
             pb.AppendText(text);
             pb.EndVoice();
         }
+        // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
+            {
+                DefaultValue = FindResource(typeof(Window))
+            });
+        }
     }
 }

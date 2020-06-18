@@ -17,7 +17,6 @@ namespace LollyCloud
         public SettingsDlg()
         {
             InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
             DataContext = vm;
             // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
