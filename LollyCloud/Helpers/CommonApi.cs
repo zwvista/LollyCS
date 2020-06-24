@@ -107,7 +107,8 @@ namespace LollyCloud
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="destination">The destination.</param>
-        public static void CopyProperties(this object source, object destination)
+        /// <param name="ignoreProperties">The names of the properties to be ignored while copying.</param>
+        public static void CopyPropertiesTo(this object source, object destination, params string[] ignoreProperties)
         {
             // If any this null throw an exception
             if (source == null || destination == null)
@@ -117,6 +118,7 @@ namespace LollyCloud
             Type typeSrc = source.GetType();
             // Collect all the valid properties to map
             var results = from srcProp in typeSrc.GetProperties()
+                          where !ignoreProperties.Contains(srcProp.Name)
                           let targetProperty = typeDest.GetProperty(srcProp.Name)
                           where srcProp.CanRead
                           && targetProperty != null
