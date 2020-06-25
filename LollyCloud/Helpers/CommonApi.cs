@@ -108,7 +108,7 @@ namespace LollyCloud
         /// <param name="source">The source.</param>
         /// <param name="destination">The destination.</param>
         /// <param name="ignoreProperties">The names of the properties to be ignored while copying.</param>
-        public static void CopyPropertiesTo(this object source, object destination, params string[] ignoreProperties)
+        public static void CopyProperties(this object source, object destination, params string[] ignoreProperties)
         {
             // If any this null throw an exception
             if (source == null || destination == null)
