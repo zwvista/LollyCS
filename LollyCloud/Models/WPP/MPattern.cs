@@ -29,6 +29,9 @@ namespace LollyCloud
         [JsonProperty]
         [Reactive]
         public string NOTE { get; set; }
+        [JsonProperty]
+        [Reactive]
+        public string TAG { get; set; }
 
         public MPattern()
         {
