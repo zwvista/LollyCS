@@ -10,18 +10,18 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
-                <Button Command="{Binding HtmlToMarkedCommand}">HtmlToMarked</Button>
-                <Button x:Name="btnAddTagB" Click="btnAddTagB_Click">Add B</Button>
-                <Button x:Name="btnAddTagI" Click="btnAddTagI_Click">Add I</Button>
-                <Button x:Name="btnRemoveTagBI" Click="btnRemoveTagBI_Click">Remove BI</Button>
-                <Button x:Name="btnExchangeTagBI" Click="btnExchangeTagBI_Click">Exchange BI</Button>
-                <Button x:Name="btnAddExplanation" Click="btnAddExplanation_Click">AddExplanation</Button>
-                <Button x:Name="btnMarkedToHtml" Click="btnMarkedToHtml_Click">MarkedToHtml</Button>
-                <Button x:Name="btnPatternToHtml" Click="btnPatternToHtml_Click">PatternToHtml</Button>
+                <Button Content="HtmlToMarked" Command="{Binding HtmlToMarkedCommand}"/>
+                <Button x:Name="btnAddTagB" Content="Add B" Click="btnAddTagB_Click"/>
+                <Button x:Name="btnAddTagI" Content="Add I" Click="btnAddTagI_Click"/>
+                <Button x:Name="btnRemoveTagBI" Content="Remove BI" Click="btnRemoveTagBI_Click"/>
+                <Button x:Name="btnExchangeTagBI" Content="Exchange BI" Click="btnExchangeTagBI_Click"/>
+                <Button x:Name="btnAddExplanation" Content="AddExplanation" Click="btnAddExplanation_Click"/>
+                <Button x:Name="btnMarkedToHtml" Content="MarkedToHtml" Click="btnMarkedToHtml_Click"/>
+                <Button x:Name="btnPatternToHtml" Content="PatternToHtml" Click="btnPatternToHtml_Click"/>
                 <TextBox Text="{Binding PatternNo}" Width="60" wpf:HintAssist.Hint="Pattern No." />
-                <Button x:Name="btnCopyPatternMarkDown" Click="btnCopyPatternMarkDown_Click">PatternMarkDown</Button>
+                <Button x:Name="btnCopyPatternMarkDown" Content="PatternMarkDown" Click="btnCopyPatternMarkDown_Click"/>
                 <TextBox Text="{Binding PatternText}" Width="96" wpf:HintAssist.Hint="Pattern Text" />
-                <Button Command="{Binding AddNotesCommand}">AddNotes</Button>
+                <Button Content="AddNotes" Command="{Binding AddNotesCommand}"/>
             </ToolBar>
         </ToolBarTray>  
         <Grid>

@@ -18,7 +18,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="tbURL" IsReadOnly="True" wpf:HintAssist.Hint="URL" />
-        <Button Grid.Column="1" x:Name="btnOpenURL" Click="btnOpenURL_Click">Open</Button>
+        <Button x:Name="btnOpenURL" Content="Open" Grid.Column="1" Click="btnOpenURL_Click"/>
         <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" x:Name="wbDict" IsBrowserInitializedChanged="wbDict_IsBrowserInitializedChanged"  LoadingStateChanged="wbDict_LoadingStateChanged" />
     </Grid>
 </UserControl>

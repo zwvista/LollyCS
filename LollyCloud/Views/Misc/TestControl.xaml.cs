@@ -23,6 +23,9 @@ namespace LollyCloud
         {
         }
 
+        void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+        }
 
     }
 }

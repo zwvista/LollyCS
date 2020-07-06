@@ -12,8 +12,8 @@
             <ToolBar x:Name="ToolBar1" Band="1">
             </ToolBar>
             <ToolBar Band="2">
-                <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
-                <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+                <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
+                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />

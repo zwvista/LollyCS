@@ -13,7 +13,7 @@
             <ToolBar x:Name="ToolBarDict" Band="1">
             </ToolBar>
             <ToolBar Band="2">
-                <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
             </ToolBar>
             <ToolBar Band="2">
                 <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />

@@ -11,9 +11,9 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar>
-                <Button x:Name="btnAddPattern" Click="btnAddPattern_Click">Add Pattern</Button>
-                <Button x:Name="btnAddWebPage" Click="btnAddWebPage_Click">Add Web Page</Button>
-                <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+                <Button x:Name="btnAddPattern" Content="Add Pattern" Click="btnAddPattern_Click"/>
+                <Button x:Name="btnAddWebPage" Content="Add Web Page" Click="btnAddWebPage_Click"/>
+                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />

@@ -9,7 +9,7 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
-                <Button x:Name="btnNewTest" Click="btnNewTest_Click">New Test</Button>
+                <Button x:Name="btnNewTest" Content="New Test" Click="btnNewTest_Click"/>
                 <CheckBox x:Name="chkSpeak" Content="Speak?" Click="chkSpeak_Click" IsChecked="{Binding vm.IsSpeaking}" />
             </ToolBar>
         </ToolBarTray>

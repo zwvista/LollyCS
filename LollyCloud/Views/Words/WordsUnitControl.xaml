@@ -14,16 +14,16 @@
             <ToolBar x:Name="ToolBarDict" Band="1">
             </ToolBar>
             <ToolBar Band="2">
-                <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
-                <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
-                <Button x:Name="btnBatch" Click="btnBatch_Click">Batch</Button>
-                <Button x:Name="btnToggleToType" Click="btnToggleToType_Click">Toggle</Button>
-                <Button x:Name="btnPreviousUnitPart" Click="btnPreviousUnitPart_Click">Previous</Button>
-                <Button x:Name="btnNextUnitPart" Click="btnNextUnitPart_Click">Next</Button>
+                <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
+                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
+                <Button x:Name="btnBatch" Content="Batch" Click="btnBatch_Click"/>
+                <Button x:Name="btnToggleToType" Content="Toggle" Click="btnToggleToType_Click"/>
+                <Button x:Name="btnPreviousUnitPart" Content="Previous" Click="btnPreviousUnitPart_Click"/>
+                <Button x:Name="btnNextUnitPart" Content="Next" Click="btnNextUnitPart_Click"/>
                 <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{Binding IfEmpty}" />
-                <Button x:Name="btnGetNotes" Click="btnGetNotes_Click">Get Notes</Button>
-                <Button x:Name="btnClearNotes" Click="btnClearNotes_Click">Clear Notes</Button>
-                <Button x:Name="btnReview" Click="btnReview_Click">Review</Button>
+                <Button x:Name="btnGetNotes" Content="Get Notes" Click="btnGetNotes_Click"/>
+                <Button x:Name="btnClearNotes" Content="Clear Notes" Click="btnClearNotes_Click"/>
+                <Button x:Name="btnReview" Content="Review" Click="btnReview_Click"/>
             </ToolBar>
             <ToolBar Band="2">
                 <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />

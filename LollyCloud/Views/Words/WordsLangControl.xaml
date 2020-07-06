@@ -13,8 +13,8 @@
             <ToolBar x:Name="ToolBarDict" Band="1">
             </ToolBar>
             <ToolBar Band="2">
-                <Button x:Name="btnAdd" Click="btnAdd_Click">Add</Button>
-                <Button x:Name="btnRefresh" Click="btnRefresh_Click">Refresh</Button>
+                <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
+                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                 <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
