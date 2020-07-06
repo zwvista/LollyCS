@@ -225,6 +225,9 @@
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
     <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
+    <Compile Include="Views\Misc\TestControl.xaml.cs">
+      <DependentUpon>TestControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Misc\TextbooksDetailDlg.xaml.cs">
       <DependentUpon>TextbooksDetailDlg.xaml</DependentUpon>
     </Compile>
@@ -384,6 +387,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Misc\TestControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Misc\TextbooksDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

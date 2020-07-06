@@ -71,7 +71,7 @@ namespace LollyCloud
             {
                 PATTERNID = patternid,
                 PATTERN = pattern,
-                SEQNUM = (WebPageItems.MaxBy(o => o.SEQNUM).FirstOrDefault()?.SEQNUM ?? 0) + 1
+                SEQNUM = WebPageItems.Select(o => o.SEQNUM).StartWith(0).Max() + 1
             };
 
         public async Task UpdatePhrase(MPatternPhrase item) =>
