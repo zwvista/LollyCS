@@ -37,7 +37,7 @@
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
                         <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                        <DataGridTextColumn Binding="{Binding TAG}" Header="TAG"/>
+                        <DataGridTextColumn Binding="{Binding TAG}" Header="TAG" Width="100"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">
