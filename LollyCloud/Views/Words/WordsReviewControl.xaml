@@ -13,7 +13,7 @@
                 <CheckBox x:Name="chkSpeak" Content="Speak?" Click="chkSpeak_Click" IsChecked="{Binding vm.IsSpeaking}" />
             </ToolBar>
         </ToolBarTray>
-        <Grid>
+        <Grid Margin="10">
             <Grid.Resources>
                 <Style TargetType="Label">
                     <Setter Property="FontSize" Value="24" />

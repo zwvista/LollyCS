@@ -8,8 +8,8 @@
         Title="Phrases in Unit Details" Height="450" Width="660" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -20,7 +20,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
         <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
@@ -50,7 +50,7 @@
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0,10,0,0" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Margin="10,0,0,0"/>
         </StackPanel>

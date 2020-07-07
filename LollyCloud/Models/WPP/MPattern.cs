@@ -46,6 +46,8 @@ namespace LollyCloud
         public string PATTERN { get; set; } = "";
         [Reactive]
         public string NOTE { get; set; }
+        [Reactive]
+        public string TAG { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MPatternEdit()
         {
