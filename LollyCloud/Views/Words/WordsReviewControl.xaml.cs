@@ -20,12 +20,18 @@ namespace LollyCloud
         public WordsReviewControl()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
             OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
         {
+            _timer?.Stop();
             vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true);
+            btnNewTest_Click(null, null);
         }
 
         async Task DoTest()
@@ -73,6 +79,8 @@ namespace LollyCloud
                     _timer.Tick += (s, e2) => btnCheck_Click(sender, e);
                     _timer.Start();
                 }
+                else
+                    _timer?.Stop();
             }
         }
 
