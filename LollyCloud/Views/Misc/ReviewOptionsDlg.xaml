@@ -37,6 +37,6 @@
             <TextBox Text="{Binding GroupCount}" Width="75" VerticalAlignment="Center" />
         </StackPanel>
         <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Grid.Row="0" Grid.Column="3" />
-        <Button Content="Cancel" Width="75" IsCancel="True" Click="btnCancel_Click" Grid.Row="1" Grid.Column="3" />
+        <Button Content="Cancel" Width="75" IsCancel="True" Grid.Row="1" Grid.Column="3" />
     </Grid>
 </Window>
