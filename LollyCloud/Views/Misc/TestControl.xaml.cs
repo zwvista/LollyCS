@@ -31,16 +31,21 @@ namespace LollyCloud
 
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            var r = new Regex(@"(\d+)(.+)");
-            var lines = File.ReadAllLines("a.txt")
-                .Where(s => !string.IsNullOrWhiteSpace(s))
-                .ToList();
-            var store = new WebPageDataStore();
-            foreach (var s in lines)
+            var r = new Regex(@"表現(\d+)");
+            var store = new PatternDataStore();
+            var patterns = await store.GetDataByLang(2);
+            var store2 = new PatternWebPageDataStore();
+            foreach (var o in patterns)
             {
-                var m = r.Match(s);
-                var item = new MWebPage { TITLE = m.Groups[2].Value, URL = $"http://viethuong.web.fc2.com/MONDAI/{m.Groups[1].Value}.html" };
-                await store.Create(item);
+                var s = o.TAGS;
+                if (string.IsNullOrEmpty(s)) continue;
+                s.Split(',').ForEach(async (s2, i) =>
+                {
+                    var m = r.Match(s);
+                    int j = int.Parse(m.Groups[1].Value) + 3;
+                    var item = new MPatternWebPage { SEQNUM = i + 1, PATTERNID = o.ID, WEBPAGEID = j  };
+                    await store2.Create(item);
+                });
             }
         }
 

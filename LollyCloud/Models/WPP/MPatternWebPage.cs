@@ -30,6 +30,9 @@ namespace LollyCloud
         public string PATTERN { get; set; }
         [JsonProperty]
         [Reactive]
+        public int WEBPAGEID { get; set; }
+        [JsonProperty]
+        [Reactive]
         public int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
