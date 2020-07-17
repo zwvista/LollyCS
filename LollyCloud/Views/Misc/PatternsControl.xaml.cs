@@ -84,7 +84,7 @@ namespace LollyCloud
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.PatternItems[e.Row.GetIndex()];
+                var item = e.Row.DataContext as MPattern;
                 var text = ((TextBox)e.EditingElement).Text;
                 if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "PATTERN")
                     text = item.PATTERN = vm.vmSettings.AutoCorrectInput(text);

@@ -49,7 +49,7 @@ namespace LollyCloud
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = vm.WordItems[e.Row.GetIndex()];
+                var item = e.Row.DataContext as MUnitWord;
                 var text = ((TextBox)e.EditingElement).Text;
                 if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "WORD")
                     text = item.WORD = vm.vmSettings.AutoCorrectInput(text);
