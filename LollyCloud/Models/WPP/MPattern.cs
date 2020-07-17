@@ -31,7 +31,7 @@ namespace LollyCloud
         public string NOTE { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TAG { get; set; }
+        public string TAGS { get; set; }
 
         public MPattern()
         {
@@ -47,7 +47,7 @@ namespace LollyCloud
         [Reactive]
         public string NOTE { get; set; }
         [Reactive]
-        public string TAG { get; set; }
+        public string TAGS { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MPatternEdit()
         {
