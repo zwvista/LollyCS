@@ -39,12 +39,18 @@ namespace LollyCloud
             {
                 var s = o.TAGS;
                 if (string.IsNullOrEmpty(s)) continue;
-                s.Split(',').ForEach(async (s2, i) =>
+                var arr = s.Split(',').ToList();
+                if (arr.Count < 2) continue;
+                var webpages = await store2.GetDataByPattern(o.ID);
+                webpages = webpages.Where(o2 => o2.URL.StartsWith("http://viethuong.web.fc2.com/MONDAI/")).ToList();
+                arr.ForEach(async (s2, i) =>
                 {
-                    var m = r.Match(s);
-                    int j = int.Parse(m.Groups[1].Value) + 3;
-                    var item = new MPatternWebPage { SEQNUM = i + 1, PATTERNID = o.ID, WEBPAGEID = j  };
-                    await store2.Create(item);
+                    var item = webpages.SingleOrDefault(o2 => o2.SEQNUM == i + 1);
+                    if (item == null) return;
+                    var m2 = r.Match(s2);
+                    int j2 = int.Parse(m2.Groups[1].Value) + 3;
+                    item.WEBPAGEID = j2;
+                    await store2.Update(item);
                 });
             }
         }

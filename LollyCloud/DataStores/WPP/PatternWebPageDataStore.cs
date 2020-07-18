@@ -9,7 +9,7 @@ namespace LollyCloud
     public class PatternWebPageDataStore : LollyDataStore<MPatternWebPage>
     {
         public async Task<List<MPatternWebPage>> GetDataByPattern(int patternid) =>
-        (await GetDataByUrl<MPatternWebPages>($"VPATTERNSWEBPAGES?filter=PATTERNID,eq,{patternid}")).Records;
+        (await GetDataByUrl<MPatternWebPages>($"VPATTERNSWEBPAGES?filter=PATTERNID,eq,{patternid}&order=SEQNUM")).Records;
 
         public async Task<List<MPatternWebPage>> GetDataById(int id) =>
         (await GetDataByUrl<MPatternWebPages>($"VPATTERNSWEBPAGES?filter=ID,eq,{id}")).Records;
