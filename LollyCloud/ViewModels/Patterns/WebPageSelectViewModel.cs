@@ -12,7 +12,6 @@ namespace LollyCloud.ViewModels
     public class WebPageSelectViewModel : ReactiveObject
     {
         WebPageDataStore webPageDS = new WebPageDataStore();
-        public SettingsViewModel vmSettings { get; set; }
         [Reactive]
         public string TITLE { get; set; }
         [Reactive]
