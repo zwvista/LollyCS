@@ -37,7 +37,6 @@ namespace LollyCloud
         {
             vm.OnOK();
             DialogResult = true;
-            Close();
         }
     }
 }

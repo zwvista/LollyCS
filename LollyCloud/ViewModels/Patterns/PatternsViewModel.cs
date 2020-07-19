@@ -13,6 +13,7 @@ namespace LollyCloud
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
         PatternWebPageDataStore patternWebPageDS = new PatternWebPageDataStore();
+        WebPageDataStore webPageDS = new WebPageDataStore();
         PatternPhraseDataStore patternPhraseDS = new PatternPhraseDataStore();
 
         public ObservableCollection<MPattern> PatternItemsAll { get; set; }
@@ -60,12 +61,18 @@ namespace LollyCloud
             WebPageItems = new ObservableCollection<MPatternWebPage>(await patternWebPageDS.GetDataByPattern(patternid));
             this.RaisePropertyChanged(nameof(WebPageItems));
         }
-        public async Task UpdateWebPage(MPatternWebPage item) =>
+        public async Task UpdatePatternWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Update(item);
-        public async Task<int> CreateWebPage(MPatternWebPage item) =>
+        public async Task<int> CreatePatternWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Create(item);
-        public async Task DeleteWebPage(int id) =>
+        public async Task DeletePatternWebPage(int id) =>
             await patternWebPageDS.Delete(id);
+        public async Task UpdateWebPage(MPatternWebPage item) =>
+            await webPageDS.Update(item);
+        public async Task<int> CreateWebPage(MPatternWebPage item) =>
+            await webPageDS.Create(item);
+        public async Task DeleteWebPage(int id) =>
+            await webPageDS.Delete(id);
         public MPatternWebPage NewPatternWebPage(int patternid, string pattern) =>
             new MPatternWebPage
             {

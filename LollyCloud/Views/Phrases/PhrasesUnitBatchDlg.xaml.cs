@@ -46,7 +46,6 @@ namespace LollyCloud
                     await unitPhraseDS.Update(o);
                 }
             DialogResult = true;
-            Close();
         }
     }
 }

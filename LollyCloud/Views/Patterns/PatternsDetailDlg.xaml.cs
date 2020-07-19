@@ -46,7 +46,6 @@ namespace LollyCloud
             else
                 await vm.Update(Item);
             DialogResult = true;
-            Close();
         }
     }
 }

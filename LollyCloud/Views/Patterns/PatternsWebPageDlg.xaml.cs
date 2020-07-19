@@ -41,12 +41,15 @@ namespace LollyCloud
         {
             itemEdit.CopyProperties(Item);
             Item.PATTERN = vmSettings.AutoCorrectInput(Item.PATTERN);
-            if (Item.ID == 0)
-                Item.ID = await vm.CreateWebPage(Item);
+            if (Item.WEBPAGEID == 0)
+                Item.WEBPAGEID = await vm.CreateWebPage(Item);
             else
                 await vm.UpdateWebPage(Item);
+            if (Item.ID == 0)
+                Item.ID = await vm.CreatePatternWebPage(Item);
+            else
+                await vm.UpdatePatternWebPage(Item);
             DialogResult = true;
-            Close();
         }
 
         void btnNew_Click(object sender, RoutedEventArgs e)

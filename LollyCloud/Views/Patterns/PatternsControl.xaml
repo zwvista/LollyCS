@@ -57,9 +57,10 @@
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding WebPageItems}" Grid.Row="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
                         <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
-                        <DataGridTextColumn Binding="{Binding WEBPAGEID}" Header="WEBPAGEID" />
+                        <DataGridTextColumn Binding="{Binding WEBPAGEID}" Header="WEBPAGEID" IsReadOnly="True" />
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">

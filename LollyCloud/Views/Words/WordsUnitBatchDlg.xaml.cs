@@ -51,7 +51,6 @@ namespace LollyCloud
                     await wordFamiDS.Update(o.WORDID, vmBatch.LEVEL);
             }
             DialogResult = true;
-            Close();
         }
     }
 }

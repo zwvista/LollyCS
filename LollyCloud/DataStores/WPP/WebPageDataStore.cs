@@ -20,6 +20,25 @@ namespace LollyCloud
             if (!string.IsNullOrEmpty(url)) filter += (filter.IsEmpty() ? "?" : "&") + $"filter=URL,cs,{HttpUtility.UrlEncode(url)}";
             return (await GetDataByUrl<MWebPages>($"WEBPAGES{filter}")).Records;
         }
+        public async Task<int> Create(MPatternWebPage item)
+        {
+            var item2 = new MWebPage
+            {
+                TITLE = item.TITLE,
+                URL = item.URL,
+            };
+            return await CreateByUrl($"WEBPAGES", item2);
+        }
+        public async Task Update(MPatternWebPage item)
+        {
+            var item2 = new MWebPage
+            {
+                ID = item.WEBPAGEID,
+                TITLE = item.TITLE,
+                URL = item.URL,
+            };
+            Debug.WriteLine(await UpdateByUrl($"WEBPAGES/{item2.ID}", JsonConvert.SerializeObject(item2)));
+        }
         public async Task<int> Create(MWebPage item) =>
         await CreateByUrl($"WEBPAGES", item);
         public async Task Update(MWebPage item) =>
