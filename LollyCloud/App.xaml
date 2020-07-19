@@ -20,6 +20,9 @@
             <Style TargetType="{x:Type Window}">
                 <Setter Property="FontSize" Value="15" />
             </Style>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0,0,10,0" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

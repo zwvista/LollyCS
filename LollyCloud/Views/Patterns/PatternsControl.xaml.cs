@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -69,6 +70,8 @@ namespace LollyCloud
                 selectedPatternID = o.ID;
                 await vm.GetWebPages(selectedPatternID);
                 await SearchPhrase();
+                if (vm.WebPageItems.Any())
+                    dgWebPages.SelectedIndex = 0;
             }
         }
         void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();

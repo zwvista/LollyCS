@@ -239,13 +239,16 @@
     <Compile Include="Views\Misc\TextbooksControl.xaml.cs">
       <DependentUpon>TextbooksControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\PatternsControl.xaml.cs">
+    <Compile Include="Views\Patterns\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\PatternsWebPageDlg.xaml.cs">
+    <Compile Include="Views\Patterns\WebPageSelectDlg.xaml.cs">
+      <DependentUpon>WebPageSelectDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Patterns\PatternsWebPageDlg.xaml.cs">
       <DependentUpon>PatternsWebPageDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\PatternsDetailDlg.xaml.cs">
+    <Compile Include="Views\Patterns\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Misc\DictsControl.xaml.cs">
@@ -405,15 +408,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\PatternsControl.xaml">
+    <Page Include="Views\Patterns\PatternsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\PatternsWebPageDlg.xaml">
+    <Page Include="Views\Patterns\WebPageSelectDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\PatternsDetailDlg.xaml">
+    <Page Include="Views\Patterns\PatternsWebPageDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Patterns\PatternsDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

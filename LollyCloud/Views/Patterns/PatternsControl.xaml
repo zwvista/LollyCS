@@ -59,6 +59,7 @@
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
                         <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding WEBPAGEID}" Header="WEBPAGEID" />
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">

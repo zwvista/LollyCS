@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Words in Language Details" Height="400" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Words in Language Details" Height="400" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
@@ -33,7 +33,8 @@
         <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
         <Label Content="ACCURACY:" VerticalAlignment="Center" Grid.Row="5" />
         <TextBox Text="{Binding ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
-        <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}" IsReadOnly="True" Grid.Row="6" Grid.Column="1">
+        <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding WordItems}" IsReadOnly="True"
+                  Grid.Row="6" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
                 <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" />

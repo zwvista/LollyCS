@@ -5,41 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="PhrasesUnitDetailDlg" Height="350" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="PhrasesUnitDetailDlg" Height="350" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Phrase Scope:" VerticalAlignment="Center" Grid.Row="0" />
-        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" >
             <RadioButton x:Name="rbUnit" Content="Unit" IsChecked="True" />
             <RadioButton x:Name="rbLanguage" Content="Language" />
         </StackPanel>
         <Label Content="Textbook:" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" />
         <ComboBox x:Name="cbTextbookFilter" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" ItemsSource="{Binding vmSettings.TextbookFilters}" DisplayMemberPath="Label" SelectedValuePath="Value"
                           SelectedValue="{Binding vm.TextbookFilter}" />
-        <Label Content="Filter Scope:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+        <Label Content="Filter Scope:" VerticalAlignment="Center" Grid.Row="1" />
         <ComboBox x:Name="cbScopeFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding vm.ScopeFilter}" />
         <Label Content="Filter Text:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
         <TextBox x:Name="tbTextFilter" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding vm.TextFilter, UpdateSourceTrigger=PropertyChanged}" />
-        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Center" >
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
             <Button Content="Check All" Tag="0" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck All" Tag="1" Click="btnCheckItems_Click"/>
             <Button Content="Check Selected" Tag="2" Click="btnCheckItems_Click"/>
             <Button Content="Uncheck Selected" Tag="3" Click="btnCheckItems_Click"/>
         </StackPanel>
-        <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" x:Name="dgPhrases" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False"
-                      ItemsSource="{Binding vm.PhraseItems}">
+        <DataGrid x:Name="dgPhrases" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding vm.PhraseItems}"
+                  Grid.Row="3" Grid.ColumnSpan="4" Margin="0,10,0,0">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding IsChecked}" />
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
@@ -52,7 +52,7 @@
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="5" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0,10,0,0" >
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="6" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0,10,0,0" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>

@@ -1,0 +1,43 @@
+﻿<Window x:Class="LollyCloud.PatternsWebPageDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LollyCloud"
+        mc:Ignorable="d"
+        Title="Pattern WebPage Details" Height="310" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
+        <TextBox Text="{Binding ID}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="PATTERNID:" VerticalAlignment="Center" Grid.Row="1" />
+        <TextBox Text="{Binding PATTERNID}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="PATTERN:" VerticalAlignment="Center" Grid.Row="2" />
+        <TextBox Text="{Binding PATTERN}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="SEQNUM:" VerticalAlignment="Center" Grid.Row="3" />
+        <TextBox Text="{Binding SEQNUM}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <Label Content="WEBPAGEID:" VerticalAlignment="Center" Grid.Row="4" />
+        <TextBox Text="{Binding WEBPAGEID}" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="TITLE:" VerticalAlignment="Center" Grid.Row="5" />
+        <TextBox x:Name="tbTitle" Text="{Binding TITLE, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" />
+        <Label Content="URL:" VerticalAlignment="Center" Grid.Row="6" />
+        <TextBox Text="{Binding URL, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" />
+        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,0,0" >
+            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
+            <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

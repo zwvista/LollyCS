@@ -54,6 +54,8 @@ namespace LollyCloud
         [Reactive]
         public string PATTERN { get; set; } = "";
         [Reactive]
+        public int WEBPAGEID { get; set; }
+        [Reactive]
         public int SEQNUM { get; set; }
         [Reactive]
         public string TITLE { get; set; } = "";
