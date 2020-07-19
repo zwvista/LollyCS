@@ -23,7 +23,7 @@ namespace LollyCloud
         public MPatternWebPage Item;
         public SettingsViewModel vmSettings => MainWindow.vmSettings;
         public PatternsViewModel vm;
-        MPatternWebPageEdit itemEdit = new MPatternWebPageEdit();
+        public MPatternWebPageEdit itemEdit { get; } = new MPatternWebPageEdit();
         public PatternsWebPageDlg()
         {
             InitializeComponent();
@@ -47,6 +47,26 @@ namespace LollyCloud
                 await vm.UpdateWebPage(Item);
             DialogResult = true;
             Close();
+        }
+
+        void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            itemEdit.WEBPAGEID = 0;
+        }
+
+        void btnExisting_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new WebPageSelectDlg();
+            dlg.Owner = Window.GetWindow(this);
+            if (dlg.ShowDialog() == true)
+            {
+                var o = dlg.VM.SelectedWebPage;
+                itemEdit.WEBPAGEID = o.ID;
+                //itemEdit.TITLE = o.TITLE;
+                //itemEdit.URL = o.URL;
+                tbTitle.Text = o.TITLE;
+                tbURL.Text = o.URL;
+            }
         }
     }
 }

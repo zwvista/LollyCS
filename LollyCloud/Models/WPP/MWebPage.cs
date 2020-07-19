@@ -22,5 +22,7 @@ namespace LollyCloud
         [JsonProperty]
         [Reactive]
         public string URL { get; set; }
+        [Reactive]
+        public bool IsChecked { get; set; }
     }
 }

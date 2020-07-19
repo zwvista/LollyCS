@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Phrases in Unit - Batch Edit" Height="500" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Phrases in Unit - Batch Edit" Height="530" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <Style TargetType="CheckBox">
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}">
             <Setter Property="Margin" Value="0,0,10,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>

@@ -227,6 +227,7 @@
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
     <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
+    <Compile Include="ViewModels\Patterns\WebPageSelectViewModel.cs" />
     <Compile Include="Views\Misc\TestControl.xaml.cs">
       <DependentUpon>TestControl.xaml</DependentUpon>
     </Compile>
@@ -324,7 +325,7 @@
     <Compile Include="Views\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Misc\PatternsViewModel.cs" />
+    <Compile Include="ViewModels\Patterns\PatternsViewModel.cs" />
     <Compile Include="ViewModels\Misc\SelectDictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\EmbeddedReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesReviewViewModel.cs" />

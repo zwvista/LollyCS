@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LollyCloud.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,32 +21,26 @@ namespace LollyCloud
     /// </summary>
     public partial class WebPageSelectDlg : Window
     {
-        public MPattern Item;
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        public PatternsViewModel vm;
-        MPatternEdit itemEdit = new MPatternEdit();
+        public WebPageSelectViewModel VM { get; } = new WebPageSelectViewModel();
         public WebPageSelectDlg()
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
+            DataContext = VM;
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Item.CopyProperties(itemEdit);
-            DataContext = itemEdit;
         }
 
-        async void btnOK_Click(object sender, RoutedEventArgs e)
+        void chkWebPage_Click(object sender, RoutedEventArgs e)
         {
-            itemEdit.CopyProperties(Item);
-            Item.PATTERN = vmSettings.AutoCorrectInput(Item.PATTERN);
-            if (Item.ID == 0)
-                Item.ID = await vm.Create(Item);
-            else
-                await vm.Update(Item);
+            VM.SelectedWebPage = (MWebPage)((RadioButton)sender).DataContext;
+        }
+
+        void btnOK_Click(object sender, RoutedEventArgs e)
+        {
             DialogResult = true;
-            Close();
         }
     }
 }
