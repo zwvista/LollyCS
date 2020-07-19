@@ -19,12 +19,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
-        <Label Content="TITLE:" VerticalAlignment="Center" Grid.Row="1" />
-        <TextBox Text="{Binding TITLE, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <Label Content="URL:" VerticalAlignment="Center" Grid.Row="2" />
-        <TextBox Text="{Binding URL}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <Label Content="ID:" Grid.Row="0" />
+        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="TITLE:" Grid.Row="1" />
+        <TextBox Text="{Binding TITLE, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" />
+        <Label Content="URL:" Grid.Row="2" />
+        <TextBox Text="{Binding URL}" Grid.Row="2" Grid.Column="1" />
         <Button HorizontalAlignment="Right" Content="Search" Width="75" IsDefault="True" Command="{Binding Save}" Grid.Row="3" Grid.Column="1" Margin="0,10,0,0"/>
         <DataGrid x:Name="dgWebPages" SelectionMode="Single" AutoGenerateColumns="False"
                       IsReadOnly="True" ItemsSource="{Binding WebPageItems}" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,10,0,0">
@@ -34,7 +34,7 @@
                 <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0,10,0,0" >
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,10,0,0" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>

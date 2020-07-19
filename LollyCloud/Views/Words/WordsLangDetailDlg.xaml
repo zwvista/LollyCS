@@ -21,18 +21,18 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="ID:" VerticalAlignment="Center" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
-        <Label Content="WORD:" VerticalAlignment="Center" Grid.Row="1" />
-        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <Label Content="NOTE:" VerticalAlignment="Center" Grid.Row="2" />
-        <TextBox Text="{Binding NOTE}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <Label Content="FAMIID:" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox Text="{Binding FAMIID}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" IsReadOnly="True" />
-        <Label Content="LEVEL:" VerticalAlignment="Center" Grid.Row="4" />
-        <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" />
-        <Label Content="ACCURACY:" VerticalAlignment="Center" Grid.Row="5" />
-        <TextBox Text="{Binding ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="ID:" Grid.Row="0" />
+        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="WORD:" Grid.Row="1" />
+        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" />
+        <Label Content="NOTE:" Grid.Row="2" />
+        <TextBox Text="{Binding NOTE}" Grid.Row="2" Grid.Column="1" />
+        <Label Content="FAMIID:" Grid.Row="3" />
+        <TextBox Text="{Binding FAMIID}" Grid.Row="3" Grid.Column="1" IsReadOnly="True" />
+        <Label Content="LEVEL:" Grid.Row="4" />
+        <TextBox Text="{Binding LEVEL}" Grid.Row="4" Grid.Column="1" />
+        <Label Content="ACCURACY:" Grid.Row="5" />
+        <TextBox Text="{Binding ACCURACY,Mode=OneWay}" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
         <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding WordItems}" IsReadOnly="True"
                   Grid.Row="6" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>
@@ -74,7 +74,7 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0,10,0,0" >
+        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,10,0,0" >
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>
