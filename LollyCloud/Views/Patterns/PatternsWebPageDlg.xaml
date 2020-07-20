@@ -39,8 +39,8 @@
         <TextBox Text="{Binding SEQNUM}" Grid.Row="3" Grid.Column="1" />
         <Label Content="WEBPAGEID:" Grid.Row="4" />
         <DockPanel Grid.Row="4" Grid.Column="1">
-            <Button Content="Existing" Width="85" DockPanel.Dock="Right" Click="btnExisting_Click" Margin="10,0,0,0"/>
-            <Button Content="New" Width="85" DockPanel.Dock="Right" Click="btnNew_Click" Margin="10,0,0,0"/>
+            <Button x:Name="btnExisting" Content="Existing" Width="85" DockPanel.Dock="Right" Click="btnExisting_Click" Margin="10,0,0,0"/>
+            <Button x:Name="btnNew" Content="New" Width="85" DockPanel.Dock="Right" Click="btnNew_Click" Margin="10,0,0,0"/>
             <TextBox Text="{Binding WEBPAGEID}" IsReadOnly="True" HorizontalAlignment="Stretch" />
         </DockPanel>
         <Label Content="TITLE:" Grid.Row="5" />

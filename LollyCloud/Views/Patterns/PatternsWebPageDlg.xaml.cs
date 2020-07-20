@@ -35,6 +35,7 @@ namespace LollyCloud
         {
             Item.CopyProperties(itemEdit);
             DataContext = itemEdit;
+            btnExisting.IsEnabled = btnNew.IsEnabled = itemEdit.ID == 0;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)

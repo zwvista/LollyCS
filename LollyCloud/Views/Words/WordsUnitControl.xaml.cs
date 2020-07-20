@@ -1,14 +1,11 @@
-﻿using Hardcodet.Wpf.Util;
-using System.Collections.ObjectModel;
+﻿using Dragablz;
+using Hardcodet.Wpf.Util;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Linq;
-using Dragablz;
 using System.Windows.Data;
-using System.Windows.Threading;
-using System;
+using System.Windows.Input;
 
 namespace LollyCloud
 {
@@ -35,28 +32,20 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new WordsUnitDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = (sender as DataGridRow).Item as MUnitWord;
-            dlg.vm = vm;
+            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), (MUnitWord)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsUnitBatchDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.vmBatch.vm = vm;
+            var dlg = new WordsUnitBatchDlg(Window.GetWindow(this), vm);
             dlg.ShowDialog();
         }
 
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsUnitDetailDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = vm.NewUnitWord();
-            dlg.vm = vm;
+            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm.NewUnitWord(), vm);
             if (dlg.ShowDialog() == true)
                 vm.Add(dlg.Item);
         }
