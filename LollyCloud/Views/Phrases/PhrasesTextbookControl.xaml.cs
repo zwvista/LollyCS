@@ -25,22 +25,9 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new PhrasesTextbookDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = (sender as DataGridRow).Item as MUnitPhrase;
-            dlg.vm = vm;
+            var dlg = new PhrasesTextbookDetailDlg(Window.GetWindow(this), (MUnitPhrase)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
-        }
-
-        void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new PhrasesTextbookDetailDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = vm.NewUnitPhrase();
-            dlg.vm = vm;
-            dlg.ShowDialog();
-            vm.Add(dlg.Item);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 

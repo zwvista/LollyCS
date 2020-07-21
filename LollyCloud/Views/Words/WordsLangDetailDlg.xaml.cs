@@ -20,32 +20,22 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsLangDetailDlg : Window
     {
-        public MLangWord Item;
-        public SettingsViewModel vmSettings => vm.vmSettings;
-        public WordsLangViewModel vm;
-        MLangWordEdit itemEdit = new MLangWordEdit();
-        public WordsLangDetailDlg()
+        WordsLangDetailViewModel vmDetail;
+        public MLangWord Item { get; set; }
+        public WordsLangDetailDlg(Window owner, MLangWord item, WordsLangViewModel vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbWord.Focus();
-        }
-
-        void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Item.CopyProperties(itemEdit);
-            DataContext = itemEdit;
-            dgWords.DataContext = new SingleWordViewModel(Item.WORD, vmSettings);
+            Owner = owner;
+            vmDetail = new WordsLangDetailViewModel(Item = item, vm);
+            DataContext = vmDetail.ItemEdit;
+            dgWords.DataContext = vmDetail.vmSingleWord;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            itemEdit.CopyProperties(Item);
-            Item.WORD = vmSettings.AutoCorrectInput(Item.WORD);
-            if (Item.ID == 0)
-                Item.ID = await vm.Create(Item);
-            else
-                await vm.Update(Item);
+            await vmDetail.OnOK();
             DialogResult = true;
         }
     }

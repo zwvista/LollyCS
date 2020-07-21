@@ -29,20 +29,14 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new WordsLangDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = (sender as DataGridRow).Item as MLangWord;
-            dlg.vm = vm;
+            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), (MLangWord)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
         }
 
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsLangDetailDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = vm.NewLangWord();
-            dlg.vm = vm;
+            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm.NewLangWord(), vm);
             if (dlg.ShowDialog() == true)
                 vm.WordItems.Add(dlg.Item);
         }

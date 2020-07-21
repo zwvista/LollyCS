@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Phrases in Textbook Details" Height="580" Width="650" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Phrases in Textbook Details" Height="580" Width="650" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
             <Setter Property="Margin" Value="0,0,10,0" />
