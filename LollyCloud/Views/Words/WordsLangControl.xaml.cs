@@ -1,4 +1,6 @@
 ﻿using Dragablz;
+using System;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,17 +51,20 @@ namespace LollyCloud
             originalText = o2.Text;
         }
 
-        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = e.Row.DataContext as MLangWord;
-                var text = ((TextBox)e.EditingElement).Text;
-                if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "WORD")
-                    text = item.WORD = vm.vmSettings.AutoCorrectInput(text);
-                if (text != originalText)
-                    await vm.Update(item);
-                dgWords.CancelEdit(DataGridEditingUnit.Row);
+                var item = (MLangWord)e.Row.DataContext;
+                var el = (TextBox)e.EditingElement;
+                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "WORD")
+                    el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
+                if (el.Text != originalText)
+                    Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                    {
+                        await vm.Update(item);
+                        dgWords.CancelEdit(DataGridEditingUnit.Row);
+                    });
             }
         }
 

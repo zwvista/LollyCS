@@ -1,5 +1,6 @@
-﻿using Hardcodet.Wpf.Util;
+﻿using System;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -97,18 +98,21 @@ namespace LollyCloud
             originalText = o2.Text;
         }
 
-        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
             vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = e.Row.DataContext as MUnitPhrase;
-                var text = ((TextBox)e.EditingElement).Text;
-                if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "PHRASE")
-                    text = item.PHRASE = vm.vmSettings.AutoCorrectInput(text);
-                if (text != originalText)
-                    await vm.Update(item);
-                dgPhrases.CancelEdit(DataGridEditingUnit.Row);
+                var item = (MUnitPhrase)e.Row.DataContext;
+                var el = (TextBox)e.EditingElement;
+                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "PHRASE")
+                    el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
+                if (el.Text != originalText)
+                    Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                    {
+                        await vm.Update(item);
+                        dgPhrases.CancelEdit(DataGridEditingUnit.Row);
+                    });
             }
         }
         void btnReview_Click(object sender, RoutedEventArgs e)

@@ -1,13 +1,12 @@
 ﻿using Dragablz;
-using Hardcodet.Wpf.Util;
 using System;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace LollyCloud
 {
@@ -151,18 +150,21 @@ namespace LollyCloud
             var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
             originalText = o2.Text;
         }
-        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
             vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = e.Row.DataContext as MUnitWord;
-                var text = ((TextBox)e.EditingElement).Text;
-                if (((Binding)((DataGridTextColumn)e.Column).Binding).Path.Path == "WORD")
-                    text = item.WORD = vm.vmSettings.AutoCorrectInput(text);
-                if (text != originalText)
-                    await vm.Update(item);
-                dgWords.CancelEdit(DataGridEditingUnit.Row);
+                var item = (MUnitWord)e.Row.DataContext;
+                var el = (TextBox)e.EditingElement;
+                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "WORD")
+                    el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
+                if (el.Text != originalText)
+                    Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                    {
+                        await vm.Update(item);
+                        dgWords.CancelEdit(DataGridEditingUnit.Row);
+                    });
             }
         }
 
