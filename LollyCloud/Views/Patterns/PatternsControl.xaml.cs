@@ -27,30 +27,21 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgPatterns_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new PatternsDetailDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = (sender as DataGridRow).Item as MPattern;
-            dlg.vm = vm;
+            var dlg = new PatternsDetailDlg(Window.GetWindow(this), (MPattern)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
         }
 
         void btnAddPattern_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PatternsDetailDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = vm.NewPattern();
-            dlg.vm = vm;
+            var dlg = new PatternsDetailDlg(Window.GetWindow(this), vm.NewPattern(), vm);
             if (dlg.ShowDialog() == true)
                 vm.PatternItems.Add(dlg.Item);
         }
 
         void btnAddWebPage_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PatternsWebPageDlg();
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = vm.NewPatternWebPage(selectedPatternID, selectedPattern);
-            dlg.vm = vm;
+            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), vm.NewPatternWebPage(selectedPatternID, selectedPattern), vm);
             if (dlg.ShowDialog() == true)
                 vm.WebPageItems.Add(dlg.Item);
         }
@@ -116,11 +107,8 @@ namespace LollyCloud
 
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var dlg = new PatternsWebPageDlg();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            dlg.Owner = Window.GetWindow(this);
-            dlg.Item = (sender as DataGridRow).Item as MPatternWebPage;
-            dlg.vm = vm;
+            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), (MPatternWebPage)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
         }
 

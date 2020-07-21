@@ -20,54 +20,40 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsWebPageDlg : Window
     {
+        PatternsWebPageViewModel vmDetail;
         public MPatternWebPage Item;
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        public PatternsViewModel vm;
-        public MPatternWebPageEdit itemEdit { get; } = new MPatternWebPageEdit();
-        public PatternsWebPageDlg()
+        public PatternsWebPageDlg(Window owner, MPatternWebPage item, PatternsViewModel vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
-        }
-
-        void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Item.CopyProperties(itemEdit);
-            DataContext = itemEdit;
-            btnExisting.IsEnabled = btnNew.IsEnabled = itemEdit.ID == 0;
+            Owner = owner;
+            vmDetail = new PatternsWebPageViewModel(Item = item, vm);
+            DataContext = vmDetail.ItemEdit;
+            btnExisting.IsEnabled = btnNew.IsEnabled = vmDetail.ItemEdit.ID == 0;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            itemEdit.CopyProperties(Item);
-            Item.PATTERN = vmSettings.AutoCorrectInput(Item.PATTERN);
-            if (Item.WEBPAGEID == 0)
-                Item.WEBPAGEID = await vm.CreateWebPage(Item);
-            else
-                await vm.UpdateWebPage(Item);
-            if (Item.ID == 0)
-                Item.ID = await vm.CreatePatternWebPage(Item);
-            else
-                await vm.UpdatePatternWebPage(Item);
+            await vmDetail.OnOK();
             DialogResult = true;
         }
 
         void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            itemEdit.WEBPAGEID = 0;
+            vmDetail.ItemEdit.WEBPAGEID = 0;
         }
 
         void btnExisting_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new WebPageSelectDlg();
-            dlg.Owner = Window.GetWindow(this);
+            dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
                 var o = dlg.VM.SelectedWebPage;
-                itemEdit.WEBPAGEID = o.ID;
-                //itemEdit.TITLE = o.TITLE;
-                //itemEdit.URL = o.URL;
+                vmDetail.ItemEdit.WEBPAGEID = o.ID;
+                //vmDetail.ItemEdit.TITLE = o.TITLE;
+                //vmDetail.ItemEdit.URL = o.URL;
                 tbTitle.Text = o.TITLE;
                 tbURL.Text = o.URL;
             }

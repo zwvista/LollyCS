@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Pattern in Language Details" Height="260" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Pattern in Language Details" Height="260" Width="380" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
             <Setter Property="Margin" Value="0,0,10,0" />
