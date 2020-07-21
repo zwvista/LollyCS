@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="WebPage Select" Height="420" Width="380" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="WebPage Select" Height="420" Width="380" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
             <Setter Property="Margin" Value="0,0,10,0" />
@@ -40,7 +40,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <RadioButton GroupName="WebPage" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" Click="chkWebPage_Click" />
+                            <RadioButton GroupName="WebPage" Click="chkWebPage_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

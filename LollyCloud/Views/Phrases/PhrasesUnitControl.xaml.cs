@@ -1,4 +1,5 @@
 ﻿using Hardcodet.Wpf.Util;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
         public override MPhraseInterface ItemForRow(int row) => vm.PhraseItems[row];
+        EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
 
         public PhrasesUnitControl()
         {
@@ -107,6 +109,26 @@ namespace LollyCloud
                 if (text != originalText)
                     await vm.Update(item);
                 dgPhrases.CancelEdit(DataGridEditingUnit.Row);
+            }
+        }
+        void btnReview_Click(object sender, RoutedEventArgs e)
+        {
+            if (vmReview.IsRunning)
+                vmReview.Stop();
+            else
+            {
+                var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
+                if (dlg.ShowDialog() == true)
+                {
+                    var items = vm.PhraseItems.ToList();
+                    if (vmReview.Options.Shuffled)
+                        items.Shuffle();
+                    var ids = items.Select(o => o.ID).ToList();
+                    vmReview.Start(ids, id =>
+                    {
+                        dgPhrases.SelectedItem = vm.PhraseItems.FirstOrDefault(o => o.ID == id);
+                    });
+                }
             }
         }
 

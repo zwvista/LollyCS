@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Review Options" Height="300" Width="500" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Review Options" Height="300" Width="500" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <local:EnumConverter x:Key="EnumConverter"></local:EnumConverter>
     </Window.Resources>

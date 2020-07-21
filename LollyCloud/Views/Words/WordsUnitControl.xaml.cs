@@ -1,11 +1,13 @@
 ﻿using Dragablz;
 using Hardcodet.Wpf.Util;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace LollyCloud
 {
@@ -21,7 +23,7 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
-        public MReviewOptions Options { get; set; } = new MReviewOptions();
+        EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
 
         public WordsUnitControl()
         {
@@ -119,11 +121,24 @@ namespace LollyCloud
             await vm.ClearNotes(_ => { });
         void btnReview_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new ReviewOptionsDlg();
-            dlg.Owner = UIHelpers.TryFindParent<Window>(this);
-            dlg.optionsOriginal = Options;
-            if (dlg.ShowDialog() == true)
+            if (vmReview.IsRunning)
+                vmReview.Stop();
+            else
             {
+                var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
+                if (dlg.ShowDialog() == true)
+                {
+                    var items = vm.WordItems.ToList();
+                    if (vmReview.Options.Levelge0only)
+                        items = items.Where(o => o.LEVEL >= 0).ToList();
+                    if (vmReview.Options.Shuffled)
+                        items.Shuffle();
+                    var ids = items.Select(o => o.ID).ToList();
+                    vmReview.Start(ids, id =>
+                    {
+                        dgWords.SelectedItem = vm.WordItems.FirstOrDefault(o => o.ID == id);
+                    });
+                }
             }
         }
         public override async Task SearchPhrases() =>

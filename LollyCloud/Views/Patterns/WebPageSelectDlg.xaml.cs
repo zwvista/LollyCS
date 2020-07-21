@@ -29,10 +29,6 @@ namespace LollyCloud
             DataContext = VM;
         }
 
-        void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-
         void chkWebPage_Click(object sender, RoutedEventArgs e)
         {
             VM.SelectedWebPage = (MWebPage)((RadioButton)sender).DataContext;

@@ -1,31 +1,33 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Reactive.Linq;
 
 namespace LollyCloud
 {
     public class EmbeddedReviewViewModel : ReactiveObject
     {
-        public SettingsViewModel vmSettings;
-        public MReviewOptions Options { get; set; } = new MReviewOptions();
+        public MReviewOptions Options { get; } = new MReviewOptions();
+        IDisposable subscriptionTimer;
+        public bool IsRunning => subscriptionTimer != null;
 
-        public EmbeddedReviewViewModel(SettingsViewModel vmSettings)
+        public void Stop()
         {
-            this.vmSettings = vmSettings;
+            subscriptionTimer?.Dispose();
+            subscriptionTimer = null;
         }
 
-        public async Task Start(List<int> ids, int interval, Func<int, Task> getOne, CancellationToken token)
+        public void Start(List<int> ids, Action<int> getOne)
         {
-            token.ThrowIfCancellationRequested();
-            for (int i = 0; i < ids.Count; i++)
-            {
-                await Task.Delay((int)interval);
-                await getOne(i);
-            }
+            subscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(i =>
+                {
+                    if (i < ids.Count)
+                        getOne(ids[(int)i]);
+                    else
+                        Stop();
+                });
         }
     }
 }

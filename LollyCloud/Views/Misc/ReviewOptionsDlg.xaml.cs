@@ -20,23 +20,21 @@ namespace LollyCloud
     /// </summary>
     public partial class ReviewOptionsDlg : Window
     {
-        public MReviewOptions optionsOriginal;
-        MReviewOptions options = new MReviewOptions();
-        public ReviewOptionsDlg()
+        MReviewOptions options;
+        MReviewOptions optionsEdit = new MReviewOptions();
+        public ReviewOptionsDlg(Window owner, MReviewOptions options)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
-        }
-
-        void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            optionsOriginal.CopyProperties(options);
-            DataContext = options;
+            Owner = owner;
+            this.options = options;
+            options.CopyProperties(optionsEdit);
+            DataContext = optionsEdit;
         }
 
         void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            options.CopyProperties(optionsOriginal);
+            optionsEdit.CopyProperties(options);
             DialogResult = true;
         }
     }

@@ -19,6 +19,7 @@
                 <Button x:Name="btnToggleToType" Content="Toggle" Click="btnToggleToType_Click"/>
                 <Button x:Name="btnPreviousUnitPart" Content="Previous" Click="btnPreviousUnitPart_Click"/>
                 <Button x:Name="btnNextUnitPart" Content="Next" Click="btnNextUnitPart_Click"/>
+                <Button x:Name="btnReview" Content="Review" Click="btnReview_Click"/>
             </ToolBar>
             <ToolBar Band="2">
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" />

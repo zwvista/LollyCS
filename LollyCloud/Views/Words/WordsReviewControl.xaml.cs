@@ -21,7 +21,6 @@ namespace LollyCloud
         {
             InitializeComponent();
         }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             OnSettingsChanged();
@@ -64,9 +63,7 @@ namespace LollyCloud
 
         async void btnNewTest_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new ReviewOptionsDlg();
-            dlg.Owner = UIHelpers.TryFindParent<Window>(this);
-            dlg.optionsOriginal = vm.Options;
+            var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vm.Options);
             if (dlg.ShowDialog() == true)
             {
                 await vm.NewTest();

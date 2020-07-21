@@ -20,12 +20,17 @@ namespace LollyCloud
         public PhrasesReviewControl()
         {
             InitializeComponent();
+        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
             OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
         {
+            _timer?.Stop();
             vm = new PhrasesReviewViewModel(MainWindow.vmSettings, needCopy: true);
+            btnNewTest_Click(null, null);
         }
         void DoTest()
         {
@@ -52,9 +57,7 @@ namespace LollyCloud
 
         void btnNewTest_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new ReviewOptionsDlg();
-            dlg.Owner = UIHelpers.TryFindParent<Window>(this);
-            dlg.optionsOriginal = vm.Options;
+            var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vm.Options);
             if (dlg.ShowDialog() == true)
             {
                 vm.NewTest();
@@ -67,6 +70,8 @@ namespace LollyCloud
                     _timer.Tick += (s, e2) => btnCheck_Click(sender, e);
                     _timer.Start();
                 }
+                else
+                    _timer?.Stop();
             }
         }
 
