@@ -227,6 +227,7 @@
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
     <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
+    <Compile Include="ViewModels\Misc\TextbooksDetailViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsWebPageViewModel.cs" />
     <Compile Include="ViewModels\Patterns\WebPageSelectViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsDetailViewModel.cs" />

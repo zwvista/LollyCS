@@ -47,6 +47,10 @@ namespace LollyCloud
         public int ID { get; set; }
         [Reactive]
         public string TEXTBOOKNAME { get; set; }
+        [Reactive]
+        public string UNITS { get; set; }
+        [Reactive]
+        public string PARTS { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MTextbookEdit()
         {

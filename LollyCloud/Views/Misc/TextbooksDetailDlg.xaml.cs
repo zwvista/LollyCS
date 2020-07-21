@@ -20,31 +20,22 @@ namespace LollyCloud
     /// </summary>
     public partial class TextbooksDetailDlg : Window
     {
-        public MPattern Item;
-        public SettingsViewModel vmSettings => MainWindow.vmSettings;
-        public PatternsViewModel vm;
-        MPatternEdit itemEdit = new MPatternEdit();
-        public TextbooksDetailDlg()
+        TextbooksDetailViewModel vmDetail;
+        public MTextbook Item { get; set; }
+        public TextbooksDetailDlg(Window owner, MTextbook item, TextbooksViewModel vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
-            tbPattern.Focus();
-        }
-
-        void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Item.CopyProperties(itemEdit);
-            DataContext = itemEdit;
+            tbTextbookName.Focus();
+            Owner = owner;
+            vmDetail = new TextbooksDetailViewModel(Item = item, vm);
+            DataContext = vmDetail.ItemEdit;
+            tbLangName.Text = vmDetail.LANGNAME;
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            itemEdit.CopyProperties(Item);
-            Item.PATTERN = vmSettings.AutoCorrectInput(Item.PATTERN);
-            if (Item.ID == 0)
-                Item.ID = await vm.Create(Item);
-            else
-                await vm.Update(Item);
+            await vmDetail.OnOK();
             DialogResult = true;
         }
     }

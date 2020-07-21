@@ -26,6 +26,16 @@ namespace LollyCloud
                 Items = new ObservableCollection<MTextbook>(lst);
                 this.RaisePropertyChanged(nameof(Items));
             });
+        public MTextbook NewTextbook() =>
+            new MTextbook
+            {
+                LANGID = vmSettings.SelectedLang.ID,
+            };
+
+        public void Add(MTextbook item)
+        {
+            Items.Add(item);
+        }
 
         public async Task Update(MTextbook item) => await textbookDS.Update(item);
         public async Task<int> Create(MTextbook item) => await textbookDS.Create(item);
