@@ -122,19 +122,7 @@ namespace LollyCloud
         }
     }
 
-    public class MDictsReference
-    {
-        [JsonProperty("records")]
-        public List<MDictionary> Records { get; set; }
-    }
-
-    public class MDictsNote
-    {
-        [JsonProperty("records")]
-        public List<MDictionary> Records { get; set; }
-    }
-
-    public class MDictsTranslation
+    public class MDictionaries
     {
         [JsonProperty("records")]
         public List<MDictionary> Records { get; set; }

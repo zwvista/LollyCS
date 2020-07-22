@@ -13,13 +13,13 @@ namespace LollyCloud
     public class DictionaryDataStore : LollyDataStore<MDictionary>
     {
         public async Task<List<MDictionary>> GetDictsByLang(int langid) =>
-        (await GetDataByUrl<MDictsReference>($"VDICTIONARIES?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).Records;
+        (await GetDataByUrl<MDictionaries>($"VDICTIONARIES?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).Records;
         public async Task<List<MDictionary>> GetDictsReferenceByLang(int langid) =>
-        (await GetDataByUrl<MDictsReference>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).Records;
+        (await GetDataByUrl<MDictionaries>($"VDICTSREFERENCE?filter=LANGIDFROM,eq,{langid}&order=SEQNUM&order=DICTNAME")).Records;
         public async Task<List<MDictionary>> GetDictsNoteByLang(int langid) =>
-        (await GetDataByUrl<MDictsNote>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).Records;
+        (await GetDataByUrl<MDictionaries>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).Records;
         public async Task<List<MDictionary>> GetDictsTranslationByLang(int langid) =>
-        (await GetDataByUrl<MDictsTranslation>($"VDICTSTRANSLATION?filter=LANGIDFROM,eq,{langid}")).Records;
+        (await GetDataByUrl<MDictionaries>($"VDICTSTRANSLATION?filter=LANGIDFROM,eq,{langid}")).Records;
         public async Task<int> Create(MDictionary item) =>
         await CreateByUrl($"DICTIONARIES", item);
         public async Task Update(MDictionary item) =>
