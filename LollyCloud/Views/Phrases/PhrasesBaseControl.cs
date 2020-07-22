@@ -14,13 +14,11 @@ namespace LollyCloud
         protected string originalText = "";
         public virtual SettingsViewModel vmSettings => null;
         public virtual DataGrid dgPhrasesBase => null;
-        public virtual MPhraseInterface ItemForRow(int row) => null;
 
         public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var row = dgPhrasesBase.SelectedIndex;
-            if (row == -1) return;
-            selectedPhrase = ItemForRow(row).PHRASE;
+            var item = (MPhraseInterface)dgPhrasesBase.SelectedItem;
+            if (item == null) return;
             App.Speak(vmSettings, selectedPhrase);
         }
 

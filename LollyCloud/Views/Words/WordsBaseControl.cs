@@ -18,7 +18,6 @@ namespace LollyCloud
         protected string originalText = "";
         protected virtual string NewWord => null;
         public virtual DataGrid dgWordsBase => null;
-        public virtual MWordInterface ItemForRow(int row) => null;
         public virtual SettingsViewModel vmSettings => null;
         public virtual ToolBar ToolBarDictBase => null;
         public virtual TabablzControl tcDictsBase => null;
@@ -37,8 +36,8 @@ namespace LollyCloud
             void f(string word) =>
                 Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
 
-            var row = dgWordsBase.SelectedIndex;
-            if (row == -1)
+            var item = (MWordInterface)dgWordsBase.SelectedItem;
+            if (item == null)
             {
                 selectedWord = "";
                 selectedWordID = 0;
@@ -46,7 +45,6 @@ namespace LollyCloud
             }
             else
             {
-                var item = ItemForRow(row);
                 selectedWord = item.WORD;
                 selectedWordID = item.WORDID;
                 f(selectedWord);
@@ -59,16 +57,13 @@ namespace LollyCloud
 
         public async Task ChangeLevel(int delta)
         {
-            var row = dgWordsBase.SelectedIndex;
-            if (row == -1) return;
-            var item = ItemForRow(row);
+            var item = (MWordInterface)dgWordsBase.SelectedItem;
+            if (item == null) return;
             var newLevel = item.LEVEL + delta;
             if (newLevel != 0 && !vmSettings.USLEVELCOLORS.ContainsKey(newLevel)) return;
             item.LEVEL = newLevel;
-            await LevelChanged(row);
+            await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
         }
-
-        public virtual async Task LevelChanged(int row) { }
 
         public virtual async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
         {

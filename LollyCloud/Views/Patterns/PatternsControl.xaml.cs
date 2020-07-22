@@ -50,15 +50,14 @@ namespace LollyCloud
 
         async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var row = dgPatterns.SelectedIndex;
-            if (row == -1)
+            var o = (MPattern)dgPatterns.SelectedItem;
+            if (o == null)
             {
                 selectedPattern = "";
                 selectedPatternID = 0;
             }
             else
             {
-                var o = vm.PatternItems[row];
                 selectedPattern = o.PATTERN;
                 selectedPatternID = o.ID;
                 await vm.GetWebPages(selectedPatternID);
@@ -82,16 +81,30 @@ namespace LollyCloud
             vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var item = (MPattern)e.Row.DataContext;
-                var el = (TextBox)e.EditingElement;
-                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "PATTERN")
-                    el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
-                if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
-                    {
-                        await vm.Update(item);
-                        dgPatterns.CancelEdit(DataGridEditingUnit.Row);
-                    });
+                if (sender == dgPatterns)
+                {
+                    var item = (MPattern)e.Row.DataContext;
+                    var el = (TextBox)e.EditingElement;
+                    if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "PATTERN")
+                        el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
+                    if (el.Text != originalText)
+                        Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                        {
+                            await vm.Update(item);
+                            dgPatterns.CancelEdit(DataGridEditingUnit.Row);
+                        });
+                }
+                else if (sender == dgWebPages)
+                {
+                    var item = (MPatternWebPage)e.Row.DataContext;
+                    var el = (TextBox)e.EditingElement;
+                    if (el.Text != originalText)
+                        Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                        {
+                            await vm.UpdatePatternWebPage(item);
+                            dgWebPages.CancelEdit(DataGridEditingUnit.Row);
+                        });
+                }
             }
         }
 
@@ -121,9 +134,8 @@ namespace LollyCloud
 
         void dgWebPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var row = dgWebPages.SelectedIndex;
-            if (row == -1) return;
-            var item = vm.WebPageItems[row];
+            var item = (MPatternWebPage)dgWebPages.SelectedItem;
+            if (item == null) return;
             wbWebPage.Load(item.URL);
         }
         async Task SearchPhrase() =>
@@ -131,9 +143,8 @@ namespace LollyCloud
 
         void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var row = dgPhrases.SelectedIndex;
-            if (row == -1) return;
-            var item = vm.PhraseItems[row];
+            var item = (MPatternPhrase)dgPhrases.SelectedItem;
+            if (item == null) return;
             App.Speak(vmSettings, item.PHRASE);
         }
     }

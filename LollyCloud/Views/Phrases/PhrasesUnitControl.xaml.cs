@@ -17,7 +17,6 @@ namespace LollyCloud
         public PhrasesUnitViewModel vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
-        public override MPhraseInterface ItemForRow(int row) => vm.PhraseItems[row];
         EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
 
         public PhrasesUnitControl()

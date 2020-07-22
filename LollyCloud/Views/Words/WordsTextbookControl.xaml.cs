@@ -17,7 +17,6 @@ namespace LollyCloud
         public WordsUnitViewModel vm { get; set; }
         protected override string NewWord => vm.NewWord;
         public override DataGrid dgWordsBase => dgWords;
-        public override MWordInterface ItemForRow(int row) => vm.WordItems[row];
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
@@ -59,12 +58,6 @@ namespace LollyCloud
                         dgWords.CancelEdit(DataGridEditingUnit.Row);
                     });
             }
-        }
-
-        public override async Task LevelChanged(int row)
-        {
-            var item = vm.WordItems[row];
-            await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
         }
 
         public override async Task OnSettingsChanged()

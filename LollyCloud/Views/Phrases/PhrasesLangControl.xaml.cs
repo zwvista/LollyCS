@@ -16,7 +16,6 @@ namespace LollyCloud
         public PhrasesLangViewModel vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
-        public override MPhraseInterface ItemForRow(int row) => vm.PhraseItems[row];
 
         public PhrasesLangControl()
         {
