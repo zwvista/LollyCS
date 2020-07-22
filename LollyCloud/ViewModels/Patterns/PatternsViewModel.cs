@@ -1,14 +1,18 @@
-﻿using ReactiveUI;
+﻿using GongSolutions.Wpf.DragDrop;
+using GongSolutions.Wpf.DragDrop.Utilities;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LollyCloud
 {
-    public class PatternsViewModel : ReactiveObject
+    public class PatternsViewModel : ReactiveObject, IDragSource
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
@@ -25,6 +29,7 @@ namespace LollyCloud
         public string TextFilter { get; set; }
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
+        public bool IsEditing { get; set; }
 
         public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
@@ -81,6 +86,18 @@ namespace LollyCloud
                 SEQNUM = WebPageItems.Select(o => o.SEQNUM).StartWith(0).Max() + 1
             };
 
+        public async Task Reindex(Action<int> complete)
+        {
+            for (int i = 1; i <= WebPageItems.Count; i++)
+            {
+                var item = WebPageItems[i - 1];
+                if (item.SEQNUM == i) continue;
+                item.SEQNUM = i;
+                await patternWebPageDS.UpdateSeqNum(item.ID, item.SEQNUM);
+                complete(i - 1);
+            }
+        }
+
         public async Task UpdatePhrase(MPatternPhrase item) =>
             await patternPhraseDS.Update(item);
         public async Task SearchPhrases(int patternid)
@@ -88,5 +105,37 @@ namespace LollyCloud
             PhraseItems = new ObservableCollection<MPatternPhrase>(await patternPhraseDS.GetDataByPatternId(patternid));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
+
+        // Copied from DefaultDragHandler
+        // https://github.com/punker76/gong-wpf-dragdrop/blob/dev/src/GongSolutions.WPF.DragDrop/DefaultDragHandler.cs
+        void IDragSource.StartDrag(IDragInfo dragInfo)
+        {
+            var items = TypeUtilities.CreateDynamicallyTypedList(dragInfo.SourceItems).Cast<object>().ToList();
+            if (items.Count > 1)
+            {
+                dragInfo.Data = items;
+            }
+            else
+            {
+                // special case: if the single item is an enumerable then we can not drop it as single item
+                var singleItem = items.FirstOrDefault();
+                if (singleItem is IEnumerable && !(singleItem is string))
+                {
+                    dragInfo.Data = items;
+                }
+                else
+                {
+                    dragInfo.Data = singleItem;
+                }
+            }
+
+            dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
+        }
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing;
+        void IDragSource.Dropped(IDropInfo dropInfo) { }
+        async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
+            await Reindex(_ => { });
+        void IDragSource.DragCancelled() { }
+        bool IDragSource.TryCatchOccurredException(Exception exception) => false;
     }
 }

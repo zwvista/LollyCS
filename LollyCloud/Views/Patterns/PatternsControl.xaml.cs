@@ -71,6 +71,7 @@ namespace LollyCloud
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
+            vm.IsEditing = true;
             var o = e.EditingEventArgs.Source;
             var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
             originalText = o2.Text;
@@ -78,6 +79,7 @@ namespace LollyCloud
 
         void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
+            vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 var item = (MPattern)e.Row.DataContext;
