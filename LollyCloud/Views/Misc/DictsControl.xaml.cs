@@ -12,30 +12,20 @@ namespace LollyCloud
     /// </summary>
     public partial class DictsControl : UserControl, ILollySettings
     {
+        public DictsViewModel vm { get; set; }
         public DictsControl()
         {
             InitializeComponent();
             OnSettingsChanged();
         }
 
-        // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
-        void dgDicts_RowDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-        }
-
-        async void dgDicts_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-        }
-
         public async Task OnSettingsChanged()
         {
+            vm = new DictsViewModel(MainWindow.vmSettings, needCopy: true);
+            DataContext = vm;
         }
 
-        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-        }
-
-        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        void dgDicts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
         }
 

@@ -225,6 +225,7 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="ViewModels\Misc\DictsDetailViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
     <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksDetailViewModel.cs" />

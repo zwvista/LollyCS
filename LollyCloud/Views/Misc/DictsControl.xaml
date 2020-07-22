@@ -17,17 +17,20 @@
             <StatusBar DockPanel.Dock="Bottom">
                 <Label Content="{Binding StatusText}"/>
             </StatusBar>
-            <DataGrid x:Name="dgDicts" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
-                      dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
+            <DataGrid x:Name="dgDicts" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding Items}" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE" />
-                    <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION" />
-                    <DataGridTextColumn Binding="{Binding PHRASEID}" Header="PHRASEID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
+                    <DataGridTextColumn Binding="{Binding LANGNAMETO}" Header="LANGNAMETO" />
+                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" />
+                    <DataGridTextColumn Binding="{Binding DICTTYPENAME}" Header="DICTTYPENAME" />
+                    <DataGridTextColumn Binding="{Binding DICTNAME}" Header="DICTNAME" />
+                    <DataGridTextColumn Binding="{Binding URL}" Header="URL" />
+                    <DataGridTextColumn Binding="{Binding CHCONV}" Header="CHCONV" />
+                    <DataGridTextColumn Binding="{Binding AUTOMATION}" Header="AUTOMATION" />
+                    <DataGridTextColumn Binding="{Binding TRANSFORM}" Header="TRANSFORM" />
+                    <DataGridTextColumn Binding="{Binding WAIT}" Header="WAIT" />
+                    <DataGridTextColumn Binding="{Binding TEMPLATE}" Header="TEMPLATE" />
+                    <DataGridTextColumn Binding="{Binding TEMPLATE2}" Header="TEMPLATE2" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">

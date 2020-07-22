@@ -79,6 +79,7 @@ namespace LollyCloud
         void miBlog_Click(object sender, RoutedEventArgs e) => AddTab<BlogControl>("Blog");
         void miReadNumber_Click(object sender, RoutedEventArgs e) => AddTab<ReadNumberControl>("Read Number");
         void miTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<TextbooksControl>("Textbooks");
+        void miDictionaries_Click(object sender, RoutedEventArgs e) => AddTab<DictsControl>("Dictionaries");
         void miTest_Click(object sender, RoutedEventArgs e) => AddTab<TestControl>("Test");
 
     }
