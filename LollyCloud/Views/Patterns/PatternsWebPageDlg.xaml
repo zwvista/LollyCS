@@ -41,7 +41,7 @@
         <DockPanel Grid.Row="4" Grid.Column="1">
             <Button x:Name="btnExisting" Content="Existing" Width="85" DockPanel.Dock="Right" Click="btnExisting_Click" Margin="10,0,0,0"/>
             <Button x:Name="btnNew" Content="New" Width="85" DockPanel.Dock="Right" Click="btnNew_Click" Margin="10,0,0,0"/>
-            <TextBox Text="{Binding WEBPAGEID}" IsReadOnly="True" HorizontalAlignment="Stretch" />
+            <TextBox Text="{Binding WEBPAGEID}" IsReadOnly="True" />
         </DockPanel>
         <Label Content="TITLE:" Grid.Row="5" />
         <TextBox x:Name="tbTitle" Text="{Binding TITLE, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,10" />

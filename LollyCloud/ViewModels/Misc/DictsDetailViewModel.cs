@@ -5,12 +5,12 @@ namespace LollyCloud
 {
     public class DictsDetailViewModel : ReactiveObject
     {
-        MTextbook item;
-        TextbooksViewModel vm;
-        public MTextbookEdit ItemEdit = new MTextbookEdit();
+        MDictionary item;
+        DictsViewModel vm;
+        public MDictionaryEdit ItemEdit = new MDictionaryEdit();
         public string LANGNAME { get; private set; }
 
-        public DictsDetailViewModel(MTextbook item, TextbooksViewModel vm)
+        public DictsDetailViewModel(MDictionary item, DictsViewModel vm)
         {
             this.item = item;
             this.vm = vm;

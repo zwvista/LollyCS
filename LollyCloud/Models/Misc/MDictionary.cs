@@ -83,7 +83,37 @@ namespace LollyCloud
         [Reactive]
         public int ID { get; set; }
         [Reactive]
+        public int DICTID { get; set; }
+        [Reactive]
+        public int LANGIDFROM { get; set; }
+        [Reactive]
+        public string LANGNAMEFROM { get; set; }
+        [Reactive]
+        public int LANGIDTO { get; set; }
+        [Reactive]
+        public string LANGNAMETO { get; set; }
+        [Reactive]
+        public int SEQNUM { get; set; }
+        [Reactive]
+        public int DICTTYPEID { get; set; }
+        [Reactive]
+        public string DICTTYPENAME { get; set; }
+        [Reactive]
         public string DICTNAME { get; set; }
+        [Reactive]
+        public string URL { get; set; }
+        [Reactive]
+        public string CHCONV { get; set; }
+        [Reactive]
+        public string AUTOMATION { get; set; }
+        [Reactive]
+        public string TRANSFORM { get; set; }
+        [Reactive]
+        public int? WAIT { get; set; }
+        [Reactive]
+        public string TEMPLATE { get; set; }
+        [Reactive]
+        public string TEMPLATE2 { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public MDictionaryEdit()
         {

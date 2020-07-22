@@ -36,7 +36,7 @@
             </DockPanel>
             <Label x:Name="lblPhraseTarget" Content="{Binding PhraseTarget}" Foreground="Orange" Grid.Row="1" />
             <Label x:Name="lblTranslation" Content="{Binding Translation}" Foreground="Pink" Grid.Row="2" />
-            <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInput}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
+            <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInput}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
             <Button Grid.Row="4" x:Name="btnCheck" Width="100" HorizontalAlignment="Right" Click="btnCheck_Click"/>
         </Grid>
     </DockPanel>

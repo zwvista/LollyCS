@@ -27,7 +27,17 @@ namespace LollyCloud
 
         void dgDicts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var dlg = new DictsDetailDlg(Window.GetWindow(this), (MDictionary)((DataGridRow)sender).Item, vm);
+            dlg.ShowDialog();
         }
+
+        void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new DictsDetailDlg(Window.GetWindow(this), vm.NewDictionary(), vm);
+            if (dlg.ShowDialog() == true)
+                vm.Add(dlg.Item);
+        }
+        public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
     }
 }

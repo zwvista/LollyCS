@@ -11,6 +11,8 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar x:Name="ToolBar1" Band="1">
+                <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
+                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
             </ToolBar>
         </ToolBarTray>
         <DockPanel>

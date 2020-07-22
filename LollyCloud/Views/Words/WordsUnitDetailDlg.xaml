@@ -37,27 +37,27 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="UNIT:" Grid.Row="1" />
         <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
-                  HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" />
+                  Grid.Row="1" Grid.Column="1" />
         <Label Content="PART:" Grid.Row="2" />
         <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
-                  HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1" />
+                  Grid.Row="2" Grid.Column="1" />
         <Label Content="SEQNUM:" Grid.Row="3" />
-        <TextBox Text="{Binding SEQNUM}" HorizontalAlignment="Stretch" Grid.Row="3" Grid.Column="1" />
+        <TextBox Text="{Binding SEQNUM}" Grid.Row="3" Grid.Column="1" />
         <Label Content="WORDID:" Grid.Row="4" />
-        <TextBox Text="{Binding WORDID}" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding WORDID}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="WORD:" Grid.Row="5" />
-        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
         <Label Content="NOTE:" Grid.Row="6" />
-        <TextBox Text="{Binding NOTE}" HorizontalAlignment="Stretch" Grid.Row="6" Grid.Column="1" />
+        <TextBox Text="{Binding NOTE}" Grid.Row="6" Grid.Column="1" />
         <Label Content="FAMIID:" Grid.Row="7" />
-        <TextBox Text="{Binding FAMIID}" HorizontalAlignment="Stretch" Grid.Row="7" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding FAMIID}" Grid.Row="7" Grid.Column="1" IsReadOnly="True" />
         <Label Content="LEVEL:" Grid.Row="8" />
-        <TextBox Text="{Binding LEVEL}" HorizontalAlignment="Stretch" Grid.Row="8" Grid.Column="1" />
+        <TextBox Text="{Binding LEVEL}" Grid.Row="8" Grid.Column="1" />
         <Label Content="ACCURACY:" Grid.Row="9" />
-        <TextBox Text="{Binding ACCURACY,Mode=OneWay}" HorizontalAlignment="Stretch" Grid.Row="9" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding ACCURACY,Mode=OneWay}" Grid.Row="9" Grid.Column="1" IsReadOnly="True" />
         <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding WordItems}" IsReadOnly="True"
                   Grid.Row="10" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>

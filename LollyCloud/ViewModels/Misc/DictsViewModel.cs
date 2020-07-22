@@ -26,6 +26,16 @@ namespace LollyCloud
                 Items = new ObservableCollection<MDictionary>(lst);
                 this.RaisePropertyChanged(nameof(Items));
             });
+        public MDictionary NewDictionary() =>
+            new MDictionary
+            {
+                LANGIDFROM = vmSettings.SelectedLang.ID,
+            };
+
+        public void Add(MDictionary item)
+        {
+            Items.Add(item);
+        }
 
         public async Task Update(MDictionary item) => await dictDS.Update(item);
         public async Task<int> Create(MDictionary item) => await dictDS.Create(item);

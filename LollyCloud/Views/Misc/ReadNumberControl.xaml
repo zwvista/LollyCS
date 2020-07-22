@@ -10,7 +10,7 @@
             <ToolBar x:Name="ToolBar1" Band="1">
             </ToolBar>
         </ToolBarTray>  
-        <Grid>
+        <Grid Margin="10">
             <Grid.Resources>
                 <Style TargetType="Label">
                     <Setter Property="FontSize" Value="24" />
@@ -24,8 +24,8 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBox Text="{Binding Number}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" />
-            <TextBox Text="{Binding Text}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" />
+            <TextBox Text="{Binding Number}" VerticalAlignment="Center" Grid.Row="0" />
+            <TextBox Text="{Binding Text}" VerticalAlignment="Center" Grid.Row="1" />
             <Button x:Name="btnRead" Grid.Row="2" Content="Read" Width="100" HorizontalAlignment="Right" Command="{Binding ReadNumberCommand}" />
         </Grid>
     </DockPanel>
