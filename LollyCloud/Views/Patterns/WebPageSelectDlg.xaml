@@ -34,16 +34,9 @@
         <Label Content="URL:" Grid.Row="1" />
         <TextBox Text="{Binding URL}" Grid.Row="1" Grid.Column="1" />
         <Button HorizontalAlignment="Right" Content="Search" Width="75" IsDefault="True" Command="{Binding Search}" Grid.Row="2" Grid.Column="1"/>
-        <DataGrid x:Name="dgWebPages" SelectionMode="Single" AutoGenerateColumns="False"
-                      IsReadOnly="True" ItemsSource="{Binding WebPageItems}" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10,0,0">
+        <DataGrid x:Name="dgWebPages" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True"
+                  ItemsSource="{Binding WebPageItems}" SelectedItem="{Binding SelectedWebPage}" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <RadioButton GroupName="WebPage" Click="chkWebPage_Click" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
                 <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
                 <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
