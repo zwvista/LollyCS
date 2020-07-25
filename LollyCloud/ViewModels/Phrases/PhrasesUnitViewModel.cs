@@ -66,34 +66,34 @@ namespace LollyCloud
             var itemLang = new MLangPhrase(item);
             var lstLangOld = await langPhraseDS.GetDataById(phraseid);
             if (!lstLangOld.IsEmpty() && lstLangOld[0].PHRASE == item.PHRASE)
-            {
                 await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
-                return;
-            }
-            var lstLangNew = await langPhraseDS.GetDataByLangPhrase(item.LANGID, item.PHRASE);
-            async Task f()
-            {
-                itemLang = lstLangNew[0];
-                phraseid = itemLang.ID;
-                var b = itemLang.CombineTranslation(item.TRANSLATION);
-                item.TRANSLATION = itemLang.TRANSLATION;
-                if (b) await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
-            }
-            if (lstUnit.Count == 1)
-                if (lstLangNew.IsEmpty())
-                    await langPhraseDS.Update(itemLang);
-                else
-                {
-                    await langPhraseDS.Delete(phraseid);
-                    await f();
-                }
-            else if (lstLangNew.IsEmpty())
-            {
-                itemLang.ID = 0;
-                await langPhraseDS.Create(itemLang);
-            }
             else
-                await f();
+            {
+                var lstLangNew = await langPhraseDS.GetDataByLangPhrase(item.LANGID, item.PHRASE);
+                async Task f()
+                {
+                    itemLang = lstLangNew[0];
+                    phraseid = itemLang.ID;
+                    var b = itemLang.CombineTranslation(item.TRANSLATION);
+                    item.TRANSLATION = itemLang.TRANSLATION;
+                    if (b) await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
+                }
+                if (lstUnit.Count == 1)
+                    if (lstLangNew.IsEmpty())
+                        await langPhraseDS.Update(itemLang);
+                    else
+                    {
+                        await langPhraseDS.Delete(phraseid);
+                        await f();
+                    }
+                else if (lstLangNew.IsEmpty())
+                {
+                    itemLang.ID = 0;
+                    await langPhraseDS.Create(itemLang);
+                }
+                else
+                    await f();
+            }
             item.PHRASEID = phraseid;
             await unitPhraseDS.Update(item);
         }

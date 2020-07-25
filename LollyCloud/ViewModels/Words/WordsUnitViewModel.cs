@@ -76,40 +76,40 @@ namespace LollyCloud
             var itemLang = new MLangWord(item);
             var lstLangOld = await langWordDS.GetDataById(wordid);
             if (lstLangOld.Any() && lstLangOld[0].WORD == item.WORD)
-            {
                 await langWordDS.UpdateNote(wordid, item.NOTE);
-                return;
-            }
-            var lstLangNew = await langWordDS.GetDataByLangWord(item.LANGID, item.WORD);
-            async Task f()
-            {
-                itemLang = lstLangNew[0];
-                wordid = itemLang.ID;
-                var b = itemLang.CombineNote(item.NOTE);
-                item.NOTE = itemLang.NOTE;
-                var lstFami = await wordFamiDS.GetDataByUserWord(CommonApi.UserId, wordid);
-                if (lstFami.Any())
-                {
-                    item.CORRECT = lstFami[0].CORRECT;
-                    item.TOTAL = lstFami[0].TOTAL;
-                }
-                if (b) await langWordDS.UpdateNote(wordid, item.NOTE);
-            }
-            if (lstUnit.Count == 1)
-                if (lstLangNew.IsEmpty())
-                    await langWordDS.Update(itemLang);
-                else
-                {
-                    await langWordDS.Delete(wordid);
-                    await f();
-                }
-            else if (lstLangNew.IsEmpty())
-            {
-                itemLang.ID = 0;
-                await langWordDS.Create(itemLang);
-            }
             else
-                await f();
+            {
+                var lstLangNew = await langWordDS.GetDataByLangWord(item.LANGID, item.WORD);
+                async Task f()
+                {
+                    itemLang = lstLangNew[0];
+                    wordid = itemLang.ID;
+                    var b = itemLang.CombineNote(item.NOTE);
+                    item.NOTE = itemLang.NOTE;
+                    var lstFami = await wordFamiDS.GetDataByUserWord(CommonApi.UserId, wordid);
+                    if (lstFami.Any())
+                    {
+                        item.CORRECT = lstFami[0].CORRECT;
+                        item.TOTAL = lstFami[0].TOTAL;
+                    }
+                    if (b) await langWordDS.UpdateNote(wordid, item.NOTE);
+                }
+                if (lstUnit.Count == 1)
+                    if (lstLangNew.IsEmpty())
+                        await langWordDS.Update(itemLang);
+                    else
+                    {
+                        await langWordDS.Delete(wordid);
+                        await f();
+                    }
+                else if (lstLangNew.IsEmpty())
+                {
+                    itemLang.ID = 0;
+                    await langWordDS.Create(itemLang);
+                }
+                else
+                    await f();
+            }
             item.WORDID = wordid;
             await unitWordDS.Update(item);
         }
