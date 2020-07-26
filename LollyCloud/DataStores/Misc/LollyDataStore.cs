@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace LollyCloud
         protected HttpClient client = new HttpClient
         {
             BaseAddress = new Uri(CommonApi.LollyUrl)
+        };
+        protected HttpClient clientSP = new HttpClient
+        {
+            BaseAddress = new Uri(CommonApi.LollyUrlSP)
         };
 
         protected async Task<U> GetDataByUrl<U>(string url) where U : class
@@ -72,6 +77,32 @@ namespace LollyCloud
             var response = await client.DeleteAsync(url);
 
             return response.IsSuccessStatusCode;
+        }
+
+        protected async Task<MSPResult> CallSPByUrl(string url, T item)
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+                return null;
+
+            var dic = typeof(T).GetProperties().ToDictionary(o => o.Name, o => o.GetValue(item).ToString());
+            var response = await clientSP.PostAsync(url, new FormUrlEncodedContent(dic));
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var u = await Task.Run(() =>
+            {
+                try
+                {
+                    return JsonConvert.DeserializeObject<List<List<MSPResult>>>(json)[0][0];
+                }
+                catch (JsonException ex)
+                {
+                    return null;
+                }
+            });
+            return u;
         }
     }
 }

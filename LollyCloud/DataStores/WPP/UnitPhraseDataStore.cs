@@ -17,12 +17,24 @@ namespace LollyCloud
             return lst;
         }
 
-        public async Task<List<MUnitPhrase>> GetDataByLang(int langid, List<MTextbook> lstTextbooks)
+        List<MUnitPhrase> SetTextbook(List<MUnitPhrase> lst, List<MTextbook> lstTextbooks)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM")).Records;
             foreach (var o in lst)
                 o.Textbook = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);
             return lst;
+        }
+
+        public async Task<List<MUnitPhrase>> GetDataByLang(int langid, List<MTextbook> lstTextbooks)
+        {
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM")).Records;
+            return SetTextbook(lst, lstTextbooks);
+        }
+
+        public async Task<MUnitPhrase> GetDataById(int id, List<MTextbook> lstTextbooks)
+        {
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITWORDS?filter=ID,eq,{id}")).Records.ToList();
+            lst = SetTextbook(lst, lstTextbooks);
+            return lst.Any() ? lst[0] : null;
         }
 
         public async Task<List<MUnitPhrase>> GetDataByPhraseId(int phraseid) =>
@@ -31,24 +43,22 @@ namespace LollyCloud
         {
             var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=LANGID,eq,{langid}&filter=PHRASE,eq,{HttpUtility.UrlEncode(phrase)}")).Records
                 .Where(o => o.PHRASE == phrase).ToList();
-            foreach (var o in lst)
-                o.Textbook = lstTextbooks.First(o3 => o3.ID == o.TEXTBOOKID);
-            return lst;
+            return SetTextbook(lst, lstTextbooks);
         }
 
         public async Task<int> Create(MUnitPhrase item) =>
-        await CreateByUrl($"UNITPHRASES", item);
+        (await CallSPByUrl("UNITPHRASES_CREATE", item)).NewID.Value;
 
         public async Task UpdateSeqNum(int id, int seqnum) =>
         Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"SEQNUM={seqnum}"));
 
-        public async Task UpdateNote(int id, string note) =>
-        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"NOTE={note}"));
+        public async Task UpdateTranslation(int id, string translation) =>
+        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"TRANSLATION={translation}"));
 
         public async Task Update(MUnitPhrase item) =>
-        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{item.ID}", JsonConvert.SerializeObject(item)));
+        Debug.WriteLine(await CallSPByUrl("UNITPHRASES_CREATE", item));
 
-        public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"UNITPHRASES/{id}"));
+        public async Task Delete(MUnitPhrase item) =>
+        Debug.WriteLine(await CallSPByUrl("UNITPHRASES_DELETE", item));
     }
 }

@@ -60,75 +60,23 @@ namespace LollyCloud
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
         public async Task Update(MUnitPhrase item)
         {
-            var phraseid = item.PHRASEID;
-            var lstUnit = await unitPhraseDS.GetDataByPhraseId(phraseid);
-            if (lstUnit.IsEmpty()) return;
-            var itemLang = new MLangPhrase(item);
-            var lstLangOld = await langPhraseDS.GetDataById(phraseid);
-            if (!lstLangOld.IsEmpty() && lstLangOld[0].PHRASE == item.PHRASE)
-                await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
-            else
-            {
-                var lstLangNew = await langPhraseDS.GetDataByLangPhrase(item.LANGID, item.PHRASE);
-                async Task f()
-                {
-                    itemLang = lstLangNew[0];
-                    phraseid = itemLang.ID;
-                    var b = itemLang.CombineTranslation(item.TRANSLATION);
-                    item.TRANSLATION = itemLang.TRANSLATION;
-                    if (b) await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
-                }
-                if (lstUnit.Count == 1)
-                    if (lstLangNew.IsEmpty())
-                        await langPhraseDS.Update(itemLang);
-                    else
-                    {
-                        await langPhraseDS.Delete(phraseid);
-                        await f();
-                    }
-                else if (lstLangNew.IsEmpty())
-                {
-                    itemLang.ID = 0;
-                    await langPhraseDS.Create(itemLang);
-                }
-                else
-                    await f();
-            }
-            item.PHRASEID = phraseid;
             await unitPhraseDS.Update(item);
+            var o = unitPhraseDS.GetDataById(item.ID, vmSettings.Textbooks);
+            o?.CopyProperties(item);
         }
-        public async Task<int> Create(MUnitPhrase item)
+        public async Task Create(MUnitPhrase item)
         {
-            var lstLang = await langPhraseDS.GetDataByLangPhrase(item.LANGID, item.PHRASE);
-            int phraseid;
-            if (lstLang.IsEmpty())
-            {
-                var itemLang = new MLangPhrase(item);
-                phraseid = await langPhraseDS.Create(itemLang);
-            }
-            else
-            {
-                var itemLang = lstLang[0];
-                phraseid = itemLang.ID;
-                var b = itemLang.CombineTranslation(item.TRANSLATION);
-                item.TRANSLATION = itemLang.TRANSLATION;
-                if (b) await langPhraseDS.UpdateTranslation(phraseid, item.TRANSLATION);
-            }
-            item.PHRASEID = phraseid;
-            return await unitPhraseDS.Create(item);
+            int id = await unitPhraseDS.Create(item);
+            var o = unitPhraseDS.GetDataById(id, vmSettings.Textbooks);
+            o?.CopyProperties(item);
         }
         public void Add(MUnitPhrase item)
         {
             PhraseItemsAll.Add(item);
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
-        public async Task Delete(MUnitPhrase item)
-        {
-            await unitPhraseDS.Delete(item.ID);
-            var lst = await unitPhraseDS.GetDataByPhraseId(item.PHRASEID);
-            if (lst.IsEmpty())
-                await langPhraseDS.Delete(item.PHRASEID);
-        }
+        public async Task Delete(MUnitPhrase item) =>
+            await unitPhraseDS.Delete(item);
 
         public async Task Reindex(Action<int> complete)
         {

@@ -70,74 +70,15 @@ namespace LollyCloud
 
         public async Task Update(MUnitWord item)
         {
-            var wordid = item.WORDID;
-            var lstUnit = await unitWordDS.GetDataByWordId(wordid);
-            if (lstUnit.IsEmpty()) return;
-            var itemLang = new MLangWord(item);
-            var lstLangOld = await langWordDS.GetDataById(wordid);
-            if (lstLangOld.Any() && lstLangOld[0].WORD == item.WORD)
-                await langWordDS.UpdateNote(wordid, item.NOTE);
-            else
-            {
-                var lstLangNew = await langWordDS.GetDataByLangWord(item.LANGID, item.WORD);
-                async Task f()
-                {
-                    itemLang = lstLangNew[0];
-                    wordid = itemLang.ID;
-                    var b = itemLang.CombineNote(item.NOTE);
-                    item.NOTE = itemLang.NOTE;
-                    var lstFami = await wordFamiDS.GetDataByUserWord(CommonApi.UserId, wordid);
-                    if (lstFami.Any())
-                    {
-                        item.CORRECT = lstFami[0].CORRECT;
-                        item.TOTAL = lstFami[0].TOTAL;
-                    }
-                    if (b) await langWordDS.UpdateNote(wordid, item.NOTE);
-                }
-                if (lstUnit.Count == 1)
-                    if (lstLangNew.IsEmpty())
-                        await langWordDS.Update(itemLang);
-                    else
-                    {
-                        await langWordDS.Delete(wordid);
-                        await f();
-                    }
-                else if (lstLangNew.IsEmpty())
-                {
-                    itemLang.ID = 0;
-                    await langWordDS.Create(itemLang);
-                }
-                else
-                    await f();
-            }
-            item.WORDID = wordid;
             await unitWordDS.Update(item);
+            var o = unitWordDS.GetDataById(item.ID, vmSettings.Textbooks);
+            o?.CopyProperties(item);
         }
-        public async Task<int> Create(MUnitWord item)
+        public async Task Create(MUnitWord item)
         {
-            var lstLang = await langWordDS.GetDataByLangWord(item.LANGID, item.WORD);
-            int wordid;
-            if (lstLang.IsEmpty())
-            {
-                var itemLang = new MLangWord(item);
-                wordid = await langWordDS.Create(itemLang);
-            }
-            else
-            {
-                var itemLang = lstLang[0];
-                wordid = itemLang.ID;
-                var b = itemLang.CombineNote(item.NOTE);
-                item.NOTE = itemLang.NOTE;
-                var lstFami = await wordFamiDS.GetDataByUserWord(CommonApi.UserId, wordid);
-                if (lstFami.Any())
-                {
-                    item.CORRECT = lstFami[0].CORRECT;
-                    item.TOTAL = lstFami[0].TOTAL;
-                }
-                if (b) await langWordDS.UpdateNote(wordid, item.NOTE);
-            }
-            item.WORDID = wordid;
-            return await unitWordDS.Create(item);
+            int id = await unitWordDS.Create(item);
+            var o = unitWordDS.GetDataById(id, vmSettings.Textbooks);
+            o?.CopyProperties(item);
         }
 
         public void Add(MUnitWord item)
@@ -146,17 +87,8 @@ namespace LollyCloud
             this.RaisePropertyChanged(nameof(WordItems));
         }
 
-        public async Task Delete(MUnitWord item)
-        {
-            await unitWordDS.Delete(item.ID);
-            var lst1 = await unitWordDS.GetDataByWordId(item.WORDID);
-            var lst2 = await wordPhraseDS.GetPhrasesByWordId(item.WORDID);
-            if (lst1.IsEmpty() && lst2.IsEmpty())
-            {
-                await langWordDS.Delete(item.WORDID);
-                await wordFamiDS.Delete(item.FAMIID);
-            }
-        }
+        public async Task Delete(MUnitWord item) =>
+            await unitWordDS.Delete(item);
 
         public async Task Reindex(Action<int> complete)
         {

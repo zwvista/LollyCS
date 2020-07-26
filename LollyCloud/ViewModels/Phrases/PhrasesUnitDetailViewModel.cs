@@ -22,7 +22,7 @@ namespace LollyCloud
             ItemEdit.CopyProperties(item);
             item.PHRASE = vm.vmSettings.AutoCorrectInput(item.PHRASE);
             if (item.ID == 0)
-                item.ID = await vm.Create(item);
+                await vm.Create(item);
             else
                 await vm.Update(item);
         }

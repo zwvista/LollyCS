@@ -73,7 +73,7 @@ namespace LollyCloud
             var item = vm.NewUnitWord();
             item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
             vm.NewWord = "";
-            item.ID = await vm.Create(item);
+            await vm.Create(item);
             vm.Add(item);
             dgWords.SelectedItem = vm.WordItems.Last();
         }

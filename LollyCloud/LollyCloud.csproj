@@ -211,6 +211,7 @@
     </ApplicationDefinition>
     <Compile Include="DataStores\WPP\WebPageDataStore.cs" />
     <Compile Include="Models\Misc\MBlog.cs" />
+    <Compile Include="Models\Misc\MSPResult.cs" />
     <Compile Include="Models\WPP\MWebPage.cs" />
     <Compile Include="Models\WPP\MPatternPhrase.cs" />
     <Compile Include="Models\WPP\MPatternWebPage.cs" />
