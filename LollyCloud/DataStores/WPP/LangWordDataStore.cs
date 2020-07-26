@@ -28,7 +28,7 @@ namespace LollyCloud
         public async Task Update(MLangWord item) =>
         Debug.WriteLine(await UpdateByUrl($"LANGWORDS/{item.ID}", JsonConvert.SerializeObject(item)));
 
-        public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"LANGWORDS/{id}"));
+        public async Task Delete(MLangWord item) =>
+        Debug.WriteLine(await CallSPByUrl("LANGWORDS_DELETE", item));
     }
 }

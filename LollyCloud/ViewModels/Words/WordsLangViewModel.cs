@@ -53,12 +53,7 @@ namespace LollyCloud
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);
         public async Task<int> Create(MLangWord item) => await langWordDS.Create(item);
-        public async Task Delete(MLangWord item)
-        {
-            await langWordDS.Delete(item.ID);
-            await wordFamiDS.Delete(item.FAMIID);
-            await wordPhraseDS.DeleteByWordId(item.ID);
-        }
+        public async Task Delete(MLangWord item) => await langWordDS.Delete(item);
 
         public MLangWord NewLangWord() =>
             new MLangWord

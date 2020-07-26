@@ -75,7 +75,7 @@ namespace LollyCloud
             var row = dgPhrases.SelectedIndex;
             if (row == -1) return;
             var item = vm.PhraseItems[row];
-            await vm.Delete(item.ID);
+            await vm.Delete(item);
         }
     }
 }
