@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -88,7 +89,7 @@ namespace LollyCloud
                     if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "PATTERN")
                         el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
                     if (el.Text != originalText)
-                        Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                        Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                         {
                             await vm.Update(item);
                             dgPatterns.CancelEdit(DataGridEditingUnit.Row);
@@ -99,7 +100,7 @@ namespace LollyCloud
                     var item = (MPatternWebPage)e.Row.DataContext;
                     var el = (TextBox)e.EditingElement;
                     if (el.Text != originalText)
-                        Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                        Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                         {
                             await vm.UpdatePatternWebPage(item);
                             dgWebPages.CancelEdit(DataGridEditingUnit.Row);

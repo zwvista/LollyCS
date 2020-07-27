@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -48,7 +49,7 @@ namespace LollyCloud
                 if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "PHRASE")
                     el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
                 if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                    Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                     {
                         await vm.Update(item);
                         dgPhrases.CancelEdit(DataGridEditingUnit.Row);

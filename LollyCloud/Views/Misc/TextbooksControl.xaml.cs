@@ -1,4 +1,5 @@
 ﻿using Hardcodet.Wpf.Util;
+using ReactiveUI;
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace LollyCloud
                 var item = (MTextbook)e.Row.DataContext;
                 var el = (TextBox)e.EditingElement;
                 if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100)).Subscribe(async _ =>
+                    Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                     {
                         await vm.Update(item);
                         dgTextbooks.CancelEdit(DataGridEditingUnit.Row);

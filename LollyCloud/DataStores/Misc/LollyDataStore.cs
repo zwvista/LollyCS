@@ -84,7 +84,7 @@ namespace LollyCloud
             if (!CrossConnectivity.Current.IsConnected)
                 return null;
 
-            var dic = typeof(T).GetProperties().ToDictionary(o => "P_" + o.Name, o => o.GetValue(item).ToString());
+            var dic = typeof(T).GetProperties().ToDictionary(o => "P_" + o.Name, o => o.GetValue(item)?.ToString());
             var response = await clientSP.PostAsync(url, new FormUrlEncodedContent(dic));
 
             if (!response.IsSuccessStatusCode)
