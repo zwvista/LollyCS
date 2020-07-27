@@ -13,7 +13,7 @@ namespace LollyCloud
 {
     public class LollyDataStore<T> where T: class
     {
-        protected HttpClient client = new HttpClient
+        protected HttpClient clientAPI = new HttpClient
         {
             BaseAddress = new Uri(CommonApi.LollyUrl)
         };
@@ -26,7 +26,7 @@ namespace LollyCloud
         {
             if (!CrossConnectivity.Current.IsConnected) return null;
 
-            var json = await client.GetStringAsync(url);
+            var json = await clientAPI.GetStringAsync(url);
             U u = await Task.Run(() =>
             {
                 try
@@ -50,7 +50,7 @@ namespace LollyCloud
             // Otherwise the generated id will not be returned.
             var serializedItem = JsonConvert.SerializeObject(item).Replace("\"ID\":0,", "").Replace(",\"ID\":0", "");
 
-            var response = await client.PostAsync(url, new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+            var response = await clientAPI.PostAsync(url, new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return !response.IsSuccessStatusCode || !int.TryParse(await response.Content.ReadAsStringAsync(), out var v) ? 0 : v;
         }
@@ -64,7 +64,7 @@ namespace LollyCloud
             var buffer = Encoding.UTF8.GetBytes(serializedItem);
             var byteContent = new ByteArrayContent(buffer);
 
-            var response = await client.PutAsync(url, byteContent);
+            var response = await clientAPI.PutAsync(url, byteContent);
 
             return response.IsSuccessStatusCode;
         }
@@ -74,7 +74,7 @@ namespace LollyCloud
             if (!CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.DeleteAsync(url);
+            var response = await clientAPI.DeleteAsync(url);
 
             return response.IsSuccessStatusCode;
         }
