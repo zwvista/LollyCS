@@ -54,7 +54,7 @@ namespace LollyCloud
         Debug.WriteLine(await UpdateByUrl($"UNITWORDS/{id}", $"NOTE={note}"));
 
         public async Task Update(MUnitWord item) =>
-        Debug.WriteLine(await CallSPByUrl("UNITWORDS_CREATE", item));
+        Debug.WriteLine(await CallSPByUrl("UNITWORDS_UPDATE", item));
 
         public async Task Delete(MUnitWord item) =>
         Debug.WriteLine(await CallSPByUrl("UNITWORDS_DELETE", item));

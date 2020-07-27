@@ -56,7 +56,7 @@ namespace LollyCloud
         Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"TRANSLATION={translation}"));
 
         public async Task Update(MUnitPhrase item) =>
-        Debug.WriteLine(await CallSPByUrl("UNITPHRASES_CREATE", item));
+        Debug.WriteLine(await CallSPByUrl("UNITPHRASES_UPDATE", item));
 
         public async Task Delete(MUnitPhrase item) =>
         Debug.WriteLine(await CallSPByUrl("UNITPHRASES_DELETE", item));
