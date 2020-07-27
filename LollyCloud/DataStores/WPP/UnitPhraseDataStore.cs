@@ -32,7 +32,7 @@ namespace LollyCloud
 
         public async Task<MUnitPhrase> GetDataById(int id, List<MTextbook> lstTextbooks)
         {
-            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITWORDS?filter=ID,eq,{id}")).Records.ToList();
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=ID,eq,{id}")).Records.ToList();
             lst = SetTextbook(lst, lstTextbooks);
             return lst.Any() ? lst[0] : null;
         }
