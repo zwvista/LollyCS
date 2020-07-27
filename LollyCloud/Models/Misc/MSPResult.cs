@@ -13,5 +13,7 @@ namespace LollyCloud
         [JsonProperty("result")]
         [Reactive]
         public string Result { get; set; }
+
+        public override string ToString() => JsonConvert.SerializeObject(this);
     }
 }

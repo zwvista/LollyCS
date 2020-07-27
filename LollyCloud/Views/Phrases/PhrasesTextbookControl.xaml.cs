@@ -70,6 +70,7 @@ namespace LollyCloud
             if (row == -1) return;
             var item = vm.PhraseItems[row];
             await vm.Delete(item);
+            vm.Reload();
         }
     }
 }

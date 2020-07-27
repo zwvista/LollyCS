@@ -121,6 +121,7 @@ namespace LollyCloud
             if (row == -1) return;
             var item = vm.PatternItems[row];
             await vm.Delete(item.ID);
+            vm.Reload();
         }
         void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
 

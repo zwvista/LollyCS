@@ -71,13 +71,13 @@ namespace LollyCloud
         public async Task Update(MUnitWord item)
         {
             await unitWordDS.Update(item);
-            var o = unitWordDS.GetDataById(item.ID, vmSettings.Textbooks);
+            var o = await unitWordDS.GetDataById(item.ID, vmSettings.Textbooks);
             o?.CopyProperties(item);
         }
         public async Task Create(MUnitWord item)
         {
             int id = await unitWordDS.Create(item);
-            var o = unitWordDS.GetDataById(id, vmSettings.Textbooks);
+            var o = await unitWordDS.GetDataById(id, vmSettings.Textbooks);
             o?.CopyProperties(item);
         }
 

@@ -75,6 +75,7 @@ namespace LollyCloud
             if (row == -1) return;
             var item = vm.WordItems[row];
             await vm.Delete(item);
+            vm.Reload();
         }
     }
 }

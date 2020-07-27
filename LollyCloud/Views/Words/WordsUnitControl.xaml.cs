@@ -66,6 +66,7 @@ namespace LollyCloud
             if (row == -1) return;
             var item = vm.WordItems[row];
             await vm.Delete(item);
+            vm.Reload();
         }
 
         async void tbNewWord_KeyDown(object sender, KeyEventArgs e)

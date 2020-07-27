@@ -61,13 +61,13 @@ namespace LollyCloud
         public async Task Update(MUnitPhrase item)
         {
             await unitPhraseDS.Update(item);
-            var o = unitPhraseDS.GetDataById(item.ID, vmSettings.Textbooks);
+            var o = await unitPhraseDS.GetDataById(item.ID, vmSettings.Textbooks);
             o?.CopyProperties(item);
         }
         public async Task Create(MUnitPhrase item)
         {
             int id = await unitPhraseDS.Create(item);
-            var o = unitPhraseDS.GetDataById(id, vmSettings.Textbooks);
+            var o = await unitPhraseDS.GetDataById(id, vmSettings.Textbooks);
             o?.CopyProperties(item);
         }
         public void Add(MUnitPhrase item)
