@@ -23,7 +23,7 @@ namespace LollyCloud
             TEMPLATE = template;
             var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             TransformItems = new ObservableCollection<MTransformItem>(
-                arr.Take(arr.Length / 2 * 2).Buffer(2).Select(g => new MTransformItem { Extractor = g[0], Replacement = g[1] })
+                arr.Take(arr.Length / 2 * 2).Buffer(2).Select((g, i) => new MTransformItem { Index = i + 1, Extractor = g[0], Replacement = g[1] })
             );
         }
         public void OnOK()
@@ -57,7 +57,8 @@ namespace LollyCloud
         }
         bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
-        void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) { }
+        void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
+            TransformItems.ForEach((o, i) => o.Index = i + 1);
         void IDragSource.DragCancelled() { }
         bool IDragSource.TryCatchOccurredException(Exception exception) => false;
     }

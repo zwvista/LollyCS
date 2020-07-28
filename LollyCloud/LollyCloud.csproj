@@ -228,6 +228,7 @@
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="ViewModels\Dicts\DictsDetailViewModel.cs" />
+    <Compile Include="ViewModels\Dicts\TransformSourceViewModel.cs" />
     <Compile Include="ViewModels\Dicts\TransformItemEditViewModel.cs" />
     <Compile Include="ViewModels\Dicts\TransformEditViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
@@ -242,6 +243,12 @@
     <Compile Include="ViewModels\Words\WordsUnitDetailViewModel.cs" />
     <Compile Include="Views\Dicts\TransformItemEditDlg.xaml.cs">
       <DependentUpon>TransformItemEditDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dicts\TransformTextControl.xaml.cs">
+      <DependentUpon>TransformTextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dicts\TransformSourceControl.xaml.cs">
+      <DependentUpon>TransformSourceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Misc\TestControl.xaml.cs">
       <DependentUpon>TestControl.xaml</DependentUpon>
@@ -412,6 +419,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Dicts\TransformItemEditDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dicts\TransformTextControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dicts\TransformSourceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

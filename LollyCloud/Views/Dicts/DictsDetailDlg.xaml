@@ -72,7 +72,7 @@
                 <Label Content="CHCONV:" Grid.Row="7" />
                 <TextBox Text="{Binding CHCONV}" Grid.Row="7" Grid.Column="1" />
                 <Label Content="TRANSFORM:" Grid.Row="8" />
-                <TextBox Text="{Binding TRANSFORM}" Grid.Row="9" Grid.ColumnSpan="2" Margin="0" />
+                <TextBox Text="{Binding TRANSFORM}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="9" Grid.ColumnSpan="2" Margin="0" />
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
@@ -85,11 +85,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="AUTOMATION:" />
-                <TextBox Text="{Binding AUTOMATION}" Grid.Row="1" Grid.ColumnSpan="2" />
+                <TextBox Text="{Binding AUTOMATION}" AcceptsReturn="True" Grid.Row="1" Grid.ColumnSpan="2" />
                 <Label Content="TEMPLATE:" Grid.Row="2" />
-                <TextBox Text="{Binding TEMPLATE}" Grid.Row="3" Grid.ColumnSpan="2" />
+                <TextBox Text="{Binding TEMPLATE}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.ColumnSpan="2" />
                 <Label Content="TEMPLATE2:" Grid.Row="4" />
-                <TextBox Text="{Binding TEMPLATE2}" Grid.Row="5" Grid.ColumnSpan="2" Margin="0" />
+                <TextBox Text="{Binding TEMPLATE2}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="5" Grid.ColumnSpan="2" Margin="0" />
             </Grid>
         </Grid>
     </DockPanel>

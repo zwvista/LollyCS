@@ -36,7 +36,7 @@
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="tbMarked" Text="{Binding MarkedText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                <TextBox x:Name="tbMarked" Text="{Binding MarkedText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"></TextBox>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
                 <TextBox Text="{Binding HtmlText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
             </Grid>

@@ -7,8 +7,10 @@ using ReactiveUI.Fody.Helpers;
 
 namespace LollyCloud
 {
-    public class MTransformItem: ReactiveObject
+    public class MTransformItem : ReactiveObject
     {
+        [Reactive]
+        public int Index { get; set; }
         [Reactive]
         public string Extractor { get; set; }
         [Reactive]
