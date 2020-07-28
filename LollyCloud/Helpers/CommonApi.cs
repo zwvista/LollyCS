@@ -26,7 +26,7 @@ namespace LollyCloud
     }
     public static class CommonApi
     {
-        public static string LollyUrl = "https://zwvista.tk/lolly/api.php/records/";
+        public static string LollyUrlAPI = "https://zwvista.tk/lolly/api.php/records/";
         public static string LollyUrlSP = "https://zwvista.tk/lolly/sp.php/";
         public static string CssFolder = "https://zwvista.tk/lolly/css/";
         public static int UserId = 1;

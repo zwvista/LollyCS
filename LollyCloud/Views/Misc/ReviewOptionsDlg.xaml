@@ -1,13 +1,14 @@
-﻿<Window x:Class="LollyCloud.ReviewOptionsDlg"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="LollyCloud.ReviewOptionsDlg"
         mc:Ignorable="d"
         Title="Review Options" Height="300" Width="500" WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <local:EnumConverter x:Key="EnumConverter"></local:EnumConverter>
+        <local:EnumConverter x:Key="EnumConverter"/>
     </Window.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -24,17 +25,19 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
-        <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding Mode, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type local:ReviewMode}}"
+        <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value"
+                  SelectedValue="{Binding Mode, ConverterParameter={x:Type local:ReviewMode}, Converter={StaticResource EnumConverter}}" IsEnabled="{Binding CanChangeMode}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-        <CheckBox Content="LEVEL >= 0" IsChecked="{Binding Levelge0only}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <CheckBox Content="LEVEL &gt;= 0" IsChecked="{Binding Levelge0only}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
         <Label Content="Interval:" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox Text="{Binding Interval}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
+        <xctk:IntegerUpDown Value="{Binding Interval}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Minimum="1" Maximum="10"/>
         <Label Content="Group:" VerticalAlignment="Center" Grid.Row="4" />
         <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBox Text="{Binding GroupSelected}" Width="75" VerticalAlignment="Center" />
-            <Label Content="/" VerticalAlignment="Center" Grid.Row="3" />
-            <TextBox Text="{Binding GroupCount}" Width="75" VerticalAlignment="Center" />
+            <xctk:IntegerUpDown Value="{Binding GroupSelected}" Width="75" VerticalAlignment="Center" Minimum="1"/>
+            <Label Content="out of" VerticalAlignment="Center" Grid.Row="3" />
+            <xctk:IntegerUpDown Value="{Binding GroupCount}" Width="75" VerticalAlignment="Center" Minimum="1"/>
         </StackPanel>
         <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Grid.Row="0" Grid.Column="3" />
         <Button Content="Cancel" Width="75" IsCancel="True" Grid.Row="1" Grid.Column="3" />

@@ -15,7 +15,7 @@ namespace LollyCloud
     {
         protected HttpClient clientAPI = new HttpClient
         {
-            BaseAddress = new Uri(CommonApi.LollyUrl)
+            BaseAddress = new Uri(CommonApi.LollyUrlAPI)
         };
         protected HttpClient clientSP = new HttpClient
         {

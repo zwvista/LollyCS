@@ -5,6 +5,8 @@ namespace LollyCloud
 {
     public class MReviewOptions : ReactiveObject
     {
+        public bool IsEmbedded { get; set; }
+        public bool CanChangeMode => !IsEmbedded;
         [Reactive]
         public ReviewMode Mode { get; set; } = ReviewMode.ReviewAuto;
         [Reactive]

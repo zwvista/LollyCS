@@ -115,24 +115,15 @@ namespace LollyCloud
             await vm.ClearNotes(_ => { });
         void btnReview_Click(object sender, RoutedEventArgs e)
         {
-            if (vmReview.IsRunning)
-                vmReview.Stop();
-            else
+            vmReview.Stop();
+            var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
+            if (dlg.ShowDialog() == true)
             {
-                var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
-                if (dlg.ShowDialog() == true)
+                var ids = vm.WordItems.Where(o => !vmReview.Options.Levelge0only || o.LEVEL >= 0).Select(o => o.ID).ToList();
+                vmReview.Start(ids, id =>
                 {
-                    var items = vm.WordItems.ToList();
-                    if (vmReview.Options.Levelge0only)
-                        items = items.Where(o => o.LEVEL >= 0).ToList();
-                    if (vmReview.Options.Shuffled)
-                        items.Shuffle();
-                    var ids = items.Select(o => o.ID).ToList();
-                    vmReview.Start(ids, id =>
-                    {
-                        dgWords.SelectedItem = vm.WordItems.FirstOrDefault(o => o.ID == id);
-                    });
-                }
+                    dgWords.SelectedItem = vm.WordItems.FirstOrDefault(o => o.ID == id);
+                });
             }
         }
         public override async Task SearchPhrases() =>

@@ -118,22 +118,15 @@ namespace LollyCloud
         }
         void btnReview_Click(object sender, RoutedEventArgs e)
         {
-            if (vmReview.IsRunning)
-                vmReview.Stop();
-            else
+            vmReview.Stop();
+            var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
+            if (dlg.ShowDialog() == true)
             {
-                var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
-                if (dlg.ShowDialog() == true)
+                var ids = vm.PhraseItems.Select(o => o.ID).ToList();
+                vmReview.Start(ids, id =>
                 {
-                    var items = vm.PhraseItems.ToList();
-                    if (vmReview.Options.Shuffled)
-                        items.Shuffle();
-                    var ids = items.Select(o => o.ID).ToList();
-                    vmReview.Start(ids, id =>
-                    {
-                        dgPhrases.SelectedItem = vm.PhraseItems.FirstOrDefault(o => o.ID == id);
-                    });
-                }
+                    dgPhrases.SelectedItem = vm.PhraseItems.FirstOrDefault(o => o.ID == id);
+                });
             }
         }
 
