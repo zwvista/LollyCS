@@ -31,6 +31,7 @@ namespace LollyCloud
 
         void dgTextbooks_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            dgTextbooks.CancelEdit();
             var dlg = new TextbooksDetailDlg(Window.GetWindow(this), (MTextbook)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
         }
@@ -60,7 +61,7 @@ namespace LollyCloud
                     Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                     {
                         await vm.Update(item);
-                        dgTextbooks.CancelEdit(DataGridEditingUnit.Row);
+                        dgTextbooks.CancelEdit();
                     });
             }
         }

@@ -29,6 +29,10 @@ namespace LollyCloud
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
         }
+        void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dgTransform.CancelEdit();
+        }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
         {

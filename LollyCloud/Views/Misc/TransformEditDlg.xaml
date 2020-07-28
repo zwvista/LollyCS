@@ -18,6 +18,18 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <DataGrid x:Name="dgTransform" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Extract}" Header="Extract" />
+                    <DataGridTextColumn Binding="{Binding Replacer}" Header="Replacer" />
+                </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="dgTransform_RowDoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
                 <dragablz:TabablzControl.InterTabController>

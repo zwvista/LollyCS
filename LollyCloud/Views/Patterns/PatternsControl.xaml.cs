@@ -30,6 +30,8 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgPatterns_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            vm.IsEditing = false;
+            dgPatterns.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new PatternsDetailDlg(Window.GetWindow(this), (MPattern)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
@@ -92,7 +94,7 @@ namespace LollyCloud
                         Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                         {
                             await vm.Update(item);
-                            dgPatterns.CancelEdit(DataGridEditingUnit.Row);
+                            dgPatterns.CancelEdit();
                         });
                 }
                 else if (sender == dgWebPages)
@@ -103,7 +105,7 @@ namespace LollyCloud
                         Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                         {
                             await vm.UpdatePatternWebPage(item);
-                            dgWebPages.CancelEdit(DataGridEditingUnit.Row);
+                            dgWebPages.CancelEdit();
                         });
                 }
             }
@@ -129,6 +131,8 @@ namespace LollyCloud
 
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            vm.IsEditing = false;
+            dgWebPages.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new PatternsWebPageDlg(Window.GetWindow(this), (MPatternWebPage)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();

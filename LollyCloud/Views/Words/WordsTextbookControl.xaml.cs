@@ -32,6 +32,7 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            dgWords.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), (MUnitWord)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
@@ -56,7 +57,7 @@ namespace LollyCloud
                     Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
                     {
                         await vm.Update(item);
-                        dgWords.CancelEdit(DataGridEditingUnit.Row);
+                        dgWords.CancelEdit();
                     });
             }
         }

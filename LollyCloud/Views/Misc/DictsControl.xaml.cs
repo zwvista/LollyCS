@@ -27,6 +27,7 @@ namespace LollyCloud
 
         void dgDicts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            dgDicts.CancelEdit();
             var dlg = new DictsDetailDlg(Window.GetWindow(this), (MDictionary)((DataGridRow)sender).Item, vm);
             dlg.ShowDialog();
         }
