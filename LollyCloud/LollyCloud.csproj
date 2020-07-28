@@ -243,8 +243,8 @@
     <Compile Include="Views\Dicts\TransformItemEditDlg.xaml.cs">
       <DependentUpon>TransformItemEditDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dicts\TransformStepControl.xaml.cs">
-      <DependentUpon>TransformStepControl.xaml</DependentUpon>
+    <Compile Include="Views\Dicts\TransformDetailControl.xaml.cs">
+      <DependentUpon>TransformDetailControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dicts\TransformTemplateControl.xaml.cs">
       <DependentUpon>TransformTemplateControl.xaml</DependentUpon>
@@ -427,7 +427,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Dicts\TransformStepControl.xaml">
+    <Page Include="Views\Dicts\TransformDetailControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -7,17 +7,11 @@
              xmlns:local="clr-namespace:LollyCloud"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBox Text="{Binding SourceURL}" wpf:HintAssist.Hint="URL" />
-        <Button x:Name="btnGetHtml" Content="Get Html" Grid.Column="1" Click="btnGetHtml_Click"/>
+    <DockPanel Margin="10">
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Right" x:Name="btnGetHtml" Content="Get Html" Grid.Column="1" Click="btnGetHtml_Click"/>
+            <TextBox Text="{Binding SourceURL}" wpf:HintAssist.Hint="URL" />
+        </DockPanel>
         <TextBox Text="{Binding SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
-    </Grid>
+    </DockPanel>
 </UserControl>

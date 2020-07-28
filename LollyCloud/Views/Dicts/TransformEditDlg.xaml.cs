@@ -31,6 +31,7 @@ namespace LollyCloud
         TransformTemplateControl templateCtrl;
         TransformSourceControl sourceCtrl;
         TransformResultControl resultCtrl;
+        TransformDetailControl detailCtrl;
 
         public TransformEditDlg(Window owner, string transform, string template)
         {
@@ -46,6 +47,7 @@ namespace LollyCloud
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
             Tabs.Add(new ActionTabItem { Header = "Source", Content = sourceCtrl });
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });
+            Tabs.Add(new ActionTabItem { Header = "Detail", Content = detailCtrl });
         }
         void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

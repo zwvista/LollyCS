@@ -9,11 +9,11 @@ using System.Windows.Threading;
 namespace LollyCloud
 {
     /// <summary>
-    /// TransformStepControl.xaml の相互作用ロジック
+    /// TransformDetailControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class TransformStepControl : UserControl
+    public partial class TransformDetailControl : UserControl
     {
-        public TransformStepControl(TransformEditViewModel vm)
+        public TransformDetailControl(TransformEditViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
