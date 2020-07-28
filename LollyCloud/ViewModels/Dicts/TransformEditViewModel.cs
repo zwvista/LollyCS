@@ -24,6 +24,8 @@ namespace LollyCloud
         public string SourceText { get; set; }
         [Reactive]
         public string ResultText { get; set; }
+        [Reactive]
+        public string DetailText { get; set; }
         public ObservableCollection<MTransformItem> TransformItems { get; }
         public TransformEditViewModel(string transform, string template)
         {

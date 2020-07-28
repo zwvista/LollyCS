@@ -44,6 +44,7 @@ namespace LollyCloud
             templateCtrl = new TransformTemplateControl(vm);
             sourceCtrl = new TransformSourceControl(vm);
             resultCtrl = new TransformResultControl(vm);
+            detailCtrl = new TransformDetailControl(vm);
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
             Tabs.Add(new ActionTabItem { Header = "Source", Content = sourceCtrl });
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });
