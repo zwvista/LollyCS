@@ -26,7 +26,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" Grid.Row="0" />
         <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
