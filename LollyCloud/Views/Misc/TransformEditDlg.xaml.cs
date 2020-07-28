@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,9 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformEditDlg : Window
     {
-        public TransformEditDlg(Window owner, )
+        public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
+        public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
+        public TransformEditDlg(Window owner)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

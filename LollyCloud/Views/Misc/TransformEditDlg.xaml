@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
         Title="Transform Edit" Height="300" Width="600" WindowStartupLocation="CenterOwner">
@@ -18,6 +19,21 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
+            <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
+                </dragablz:TabablzControl.InterTabController>
+                <dragablz:TabablzControl.HeaderItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Header}"/>
+                    </DataTemplate>
+                </dragablz:TabablzControl.HeaderItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </dragablz:TabablzControl>
         </Grid>
     </DockPanel>
 </Window>
