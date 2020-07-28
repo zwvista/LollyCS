@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Web;
+using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using System.Web;
 
 namespace LollyCloud
 {
@@ -50,15 +47,15 @@ namespace LollyCloud
                 for (int i = 0; i < arr.Length; i += 2)
                 {
                     var reg = new Regex(arr[i].Replace("\\r\\n", "\\n"));
-                    var replacer = arr[i + 1];
-                    if (replacer.StartsWith("<extract>"))
+                    var replacement = arr[i + 1];
+                    if (replacement.StartsWith("<extract>"))
                     {
-                        replacer = replacer.Substring("<extract>".Length);
+                        replacement = replacement.Substring("<extract>".Length);
                         text = string.Join("", reg.Matches(text).Cast<Match>().Select(m => m.Groups[0]));
                     }
                     foreach (var entry in escapes)
-                        replacer = replacer.Replace(entry.Key, entry.Value);
-                    text = reg.Replace(text, replacer);
+                        replacement = replacement.Replace(entry.Key, entry.Value);
+                    text = reg.Replace(text, replacement);
 
 #if DEBUG_EXTRACT
                     File.WriteAllText(logFolder + "2_extracted.txt", text);

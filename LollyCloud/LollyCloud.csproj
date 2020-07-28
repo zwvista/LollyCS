@@ -226,9 +226,10 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Helpers\Converters.cs" />
-    <Compile Include="ViewModels\Misc\DictsDetailViewModel.cs" />
+    <Compile Include="ViewModels\Dicts\DictsDetailViewModel.cs" />
+    <Compile Include="ViewModels\Dicts\TransformEditViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
-    <Compile Include="ViewModels\Misc\DictsViewModel.cs" />
+    <Compile Include="ViewModels\Dicts\DictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksDetailViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsWebPageViewModel.cs" />
     <Compile Include="ViewModels\Patterns\WebPageSelectViewModel.cs" />
@@ -240,13 +241,13 @@
     <Compile Include="Views\Misc\TestControl.xaml.cs">
       <DependentUpon>TestControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\TransformEditDlg.xaml.cs">
+    <Compile Include="Views\Dicts\TransformEditDlg.xaml.cs">
       <DependentUpon>TransformEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Misc\TextbooksDetailDlg.xaml.cs">
       <DependentUpon>TextbooksDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\DictsDetailDlg.xaml.cs">
+    <Compile Include="Views\Dicts\DictsDetailDlg.xaml.cs">
       <DependentUpon>DictsDetailDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Misc\TextbooksControl.xaml.cs">
@@ -264,10 +265,10 @@
     <Compile Include="Views\Patterns\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\DictsControl.xaml.cs">
+    <Compile Include="Views\Dicts\DictsControl.xaml.cs">
       <DependentUpon>DictsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\SelectDictsDlg.xaml.cs">
+    <Compile Include="Views\Dicts\SelectDictsDlg.xaml.cs">
       <DependentUpon>SelectDictsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesBaseControl.cs" />
@@ -338,7 +339,7 @@
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Patterns\PatternsViewModel.cs" />
-    <Compile Include="ViewModels\Misc\SelectDictsViewModel.cs" />
+    <Compile Include="ViewModels\Dicts\SelectDictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\EmbeddedReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
@@ -409,7 +410,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\TransformEditDlg.xaml">
+    <Page Include="Views\Dicts\TransformEditDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -417,7 +418,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\DictsDetailDlg.xaml">
+    <Page Include="Views\Dicts\DictsDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -441,11 +442,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\DictsControl.xaml">
+    <Page Include="Views\Dicts\DictsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\SelectDictsDlg.xaml">
+    <Page Include="Views\Dicts\SelectDictsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

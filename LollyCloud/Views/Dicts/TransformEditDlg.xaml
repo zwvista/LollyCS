@@ -4,25 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:local="clr-namespace:LollyCloud"
         mc:Ignorable="d"
-        Title="Transform Edit" Height="300" Width="600" WindowStartupLocation="CenterOwner">
+        Title="Transform Edit" Height="800" Width="1000" WindowStartupLocation="CenterOwner">
     <DockPanel Margin="10">
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,10,0,0" >
-            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}"/>
-            <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
-        </StackPanel>
+        <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Execute" Tag= "1" HorizontalAlignment="Left" />
+            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}" Grid.Column="1"/>
+            <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0" Grid.Column="2"/>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgTransform" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
-                      >
+            <DataGrid x:Name="dgTransform" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding TransformItems}"
+                    dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
+                    BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Extract}" Header="Extract" />
-                    <DataGridTextColumn Binding="{Binding Replacer}" Header="Replacer" />
+                    <DataGridTextColumn Binding="{Binding Extractor}" Header="Extractor" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Replacement}" Header="Replacement" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
@@ -31,7 +39,7 @@
                 </DataGrid.Resources>
             </DataGrid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
-            <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
+            <dragablz:TabablzControl Grid.Column="2" x:Name="tcTranformResult" ItemsSource="{Binding Tabs}">
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
                 </dragablz:TabablzControl.InterTabController>

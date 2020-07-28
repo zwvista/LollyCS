@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,21 +23,37 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformEditDlg : Window
     {
+        TransformEditViewModel vm;
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
-        public TransformEditDlg(Window owner)
+        public string TRANSFORM => vm.TRANSFORM;
+        public string TEMPLATE => vm.TEMPLATE;
+        public TransformEditDlg(Window owner, string transform, string template)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
+            vm = new TransformEditViewModel(transform, template);
+            DataContext = vm;
+            tcTranformResult.DataContext = this;
         }
         void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgTransform.CancelEdit();
+            vm.IsEditing = false;
         }
 
-        async void btnOK_Click(object sender, RoutedEventArgs e)
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
+            vm.IsEditing = true;
+        }
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            vm.IsEditing = false;
+        }
+
+        void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            vm.OnOK();
             DialogResult = true;
         }
     }

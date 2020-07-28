@@ -1,12 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-
-using Newtonsoft.Json;
-using Plugin.Connectivity;
 
 namespace LollyCloud
 {

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Hardcodet.Wpf.Util
 {
-  /// <summary>
-  /// Common UI related helper methods.
-  /// </summary>
-  public static class UIHelpers
+    /// <summary>
+    /// Common UI related helper methods.
+    /// </summary>
+    public static class UIHelpers
   {
 
     #region find parent
