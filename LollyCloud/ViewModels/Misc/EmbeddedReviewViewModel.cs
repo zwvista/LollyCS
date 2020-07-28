@@ -20,11 +20,11 @@ namespace LollyCloud
 
         public void Start(List<int> ids, Action<int> getOne)
         {
-            if (Options.Shuffled)
-                ids.Shuffle();
             int nFrom = ids.Count * (Options.GroupSelected - 1) / Options.GroupCount;
             int nTo = ids.Count * Options.GroupSelected / Options.GroupCount;
             ids = ids.Skip(nFrom).Take(nTo - nFrom).ToList();
+            if (Options.Shuffled)
+                ids.Shuffle();
             subscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(i =>
             {
                 if (i < ids.Count)
