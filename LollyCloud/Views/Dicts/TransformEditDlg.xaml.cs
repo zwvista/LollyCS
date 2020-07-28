@@ -28,9 +28,9 @@ namespace LollyCloud
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
         public string TRANSFORM => vm.TRANSFORM;
         public string TEMPLATE => vm.TEMPLATE;
-        TransformTextControl templateCtrl;
+        TransformTemplateControl templateCtrl;
         TransformSourceControl sourceCtrl;
-        TransformTextControl resultCtrl;
+        TransformResultControl resultCtrl;
 
         public TransformEditDlg(Window owner, string transform, string template)
         {
@@ -40,9 +40,9 @@ namespace LollyCloud
             vm = new TransformEditViewModel(transform, template);
             DataContext = vm;
             tcTranformResult.DataContext = this;
-            templateCtrl = new TransformTextControl();
-            sourceCtrl = new TransformSourceControl();
-            resultCtrl = new TransformTextControl();
+            templateCtrl = new TransformTemplateControl(vm);
+            sourceCtrl = new TransformSourceControl(vm);
+            resultCtrl = new TransformResultControl(vm);
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
             Tabs.Add(new ActionTabItem { Header = "Source", Content = sourceCtrl });
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });

@@ -9,19 +9,15 @@ using System.Windows.Threading;
 namespace LollyCloud
 {
     /// <summary>
-    /// TransformSourceControl.xaml の相互作用ロジック
+    /// TransformResultControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class TransformSourceControl : UserControl
+    public partial class TransformResultControl : UserControl
     {
         TransformEditViewModel vm;
-        public TransformSourceControl(TransformEditViewModel vm)
+        public TransformResultControl(TransformEditViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
-        }
-        async void btnGetHtml_Click(object sender, RoutedEventArgs e)
-        {
-            vm.SourceText = await MainWindow.vmSettings.client.GetStringAsync(vm.SourceURL);
         }
     }
 }
