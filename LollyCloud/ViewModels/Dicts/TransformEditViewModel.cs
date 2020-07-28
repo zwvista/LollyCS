@@ -11,27 +11,19 @@ using System.Windows;
 
 namespace LollyCloud
 {
-    public class TransformItem
-    {
-        [Reactive]
-        public string Extractor { get; set; }
-        [Reactive]
-        public string Replacement { get; set; }
-    }
     public class TransformEditViewModel : ReactiveObject, IDragSource
     {
         public string TRANSFORM { get; private set; }
         public string TEMPLATE { get; private set; }
         public bool IsEditing { get; set; }
-        [Reactive]
-        public ObservableCollection<TransformItem> TransformItems { get; set; } = new ObservableCollection<TransformItem>();
+        public ObservableCollection<MTransformItem> TransformItems { get; }
         public TransformEditViewModel(string transform, string template)
         {
             TRANSFORM = transform;
             TEMPLATE = template;
             var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            TransformItems = new ObservableCollection<TransformItem>(
-                arr.Take(arr.Length / 2 * 2).Buffer(2).Select(g => new TransformItem { Extractor = g[0], Replacement = g[1] })
+            TransformItems = new ObservableCollection<MTransformItem>(
+                arr.Take(arr.Length / 2 * 2).Buffer(2).Select(g => new MTransformItem { Extractor = g[0], Replacement = g[1] })
             );
         }
         public void OnOK()

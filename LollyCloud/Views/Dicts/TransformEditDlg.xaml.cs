@@ -40,6 +40,9 @@ namespace LollyCloud
         void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             vm.IsEditing = false;
+            dgTransform.CancelEdit();
+            var dlg = new TransformItemEditDlg(this, (MTransformItem)((DataGridRow)sender).Item);
+            dlg.ShowDialog();
         }
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
