@@ -17,6 +17,8 @@ namespace LollyCloud
         public string TEMPLATE { get; private set; }
         public bool IsEditing { get; set; }
         [Reactive]
+        public string TemplateText { get; set; }
+        [Reactive]
         public string SourceURL { get; set; }
         [Reactive]
         public string SourceText { get; set; }
@@ -26,7 +28,7 @@ namespace LollyCloud
         public TransformEditViewModel(string transform, string template)
         {
             TRANSFORM = transform;
-            TEMPLATE = template;
+            TemplateText = TEMPLATE = template;
             var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             TransformItems = new ObservableCollection<MTransformItem>(
                 arr.Take(arr.Length / 2 * 2).Buffer(2).Select((g, i) => new MTransformItem { Index = i + 1, Extractor = g[0], Replacement = g[1] })

@@ -13,7 +13,6 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformResultControl : UserControl
     {
-        TransformEditViewModel vm;
         public TransformResultControl(TransformEditViewModel vm)
         {
             InitializeComponent();

@@ -17,7 +17,7 @@ namespace LollyCloud
         public TransformSourceControl(TransformEditViewModel vm)
         {
             InitializeComponent();
-            DataContext = vm;
+            DataContext = this.vm = vm;
         }
         async void btnGetHtml_Click(object sender, RoutedEventArgs e)
         {

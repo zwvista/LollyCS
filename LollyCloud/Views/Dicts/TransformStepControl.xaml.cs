@@ -13,7 +13,6 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformStepControl : UserControl
     {
-        TransformEditViewModel vm;
         public TransformStepControl(TransformEditViewModel vm)
         {
             InitializeComponent();
