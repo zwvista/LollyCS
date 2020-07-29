@@ -57,6 +57,13 @@ namespace LollyCloud
             var dlg = new TransformItemEditDlg(this, (MTransformItem)((DataGridRow)sender).Item);
             dlg.ShowDialog();
         }
+        void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var item = new MTransformItem();
+            var dlg = new TransformItemEditDlg(this, item);
+            if (dlg.ShowDialog() == true)
+                vm.Add(item);
+        }
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {

@@ -60,6 +60,22 @@ namespace LollyCloud
                 ResultText = text;
             });
         }
+
+        public void Reindex() =>
+            TransformItems.ForEach((o, i) => o.Index = i + 1);
+
+        public void Add(MTransformItem item)
+        {
+            TransformItems.Add(item);
+            Reindex();
+        }
+
+        public void Delete(MTransformItem item)
+        {
+            TransformItems.Remove(item);
+            Reindex();
+        }
+
         public void OnOK()
         {
         }
@@ -91,8 +107,7 @@ namespace LollyCloud
         }
         bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
-        void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
-            TransformItems.ForEach((o, i) => o.Index = i + 1);
+        void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) => Reindex();
         void IDragSource.DragCancelled() { }
         bool IDragSource.TryCatchOccurredException(Exception exception) => false;
     }

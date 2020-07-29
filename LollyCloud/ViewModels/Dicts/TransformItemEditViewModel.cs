@@ -5,7 +5,7 @@ namespace LollyCloud
     public class TransformItemEditViewModel : ReactiveObject
     {
         MTransformItem item;
-        public MTransformItem ItemEdit = new MTransformItem();
+        public MTransformItemEdit ItemEdit = new MTransformItemEdit();
 
         public TransformItemEditViewModel(MTransformItem item)
         {

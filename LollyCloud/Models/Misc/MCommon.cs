@@ -43,13 +43,4 @@ namespace LollyCloud
 
         public override string ToString() => JsonConvert.SerializeObject(this);
     }
-    public class MTransformItem : ReactiveObject
-    {
-        [Reactive]
-        public int Index { get; set; }
-        [Reactive]
-        public string Extractor { get; set; }
-        [Reactive]
-        public string Replacement { get; set; }
-    }
 }
