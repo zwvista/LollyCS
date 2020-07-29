@@ -38,7 +38,7 @@ namespace LollyCloud
         {
             var tag = (string)((Button)sender).Tag;
             var o = vmDetail.ItemEdit;
-            var dlg = new TransformEditDlg(this, o.TRANSFORM, tag == "1" ? o.TEMPLATE : o.TEMPLATE2);
+            var dlg = new TransformEditDlg(this, o.TRANSFORM, tag == "1" ? o.TEMPLATE : o.TEMPLATE2, o.URL);
             if (dlg.ShowDialog() == true)
             {
                 o.TRANSFORM = dlg.TRANSFORM;

@@ -17,11 +17,12 @@ namespace LollyCloud
     {
         public string TRANSFORM { get; private set; }
         public string TEMPLATE { get; private set; }
+        public string URL { get; private set; }
         public bool IsEditing { get; set; }
         [Reactive]
         public string TemplateText { get; set; }
         [Reactive]
-        public string SourceURL { get; set; }
+        public string SourceWord { get; set; }
         [Reactive]
         public string SourceText { get; set; }
         [Reactive]
@@ -37,15 +38,17 @@ namespace LollyCloud
         public List<string> InterimResults { get; private set; } = new List<string> { "" };
         public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; private set; }
-        public TransformEditViewModel(string transform, string template)
+        public TransformEditViewModel(string transform, string template, string url)
         {
             TRANSFORM = transform;
             TemplateText = TEMPLATE = template;
+            URL = url;
             TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(transform));
             this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
             this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
             GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => {
-                SourceText = await MainWindow.vmSettings.client.GetStringAsync(SourceURL);
+                var url2 = string.Format(URL, SourceWord);
+                SourceText = await MainWindow.vmSettings.client.GetStringAsync(url2);
             });
             ExecuteTransformCommand = ReactiveCommand.Create(() =>
             {
