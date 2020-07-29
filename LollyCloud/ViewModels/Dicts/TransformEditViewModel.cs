@@ -4,8 +4,10 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -23,18 +25,40 @@ namespace LollyCloud
         [Reactive]
         public string SourceText { get; set; }
         [Reactive]
-        public string ResultText { get; set; }
+        public string ResultText { get; private set; }
         [Reactive]
-        public string DetailText { get; set; }
+        public string InterimText { get; private set; }
+        [Reactive]
+        public int InterimMaxIndex { get; private set; }
+        [Reactive]
+        public int InterimIndex { get; set; }
         public ObservableCollection<MTransformItem> TransformItems { get; }
+        [Reactive]
+        public List<string> InterimResults { get; private set; } = new List<string> { "" };
+        public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; private set; }
         public TransformEditViewModel(string transform, string template)
         {
             TRANSFORM = transform;
             TemplateText = TEMPLATE = template;
-            var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            TransformItems = new ObservableCollection<MTransformItem>(
-                arr.Take(arr.Length / 2 * 2).Buffer(2).Select((g, i) => new MTransformItem { Index = i + 1, Extractor = g[0], Replacement = g[1] })
-            );
+            TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(transform));
+            this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
+            this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
+            GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => {
+                SourceText = await MainWindow.vmSettings.client.GetStringAsync(SourceURL);
+            });
+            ExecuteTransformCommand = ReactiveCommand.Create(() =>
+            {
+                var text = HtmlTransformService.RemoveReturns(SourceText);
+                InterimResults = new List<string> { text };
+                foreach (var item in TransformItems)
+                {
+                    text = HtmlTransformService.DoTransform(text, item);
+                    InterimResults.Add(text);
+                }
+                InterimMaxIndex = InterimResults.Count - 1;
+                ResultText = text;
+            });
         }
         public void OnOK()
         {

@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
-        <TextBox Text="{Binding ResultText, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <TextBox Text="{Binding ResultText, Mode=OneWay}" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
     </Grid>
 </UserControl>

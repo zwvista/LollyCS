@@ -22,7 +22,7 @@ namespace LollyCloud
             if (DictNote == null) return "";
             var url = DictNote.UrlString(word, vmSettings.AutoCorrects.ToList());
             var html = await vmSettings.client.GetStringAsync(url);
-            return CommonApi.ExtractTextFromHtml(html, DictNote.TRANSFORM, "", (text, _) => text);
+            return HtmlTransformService.ExtractTextFromHtml(html, DictNote.TRANSFORM, "", (text, _) => text);
         }
 
         public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)

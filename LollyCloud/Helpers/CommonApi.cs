@@ -27,53 +27,6 @@ namespace LollyCloud
         public static string LollyUrlSP = "https://zwvista.tk/lolly/sp.php/";
         public static string CssFolder = "https://zwvista.tk/lolly/css/";
         public static int UserId = 1;
-        static readonly Dictionary<string, string> escapes = new Dictionary<string, string>()
-        {
-            {"<delete>", ""}, {@"\t", "\t"}, {@"\r", "\r"}, {@"\n", "\n"},
-        };
-        public static string ExtractTextFromHtml(string html, string transform, string template, Func<string, string, string> templateHandler)
-        {
-#if DEBUG_EXTRACT
-            var logFolder = Settings.Default.LogFolder + "\\";
-            File.WriteAllText(logFolder + "0_raw.html", html);
-            transfrom = File.ReadAllText(logFolder + "1_transform.txt");
-            template = File.ReadAllText(logFolder + "5_template.txt");
-#endif
-            var text = html.Replace("\r\n", "\n");
-            do
-            {
-                if (string.IsNullOrEmpty(transform)) break;
-                var arr = transform.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < arr.Length; i += 2)
-                {
-                    var reg = new Regex(arr[i].Replace("\\r\\n", "\\n"));
-                    var replacement = arr[i + 1];
-                    if (replacement.StartsWith("<extract>"))
-                    {
-                        replacement = replacement.Substring("<extract>".Length);
-                        text = string.Join("", reg.Matches(text).Cast<Match>().Select(m => m.Groups[0]));
-                    }
-                    foreach (var entry in escapes)
-                        replacement = replacement.Replace(entry.Key, entry.Value);
-                    text = reg.Replace(text, replacement);
-
-#if DEBUG_EXTRACT
-                    File.WriteAllText(logFolder + "2_extracted.txt", text);
-#endif
-                }
-#if DEBUG_EXTRACT
-            File.WriteAllText(logFolder + "4_cooked.txt", text);
-#endif
-                if (string.IsNullOrEmpty(template)) break;
-                text = templateHandler(text, template);
-
-            } while (false);
-
-#if DEBUG_EXTRACT
-            File.WriteAllText(logFolder + "6_result.html", text);
-#endif
-            return text;
-        }
 
         public static void GoogleString(string str) =>
             Process.Start($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");

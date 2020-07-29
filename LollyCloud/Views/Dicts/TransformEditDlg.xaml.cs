@@ -28,10 +28,10 @@ namespace LollyCloud
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
         public string TRANSFORM => vm.TRANSFORM;
         public string TEMPLATE => vm.TEMPLATE;
-        TransformTemplateControl templateCtrl;
         TransformSourceControl sourceCtrl;
         TransformResultControl resultCtrl;
-        TransformDetailControl detailCtrl;
+        TransformInterimControl interimCtrl;
+        TransformTemplateControl templateCtrl;
 
         public TransformEditDlg(Window owner, string transform, string template)
         {
@@ -44,11 +44,11 @@ namespace LollyCloud
             templateCtrl = new TransformTemplateControl(vm);
             sourceCtrl = new TransformSourceControl(vm);
             resultCtrl = new TransformResultControl(vm);
-            detailCtrl = new TransformDetailControl(vm);
-            Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
+            interimCtrl = new TransformInterimControl(vm);
             Tabs.Add(new ActionTabItem { Header = "Source", Content = sourceCtrl });
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });
-            Tabs.Add(new ActionTabItem { Header = "Detail", Content = detailCtrl });
+            Tabs.Add(new ActionTabItem { Header = "Interim", Content = interimCtrl });
+            Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
         }
         void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

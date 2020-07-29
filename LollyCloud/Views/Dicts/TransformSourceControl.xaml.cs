@@ -13,15 +13,10 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformSourceControl : UserControl
     {
-        TransformEditViewModel vm;
         public TransformSourceControl(TransformEditViewModel vm)
         {
             InitializeComponent();
-            DataContext = this.vm = vm;
-        }
-        async void btnGetHtml_Click(object sender, RoutedEventArgs e)
-        {
-            vm.SourceText = await MainWindow.vmSettings.client.GetStringAsync(vm.SourceURL);
+            DataContext = vm;
         }
     }
 }

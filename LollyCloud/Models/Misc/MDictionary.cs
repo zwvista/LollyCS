@@ -74,7 +74,7 @@ namespace LollyCloud
         public string HtmlString(string html, string word, bool useTemplate2 = false)
         {
             var template = useTemplate2 && !string.IsNullOrEmpty(TEMPLATE2) ? TEMPLATE2 : TEMPLATE;
-            return CommonApi.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
+            return HtmlTransformService.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
                 string.Format(template2, word, CommonApi.CssFolder, text));
         }
     }

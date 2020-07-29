@@ -15,8 +15,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Execute" Tag= "1" HorizontalAlignment="Left" />
-            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}" Grid.Column="1"/>
+            <Button Content="Execute" Tag= "1" HorizontalAlignment="Left" Command="{Binding ExecuteTransformCommand}" />
+            <Button Content="OK" Width="75" Click="btnOK_Click" Command="{Binding Save}" Grid.Column="1"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0" Grid.Column="2"/>
         </Grid>
         <Grid>

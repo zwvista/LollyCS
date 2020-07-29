@@ -58,7 +58,7 @@ namespace LollyCloud
             if (!vmSettings.HasDictTranslation) return "";
             var url = DictTranslation.UrlString(CurrentWord, vmSettings.AutoCorrects);
             var html = await vmSettings.client.GetStringAsync(url);
-            return CommonApi.ExtractTextFromHtml(html, DictTranslation.TRANSFORM, "", (text, _) => text);
+            return HtmlTransformService.ExtractTextFromHtml(html, DictTranslation.TRANSFORM, "", (text, _) => text);
         }
         public async Task Check(string wordInput)
         {

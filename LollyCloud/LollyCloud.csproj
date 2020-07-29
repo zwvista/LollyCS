@@ -225,6 +225,7 @@
     <Compile Include="Models\WPP\MWordPhrase.cs" />
     <Compile Include="Models\Misc\MReadNumber.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Services\HtmlTransformService.cs" />
     <Compile Include="ViewModels\Dicts\DictsDetailViewModel.cs" />
     <Compile Include="ViewModels\Dicts\TransformItemEditViewModel.cs" />
     <Compile Include="ViewModels\Dicts\TransformEditViewModel.cs" />
@@ -241,8 +242,8 @@
     <Compile Include="Views\Dicts\TransformItemEditDlg.xaml.cs">
       <DependentUpon>TransformItemEditDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dicts\TransformDetailControl.xaml.cs">
-      <DependentUpon>TransformDetailControl.xaml</DependentUpon>
+    <Compile Include="Views\Dicts\TransformInterimControl.xaml.cs">
+      <DependentUpon>TransformInterimControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dicts\TransformTemplateControl.xaml.cs">
       <DependentUpon>TransformTemplateControl.xaml</DependentUpon>
@@ -425,7 +426,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Dicts\TransformDetailControl.xaml">
+    <Page Include="Views\Dicts\TransformInterimControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
