@@ -18,7 +18,7 @@ namespace LollyCloud
         public string TRANSFORM { get; private set; }
         [Reactive]
         public string TEMPLATE { get; set; }
-        public string URL { get; private set; }
+        public string URL { get; }
         public bool IsEditing { get; set; }
         [Reactive]
         public string SourceWord { get; set; }

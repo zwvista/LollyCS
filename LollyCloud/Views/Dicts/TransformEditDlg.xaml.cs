@@ -50,19 +50,31 @@ namespace LollyCloud
             Tabs.Add(new ActionTabItem { Header = "Interim", Content = interimCtrl });
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
         }
-        void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        void EditTransformItem(MTransformItem item)
         {
             vm.IsEditing = false;
             dgTransform.CancelEdit();
-            var dlg = new TransformItemEditDlg(this, (MTransformItem)((DataGridRow)sender).Item);
+            var dlg = new TransformItemEditDlg(this, item);
             dlg.ShowDialog();
         }
-        void btnAdd_Click(object sender, RoutedEventArgs e)
+        void dgTransform_RowDoubleClick(object sender, MouseButtonEventArgs e) =>
+            EditTransformItem((MTransformItem)((DataGridRow)sender).Item);
+        void miAdd_Click(object sender, RoutedEventArgs e)
         {
             var item = vm.NewTransformItem();
             var dlg = new TransformItemEditDlg(this, item);
             if (dlg.ShowDialog() == true)
                 vm.Add(item);
+        }
+        void miEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MTransformItem)dgTransform.SelectedItem;
+            if (item != null) EditTransformItem(item);
+        }
+        void miDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MTransformItem)dgTransform.SelectedItem;
+            if (item != null) vm.Delete(item);
         }
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)

@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Add" Click="btnAdd_Click" />
+            <Button Content="Add" Click="miAdd_Click" />
             <Button Content="OK" Width="75" Click="btnOK_Click" Command="{Binding Save}" Grid.Column="2"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0" Grid.Column="3"/>
         </Grid>
@@ -39,6 +39,13 @@
                         <EventSetter Event="MouseDoubleClick" Handler="dgTransform_RowDoubleClick"/>
                     </Style>
                 </DataGrid.Resources>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="miAdd" Header="Add" Click="miAdd_Click" />
+                        <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
+                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <dragablz:TabablzControl Grid.Column="2" x:Name="tcTranformResult" ItemsSource="{Binding Tabs}">
