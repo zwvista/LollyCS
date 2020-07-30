@@ -3,6 +3,7 @@ using Hardcodet.Wpf.Util;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,7 +33,9 @@ namespace LollyCloud
         {
             if (!wbDict.IsInitialized || string.IsNullOrEmpty(vm.ResultHtml)) return;
             // https://github.com/cefsharp/CefSharp/issues/2788
-            Observable.Timer(TimeSpan.FromMilliseconds(2000), RxApp.MainThreadScheduler).Subscribe(_ => wbDict.LoadHtml(vm.ResultHtml, "about:blank"));
+            //Observable.Timer(TimeSpan.FromMilliseconds(2000), RxApp.MainThreadScheduler).Subscribe(_ => wbDict.LoadHtml(vm.ResultHtml, "about:blank"));
+            var base64EncodedHtml = Convert.ToBase64String(Encoding.UTF8.GetBytes(vm.ResultHtml));
+            wbDict.Load("data:text/html;base64," + base64EncodedHtml);
         }
     }
 }
