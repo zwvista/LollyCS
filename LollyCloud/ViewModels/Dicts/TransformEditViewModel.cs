@@ -65,7 +65,7 @@ namespace LollyCloud
                 }
                 InterimMaxIndex = InterimResults.Count - 1;
                 ResultText = text;
-                ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.GetHtml(text) :
+                ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.ToHtml(text) :
                     string.Format(TEMPLATE, SourceWord, CommonApi.CssFolder, text);
             });
             Save = ReactiveCommand.Create(() =>

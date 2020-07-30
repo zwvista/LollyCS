@@ -52,7 +52,7 @@ namespace LollyCloud
             return text;
         }
 
-        public static string GetHtml(string text) =>
+        public static string ToHtml(string text) =>
             $@"<!doctype html>
 <html>
 <head>
