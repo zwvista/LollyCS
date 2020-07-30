@@ -59,7 +59,7 @@ namespace LollyCloud
         }
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var item = new MTransformItem();
+            var item = vm.NewTransformItem();
             var dlg = new TransformItemEditDlg(this, item);
             if (dlg.ShowDialog() == true)
                 vm.Add(item);
@@ -76,7 +76,6 @@ namespace LollyCloud
 
         void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            vm.OnOK();
             DialogResult = true;
         }
     }

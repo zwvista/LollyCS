@@ -8,11 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel Margin="10">
-        <DockPanel DockPanel.Dock="Top">
-            <TextBox DockPanel.Dock="Left" Text="{Binding SourceWord}" wpf:HintAssist.Hint="Word" Width="100" />
-            <Button DockPanel.Dock="Right" Content="Get Html" Grid.Column="1" Command="{Binding GetHtmlCommand}"/>
-            <TextBox Text="{Binding URL, Mode=OneWay}" />
-        </DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding SourceWord}" wpf:HintAssist.Hint="Word" Width="100" />
+            <TextBox Text="{Binding URL, Mode=OneWay}" wpf:HintAssist.Hint="URL" Margin="10,0,0,0" Grid.Column="1" />
+            <Button Content="Get Html" Command="{Binding GetHtmlCommand}" Margin="10,0,0,0" Grid.Column="2" />
+            <Button Content="Transform" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding ExecuteTransformCommand}" Grid.Column="3" />
+        </Grid>
         <TextBox Text="{Binding SourceText}" Grid.Row="2" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
     </DockPanel>
 </UserControl>

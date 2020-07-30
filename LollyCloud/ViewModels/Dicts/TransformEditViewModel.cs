@@ -16,11 +16,10 @@ namespace LollyCloud
     public class TransformEditViewModel : ReactiveObject, IDragSource
     {
         public string TRANSFORM { get; private set; }
-        public string TEMPLATE { get; private set; }
+        [Reactive]
+        public string TEMPLATE { get; set; }
         public string URL { get; private set; }
         public bool IsEditing { get; set; }
-        [Reactive]
-        public string TemplateText { get; set; }
         [Reactive]
         public string SourceWord { get; set; }
         [Reactive]
@@ -38,10 +37,11 @@ namespace LollyCloud
         public List<string> InterimResults { get; private set; } = new List<string> { "" };
         public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> Save { get; private set; }
         public TransformEditViewModel(string transform, string template, string url)
         {
             TRANSFORM = transform;
-            TemplateText = TEMPLATE = template;
+            TEMPLATE = template;
             URL = url;
             TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(transform));
             this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
@@ -62,10 +62,20 @@ namespace LollyCloud
                 InterimMaxIndex = InterimResults.Count - 1;
                 ResultText = text;
             });
+            Save = ReactiveCommand.Create(() =>
+            {
+                TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));
+            });
         }
 
         public void Reindex() =>
             TransformItems.ForEach((o, i) => o.Index = i + 1);
+
+        public MTransformItem NewTransformItem() =>
+            new MTransformItem
+            {
+                Index = TransformItems.Count + 1
+            };
 
         public void Add(MTransformItem item)
         {
@@ -77,10 +87,6 @@ namespace LollyCloud
         {
             TransformItems.Remove(item);
             Reindex();
-        }
-
-        public void OnOK()
-        {
         }
 
         // Copied from DefaultDragHandler
