@@ -47,7 +47,10 @@ namespace LollyCloud
                     dictStatus = DictWebBrowserStatus.Navigating;
             }
         }
-        async void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e) => await Load();
+        async void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue) await Load();
+        }
         async void wbDict_LoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
             if (args.IsLoading) return;

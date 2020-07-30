@@ -23,6 +23,8 @@ namespace LollyCloud
         [Reactive]
         public string SourceWord { get; set; }
         [Reactive]
+        public string SourceUrl { get; set; }
+        [Reactive]
         public string SourceText { get; set; }
         [Reactive]
         public string ResultText { get; private set; }
@@ -47,8 +49,8 @@ namespace LollyCloud
             this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
             this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
             GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => {
-                var url2 = string.Format(URL, SourceWord);
-                SourceText = await MainWindow.vmSettings.client.GetStringAsync(url2);
+                SourceUrl = string.Format(URL, SourceWord);
+                SourceText = await MainWindow.vmSettings.client.GetStringAsync(SourceUrl);
             });
             ExecuteTransformCommand = ReactiveCommand.Create(() =>
             {
