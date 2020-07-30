@@ -111,17 +111,6 @@ namespace LollyCloud
             return text;
         }
         public string GetExplanation(string text) => $"* {text}：：\r\n";
-        public string GetHtml(string text) =>
-            $@"<!doctype html>
-<html>
-<head>
-  <meta charset=""utf-8"">
-  <meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">
-</head>
-<body>
-{text}
-</body>
-</html>";
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
         public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
         readonly string bigDigits = "０１２３４５６７８９";

@@ -41,7 +41,7 @@ namespace LollyCloud
         public string MarkedToHtml()
         {
             HtmlText = service.MarkedToHtml(MarkedText);
-            var str = service.GetHtml(HtmlText);
+            var str = HtmlTransformService.GetHtml(HtmlText);
             return str;
         }
     }

@@ -58,7 +58,7 @@ namespace LollyCloud
                 var item = (MTextbook)e.Row.DataContext;
                 var el = (TextBox)e.EditingElement;
                 if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
+                    Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ =>
                     {
                         await vm.Update(item);
                         dgTextbooks.CancelEdit();

@@ -26,6 +26,10 @@ namespace LollyCloud
         {
             if ((bool)e.NewValue) Load();
         }
-        void Load() => wbDict.Load(vm.SourceUrl);
+        void Load()
+        {
+            if (wbDict.IsInitialized)
+                wbDict.Load(vm.SourceUrl);
+        }
     }
 }

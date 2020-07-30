@@ -91,7 +91,7 @@ namespace LollyCloud
                     if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "PATTERN")
                         el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
                     if (el.Text != originalText)
-                        Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
+                        Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ =>
                         {
                             await vm.Update(item);
                             dgPatterns.CancelEdit();
@@ -102,7 +102,7 @@ namespace LollyCloud
                     var item = (MPatternWebPage)e.Row.DataContext;
                     var el = (TextBox)e.EditingElement;
                     if (el.Text != originalText)
-                        Observable.Timer(TimeSpan.FromMilliseconds(100)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(async _ =>
+                        Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ =>
                         {
                             await vm.UpdatePatternWebPage(item);
                             dgWebPages.CancelEdit();

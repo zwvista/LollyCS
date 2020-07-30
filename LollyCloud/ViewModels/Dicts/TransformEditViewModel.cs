@@ -29,6 +29,8 @@ namespace LollyCloud
         [Reactive]
         public string ResultText { get; private set; }
         [Reactive]
+        public string ResultHtml { get; private set; }
+        [Reactive]
         public string InterimText { get; private set; }
         [Reactive]
         public int InterimMaxIndex { get; private set; }
@@ -63,6 +65,8 @@ namespace LollyCloud
                 }
                 InterimMaxIndex = InterimResults.Count - 1;
                 ResultText = text;
+                ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.GetHtml(text) :
+                    string.Format(TEMPLATE, SourceWord, CommonApi.CssFolder, text);
             });
             Save = ReactiveCommand.Create(() =>
             {
