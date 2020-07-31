@@ -32,11 +32,5 @@ namespace LollyCloud
             DataContext = vmDetail.ItemEdit;
             dgWords.DataContext = vmDetail.vmSingleWord;
         }
-
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            await vmDetail.OnOK();
-            DialogResult = true;
-        }
     }
 }

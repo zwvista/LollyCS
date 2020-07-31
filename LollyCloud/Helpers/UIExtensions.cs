@@ -10,12 +10,18 @@ using System.Windows.Media;
 
 namespace LollyCloud
 {
-    // https://stackoverflow.com/questions/4734482/button1-performclick-in-wpf
-    public static class ButtonExtensions
+    public static class ControlExtensions
     {
+        // https://stackoverflow.com/questions/4734482/button1-performclick-in-wpf
         public static void PerformClick(this ButtonBase btn)
         {
             btn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+        }
+        // https://github.com/cefsharp/CefSharp/issues/2788
+        public static void LoadLargeHtml(this ChromiumWebBrowser wb, string html)
+        {
+            var base64EncodedHtml = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
+            wb.Load("data:text/html;base64," + base64EncodedHtml);
         }
     }
     public static class UIHelper
@@ -86,14 +92,26 @@ namespace LollyCloud
         public override TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window) =>
             TabEmptiedResponse.DoNothing;
     }
-
-    public static class BrowserExtensions
+    // https://stackoverflow.com/questions/1759372/where-is-button-dialogresult-in-wpf
+    public class ButtonHelper
     {
-        public static void LoadLargeHtml(this ChromiumWebBrowser wb, string html)
+        // Boilerplate code to register attached property "bool? DialogResult"
+        public static bool? GetDialogResult(DependencyObject obj) { return (bool?)obj.GetValue(DialogResultProperty); }
+        public static void SetDialogResult(DependencyObject obj, bool? value) { obj.SetValue(DialogResultProperty, value); }
+        public static readonly DependencyProperty DialogResultProperty = DependencyProperty.RegisterAttached("DialogResult", typeof(bool?), typeof(ButtonHelper), new UIPropertyMetadata
         {
-            // https://github.com/cefsharp/CefSharp/issues/2788
-            var base64EncodedHtml = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
-            wb.Load("data:text/html;base64," + base64EncodedHtml);
-        }
+            PropertyChangedCallback = (obj, e) =>
+            {
+                // Implementation of DialogResult functionality
+                Button button = obj as Button;
+                if (button == null)
+                    throw new InvalidOperationException(
+                      "Can only use ButtonHelper.DialogResult on a Button control");
+                button.Click += (sender, e2) =>
+                {
+                    Window.GetWindow(button).DialogResult = GetDialogResult(button);
+                };
+            }
+        });
     }
 }

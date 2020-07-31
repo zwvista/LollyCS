@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,12 +32,6 @@ namespace LollyCloud
             vmDetail = new WordsUnitDetailViewModel(Item = item, vm);
             DataContext = vmDetail.ItemEdit;
             dgWords.DataContext = vmDetail.vmSingleWord;
-        }
-
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            await vmDetail.OnOK();
-            DialogResult = true;
         }
     }
 }

@@ -330,7 +330,7 @@
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UIHelpers.cs" />
-    <Compile Include="Helpers\WindowsExtensions.cs" />
+    <Compile Include="Helpers\UIExtensions.cs" />
     <Compile Include="Helpers\CommonApi.cs" />
     <Compile Include="Models\Misc\MAutoCorrect.cs" />
     <Compile Include="Models\Misc\MDictionary.cs" />
