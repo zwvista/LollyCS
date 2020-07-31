@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace LollyCloud
             Owner = owner;
             vm = new TransformEditViewModel(itemEdit);
             DataContext = vm;
-            tcTranformResult.DataContext = this;
+            tcTranform.DataContext = this;
             templateCtrl = new TransformTemplateControl(vm);
             sourceCtrl = new TransformSourceControl(vm);
             resultCtrl = new TransformResultControl(vm);
@@ -47,6 +48,13 @@ namespace LollyCloud
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });
             Tabs.Add(new ActionTabItem { Header = "Interim", Content = interimCtrl });
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
+            // https://stackoverflow.com/questions/50177352/is-there-a-way-to-track-when-reactive-command-finished-its-execution
+            Action<ReactiveCommand<Unit, Unit>> f = cmd => cmd.IsExecuting
+                .Skip(1) // IsExecuting has an initial value of false.  We can skip that first value
+                .Where(isExecuting => !isExecuting) // filter until the executing state becomes false
+                .Subscribe(_ => tcTranform.SelectedIndex = 1);
+            f(vm.ExecuteTransformCommand);
+            f(vm.GetAndTransformCommand);
         }
         void EditTransformItem(MTransformItem item)
         {

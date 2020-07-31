@@ -48,7 +48,7 @@
                 </DataGrid.ContextMenu>
             </DataGrid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
-            <dragablz:TabablzControl Grid.Column="2" x:Name="tcTranformResult" ItemsSource="{Binding Tabs}">
+            <dragablz:TabablzControl Grid.Column="2" x:Name="tcTranform" ItemsSource="{Binding Tabs}">
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
                 </dragablz:TabablzControl.InterTabController>

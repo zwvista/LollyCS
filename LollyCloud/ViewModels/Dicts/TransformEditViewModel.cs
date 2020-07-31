@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -51,13 +53,12 @@ namespace LollyCloud
             TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(itemEdit.TRANSFORM));
             this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
             this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
-
-            async Task F1()
+            GetHtmlCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 SourceUrl = string.Format(URL, SourceWord);
                 SourceText = await MainWindow.vmSettings.client.GetStringAsync(SourceUrl);
-            }
-            void F2()
+            });
+            ExecuteTransformCommand = ReactiveCommand.Create(() =>
             {
                 var text = HtmlTransformService.RemoveReturns(SourceText);
                 InterimResults = new List<string> { text };
@@ -70,11 +71,9 @@ namespace LollyCloud
                 ResultText = text;
                 ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.ToHtml(text) :
                     HtmlTransformService.ApplyTemplate(TEMPLATE, SourceWord, text);
-            }
-
-            GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => await F1());
-            ExecuteTransformCommand = ReactiveCommand.Create(() => F2());
-            GetAndTransformCommand = ReactiveCommand.CreateFromTask(async () => { await F1(); F2(); });
+            });
+            GetAndTransformCommand = ReactiveCommand.CreateFromTask(async () =>
+                await GetHtmlCommand.Execute().Concat(ExecuteTransformCommand.Execute()).ToTask());
             Save = ReactiveCommand.Create(() =>
             {
                 itemEdit.TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));
