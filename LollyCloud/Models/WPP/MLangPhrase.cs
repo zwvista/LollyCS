@@ -66,7 +66,7 @@ namespace LollyCloud
         public string PHRASE { get; set; } = "";
         [Reactive]
         public string TRANSLATION { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
         public MLangPhraseEdit()
         {
             this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");

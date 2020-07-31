@@ -48,7 +48,7 @@ namespace LollyCloud
         public string NOTE { get; set; }
         [Reactive]
         public string TAGS { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
         public MPatternEdit()
         {
             this.ValidationRule(x => x.PATTERN, v => !string.IsNullOrWhiteSpace(v), "PATTERN must not be empty");

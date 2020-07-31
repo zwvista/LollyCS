@@ -63,5 +63,8 @@ namespace LollyCloud
 {text}
 </body>
 </html>";
+
+        public static string ApplyTemplate(string template, string word, string text) =>
+            string.Format(template, word, CommonApi.CssFolder, text);
     }
 }

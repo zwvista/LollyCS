@@ -99,7 +99,7 @@ namespace LollyCloud
         public MTextbook Textbook { get; set; }
         [Reactive]
         public string ACCURACY { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
         public MUnitWordEdit()
         {
             this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");

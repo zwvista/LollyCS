@@ -20,8 +20,8 @@ namespace LollyCloud.ViewModels
         public List<MWebPage> WebPageItems { get; set; } = new List<MWebPage>();
         [Reactive]
         public MWebPage SelectedWebPage { get; set; }
-        public ReactiveCommand<Unit, Unit> Search { get; private set; }
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public ReactiveCommand<Unit, Unit> Search { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
         public WebPageSelectViewModel()
         {
             Search = ReactiveCommand.CreateFromTask(async () =>

@@ -39,9 +39,10 @@ namespace LollyCloud
         public ObservableCollection<MTransformItem> TransformItems { get; }
         [Reactive]
         public List<string> InterimResults { get; private set; } = new List<string> { "" };
-        public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; private set; }
-        public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; private set; }
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; }
+        public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; }
+        public ReactiveCommand<Unit, Unit> GetAndTransformCommand { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
         public TransformEditViewModel(MDictionaryEdit itemEdit)
         {
             this.itemEdit = itemEdit;
@@ -50,11 +51,13 @@ namespace LollyCloud
             TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(itemEdit.TRANSFORM));
             this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
             this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
-            GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => {
+
+            async Task F1()
+            {
                 SourceUrl = string.Format(URL, SourceWord);
                 SourceText = await MainWindow.vmSettings.client.GetStringAsync(SourceUrl);
-            });
-            ExecuteTransformCommand = ReactiveCommand.Create(() =>
+            }
+            void F2()
             {
                 var text = HtmlTransformService.RemoveReturns(SourceText);
                 InterimResults = new List<string> { text };
@@ -66,8 +69,12 @@ namespace LollyCloud
                 InterimMaxIndex = InterimResults.Count - 1;
                 ResultText = text;
                 ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.ToHtml(text) :
-                    string.Format(TEMPLATE, SourceWord, CommonApi.CssFolder, text);
-            });
+                    HtmlTransformService.ApplyTemplate(TEMPLATE, SourceWord, text);
+            }
+
+            GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => await F1());
+            ExecuteTransformCommand = ReactiveCommand.Create(() => F2());
+            GetAndTransformCommand = ReactiveCommand.CreateFromTask(async () => { await F1(); F2(); });
             Save = ReactiveCommand.Create(() =>
             {
                 itemEdit.TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));

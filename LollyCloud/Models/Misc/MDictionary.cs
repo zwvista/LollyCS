@@ -75,7 +75,7 @@ namespace LollyCloud
         {
             var template = useTemplate2 && !string.IsNullOrEmpty(TEMPLATE2) ? TEMPLATE2 : TEMPLATE;
             return HtmlTransformService.ExtractTextFromHtml(html, TRANSFORM, template, (text, template2) =>
-                string.Format(template2, word, CommonApi.CssFolder, text));
+                HtmlTransformService.ApplyTemplate(template2, word, text));
         }
     }
     public class MDictionaryEdit : ReactiveValidationObject<MDictionaryEdit>
@@ -114,7 +114,7 @@ namespace LollyCloud
         public string TEMPLATE { get; set; }
         [Reactive]
         public string TEMPLATE2 { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; private set; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
         public MDictionaryEdit()
         {
             this.ValidationRule(x => x.DICTNAME, v => !string.IsNullOrWhiteSpace(v), "DICTNAME must not be empty");
