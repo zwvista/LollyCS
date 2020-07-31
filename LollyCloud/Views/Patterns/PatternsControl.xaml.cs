@@ -127,7 +127,7 @@ namespace LollyCloud
         }
         void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
 
-        void miGoogle_Click(object sender, RoutedEventArgs e) => CommonApi.GoogleString(selectedPattern);
+        void miGoogle_Click(object sender, RoutedEventArgs e) => selectedPattern.Google();
 
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

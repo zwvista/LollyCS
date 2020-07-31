@@ -48,11 +48,7 @@ namespace LollyCloud
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });
             Tabs.Add(new ActionTabItem { Header = "Interim", Content = interimCtrl });
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
-            // https://stackoverflow.com/questions/50177352/is-there-a-way-to-track-when-reactive-command-finished-its-execution
-            Action<ReactiveCommand<Unit, Unit>> f = cmd => cmd.IsExecuting
-                .Skip(1) // IsExecuting has an initial value of false.  We can skip that first value
-                .Where(isExecuting => !isExecuting) // filter until the executing state becomes false
-                .Subscribe(_ => tcTranform.SelectedIndex = 1);
+            Action<ReactiveCommand<Unit, Unit>> f = cmd => cmd.WhenFinishedExecuting().Subscribe(_ => tcTranform.SelectedIndex = 1);
             f(vm.ExecuteTransformCommand);
             f(vm.GetAndTransformCommand);
         }

@@ -72,8 +72,7 @@ namespace LollyCloud
                 ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.ToHtml(text) :
                     HtmlTransformService.ApplyTemplate(TEMPLATE, SourceWord, text);
             });
-            GetAndTransformCommand = ReactiveCommand.CreateFromTask(async () =>
-                await GetHtmlCommand.Execute().Concat(ExecuteTransformCommand.Execute()).ToTask());
+            GetAndTransformCommand = ReactiveCommand.CreateFromObservable(() => GetHtmlCommand.Execute().Concat(ExecuteTransformCommand.Execute()));
             Save = ReactiveCommand.Create(() =>
             {
                 itemEdit.TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));

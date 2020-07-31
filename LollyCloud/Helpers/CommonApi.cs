@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -28,7 +30,7 @@ namespace LollyCloud
         public static string CssFolder = "https://zwvista.tk/lolly/css/";
         public static int UserId = 1;
 
-        public static void GoogleString(string str) =>
+        public static void Google(this string str) =>
             Process.Start($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");
 
         // https://stackoverflow.com/questions/273313/randomize-a-listt
@@ -48,11 +50,8 @@ namespace LollyCloud
                 list[n] = value;
             }
         }
-    }
 
-    // https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall
-    public static class Reflection
-    {
+        // https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall
         /// <summary>
         /// Extension for 'Object' that copies the properties to a destination object.
         /// </summary>
@@ -83,5 +82,11 @@ namespace LollyCloud
                 props.targetProperty.SetValue(destination, props.sourceProperty.GetValue(source, null), null);
             }
         }
+
+        // https://stackoverflow.com/questions/50177352/is-there-a-way-to-track-when-reactive-command-finished-its-execution
+        public static IObservable<bool> WhenFinishedExecuting<TParam, TResult>(this ReactiveCommand<TParam, TResult> cmd) =>
+            cmd.IsExecuting
+                .Skip(1) // IsExecuting has an initial value of false.  We can skip that first value
+                .Where(isExecuting => !isExecuting); // filter until the executing state becomes false
     }
 }
