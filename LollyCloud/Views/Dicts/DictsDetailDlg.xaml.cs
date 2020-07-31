@@ -36,17 +36,8 @@ namespace LollyCloud
 
         void btnEditTransform_Click(object sender, RoutedEventArgs e)
         {
-            var tag = (string)((Button)sender).Tag;
-            var o = vmDetail.ItemEdit;
-            var dlg = new TransformEditDlg(this, o.TRANSFORM, tag == "1" ? o.TEMPLATE : o.TEMPLATE2, o.URL);
-            if (dlg.ShowDialog() == true)
-            {
-                o.TRANSFORM = dlg.TRANSFORM;
-                if (tag == "1")
-                    o.TEMPLATE = dlg.TEMPLATE;
-                else
-                    o.TEMPLATE2 = dlg.TEMPLATE;
-            }
+            var dlg = new TransformEditDlg(this, vmDetail.ItemEdit);
+            dlg.ShowDialog();
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)

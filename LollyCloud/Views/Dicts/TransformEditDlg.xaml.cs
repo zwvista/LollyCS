@@ -26,19 +26,17 @@ namespace LollyCloud
         TransformEditViewModel vm;
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
-        public string TRANSFORM => vm.TRANSFORM;
-        public string TEMPLATE => vm.TEMPLATE;
         TransformSourceControl sourceCtrl;
         TransformResultControl resultCtrl;
         TransformInterimControl interimCtrl;
         TransformTemplateControl templateCtrl;
 
-        public TransformEditDlg(Window owner, string transform, string template, string url)
+        public TransformEditDlg(Window owner, MDictionaryEdit itemEdit)
         {
             InitializeComponent();
             //SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            vm = new TransformEditViewModel(transform, template, url);
+            vm = new TransformEditViewModel(itemEdit);
             DataContext = vm;
             tcTranformResult.DataContext = this;
             templateCtrl = new TransformTemplateControl(vm);

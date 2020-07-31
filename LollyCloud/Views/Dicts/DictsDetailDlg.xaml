@@ -25,8 +25,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Edit TRANSFORM T1" Click="btnEditTransform_Click" Tag= "1" />
-            <Button Content="Edit TRANSFORM T2" Click="btnEditTransform_Click" Tag= "2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Column="1"/>
+            <Button Content="Edit TRANSFORM" Click="btnEditTransform_Click" />
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Command="{Binding Save}" Grid.Column="2"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0" Grid.Column="3"/>
         </Grid>

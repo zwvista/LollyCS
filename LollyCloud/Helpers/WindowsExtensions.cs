@@ -1,6 +1,8 @@
-﻿using Dragablz;
+﻿using CefSharp.Wpf;
+using Dragablz;
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -85,4 +87,13 @@ namespace LollyCloud
             TabEmptiedResponse.DoNothing;
     }
 
+    public static class BrowserExtensions
+    {
+        public static void LoadLargeHtml(this ChromiumWebBrowser wb, string html)
+        {
+            // https://github.com/cefsharp/CefSharp/issues/2788
+            var base64EncodedHtml = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
+            wb.Load("data:text/html;base64," + base64EncodedHtml);
+        }
+    }
 }

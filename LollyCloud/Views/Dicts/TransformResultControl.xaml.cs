@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using CefSharp.Wpf;
 using Hardcodet.Wpf.Util;
 using ReactiveUI;
 using System;
@@ -32,9 +33,7 @@ namespace LollyCloud
         void Load()
         {
             if (!wbDict.IsInitialized || string.IsNullOrEmpty(vm.ResultHtml)) return;
-            // https://github.com/cefsharp/CefSharp/issues/2788
-            var base64EncodedHtml = Convert.ToBase64String(Encoding.UTF8.GetBytes(vm.ResultHtml));
-            wbDict.Load("data:text/html;base64," + base64EncodedHtml);
+            wbDict.LoadLargeHtml(vm.ResultHtml);
         }
     }
 }

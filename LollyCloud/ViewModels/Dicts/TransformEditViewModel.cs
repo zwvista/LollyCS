@@ -15,7 +15,7 @@ namespace LollyCloud
 {
     public class TransformEditViewModel : ReactiveObject, IDragSource
     {
-        public string TRANSFORM { get; private set; }
+        MDictionaryEdit itemEdit;
         [Reactive]
         public string TEMPLATE { get; set; }
         public string URL { get; }
@@ -42,12 +42,12 @@ namespace LollyCloud
         public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> Save { get; private set; }
-        public TransformEditViewModel(string transform, string template, string url)
+        public TransformEditViewModel(MDictionaryEdit itemEdit)
         {
-            TRANSFORM = transform;
-            TEMPLATE = template;
-            URL = url;
-            TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(transform));
+            this.itemEdit = itemEdit;
+            TEMPLATE = itemEdit.TEMPLATE;
+            URL = itemEdit.URL;
+            TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(itemEdit.TRANSFORM));
             this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
             this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
             GetHtmlCommand = ReactiveCommand.CreateFromTask(async () => {
@@ -70,7 +70,8 @@ namespace LollyCloud
             });
             Save = ReactiveCommand.Create(() =>
             {
-                TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));
+                itemEdit.TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));
+                itemEdit.TEMPLATE = TEMPLATE;
             });
         }
 
