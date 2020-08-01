@@ -24,7 +24,7 @@ namespace LollyCloud
         [Reactive]
         public string SourceWord { get; set; }
         [Reactive]
-        public string SourceUrl { get; set; }
+        public string SourceUrl { get; private set; }
         [Reactive]
         public string SourceText { get; set; }
         [Reactive]

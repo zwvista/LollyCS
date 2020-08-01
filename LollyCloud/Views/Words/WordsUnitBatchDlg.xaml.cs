@@ -24,11 +24,5 @@ namespace LollyCloud
             var checkedItems = dgWords.SelectedItems.Cast<MUnitWord>().ToList();
             vmBatch.CheckItems(n, checkedItems);
         }
-
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            await vmBatch.OnOK();
-            DialogResult = true;
-        }
     }
 }

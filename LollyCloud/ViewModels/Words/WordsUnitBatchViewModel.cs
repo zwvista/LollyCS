@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Reactive;
 
 namespace LollyCloud
 {
@@ -30,12 +30,28 @@ namespace LollyCloud
         public int SEQNUM { get; set; }
         [Reactive]
         public int LEVEL { get; set; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
 
         public WordsUnitBatchViewModel(WordsUnitViewModel vm)
         {
             this.vm = vm;
             foreach (var o in vm.WordItems)
                 o.IsChecked = false;
+            Save = ReactiveCommand.CreateFromTask(async () =>
+            {
+                foreach (var o in vm.WordItems)
+                {
+                    if (IsUnitChecked || IsPartChecked || IsSeqNumChecked)
+                    {
+                        if (IsUnitChecked) o.UNIT = UNIT;
+                        if (IsPartChecked) o.PART = PART;
+                        if (IsSeqNumChecked) o.SEQNUM += SEQNUM;
+                        await unitWordDS.Update(o);
+                    }
+                    if (IsLevelChecked && (!IsLevel0OnlyChecked || o.LEVEL == 0))
+                        await wordFamiDS.Update(o.WORDID, LEVEL);
+                }
+            });
         }
 
         public void CheckItems(int n, List<MUnitWord> checkedItems)
@@ -44,21 +60,6 @@ namespace LollyCloud
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
                     !checkedItems.Contains(o) ? o.IsChecked :
                     n == 2;
-        }
-        public async Task OnOK()
-        {
-            foreach (var o in vm.WordItems)
-            {
-                if (IsUnitChecked || IsPartChecked || IsSeqNumChecked)
-                {
-                    if (IsUnitChecked) o.UNIT = UNIT;
-                    if (IsPartChecked) o.PART = PART;
-                    if (IsSeqNumChecked) o.SEQNUM += SEQNUM;
-                    await unitWordDS.Update(o);
-                }
-                if (IsLevelChecked && (!IsLevel0OnlyChecked || o.LEVEL == 0))
-                    await wordFamiDS.Update(o.WORDID, LEVEL);
-            }
         }
     }
 }

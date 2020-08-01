@@ -94,11 +94,10 @@ namespace LollyCloud
         public MTextbook Textbook { get; set; }
         [Reactive]
         public string ACCURACY { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangWordEdit()
         {
             this.ValidationRule(x => x.WORD, v => !string.IsNullOrWhiteSpace(v), "WORD must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }
