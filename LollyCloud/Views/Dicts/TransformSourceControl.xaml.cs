@@ -24,7 +24,8 @@ namespace LollyCloud
         }
         void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((bool)e.NewValue) Load();
+            if ((bool)e.NewValue)
+                Load();
         }
         void Load()
         {

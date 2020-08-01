@@ -28,7 +28,6 @@ namespace LollyCloud
         {
             if (!(bool)e.NewValue) return;
             vm.WhenAnyValue(x => x.ResultHtml).Subscribe(_ => Load());
-            Load();
         }
         void Load()
         {

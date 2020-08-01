@@ -49,7 +49,7 @@ namespace LollyCloud
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {
             var str = vm.MarkedToHtml();
-            wbBlog.LoadHtml(str);
+            wbBlog.LoadLargeHtml(str);
             Clipboard.SetDataObject(vm.HtmlText);
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>

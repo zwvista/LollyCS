@@ -36,7 +36,7 @@ namespace LollyCloud
                 wbDict.Load("about:blank");
                 var html = await vmSettings.client.GetStringAsync(Url);
                 var str = Dict.HtmlString(html, Word);
-                wbDict.LoadHtml(str);
+                wbDict.LoadLargeHtml(str);
             }
             else
             {
@@ -49,7 +49,8 @@ namespace LollyCloud
         }
         async void wbDict_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((bool)e.NewValue) await Load();
+            if ((bool)e.NewValue)
+                await Load();
         }
         async void wbDict_LoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
@@ -74,7 +75,7 @@ namespace LollyCloud
                     var html = await frame.GetSourceAsync();
                     var str = Dict.HtmlString(html, Word);
                     dictStatus = DictWebBrowserStatus.Ready;
-                    wbDict.LoadHtml(str);
+                    wbDict.LoadLargeHtml(str);
                     break;
             }
         }
