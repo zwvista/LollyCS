@@ -31,11 +31,5 @@ namespace LollyCloud
             vmDetail = new PatternsDetailViewModel(Item = item, vm);
             DataContext = vmDetail.ItemEdit;
         }
-
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            await vmDetail.OnOK();
-            DialogResult = true;
-        }
     }
 }

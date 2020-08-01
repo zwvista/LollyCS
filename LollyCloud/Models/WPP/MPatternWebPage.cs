@@ -61,12 +61,11 @@ namespace LollyCloud
         public string TITLE { get; set; } = "";
         [Reactive]
         public string URL { get; set; } = "";
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MPatternWebPageEdit()
         {
             this.ValidationRule(x => x.TITLE, v => !string.IsNullOrWhiteSpace(v), "TITLE must not be empty");
             this.ValidationRule(x => x.URL, v => !string.IsNullOrWhiteSpace(v), "URL must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }

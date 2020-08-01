@@ -28,10 +28,5 @@ namespace LollyCloud
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             DataContext = VM;
         }
-
-        void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
     }
 }

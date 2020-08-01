@@ -33,12 +33,6 @@ namespace LollyCloud
             btnExisting.IsEnabled = btnNew.IsEnabled = vmDetail.ItemEdit.ID == 0;
         }
 
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            await vmDetail.OnOK();
-            DialogResult = true;
-        }
-
         void btnNew_Click(object sender, RoutedEventArgs e)
         {
             vmDetail.ItemEdit.WEBPAGEID = 0;
