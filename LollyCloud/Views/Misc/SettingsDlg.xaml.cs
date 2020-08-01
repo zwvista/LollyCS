@@ -83,7 +83,7 @@ namespace LollyCloud
 
         void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new SelectDictsDlg();
+            var dlg = new SettingsDictsDlg();
             dlg.Owner = this;
             dlg.vmSettings = vm;
             dlg.ShowDialog();

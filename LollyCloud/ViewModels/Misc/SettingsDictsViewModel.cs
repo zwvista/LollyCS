@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LollyCloud
 {
-    public class SelectDictsViewModel
+    public class SettingsDictsViewModel
     {
         SettingsViewModel vmSettings;
         public ObservableCollection<MDictionary> DictsAvailable { get; }
         public ObservableCollection<MDictionary> DictsSelected { get; }
-        public SelectDictsViewModel(SettingsViewModel vmSettings)
+        public SettingsDictsViewModel(SettingsViewModel vmSettings)
         {
             this.vmSettings = vmSettings;
             DictsSelected = new ObservableCollection<MDictionary>(vmSettings.SelectedDictsReference);

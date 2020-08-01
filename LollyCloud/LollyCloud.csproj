@@ -285,8 +285,8 @@
     <Compile Include="Views\Dicts\DictsControl.xaml.cs">
       <DependentUpon>DictsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dicts\SelectDictsDlg.xaml.cs">
-      <DependentUpon>SelectDictsDlg.xaml</DependentUpon>
+    <Compile Include="Views\Misc\SettingsDictsDlg.xaml.cs">
+      <DependentUpon>SettingsDictsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesBaseControl.cs" />
     <Compile Include="Views\Phrases\PhrasesLangControl.xaml.cs">
@@ -356,7 +356,7 @@
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Patterns\PatternsViewModel.cs" />
-    <Compile Include="ViewModels\Dicts\SelectDictsViewModel.cs" />
+    <Compile Include="ViewModels\Misc\SettingsDictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\EmbeddedReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
@@ -483,7 +483,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Dicts\SelectDictsDlg.xaml">
+    <Page Include="Views\Misc\SettingsDictsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

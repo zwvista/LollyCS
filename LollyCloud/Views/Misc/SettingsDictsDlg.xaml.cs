@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace LollyCloud
 {
     /// <summary>
-    /// SelectDictsDlg.xaml の相互作用ロジック
+    /// SettingsDictsDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class SelectDictsDlg : Window
+    public partial class SettingsDictsDlg : Window
     {
         public SettingsViewModel vmSettings;
-        SelectDictsViewModel vm;
-        public SelectDictsDlg()
+        SettingsDictsViewModel vm;
+        public SettingsDictsDlg()
         {
             InitializeComponent();
             // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
@@ -30,7 +30,7 @@ namespace LollyCloud
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = vm = new SelectDictsViewModel(vmSettings);
+            DataContext = vm = new SettingsDictsViewModel(vmSettings);
         }
 
         async void btnOK_Click(object sender, RoutedEventArgs e)
