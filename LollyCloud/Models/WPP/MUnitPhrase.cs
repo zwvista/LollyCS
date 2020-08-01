@@ -77,11 +77,10 @@ namespace LollyCloud
         [Reactive]
         public string TRANSLATION { get; set; }
         public MTextbook Textbook { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MUnitPhraseEdit()
         {
             this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }

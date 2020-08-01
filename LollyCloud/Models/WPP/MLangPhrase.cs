@@ -66,11 +66,10 @@ namespace LollyCloud
         public string PHRASE { get; set; } = "";
         [Reactive]
         public string TRANSLATION { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangPhraseEdit()
         {
             this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 }
