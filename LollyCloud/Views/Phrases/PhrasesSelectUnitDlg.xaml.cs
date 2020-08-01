@@ -35,10 +35,5 @@ namespace LollyCloud
                     !checkedItems.Contains(o) ? o.IsChecked :
                     n == 2;
         }
-
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
     }
 }
