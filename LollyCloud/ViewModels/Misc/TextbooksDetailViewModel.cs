@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using System.Threading.Tasks;
+using System.Reactive;
 
 namespace LollyCloud
 {
@@ -9,6 +9,7 @@ namespace LollyCloud
         TextbooksViewModel vm;
         public MTextbookEdit ItemEdit = new MTextbookEdit();
         public string LANGNAME { get; private set; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
 
         public TextbooksDetailViewModel(MTextbook item, TextbooksViewModel vm)
         {
@@ -16,14 +17,14 @@ namespace LollyCloud
             this.vm = vm;
             item.CopyProperties(ItemEdit);
             LANGNAME = vm.vmSettings.SelectedLang.LANGNAME;
-        }
-        public async Task OnOK()
-        {
-            ItemEdit.CopyProperties(item);
-            if (item.ID == 0)
-                item.ID = await vm.Create(item);
-            else
-                await vm.Update(item);
+            Save = ReactiveCommand.CreateFromTask(async () =>
+            {
+                ItemEdit.CopyProperties(item);
+                if (item.ID == 0)
+                    item.ID = await vm.Create(item);
+                else
+                    await vm.Update(item);
+            });
         }
     }
 }

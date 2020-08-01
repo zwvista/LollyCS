@@ -14,7 +14,7 @@ namespace LollyCloud
         public List<MPatternPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MPatternPhrase : ReactiveValidationObject<MPatternPhrase>
+    public class MPatternPhrase : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
@@ -44,12 +44,8 @@ namespace LollyCloud
         [Reactive]
         public string TRANSLATION { get; set; }
 
-        public ReactiveCommand<Unit, Unit> Save { get; }
-
         public MPatternPhrase()
         {
-            this.ValidationRule(x => x.PHRASE, v => !string.IsNullOrWhiteSpace(v), "PHRASE must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
 
     }
