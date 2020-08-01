@@ -39,11 +39,5 @@ namespace LollyCloud
             var dlg = new TransformEditDlg(this, vmDetail.ItemEdit);
             dlg.ShowDialog();
         }
-
-        async void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            await vmDetail.OnOK();
-            DialogResult = true;
-        }
     }
 }

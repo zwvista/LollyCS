@@ -114,11 +114,10 @@ namespace LollyCloud
         public string TEMPLATE { get; set; }
         [Reactive]
         public string TEMPLATE2 { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MDictionaryEdit()
         {
             this.ValidationRule(x => x.DICTNAME, v => !string.IsNullOrWhiteSpace(v), "DICTNAME must not be empty");
-            Save = ReactiveCommand.Create(() => { }, this.IsValid());
         }
     }
 
