@@ -87,10 +87,5 @@ namespace LollyCloud
         {
             vm.IsEditing = false;
         }
-
-        void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
     }
 }

@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button Content="Add" Click="miAdd_Click" />
-            <Button Content="OK" Width="75" Click="btnOK_Click" Command="{Binding Save}" Grid.Column="2"/>
+            <Button Content="OK" Width="75" local:ButtonHelper.DialogResult="True" Command="{Binding Save}" Grid.Column="2"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0" Grid.Column="3"/>
         </Grid>
         <Grid>
