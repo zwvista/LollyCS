@@ -17,7 +17,6 @@ namespace LollyCloud
 {
     public class TransformEditViewModel : ReactiveObject, IDragSource
     {
-        MDictionaryEdit itemEdit;
         [Reactive]
         public string TEMPLATE { get; set; }
         public string URL { get; }
@@ -47,7 +46,6 @@ namespace LollyCloud
         public ReactiveCommand<Unit, Unit> Save { get; }
         public TransformEditViewModel(MDictionaryEdit itemEdit)
         {
-            this.itemEdit = itemEdit;
             TEMPLATE = itemEdit.TEMPLATE;
             URL = itemEdit.URL;
             TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(itemEdit.TRANSFORM));
