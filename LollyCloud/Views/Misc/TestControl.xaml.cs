@@ -43,16 +43,17 @@ namespace LollyCloud
                 var ptid = o1.ID;
                 {
                     o1.TAGS = string.Join(",", lst2.Select(o => o.TAGS).OrderBy(s => s));
-                    // await storept.Update(o1);
+                    await storept.Update(o1);
                 }
-                lst2.Where(o => o.ID != ptid).ForEach(o =>
+                lst2.Where(o => o.ID != ptid).ForEach(async o =>
                 {
-                    // await storept.Delete(o);
+                    await storept.Delete(o.ID);
                 });
-                lst3.Where(o => o.PATTERNID != ptid).ForEach(o =>
+                lst3.Where(o => o.PATTERNID != ptid).ForEach(async (o, i) =>
                 {
                     o.PATTERNID = ptid;
-                    // await storeptwp.Update(o);
+                    o.SEQNUM = i + 2;
+                    await storeptwp.Update(o);
                 });
             }
         }
