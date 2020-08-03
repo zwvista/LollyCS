@@ -38,7 +38,7 @@ namespace LollyCloud
             {
                 PatternItemsFiltered = string.IsNullOrEmpty(TextFilter) ? null :
                 new ObservableCollection<MPattern>(PatternItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower()))
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : ScopeFilter == "Note" ? o.NOTE ?? "" : o.TAGS ?? "").ToLower().Contains(TextFilter.ToLower()))
                 ));
                 this.RaisePropertyChanged(nameof(PatternItems));
             });
