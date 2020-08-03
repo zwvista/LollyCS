@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +30,31 @@ namespace LollyCloud
 
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
+            var storept = new PatternDataStore();
+            var storeptwp = new PatternWebPageDataStore();
+            var lst = await storept.GetDataByLang(2);
+            var dic = lst.GroupBy(o => o.PATTERN).Where(g => g.Count() > 1).ToDictionary(g => g.Key, g => g.OrderBy(o => o.ID).ToList());
+            foreach(var kv in dic)
+            {
+                var k = kv.Key;
+                var lst2 = kv.Value;
+                var lst3 = (await lst2.ToObservable().SelectMany(o => storeptwp.GetDataByPattern(o.ID).ToObservable()).ToList().ToTask()).SelectMany(o => o).ToList();
+                var o1 = lst2[0];
+                var ptid = o1.ID;
+                {
+                    o1.TAGS = string.Join(",", lst2.Select(o => o.TAGS).OrderBy(s => s));
+                    // await storept.Update(o1);
+                }
+                lst2.Where(o => o.ID != ptid).ForEach(o =>
+                {
+                    // await storept.Delete(o);
+                });
+                lst3.Where(o => o.PATTERNID != ptid).ForEach(o =>
+                {
+                    o.PATTERNID = ptid;
+                    // await storeptwp.Update(o);
+                });
+            }
         }
 
         void TestFor毎日のんびり日本語教師1()
