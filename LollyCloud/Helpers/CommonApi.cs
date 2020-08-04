@@ -32,6 +32,13 @@ namespace LollyCloud
 
         public static void Google(this string str) =>
             Process.Start($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");
+        public static string Replace(this string str, Dictionary<string, string> dic)
+        {
+            var s = str;
+            foreach (var kv in dic)
+                s = s.Replace(kv.Key, kv.Value);
+            return s;
+        }
 
         // https://stackoverflow.com/questions/273313/randomize-a-listt
         public static void Shuffle<T>(this IList<T> list)

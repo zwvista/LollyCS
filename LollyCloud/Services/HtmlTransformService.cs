@@ -31,8 +31,7 @@ namespace LollyCloud
                 replacement = replacement.Substring("<extract>".Length);
                 s = string.Join("", reg.Matches(s).Cast<Match>().Select(m => m.Groups[0]));
             }
-            foreach (var entry in escapes)
-                replacement = replacement.Replace(entry.Key, entry.Value);
+            replacement = replacement.Replace(escapes);
             s = reg.Replace(s, replacement);
             return s;
         }

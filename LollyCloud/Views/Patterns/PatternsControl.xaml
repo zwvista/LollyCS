@@ -32,7 +32,7 @@
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="100" />
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPatterns" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
+                <DataGrid x:Name="dgPatterns" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding PatternItems}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
@@ -50,6 +50,7 @@
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
                             <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                            <MenuItem x:Name="miCombine" Header="Combine" Click="miCombine_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

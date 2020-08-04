@@ -129,6 +129,13 @@ namespace LollyCloud
 
         void miGoogle_Click(object sender, RoutedEventArgs e) => selectedPattern.Google();
 
+        void miCombine_Click(object sender, RoutedEventArgs e)
+        {
+            var lst = dgPatterns.SelectedItems.Cast<MPattern>().ToList();
+            var dlg = new PatternsCombineDlg(Window.GetWindow(this), lst);
+            dlg.ShowDialog();
+        }
+
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             vm.IsEditing = false;

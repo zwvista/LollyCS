@@ -233,6 +233,8 @@
     <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
     <Compile Include="ViewModels\Dicts\DictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksDetailViewModel.cs" />
+    <Compile Include="ViewModels\Patterns\PatternsSplitViewModel.cs" />
+    <Compile Include="ViewModels\Patterns\PatternsCombineViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsWebPageViewModel.cs" />
     <Compile Include="ViewModels\Patterns\WebPageSelectViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsDetailViewModel.cs" />
@@ -272,6 +274,12 @@
     </Compile>
     <Compile Include="Views\Patterns\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Patterns\PatternsSplitDlg.xaml.cs">
+      <DependentUpon>PatternsSplitDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Patterns\PatternsCombineDlg.xaml.cs">
+      <DependentUpon>PatternsCombineDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Patterns\WebPageSelectDlg.xaml.cs">
       <DependentUpon>WebPageSelectDlg.xaml</DependentUpon>
@@ -464,6 +472,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Patterns\PatternsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Patterns\PatternsSplitDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Patterns\PatternsCombineDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -29,24 +29,10 @@ namespace LollyCloud
         }
 
         const string delim = "@@@@";
+        HttpClient client = new HttpClient();
 
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            var storept = new PatternDataStore();
-            var storeptwp = new PatternWebPageDataStore();
-            var lst = (await storept.GetDataByLang(2)).Where(o => o.TAGS.Contains(",")).ToList();
-            foreach (var o in lst)
-            {
-                o.TAGS = string.Join(",", o.TAGS.Split(',').OrderBy(s => s));
-                await storept.Update(o);
-                var lst2 = (await storeptwp.GetDataByPattern(o.ID)).OrderBy(o2 => o2.ID).ToList();
-                if (lst2.Count < 2) continue;
-                lst2.ForEach(async (o2, i) =>
-                {
-                    o2.SEQNUM = i + 1;
-                    await storeptwp.Update(o2);
-                });
-            }
         }
 
         async void TestCombinePatterns()
@@ -148,10 +134,11 @@ namespace LollyCloud
             var text = File.ReadAllLines("a.txt").MaxBy(s => s.Length).Single();
             var ms = reg1.Matches(text);
             var lines2 = new List<string>();
+            var dic = new Dictionary<string, string> { { "〜", "～" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" } };
             foreach (Match m in ms)
             {
                 var url = m.Groups[1].Value;
-                var title = m.Groups[2].Value.Replace("〜", "～").Replace("・", "／").Trim();
+                var title = m.Groups[2].Value.Replace(dic);
                 if (title.IsEmpty()) continue;
                 var s = url + delim + title;
                 lines2.Add(s);
@@ -201,6 +188,7 @@ namespace LollyCloud
             var pages = int.Parse(m.Groups[1].Value);
             var reg2 = new Regex(@"<a href=""(https://nihongokyoshi-net.com/[^""]+?)"" title=""(【JLPT[^】]+?】文法・例文：[^""]+?)"" rel=""bookmark"">.+?</a>");
             var lines2 = new List<string>();
+            var dic = new Dictionary<string, string> { { "〜", "～" }, { "/", "／" }, { " ", "" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" }, { "に出ない？", "0" } };
             for (int i = 1; i <= pages; i++)
             {
                 html = await client.GetStringAsync($"https://nihongokyoshi-net.com/category/jlpt/page/{i}/");
@@ -208,7 +196,7 @@ namespace LollyCloud
                 foreach (Match m2 in ms)
                 {
                     var url = m2.Groups[1].Value;
-                    var title = m2.Groups[2].Value.Replace("〜", "～").Replace("/", "／").Replace(" ", "").Replace("１", "1").Replace("２", "2").Replace("３", "3").Replace("４", "4").Replace("５", "5").Replace("に出ない？", "0").Trim(); ;
+                    var title = m2.Groups[2].Value.Replace(dic).Trim();
                     var s = url + delim + title;
                     lines2.Add(s);
                 }
