@@ -16,6 +16,8 @@ namespace LollyCloud
             if (!string.IsNullOrEmpty(url)) filter += (filter.IsEmpty() ? "?" : "&") + $"filter=URL,cs,{HttpUtility.UrlEncode(url)}";
             return (await GetDataByUrl<MWebPages>($"WEBPAGES{filter}")).Records;
         }
+        public async Task<List<MWebPage>> GetDataById(int id) =>
+        (await GetDataByUrl<MWebPages>($"WEBPAGES?filter=ID,eq,{id}")).Records;
         public async Task<int> Create(MPatternWebPage item)
         {
             var item2 = new MWebPage
