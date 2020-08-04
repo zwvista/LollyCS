@@ -42,7 +42,7 @@ namespace LollyCloud
             TRANSLATION = item.TRANSLATION;
         }
 
-        public bool CombineTranslation(string translation)
+        public bool MergeTranslation(string translation)
         {
             var oldTranslation = TRANSLATION;
             if (!string.IsNullOrEmpty(translation))

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace LollyCloud
 {
-    public class PatternsCombineViewModel : ReactiveObject
+    public class PatternsMergeViewModel : ReactiveObject
     {
         public ObservableCollection<MPattern> PatternItems { get; set; }
         public ObservableCollection<StringWrapper> PatternVariations { get; set; }
@@ -14,7 +14,7 @@ namespace LollyCloud
         public string NOTE { get; set; }
         public string TAGS { get; set; }
 
-        public PatternsCombineViewModel(List<MPattern> items)
+        public PatternsMergeViewModel(List<MPattern> items)
         {
             PatternItems = new ObservableCollection<MPattern>(items);
             var strs = items.SelectMany(o => o.PATTERN.Split('／')).OrderBy(s => s).Distinct().ToList();

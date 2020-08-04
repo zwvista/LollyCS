@@ -63,7 +63,7 @@ namespace LollyCloud
             WhenAnyValueChanged();
         }
 
-        public bool CombineNote(string note)
+        public bool MergeNote(string note)
         {
             var oldNote = NOTE;
             if (!string.IsNullOrEmpty(note))

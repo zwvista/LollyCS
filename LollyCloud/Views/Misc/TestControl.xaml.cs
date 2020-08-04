@@ -35,7 +35,7 @@ namespace LollyCloud
         {
         }
 
-        async void TestCombinePatterns()
+        async void TestMergePatterns()
         {
             var storept = new PatternDataStore();
             var storeptwp = new PatternWebPageDataStore();

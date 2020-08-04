@@ -16,17 +16,17 @@ using System.Windows.Shapes;
 namespace LollyCloud
 {
     /// <summary>
-    /// PatternsCombineDlg.xaml の相互作用ロジック
+    /// PatternsMergeDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class PatternsCombineDlg : Window
+    public partial class PatternsMergeDlg : Window
     {
-        PatternsCombineViewModel vm;
-        public PatternsCombineDlg(Window owner, List<MPattern> items)
+        PatternsMergeViewModel vm;
+        public PatternsMergeDlg(Window owner, List<MPattern> items)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new PatternsCombineViewModel(items);
+            DataContext = vm = new PatternsMergeViewModel(items);
         }
     }
 }

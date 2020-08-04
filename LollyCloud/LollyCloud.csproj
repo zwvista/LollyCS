@@ -278,8 +278,8 @@
     <Compile Include="Views\Patterns\PatternsSplitDlg.xaml.cs">
       <DependentUpon>PatternsSplitDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Patterns\PatternsCombineDlg.xaml.cs">
-      <DependentUpon>PatternsCombineDlg.xaml</DependentUpon>
+    <Compile Include="Views\Patterns\PatternsMergeDlg.xaml.cs">
+      <DependentUpon>PatternsMergeDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Patterns\WebPageSelectDlg.xaml.cs">
       <DependentUpon>WebPageSelectDlg.xaml</DependentUpon>
@@ -479,7 +479,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Patterns\PatternsCombineDlg.xaml">
+    <Page Include="Views\Patterns\PatternsMergeDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
