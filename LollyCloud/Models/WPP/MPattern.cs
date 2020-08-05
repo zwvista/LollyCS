@@ -54,4 +54,12 @@ namespace LollyCloud
             this.ValidationRule(x => x.PATTERN, v => !string.IsNullOrWhiteSpace(v), "PATTERN must not be empty");
         }
     }
+
+    public class MPatternVariation
+    {
+        [Reactive]
+        public int Index { get; set; }
+        [Reactive]
+        public string Variation { get; set; }
+    }
 }

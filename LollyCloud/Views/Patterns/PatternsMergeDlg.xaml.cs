@@ -24,7 +24,7 @@ namespace LollyCloud
         public PatternsMergeDlg(Window owner, List<MPattern> items)
         {
             InitializeComponent();
-            SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
+            //SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
             DataContext = vm = new PatternsMergeViewModel(items);
         }
