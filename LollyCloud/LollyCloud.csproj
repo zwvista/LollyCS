@@ -234,7 +234,7 @@
     <Compile Include="ViewModels\Dicts\DictsViewModel.cs" />
     <Compile Include="ViewModels\Misc\TextbooksDetailViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsSplitViewModel.cs" />
-    <Compile Include="ViewModels\Patterns\PatternsCombineViewModel.cs" />
+    <Compile Include="ViewModels\Patterns\PatternsMergeViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsWebPageViewModel.cs" />
     <Compile Include="ViewModels\Patterns\WebPageSelectViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsDetailViewModel.cs" />
