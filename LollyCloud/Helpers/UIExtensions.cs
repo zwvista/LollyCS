@@ -114,9 +114,4 @@ namespace LollyCloud
             }
         });
     }
-    // https://stackoverflow.com/questions/2872916/wpf-bind-datagrid-to-liststring
-    public class StringWrapper
-    {
-        public string Value { get; set; }
-    }
 }

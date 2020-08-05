@@ -9,23 +9,22 @@ namespace LollyCloud
     public class PatternsMergeViewModel : ReactiveObject
     {
         public ObservableCollection<MPattern> PatternItems { get; set; }
-        public ObservableCollection<StringWrapper> PatternVariations { get; set; }
-        public string PATTERN { get; set; }
-        public string NOTE { get; set; }
-        public string TAGS { get; set; }
+        public ObservableCollection<MPattern> PatternVariations { get; set; }
+        public MPattern MergedItem { get; } = new MPattern();
 
         public PatternsMergeViewModel(List<MPattern> items)
         {
             PatternItems = new ObservableCollection<MPattern>(items);
             var strs = items.SelectMany(o => o.PATTERN.Split('／')).OrderBy(s => s).Distinct().ToList();
-            PatternVariations = new ObservableCollection<StringWrapper>(strs.Select(s => new StringWrapper { Value = s }));
-            Action f = () => PATTERN = string.Join("／", PatternVariations.Select(o => o.Value));
+            PatternVariations = new ObservableCollection<MPattern>(strs.Select(s => new MPattern { PATTERN = s }));
+            Action f = () => MergedItem.PATTERN = string.Join("／", PatternVariations.Select(o => o.PATTERN));
+            // https://stackoverflow.com/questions/1427471/observablecollection-not-noticing-when-item-in-it-changes-even-with-inotifyprop
             PatternVariations.CollectionChanged += (s, e) => f();
             f();
             strs = items.Select(o => o.NOTE).Where(s => !string.IsNullOrEmpty(s)).SelectMany(s => s.Split(',')).Distinct().ToList();
-            NOTE = string.Join(",", strs);
+            MergedItem.NOTE = string.Join(",", strs);
             strs = items.Select(o => o.TAGS).Where(s => !string.IsNullOrEmpty(s)).SelectMany(s => s.Split(',')).OrderBy(s => s).Distinct().ToList();
-            TAGS = string.Join(",", strs);
+            MergedItem.TAGS = string.Join(",", strs);
         }
     }
 }
