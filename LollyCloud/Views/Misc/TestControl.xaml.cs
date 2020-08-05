@@ -35,35 +35,6 @@ namespace LollyCloud
         {
         }
 
-        async void TestMergePatterns()
-        {
-            var storept = new PatternDataStore();
-            var storeptwp = new PatternWebPageDataStore();
-            var lst = await storept.GetDataByLang(2);
-            var dic = lst.GroupBy(o => o.PATTERN).Where(g => g.Count() > 1).ToDictionary(g => g.Key, g => g.OrderBy(o => o.ID).ToList());
-            foreach (var kv in dic)
-            {
-                var k = kv.Key;
-                var lst2 = kv.Value;
-                var lst3 = (await lst2.ToObservable().SelectMany(o => storeptwp.GetDataByPattern(o.ID).ToObservable()).ToList().ToTask()).SelectMany(o => o).ToList();
-                var o1 = lst2[0];
-                var ptid = o1.ID;
-                {
-                    o1.TAGS = string.Join(",", lst2.SelectMany(o => o.TAGS.Split(',')).OrderBy(s => s));
-                    await storept.Update(o1);
-                }
-                lst2.Where(o => o.ID != ptid).ForEach(async o =>
-                {
-                    await storept.Delete(o.ID);
-                });
-                lst3.ForEach(async (o, i) =>
-                {
-                    o.PATTERNID = ptid;
-                    o.SEQNUM = i + 1;
-                    await storeptwp.Update(o);
-                });
-            }
-        }
         void TestFor毎日のんびり日本語教師1()
         {
             var reg1 = new Regex(@"font -weight:800; padding-left:10px;"">(.+?)</p>");

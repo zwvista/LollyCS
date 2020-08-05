@@ -95,5 +95,8 @@ namespace LollyCloud
             cmd.IsExecuting
                 .Skip(1) // IsExecuting has an initial value of false.  We can skip that first value
                 .Where(isExecuting => !isExecuting); // filter until the executing state becomes false
+
+        public static string SplitByCommaAndMerge(this IEnumerable<string> strs) =>
+            string.Join(",", strs.SelectMany(s => (s ?? "").Split(',')).Where(s => s.Any()).OrderBy(s => s).Distinct());
     }
 }
