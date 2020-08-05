@@ -1,8 +1,6 @@
-﻿using CefSharp;
-using Dragablz;
+﻿using Dragablz;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,17 +96,17 @@ namespace LollyCloud
 
             Tabs.Clear();
             ToolBarDictBase.Items.Clear();
-            vmSettings.DictsReference.ForEach((item, i) =>
+            foreach (var o in vmSettings.DictsReference)
             {
-                var name = item.DICTNAME;
+                var name = o.DICTNAME;
                 var b = new CheckBox
                 {
                     Content = name,
-                    Tag = item,
+                    Tag = o,
                 };
                 b.Click += async (s, e) => await F(name);
                 ToolBarDictBase.Items.Add(b);
-            });
+            }
             foreach (var o in vmSettings.SelectedDictsReference)
             {
                 var b = ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => o2.Tag == o);
