@@ -61,9 +61,9 @@ namespace LollyCloud
             mergedItem.CopyProperties(o1, nameof(MPattern.ID));
             await storept.Update(o1);
 
-            Task.WaitAll(lstpt.Skip(1).Select(async o => await storept.Delete(o.ID)).ToArray());
+            await Task.WhenAll(lstpt.Skip(1).Select(async o => await storept.Delete(o.ID)).ToArray());
 
-            Task.WaitAll(lstptwp.Select(async (o, i) =>
+            await Task.WhenAll(lstptwp.Select(async (o, i) =>
             {
                 o.PATTERNID = ptid;
                 o.SEQNUM = i + 1;

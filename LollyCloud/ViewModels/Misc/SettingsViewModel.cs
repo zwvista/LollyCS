@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -266,10 +267,12 @@ namespace LollyCloud
         }
 
         public async Task GetData() {
-            Languages = await LanguageDS.GetData();
-            USMappings = await USMappingDS.GetData();
-            UserSettings = await UserSettingDS.GetDataByUser(CommonApi.UserId);
-            DictCodes = await CodeDS.GetDictCodes();
+            var t = await LanguageDS.GetData().ToObservable().Zip(USMappingDS.GetData().ToObservable(),
+                UserSettingDS.GetDataByUser(CommonApi.UserId).ToObservable(), CodeDS.GetDictCodes().ToObservable(), (a, b, c, d) => (a, b, c, d)).ToTask();
+            Languages = t.a;
+            USMappings = t.b;
+            UserSettings = t.c;
+            DictCodes = t.d;
             ReadNumberCodes = await CodeDS.GetReadNumberCodes();
             INFO_USLANGID = GetUSInfo(MUSMapping.NAME_USLANGID);
             INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
@@ -294,12 +297,15 @@ namespace LollyCloud
             INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
             INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
             INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
-            DictsReference = await DictionaryDS.GetDictsReferenceByLang(USLANGID);
-            DictsNote = await DictionaryDS.GetDictsNoteByLang(USLANGID);
-            DictsTranslation = await DictionaryDS.GetDictsTranslationByLang(USLANGID);
-            Textbooks = await TextbookDS.GetDataByLang(USLANGID);
-            AutoCorrects = await AutoCorrectDS.GetDataByLang(USLANGID);
-            Voices = await VoiceDS.GetDataByLang(USLANGID);
+            var t = await DictionaryDS.GetDictsReferenceByLang(USLANGID).ToObservable().Zip(DictionaryDS.GetDictsNoteByLang(USLANGID).ToObservable(),
+                DictionaryDS.GetDictsTranslationByLang(USLANGID).ToObservable(), TextbookDS.GetDataByLang(USLANGID).ToObservable(),
+                AutoCorrectDS.GetDataByLang(USLANGID).ToObservable(), VoiceDS.GetDataByLang(USLANGID).ToObservable(), (a, b, c, d, e, f) => (a, b, c, d, e, f)).ToTask();
+            DictsReference = t.a;
+            DictsNote = t.b;
+            DictsTranslation = t.c;
+            Textbooks = t.d;
+            AutoCorrects = t.e;
+            Voices = t.f;
             SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTREFERENCE);
             SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
             SelectedDictsReference = USDICTSREFERENCE.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
