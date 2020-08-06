@@ -20,6 +20,8 @@ namespace LollyCloud
         [Reactive]
         public int ID { get; set; }
         public int PATTERNID => ID;
+        [JsonIgnore]
+        public string IDS { get; set; }
         [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }

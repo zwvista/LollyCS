@@ -19,6 +19,7 @@ namespace LollyCloud
 {
     public class PatternsMergeViewModel : ReactiveValidationObject<PatternsMergeViewModel>, IDragSource
     {
+        PatternDataStore patternDS = new PatternDataStore();
         public ObservableCollection<MPattern> PatternItems { get; set; }
         // https://stackoverflow.com/questions/1427471/observablecollection-not-noticing-when-item-in-it-changes-even-with-inotifyprop
         public BindingList<MPatternVariation> PatternVariations { get; set; }
@@ -41,50 +42,33 @@ namespace LollyCloud
             MergedItemEdit.TAGS = items.Select(o => o.TAGS).SplitUsingCommaAndMerge();
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
-                var mergedItem = new MPattern();
-                MergedItemEdit.CopyProperties(mergedItem);
-                await MergePatterns(PatternItems.ToList(), mergedItem);
+                var mergedItem = new MPattern
+                {
+                    IDS = string.Join(",", PatternItems.OrderBy(o => o.ID).Select(o => o.ID.ToString())),
+                    PATTERN = MergedItemEdit.PATTERN,
+                    NOTE = MergedItemEdit.NOTE,
+                    TAGS = MergedItemEdit.TAGS,
+                };
+                await patternDS.MergePatterns(mergedItem);
             }, MergedItemEdit.IsValid());
         }
 
-        public static async Task MergePatterns(List<MPattern> sourceItems, MPattern mergedItem)
-        {
-            var storept = new PatternDataStore();
-            var storeptwp = new PatternWebPageDataStore();
-
-            var lstpt = sourceItems.OrderBy(o => o.ID).ToList();
-            // var lstptwp = (await ObservableEx.ForkJoin(lstpt.Select(o => storeptwp.GetDataByPattern(o.ID).ToObservable())).ToTask()).SelectMany(o => o).ToList();
-            var lstptwp = (await Task.WhenAll(lstpt.Select(async o => await storeptwp.GetDataByPattern(o.ID)))).SelectMany(o => o).ToList();
-
-            var o1 = lstpt[0];
-            var ptid = o1.ID;
-            mergedItem.CopyProperties(o1, nameof(MPattern.ID));
-            await storept.Update(o1);
-
-            await Task.WhenAll(lstpt.Skip(1).Select(async o => await storept.Delete(o.ID)).ToArray());
-
-            await Task.WhenAll(lstptwp.Select(async (o, i) =>
-            {
-                o.PATTERNID = ptid;
-                o.SEQNUM = i + 1;
-                await storeptwp.Update(o);
-            }).ToArray());
-        }
         public static async Task AutoMergePatterns()
         {
             var storept = new PatternDataStore();
             var lst = await storept.GetDataByLang(2);
-            var dic = lst.GroupBy(o => o.PATTERN).Where(g => g.Count() > 1).ToDictionary(g => g.Key, g => g.ToList());
+            var dic = lst.GroupBy(o => o.PATTERN).Where(g => g.Count() > 1).ToDictionary(g => g.Key, g => g.OrderBy(o => o.ID).ToList());
             foreach (var kv in dic)
             {
                 var sourceItems = kv.Value;
                 var mergedItem = new MPattern
                 {
+                    IDS = string.Join(",", sourceItems.Select(o => o.ID.ToString())),
                     PATTERN = kv.Key,
                     NOTE = sourceItems.Select(o => o.NOTE).SplitUsingCommaAndMerge(),
                     TAGS = sourceItems.Select(o => o.TAGS).SplitUsingCommaAndMerge()
                 };
-                await MergePatterns(sourceItems, mergedItem);
+                await storept.MergePatterns(mergedItem);
             }
         }
 
