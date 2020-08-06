@@ -20,8 +20,6 @@ namespace LollyCloud
         [Reactive]
         public int ID { get; set; }
         public int PATTERNID => ID;
-        [JsonIgnore]
-        public string IDS { get; set; }
         [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
@@ -34,6 +32,10 @@ namespace LollyCloud
         [JsonProperty]
         [Reactive]
         public string TAGS { get; set; }
+        [JsonIgnore]
+        public string IDS_MERGE { get; set; }
+        [JsonIgnore]
+        public string PATTERNS_SPLIT { get; set; }
 
         public MPattern()
         {
@@ -57,7 +59,7 @@ namespace LollyCloud
         }
     }
 
-    public class MPatternVariation
+    public class MPatternVariation : ReactiveObject
     {
         [Reactive]
         public int Index { get; set; }

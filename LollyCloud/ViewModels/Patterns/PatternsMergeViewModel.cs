@@ -44,7 +44,7 @@ namespace LollyCloud
             {
                 var mergedItem = new MPattern
                 {
-                    IDS = string.Join(",", PatternItems.OrderBy(o => o.ID).Select(o => o.ID.ToString())),
+                    IDS_MERGE = string.Join(",", PatternItems.OrderBy(o => o.ID).Select(o => o.ID.ToString())),
                     PATTERN = MergedItemEdit.PATTERN,
                     NOTE = MergedItemEdit.NOTE,
                     TAGS = MergedItemEdit.TAGS,
@@ -63,7 +63,7 @@ namespace LollyCloud
                 var sourceItems = kv.Value;
                 var mergedItem = new MPattern
                 {
-                    IDS = string.Join(",", sourceItems.Select(o => o.ID.ToString())),
+                    IDS_MERGE = string.Join(",", sourceItems.Select(o => o.ID.ToString())),
                     PATTERN = kv.Key,
                     NOTE = sourceItems.Select(o => o.NOTE).SplitUsingCommaAndMerge(),
                     TAGS = sourceItems.Select(o => o.TAGS).SplitUsingCommaAndMerge()

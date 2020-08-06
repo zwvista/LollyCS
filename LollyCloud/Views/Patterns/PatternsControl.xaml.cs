@@ -136,6 +136,13 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
+        void miSplit_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MPattern)dgPatterns.SelectedItem;
+            var dlg = new PatternsSplitDlg(Window.GetWindow(this), item);
+            dlg.ShowDialog();
+        }
+
         void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             vm.IsEditing = false;

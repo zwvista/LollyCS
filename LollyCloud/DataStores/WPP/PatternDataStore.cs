@@ -27,5 +27,8 @@ namespace LollyCloud
 
         public async Task MergePatterns(MPattern item) =>
         Debug.WriteLine(await CallSPByUrl("PATTERNS_MERGE", item));
+
+        public async Task SplitPattern(MPattern item) =>
+        Debug.WriteLine(await CallSPByUrl("PATTERNS_SPLIT", item));
     }
 }
