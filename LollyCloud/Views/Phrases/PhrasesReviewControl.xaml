@@ -9,8 +9,8 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
-                <Button x:Name="btnNewTest" Content="New Test" Click="btnNewTest_Click"/>
-                <CheckBox x:Name="chkSpeak" Content="Speak?" Click="chkSpeak_Click" IsChecked="{Binding vm.IsSpeaking}" />
+                <Button Content="New Test" Click="btnNewTest_Click"/>
+                <CheckBox Content="Speak?" IsChecked="{Binding IsSpeaking}" />
             </ToolBar>
         </ToolBarTray>
         <Grid Margin="10">
@@ -30,14 +30,14 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                <Label x:Name="lblIndex" DockPanel.Dock="Left"/>
-                <Label x:Name="lblCorrect" Visibility="Hidden" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
-                <Label x:Name="lblIncorrect" Visibility="Hidden" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
+                <Label Content="{Binding IndexString}" Visibility="{Binding IndexVisibility}" DockPanel.Dock="Left"/>
+                <Label Visibility="{Binding CorrectVisibility}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
+                <Label Visibility="{Binding IncorrectVisibility}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
             </DockPanel>
-            <Label x:Name="lblPhraseTarget" Content="{Binding PhraseTarget}" Foreground="Orange" Grid.Row="1" />
-            <Label x:Name="lblTranslation" Content="{Binding Translation}" Foreground="Pink" Grid.Row="2" />
-            <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInput}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
-            <Button Grid.Row="4" x:Name="btnCheck" Width="100" HorizontalAlignment="Right" Click="btnCheck_Click"/>
+            <Label Content="{Binding PhraseTargetString}" Foreground="Orange" Grid.Row="1" />
+            <Label Content="{Binding TranslationString}" Foreground="Pink" Grid.Row="2" />
+            <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInputString}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
+            <Button Grid.Row="4" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" HorizontalAlignment="Right" Click="btnCheck_Click"/>
         </Grid>
     </DockPanel>
 </UserControl>
