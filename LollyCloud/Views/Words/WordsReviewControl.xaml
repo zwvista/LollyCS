@@ -9,8 +9,8 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="2">
-                <Button x:Name="btnNewTest" Content="New Test" Click="btnNewTest_Click"/>
-                <CheckBox x:Name="chkSpeak" Content="Speak?" Click="chkSpeak_Click" IsChecked="{Binding vm.IsSpeaking}" />
+                <Button Content="New Test" Click="btnNewTest_Click"/>
+                <CheckBox Content="Speak?" IsChecked="{Binding IsSpeaking}" />
             </ToolBar>
         </ToolBarTray>
         <Grid Margin="10">
@@ -30,18 +30,18 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                <Label x:Name="lblIndex" Content="{Binding IndexString}" DockPanel.Dock="Left"/>
-                <Label x:Name="lblCorrect" Visibility="{Binding CorrectVisibility}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
-                <Label x:Name="lblIncorrect" Visibility="{Binding IncorrectVisibility}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
-                <Label x:Name="lblAccuracy" Content="{Binding AccuracyString}" Visibility="{Binding AccuracyVisibility}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+                <Label Content="{Binding IndexString}" DockPanel.Dock="Left"/>
+                <Label Visibility="{Binding CorrectVisibility}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
+                <Label Visibility="{Binding IncorrectVisibility}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
+                <Label Content="{Binding AccuracyString}" Visibility="{Binding AccuracyVisibility}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
             </DockPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Label x:Name="lblWordTarget" Content="{Binding WordTargetString}" Foreground="Orange" />
-                <Label x:Name="lblNoteTarget" Content="{Binding NoteTargetString}" Foreground="Pink" />
+                <Label Content="{Binding WordTargetString}" Foreground="Orange" />
+                <Label Content="{Binding NoteTargetString}" Foreground="Pink" />
             </StackPanel>
-            <TextBox x:Name="tbTranslation" Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
+            <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
             <TextBox x:Name="tbWordInput" Text="{Binding WordInputString}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
-            <Button Grid.Row="4" x:Name="btnCheck" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Width="100" HorizontalAlignment="Right" Click="btnCheck_Click"/>
+            <Button Grid.Row="4" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Width="100" HorizontalAlignment="Right" Click="btnCheck_Click"/>
         </Grid>
     </DockPanel>
 </UserControl>

@@ -69,11 +69,11 @@ namespace LollyCloud
             SubscriptionTimer?.Dispose();
             Items = await unitWordDS.GetDataByTextbookUnitPart(
                 vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
+            if (Options.Levelge0only)
+                Items = Items.Where(o => o.LEVEL >= 0).ToList();
             int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
             int nTo = Count * Options.GroupSelected / Options.GroupCount;
             Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
-            if (Options.Levelge0only)
-                Items = Items.Where(o => o.LEVEL >= 0).ToList();
             if (Options.Shuffled)
                 Items.Shuffle();
             CorrectIDs = new List<int>();

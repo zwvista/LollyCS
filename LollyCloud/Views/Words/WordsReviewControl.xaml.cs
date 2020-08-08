@@ -27,26 +27,20 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true, () =>
+            DataContext = vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true, () =>
             {
                 tbWordInput.Focus();
-                if (vm.HasNext)
-                {
-                    if (vm.IsSpeaking) {
-                        App.Speak(vm.vmSettings, vm.CurrentWord);
-                    }
-                }
+                if (vm.HasNext && vm.IsSpeaking)
+                    App.Speak(vm.vmSettings, vm.CurrentWord);
             });
-            await vm.NewTest();
+            btnNewTest_Click(null, null);
         }
 
         async void btnNewTest_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vm.Options);
             if (dlg.ShowDialog() == true)
-            {
                 await vm.NewTest();
-            }
         }
 
         async void btnCheck_Click(object sender, RoutedEventArgs e) =>
@@ -56,11 +50,6 @@ namespace LollyCloud
         {
             if (e.Key == Key.Return && !(vm.IsTestMode && string.IsNullOrEmpty(vm.WordInputString)))
                 await vm.Check();
-        }
-
-        void chkSpeak_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
