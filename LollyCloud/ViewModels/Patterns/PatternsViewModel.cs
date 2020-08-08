@@ -52,7 +52,7 @@ namespace LollyCloud
             });
 
         public async Task Update(MPattern item) => await patternDS.Update(item);
-        public async Task<int> Create(MPattern item) => await patternDS.Create(item);
+        public async Task Create(MPattern item) => item.ID = await patternDS.Create(item);
         public async Task Delete(int id) => await patternDS.Delete(id);
 
         public MPattern NewPattern() =>

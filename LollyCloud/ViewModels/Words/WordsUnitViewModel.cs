@@ -17,8 +17,6 @@ namespace LollyCloud
         public SettingsViewModel vmSettings;
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
-        LangWordDataStore langWordDS = new LangWordDataStore();
-        WordFamiDataStore wordFamiDS = new WordFamiDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
         NoteViewModel vmNote;
 

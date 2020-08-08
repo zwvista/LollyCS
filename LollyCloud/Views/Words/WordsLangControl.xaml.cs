@@ -92,7 +92,7 @@ namespace LollyCloud
             var item = vm.NewLangWord();
             item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
             vm.NewWord = "";
-            item.ID = await vm.Create(item);
+            await vm.Create(item);
             vm.WordItems.Add(item);
         }
     }

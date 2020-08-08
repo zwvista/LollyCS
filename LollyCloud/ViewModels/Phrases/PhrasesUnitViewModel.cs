@@ -17,7 +17,6 @@ namespace LollyCloud
         public SettingsViewModel vmSettings;
         bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
-        LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
 
         ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
         ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
