@@ -32,9 +32,9 @@ namespace LollyCloud
         [Reactive]
         public Visibility IndexVisibility { get; set; }
         [Reactive]
-        public Visibility CorrectVisibility { get; set; }
+        public Visibility CorrectVisibility { get; set; } = Visibility.Hidden;
         [Reactive]
-        public Visibility IncorrectVisibility { get; set; }
+        public Visibility IncorrectVisibility { get; set; } = Visibility.Hidden;
         [Reactive]
         public bool CheckEnabled { get; set; }
         [Reactive]
@@ -46,7 +46,7 @@ namespace LollyCloud
         [Reactive]
         public string PhraseInputString { get; set; }
         [Reactive]
-        public string CheckString { get; set; }
+        public string CheckString { get; set; } = "Check";
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public PhrasesReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)

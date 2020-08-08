@@ -34,9 +34,9 @@ namespace LollyCloud
         [Reactive]
         public Visibility IndexVisibility { get; set; }
         [Reactive]
-        public Visibility CorrectVisibility { get; set; }
+        public Visibility CorrectVisibility { get; set; } = Visibility.Hidden;
         [Reactive]
-        public Visibility IncorrectVisibility { get; set; }
+        public Visibility IncorrectVisibility { get; set; } = Visibility.Hidden;
         [Reactive]
         public string AccuracyString { get; set; }
         [Reactive]
@@ -56,7 +56,7 @@ namespace LollyCloud
         [Reactive]
         public string WordInputString { get; set; }
         [Reactive]
-        public string CheckString { get; set; }
+        public string CheckString { get; set; } = "Check";
 
         public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)
         {
