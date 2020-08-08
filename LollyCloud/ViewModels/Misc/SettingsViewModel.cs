@@ -235,8 +235,8 @@ namespace LollyCloud
             this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(v => USDICTREFERENCE = v.DICTID.ToString());
             this.WhenAnyValue(x => x.SelectedDictsReference).Where(v => v != null)
                 .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
-            this.WhenAnyValue(x => x.SelectedDictNote).Subscribe(v => USDICTNOTE = v?.ID ?? 0);
-            this.WhenAnyValue(x => x.SelectedDictTranslation).Subscribe(v => USDICTTRANSLATION = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(v => USDICTNOTE = v?.ID ?? 0);
+            this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(v => USDICTTRANSLATION = v?.ID ?? 0);
             this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(v =>
             {
                 USTEXTBOOKID = v.ID;

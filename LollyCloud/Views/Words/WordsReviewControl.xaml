@@ -30,7 +30,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                <Label Content="{Binding IndexString}" DockPanel.Dock="Left"/>
+                <Label Content="{Binding IndexString}" Visibility="{Binding IndexVisibility}" DockPanel.Dock="Left"/>
                 <Label Visibility="{Binding CorrectVisibility}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
                 <Label Visibility="{Binding IncorrectVisibility}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
                 <Label Content="{Binding AccuracyString}" Visibility="{Binding AccuracyVisibility}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
