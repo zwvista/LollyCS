@@ -38,7 +38,7 @@ namespace LollyCloud
         }
 
         public async Task Update(MTextbook item) => await textbookDS.Update(item);
-        public async Task<int> Create(MTextbook item) => await textbookDS.Create(item);
+        public async Task Create(MTextbook item) => item.ID = await textbookDS.Create(item);
         public async Task Delete(int id) => await textbookDS.Delete(id);
 
     }

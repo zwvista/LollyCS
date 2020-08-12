@@ -38,7 +38,7 @@ namespace LollyCloud
         }
 
         public async Task Update(MDictionary item) => await dictDS.Update(item);
-        public async Task<int> Create(MDictionary item) => await dictDS.Create(item);
+        public async Task Create(MDictionary item) => item.ID = await dictDS.Create(item);
         public async Task Delete(int id) => await dictDS.Delete(id);
 
     }
