@@ -76,6 +76,7 @@ namespace LollyCloud
                 itemEdit.TRANSFORM = string.Join("\r\n", TransformItems.SelectMany(o => new[] { o.Extractor, o.Replacement }));
                 itemEdit.TEMPLATE = TEMPLATE;
             });
+            TransformItems.CollectionChanged += (s, e) => Reindex();
         }
 
         public void Reindex() =>

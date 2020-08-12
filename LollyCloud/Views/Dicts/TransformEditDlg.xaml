@@ -16,7 +16,6 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Add" Click="miAdd_Click" />
             <Button Content="OK" Width="75" local:ButtonHelper.DialogResult="True" Command="{Binding Save}" Grid.Column="2"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0" Grid.Column="3"/>
         </Grid>
@@ -26,7 +25,7 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dgTransform" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding TransformItems}"
+            <DataGrid x:Name="dgTransform" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding TransformItems}"
                     dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
                     BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                 <DataGrid.Columns>
@@ -39,13 +38,6 @@
                         <EventSetter Event="MouseDoubleClick" Handler="dgTransform_RowDoubleClick"/>
                     </Style>
                 </DataGrid.Resources>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="miAdd" Header="Add" Click="miAdd_Click" />
-                        <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
-                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
             </DataGrid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <dragablz:TabablzControl Grid.Column="2" x:Name="tcTranform" ItemsSource="{Binding Tabs}">
