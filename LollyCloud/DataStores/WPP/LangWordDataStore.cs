@@ -12,13 +12,6 @@ namespace LollyCloud
         public async Task<List<MLangWord>> GetDataByLang(int langid) =>
         (await GetDataByUrl<MLangWords>($"VLANGWORDS?filter=LANGID,eq,{langid}&order=WORD")).Records;
 
-        public async Task<List<MLangWord>> GetDataByLangWord(int langid, string word) =>
-        (await GetDataByUrl<MLangWords>($"VLANGWORDS?filter=LANGID,eq,{langid}&filter=WORD,eq,{HttpUtility.UrlEncode(word)}")).Records
-        .Where(o => o.WORD == word).ToList();
-
-        public async Task<List<MLangWord>> GetDataById(int id) =>
-        (await GetDataByUrl<MLangWords>($"VLANGWORDS?filter=ID,eq,{id}")).Records;
-
         public async Task<int> Create(MLangWord item) =>
         await CreateByUrl($"LANGWORDS", item);
 
