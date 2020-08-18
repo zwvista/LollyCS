@@ -27,7 +27,6 @@ namespace LollyCloud
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
         [Reactive]
         public int TextbookFilter { get; set; }
-        public bool IsEditing { get; set; }
         public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {vmSettings.UNITINFO}";
 
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
@@ -128,7 +127,7 @@ namespace LollyCloud
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && vmSettings.IsSingleUnitPart && PhraseItemsFiltered == null;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => vmSettings.IsSingleUnitPart && PhraseItemsFiltered == null;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

@@ -20,7 +20,6 @@ namespace LollyCloud
         [Reactive]
         public string TEMPLATE { get; set; }
         public string URL { get; }
-        public bool IsEditing { get; set; }
         [Reactive]
         public string SourceWord { get; set; }
         [Reactive]
@@ -125,7 +124,7 @@ namespace LollyCloud
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => true;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) => Reindex();
         void IDragSource.DragCancelled() { }

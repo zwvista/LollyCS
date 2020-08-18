@@ -54,7 +54,6 @@ namespace LollyCloud
         }
         void EditTransformItem(MTransformItem item)
         {
-            vm.IsEditing = false;
             dgTransform.CancelEdit();
             var dlg = new TransformItemEditDlg(this, item);
             dlg.ShowDialog();
@@ -64,15 +63,6 @@ namespace LollyCloud
             var item = ((DataGridRow)sender).Item as MTransformItem;
             if (item != null)
                 EditTransformItem(item);
-        }
-
-        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            vm.IsEditing = true;
-        }
-        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            vm.IsEditing = false;
         }
     }
 }

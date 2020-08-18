@@ -34,7 +34,6 @@ namespace LollyCloud
         public bool Levelge0only { get; set; }
         [Reactive]
         public int TextbookFilter { get; set; }
-        public bool IsEditing { get; set; }
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.UNITINFO}";
 
@@ -174,7 +173,7 @@ namespace LollyCloud
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing && vmSettings.IsSingleUnitPart && WordItemsFiltered == null;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => vmSettings.IsSingleUnitPart && WordItemsFiltered == null;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

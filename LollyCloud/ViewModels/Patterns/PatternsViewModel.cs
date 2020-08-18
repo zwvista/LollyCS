@@ -29,7 +29,6 @@ namespace LollyCloud
         public string TextFilter { get; set; }
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
-        public bool IsEditing { get; set; }
 
         public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
@@ -131,7 +130,7 @@ namespace LollyCloud
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => !IsEditing;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => true;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

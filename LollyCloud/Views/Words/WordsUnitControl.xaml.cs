@@ -33,7 +33,6 @@ namespace LollyCloud
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            vm.IsEditing = false;
             dgWords.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), (MUnitWord)((DataGridRow)sender).Item, vm);
@@ -133,14 +132,12 @@ namespace LollyCloud
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            vm.IsEditing = true;
             var o = e.EditingEventArgs.Source;
             var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
             originalText = o2.Text;
         }
         void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
-            vm.IsEditing = false;
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 var item = (MUnitWord)e.Row.DataContext;
