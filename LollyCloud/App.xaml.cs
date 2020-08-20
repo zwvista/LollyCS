@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Speech.Synthesis;
+using CefSharp;
+using CefSharp.Wpf;
 
 namespace LollyCloud
 {
@@ -44,6 +46,7 @@ namespace LollyCloud
             {
                 DefaultValue = FindResource(typeof(Window))
             });
+            Cef.Initialize(new CefSettings());
         }
     }
 }

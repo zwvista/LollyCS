@@ -1,7 +1,6 @@
-﻿using CefSharp;
-using CefSharp.Wpf;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,13 +25,9 @@ namespace LollyCloud
         public MainWindow()
         {
             InitializeComponent();
-            Cef.Initialize(new CefSettings());
-            // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
             DataContext = this;
-            Init();
+            Task.Run(() => vmSettings.GetData()).Wait();
         }
-
-        async void Init() => await vmSettings.GetData();
 
         async void ShowSettingsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
