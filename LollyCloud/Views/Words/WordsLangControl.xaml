@@ -40,7 +40,8 @@
                     <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
                     <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL"/>
                     <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
-                </DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
+                    </DataGrid.Columns>
                 <DataGrid.Resources>
                     <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
                     <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
