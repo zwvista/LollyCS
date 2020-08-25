@@ -65,22 +65,28 @@ namespace LollyCloud
                 this.RaisePropertyChanged(nameof(WordItems));
             });
 
-        public async Task Update(MUnitWord item)
+        public async Task<MUnitWord> Update(MUnitWord item)
         {
             await unitWordDS.Update(item);
             var o = await unitWordDS.GetDataById(item.ID, vmSettings.Textbooks);
-            o?.CopyProperties(item);
+            return o;
         }
-        public async Task Create(MUnitWord item)
+        public async Task<MUnitWord> Create(MUnitWord item)
         {
             int id = await unitWordDS.Create(item);
             var o = await unitWordDS.GetDataById(id, vmSettings.Textbooks);
-            o?.CopyProperties(item);
+            return o;
         }
 
         public void Add(MUnitWord item)
         {
             WordItemsAll.Add(item);
+            this.RaisePropertyChanged(nameof(WordItems));
+        }
+
+        public void Replace(int index, MUnitWord item)
+        {
+            WordItems[index] = item;
             this.RaisePropertyChanged(nameof(WordItems));
         }
 

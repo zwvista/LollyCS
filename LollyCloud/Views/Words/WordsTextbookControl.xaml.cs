@@ -33,8 +33,9 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgWords.CancelEdit();
+            int index = vm.WordItems.IndexOf((MUnitWord)((DataGridRow)sender).Item);
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), (MUnitWord)((DataGridRow)sender).Item, vm);
+            var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), vm, index);
             dlg.ShowDialog();
         }
 
