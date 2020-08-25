@@ -21,14 +21,13 @@ namespace LollyCloud
     public partial class WordsLangDetailDlg : Window
     {
         WordsLangDetailViewModel vmDetail;
-        public MLangWord Item { get; set; }
-        public WordsLangDetailDlg(Window owner, MLangWord item, WordsLangViewModel vm)
+        public WordsLangDetailDlg(Window owner, WordsLangViewModel vm, int index = -1)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbWord.Focus();
             Owner = owner;
-            vmDetail = new WordsLangDetailViewModel(Item = item, vm);
+            vmDetail = new WordsLangDetailViewModel(vm, index);
             DataContext = vmDetail.ItemEdit;
             dgWords.DataContext = vmDetail.vmSingleWord;
         }

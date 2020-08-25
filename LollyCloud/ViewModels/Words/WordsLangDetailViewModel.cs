@@ -5,15 +5,12 @@ namespace LollyCloud
 {
     public class WordsLangDetailViewModel : ReactiveObject
     {
-        MLangWord item;
-        WordsLangViewModel vm;
         public MLangWordEdit ItemEdit = new MLangWordEdit();
         public SingleWordViewModel vmSingleWord;
 
-        public WordsLangDetailViewModel(MLangWord item, WordsLangViewModel vm)
+        public WordsLangDetailViewModel(WordsLangViewModel vm, int index = -1)
         {
-            this.item = item;
-            this.vm = vm;
+            var item = index == -1 ? vm.NewLangWord() : vm.WordItems[index];
             item.CopyProperties(ItemEdit);
             vmSingleWord = new SingleWordViewModel(item.WORD, vm.vmSettings);
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
@@ -21,7 +18,10 @@ namespace LollyCloud
                 ItemEdit.CopyProperties(item);
                 item.WORD = vm.vmSettings.AutoCorrectInput(item.WORD);
                 if (item.ID == 0)
+                {
                     await vm.Create(item);
+                    vm.WordItems.Add(item);
+                }
                 else
                     await vm.Update(item);
             }, ItemEdit.IsValid());
