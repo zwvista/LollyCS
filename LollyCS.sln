@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyXamarin.Android", "Lol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyXamarin.iOS", "LollyXamarin\LollyXamarin.iOS\LollyXamarin.iOS.csproj", "{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyXamarin", "LollyXamarin\LollyXamarin\LollyXamarin.csproj", "{9D7DBE4C-2E01-4E7B-BCA3-EA319294B7DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyXamarin", "LollyXamarin\LollyXamarin\LollyXamarin.csproj", "{9D7DBE4C-2E01-4E7B-BCA3-EA319294B7DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
