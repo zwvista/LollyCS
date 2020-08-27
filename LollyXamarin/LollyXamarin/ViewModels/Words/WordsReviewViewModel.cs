@@ -32,15 +32,15 @@ namespace LollyCloud
         [Reactive]
         public string IndexString { get; set; }
         [Reactive]
-        public Visibility IndexVisibility { get; set; }
+        public bool IndexIsVisible { get; set; }
         [Reactive]
-        public Visibility CorrectVisibility { get; set; } = Visibility.Hidden;
+        public bool CorrectIsVisible { get; set; } = false;
         [Reactive]
-        public Visibility IncorrectVisibility { get; set; } = Visibility.Hidden;
+        public bool IncorrectIsVisible { get; set; } = false;
         [Reactive]
         public string AccuracyString { get; set; }
         [Reactive]
-        public Visibility AccuracyVisibility { get; set; }
+        public bool AccuracyIsVisible { get; set; }
         [Reactive]
         public bool CheckEnabled { get; set; }
         [Reactive]
@@ -48,9 +48,9 @@ namespace LollyCloud
         [Reactive]
         public string NoteTargetString { get; set; }
         [Reactive]
-        public Visibility WordTargetVisibility { get; set; }
+        public bool WordTargetIsVisible { get; set; }
         [Reactive]
-        public Visibility NoteTargetVisibility { get; set; }
+        public bool NoteTargetIsVisible { get; set; }
         [Reactive]
         public string TranslationString { get; set; }
         [Reactive]
@@ -108,15 +108,15 @@ namespace LollyCloud
                 Next();
                 await DoTest();
             }
-            else if (CorrectVisibility != Visibility.Visible && IncorrectVisibility != Visibility.Visible)
+            else if (CorrectIsVisible != true && IncorrectIsVisible != true)
             {
                 WordInputString = vmSettings.AutoCorrectInput(WordInputString);
-                WordTargetVisibility = Visibility.Visible;
-                NoteTargetVisibility = Visibility.Visible;
+                WordTargetIsVisible = true;
+                NoteTargetIsVisible = true;
                 if (WordInputString == CurrentWord)
-                    CorrectVisibility = Visibility.Visible;
+                    CorrectIsVisible = true;
                 else
-                    IncorrectVisibility = Visibility.Visible;
+                    IncorrectIsVisible = true;
                 CheckString = "Next";
                 if (!HasNext) return;
                 var o = CurrentItem;
@@ -135,15 +135,15 @@ namespace LollyCloud
         }
         public async Task DoTest()
         {
-            IndexVisibility = HasNext ? Visibility.Visible : Visibility.Hidden;
-            CorrectVisibility = Visibility.Hidden;
-            IncorrectVisibility = Visibility.Hidden;
-            AccuracyVisibility = IsTestMode && HasNext ? Visibility.Visible : Visibility.Hidden;
+            IndexIsVisible = HasNext ? true : false;
+            CorrectIsVisible = false;
+            IncorrectIsVisible = false;
+            AccuracyIsVisible = IsTestMode && HasNext ? true : false;
             CheckEnabled = HasNext;
             WordTargetString = CurrentWord;
             NoteTargetString = CurrentItem?.NOTE ?? "";
-            WordTargetVisibility = !IsTestMode ? Visibility.Visible : Visibility.Hidden;
-            NoteTargetVisibility = !IsTestMode ? Visibility.Visible : Visibility.Hidden;
+            WordTargetIsVisible = !IsTestMode ? true : false;
+            NoteTargetIsVisible = !IsTestMode ? true : false;
             TranslationString = "";
             WordInputString = "";
             DoTestAction?.Invoke();
