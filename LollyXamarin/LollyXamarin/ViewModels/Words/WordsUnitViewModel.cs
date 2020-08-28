@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,6 +35,8 @@ namespace LollyCloud
         public int TextbookFilter { get; set; }
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.UNITINFO}";
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -51,17 +54,17 @@ namespace LollyCloud
                 this.RaisePropertyChanged(nameof(WordItems));
             });
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            Reload();
-        }
-        public void Reload() =>
-            (inTextbook ? unitWordDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
-            .ToObservable().Subscribe(lst =>
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
+                IsBusy = true;
+                var lst = inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks);
                 WordItemsAll = new ObservableCollection<MUnitWord>(lst);
                 this.RaisePropertyChanged(nameof(WordItems));
+                IsBusy = false;
             });
+        }
 
         public async Task<MUnitWord> Update(MUnitWord item)
         {
