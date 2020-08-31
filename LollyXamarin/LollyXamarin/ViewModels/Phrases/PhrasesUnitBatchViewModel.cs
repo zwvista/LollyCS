@@ -12,11 +12,11 @@ namespace LollyCloud
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
 
         [Reactive]
-        public bool IsUnitChecked { get; set; }
+        public bool UnitIsChecked { get; set; }
         [Reactive]
-        public bool IsPartChecked { get; set; }
+        public bool PartIsChecked { get; set; }
         [Reactive]
-        public bool IsSeqNumChecked { get; set; }
+        public bool SeqNumIsChecked { get; set; }
         [Reactive]
         public int UNIT { get; set; }
         [Reactive]
@@ -33,11 +33,11 @@ namespace LollyCloud
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.PhraseItems)
-                    if (IsUnitChecked || IsPartChecked || IsSeqNumChecked)
+                    if (UnitIsChecked || PartIsChecked || SeqNumIsChecked)
                     {
-                        if (IsUnitChecked) o.UNIT = UNIT;
-                        if (IsPartChecked) o.PART = PART;
-                        if (IsSeqNumChecked) o.SEQNUM += SEQNUM;
+                        if (UnitIsChecked) o.UNIT = UNIT;
+                        if (PartIsChecked) o.PART = PART;
+                        if (SeqNumIsChecked) o.SEQNUM += SEQNUM;
                         await unitPhraseDS.Update(o);
                     }
             });
