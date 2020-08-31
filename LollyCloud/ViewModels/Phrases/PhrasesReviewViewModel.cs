@@ -86,8 +86,17 @@ namespace LollyCloud
         {
             if (!IsTestMode)
             {
-                Next();
-                DoTest();
+                var b = true;
+                if (Options.Mode == ReviewMode.ReviewManual && !PhraseInputString.IsEmpty() && PhraseInputString != CurrentPhrase)
+                {
+                    b = false;
+                    IncorrectIsVisible = true;
+                }
+                if (b)
+                {
+                    Next();
+                    DoTest();
+                }
             }
             else if (!CorrectIsVisible && !IncorrectIsVisible)
             {
