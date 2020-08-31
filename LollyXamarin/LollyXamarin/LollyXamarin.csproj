@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Phrases\PhrasesUnitPage.xaml.cs">
+      <DependentUpon>PhrasesUnitPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Words\WordsUnitPage.xaml.cs">
       <DependentUpon>WordsUnitPage.xaml</DependentUpon>
     </Compile>

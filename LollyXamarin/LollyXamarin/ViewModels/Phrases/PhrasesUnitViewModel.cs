@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,8 @@ namespace LollyCloud
         [Reactive]
         public int TextbookFilter { get; set; }
         public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {vmSettings.UNITINFO}";
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {
@@ -41,17 +44,17 @@ namespace LollyCloud
                 this.RaisePropertyChanged(nameof(PhraseItems));
             });
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            Reload();
-        }
-        public void Reload() =>
-            (inTextbook ? unitPhraseDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
-            .ToObservable().Subscribe(lst =>
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
+                IsBusy = true;
+                var lst = inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks);
                 PhraseItemsAll = new ObservableCollection<MUnitPhrase>(lst);
                 this.RaisePropertyChanged(nameof(PhraseItems));
+                IsBusy = false;
             });
+        }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
         public async Task<MUnitPhrase> Update(MUnitPhrase item)

@@ -27,6 +27,18 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+            <Style x:Key="Text1" TargetType="Label">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="Blue"/>
+            </Style>
+            <Style x:Key="Text2" TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="Orange"/>
+            </Style>
+            <Style x:Key="Text3" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="Magenta"/>
+            </Style>
         </ResourceDictionary>        
     </Application.Resources>
 </Application>
