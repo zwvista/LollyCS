@@ -32,15 +32,15 @@ namespace LollyCloud
         [Reactive]
         public string IndexString { get; set; }
         [Reactive]
-        public bool IndexIsVisible { get; set; }
+        public bool IndexIsVisible { get; set; } = true;
         [Reactive]
-        public bool CorrectIsVisible { get; set; } = false;
+        public bool CorrectIsVisible { get; set; }
         [Reactive]
-        public bool IncorrectIsVisible { get; set; } = false;
+        public bool IncorrectIsVisible { get; set; }
         [Reactive]
         public string AccuracyString { get; set; }
         [Reactive]
-        public bool AccuracyIsVisible { get; set; }
+        public bool AccuracyIsVisible { get; set; } = true;
         [Reactive]
         public bool CheckEnabled { get; set; }
         [Reactive]
@@ -48,9 +48,9 @@ namespace LollyCloud
         [Reactive]
         public string NoteTargetString { get; set; }
         [Reactive]
-        public bool WordTargetIsVisible { get; set; }
+        public bool WordTargetIsVisible { get; set; } = true;
         [Reactive]
-        public bool NoteTargetIsVisible { get; set; }
+        public bool NoteTargetIsVisible { get; set; } = true;
         [Reactive]
         public string TranslationString { get; set; }
         [Reactive]
@@ -108,7 +108,7 @@ namespace LollyCloud
                 Next();
                 await DoTest();
             }
-            else if (CorrectIsVisible != true && IncorrectIsVisible != true)
+            else if (!CorrectIsVisible && !IncorrectIsVisible)
             {
                 WordInputString = vmSettings.AutoCorrectInput(WordInputString);
                 WordTargetIsVisible = true;
@@ -135,15 +135,15 @@ namespace LollyCloud
         }
         public async Task DoTest()
         {
-            IndexIsVisible = HasNext ? true : false;
+            IndexIsVisible = HasNext;
             CorrectIsVisible = false;
             IncorrectIsVisible = false;
-            AccuracyIsVisible = IsTestMode && HasNext ? true : false;
+            AccuracyIsVisible = IsTestMode && HasNext;
             CheckEnabled = HasNext;
             WordTargetString = CurrentWord;
             NoteTargetString = CurrentItem?.NOTE ?? "";
-            WordTargetIsVisible = !IsTestMode ? true : false;
-            NoteTargetIsVisible = !IsTestMode ? true : false;
+            WordTargetIsVisible = !IsTestMode;
+            NoteTargetIsVisible = !IsTestMode;
             TranslationString = "";
             WordInputString = "";
             DoTestAction?.Invoke();

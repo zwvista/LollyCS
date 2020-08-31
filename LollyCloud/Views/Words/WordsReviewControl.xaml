@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:LollyCloud"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="2">
@@ -30,14 +33,14 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                <Label Content="{Binding IndexString}" Visibility="{Binding IndexVisibility}" DockPanel.Dock="Left"/>
-                <Label Visibility="{Binding CorrectVisibility}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
-                <Label Visibility="{Binding IncorrectVisibility}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
-                <Label Content="{Binding AccuracyString}" Visibility="{Binding AccuracyVisibility}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+                <Label Content="{Binding IndexString}" Visibility="{Binding IndexIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" DockPanel.Dock="Left"/>
+                <Label Visibility="{Binding CorrectIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
+                <Label Visibility="{Binding IncorrectIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
+                <Label Content="{Binding AccuracyString}" Visibility="{Binding AccuracyIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
             </DockPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Label Content="{Binding WordTargetString}" Foreground="Orange" />
-                <Label Content="{Binding NoteTargetString}" Foreground="Pink" />
+                <Label Content="{Binding WordTargetString}" Visibility="{Binding WordTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" />
+                <Label Content="{Binding NoteTargetString}" Visibility="{Binding NoteTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Pink" />
             </StackPanel>
             <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
             <TextBox x:Name="tbWordInput" Text="{Binding WordInputString}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />

@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:LollyCloud"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
@@ -30,11 +33,11 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                <Label Content="{Binding IndexString}" Visibility="{Binding IndexVisibility}" DockPanel.Dock="Left"/>
-                <Label Visibility="{Binding CorrectVisibility}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
-                <Label Visibility="{Binding IncorrectVisibility}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
+                <Label Content="{Binding IndexString}" Visibility="{Binding IndexIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" DockPanel.Dock="Left"/>
+                <Label Visibility="{Binding CorrectIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
+                <Label Visibility="{Binding IncorrectIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
             </DockPanel>
-            <Label Content="{Binding PhraseTargetString}" Foreground="Orange" Grid.Row="1" />
+            <Label Content="{Binding PhraseTargetString}" Visibility="{Binding PhraseTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" Grid.Row="1" />
             <Label Content="{Binding TranslationString}" Foreground="Pink" Grid.Row="2" />
             <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInputString}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
             <Button Grid.Row="4" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" HorizontalAlignment="Right" Click="btnCheck_Click"/>

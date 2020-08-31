@@ -30,17 +30,17 @@ namespace LollyCloud
         [Reactive]
         public string IndexString { get; set; }
         [Reactive]
-        public bool IndexVisibility { get; set; }
+        public bool IndexIsVisible { get; set; } = true;
         [Reactive]
-        public bool CorrectVisibility { get; set; } = false;
+        public bool CorrectIsVisible { get; set; }
         [Reactive]
-        public bool IncorrectVisibility { get; set; } = false;
+        public bool IncorrectIsVisible { get; set; }
         [Reactive]
         public bool CheckEnabled { get; set; }
         [Reactive]
         public string PhraseTargetString { get; set; }
         [Reactive]
-        public bool PhraseTargetVisibility { get; set; }
+        public bool PhraseTargetIsVisible { get; set; } = true;
         [Reactive]
         public string TranslationString { get; set; }
         [Reactive]
@@ -89,14 +89,14 @@ namespace LollyCloud
                 Next();
                 DoTest();
             }
-            else if (CorrectVisibility != true && IncorrectVisibility != true)
+            else if (!CorrectIsVisible && !IncorrectIsVisible)
             {
                 PhraseInputString = vmSettings.AutoCorrectInput(PhraseInputString);
-                PhraseTargetVisibility = false;
+                PhraseTargetIsVisible = false;
                 if (PhraseInputString == CurrentPhrase)
-                    CorrectVisibility = true;
+                    CorrectIsVisible = true;
                 else
-                    IncorrectVisibility = true;
+                    IncorrectIsVisible = true;
                 CheckString = "Next";
                 if (!HasNext) return;
                 var o = CurrentItem;
@@ -112,13 +112,13 @@ namespace LollyCloud
         }
         public void DoTest()
         {
-            IndexVisibility = HasNext ? true : false;
-            CorrectVisibility = false;
-            IncorrectVisibility = false;
+            IndexIsVisible = HasNext;
+            CorrectIsVisible = false;
+            IncorrectIsVisible = false;
             CheckEnabled = HasNext;
             PhraseTargetString = CurrentPhrase;
             TranslationString = CurrentItem?.TRANSLATION ?? "";
-            PhraseTargetVisibility = !IsTestMode ? true : false;
+            PhraseTargetIsVisible = !IsTestMode;
             PhraseInputString = "";
             DoTestAction?.Invoke();
             if (HasNext)
