@@ -54,6 +54,7 @@
                 <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" />
                 <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" />
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
+                <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" />
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
