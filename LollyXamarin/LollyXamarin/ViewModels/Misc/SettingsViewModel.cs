@@ -23,20 +23,6 @@ namespace LollyCloud
         VoiceDataStore VoiceDS = new VoiceDataStore();
         CodeDataStore CodeDS = new CodeDataStore();
 
-        public event EventHandler OnGetData;
-        public event EventHandler OnUpdateLang;
-        public event EventHandler OnUpdateDictReference;
-        public event EventHandler OnUpdateDictsReference;
-        public event EventHandler OnUpdateDictNote;
-        public event EventHandler OnUpdateDictTranslation;
-        public event EventHandler OnUpdateTextbook;
-        public event EventHandler OnUpdateUnitFrom;
-        public event EventHandler OnUpdatePartFrom;
-        public event EventHandler OnUpdateUnitTo;
-        public event EventHandler OnUpdatePartTo;
-        public event EventHandler OnUpdateVoice;
-        public event EventHandler OnUpdateToType;
-
         public SettingsViewModel ShallowCopy() => (SettingsViewModel)this.MemberwiseClone();
 
         public List<MUSMapping> USMappings { get; set; }
@@ -211,6 +197,20 @@ namespace LollyCloud
         };
         [Reactive]
         public UnitPartToType ToType { get; set; } = UnitPartToType.To;
+        [Reactive]
+        public bool UnitToIsEnabled { get; set; }
+        [Reactive]
+        public bool PartToIsEnabled { get; set; }
+        [Reactive]
+        public bool PreviousIsEnabled { get; set; }
+        [Reactive]
+        public bool NextIsEnabled { get; set; }
+        [Reactive]
+        public string PreviousText { get; set; }
+        [Reactive]
+        public string NextText { get; set; }
+        [Reactive]
+        public bool PartFromIsEnabled { get; set; }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictCodes { get; set; }
@@ -253,10 +253,60 @@ namespace LollyCloud
                 this.RaisePropertyChanged(nameof(USUNITTO));
                 this.RaisePropertyChanged(nameof(USPARTTO));
             });
-            this.WhenAnyValue(x => x.ToType).Subscribe(_ => OnUpdateToType?.Invoke(this, null));
+            this.WhenAnyValue(x => x.ToType).Subscribe(async v =>
+            {
+                if (Units == null) return;
+                var b = v == UnitPartToType.To;
+                UnitToIsEnabled = b;
+                PartToIsEnabled = b && !IsSinglePart;
+                PreviousIsEnabled = !b;
+                NextIsEnabled = !b;
+                var b2 = v != UnitPartToType.Unit;
+                var t = !b2 ? "Unit" : "Part";
+                PreviousText = "Previous " + t;
+                NextText = "Next " + t;
+                PartFromIsEnabled = b2 && !IsSinglePart;
+                await UpdateToType();
+            });
+            this.WhenAnyValue(x => x.SelectedLang).Where(v => v != null).Subscribe(async v =>
+            {
+                var isinit = USLANGID == v.ID;
+                USLANGID = v.ID;
+                INFO_USTEXTBOOKID = GetUSInfo(MUSMapping.NAME_USTEXTBOOKID);
+                INFO_USDICTREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTREFERENCE);
+                INFO_USDICTNOTE = GetUSInfo(MUSMapping.NAME_USDICTNOTE);
+                INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
+                INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
+                INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
+                var t = await DictionaryDS.GetDictsReferenceByLang(USLANGID).ToObservable().Zip(DictionaryDS.GetDictsNoteByLang(USLANGID).ToObservable(),
+                    DictionaryDS.GetDictsTranslationByLang(USLANGID).ToObservable(), TextbookDS.GetDataByLang(USLANGID).ToObservable(),
+                    AutoCorrectDS.GetDataByLang(USLANGID).ToObservable(), VoiceDS.GetDataByLang(USLANGID).ToObservable(), (a, b, c, d, e, f) => (a, b, c, d, e, f)).ToTask();
+                DictsReference = t.a;
+                DictsNote = t.b;
+                DictsTranslation = t.c;
+                Textbooks = t.d;
+                AutoCorrects = t.e;
+                Voices = t.f;
+                SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTREFERENCE);
+                SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
+                SelectedDictsReference = USDICTSREFERENCE.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
+                SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? DictsTranslation.FirstOrDefault();
+                SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
+                TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
+                    .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
+                SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? Voices.FirstOrDefault();
+                if (!isinit)
+                    await UserSettingDS.Update(INFO_USLANGID, USLANGID);
+            });
+            this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID));
+            this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE));
+            this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE));
+            this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION));
+            this.WhenAnyValue(x => x.SelectedVoice).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USVOICEID, USVOICEID));
         }
 
-        MUserSettingInfo GetUSInfo(string name) {
+        MUserSettingInfo GetUSInfo(string name)
+        {
             var o = USMappings.First(v => v.NAME == name);
             var entityid = o.ENTITYID != -1 ? o.ENTITYID :
                 o.LEVEL == 1 ? SelectedLang.ID :
@@ -266,7 +316,8 @@ namespace LollyCloud
             return new MUserSettingInfo { USERSETTINGID = o2.ID, VALUEID = o.VALUEID };
         }
 
-        public async Task GetData() {
+        public async Task GetData()
+        {
             var t = await LanguageDS.GetData().ToObservable().Zip(USMappingDS.GetData().ToObservable(),
                 UserSettingDS.GetDataByUser(CommonApi.UserId).ToObservable(), CodeDS.GetDictCodes().ToObservable(), (a, b, c, d) => (a, b, c, d)).ToTask();
             Languages = t.a;
@@ -283,79 +334,14 @@ namespace LollyCloud
             INFO_USREADNUMBERID = GetUSInfo(MUSMapping.NAME_USREADNUMBERID);
             USLEVELCOLORS = GetUSValue(INFO_USLEVELCOLORS).Split(new[] { "\r\n" }, StringSplitOptions.None)
                 .Select(s => s.Split(',')).ToDictionary(v => int.Parse(v[0]), v2 => new List<string> { v2[1], v2[2] });
-            OnGetData?.Invoke(this, null);
-            await SetSelectedLang(Languages.FirstOrDefault(o => o.ID == USLANGID));
+            SelectedLang = Languages.FirstOrDefault(o => o.ID == USLANGID);
         }
 
-        public async Task SetSelectedLang(MLanguage lang) {
-            var isinit = USLANGID == lang.ID;
-            USLANGID = lang.ID;
-            SelectedLang = lang;
-            INFO_USTEXTBOOKID = GetUSInfo(MUSMapping.NAME_USTEXTBOOKID);
-            INFO_USDICTREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTREFERENCE);
-            INFO_USDICTNOTE = GetUSInfo(MUSMapping.NAME_USDICTNOTE);
-            INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
-            INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
-            INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICEID);
-            var t = await DictionaryDS.GetDictsReferenceByLang(USLANGID).ToObservable().Zip(DictionaryDS.GetDictsNoteByLang(USLANGID).ToObservable(),
-                DictionaryDS.GetDictsTranslationByLang(USLANGID).ToObservable(), TextbookDS.GetDataByLang(USLANGID).ToObservable(),
-                AutoCorrectDS.GetDataByLang(USLANGID).ToObservable(), VoiceDS.GetDataByLang(USLANGID).ToObservable(), (a, b, c, d, e, f) => (a, b, c, d, e, f)).ToTask();
-            DictsReference = t.a;
-            DictsNote = t.b;
-            DictsTranslation = t.c;
-            Textbooks = t.d;
-            AutoCorrects = t.e;
-            Voices = t.f;
-            SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTREFERENCE);
-            SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
-            SelectedDictsReference = USDICTSREFERENCE.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
-            SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? DictsTranslation.FirstOrDefault();
-            SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
-            TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
-                .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
-            SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? Voices.FirstOrDefault();
-            if (isinit)
-                OnUpdateLang?.Invoke(this, null);
-            else
-                await UpdateLang();
-        }
-
-        public async Task UpdateLang()
-        {
-            await UserSettingDS.Update(INFO_USLANGID, USLANGID);
-            OnUpdateLang?.Invoke(this, null);
-        }
-        public async Task UpdateTextbook()
-        {
-            await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID);
-            OnUpdateTextbook?.Invoke(this, null);
-        }
-        public async Task UpdateDictReference()
-        {
-            await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE);
-            OnUpdateDictReference?.Invoke(this, null);
-        }
         public async Task UpdateDictsReference(List<MDictionary> lst)
         {
             SelectedDictsReference = lst;
             this.RaisePropertyChanged(nameof(SelectedDictsReference));
             await UserSettingDS.Update(INFO_USDICTSREFERENCE, USDICTSREFERENCE);
-            OnUpdateDictsReference?.Invoke(this, null);
-        }
-        public async Task UpdateDictNote()
-        {
-            await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE);
-            OnUpdateDictNote?.Invoke(this, null);
-        }
-        public async Task UpdateDictTranslation()
-        {
-            await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION);
-            OnUpdateDictTranslation?.Invoke(this, null);
-        }
-        public async Task UpdateVoice()
-        {
-            await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
-            OnUpdateVoice?.Invoke(this, null);
         }
         public string AutoCorrectInput(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
         public async Task UpdateUnitFrom()
@@ -469,25 +455,21 @@ namespace LollyCloud
         {
             if (check && USUNITFROM == v) return;
             await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
-            OnUpdateUnitFrom?.Invoke(this, null);
         }
         async Task DoUpdatePartFrom(int v, bool check = true)
         {
             if (check && USPARTFROM == v) return;
             await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
-            OnUpdatePartFrom?.Invoke(this, null);
         }
         async Task DoUpdateUnitTo(int v, bool check = true)
         {
             if (check && USUNITTO == v) return;
             await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
-            OnUpdateUnitTo?.Invoke(this, null);
         }
         async Task DoUpdatePartTo(int v, bool check = true)
         {
             if (check && USPARTTO == v) return;
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
-            OnUpdatePartTo?.Invoke(this, null);
         }
         public async Task UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
         public async Task UpdateReadNumberId() => await UserSettingDS.Update(INFO_USREADNUMBERID, USREADNUMBERID);
