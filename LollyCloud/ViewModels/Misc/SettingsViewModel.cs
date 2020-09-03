@@ -232,42 +232,6 @@ namespace LollyCloud
             // https://stackoverflow.com/questions/35685063/httpclient-getasync-method-403-error
             client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "http://developer.github.com/v3/#user-agent-required");
 
-            this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(v => USDICTREFERENCE = v.DICTID.ToString());
-            this.WhenAnyValue(x => x.SelectedDictsReference).Where(v => v != null)
-                .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
-            this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(v => USDICTNOTE = v?.ID ?? 0);
-            this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(v => USDICTTRANSLATION = v?.ID ?? 0);
-            this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(v =>
-            {
-                USTEXTBOOKID = v.ID;
-                INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
-                INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
-                INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
-                INFO_USPARTTO = GetUSInfo(MUSMapping.NAME_USPARTTO);
-                ToType = IsSingleUnit ? UnitPartToType.Unit : IsSingleUnitPart ? UnitPartToType.Part : UnitPartToType.To;
-                this.RaisePropertyChanged(nameof(Units));
-                this.RaisePropertyChanged(nameof(UnitsInAll));
-                this.RaisePropertyChanged(nameof(Parts));
-                this.RaisePropertyChanged(nameof(USUNITFROM));
-                this.RaisePropertyChanged(nameof(USPARTFROM));
-                this.RaisePropertyChanged(nameof(USUNITTO));
-                this.RaisePropertyChanged(nameof(USPARTTO));
-            });
-            this.WhenAnyValue(x => x.ToType).Subscribe(async v =>
-            {
-                if (Units == null) return;
-                var b = v == UnitPartToType.To;
-                UnitToIsEnabled = b;
-                PartToIsEnabled = b && !IsSinglePart;
-                PreviousIsEnabled = !b;
-                NextIsEnabled = !b;
-                var b2 = v != UnitPartToType.Unit;
-                var t = !b2 ? "Unit" : "Part";
-                PreviousText = "Previous " + t;
-                NextText = "Next " + t;
-                PartFromIsEnabled = b2 && !IsSinglePart;
-                await UpdateToType();
-            });
             this.WhenAnyValue(x => x.SelectedLang).Where(v => v != null).Subscribe(async v =>
             {
                 var isinit = USLANGID == v.ID;
@@ -298,10 +262,54 @@ namespace LollyCloud
                 if (!isinit)
                     await UserSettingDS.Update(INFO_USLANGID, USLANGID);
             });
-            this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID));
-            this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE));
-            this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE));
-            this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION));
+            this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v =>
+            {
+                USDICTREFERENCE = v.DICTID.ToString();
+                await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE);
+            });
+            this.WhenAnyValue(x => x.SelectedDictsReference).Where(v => v != null)
+                .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
+            this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(async v =>
+            {
+                USDICTNOTE = v?.ID ?? 0;
+                await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE);
+            });
+            this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(async v =>
+            {
+                USDICTTRANSLATION = v?.ID ?? 0;
+                await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION);
+            });
+            this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(async v =>
+            {
+                USTEXTBOOKID = v.ID;
+                INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
+                INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
+                INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
+                INFO_USPARTTO = GetUSInfo(MUSMapping.NAME_USPARTTO);
+                ToType = IsSingleUnit ? UnitPartToType.Unit : IsSingleUnitPart ? UnitPartToType.Part : UnitPartToType.To;
+                this.RaisePropertyChanged(nameof(Units));
+                this.RaisePropertyChanged(nameof(UnitsInAll));
+                this.RaisePropertyChanged(nameof(Parts));
+                this.RaisePropertyChanged(nameof(USUNITFROM));
+                this.RaisePropertyChanged(nameof(USPARTFROM));
+                this.RaisePropertyChanged(nameof(USUNITTO));
+                this.RaisePropertyChanged(nameof(USPARTTO));
+                await UserSettingDS.Update(INFO_USTEXTBOOKID, USTEXTBOOKID);
+            });
+            this.WhenAnyValue(x => x.ToType).Where(_ => Units != null).Subscribe(async v =>
+            {
+                var b = v == UnitPartToType.To;
+                UnitToIsEnabled = b;
+                PartToIsEnabled = b && !IsSinglePart;
+                PreviousIsEnabled = !b;
+                NextIsEnabled = !b;
+                var b2 = v != UnitPartToType.Unit;
+                var t = !b2 ? "Unit" : "Part";
+                PreviousText = "Previous " + t;
+                NextText = "Next " + t;
+                PartFromIsEnabled = b2 && !IsSinglePart;
+                await UpdateToType();
+            });
             this.WhenAnyValue(x => x.SelectedVoice).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USVOICEID, USVOICEID));
         }
 
