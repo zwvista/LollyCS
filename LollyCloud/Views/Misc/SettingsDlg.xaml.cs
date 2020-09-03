@@ -25,18 +25,6 @@ namespace LollyCloud
 
         async Task Init() => await vm.GetData();
 
-        async void cbUnitFrom_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            await vm.UpdateUnitFrom();
-
-        async void cbPartFrom_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            await vm.UpdatePartFrom();
-
-        async void cbUnitTo_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            await vm.UpdateUnitTo();
-
-        async void cbPartTo_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            await vm.UpdatePartTo();
-
         async void btnPrevious_Click(object sender, RoutedEventArgs e) =>
             await vm.PreviousUnitPart();
 

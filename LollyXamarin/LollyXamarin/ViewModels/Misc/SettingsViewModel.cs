@@ -262,6 +262,7 @@ namespace LollyCloud
                 if (!isinit)
                     await UserSettingDS.Update(INFO_USLANGID, USLANGID);
             });
+            this.WhenAnyValue(x => x.SelectedVoice).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USVOICEID, USVOICEID));
             this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v =>
             {
                 USDICTREFERENCE = v.DICTID.ToString();
@@ -308,9 +309,37 @@ namespace LollyCloud
                 PreviousText = "Previous " + t;
                 NextText = "Next " + t;
                 PartFromIsEnabled = b2 && !IsSinglePart;
-                await UpdateToType();
+                if (v == UnitPartToType.Unit)
+                    await DoUpdateSingleUnit();
+                else if (ToType == UnitPartToType.Part)
+                    await DoUpdateUnitPartTo();
             });
-            this.WhenAnyValue(x => x.SelectedVoice).Where(v => v != null).Subscribe(async v => await UserSettingDS.Update(INFO_USVOICEID, USVOICEID));
+            this.WhenAnyValue(x => x.USUNITFROM).Skip(1).Subscribe(async v =>
+            {
+                await DoUpdateUnitFrom(v, check: false);
+                if (ToType == UnitPartToType.Unit)
+                    await DoUpdateSingleUnit();
+                else if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
+                    await DoUpdateUnitPartTo();
+            });
+            this.WhenAnyValue(x => x.USPARTFROM).Skip(1).Subscribe(async v =>
+            {
+                await DoUpdatePartFrom(v, check: false);
+                if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
+                    await DoUpdateUnitPartTo();
+            });
+            this.WhenAnyValue(x => x.USUNITTO).Skip(1).Subscribe(async v =>
+            {
+                await DoUpdateUnitTo(v, check: false);
+                if (IsInvalidUnitPart)
+                    await DoUpdateUnitPartFrom();
+            });
+            this.WhenAnyValue(x => x.USPARTTO).Skip(1).Subscribe(async v =>
+            {
+                await DoUpdatePartTo(v, check: false);
+                if (IsInvalidUnitPart)
+                    await DoUpdateUnitPartFrom();
+            });
         }
 
         MUserSettingInfo GetUSInfo(string name)
@@ -352,39 +381,6 @@ namespace LollyCloud
             await UserSettingDS.Update(INFO_USDICTSREFERENCE, USDICTSREFERENCE);
         }
         public string AutoCorrectInput(string text) => AutoCorrectDS.AutoCorrect(text, AutoCorrects, o => o.INPUT, o => o.EXTENDED);
-        public async Task UpdateUnitFrom()
-        {
-            await DoUpdateUnitFrom(USUNITFROM, check: false);
-            if (ToType == UnitPartToType.Unit)
-                await DoUpdateSingleUnit();
-            else if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
-                await DoUpdateUnitPartTo();
-        }
-        public async Task UpdatePartFrom()
-        {
-            await DoUpdatePartFrom(USPARTFROM, check: false);
-            if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
-                await DoUpdateUnitPartTo();
-        }
-        public async Task UpdateUnitTo()
-        {
-            await DoUpdateUnitTo(USUNITTO, check: false);
-            if (IsInvalidUnitPart)
-                await DoUpdateUnitPartFrom();
-        }
-        public async Task UpdatePartTo()
-        {
-            await DoUpdatePartTo(USPARTTO, check: false);
-            if (IsInvalidUnitPart)
-                await DoUpdateUnitPartFrom();
-        }
-        public async Task UpdateToType()
-        {
-            if (ToType == UnitPartToType.Unit)
-                await DoUpdateSingleUnit();
-            else if (ToType == UnitPartToType.Part)
-                await DoUpdateUnitPartTo();
-        }
         public async Task ToggleToType(int part)
         {
             if (ToType == UnitPartToType.Unit)
