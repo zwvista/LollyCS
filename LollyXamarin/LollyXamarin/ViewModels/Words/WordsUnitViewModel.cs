@@ -13,7 +13,7 @@ namespace LollyCloud
 {
     public class WordsUnitViewModel : ReactiveObject
     {
-        public SettingsViewModel vmSettings;
+        public SettingsViewModel vmSettings { get; }
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();

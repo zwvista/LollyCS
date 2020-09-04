@@ -197,6 +197,7 @@ namespace LollyCloud
         };
         [Reactive]
         public UnitPartToType ToType { get; set; } = UnitPartToType.To;
+        public bool ToTypeIsMovable => ToType != UnitPartToType.To;
         [Reactive]
         public bool UnitToIsEnabled { get; set; }
         [Reactive]
