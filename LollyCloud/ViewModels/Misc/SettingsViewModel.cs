@@ -384,8 +384,7 @@ namespace LollyCloud
             if (ToType == UnitPartToType.Unit)
             {
                 ToType = UnitPartToType.Part;
-                await DoUpdatePartFrom(part);
-                await DoUpdateUnitPartTo();
+                await Task.WhenAll(DoUpdatePartFrom(part), DoUpdateUnitPartTo());
             }
             else if (ToType == UnitPartToType.Part)
             {
@@ -398,61 +397,31 @@ namespace LollyCloud
             if (ToType == UnitPartToType.Unit)
             {
                 if (USUNITFROM > 1)
-                {
-                    await DoUpdateUnitFrom(USUNITFROM - 1);
-                    await DoUpdateUnitTo(USUNITFROM);
-                }
+                    await Task.WhenAll(DoUpdateUnitFrom(USUNITFROM - 1), DoUpdateUnitTo(USUNITFROM));
             }
             else if (USPARTFROM > 1)
-            {
-                await DoUpdatePartFrom(USPARTFROM - 1);
-                await DoUpdateUnitPartTo();
-            }
+                await Task.WhenAll(DoUpdatePartFrom(USPARTFROM - 1), DoUpdateUnitPartTo());
             else if (USUNITFROM > 1)
-            {
-                await DoUpdateUnitFrom(USUNITFROM - 1);
-                await DoUpdatePartFrom(PartCount);
-                await DoUpdateUnitPartTo();
-            }
+                await Task.WhenAll(DoUpdateUnitFrom(USUNITFROM - 1), DoUpdatePartFrom(PartCount), DoUpdateUnitPartTo());
         }
         public async Task NextUnitPart()
         {
             if (ToType == UnitPartToType.Unit)
             {
                 if (USUNITFROM < UnitCount)
-                {
-                    await DoUpdateUnitFrom(USUNITFROM + 1);
-                    await DoUpdateUnitTo(USUNITFROM);
-                }
+                    await Task.WhenAll(DoUpdateUnitFrom(USUNITFROM + 1), DoUpdateUnitTo(USUNITFROM));
             }
             else if (USPARTFROM < PartCount)
-            {
-                await DoUpdatePartFrom(USPARTFROM + 1);
-                await DoUpdateUnitPartTo();
-            }
+                await Task.WhenAll(DoUpdatePartFrom(USPARTFROM + 1), DoUpdateUnitPartTo());
             else if (USUNITFROM < UnitCount)
-            {
-                await DoUpdateUnitFrom(USUNITFROM + 1);
-                await DoUpdatePartFrom(1);
-                await DoUpdateUnitPartTo();
-            }
+                await Task.WhenAll(DoUpdateUnitFrom(USUNITFROM + 1), DoUpdatePartFrom(1), DoUpdateUnitPartTo());
         }
-        async Task DoUpdateUnitPartFrom()
-        {
-            await DoUpdateUnitFrom(USUNITTO);
-            await DoUpdatePartFrom(USPARTTO);
-        }
-        async Task DoUpdateUnitPartTo()
-        {
-            await DoUpdateUnitTo(USUNITFROM);
-            await DoUpdatePartTo(USPARTFROM);
-        }
-        async Task DoUpdateSingleUnit()
-        {
-            await DoUpdateUnitTo(USUNITFROM);
-            await DoUpdatePartFrom(1);
-            await DoUpdatePartTo(PartCount);
-        }
+        async Task DoUpdateUnitPartFrom() =>
+            await Task.WhenAll(DoUpdateUnitFrom(USUNITTO), DoUpdatePartFrom(USPARTTO));
+        async Task DoUpdateUnitPartTo() =>
+            await Task.WhenAll(DoUpdateUnitTo(USUNITFROM), DoUpdatePartTo(USPARTFROM));
+        async Task DoUpdateSingleUnit() =>
+            await Task.WhenAll(DoUpdateUnitTo(USUNITFROM), DoUpdatePartFrom(1), DoUpdatePartTo(PartCount));
         async Task DoUpdateUnitFrom(int v, bool check = true)
         {
             if (check && USUNITFROM == v) return;
