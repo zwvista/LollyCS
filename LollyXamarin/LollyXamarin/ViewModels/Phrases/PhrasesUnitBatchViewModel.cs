@@ -7,7 +7,6 @@ namespace LollyCloud
 {
     public class PhrasesUnitBatchViewModel : ReactiveObject
     {
-        UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         public PhrasesUnitViewModel vm { get; set; }
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
 
@@ -35,10 +34,24 @@ namespace LollyCloud
                 foreach (var o in vm.PhraseItems)
                     if (UnitIsChecked || PartIsChecked || SeqNumIsChecked)
                     {
-                        if (UnitIsChecked) o.UNIT = UNIT;
-                        if (PartIsChecked) o.PART = PART;
-                        if (SeqNumIsChecked) o.SEQNUM += SEQNUM;
-                        await unitPhraseDS.Update(o);
+                        bool b = false;
+                        if (UnitIsChecked)
+                        {
+                            o.UNIT = UNIT;
+                            b = true;
+                        }
+                        if (PartIsChecked)
+                        {
+                            o.PART = PART;
+                            b = true;
+                        }
+                        if (SeqNumIsChecked)
+                        {
+                            o.SEQNUM += SEQNUM;
+                            b = true;
+                        }
+                        if (b)
+                            await vm.Update(o);
                     }
             });
         }

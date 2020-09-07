@@ -7,8 +7,6 @@ namespace LollyCloud
 {
     public class WordsUnitBatchViewModel : ReactiveObject
     {
-        UnitWordDataStore unitWordDS = new UnitWordDataStore();
-        WordFamiDataStore wordFamiDS = new WordFamiDataStore();
         public WordsUnitViewModel vm { get; set; }
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
 
@@ -41,15 +39,29 @@ namespace LollyCloud
             {
                 foreach (var o in vm.WordItems)
                 {
-                    if (UnitIsChecked || PartIsChecked || SeqNumIsChecked)
+                    bool b = false;
+                    if (UnitIsChecked)
                     {
-                        if (UnitIsChecked) o.UNIT = UNIT;
-                        if (PartIsChecked) o.PART = PART;
-                        if (SeqNumIsChecked) o.SEQNUM += SEQNUM;
-                        await unitWordDS.Update(o);
+                        o.UNIT = UNIT;
+                        b = true;
+                    }
+                    if (PartIsChecked)
+                    {
+                        o.PART = PART;
+                        b = true;
+                    }
+                    if (SeqNumIsChecked)
+                    {
+                        o.SEQNUM += SEQNUM;
+                        b = true;
                     }
                     if (LevelIsChecked && (!Level0OnlyIsChecked || o.LEVEL == 0))
-                        await wordFamiDS.Update(o.WORDID, LEVEL);
+                    {
+                        o.LEVEL = LEVEL;
+                        b = true;
+                    }
+                    if (b)
+                        await vm.Update(o);
                 }
             });
         }
