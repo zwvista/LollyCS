@@ -54,11 +54,11 @@ namespace LollyCloud
             });
         }
 
-        public void CheckItems(int n, List<MUnitWord> checkedItems)
+        public void CheckItems(int n, List<MUnitWord> selectedItems)
         {
             foreach (var o in vm.WordItems)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
-                    !checkedItems.Contains(o) ? o.IsChecked :
+                    !selectedItems.Contains(o) ? o.IsChecked :
                     n == 2;
         }
     }

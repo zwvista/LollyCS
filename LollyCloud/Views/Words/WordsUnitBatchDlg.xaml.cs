@@ -21,8 +21,8 @@ namespace LollyCloud
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
         {
             int n = int.Parse((string)((Button)sender).Tag);
-            var checkedItems = dgWords.SelectedItems.Cast<MUnitWord>().ToList();
-            vmBatch.CheckItems(n, checkedItems);
+            var selectedItems = dgWords.SelectedItems.Cast<MUnitWord>().ToList();
+            vmBatch.CheckItems(n, selectedItems);
         }
     }
 }

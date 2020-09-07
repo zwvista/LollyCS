@@ -43,11 +43,11 @@ namespace LollyCloud
             });
         }
 
-        public void CheckItems(int n, List<MUnitPhrase> checkedItems)
+        public void CheckItems(int n, List<MUnitPhrase> selectedItems)
         {
             foreach (var o in vm.PhraseItems)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
-                    !checkedItems.Contains(o) ? o.IsChecked :
+                    !selectedItems.Contains(o) ? o.IsChecked :
                     n == 2;
         }
     }
