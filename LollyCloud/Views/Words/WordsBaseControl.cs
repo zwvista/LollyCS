@@ -53,25 +53,6 @@ namespace LollyCloud
 
         public void miGoogle_Click(object sender, RoutedEventArgs e) => selectedWord.Google();
 
-        public async Task ChangeLevel(int delta)
-        {
-            var item = (MWordInterface)dgWordsBase.SelectedItem;
-            if (item == null) return;
-            var newLevel = item.LEVEL + delta;
-            if (newLevel != 0 && !vmSettings.USLEVELCOLORS.ContainsKey(newLevel)) return;
-            item.LEVEL = newLevel;
-            await vmSettings.UpdateLevel(item.WORDID, item.LEVEL);
-        }
-
-        public virtual async void dgWords_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyboardDevice.Modifiers == ModifierKeys.Alt && (e.SystemKey == Key.Up || e.SystemKey == Key.Down))
-            {
-                await ChangeLevel(e.SystemKey == Key.Up ? 1 : -1);
-                e.Handled = true;
-            }
-        }
-
         public virtual async Task OnSettingsChanged()
         {
             async Task F(string name)

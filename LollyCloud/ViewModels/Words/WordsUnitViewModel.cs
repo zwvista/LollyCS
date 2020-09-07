@@ -31,8 +31,6 @@ namespace LollyCloud
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
         [Reactive]
-        public bool Levelge0only { get; set; }
-        [Reactive]
         public int TextbookFilter { get; set; }
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.UNITINFO}";
@@ -42,12 +40,11 @@ namespace LollyCloud
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.inTextbook = inTextbook;
             vmNote = new NoteViewModel(vmSettings);
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only, x => x.TextbookFilter).Subscribe(_ =>
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ =>
             {
-                WordItemsFiltered = string.IsNullOrEmpty(TextFilter) && !Levelge0only && TextbookFilter == 0 ? null :
+                WordItemsFiltered = string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? null :
                 new ObservableCollection<MUnitWord>(WordItemsAll.Where(o =>
                     (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
-                    (!Levelge0only || o.LEVEL >= 0) &&
                     (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
                 ));
                 this.RaisePropertyChanged(nameof(WordItems));

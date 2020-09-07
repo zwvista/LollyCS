@@ -24,9 +24,6 @@ namespace LollyCloud
         public int WORDID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LEVEL { get; set; }
-        [JsonProperty]
-        [Reactive]
         public int CORRECT { get; set; }
         [JsonProperty]
         [Reactive]

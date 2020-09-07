@@ -28,7 +28,6 @@
         <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value"
                   SelectedValue="{Binding Mode, ConverterParameter={x:Type local:ReviewMode}, Converter={StaticResource EnumConverter}}" IsEnabled="{Binding CanChangeMode}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-        <CheckBox Content="LEVEL &gt;= 0" IsChecked="{Binding Levelge0only}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
         <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
         <Label Content="Interval:" VerticalAlignment="Center" Grid.Row="3" />
         <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />

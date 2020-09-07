@@ -120,7 +120,7 @@ namespace LollyCloud
             var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
             if (dlg.ShowDialog() == true)
             {
-                var ids = vm.WordItems.Where(o => !vmReview.Options.Levelge0only || o.LEVEL >= 0).Select(o => o.ID).ToList();
+                var ids = vm.WordItems.Select(o => o.ID).ToList();
                 vmReview.Start(ids, id =>
                 {
                     dgWords.SelectedItem = vm.WordItems.FirstOrDefault(o => o.ID == id);

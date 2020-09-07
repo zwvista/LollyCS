@@ -17,17 +17,11 @@ namespace LollyCloud
         [Reactive]
         public bool SeqNumIsChecked { get; set; }
         [Reactive]
-        public bool LevelIsChecked { get; set; }
-        [Reactive]
-        public bool Level0OnlyIsChecked { get; set; }
-        [Reactive]
         public int UNIT { get; set; }
         [Reactive]
         public int PART { get; set; }
         [Reactive]
         public int SEQNUM { get; set; }
-        [Reactive]
-        public int LEVEL { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; }
 
         public WordsUnitBatchViewModel(WordsUnitViewModel vm)
@@ -53,11 +47,6 @@ namespace LollyCloud
                     if (SeqNumIsChecked)
                     {
                         o.SEQNUM += SEQNUM;
-                        b = true;
-                    }
-                    if (LevelIsChecked && (!Level0OnlyIsChecked || o.LEVEL == 0))
-                    {
-                        o.LEVEL = LEVEL;
                         b = true;
                     }
                     if (b)

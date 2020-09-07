@@ -37,8 +37,6 @@
         <TextBox Text="{Binding NOTE}" Grid.Row="2" Grid.Column="1" />
         <Label Content="FAMIID:" Grid.Row="3" />
         <TextBox Text="{Binding FAMIID}" Grid.Row="3" Grid.Column="1" IsReadOnly="True" />
-        <Label Content="LEVEL:" Grid.Row="4" />
-        <TextBox Text="{Binding LEVEL}" Grid.Row="4" Grid.Column="1" />
         <Label Content="ACCURACY:" Grid.Row="5" />
         <TextBox Text="{Binding ACCURACY,Mode=OneWay}" Grid.Row="5" Grid.Column="1" IsReadOnly="True" />
         <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding WordItems}" IsReadOnly="True"
@@ -50,38 +48,11 @@
                 <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" />
                 <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" />
                 <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" />
-                <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" />
                 <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" />
                 <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" />
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
                 <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" />
             </DataGrid.Columns>
-            <DataGrid.Resources>
-                <local:LevelToBackgroundConverter x:Key="LevelToBackgroundConverter" />
-                <local:LevelToForegroundConverter x:Key="LevelToForegroundConverter" />
-                <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding LevelNotZero}" Value="True">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource LevelToBackgroundConverter}">
-                                        <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
-                                        <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                                    </MultiBinding>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Foreground">
-                                <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource LevelToForegroundConverter}">
-                                        <Binding Path="vmSettings" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}"/>
-                                        <Binding Path="Item.LEVEL" RelativeSource="{RelativeSource Self}"/>
-                                    </MultiBinding>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Resources>
         </DataGrid>
         <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,10,0,0" >
             <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{Binding Save}"/>

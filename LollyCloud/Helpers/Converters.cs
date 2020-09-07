@@ -6,40 +6,6 @@ using System.Windows.Media;
 
 namespace LollyCloud
 {
-    // https://stackoverflow.com/questions/47871745/wpf-change-datagrid-cell-background-color-using-a-converter
-    public class LevelToBackgroundConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var vmSettings = values[0] as SettingsViewModel;
-            var level = values[1] as int? ?? 0;
-            if (level == 0) return SystemColors.ControlLightColor;
-            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][0]);
-            return new SolidColorBrush(color);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-    }
-
-    public class LevelToForegroundConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var vmSettings = values[0] as SettingsViewModel;
-            var level = values[1] as int? ?? 0;
-            if (level == 0) return SystemColors.ControlTextColor;
-            var color = (Color)ColorConverter.ConvertFromString("#" + vmSettings.USLEVELCOLORS[level][1]);
-            return new SolidColorBrush(color);
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
-    }
     // https://stackoverflow.com/questions/20707160/data-binding-int-property-to-enum-in-wpf
     public class EnumConverter : IValueConverter
     {

@@ -445,7 +445,6 @@ namespace LollyCloud
             if (check && USPARTTO == v) return;
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
         }
-        public async Task UpdateLevel(int wordid, int level) => await WordFamiDS.Update(wordid, level);
         public async Task UpdateReadNumberId() => await UserSettingDS.Update(INFO_USREADNUMBERID, USREADNUMBERID);
     }
 }

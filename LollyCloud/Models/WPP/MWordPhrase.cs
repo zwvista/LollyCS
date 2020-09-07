@@ -12,7 +12,6 @@ namespace LollyCloud
         string WORD { get; set; }
         string NOTE { get; set; }
         int FAMIID { get; set; }
-        int LEVEL { get; set; }
     }
     public interface MPhraseInterface
     {

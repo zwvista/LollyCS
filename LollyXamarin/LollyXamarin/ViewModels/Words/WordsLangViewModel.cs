@@ -25,19 +25,16 @@ namespace LollyCloud
         public string TextFilter { get; set; } = "";
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
-        [Reactive]
-        public bool Levelge0only { get; set; }
         public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.UNITINFO}";
 
         public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.Levelge0only).Subscribe(_ =>
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ =>
             {
-                WordItemsFiltered = string.IsNullOrEmpty(TextFilter) && !Levelge0only ? null :
+                WordItemsFiltered = string.IsNullOrEmpty(TextFilter) ? null :
                 new ObservableCollection<MLangWord>(WordItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
-                    (!Levelge0only || o.LEVEL >= 0)
+                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower()))
                 ));
                 this.RaisePropertyChanged(nameof(WordItems));
             });

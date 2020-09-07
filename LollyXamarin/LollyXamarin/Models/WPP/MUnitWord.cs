@@ -52,10 +52,6 @@ namespace LollyCloud
         public int FAMIID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LEVEL { get; set; }
-        public bool LevelNotZero { [ObservableAsProperty] get; }
-        [JsonProperty]
-        [Reactive]
         public int CORRECT { get; set; }
         [JsonProperty]
         [Reactive]
@@ -71,7 +67,6 @@ namespace LollyCloud
 
         public MUnitWord()
         {
-            this.WhenAnyValue(x => x.LEVEL, v => v != 0).ToPropertyEx(this, x => x.LevelNotZero);
         }
     }
     public class MUnitWordEdit : ReactiveValidationObject<MUnitWordEdit>
@@ -94,8 +89,6 @@ namespace LollyCloud
         public string NOTE { get; set; }
         [Reactive]
         public int FAMIID { get; set; }
-        [Reactive]
-        public int LEVEL { get; set; }
         public MTextbook Textbook { get; set; }
         [Reactive]
         public string ACCURACY { get; set; }
