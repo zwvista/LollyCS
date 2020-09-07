@@ -22,18 +22,17 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
         <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value"
                   SelectedValue="{Binding Mode, ConverterParameter={x:Type local:ReviewMode}, Converter={StaticResource EnumConverter}}" IsEnabled="{Binding CanChangeMode}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-        <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <Label Content="Interval:" VerticalAlignment="Center" Grid.Row="3" />
-        <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" />
-        <xctk:IntegerUpDown Value="{Binding Interval}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Minimum="1" Maximum="10"/>
-        <Label Content="Group:" VerticalAlignment="Center" Grid.Row="4" />
-        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <Label Content="Interval:" VerticalAlignment="Center" Grid.Row="2" />
+        <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <xctk:IntegerUpDown Value="{Binding Interval}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Minimum="1" Maximum="10"/>
+        <Label Content="Group:" VerticalAlignment="Center" Grid.Row="3" />
+        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <xctk:IntegerUpDown Value="{Binding GroupSelected}" Width="75" VerticalAlignment="Center" Minimum="1"/>
             <Label Content="out of" VerticalAlignment="Center" Grid.Row="3" />
             <xctk:IntegerUpDown Value="{Binding GroupCount}" Width="75" VerticalAlignment="Center" Minimum="1"/>
