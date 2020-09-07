@@ -253,9 +253,9 @@ namespace LollyCloud
                 AutoCorrects = t.e;
                 Voices = t.f;
                 SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTREFERENCE);
-                SelectedDictNote = DictsNote.FirstOrDefault(o => o.ID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
+                SelectedDictNote = DictsNote.FirstOrDefault(o => o.DICTID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
                 SelectedDictsReference = USDICTSREFERENCE.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
-                SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? DictsTranslation.FirstOrDefault();
+                SelectedDictTranslation = DictsTranslation.FirstOrDefault(o => o.DICTID == USDICTTRANSLATION) ?? DictsTranslation.FirstOrDefault();
                 SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOKID);
                 TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
                     .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
@@ -273,12 +273,12 @@ namespace LollyCloud
                 .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
             this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(async v =>
             {
-                USDICTNOTE = v?.ID ?? 0;
+                USDICTNOTE = v?.DICTID ?? 0;
                 await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE);
             });
             this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(async v =>
             {
-                USDICTTRANSLATION = v?.ID ?? 0;
+                USDICTTRANSLATION = v?.DICTID ?? 0;
                 await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION);
             });
             this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(async v =>
