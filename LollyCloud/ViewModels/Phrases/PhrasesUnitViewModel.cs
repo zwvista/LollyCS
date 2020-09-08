@@ -27,6 +27,7 @@ namespace LollyCloud
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
         [Reactive]
         public int TextbookFilter { get; set; }
+        bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
 
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
@@ -48,13 +49,10 @@ namespace LollyCloud
             });
         void ApplyFilters()
         {
-            PhraseItems = new ObservableCollection<MUnitPhrase>(
-                string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? PhraseItemsAll :
-                PhraseItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
-                    (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
-                )
-            );
+            PhraseItems = new ObservableCollection<MUnitPhrase>(NoFilter ? PhraseItemsAll : PhraseItemsAll.Where(o =>
+                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
+            ));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
 
@@ -135,7 +133,7 @@ namespace LollyCloud
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => vmSettings.IsSingleUnitPart && string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => vmSettings.IsSingleUnitPart && NoFilter;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

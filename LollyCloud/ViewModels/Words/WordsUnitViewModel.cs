@@ -33,6 +33,7 @@ namespace LollyCloud
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
         [Reactive]
         public int TextbookFilter { get; set; }
+        bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems?.Count ?? 0} Words in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
 
@@ -56,13 +57,10 @@ namespace LollyCloud
             });
         void ApplyFilters()
         {
-            WordItems = new ObservableCollection<MUnitWord>(
-                string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? WordItemsAll :
-                WordItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
-                    (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
-                )
-            );
+            WordItems = new ObservableCollection<MUnitWord>(NoFilter ? WordItemsAll :WordItemsAll.Where(o =>
+                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
+            ));
             this.RaisePropertyChanged(nameof(WordItems));
         }
 
@@ -180,7 +178,7 @@ namespace LollyCloud
 
             dragInfo.Effects = dragInfo.Data != null ? DragDropEffects.Copy | DragDropEffects.Move : DragDropEffects.None;
         }
-        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => vmSettings.IsSingleUnitPart && string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
+        bool IDragSource.CanStartDrag(IDragInfo dragInfo) => vmSettings.IsSingleUnitPart && NoFilter;
         void IDragSource.Dropped(IDropInfo dropInfo) { }
         async void IDragSource.DragDropOperationFinished(DragDropEffects operationResult, IDragInfo dragInfo) =>
             await Reindex(_ => { });

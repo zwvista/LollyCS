@@ -24,6 +24,7 @@ namespace LollyCloud
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
         [Reactive]
         public int TextbookFilter { get; set; }
+        bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
@@ -47,13 +48,10 @@ namespace LollyCloud
             });
         void ApplyFilters()
         {
-            PhraseItems = new ObservableCollection<MUnitPhrase>(
-                string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? PhraseItemsAll :
-                PhraseItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
-                    (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
-                )
-            );
+            PhraseItems = new ObservableCollection<MUnitPhrase>(NoFilter ? PhraseItemsAll : PhraseItemsAll.Where(o =>
+                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
+            ));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
 
