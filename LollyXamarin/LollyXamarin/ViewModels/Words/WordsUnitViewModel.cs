@@ -31,7 +31,7 @@ namespace LollyCloud
         public int TextbookFilter { get; set; }
         bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public bool IfEmpty { get; set; } = true;
-        public string StatusText => $"{WordItems?.Count ?? 0} Words in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
+        public string StatusText => $"{WordItems.Count} Words in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 

@@ -28,7 +28,7 @@ namespace LollyCloud
         [Reactive]
         public int TextbookFilter { get; set; }
         bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
-        public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
+        public string StatusText => $"{PhraseItems.Count} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
 
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
         {

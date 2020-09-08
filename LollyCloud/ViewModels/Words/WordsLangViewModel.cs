@@ -24,7 +24,7 @@ namespace LollyCloud
         public string TextFilter { get; set; } = "";
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
-        public string StatusText => $"{WordItems?.Count ?? 0} Words in {vmSettings.LANGINFO}";
+        public string StatusText => $"{WordItems.Count} Words in {vmSettings.LANGINFO}";
 
         public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
