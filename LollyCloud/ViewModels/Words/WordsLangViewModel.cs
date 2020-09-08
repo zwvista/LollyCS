@@ -41,12 +41,9 @@ namespace LollyCloud
             });
         void ApplyFilters()
         {
-            WordItems = new ObservableCollection<MLangWord>(
-                string.IsNullOrEmpty(TextFilter) ? WordItemsAll :
-                WordItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower()))
-                )
-            );
+            WordItems = new ObservableCollection<MLangWord>(string.IsNullOrEmpty(TextFilter) ? WordItemsAll : WordItemsAll.Where(o =>
+                string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())
+            ));
             this.RaisePropertyChanged(nameof(WordItems));
         }
 

@@ -37,12 +37,9 @@ namespace LollyCloud
             });
         void ApplyFilters()
         {
-            PhraseItems = new ObservableCollection<MLangPhrase>(
-                string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll :
-                PhraseItemsAll.Where(o =>
-                    (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower()))
-                )
-            );
+            PhraseItems = new ObservableCollection<MLangPhrase>(string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll : PhraseItemsAll.Where(o =>
+                string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())
+            ));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
 
