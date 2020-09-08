@@ -1,13 +1,12 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace LollyCloud
 {
@@ -17,16 +16,15 @@ namespace LollyCloud
         bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
 
-        ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; }
-        ObservableCollection<MUnitPhrase> PhraseItemsFiltered { get; set; }
-        public ObservableCollection<MUnitPhrase> PhraseItems => PhraseItemsFiltered ?? PhraseItemsAll;
+        List<MUnitPhrase> PhraseItemsAll { get; set; } = new List<MUnitPhrase>();
+        public ObservableCollection<MUnitPhrase> PhraseItems { get; set; } = new ObservableCollection<MUnitPhrase>();
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
         [Reactive]
         public int TextbookFilter { get; set; }
-        public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {vmSettings.UNITINFO}";
+        public string StatusText => $"{PhraseItems?.Count ?? 0} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
@@ -34,26 +32,29 @@ namespace LollyCloud
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.inTextbook = inTextbook;
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ =>
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
+            this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
+            Reload();
+        }
+        public void Reload() =>
+            (inTextbook ? unitPhraseDS.GetDataByTextbookUnitPart(
+                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
+            .ToObservable().Subscribe(lst =>
             {
-                PhraseItemsFiltered = string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? null :
-                new ObservableCollection<MUnitPhrase>(PhraseItemsAll.Where(o =>
+                PhraseItemsAll = lst;
+                ApplyFilters();
+            });
+        void ApplyFilters()
+        {
+            PhraseItems = new ObservableCollection<MUnitPhrase>(
+                string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0 ? PhraseItemsAll :
+                PhraseItemsAll.Where(o =>
                     (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
                     (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
-                ));
-                this.RaisePropertyChanged(nameof(PhraseItems));
-            });
-            this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
-            {
-                IsBusy = true;
-                var lst = inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
-                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks);
-                PhraseItemsAll = new ObservableCollection<MUnitPhrase>(lst);
-                this.RaisePropertyChanged(nameof(PhraseItems));
-                IsBusy = false;
-            });
+                )
+            );
+            this.RaisePropertyChanged(nameof(PhraseItems));
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);

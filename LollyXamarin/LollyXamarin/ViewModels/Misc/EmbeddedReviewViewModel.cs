@@ -25,7 +25,7 @@ namespace LollyCloud
             ids = ids.Skip(nFrom).Take(nTo - nFrom).ToList();
             if (Options.Shuffled)
                 ids.Shuffle();
-            subscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval)).ObserveOn(RxApp.MainThreadScheduler).Subscribe(i =>
+            subscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(i =>
             {
                 if (i < ids.Count)
                     getOne(ids[(int)i]);
