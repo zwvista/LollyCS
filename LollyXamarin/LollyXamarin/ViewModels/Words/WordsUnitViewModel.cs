@@ -42,17 +42,16 @@ namespace LollyCloud
             vmNote = new NoteViewModel(vmSettings);
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            Reload();
-        }
-        public void Reload() =>
-            (inTextbook ? unitWordDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks))
-            .ToObservable().Subscribe(lst =>
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                WordItemsAll = lst;
+                IsBusy = true;
+                WordItemsAll = inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
+                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks);
                 ApplyFilters();
+                IsBusy = false;
             });
+        }
         void ApplyFilters()
         {
             WordItems = new ObservableCollection<MUnitWord>(NoFilter ? WordItemsAll : WordItemsAll.Where(o =>
