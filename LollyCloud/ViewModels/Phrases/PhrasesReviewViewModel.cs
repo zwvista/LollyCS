@@ -101,7 +101,7 @@ namespace LollyCloud
             else if (!CorrectIsVisible && !IncorrectIsVisible)
             {
                 PhraseInputString = vmSettings.AutoCorrectInput(PhraseInputString);
-                PhraseTargetIsVisible = false;
+                PhraseTargetIsVisible = true;
                 if (PhraseInputString == CurrentPhrase)
                     CorrectIsVisible = true;
                 else

@@ -38,7 +38,7 @@
                 <Label Visibility="{Binding IncorrectIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
             </DockPanel>
             <Label Content="{Binding PhraseTargetString}" Visibility="{Binding PhraseTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" Grid.Row="1" />
-            <Label Content="{Binding TranslationString}" Foreground="Pink" Grid.Row="2" />
+            <Label Content="{Binding TranslationString}" Foreground="Magenta" Grid.Row="2" />
             <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInputString}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
             <Button Grid.Row="4" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" HorizontalAlignment="Right" Click="btnCheck_Click"/>
         </Grid>

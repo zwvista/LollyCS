@@ -18,7 +18,7 @@ namespace LollyCloud
         [Reactive]
         public bool Shuffled { get; set; } = true;
         [Reactive]
-        public int Interval { get; set; } = 3;
+        public int Interval { get; set; } = 5;
         [Reactive]
         public int GroupSelected { get; set; } = 1;
         [Reactive]

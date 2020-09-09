@@ -39,9 +39,9 @@
                 <Label Visibility="{Binding IncorrectIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
                 <Label Content="{Binding AccuracyString}" Visibility="{Binding AccuracyIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
             </DockPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
                 <Label Content="{Binding WordTargetString}" Visibility="{Binding WordTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" />
-                <Label Content="{Binding NoteTargetString}" Visibility="{Binding NoteTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Pink" />
+                <Label Content="{Binding NoteTargetString}" Visibility="{Binding NoteTargetIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Magenta" FontSize="18" VerticalAlignment="Center" />
             </StackPanel>
             <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
             <TextBox x:Name="tbWordInput" Text="{Binding WordInputString}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
