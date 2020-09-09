@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
@@ -21,20 +22,22 @@ namespace LollyCloud
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
         public string StatusText => $"{PhraseItems.Count} Phrases in {vmSettings.LANGINFO}";
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
         public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            Reload();
-        }
-        public void Reload() =>
-            langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                PhraseItemsAll = lst;
+                IsBusy = true;
+                PhraseItemsAll = await langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID);
                 ApplyFilters();
+                IsBusy = false;
             });
+        }
         void ApplyFilters()
         {
             PhraseItems = new ObservableCollection<MLangPhrase>(string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll : PhraseItemsAll.Where(o =>

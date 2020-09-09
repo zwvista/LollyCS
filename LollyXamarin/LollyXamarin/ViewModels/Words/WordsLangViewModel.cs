@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
@@ -25,20 +26,22 @@ namespace LollyCloud
         [Reactive]
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
         public string StatusText => $"{WordItems.Count} Words in {vmSettings.LANGINFO}";
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
         public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            Reload();
-        }
-        public void Reload() =>
-            langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID).ToObservable().Subscribe(lst =>
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                WordItemsAll = lst;
+                IsBusy = true;
+                WordItemsAll = await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID);
                 ApplyFilters();
+                IsBusy = false;
             });
+        }
         void ApplyFilters()
         {
             WordItems = new ObservableCollection<MLangWord>(string.IsNullOrEmpty(TextFilter) ? WordItemsAll : WordItemsAll.Where(o =>

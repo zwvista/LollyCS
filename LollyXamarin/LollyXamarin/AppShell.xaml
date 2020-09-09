@@ -83,7 +83,11 @@
         <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="Browse" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
         <ShellContent Title="Words in Unit" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsUnitPage}" />
+        <ShellContent Title="Words in Textbooks" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
+        <ShellContent Title="Words in Language" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsLangPage}" />
         <ShellContent Title="Phrases in Unit" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
+        <ShellContent Title="Phrases in Textbooks" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
+        <ShellContent Title="Phrases in Language" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

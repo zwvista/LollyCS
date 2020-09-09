@@ -23,8 +23,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Phrases\PhrasesLangPage.xaml.cs">
+      <DependentUpon>PhrasesLangPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Phrases\PhrasesTextbookPage.xaml.cs">
+      <DependentUpon>PhrasesTextbookPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Phrases\PhrasesUnitPage.xaml.cs">
       <DependentUpon>PhrasesUnitPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Words\WordsLangPage.xaml.cs">
+      <DependentUpon>WordsLangPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Words\WordsTextbookPage.xaml.cs">
+      <DependentUpon>WordsTextbookPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Words\WordsUnitPage.xaml.cs">
       <DependentUpon>WordsUnitPage.xaml</DependentUpon>
