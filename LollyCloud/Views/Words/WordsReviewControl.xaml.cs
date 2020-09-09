@@ -51,5 +51,11 @@ namespace LollyCloud
             if (e.Key == Key.Return && !(vm.IsTestMode && string.IsNullOrEmpty(vm.WordInputString)))
                 await vm.Check();
         }
+
+        void btnSpeak_Click(object sender, RoutedEventArgs e)
+        {
+            if (vm.HasNext)
+                App.Speak(vm.vmSettings, vm.CurrentWord);
+        }
     }
 }

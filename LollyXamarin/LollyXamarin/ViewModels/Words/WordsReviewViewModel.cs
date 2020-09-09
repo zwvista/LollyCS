@@ -92,7 +92,7 @@ namespace LollyCloud
                 Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
             }
         }
-        public async Task<string> GetTranslation()
+        async Task<string> GetTranslation()
         {
             if (!vmSettings.HasDictTranslation) return "";
             var url = DictTranslation.UrlString(CurrentWord, vmSettings.AutoCorrects);
@@ -140,7 +140,7 @@ namespace LollyCloud
                 CheckString = "Check";
             }
         }
-        public async Task DoTest()
+        async Task DoTest()
         {
             IndexIsVisible = HasNext;
             CorrectIsVisible = false;

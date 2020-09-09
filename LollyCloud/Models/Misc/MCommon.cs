@@ -5,6 +5,14 @@ using ReactiveUI.Fody.Helpers;
 
 namespace LollyCloud
 {
+    public enum DictWebBrowserStatus
+    {
+        Ready, Navigating, Automating
+    }
+    public enum UnitPartToType
+    {
+        Unit, Part, To
+    }
     public class MSelectItem
     {
         public int Value { get; set; }

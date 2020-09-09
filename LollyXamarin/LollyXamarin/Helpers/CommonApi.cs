@@ -11,18 +11,6 @@ using System.Web;
 
 namespace LollyCloud
 {
-    public enum DictWebBrowserStatus
-    {
-        Ready, Navigating, Automating
-    }
-    public enum ReviewMode
-    {
-        ReviewAuto, Test, ReviewManual
-    }
-    public enum UnitPartToType
-    {
-        Unit, Part, To
-    }
     public static class CommonApi
     {
         public static string LollyUrlAPI = "https://zwvista.tk/lolly/api.php/records/";

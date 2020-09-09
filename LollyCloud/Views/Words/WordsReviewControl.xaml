@@ -14,6 +14,7 @@
             <ToolBar Band="2">
                 <Button Content="New Test" Click="btnNewTest_Click"/>
                 <CheckBox Content="Speak?" IsChecked="{Binding IsSpeaking}" />
+                <Button Content="Speak" Click="btnSpeak_Click"/>
             </ToolBar>
         </ToolBarTray>
         <Grid Margin="10">

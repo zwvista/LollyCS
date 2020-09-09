@@ -5,6 +5,10 @@ using System.Reactive.Linq;
 
 namespace LollyCloud
 {
+    public enum ReviewMode
+    {
+        ReviewAuto, Test, ReviewManual
+    }
     public class MReviewOptions : ReactiveObject
     {
         public bool IsEmbedded { get; set; }
