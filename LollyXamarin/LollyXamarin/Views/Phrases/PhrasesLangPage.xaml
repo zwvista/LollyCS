@@ -16,19 +16,24 @@
         <CollectionView ItemsSource="{Binding PhraseItems}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" x:DataType="cloud:MLangPhrase">
+                    <Grid Padding="10" x:DataType="cloud:MLangPhrase">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <StackLayout Padding="10">
                             <Label Text="{Binding PHRASE}" Style="{StaticResource Key=Text2}" />
                             <Label Text="{Binding TRANSLATION}" Style="{StaticResource Key=Text3}" />
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    NumberOfTapsRequired="1"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type cloud:PhrasesUnitViewModel}}, Path=ItemTapped}"		
-                                    CommandParameter="{Binding .}">
-                                </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
                         </StackLayout>
-                    </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type cloud:PhrasesUnitViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

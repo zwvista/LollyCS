@@ -16,24 +16,29 @@
         <CollectionView ItemsSource="{Binding PhraseItems}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" x:DataType="cloud:MUnitPhrase">
-                        <StackLayout Padding="10" Spacing="2">
+                    <Grid Padding="10" x:DataType="cloud:MUnitPhrase">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Spacing="2">
                             <Label Text="{Binding UNITSTR}" Style="{StaticResource Key=Text1}" />
                             <Label Text="{Binding PARTSTR}" Style="{StaticResource Key=Text1}" />
                             <Label Text="{Binding SEQNUM}" Style="{StaticResource Key=Text1}" />
                         </StackLayout>
-                        <StackLayout Padding="10">
+                        <StackLayout Grid.Column="1">
                             <Label Text="{Binding PHRASE}" Style="{StaticResource Key=Text2}" />
                             <Label Text="{Binding TRANSLATION}" Style="{StaticResource Key=Text3}" />
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    NumberOfTapsRequired="1"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type cloud:PhrasesUnitViewModel}}, Path=ItemTapped}"		
-                                    CommandParameter="{Binding .}">
-                                </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
                         </StackLayout>
-                    </StackLayout>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type cloud:PhrasesUnitViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
