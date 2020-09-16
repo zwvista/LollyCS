@@ -27,21 +27,29 @@ namespace LollyCloud
 
         public List<MUSMapping> USMappings { get; set; }
         public List<MUserSetting> UserSettings { get; set; }
-        (MUserSetting, PropertyInfo) GetUS(MUserSettingInfo info)
-        {
-            var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
-            var pi = o?.GetType().GetProperty($"VALUE{info.VALUEID}");
-            return (o, pi);
-        }
         string GetUSValue(MUserSettingInfo info)
         {
-            var (o, pi) = GetUS(info);
-            return pi?.GetValue(o) as string;
+            var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
+            switch (info.VALUEID)
+            {
+                case 1: return o?.VALUE1;
+                case 2: return o?.VALUE2;
+                case 3: return o?.VALUE3;
+                case 4: return o?.VALUE4;
+                default: return null;
+            }
         }
         void SetUSValue(MUserSettingInfo info, string value, string name)
         {
-            var (o, pi) = GetUS(info);
-            pi?.SetValue(o, value);
+            var o = UserSettings?.FirstOrDefault(v => v.ID == info.USERSETTINGID);
+            if (o == null) return;
+            switch (info.VALUEID)
+            {
+                case 1: o.VALUE1 = value; break;
+                case 2: o.VALUE2 = value; break;
+                case 3: o.VALUE3 = value; break;
+                case 4: o.VALUE4 = value; break;
+            }
             this.RaisePropertyChanged(name);
         }
         MUserSettingInfo INFO_USLANGID = new MUserSettingInfo();
