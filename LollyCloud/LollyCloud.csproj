@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props" Condition="Exists('..\packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props')" />
+  <Import Project="..\packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props" Condition="Exists('..\packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props')" />
   <Import Project="..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.props')" />
   <Import Project="..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props')" />
   <Import Project="..\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props')" />
@@ -94,7 +94,7 @@
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
     <Reference Include="DynamicData, Version=6.16.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DynamicData.6.16.3\lib\net461\DynamicData.dll</HintPath>
+      <HintPath>..\packages\DynamicData.6.16.9\lib\net461\DynamicData.dll</HintPath>
     </Reference>
     <Reference Include="FontAwesome5, Version=2.0.8.0, Culture=neutral, PublicKeyToken=9cfaf01297a008f8, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome5.2.0.8\lib\net472\FontAwesome5.dll</HintPath>
@@ -132,26 +132,22 @@
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="ReactiveUI, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveUI.11.5.26\lib\net461\ReactiveUI.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ReactiveUI.11.5.35\lib\net461\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.Events.WPF, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveUI.Events.WPF.11.5.26\lib\net472\ReactiveUI.Events.WPF.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ReactiveUI.Events.WPF.11.5.35\lib\net472\ReactiveUI.Events.WPF.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.Fody.Helpers, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveUI.Fody.11.5.26\lib\net461\ReactiveUI.Fody.Helpers.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ReactiveUI.Fody.11.5.35\lib\net461\ReactiveUI.Fody.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.Validation, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReactiveUI.Validation.1.5.5\lib\net461\ReactiveUI.Validation.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.WPF, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveUI.WPF.11.5.26\lib\net472\ReactiveUI.WPF.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ReactiveUI.WPF.11.5.35\lib\net472\ReactiveUI.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Splat, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Splat.9.5.20\lib\net461\Splat.dll</HintPath>
+      <HintPath>..\packages\Splat.9.5.37\lib\net461\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -639,17 +635,17 @@
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.6.2.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.2.4\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x64.84.4.1\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.84.4.1\build\cef.redist.x64.props'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.84.4.1\build\cef.redist.x86.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.targets'))" />
-    <Error Condition="!Exists('..\packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.2.5\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.2.5\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props'))" />
   </Target>
   <Import Project="..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" />
-  <Import Project="..\packages\Fody.6.2.4\build\Fody.targets" Condition="Exists('..\packages\Fody.6.2.4\build\Fody.targets')" />
   <Import Project="..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.84.4.10\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.84.4.10\build\CefSharp.Wpf.targets')" />
+  <Import Project="..\packages\Fody.6.2.5\build\Fody.targets" Condition="Exists('..\packages\Fody.6.2.5\build\Fody.targets')" />
 </Project>
