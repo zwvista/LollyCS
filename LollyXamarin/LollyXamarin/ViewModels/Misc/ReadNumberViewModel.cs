@@ -16,7 +16,7 @@ namespace LollyCloud
         public ReadNumberViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            Type = (ReadNumberType)this.vmSettings.USREADNUMBERID;
+            Type = (ReadNumberType)this.vmSettings.USREADNUMBER;
             ReadNumberCommand = ReactiveCommand.Create(() =>
             {
                 Text =

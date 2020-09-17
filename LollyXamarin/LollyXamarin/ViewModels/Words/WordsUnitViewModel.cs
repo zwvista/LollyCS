@@ -107,7 +107,7 @@ namespace LollyCloud
             return new MUnitWord
             {
                 LANGID = vmSettings.SelectedLang.ID,
-                TEXTBOOKID = vmSettings.USTEXTBOOKID,
+                TEXTBOOKID = vmSettings.USTEXTBOOK,
                 UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO,
                 PART = maxElem?.PART ?? vmSettings.USPARTTO,
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
