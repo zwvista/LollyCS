@@ -113,11 +113,11 @@ namespace LollyCloud
             get => int.TryParse(GetUSValue(INFO_USDICTTRANSLATION), out var v) ? v : 0;
             set => SetUSValue(INFO_USDICTTRANSLATION, value.ToString(), nameof(USDICTTRANSLATION));
         }
-        MUserSettingInfo INFO_USVOICEID = new MUserSettingInfo();
-        public int USVOICEID
+        MUserSettingInfo INFO_USVOICE = new MUserSettingInfo();
+        public int USVOICE
         {
-            get => int.TryParse(GetUSValue(INFO_USVOICEID), out var v) ? v : 0;
-            set => SetUSValue(INFO_USVOICEID, value.ToString(), nameof(USVOICEID));
+            get => int.TryParse(GetUSValue(INFO_USVOICE), out var v) ? v : 0;
+            set => SetUSValue(INFO_USVOICE, value.ToString(), nameof(USVOICE));
         }
         MUserSettingInfo INFO_USUNITFROM = new MUserSettingInfo();
         public int USUNITFROM
@@ -250,7 +250,7 @@ namespace LollyCloud
                 INFO_USDICTNOTE = GetUSInfo(MUSMapping.NAME_USDICTNOTE);
                 INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
                 INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
-                INFO_USVOICEID = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICE);
+                INFO_USVOICE = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICE);
                 var t = await DictionaryDS.GetDictsReferenceByLang(USLANG).ToObservable().Zip(DictionaryDS.GetDictsNoteByLang(USLANG).ToObservable(),
                     DictionaryDS.GetDictsTranslationByLang(USLANG).ToObservable(), TextbookDS.GetDataByLang(USLANG).ToObservable(),
                     AutoCorrectDS.GetDataByLang(USLANG).ToObservable(), VoiceDS.GetDataByLang(USLANG).ToObservable(), (a, b, c, d, e, f) => (a, b, c, d, e, f)).ToTask();
@@ -273,8 +273,8 @@ namespace LollyCloud
             });
             this.WhenAnyValue(x => x.SelectedVoice).Skip(1).Subscribe(async v =>
             {
-                USVOICEID = v?.ID ?? 0;
-                await UserSettingDS.Update(INFO_USVOICEID, USVOICEID);
+                USVOICE = v?.ID ?? 0;
+                await UserSettingDS.Update(INFO_USVOICE, USVOICE);
             });
             this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v =>
             {
