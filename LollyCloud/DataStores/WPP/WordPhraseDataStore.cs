@@ -10,6 +10,12 @@ namespace LollyCloud
         async Task<List<MWordPhrase>> GetDataByWordPhrase(int wordid, int phraseid) =>
         (await GetDataByUrl<MWordsPhrases>($"WORDSPHRASES?filter=WORDID,eq,{wordid}&filter=PHRASEID,eq,{phraseid}")).Records;
 
+        public async Task<List<MLangPhrase>> GetPhrasesByWordId(int wordid) =>
+        (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).Records;
+
+        public async Task<List<MLangWord>> GetWordsByPhraseId(int phraseid) =>
+        (await GetDataByUrl<MLangWords>($"VWORDSPHRASE?filter=PHRASEID,eq,{phraseid}")).Records;
+
         async Task<int> Create(MWordPhrase item) =>
         await CreateByUrl($"WORDSPHRASES", item);
 
@@ -42,11 +48,5 @@ namespace LollyCloud
             foreach (var o in lst)
                 await Delete(o.ID);
         }
-
-        public async Task<List<MLangPhrase>> GetPhrasesByWordId(int wordid) =>
-        (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).Records;
-
-        public async Task<List<MLangWord>> GetWordsByPhraseId(int phraseid) =>
-        (await GetDataByUrl<MLangWords>($"VPHRASESWORD?filter=PHRASEID,eq,{phraseid}")).Records;
     }
 }

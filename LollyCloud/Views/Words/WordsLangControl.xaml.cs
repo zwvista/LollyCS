@@ -95,5 +95,7 @@ namespace LollyCloud
             await vm.Create(item);
             vm.WordItems.Add(item);
         }
+        public override async Task SearchPhrases() =>
+            await vm.SearchPhrases(selectedWordID);
     }
 }
