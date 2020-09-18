@@ -1,8 +1,8 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
@@ -13,11 +13,13 @@ namespace LollyCloud
         public SettingsViewModel vmSettings;
         TextbookDataStore textbookDS = new TextbookDataStore();
 
-        public ObservableCollection<MTextbook> Items { get; set; }
+        public ObservableCollection<MTextbook> Items { get; set; } = new ObservableCollection<MTextbook>();
+        public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
 
         public TextbooksViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            this.WhenAnyValue(x => x.Items).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() =>
