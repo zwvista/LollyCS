@@ -47,7 +47,12 @@ namespace LollyCloud
         }
 
         public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);
-        public async Task Create(MLangPhrase item) => item.ID = await langPhraseDS.Create(item);
+        public async Task Create(MLangPhrase item)
+        {
+            item.ID = await langPhraseDS.Create(item);
+            PhraseItemsAll.Add(item);
+            ApplyFilters();
+        }
         public async Task Delete(MLangPhrase item) => await langPhraseDS.Delete(item);
 
         public MLangPhrase NewLangPhrase() =>

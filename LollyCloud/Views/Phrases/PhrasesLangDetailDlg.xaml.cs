@@ -21,13 +21,13 @@ namespace LollyCloud
     public partial class PhrasesLangDetailDlg : Window
     {
         PhrasesLangDetailViewModel vmDetail;
-        public PhrasesLangDetailDlg(Window owner, PhrasesLangViewModel vm, int index = -1)
+        public PhrasesLangDetailDlg(Window owner, PhrasesLangViewModel vm, MLangPhrase item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbPhrase.Focus();
             Owner = owner;
-            vmDetail = new PhrasesLangDetailViewModel(vm, index);
+            vmDetail = new PhrasesLangDetailViewModel(vm, item);
             DataContext = vmDetail.ItemEdit;
             dgPhrases.DataContext = vmDetail.vmSinglePhrase;
         }

@@ -32,15 +32,15 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgWords.CancelEdit();
-            int index = vm.WordItems.IndexOf((MLangWord)((DataGridRow)sender).Item);
+            var item = (MLangWord)((DataGridRow)sender).Item;
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm, index);
+            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm, item);
             dlg.ShowDialog();
         }
 
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm);
+            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm, vm.NewLangWord());
             dlg.ShowDialog();
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
