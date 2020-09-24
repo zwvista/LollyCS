@@ -57,27 +57,18 @@ namespace LollyCloud
         }
 
         public async Task UpdateSeqNum(int id, int seqnum) => await unitPhraseDS.UpdateSeqNum(id, seqnum);
-        public async Task<MUnitPhrase> Update(MUnitPhrase item)
+        public async Task Update(MUnitPhrase item)
         {
             await unitPhraseDS.Update(item);
             var o = await unitPhraseDS.GetDataById(item.ID, vmSettings.Textbooks);
-            return o;
+            o?.CopyProperties(item);
         }
-        public async Task<MUnitPhrase> Create(MUnitPhrase item)
+        public async Task Create(MUnitPhrase item)
         {
             int id = await unitPhraseDS.Create(item);
             var o = await unitPhraseDS.GetDataById(id, vmSettings.Textbooks);
-            return o;
-        }
-        public void Add(MUnitPhrase item)
-        {
-            PhraseItemsAll.Add(item);
-            this.RaisePropertyChanged(nameof(PhraseItems));
-        }
-        public void Replace(int index, MUnitPhrase item)
-        {
-            PhraseItems[index] = item;
-            this.RaisePropertyChanged(nameof(PhraseItems));
+            PhraseItemsAll.Add(o);
+            ApplyFilters();
         }
         public async Task Delete(MUnitPhrase item) =>
             await unitPhraseDS.Delete(item);

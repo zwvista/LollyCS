@@ -8,9 +8,8 @@ namespace LollyCloud
         public MUnitWordEdit ItemEdit = new MUnitWordEdit();
         public SingleWordViewModel vmSingleWord;
 
-        public WordsUnitDetailViewModel(WordsUnitViewModel vm, int index)
+        public WordsUnitDetailViewModel(WordsUnitViewModel vm, MUnitWord item)
         {
-            var item = index == -1 ? vm.NewUnitWord() : vm.WordItems[index];
             item.CopyProperties(ItemEdit);
             vmSingleWord = new SingleWordViewModel(item.WORD, vm.vmSettings);
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
@@ -18,15 +17,9 @@ namespace LollyCloud
                 ItemEdit.CopyProperties(item);
                 item.WORD = vm.vmSettings.AutoCorrectInput(item.WORD);
                 if (item.ID == 0)
-                {
-                    var o = await vm.Create(item);
-                    vm.Add(o);
-                }
+                    await vm.Create(item);
                 else
-                {
-                    var o = await vm.Update(item);
-                    vm.Replace(index, o);
-                }
+                    await vm.Update(item);
             }, ItemEdit.IsValid());
         }
     }

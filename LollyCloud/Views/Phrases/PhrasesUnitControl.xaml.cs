@@ -31,9 +31,9 @@ namespace LollyCloud
         void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgPhrases.CancelEdit();
-            int index = vm.PhraseItems.IndexOf((MUnitPhrase)((DataGridRow)sender).Item);
+            var item = (MUnitPhrase)((DataGridRow)sender).Item;
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, index);
+            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item);
             dlg.ShowDialog();
         }
 
@@ -45,7 +45,7 @@ namespace LollyCloud
 
         void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm);
+            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, vm.NewUnitPhrase());
             dlg.ShowDialog();
         }
 
