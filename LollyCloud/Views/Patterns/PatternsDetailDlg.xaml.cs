@@ -21,14 +21,13 @@ namespace LollyCloud
     public partial class PatternsDetailDlg : Window
     {
         PatternsDetailViewModel vmDetail;
-        public MPattern Item { get; set; }
-        public PatternsDetailDlg(Window owner, MPattern item, PatternsViewModel vm)
+        public PatternsDetailDlg(Window owner, PatternsViewModel vm, MPattern item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbPattern.Focus();
             Owner = owner;
-            vmDetail = new PatternsDetailViewModel(Item = item, vm);
+            vmDetail = new PatternsDetailViewModel(vm, item);
             DataContext = vmDetail.ItemEdit;
         }
     }

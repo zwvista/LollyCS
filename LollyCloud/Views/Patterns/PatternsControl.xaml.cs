@@ -32,22 +32,20 @@ namespace LollyCloud
         {
             dgPatterns.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PatternsDetailDlg(Window.GetWindow(this), (MPattern)((DataGridRow)sender).Item, vm);
+            var dlg = new PatternsDetailDlg(Window.GetWindow(this), vm, (MPattern)((DataGridRow)sender).Item);
             dlg.ShowDialog();
         }
 
         void btnAddPattern_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PatternsDetailDlg(Window.GetWindow(this), vm.NewPattern(), vm);
-            if (dlg.ShowDialog() == true)
-                vm.PatternItems.Add(dlg.Item);
+            var dlg = new PatternsDetailDlg(Window.GetWindow(this), vm, vm.NewPattern());
+            dlg.ShowDialog();
         }
 
         void btnAddWebPage_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), vm.NewPatternWebPage(selectedPatternID, selectedPattern), vm);
-            if (dlg.ShowDialog() == true)
-                vm.WebPageItems.Add(dlg.Item);
+            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), vm, vm.NewPatternWebPage(selectedPatternID, selectedPattern));
+            dlg.ShowDialog();
         }
 
         async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -144,7 +142,7 @@ namespace LollyCloud
         {
             dgWebPages.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), (MPatternWebPage)((DataGridRow)sender).Item, vm);
+            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), vm, (MPatternWebPage)((DataGridRow)sender).Item);
             dlg.ShowDialog();
         }
 

@@ -21,14 +21,13 @@ namespace LollyCloud
     public partial class PatternsWebPageDlg : Window
     {
         PatternsWebPageViewModel vmDetail;
-        public MPatternWebPage Item;
-        public PatternsWebPageDlg(Window owner, MPatternWebPage item, PatternsViewModel vm)
+        public PatternsWebPageDlg(Window owner, PatternsViewModel vm, MPatternWebPage item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
             Owner = owner;
-            vmDetail = new PatternsWebPageViewModel(Item = item, vm);
+            vmDetail = new PatternsWebPageViewModel(vm, item);
             DataContext = vmDetail.ItemEdit;
             btnExisting.IsEnabled = btnNew.IsEnabled = vmDetail.ItemEdit.ID == 0;
         }

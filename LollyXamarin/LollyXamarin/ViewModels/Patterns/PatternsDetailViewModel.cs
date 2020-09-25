@@ -5,14 +5,10 @@ namespace LollyCloud
 {
     public class PatternsDetailViewModel : ReactiveObject
     {
-        MPattern item;
-        PatternsViewModel vm;
         public MPatternEdit ItemEdit = new MPatternEdit();
 
-        public PatternsDetailViewModel(MPattern item, PatternsViewModel vm)
+        public PatternsDetailViewModel(PatternsViewModel vm, MPattern item)
         {
-            this.item = item;
-            this.vm = vm;
             item.CopyProperties(ItemEdit);
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
             {

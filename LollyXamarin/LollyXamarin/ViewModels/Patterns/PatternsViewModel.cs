@@ -73,14 +73,17 @@ namespace LollyCloud
         }
         public async Task UpdatePatternWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Update(item);
-        public async Task<int> CreatePatternWebPage(MPatternWebPage item) =>
-            await patternWebPageDS.Create(item);
+        public async Task CreatePatternWebPage(MPatternWebPage item)
+        {
+            item.ID = await patternWebPageDS.Create(item);
+            WebPageItems.Add(item);
+        }
         public async Task DeletePatternWebPage(int id) =>
             await patternWebPageDS.Delete(id);
         public async Task UpdateWebPage(MPatternWebPage item) =>
             await webPageDS.Update(item);
-        public async Task<int> CreateWebPage(MPatternWebPage item) =>
-            await webPageDS.Create(item);
+        public async Task CreateWebPage(MPatternWebPage item) =>
+            item.WEBPAGEID = await webPageDS.Create(item);
         public async Task DeleteWebPage(int id) =>
             await webPageDS.Delete(id);
         public MPatternWebPage NewPatternWebPage(int patternid, string pattern) =>
