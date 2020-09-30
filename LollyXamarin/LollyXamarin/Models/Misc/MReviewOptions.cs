@@ -7,7 +7,7 @@ namespace LollyCloud
 {
     public enum ReviewMode
     {
-        ReviewAuto, Test, ReviewManual
+        ReviewAuto, ReviewManual, Test, Textbook
     }
     public class MReviewOptions : ReactiveObject
     {

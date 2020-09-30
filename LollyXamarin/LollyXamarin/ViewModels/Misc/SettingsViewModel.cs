@@ -230,8 +230,9 @@ namespace LollyCloud
         public static List<MSelectItem> ReviewModes { get; set; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Review(Auto)"),
-            new MSelectItem(1, "Test"),
-            new MSelectItem(2, "Review(Manual)"),
+            new MSelectItem(1, "Review(Manual)"),
+            new MSelectItem(2, "Test"),
+            new MSelectItem(3, "Textbook"),
         };
 
         public HttpClient client = new HttpClient();

@@ -1,11 +1,11 @@
-﻿using ReactiveUI;
+﻿using DynamicData.Aggregation;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace LollyCloud
 {
@@ -24,7 +24,7 @@ namespace LollyCloud
         public bool HasNext => Index < Count;
         public MUnitWord CurrentItem => HasNext ? Items[Index] : null;
         public string CurrentWord => HasNext ? Items[Index].WORD : "";
-        public bool IsTestMode => Options.Mode == ReviewMode.Test;
+        public bool IsTestMode => Options.Mode == ReviewMode.Test || Options.Mode == ReviewMode.Textbook;
         public MReviewOptions Options { get; set; } = new MReviewOptions();
         public IDisposable SubscriptionTimer;
         public Action DoTestAction;
@@ -67,13 +67,35 @@ namespace LollyCloud
         public async Task NewTest()
         {
             SubscriptionTimer?.Dispose();
-            Items = await unitWordDS.GetDataByTextbookUnitPart(
-                vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
-            int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
-            int nTo = Count * Options.GroupSelected / Options.GroupCount;
-            Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
-            if (Options.Shuffled)
-                Items.Shuffle();
+            if (Options.Mode == ReviewMode.Textbook)
+            {
+                var rand = new Random();
+                var lst = await unitWordDS.GetDataByTextbook(vmSettings.SelectedTextbook);
+                var lst2 = new List<MUnitWord>();
+                foreach (var o in lst)
+                {
+                    var s = o.ACCURACY;
+                    int t = Math.Min(6, 11 - (!s.EndsWith("%") ? 0 : (int)(double.Parse(s.TrimEnd('%')) / 10)));
+                    Enumerable.Range(0, t).ForEach(_ => lst2.Add(o));
+                }
+                Items = new List<MUnitWord>();
+                while (Items.Count < 50)
+                {
+                    var o = lst2[rand.Next(lst2.Count)];
+                    if (!Items.Contains(o))
+                        Items.Add(o);
+                }
+            }
+            else
+            {
+                Items = await unitWordDS.GetDataByTextbookUnitPart(
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
+                int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
+                int nTo = Count * Options.GroupSelected / Options.GroupCount;
+                Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();
+                if (Options.Shuffled)
+                    Items.Shuffle();
+            }
             CorrectIDs = new List<int>();
             Index = 0;
             await DoTest();
