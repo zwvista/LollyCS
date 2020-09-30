@@ -16,6 +16,15 @@ namespace LollyCloud
             return lst;
         }
 
+        public async Task<List<MUnitPhrase>> GetDataByTextbook(MTextbook textbook)
+        {
+            var lst = (await GetDataByUrl<MUnitPhrases>($"VUNITPHRASES?filter=TEXTBOOKID,eq,{textbook.ID}&order=PHRASEID")).Records
+                .Distinct(o => o.PHRASEID).ToList();
+            foreach (var o in lst)
+                o.Textbook = textbook;
+            return lst;
+        }
+
         List<MUnitPhrase> SetTextbook(List<MUnitPhrase> lst, List<MTextbook> lstTextbooks)
         {
             foreach (var o in lst)

@@ -78,7 +78,8 @@ namespace LollyCloud
                     Enumerable.Range(0, t).ForEach(_ => lst2.Add(o));
                 }
                 Items = new List<MUnitWord>();
-                while (Items.Count < 50)
+                int cnt = Math.Min(50, lst.Count);
+                while (Items.Count < cnt)
                 {
                     var o = lst2[rand.Next(lst2.Count)];
                     if (!Items.Contains(o))
