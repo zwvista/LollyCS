@@ -23,6 +23,8 @@ namespace LollyCloud
         public int GroupSelected { get; set; } = 1;
         [Reactive]
         public int GroupCount { get; set; } = 1;
+        [Reactive]
+        public bool SpeakingEnabled { get; set; } = true;
 
         public MReviewOptions()
         {

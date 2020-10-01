@@ -181,6 +181,8 @@ namespace LollyCloud
                 IndexString = $"{Index + 1}/{Count}";
                 AccuracyString = CurrentItem.ACCURACY;
                 TranslationString = await GetTranslation();
+                if (string.IsNullOrEmpty(TranslationString) && !Options.SpeakingEnabled)
+                    WordInputString = CurrentWord;
             }
             else if (Options.Mode == ReviewMode.ReviewAuto)
                 SubscriptionTimer?.Dispose();
