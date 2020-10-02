@@ -82,7 +82,7 @@ namespace LollyCommon
                     Enumerable.Range(0, t).ForEach(_ => lst2.Add(o));
                 }
                 Items = new List<MUnitWord>();
-                int cnt = Math.Min(50, lst.Count);
+                int cnt = Math.Min(Options.ReviewCount, lst.Count);
                 while (Items.Count < cnt)
                 {
                     var o = lst2[rand.Next(lst2.Count)];

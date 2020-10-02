@@ -25,6 +25,8 @@ namespace LollyCommon
         public int GroupCount { get; set; } = 1;
         [Reactive]
         public bool SpeakingEnabled { get; set; } = true;
+        [Reactive]
+        public int ReviewCount { get; set; } = 10;
 
         public MReviewOptions()
         {

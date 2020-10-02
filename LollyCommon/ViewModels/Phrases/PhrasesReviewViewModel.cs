@@ -61,7 +61,7 @@ namespace LollyCommon
             {
                 var rand = new Random();
                 var lst = await unitPhraseDS.GetDataByTextbook(vmSettings.SelectedTextbook);
-                int cnt = Math.Min(50, lst.Count);
+                int cnt = Math.Min(Options.ReviewCount, lst.Count);
                 lst.Shuffle();
                 Items = lst.Take(cnt).ToList();
             }

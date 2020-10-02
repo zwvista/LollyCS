@@ -7,15 +7,13 @@
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="LollyCloud.ReviewOptionsDlg"
         mc:Ignorable="d"
-        Title="Review Options" Height="300" Width="500" WindowStartupLocation="CenterOwner">
+        Title="Review Options" Height="300" Width="360" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <local:EnumConverter x:Key="EnumConverter"/>
     </Window.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -23,23 +21,29 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
         <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value"
                   SelectedValue="{Binding Mode, ConverterParameter={x:Type common:ReviewMode}, Converter={StaticResource EnumConverter}}" IsEnabled="{Binding CanChangeMode}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-        <CheckBox Content="Speaking Enabled" IsChecked="{Binding SpeakingEnabled}" VerticalAlignment="Center" Grid.Row="1" />
-        <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
-        <Label Content="Interval:" VerticalAlignment="Center" Grid.Row="2" />
-        <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
-        <xctk:IntegerUpDown Value="{Binding Interval}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Minimum="1" Maximum="10"/>
-        <Label Content="Group:" VerticalAlignment="Center" Grid.Row="3" />
-        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
+        <CheckBox Content="Speaking Enabled" IsChecked="{Binding SpeakingEnabled}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+        <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" />
+        <Label Content="Interval:" VerticalAlignment="Center" Grid.Row="3" />
+        <xctk:IntegerUpDown Value="{Binding Interval}" Grid.Row="3" Grid.Column="1" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Minimum="1" Maximum="10"/>
+        <Label Content="Group:" VerticalAlignment="Center" Grid.Row="4" />
+        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <xctk:IntegerUpDown Value="{Binding GroupSelected}" Width="75" VerticalAlignment="Center" Minimum="1"/>
             <Label Content="out of" VerticalAlignment="Center" Grid.Row="3" />
             <xctk:IntegerUpDown Value="{Binding GroupCount}" Width="75" VerticalAlignment="Center" Minimum="1"/>
         </StackPanel>
-        <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click" Grid.Row="0" Grid.Column="3" />
-        <Button Content="Cancel" Width="75" IsCancel="True" Grid.Row="1" Grid.Column="3" />
+        <Label Content="Review Count:" VerticalAlignment="Center" Grid.Row="5" />
+        <xctk:IntegerUpDown Value="{Binding ReviewCount}" Grid.Row="5" Grid.Column="1" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Minimum="10" Maximum="100"/>
+        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0" >
+            <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click"/>
+            <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>
