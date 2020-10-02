@@ -56,18 +56,14 @@ namespace LollyCloud
 
         public async Task NewTest()
         {
+            SubscriptionTimer?.Dispose();
             if (Options.Mode == ReviewMode.Textbook)
             {
                 var rand = new Random();
                 var lst = await unitPhraseDS.GetDataByTextbook(vmSettings.SelectedTextbook);
-                Items = new List<MUnitPhrase>();
                 int cnt = Math.Min(50, lst.Count);
-                while (Items.Count < cnt)
-                {
-                    var o = lst[rand.Next(lst.Count)];
-                    if (!Items.Contains(o))
-                        Items.Add(o);
-                }
+                lst.Shuffle();
+                Items = lst.Take(cnt).ToList();
             }
             else
             {
@@ -85,8 +81,6 @@ namespace LollyCloud
             CheckString = IsTestMode ? "Check" : "Next";
             if (Options.Mode == ReviewMode.ReviewAuto)
                 SubscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(_ => Check());
-            else
-                SubscriptionTimer?.Dispose();
         }
         public void Next()
         {

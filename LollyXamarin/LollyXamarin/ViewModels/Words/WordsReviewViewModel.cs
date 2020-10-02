@@ -102,8 +102,6 @@ namespace LollyCloud
             CheckString = IsTestMode ? "Check" : "Next";
             if (Options.Mode == ReviewMode.ReviewAuto)
                 SubscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(async _ => await Check());
-            else
-                SubscriptionTimer?.Dispose();
         }
         public void Next()
         {
