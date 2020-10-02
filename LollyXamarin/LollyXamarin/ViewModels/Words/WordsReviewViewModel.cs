@@ -47,6 +47,10 @@ namespace LollyCloud
         [Reactive]
         public string NoteTargetString { get; set; }
         [Reactive]
+        public string WordHintString { get; set; }
+        [Reactive]
+        public bool WordHintIsVisible { get; set; }
+        [Reactive]
         public bool WordTargetIsVisible { get; set; } = true;
         [Reactive]
         public bool NoteTargetIsVisible { get; set; } = true;
@@ -144,6 +148,7 @@ namespace LollyCloud
                     CorrectIsVisible = true;
                 else
                     IncorrectIsVisible = true;
+                WordHintIsVisible = false;
                 CheckString = "Next";
                 if (!HasNext) return;
                 var o = CurrentItem;
@@ -169,8 +174,10 @@ namespace LollyCloud
             CheckEnabled = HasNext;
             WordTargetString = CurrentWord;
             NoteTargetString = CurrentItem?.NOTE ?? "";
+            WordHintString = CurrentWord.Length.ToString();
             WordTargetIsVisible = !IsTestMode;
             NoteTargetIsVisible = !IsTestMode;
+            WordHintIsVisible = IsTestMode;
             TranslationString = "";
             WordInputString = "";
             DoTestAction?.Invoke();
