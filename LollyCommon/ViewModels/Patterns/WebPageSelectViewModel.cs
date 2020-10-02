@@ -7,7 +7,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LollyCommon.ViewModels
+namespace LollyCommon
 {
     public class WebPageSelectViewModel : ReactiveObject
     {

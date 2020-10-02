@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyXamarin", "LollyXamari
 		{24352E07-B701-4735-B319-494B9D011679} = {24352E07-B701-4735-B319-494B9D011679}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyCommon", "LollyCommon\LollyCommon.csproj", "{24352E07-B701-4735-B319-494B9D011679}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyCommon", "LollyCommon\LollyCommon.csproj", "{24352E07-B701-4735-B319-494B9D011679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

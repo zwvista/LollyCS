@@ -1,4 +1,4 @@
-﻿using LollyCommon.ViewModels;
+﻿using LollyCommon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
