@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
         <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value"
-                  SelectedValue="{Binding Mode, ConverterParameter={x:Type common:ReviewMode}, Converter={StaticResource local:EnumConverter}}" IsEnabled="{Binding CanChangeMode}"
+                  SelectedValue="{Binding Mode, ConverterParameter={x:Type common:ReviewMode}, Converter={StaticResource EnumConverter}}" IsEnabled="{Binding CanChangeMode}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
         <CheckBox Content="Speaking Enabled" IsChecked="{Binding SpeakingEnabled}" VerticalAlignment="Center" Grid.Row="1" />
         <CheckBox Content="Shuffled" IsChecked="{Binding Shuffled}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />

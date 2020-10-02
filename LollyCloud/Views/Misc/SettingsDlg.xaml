@@ -54,7 +54,7 @@
         <Label Content="{Binding UnitsInAll}" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="2" />
         <ComboBox x:Name="cbPartFrom" ItemsSource="{Binding Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USPARTFROM}"
                   IsEnabled="{Binding PartFromIsEnabled}" Grid.Row="7" Grid.Column="3" />
-        <ComboBox x:Name="cbToTypes" ItemsSource="{Binding ToTypes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ToType, Converter={StaticResource local:EnumConverter}, ConverterParameter={x:Type common:UnitPartToType}}"
+        <ComboBox x:Name="cbToTypes" ItemsSource="{Binding ToTypes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ToType, Converter={StaticResource EnumConverter}, ConverterParameter={x:Type common:UnitPartToType}}"
                   Grid.Row="8" />
         <ComboBox x:Name="cbUnitTo" ItemsSource="{Binding Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding USUNITTO}"
                   IsEnabled="{Binding UnitToIsEnabled}" Grid.Row="8" Grid.Column="1" />
