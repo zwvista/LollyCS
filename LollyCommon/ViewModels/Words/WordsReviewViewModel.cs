@@ -61,7 +61,7 @@ namespace LollyCommon
         [Reactive]
         public string CheckString { get; set; } = "Check";
         [Reactive]
-        public bool SearchIsEnabled { get; set; }
+        public bool SearchEnabled { get; set; }
 
         public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)
         {
@@ -151,7 +151,7 @@ namespace LollyCommon
                 else
                     IncorrectIsVisible = true;
                 WordHintIsVisible = false;
-                SearchIsEnabled = true;
+                SearchEnabled = true;
                 CheckString = "Next";
                 if (!HasNext) return;
                 var o = CurrentItem;
@@ -183,7 +183,7 @@ namespace LollyCommon
             WordHintIsVisible = IsTestMode;
             TranslationString = "";
             WordInputString = "";
-            SearchIsEnabled = false;
+            SearchEnabled = false;
             DoTestAction?.Invoke();
             if (HasNext)
             {
