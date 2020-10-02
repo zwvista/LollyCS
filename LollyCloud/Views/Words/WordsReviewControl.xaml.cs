@@ -58,5 +58,10 @@ namespace LollyCloud
             if (vm.HasNext)
                 App.Speak(vm.vmSettings, vm.CurrentWord);
         }
+        void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var w = (MainWindow)Window.GetWindow(this);
+            w.SearchWord(vm.CurrentWord);
+        }
     }
 }

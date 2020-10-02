@@ -47,6 +47,7 @@
             <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
             <TextBox x:Name="tbWordInput" Text="{Binding WordInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
             <Button Grid.Row="4" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Width="100" HorizontalAlignment="Right" Click="btnCheck_Click"/>
+            <Button Grid.Row="4" Content="Search" IsEnabled="{Binding SearchIsEnabled}" Width="100" HorizontalAlignment="Left" Click="btnSearch_Click"/>
         </Grid>
     </DockPanel>
 </UserControl>
