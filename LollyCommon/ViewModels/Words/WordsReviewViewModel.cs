@@ -174,7 +174,7 @@ namespace LollyCommon
             CheckEnabled = HasNext;
             WordTargetString = CurrentWord;
             NoteTargetString = CurrentItem?.NOTE ?? "";
-            WordHintString = CurrentWord.Length.ToString();
+            WordHintString = CurrentItem?.WORD.Length.ToString() ?? "";
             WordTargetIsVisible = !IsTestMode;
             NoteTargetIsVisible = !IsTestMode;
             WordHintIsVisible = IsTestMode;
