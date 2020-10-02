@@ -10,7 +10,7 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesSelectLangDlg : Window
     {
-        public PhrasesUnitViewModel vm;
+        public PhrasesUnitViewModelWPF vm;
         public SettingsViewModel vmSettings => vm.vmSettings;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
         public PhrasesSelectLangDlg()

@@ -210,41 +210,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataStores\WPP\WebPageDataStore.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\UIExtensions.cs" />
     <Compile Include="Helpers\UIHelpers.cs" />
-    <Compile Include="Models\Misc\MBlog.cs" />
-    <Compile Include="Models\Misc\MTransformItem.cs" />
-    <Compile Include="Models\WPP\MWebPage.cs" />
-    <Compile Include="Models\WPP\MPatternPhrase.cs" />
-    <Compile Include="Models\WPP\MPatternWebPage.cs" />
-    <Compile Include="Models\WPP\MPattern.cs" />
-    <Compile Include="Models\WPP\MLangPhrase.cs" />
-    <Compile Include="Models\Misc\MUSMapping.cs" />
-    <Compile Include="Models\WPP\MUnitPhrase.cs" />
-    <Compile Include="Models\WPP\MLangWord.cs" />
-    <Compile Include="Models\Misc\MCommon.cs" />
-    <Compile Include="Models\WPP\MWordFami.cs" />
-    <Compile Include="Models\Misc\MVoice.cs" />
-    <Compile Include="Models\WPP\MWordPhrase.cs" />
-    <Compile Include="Models\Misc\MReadNumber.cs" />
-    <Compile Include="Services\HtmlTransformService.cs" />
-    <Compile Include="ViewModels\Dicts\DictsDetailViewModel.cs" />
-    <Compile Include="ViewModels\Dicts\TransformItemEditViewModel.cs" />
     <Compile Include="ViewModels\Dicts\TransformEditViewModel.cs" />
-    <Compile Include="ViewModels\Misc\TextbooksViewModel.cs" />
-    <Compile Include="ViewModels\Dicts\DictsViewModel.cs" />
-    <Compile Include="ViewModels\Misc\TextbooksDetailViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsSplitViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsMergeViewModel.cs" />
-    <Compile Include="ViewModels\Patterns\PatternsWebPageViewModel.cs" />
-    <Compile Include="ViewModels\Patterns\WebPageSelectViewModel.cs" />
-    <Compile Include="ViewModels\Patterns\PatternsDetailViewModel.cs" />
-    <Compile Include="ViewModels\Phrases\PhrasesLangDetailViewModel.cs" />
-    <Compile Include="ViewModels\Phrases\PhrasesUnitDetailViewModel.cs" />
-    <Compile Include="ViewModels\Words\WordsLangDetailViewModel.cs" />
-    <Compile Include="ViewModels\Words\WordsUnitDetailViewModel.cs" />
     <Compile Include="Views\Dicts\TransformItemEditDlg.xaml.cs">
       <DependentUpon>TransformItemEditDlg.xaml</DependentUpon>
     </Compile>
@@ -324,37 +295,9 @@
     <Compile Include="Views\Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataStores\Misc\CodeDataStore.cs" />
-    <Compile Include="DataStores\WPP\PatternPhraseDataStore.cs" />
-    <Compile Include="DataStores\WPP\PatternWebPageDataStore.cs" />
-    <Compile Include="DataStores\WPP\PatternDataStore.cs" />
-    <Compile Include="DataStores\WPP\LangPhraseDataStore.cs" />
-    <Compile Include="DataStores\Misc\USMappingDataStore.cs" />
-    <Compile Include="DataStores\WPP\WordPhraseDataStore.cs" />
-    <Compile Include="DataStores\WPP\WordFamiDataStore.cs" />
-    <Compile Include="DataStores\Misc\VoiceDataStore.cs" />
-    <Compile Include="DataStores\WPP\UnitPhraseDataStore.cs" />
-    <Compile Include="DataStores\WPP\LangWordDataStore.cs" />
-    <Compile Include="Services\BlogService.cs" />
-    <Compile Include="Services\ReadNumberService.cs" />
     <Compile Include="Views\Misc\SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CommonApi.cs" />
-    <Compile Include="Models\Misc\MAutoCorrect.cs" />
-    <Compile Include="Models\Misc\MDictionary.cs" />
-    <Compile Include="Models\Misc\MLanguage.cs" />
-    <Compile Include="Models\Misc\MTextbook.cs" />
-    <Compile Include="Models\WPP\MUnitWord.cs" />
-    <Compile Include="Models\Misc\MUserSetting.cs" />
-    <Compile Include="DataStores\Misc\AutoCorrectDataStore.cs" />
-    <Compile Include="DataStores\Misc\DictionaryDataStore.cs" />
-    <Compile Include="DataStores\Misc\LanguageDataStore.cs" />
-    <Compile Include="DataStores\Misc\LollyDataStore.cs" />
-    <Compile Include="DataStores\Misc\TextbookDataStore.cs" />
-    <Compile Include="DataStores\WPP\UnitWordDataStore.cs" />
-    <Compile Include="DataStores\Misc\UserSettingDataStore.cs" />
-    <Compile Include="Helpers\Interfaces.cs" />
     <Compile Include="Views\Misc\BlogControl.xaml.cs">
       <DependentUpon>BlogControl.xaml</DependentUpon>
     </Compile>
@@ -365,27 +308,13 @@
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Patterns\PatternsViewModel.cs" />
-    <Compile Include="ViewModels\Misc\SettingsDictsViewModel.cs" />
-    <Compile Include="ViewModels\Misc\EmbeddedReviewViewModel.cs" />
-    <Compile Include="ViewModels\Phrases\PhrasesReviewViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
-    <Compile Include="ViewModels\Phrases\PhrasesLangViewModel.cs" />
-    <Compile Include="ViewModels\Misc\ReadNumberViewModel.cs" />
-    <Compile Include="ViewModels\Phrases\SinglePhraseViewModel.cs" />
-    <Compile Include="ViewModels\Words\SingleWordViewModel.cs" />
-    <Compile Include="ViewModels\Words\WordsLangViewModel.cs" />
     <Compile Include="Views\Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Phrases\PhrasesUnitBatchViewModel.cs" />
-    <Compile Include="Models\Misc\MReviewOptions.cs" />
-    <Compile Include="ViewModels\Words\WordsUnitBatchViewModel.cs" />
-    <Compile Include="ViewModels\Words\WordsSearchViewModel.cs" />
-    <Compile Include="ViewModels\Words\WordsReviewViewModel.cs" />
     <Compile Include="Views\Misc\ReviewOptionsDlg.xaml.cs">
       <DependentUpon>ReviewOptionsDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Misc\BlogViewModel.cs" />
     <Compile Include="Views\Words\WordsBaseControl.cs" />
     <Compile Include="Views\Words\WordsLangControl.xaml.cs">
       <DependentUpon>WordsLangControl.xaml</DependentUpon>
@@ -402,8 +331,6 @@
     <Compile Include="Views\Words\WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Misc\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\Misc\NoteViewModel.cs" />
     <Compile Include="ViewModels\Words\WordsUnitViewModel.cs" />
     <Compile Include="Views\Phrases\PhrasesUnitDetailDlg.xaml.cs">
       <DependentUpon>PhrasesUnitDetailDlg.xaml</DependentUpon>
@@ -628,7 +555,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LollyCommon\LollyCommon.csproj">
+      <Project>{24352e07-b701-4735-b319-494b9d011679}</Project>
+      <Name>LollyCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -21,7 +21,7 @@ namespace LollyCloud
     public partial class PatternsWebPageDlg : Window
     {
         PatternsWebPageViewModel vmDetail;
-        public PatternsWebPageDlg(Window owner, PatternsViewModel vm, MPatternWebPage item)
+        public PatternsWebPageDlg(Window owner, PatternsViewModelWPF vm, MPatternWebPage item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

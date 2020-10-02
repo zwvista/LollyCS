@@ -22,7 +22,7 @@ namespace LollyCloud
     {
         PhrasesUnitDetailViewModel vmDetail;
         public MUnitPhrase Item { get; set; }
-        public PhrasesTextbookDetailDlg(Window owner, PhrasesUnitViewModel vm, MUnitPhrase item)
+        public PhrasesTextbookDetailDlg(Window owner, PhrasesUnitViewModelWPF vm, MUnitPhrase item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

@@ -15,7 +15,7 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsControl : UserControl, ILollySettings
     {
-        public PatternsViewModel vm { get; set; }
+        public PatternsViewModelWPF vm { get; set; }
         public string selectedPattern = "";
         public int selectedPatternID = 0;
         public string originalText = "";
@@ -108,7 +108,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new PatternsViewModel(MainWindow.vmSettings, needCopy: true);
+            vm = new PatternsViewModelWPF(MainWindow.vmSettings, needCopy: true);
             DataContext = vm;
         }
 

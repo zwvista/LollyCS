@@ -15,7 +15,7 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesUnitControl : PhrasesBaseControl
     {
-        public PhrasesUnitViewModel vm { get; set; }
+        public PhrasesUnitViewModelWPF vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
         EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
@@ -60,7 +60,7 @@ namespace LollyCloud
 
         public override async Task OnSettingsChanged()
         {
-            vm = new PhrasesUnitViewModel(MainWindow.vmSettings, inTextbook: true, needCopy: true);
+            vm = new PhrasesUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             DataContext = vm;
             await base.OnSettingsChanged();
         }

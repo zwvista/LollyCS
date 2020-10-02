@@ -24,7 +24,7 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformEditDlg : Window
     {
-        TransformEditViewModel vm;
+        TransformEditViewModelWPF vm;
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
         TransformSourceControl sourceCtrl;
@@ -37,7 +37,7 @@ namespace LollyCloud
             InitializeComponent();
             //SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            vm = new TransformEditViewModel(itemEdit);
+            vm = new TransformEditViewModelWPF(itemEdit);
             DataContext = vm;
             tcTranform.DataContext = this;
             templateCtrl = new TransformTemplateControl(vm);

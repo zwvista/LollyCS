@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
-             xmlns:local="clr-namespace:LollyCloud"
+             xmlns:common="clr-namespace:LollyCloud;assembly=LollyCommon"
              xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -15,7 +15,7 @@
                 <Button x:Name="btnAddPattern" Content="Add Pattern" Click="btnAddPattern_Click"/>
                 <Button x:Name="btnAddWebPage" Content="Add Web Page" Click="btnAddWebPage_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>

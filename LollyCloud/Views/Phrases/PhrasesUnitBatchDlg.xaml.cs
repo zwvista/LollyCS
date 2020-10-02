@@ -10,7 +10,7 @@ namespace LollyCloud
     public partial class PhrasesUnitBatchDlg : Window
     {
         public PhrasesUnitBatchViewModel vmBatch;
-        public PhrasesUnitBatchDlg(Window owner, PhrasesUnitViewModel vm)
+        public PhrasesUnitBatchDlg(Window owner, PhrasesUnitViewModelWPF vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

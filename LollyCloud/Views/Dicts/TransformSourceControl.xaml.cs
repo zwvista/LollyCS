@@ -15,8 +15,8 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformSourceControl : UserControl
     {
-        TransformEditViewModel vm;
-        public TransformSourceControl(TransformEditViewModel vm)
+        TransformEditViewModelWPF vm;
+        public TransformSourceControl(TransformEditViewModelWPF vm)
         {
             InitializeComponent();
             DataContext = this.vm = vm;

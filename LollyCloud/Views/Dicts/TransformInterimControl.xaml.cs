@@ -13,7 +13,7 @@ namespace LollyCloud
     /// </summary>
     public partial class TransformInterimControl : UserControl
     {
-        public TransformInterimControl(TransformEditViewModel vm)
+        public TransformInterimControl(TransformEditViewModelWPF vm)
         {
             InitializeComponent();
             DataContext = vm;

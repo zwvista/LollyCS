@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
+             xmlns:common="clr-namespace:LollyCloud;assembly=LollyCommon"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -14,7 +15,7 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static local:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>

@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\LollyCommon\LollyCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\Phrases\PhrasesLangPage.xaml.cs">
       <DependentUpon>PhrasesLangPage.xaml</DependentUpon>
     </Compile>
@@ -41,5 +45,9 @@
     <Compile Update="Views\Words\WordsUnitPage.xaml.cs">
       <DependentUpon>WordsUnitPage.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

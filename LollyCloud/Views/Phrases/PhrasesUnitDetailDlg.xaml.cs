@@ -21,7 +21,7 @@ namespace LollyCloud
     public partial class PhrasesUnitDetailDlg : Window
     {
         PhrasesUnitDetailViewModel vmDetail;
-        public PhrasesUnitDetailDlg(Window owner, PhrasesUnitViewModel vm, MUnitPhrase item)
+        public PhrasesUnitDetailDlg(Window owner, PhrasesUnitViewModelWPF vm, MUnitPhrase item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

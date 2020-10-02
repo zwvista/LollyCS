@@ -20,13 +20,13 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsSplitDlg : Window
     {
-        PatternsSplitViewModel vm;
+        PatternsSplitViewModelWPF vm;
         public PatternsSplitDlg(Window owner, MPattern item)
         {
             InitializeComponent();
             // SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new PatternsSplitViewModel(item);
+            DataContext = vm = new PatternsSplitViewModelWPF(item);
         }
     }
 }

@@ -20,13 +20,13 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsMergeDlg : Window
     {
-        PatternsMergeViewModel vm;
+        PatternsMergeViewModelWPF vm;
         public PatternsMergeDlg(Window owner, List<MPattern> items)
         {
             InitializeComponent();
             //SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new PatternsMergeViewModel(items);
+            DataContext = vm = new PatternsMergeViewModelWPF(items);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace LollyCloud
     public partial class PatternsDetailDlg : Window
     {
         PatternsDetailViewModel vmDetail;
-        public PatternsDetailDlg(Window owner, PatternsViewModel vm, MPattern item)
+        public PatternsDetailDlg(Window owner, PatternsViewModelWPF vm, MPattern item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
