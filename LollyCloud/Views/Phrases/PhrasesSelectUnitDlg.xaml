@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
-        xmlns:common="clr-namespace:LollyCloud;assembly=LollyCommon"
+        xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
         Title="PhrasesUnitDetailDlg" Height="370" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>

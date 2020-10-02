@@ -3,7 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Reactive.Threading.Tasks;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class SingleWordViewModel : ReactiveObject
     {

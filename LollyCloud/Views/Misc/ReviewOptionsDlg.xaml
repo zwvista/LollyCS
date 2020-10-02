@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyCloud"
-        xmlns:common="clr-namespace:LollyCloud;assembly=LollyCommon"
+        xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="LollyCloud.ReviewOptionsDlg"
         mc:Ignorable="d"
         Title="Review Options" Height="300" Width="500" WindowStartupLocation="CenterOwner">

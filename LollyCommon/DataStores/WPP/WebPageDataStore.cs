@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class WebPageDataStore : LollyDataStore<MWebPage>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public interface ILollySettings
     {

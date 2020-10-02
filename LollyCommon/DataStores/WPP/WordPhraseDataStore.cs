@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class WordPhraseDataStore : LollyDataStore<MWordPhrase>
     {

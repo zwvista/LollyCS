@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class TransformItemEditViewModel : ReactiveObject
     {

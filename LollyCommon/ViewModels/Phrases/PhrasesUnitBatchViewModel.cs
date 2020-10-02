@@ -3,7 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
 using System.Reactive;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class PhrasesUnitBatchViewModel : ReactiveObject
     {

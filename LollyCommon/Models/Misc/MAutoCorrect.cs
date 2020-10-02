@@ -5,7 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class MAutoCorrects
     {

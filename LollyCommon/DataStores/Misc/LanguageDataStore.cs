@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class LanguageDataStore : LollyDataStore<MLanguage>
     {

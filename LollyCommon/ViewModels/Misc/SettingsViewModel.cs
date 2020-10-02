@@ -9,7 +9,7 @@ using System.Reactive.Threading.Tasks;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class SettingsViewModel : ReactiveObject
     {

@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public enum ReadNumberType
     {

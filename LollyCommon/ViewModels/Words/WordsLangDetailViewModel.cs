@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Validation.Extensions;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class WordsLangDetailViewModel : ReactiveObject
     {

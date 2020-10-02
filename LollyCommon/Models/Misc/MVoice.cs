@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class MVoices
     {

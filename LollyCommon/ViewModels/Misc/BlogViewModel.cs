@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System.Reactive;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class BlogViewModel : MBlog
     {

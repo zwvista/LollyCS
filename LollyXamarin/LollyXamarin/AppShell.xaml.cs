@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LollyCloud;
+using LollyCommon;
 using LollyXamarin.ViewModels;
 using LollyXamarin.Views;
 using Xamarin.Forms;

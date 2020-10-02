@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class SettingsDictsViewModel
     {

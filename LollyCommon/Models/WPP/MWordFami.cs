@@ -3,7 +3,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class MWordsFami
     {

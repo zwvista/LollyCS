@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class LollyDataStore<T> where T: class
     {

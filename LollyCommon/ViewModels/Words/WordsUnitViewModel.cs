@@ -8,7 +8,7 @@ using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class WordsUnitViewModel : ReactiveObject
     {
@@ -51,6 +51,7 @@ namespace LollyCloud
                 ApplyFilters();
                 IsBusy = false;
             });
+            Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
         void ApplyFilters()

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public class TextbookDataStore : LollyDataStore<MTextbook>
     {

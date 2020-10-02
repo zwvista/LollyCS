@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using Dragablz;
+using LollyCommon;
 
 namespace LollyCloud
 {

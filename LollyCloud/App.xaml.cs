@@ -8,6 +8,7 @@ using System.Windows;
 using System.Speech.Synthesis;
 using CefSharp;
 using CefSharp.Wpf;
+using LollyCommon;
 
 namespace LollyCloud
 {

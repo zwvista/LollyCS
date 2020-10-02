@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Web;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class MDictionary : ReactiveObject

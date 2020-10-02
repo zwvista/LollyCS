@@ -3,7 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Reactive.Linq;
 
-namespace LollyCloud
+namespace LollyCommon
 {
     public enum ReviewMode
     {
