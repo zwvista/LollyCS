@@ -162,6 +162,7 @@ namespace LollyCommon
                 var o2 = await wordFamiDS.Update(o.WORDID, isCorrect);
                 o.CORRECT = o2.CORRECT;
                 o.TOTAL = o2.TOTAL;
+                AccuracyString = o.ACCURACY;
             }
             else
             {
@@ -185,7 +186,7 @@ namespace LollyCommon
             WordHintIsVisible = IsTestMode;
             TranslationString = "";
             WordInputString = "";
-           GoogleEnabled = SearchEnabled = false;
+            GoogleEnabled = SearchEnabled = false;
             DoTestAction?.Invoke();
             if (HasNext)
             {

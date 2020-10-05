@@ -485,7 +485,7 @@ namespace LollyCommon
         public async Task ClearNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
         {
             if (SelectedDictNote == null) return;
-            for (int i = 0; ;)
+            for (int i = 0; i < wordCount;)
             {
                 while (i < wordCount && !isNoteEmpty(i)) i++;
                 if (i < wordCount)
