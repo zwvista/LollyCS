@@ -153,11 +153,7 @@ namespace LollyCommon
                 else
                     IncorrectIsVisible = true;
                 WordHintIsVisible = false;
-<<<<<<< HEAD
                 GoogleEnabled = SearchEnabled = true;
-=======
-                SearchEnabled = true;
->>>>>>> d11a1fcfe015f5d327e17f5c4d8d3599114a85e0
                 CheckString = "Next";
                 if (!HasNext) return;
                 var o = CurrentItem;
