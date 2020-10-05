@@ -63,5 +63,7 @@ namespace LollyCloud
             var w = (MainWindow)Window.GetWindow(this);
             w.SearchWord(vm.CurrentWord);
         }
+        void btnGoogle_Click(object sender, RoutedEventArgs e) =>
+            vm.CurrentWord.Google();
     }
 }

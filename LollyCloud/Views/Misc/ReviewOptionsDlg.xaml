@@ -41,7 +41,7 @@
         </StackPanel>
         <Label Content="Review Count:" VerticalAlignment="Center" Grid.Row="5" />
         <xctk:IntegerUpDown Value="{Binding ReviewCount}" Grid.Row="5" Grid.Column="1" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Minimum="10" Maximum="100"/>
-        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0" >
+        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
             <Button Content="OK" Width="75" IsDefault="True" Click="btnOK_Click"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>
