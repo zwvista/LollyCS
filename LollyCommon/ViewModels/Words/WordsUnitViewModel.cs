@@ -16,7 +16,6 @@ namespace LollyCommon
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
-        NoteViewModel vmNote;
 
         List<MUnitWord> WordItemsAll { get; set; } = new List<MUnitWord>();
         public ObservableCollection<MUnitWord> WordItems { get; set; } = new ObservableCollection<MUnitWord>();
@@ -39,7 +38,6 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.inTextbook = inTextbook;
-            vmNote = new NoteViewModel(vmSettings);
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -109,26 +107,26 @@ namespace LollyCommon
         public async Task GetNote(int index)
         {
             var item = WordItemsAll[index];
-            var note = await vmNote.GetNote(item.WORD);
+            var note = await vmSettings.GetNote(item.WORD);
             item.NOTE = note;
             await Update(item);
         }
         public async Task ClearNote(int index)
         {
             var item = WordItemsAll[index];
-            item.NOTE = NoteViewModel.ZeroNote;
+            item.NOTE = SettingsViewModel.ZeroNote;
             await Update(item);
         }
 
         public async Task GetNotes(Action<int> oneComplete) =>
-            await vmNote.GetNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+            await vmSettings.GetNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
                     await GetNote(i);
                     oneComplete(i);
                 });
         public async Task ClearNotes(Action<int> oneComplete) =>
-            await vmNote.ClearNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+            await vmSettings.ClearNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
                     await ClearNote(i);

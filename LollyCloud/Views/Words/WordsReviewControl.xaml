@@ -45,7 +45,8 @@
                 <Label Content="{Binding WordHintString}" Visibility="{Binding WordHintIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" />
             </StackPanel>
             <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
-            <TextBox x:Name="tbWordInput" Text="{Binding WordInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
+            <TextBox x:Name="tbWordInput" Text="{Binding WordInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
+                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
             <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
                 <Button Content="Search" IsEnabled="{Binding SearchEnabled}" Width="100" Margin="0,0,10,0" Click="btnSearch_Click"/>
                 <Button Content="Google" IsEnabled="{Binding GoogleEnabled}" Width="100" Click="btnGoogle_Click"/>

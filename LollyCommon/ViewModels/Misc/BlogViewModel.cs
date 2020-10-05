@@ -6,7 +6,6 @@ namespace LollyCommon
     public class BlogViewModel : MBlog
     {
         public SettingsViewModel vmSettings;
-        NoteViewModel vmNote;
         BlogService service = new BlogService();
 
         public ReactiveCommand<Unit, Unit> HtmlToMarkedCommand { get; }
@@ -17,7 +16,6 @@ namespace LollyCommon
         public BlogViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            vmNote = new NoteViewModel(this.vmSettings);
 
             HtmlToMarkedCommand = ReactiveCommand.Create(() =>
             {
@@ -25,7 +23,7 @@ namespace LollyCommon
             });
             AddNotesCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                MarkedText = await service.AddNotes(vmNote, MarkedText);
+                MarkedText = await service.AddNotes(this.vmSettings, MarkedText);
             });
         }
         public string AddTagB(string str) => service.AddTagB(str);

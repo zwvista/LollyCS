@@ -19,7 +19,6 @@ namespace LollyCommon
         DictionaryDataStore DictionaryDS = new DictionaryDataStore();
         TextbookDataStore TextbookDS = new TextbookDataStore();
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
-        WordFamiDataStore WordFamiDS = new WordFamiDataStore();
         VoiceDataStore VoiceDS = new VoiceDataStore();
         CodeDataStore CodeDS = new CodeDataStore();
 
@@ -459,5 +458,40 @@ namespace LollyCommon
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
         }
         public async Task UpdateReadNumberId() => await UserSettingDS.Update(INFO_USREADNUMBER, USREADNUMBER);
+
+        public static readonly string ZeroNote = "O";
+        public async Task<string> GetNote(string word)
+        {
+            if (SelectedDictNote == null) return "";
+            var url = SelectedDictNote.UrlString(word, AutoCorrects.ToList());
+            var html = await client.GetStringAsync(url);
+            return HtmlTransformService.ExtractTextFromHtml(html, SelectedDictNote.TRANSFORM, "", (text, _) => text);
+        }
+
+        public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
+        {
+            if (SelectedDictNote == null) return;
+            for (int i = 0; ;)
+            {
+                await Task.Delay((int)SelectedDictNote.WAIT);
+                while (i < wordCount && !isNoteEmpty(i)) i++;
+                if (i > wordCount)
+                    break;
+                if (i < wordCount)
+                    await getOne(i);
+                i++;
+            }
+        }
+        public async Task ClearNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
+        {
+            if (SelectedDictNote == null) return;
+            for (int i = 0; ;)
+            {
+                while (i < wordCount && !isNoteEmpty(i)) i++;
+                if (i < wordCount)
+                    await getOne(i);
+                i++;
+            }
+        }
     }
 }

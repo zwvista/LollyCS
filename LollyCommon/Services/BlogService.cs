@@ -114,7 +114,7 @@ namespace LollyCommon
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
         public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
         readonly string bigDigits = "０１２３４５６７８９";
-        public async Task<string> AddNotes(NoteViewModel vmNote, string text)
+        public async Task<string> AddNotes(SettingsViewModel vmSettings, string text)
         {
             string F(string s)
             {
@@ -123,7 +123,7 @@ namespace LollyCommon
                 return s;
             }
             var items = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
-            await vmNote.GetNotes(items.Count, i =>
+            await vmSettings.GetNotes(items.Count, i =>
             {
                 var m = regMarkedEntry.Match(items[i]);
                 if (!m.Success) return false;
@@ -134,7 +134,7 @@ namespace LollyCommon
             {
                 var m = regMarkedEntry.Match(items[i]);
                 var (s1, word, s3, s4) = (m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value, m.Groups[4].Value);
-                var note = await vmNote.GetNote(word);
+                var note = await vmSettings.GetNote(word);
                 int j = note.ToList().FindIndex(char.IsDigit);
                 var s21 = j == -1 ? note : note.Substring(0, j);
                 var s22 = j == -1 ? "" : F(note.Substring(j));
