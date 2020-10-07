@@ -82,7 +82,8 @@ namespace LollyCommon
                 foreach (var o in lst)
                 {
                     var s = o.ACCURACY;
-                    int t = Math.Min(6, 11 - (!s.EndsWith("%") ? 0 : (int)(double.Parse(s.TrimEnd('%')) / 10)));
+                    double percentage = !s.EndsWith("%") ? 0 : double.Parse(s.TrimEnd('%'));
+                    int t = Math.Max(6, 11 - (int)(percentage / 20));
                     Enumerable.Range(0, t).ForEach(_ => lst2.Add(o));
                 }
                 Items = new List<MUnitWord>();
