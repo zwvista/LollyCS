@@ -83,7 +83,7 @@ namespace LollyCommon
                 {
                     var s = o.ACCURACY;
                     double percentage = !s.EndsWith("%") ? 0 : double.Parse(s.TrimEnd('%'));
-                    int t = Math.Max(6, 11 - (int)(percentage / 20));
+                    int t = 6 - (int)(percentage / 20);
                     Enumerable.Range(0, t).ForEach(_ => lst2.Add(o));
                 }
                 Items = new List<MUnitWord>();
