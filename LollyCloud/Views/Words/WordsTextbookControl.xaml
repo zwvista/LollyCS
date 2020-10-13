@@ -11,8 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
-            <ToolBar x:Name="ToolBarDict" Band="1">
-            </ToolBar>
+            <ToolBar x:Name="ToolBarDict" Band="1" />
             <ToolBar Band="2">
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
@@ -34,33 +33,33 @@
                 </StatusBar>
                 <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgWords_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
-                    <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
-                    <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                    <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
-                </DataGrid.Columns>
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                        <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
-                        <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
-                        <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
-        </DockPanel>
-        <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
+                        <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
+                        <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
+                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                            <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
+                            <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
+            <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />
             <Grid Grid.Column="2" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
@@ -77,7 +76,7 @@
                     <DataGrid.Resources>
                     </DataGrid.Resources>
                 </DataGrid>
-                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
+                <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
                     <dragablz:TabablzControl.InterTabController>
                         <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>

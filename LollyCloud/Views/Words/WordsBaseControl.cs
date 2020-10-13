@@ -9,13 +9,11 @@ using System.Windows.Input;
 
 namespace LollyCloud
 {
-    public class WordsBaseControl : UserControl, ILollySettings
+    public class WordsPhraseBaseControl : UserControl, ILollySettings
     {
-        protected DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         protected string selectedWord = "";
         protected int selectedWordID = 0;
         protected string originalText = "";
-        protected virtual string NewWord => null;
         public virtual DataGrid dgWordsBase => null;
         public virtual SettingsViewModel vmSettings => null;
         public virtual ToolBar ToolBarDictBase => null;
@@ -26,7 +24,6 @@ namespace LollyCloud
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SearchDict(null, null);
-            SearchPhrases();
             App.Speak(vmSettings, selectedWord);
         }
 
@@ -40,19 +37,13 @@ namespace LollyCloud
             {
                 selectedWord = "";
                 selectedWordID = 0;
-                f(NewWord);
             }
             else
             {
                 selectedWord = item.WORD;
                 selectedWordID = item.WORDID;
-                f(selectedWord);
             }
         }
-
-        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
-
-        public void miGoogle_Click(object sender, RoutedEventArgs e) => selectedWord.Google();
 
         public virtual async Task OnSettingsChanged()
         {
@@ -103,6 +94,26 @@ namespace LollyCloud
             var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
             o.IsChecked = false;
         };
+
+    }
+    public class WordsBaseControl : WordsPhraseBaseControl
+    {
+        protected virtual string NewWord => null;
+
+        public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            base.dgWords_SelectionChanged(sender, e);
+            SearchPhrases();
+        }
+
+        public void SearchDict(object sender, RoutedEventArgs e)
+        {
+            base.SearchDict(sender, e);
+        }
+
+        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
+
+        public void miGoogle_Click(object sender, RoutedEventArgs e) => selectedWord.Google();
 
         public virtual async Task SearchPhrases() { }
     }

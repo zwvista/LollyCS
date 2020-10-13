@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
-            <ToolBar x:Name="ToolBar1" Band="1">
-            </ToolBar>
+            <ToolBar x:Name="ToolBarDict" Band="1" />
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
@@ -20,31 +20,72 @@
                 <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
         </ToolBarTray>
-        <DockPanel>
-            <StatusBar DockPanel.Dock="Bottom">
-                <Label Content="{Binding StatusText}"/>
-            </StatusBar>
-            <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgPhrases_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                    <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
-                    <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
-                </DataGrid.Columns>
-                <DataGrid.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="dgPhrases_RowDoubleClick"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
-                        <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
-                        <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
-        </DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <DockPanel>
+                <StatusBar DockPanel.Dock="Bottom">
+                    <Label Content="{Binding StatusText}"/>
+                </StatusBar>
+                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgPhrases_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
+                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgPhrases_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                            <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
+                            <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </DockPanel>
+            <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgWords_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
+                        <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
+                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
+                        <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />
+                <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
+                    <dragablz:TabablzControl.InterTabController>
+                        <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
+                    </dragablz:TabablzControl.InterTabController>
+                    <dragablz:TabablzControl.HeaderItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Header}"/>
+                        </DataTemplate>
+                    </dragablz:TabablzControl.HeaderItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </dragablz:TabablzControl>
+            </Grid>
+        </Grid>
     </DockPanel>
 </local:PhrasesBaseControl>

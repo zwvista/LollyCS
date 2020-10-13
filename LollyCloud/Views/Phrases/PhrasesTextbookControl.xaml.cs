@@ -1,4 +1,5 @@
-﻿using LollyCommon;
+﻿using Dragablz;
+using LollyCommon;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
@@ -17,6 +18,8 @@ namespace LollyCloud
     {
         public PhrasesUnitViewModelWPF vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
+        public override ToolBar ToolBarDictBase => ToolBarDict;
+        public override TabablzControl tcDictsBase => tcDicts;
         public override DataGrid dgPhrasesBase => dgPhrases;
 
         public PhrasesTextbookControl()
