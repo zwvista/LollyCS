@@ -27,10 +27,13 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DockPanel>
-                <StatusBar DockPanel.Dock="Bottom">
-                    <Label Content="{Binding StatusText}"/>
-                </StatusBar>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgWords_SelectionChanged">
                     <DataGrid.Columns>
@@ -58,41 +61,35 @@
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
-            </DockPanel>
-            <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />
-            <Grid Grid.Column="2" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
+                <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
+                <DataGrid Grid.Row="2" x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
                       ItemsSource="{Binding PhraseItems}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE" Width="1*"/>
-                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
+                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
                     </DataGrid.Columns>
-                    <DataGrid.Resources>
-                    </DataGrid.Resources>
                 </DataGrid>
-                <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
-                <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
-                    <dragablz:TabablzControl.InterTabController>
-                        <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
-                    </dragablz:TabablzControl.InterTabController>
-                    <dragablz:TabablzControl.HeaderItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Header}"/>
-                        </DataTemplate>
-                    </dragablz:TabablzControl.HeaderItemTemplate>
-                    <TabControl.ContentTemplate>
-                        <DataTemplate>
-                            <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                        </DataTemplate>
-                    </TabControl.ContentTemplate>
-                </dragablz:TabablzControl>
+                <StatusBar Grid.Row="3">
+                    <Label Content="{Binding StatusText}"/>
+                </StatusBar>
             </Grid>
+            <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />
+            <dragablz:TabablzControl Grid.Row="2" x:Name="tcDicts" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True" ClosingItemCallback="{Binding ClosingTabItemHandler}">
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController InterTabClient="{Binding ActionInterTabClient}"/>
+                </dragablz:TabablzControl.InterTabController>
+                <dragablz:TabablzControl.HeaderItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Header}"/>
+                    </DataTemplate>
+                </dragablz:TabablzControl.HeaderItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <UserControl Content="{Binding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </dragablz:TabablzControl>
         </Grid>
     </DockPanel>
 </local:WordsBaseControl>

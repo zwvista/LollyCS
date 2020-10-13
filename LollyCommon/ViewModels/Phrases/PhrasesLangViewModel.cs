@@ -18,7 +18,7 @@ namespace LollyCommon
 
         List<MLangPhrase> PhraseItemsAll { get; set; } = new List<MLangPhrase>();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
-        public ObservableCollection<MLangWord> WordItems { get; set; }
+        public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
