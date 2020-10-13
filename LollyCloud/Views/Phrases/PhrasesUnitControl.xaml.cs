@@ -134,8 +134,11 @@ namespace LollyCloud
                 });
             }
         }
-        public override async Task SearchWords() =>
+        public override async Task SearchWords()
+        {
             await vm.SearchWords(selectedPhraseID);
-
+            if (vm.WordItems.Any())
+                dgWords.SelectedIndex = 0;
+        }
     }
 }

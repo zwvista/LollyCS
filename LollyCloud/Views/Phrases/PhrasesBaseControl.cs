@@ -31,6 +31,11 @@ namespace LollyCloud
             App.Speak(vmSettings, selectedPhrase);
             SearchWords();
         }
+        public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            base.dgWords_SelectionChanged(sender, e);
+            SearchWord(selectedWord);
+        }
 
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPhrase);
 

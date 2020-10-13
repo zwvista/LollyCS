@@ -2,6 +2,7 @@
 using LollyCommon;
 using ReactiveUI;
 using System;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -85,7 +86,11 @@ namespace LollyCloud
             await vm.Delete(item);
             vm.Reload();
         }
-        public override async Task SearchWords() =>
+        public override async Task SearchWords()
+        {
             await vm.SearchWords(selectedPhraseID);
+            if (vm.WordItems.Any())
+                dgWords.SelectedIndex = 0;
+        }
     }
 }
