@@ -132,6 +132,8 @@ namespace LollyCloud
                 });
             }
         }
+        public override async Task SearchWords() =>
+            await vm.SearchWords(selectedPhraseID);
 
     }
 }

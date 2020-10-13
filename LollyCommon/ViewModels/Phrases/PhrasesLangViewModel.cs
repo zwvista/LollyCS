@@ -14,9 +14,11 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         List<MLangPhrase> PhraseItemsAll { get; set; } = new List<MLangPhrase>();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
+        public ObservableCollection<MLangWord> WordItems { get; set; }
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
@@ -62,5 +64,10 @@ namespace LollyCommon
             {
                 LANGID = vmSettings.SelectedLang.ID,
             };
+        public async Task SearchWords(int phraseid)
+        {
+            WordItems = new ObservableCollection<MLangWord>(await wordPhraseDS.GetWordsByPhraseId(phraseid));
+            this.RaisePropertyChanged(nameof(WordItems));
+        }
     }
 }

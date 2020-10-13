@@ -27,11 +27,10 @@ namespace LollyCloud
             App.Speak(vmSettings, selectedWord);
         }
 
+        protected void SearchWord(string word) =>
+            Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
         public void SearchDict(object sender, RoutedEventArgs e)
         {
-            void f(string word) =>
-                Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
-
             var item = (MWordInterface)dgWordsBase.SelectedItem;
             if (item == null)
             {
@@ -103,6 +102,7 @@ namespace LollyCloud
         public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             base.dgWords_SelectionChanged(sender, e);
+            SearchWord(selectedWord == "" ? NewWord : selectedWord);
             SearchPhrases();
         }
 

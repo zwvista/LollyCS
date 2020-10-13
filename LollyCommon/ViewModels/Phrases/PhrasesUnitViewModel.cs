@@ -15,9 +15,11 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         List<MUnitPhrase> PhraseItemsAll { get; set; } = new List<MUnitPhrase>();
         public ObservableCollection<MUnitPhrase> PhraseItems { get; set; } = new ObservableCollection<MUnitPhrase>();
+        public ObservableCollection<MLangWord> WordItems { get; set; }
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
@@ -97,6 +99,11 @@ namespace LollyCommon
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
                 Textbook = vmSettings.SelectedTextbook,
             };
+        }
+        public async Task SearchWords(int phraseid)
+        {
+            WordItems = new ObservableCollection<MLangWord>(await wordPhraseDS.GetWordsByPhraseId(phraseid));
+            this.RaisePropertyChanged(nameof(WordItems));
         }
     }
 }

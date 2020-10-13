@@ -84,5 +84,7 @@ namespace LollyCloud
             await vm.Delete(item);
             vm.Reload();
         }
+        public override async Task SearchWords() =>
+            await vm.SearchWords(selectedPhraseID);
     }
 }
