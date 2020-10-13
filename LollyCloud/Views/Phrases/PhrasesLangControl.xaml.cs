@@ -21,6 +21,7 @@ namespace LollyCloud
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
         public override DataGrid dgPhrasesBase => dgPhrases;
+        public override DataGrid dgWordsBase => dgWords;
 
         public PhrasesLangControl()
         {

@@ -20,6 +20,7 @@ namespace LollyCloud
         public PhrasesUnitViewModelWPF vm { get; set; }
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
+        public override DataGrid dgWordsBase => dgWords;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
         EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
@@ -66,6 +67,7 @@ namespace LollyCloud
         {
             vm = new PhrasesUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             DataContext = vm;
+            tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }
 
