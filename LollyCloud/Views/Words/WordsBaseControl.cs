@@ -11,6 +11,7 @@ namespace LollyCloud
 {
     public class WordsPhraseBaseControl : UserControl, ILollySettings
     {
+        protected virtual string NewWord => "";
         protected string selectedWord = "";
         protected int selectedWordID = 0;
         protected string originalText = "";
@@ -23,14 +24,6 @@ namespace LollyCloud
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SearchDict(null, null);
-            App.Speak(vmSettings, selectedWord);
-        }
-
-        protected void SearchWord(string word) =>
-            Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
-        public void SearchDict(object sender, RoutedEventArgs e)
-        {
             var item = (MWordInterface)dgWordsBase.SelectedItem;
             if (item == null)
             {
@@ -42,7 +35,12 @@ namespace LollyCloud
                 selectedWord = item.WORD;
                 selectedWordID = item.WORDID;
             }
+            SearchWord(selectedWord == "" ? NewWord : selectedWord);
+            App.Speak(vmSettings, selectedWord);
         }
+
+        protected void SearchWord(string word) =>
+            Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
 
         public virtual async Task OnSettingsChanged()
         {
@@ -97,18 +95,10 @@ namespace LollyCloud
     }
     public class WordsBaseControl : WordsPhraseBaseControl
     {
-        protected virtual string NewWord => null;
-
         public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             base.dgWords_SelectionChanged(sender, e);
-            SearchWord(selectedWord == "" ? NewWord : selectedWord);
             SearchPhrases();
-        }
-
-        public void SearchDict(object sender, RoutedEventArgs e)
-        {
-            base.SearchDict(sender, e);
         }
 
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
