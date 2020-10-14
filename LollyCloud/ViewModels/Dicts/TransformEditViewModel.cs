@@ -11,7 +11,7 @@ namespace LollyCloud
 {
     public class TransformEditViewModelWPF : TransformEditViewModel, IDragSource
     {
-        public TransformEditViewModelWPF(MDictionaryEdit itemEdit) : base(itemEdit)
+        public TransformEditViewModelWPF(SettingsViewModel vmSettings, MDictionaryEdit itemEdit) : base(vmSettings, itemEdit)
         {
         }
 

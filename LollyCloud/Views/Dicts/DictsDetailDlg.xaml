@@ -50,6 +50,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="ID:" Grid.Row="0" />
@@ -70,8 +71,10 @@
                 <TextBox Text="{Binding URL}" Grid.Row="6" Grid.Column="1" />
                 <Label Content="CHCONV:" Grid.Row="7" />
                 <TextBox Text="{Binding CHCONV}" Grid.Row="7" Grid.Column="1" />
-                <Label Content="TRANSFORM:" Grid.Row="8" />
-                <TextBox Text="{Binding TRANSFORM}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="9" Grid.ColumnSpan="2" Margin="0" />
+                <Label Content="SITEID:" Grid.Row="8" />
+                <TextBox Text="{Binding SITEID}" Grid.Row="8" Grid.Column="1" />
+                <Label Content="TRANSFORM:" Grid.Row="9" />
+                <TextBox Text="{Binding TRANSFORM}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="10" Grid.ColumnSpan="2" Margin="0" />
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">

@@ -53,6 +53,9 @@ namespace LollyCommon
         public string AUTOMATION { get; set; }
         [JsonProperty]
         [Reactive]
+        public int SITEID { get; set; }
+        [JsonProperty]
+        [Reactive]
         public string TRANSFORM { get; set; }
         [JsonProperty]
         [Reactive]
@@ -107,6 +110,8 @@ namespace LollyCommon
         [Reactive]
         public string AUTOMATION { get; set; }
         [Reactive]
+        public int SITEID { get; set; }
+        [Reactive]
         public string TRANSFORM { get; set; }
         [Reactive]
         public int? WAIT { get; set; }
@@ -125,6 +130,45 @@ namespace LollyCommon
     {
         [JsonProperty("records")]
         public List<MDictionary> Records { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class MDictionaryDict : ReactiveObject
+    {
+        [JsonProperty]
+        public int ID { get; set; }
+        [JsonProperty]
+        public int LANGIDFROM { get; set; }
+        [JsonProperty]
+        public int LANGIDTO { get; set; }
+        [JsonProperty]
+        public int SEQNUM { get; set; }
+        [JsonProperty]
+        public int DICTTYPEID { get; set; }
+        [JsonProperty("NAME")]
+        public string DICTNAME { get; set; }
+        [JsonProperty]
+        public string URL { get; set; }
+        [JsonProperty]
+        public string CHCONV { get; set; }
+        [JsonProperty]
+        public string AUTOMATION { get; set; }
+        [JsonProperty]
+        public string TEMPLATE { get; set; }
+        [JsonProperty]
+        public string TEMPLATE2 { get; set; }
+    }
+    [JsonObject(MemberSerialization.OptIn)]
+    public class MDictionarySite
+    {
+        [JsonProperty("ID")]
+        public int SITEID { get; set; }
+        [JsonProperty("NAME")]
+        public string DICTNAME { get; set; }
+        [JsonProperty]
+        public string TRANSFORM { get; set; }
+        [JsonProperty]
+        public int? WAIT { get; set; }
     }
 
 }

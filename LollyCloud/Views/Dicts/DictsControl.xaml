@@ -29,6 +29,7 @@
                     <DataGridTextColumn Binding="{Binding URL}" Header="URL" />
                     <DataGridTextColumn Binding="{Binding CHCONV}" Header="CHCONV" />
                     <DataGridTextColumn Binding="{Binding AUTOMATION}" Header="AUTOMATION" />
+                    <DataGridTextColumn Binding="{Binding SITEID}" Header="SITEID" />
                     <DataGridTextColumn Binding="{Binding TRANSFORM}" Header="TRANSFORM" />
                     <DataGridTextColumn Binding="{Binding WAIT}" Header="WAIT" />
                     <DataGridTextColumn Binding="{Binding TEMPLATE}" Header="TEMPLATE" />

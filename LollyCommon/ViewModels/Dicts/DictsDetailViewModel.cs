@@ -6,7 +6,7 @@ namespace LollyCommon
     public class DictsDetailViewModel : ReactiveObject
     {
         MDictionary item;
-        DictsViewModel vm;
+        public DictsViewModel vm;
         public MDictionaryEdit ItemEdit = new MDictionaryEdit();
         public string LANGNAME { get; private set; }
 
@@ -19,10 +19,14 @@ namespace LollyCommon
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 ItemEdit.CopyProperties(item);
-                if (item.ID == 0)
-                    await vm.Create(item);
-                else
-                    await vm.Update(item);
+                //if (item.ID == 0)
+                //    await vm.CreateDict(item);
+                //else
+                //    await vm.UpdateDict(item);
+                //if (item.ID == 0)
+                //    await vm.CreateSite(item);
+                //else
+                //    await vm.UpdateSite(item);
             }, ItemEdit.IsValid());
         }
     }

@@ -41,7 +41,7 @@ namespace LollyCommon
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; }
         public ReactiveCommand<Unit, Unit> GetAndTransformCommand { get; }
         public ReactiveCommand<Unit, Unit> Save { get; }
-        public TransformEditViewModel(MDictionaryEdit itemEdit)
+        public TransformEditViewModel(SettingsViewModel vmSettings, MDictionaryEdit itemEdit)
         {
             TEMPLATE = itemEdit.TEMPLATE;
             URL = itemEdit.URL;
@@ -51,7 +51,7 @@ namespace LollyCommon
             GetHtmlCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 SourceUrl = string.Format(URL, SourceWord);
-                // SourceText = await MainWindow.vmSettings.client.GetStringAsync(SourceUrl);
+                SourceText = await vmSettings.client.GetStringAsync(SourceUrl);
             });
             ExecuteTransformCommand = ReactiveCommand.Create(() =>
             {

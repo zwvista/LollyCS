@@ -37,7 +37,7 @@ namespace LollyCloud
 
         void btnEditTransform_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new TransformEditDlg(this, vmDetail.ItemEdit);
+            var dlg = new TransformEditDlg(this, vmDetail.vm.vmSettings, vmDetail.ItemEdit);
             dlg.ShowDialog();
         }
     }

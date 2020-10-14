@@ -33,12 +33,12 @@ namespace LollyCloud
         TransformInterimControl interimCtrl;
         TransformTemplateControl templateCtrl;
 
-        public TransformEditDlg(Window owner, MDictionaryEdit itemEdit)
+        public TransformEditDlg(Window owner, SettingsViewModel vmSettings, MDictionaryEdit itemEdit)
         {
             InitializeComponent();
             //SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            vm = new TransformEditViewModelWPF(itemEdit);
+            vm = new TransformEditViewModelWPF(vmSettings, itemEdit);
             DataContext = vm;
             tcTranform.DataContext = this;
             templateCtrl = new TransformTemplateControl(vm);
