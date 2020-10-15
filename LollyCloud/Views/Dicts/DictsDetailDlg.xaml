@@ -51,6 +51,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="ID:" Grid.Row="0" />
@@ -63,7 +64,7 @@
                 <Label Content="SEQNUM:" Grid.Row="3" />
                 <TextBox Text="{Binding SEQNUM}" Grid.Row="3" Grid.Column="1" />
                 <Label Content="DICTTYPE:" Grid.Row="4" />
-                <ComboBox x:Name="cbDictType" DisplayMemberPath="NAME" SelectedValuePath="CODE" SelectedValue="{Binding DICTTYPEID}"
+                <ComboBox x:Name="cbDictType" DisplayMemberPath="NAME" SelectedValuePath="CODE" SelectedValue="{Binding DICTTYPECODE}"
                         Grid.Row="4" Grid.Column="1" />
                 <Label Content="DICTNAME:" Grid.Row="5" />
                 <TextBox x:Name="tbDictName" Text="{Binding DICTNAME, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
@@ -72,9 +73,11 @@
                 <Label Content="CHCONV:" Grid.Row="7" />
                 <TextBox Text="{Binding CHCONV}" Grid.Row="7" Grid.Column="1" />
                 <Label Content="SITEID:" Grid.Row="8" />
-                <TextBox Text="{Binding SITEID}" Grid.Row="8" Grid.Column="1" />
-                <Label Content="TRANSFORM:" Grid.Row="9" />
-                <TextBox Text="{Binding TRANSFORM}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="10" Grid.ColumnSpan="2" Margin="0" />
+                <TextBox Text="{Binding SITEID}" Grid.Row="8" Grid.Column="1" IsReadOnly="True" />
+                <Label Content="WAIT:" Grid.Row="9" />
+                <TextBox Text="{Binding WAIT}" Grid.Row="9" Grid.Column="1" />
+                <Label Content="TRANSFORM:" Grid.Row="10" />
+                <TextBox Text="{Binding TRANSFORM}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="11" Grid.ColumnSpan="2" Margin="0" />
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">

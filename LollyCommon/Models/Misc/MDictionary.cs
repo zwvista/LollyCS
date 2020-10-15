@@ -35,7 +35,7 @@ namespace LollyCommon
         public int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
-        public int DICTTYPEID { get; set; }
+        public int DICTTYPECODE { get; set; }
         [JsonProperty]
         [Reactive]
         public string DICTTYPENAME { get; set; }
@@ -98,7 +98,7 @@ namespace LollyCommon
         [Reactive]
         public int SEQNUM { get; set; }
         [Reactive]
-        public int DICTTYPEID { get; set; }
+        public int DICTTYPECODE { get; set; }
         [Reactive]
         public string DICTTYPENAME { get; set; }
         [Reactive]
@@ -144,7 +144,7 @@ namespace LollyCommon
         [JsonProperty]
         public int SEQNUM { get; set; }
         [JsonProperty]
-        public int DICTTYPEID { get; set; }
+        public int DICTTYPECODE { get; set; }
         [JsonProperty("NAME")]
         public string DICTNAME { get; set; }
         [JsonProperty]

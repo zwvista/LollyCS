@@ -221,7 +221,7 @@ namespace LollyCommon
         public bool PartFromIsEnabled { get; set; }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
-        public List<MCode> DictCodes { get; set; }
+        public List<MCode> DictTypeCodes { get; set; }
         public List<MCode> ReadNumberCodes { get; set; }
         public static List<string> ScopeWordFilters { get; } = new List<string> { "Word", "Note" };
         public static List<string> ScopePhraseFilters { get; } = new List<string> { "Phrase", "Translation" };
@@ -373,7 +373,7 @@ namespace LollyCommon
             Languages = t.a;
             USMappings = t.b;
             UserSettings = t.c;
-            DictCodes = t.d;
+            DictTypeCodes = t.d;
             ReadNumberCodes = await CodeDS.GetReadNumberCodes();
             INFO_USLANG = GetUSInfo(MUSMapping.NAME_USLANG);
             INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
