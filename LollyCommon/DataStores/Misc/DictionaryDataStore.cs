@@ -28,10 +28,10 @@ namespace LollyCommon
     public class DictionarySiteDataStore : LollyDataStore<MDictionarySite>
     {
         public async Task<int> Create(MDictionarySite item) =>
-        await CreateByUrl($"DICTIONARIES", item);
+        await CreateByUrl($"SITES", item);
         public async Task Update(MDictionarySite item) =>
-        Debug.WriteLine(await UpdateByUrl($"DICTIONARIES/{item.SITEID}", JsonConvert.SerializeObject(item)));
+        Debug.WriteLine(await UpdateByUrl($"SITES/{item.SITEID}", JsonConvert.SerializeObject(item)));
         public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"DICTIONARIES/{id}"));
+        Debug.WriteLine(await DeleteByUrl($"SITES/{id}"));
     }
 }

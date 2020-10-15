@@ -28,9 +28,10 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition />
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="100" />
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPatterns" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPatterns_SelectionChanged"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding PatternItems}">
@@ -72,6 +73,9 @@
                         </Style>
                     </DataGrid.Resources>
                 </DataGrid>
+                <StatusBar Grid.Row="3">
+                    <Label Content="{Binding StatusText}"/>
+                </StatusBar>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2" >
