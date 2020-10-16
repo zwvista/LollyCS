@@ -34,6 +34,8 @@ namespace LollyCommon
             new MDictionary
             {
                 LANGIDFROM = vmSettings.SelectedLang.ID,
+                LANGNAMEFROM = vmSettings.SelectedLang.LANGNAME,
+                DICTTYPECODE = 3,
             };
 
         public void Add(MDictionary item)

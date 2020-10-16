@@ -153,6 +153,7 @@ namespace LollyCommon
 
         [Reactive]
         public List<MLanguage> LanguagesAll { get; set; }
+        [Reactive]
         public List<MLanguage> Languages { get; set; }
         [Reactive]
         public MLanguage SelectedLang { get; set; }
