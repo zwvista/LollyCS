@@ -29,14 +29,14 @@ namespace LollyCommon
         [Reactive]
         public string ResultHtml { get; private set; }
         [Reactive]
-        public string InterimText { get; private set; }
+        public string IntermediateText { get; private set; }
         [Reactive]
-        public int InterimMaxIndex { get; private set; }
+        public int IntermediateMaxIndex { get; private set; }
         [Reactive]
-        public int InterimIndex { get; set; }
+        public int IntermediateIndex { get; set; }
         public ObservableCollection<MTransformItem> TransformItems { get; }
         [Reactive]
-        public List<string> InterimResults { get; private set; } = new List<string> { "" };
+        public List<string> IntermediateResults { get; private set; } = new List<string> { "" };
         public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; }
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; }
         public ReactiveCommand<Unit, Unit> GetAndTransformCommand { get; }
@@ -46,8 +46,8 @@ namespace LollyCommon
             TEMPLATE = itemEdit.TEMPLATE;
             URL = itemEdit.URL;
             TransformItems = new ObservableCollection<MTransformItem>(HtmlTransformService.ToTransformItems(itemEdit.TRANSFORM));
-            this.WhenAnyValue(x => x.InterimResults).Subscribe(_ => InterimText = InterimResults[InterimIndex = 0]);
-            this.WhenAnyValue(x => x.InterimIndex).Subscribe(_ => InterimText = InterimResults[InterimIndex]);
+            this.WhenAnyValue(x => x.IntermediateResults).Subscribe(_ => IntermediateText = IntermediateResults[IntermediateIndex = 0]);
+            this.WhenAnyValue(x => x.IntermediateIndex).Subscribe(_ => IntermediateText = IntermediateResults[IntermediateIndex]);
             GetHtmlCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 SourceUrl = string.Format(URL, SourceWord);
@@ -56,13 +56,13 @@ namespace LollyCommon
             ExecuteTransformCommand = ReactiveCommand.Create(() =>
             {
                 var text = HtmlTransformService.RemoveReturns(SourceText);
-                InterimResults = new List<string> { text };
+                IntermediateResults = new List<string> { text };
                 foreach (var item in TransformItems)
                 {
                     text = HtmlTransformService.DoTransform(text, item);
-                    InterimResults.Add(text);
+                    IntermediateResults.Add(text);
                 }
-                InterimMaxIndex = InterimResults.Count - 1;
+                IntermediateMaxIndex = IntermediateResults.Count - 1;
                 ResultText = text;
                 ResultHtml = string.IsNullOrEmpty(TEMPLATE) ? HtmlTransformService.ToHtml(text) :
                     HtmlTransformService.ApplyTemplate(TEMPLATE, SourceWord, text);

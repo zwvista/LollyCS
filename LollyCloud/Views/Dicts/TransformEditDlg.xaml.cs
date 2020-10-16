@@ -30,7 +30,7 @@ namespace LollyCloud
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
         TransformSourceControl sourceCtrl;
         TransformResultControl resultCtrl;
-        TransformInterimControl interimCtrl;
+        TransformIntermediateControl intermediateCtrl;
         TransformTemplateControl templateCtrl;
 
         public TransformEditDlg(Window owner, SettingsViewModel vmSettings, MDictionaryEdit itemEdit)
@@ -44,10 +44,10 @@ namespace LollyCloud
             templateCtrl = new TransformTemplateControl(vm);
             sourceCtrl = new TransformSourceControl(vm);
             resultCtrl = new TransformResultControl(vm);
-            interimCtrl = new TransformInterimControl(vm);
+            intermediateCtrl = new TransformIntermediateControl(vm);
             Tabs.Add(new ActionTabItem { Header = "Source", Content = sourceCtrl });
             Tabs.Add(new ActionTabItem { Header = "Result", Content = resultCtrl });
-            Tabs.Add(new ActionTabItem { Header = "Interim", Content = interimCtrl });
+            Tabs.Add(new ActionTabItem { Header = "Intermediate", Content = intermediateCtrl });
             Tabs.Add(new ActionTabItem { Header = "Template", Content = templateCtrl });
             Action<ReactiveCommand<Unit, Unit>> f = cmd => cmd.WhenFinishedExecuting().Subscribe(_ => tcTranform.SelectedIndex = 1);
             f(vm.ExecuteTransformCommand);

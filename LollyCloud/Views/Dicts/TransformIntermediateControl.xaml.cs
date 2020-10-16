@@ -9,11 +9,11 @@ using System.Windows.Threading;
 namespace LollyCloud
 {
     /// <summary>
-    /// TransformInterimControl.xaml の相互作用ロジック
+    /// TransformIntermediateControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class TransformInterimControl : UserControl
+    public partial class TransformIntermediateControl : UserControl
     {
-        public TransformInterimControl(TransformEditViewModelWPF vm)
+        public TransformIntermediateControl(TransformEditViewModelWPF vm)
         {
             InitializeComponent();
             DataContext = vm;
