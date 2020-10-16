@@ -31,7 +31,7 @@ namespace LollyCloud
             Owner = owner;
             vmDetail = new DictsDetailViewModel(Item = item, vm);
             DataContext = vmDetail.ItemEdit;
-            cbLangTo.ItemsSource = vm.vmSettings.Languages;
+            cbLangTo.ItemsSource = vm.vmSettings.LanguagesAll;
             cbDictType.ItemsSource = vm.vmSettings.DictTypeCodes;
         }
 

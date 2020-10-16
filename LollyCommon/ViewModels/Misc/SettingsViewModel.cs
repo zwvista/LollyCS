@@ -152,6 +152,7 @@ namespace LollyCommon
         public bool IsInvalidUnitPart => USUNITPARTFROM > USUNITPARTTO;
 
         [Reactive]
+        public List<MLanguage> LanguagesAll { get; set; }
         public List<MLanguage> Languages { get; set; }
         [Reactive]
         public MLanguage SelectedLang { get; set; }
@@ -370,7 +371,8 @@ namespace LollyCommon
         {
             var t = await LanguageDS.GetData().ToObservable().Zip(USMappingDS.GetData().ToObservable(),
                 UserSettingDS.GetDataByUser(CommonApi.UserId).ToObservable(), CodeDS.GetDictCodes().ToObservable(), (a, b, c, d) => (a, b, c, d)).ToTask();
-            Languages = t.a;
+            LanguagesAll = t.a;
+            Languages = LanguagesAll.Where(o => o.ID != 0).ToList();
             USMappings = t.b;
             UserSettings = t.c;
             DictTypeCodes = t.d;
