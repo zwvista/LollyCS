@@ -10,13 +10,13 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsSelectUnitDlg : Window
     {
-        public WordsSelectViewModel vm;
+        public WordsSelectUnitViewModel vm;
         public WordsSelectUnitDlg(Window owner, SettingsViewModel vmSettings, int phraseid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new WordsSelectViewModel(vmSettings, phraseid, textFilter);
+            DataContext = vm = new WordsSelectUnitViewModel(vmSettings, phraseid, textFilter);
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
