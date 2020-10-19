@@ -31,7 +31,7 @@ namespace LollyCommon
                     await wordPhraseDS.Connect(wordid, o.ID);
             });
         }
-        public void Reload()
+        void Reload()
         {
             vm = new PhrasesUnitViewModel(vmSettings, InTextbook, false);
             vm.TextFilter = textFilter;

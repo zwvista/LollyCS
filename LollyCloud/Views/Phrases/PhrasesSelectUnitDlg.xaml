@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LollyCloud"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
-        Title="Select Phrase" Height="370" Width="800" WindowStartupLocation="CenterOwner">
+        Title="Select Phrase" Height="600" Width="800" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Window.Resources>
         <local:BoolInverterConverter x:Key="BoolInverterConverter"/>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">

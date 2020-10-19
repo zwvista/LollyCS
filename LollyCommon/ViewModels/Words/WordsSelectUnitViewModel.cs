@@ -15,22 +15,22 @@ namespace LollyCommon
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         [Reactive]
-        public bool InTextbook { get; set; } = true;
+        public bool InTextbook { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; }
 
         public WordsSelectUnitViewModel(SettingsViewModel vmSettings, int phraseid, string textFilter)
         {
             this.vmSettings = vmSettings;
             this.textFilter = textFilter;
-            Reload();
-            this.WhenAnyValue(x => x.InTextbook).Skip(1).Subscribe(_ => Reload());
+            this.WhenAnyValue(x => x.InTextbook).Subscribe(_ => Reload());
+            InTextbook = true;
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.WordItems)
                     await wordPhraseDS.Connect(phraseid, o.ID);
             });
         }
-        public void Reload()
+        void Reload()
         {
             vm = new WordsUnitViewModel(vmSettings, InTextbook, false);
             vm.TextFilter = textFilter;

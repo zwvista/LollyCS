@@ -11,13 +11,13 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesSelectUnitDlg : Window
     {
-        public PhrasesSelectUnitViewModel vm;
+        PhrasesSelectUnitViewModel vm;
         public PhrasesSelectUnitDlg(Window owner, SettingsViewModel vmSettings, int wordid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new PhrasesSelectUnitViewModel(vmSettings, wordid, textFilter);
+            vm = new PhrasesSelectUnitViewModel(vmSettings, wordid, textFilter);
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
@@ -25,6 +25,11 @@ namespace LollyCloud
             int n = int.Parse((string)((Button)sender).Tag);
             var checkedItems = dgPhrases.SelectedItems.Cast<MUnitPhrase>().ToList();
             vm.CheckItems(n, checkedItems);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = vm;
         }
     }
 }

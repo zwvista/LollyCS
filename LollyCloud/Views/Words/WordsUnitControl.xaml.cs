@@ -69,6 +69,12 @@ namespace LollyCloud
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }
+        void miEdit_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void miSelectPhrase_Click(object sender, RoutedEventArgs e)
+        {
+        }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
         {
