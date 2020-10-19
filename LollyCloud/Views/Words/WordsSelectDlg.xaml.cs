@@ -10,20 +10,20 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsSelectDlg : Window
     {
-        WordsUnitBatchViewModel vmBatch;
-        public WordsSelectDlg(Window owner, WordsUnitViewModelWPF vm)
+        public WordsSelectViewModel vm;
+        public WordsSelectDlg(Window owner, SettingsViewModel vmSettings, int phraseid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vmBatch = new WordsUnitBatchViewModel(vm);
+            DataContext = vm = new WordsSelectViewModel(vmSettings, phraseid, textFilter);
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
         {
             int n = int.Parse((string)((Button)sender).Tag);
             var selectedItems = dgWords.SelectedItems.Cast<MUnitWord>().ToList();
-            vmBatch.CheckItems(n, selectedItems);
+            vm.CheckItems(n, selectedItems);
         }
     }
 }

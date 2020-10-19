@@ -12,18 +12,12 @@ namespace LollyCloud
     public partial class PhrasesSelectUnitDlg : Window
     {
         public PhrasesSelectViewModel vm;
-        UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
-        public PhrasesSelectUnitDlg(Window owner, int wordid, string textFilter)
+        public PhrasesSelectUnitDlg(Window owner, SettingsViewModel vmSettings, int wordid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new PhrasesSelectViewModel(MainWindow.vmSettings, wordid, textFilter);
-            Reload();
-        }
-        void Reload()
-        {
-            
+            DataContext = vm = new PhrasesSelectViewModel(vmSettings, wordid, textFilter);
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)

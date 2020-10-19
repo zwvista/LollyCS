@@ -37,9 +37,17 @@ namespace LollyCloud
         {
             dgPhrases.CancelEdit();
             var item = (MUnitPhrase)((DataGridRow)sender).Item;
-            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item);
-            dlg.ShowDialog();
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+            {
+                var dlg = new WordsSelectDlg(Window.GetWindow(this), vmSettings, selectedPhraseID, selectedPhrase);
+                dlg.ShowDialog();
+            }
+            else
+            {
+                // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+                var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item);
+                dlg.ShowDialog();
+            }
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)

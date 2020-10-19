@@ -1,58 +1,41 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Reactive;
+using System.Reactive.Linq;
 
 namespace LollyCommon
 {
     public class WordsSelectViewModel : ReactiveObject
     {
         public WordsUnitViewModel vm { get; set; }
-        public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
+        public SettingsViewModel vmSettings { get; set; }
+        string textFilter;
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         [Reactive]
-        public bool UnitIsChecked { get; set; }
-        [Reactive]
-        public bool PartIsChecked { get; set; }
-        [Reactive]
-        public bool SeqNumIsChecked { get; set; }
-        [Reactive]
-        public int UNIT { get; set; }
-        [Reactive]
-        public int PART { get; set; }
-        [Reactive]
-        public int SEQNUM { get; set; }
+        public bool InTextbook { get; set; } = true;
         public ReactiveCommand<Unit, Unit> Save { get; }
 
-        public WordsSelectViewModel(WordsUnitViewModel vm)
+        public WordsSelectViewModel(SettingsViewModel vmSettings, int phraseid, string textFilter)
         {
-            this.vm = vm;
-            foreach (var o in vm.WordItems)
-                o.IsChecked = false;
+            this.vmSettings = vmSettings;
+            this.textFilter = textFilter;
+            Reload();
+            this.WhenAnyValue(x => x.InTextbook).Skip(1).Subscribe(_ => Reload());
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.WordItems)
-                {
-                    bool b = false;
-                    if (UnitIsChecked)
-                    {
-                        o.UNIT = UNIT;
-                        b = true;
-                    }
-                    if (PartIsChecked)
-                    {
-                        o.PART = PART;
-                        b = true;
-                    }
-                    if (SeqNumIsChecked)
-                    {
-                        o.SEQNUM += SEQNUM;
-                        b = true;
-                    }
-                    if (b)
-                        await vm.Update(o);
-                }
+                    await wordPhraseDS.Connect(phraseid, o.ID);
             });
+        }
+        public void Reload()
+        {
+            vm = new WordsUnitViewModel(vmSettings, InTextbook, false);
+            vm.TextFilter = textFilter;
+            foreach (var o in vm.WordItems)
+                o.IsChecked = false;
         }
 
         public void CheckItems(int n, List<MUnitWord> selectedItems)
