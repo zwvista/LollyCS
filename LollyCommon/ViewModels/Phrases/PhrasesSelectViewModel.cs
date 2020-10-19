@@ -24,7 +24,7 @@ namespace LollyCommon
             this.vmSettings = vmSettings;
             this.textFilter = textFilter;
             Reload();
-            this.WhenAnyValue(x => x.InTextbook).Skip(1).Subscribe(_ => Reload());
+            this.WhenAnyValue(x => x.InTextbook).Subscribe(_ => Reload());
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.PhraseItems)

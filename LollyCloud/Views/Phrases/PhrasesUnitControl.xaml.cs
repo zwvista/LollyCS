@@ -39,7 +39,7 @@ namespace LollyCloud
             var item = (MUnitPhrase)((DataGridRow)sender).Item;
             if (Keyboard.IsKeyDown(Key.LeftAlt))
             {
-                var dlg = new WordsSelectDlg(Window.GetWindow(this), vmSettings, selectedPhraseID, selectedPhrase);
+                var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, selectedPhraseID, selectedPhrase);
                 dlg.ShowDialog();
             }
             else

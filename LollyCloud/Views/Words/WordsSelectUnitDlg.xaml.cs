@@ -6,12 +6,12 @@ using System.Windows.Controls;
 namespace LollyCloud
 {
     /// <summary>
-    /// WordsSelectDlg.xaml の相互作用ロジック
+    /// WordsSelectUnitDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class WordsSelectDlg : Window
+    public partial class WordsSelectUnitDlg : Window
     {
         public WordsSelectViewModel vm;
-        public WordsSelectDlg(Window owner, SettingsViewModel vmSettings, int phraseid, string textFilter)
+        public WordsSelectUnitDlg(Window owner, SettingsViewModel vmSettings, int phraseid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

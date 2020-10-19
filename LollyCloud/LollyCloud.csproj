@@ -274,8 +274,11 @@
     <Compile Include="Views\Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Phrases\PhrasesSelectDlg.xaml.cs">
-      <DependentUpon>PhrasesSelectDlg.xaml</DependentUpon>
+    <Compile Include="Views\Phrases\PhrasesSelectUnitDlg.xaml.cs">
+      <DependentUpon>PhrasesSelectUnitDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Phrases\PhrasesSelectLangDlg.xaml.cs">
+      <DependentUpon>PhrasesSelectLangDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesTextbookControl.xaml.cs">
       <DependentUpon>PhrasesTextbookControl.xaml</DependentUpon>
@@ -325,8 +328,8 @@
     <Compile Include="Views\Words\WordsReviewControl.xaml.cs">
       <DependentUpon>WordsReviewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Words\WordsSelectDlg.xaml.cs">
-      <DependentUpon>WordsSelectDlg.xaml</DependentUpon>
+    <Compile Include="Views\Words\WordsSelectUnitDlg.xaml.cs">
+      <DependentUpon>WordsSelectUnitDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Words\WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
@@ -435,7 +438,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Phrases\PhrasesSelectDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesSelectUnitDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Phrases\PhrasesSelectLangDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -499,7 +506,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Words\WordsSelectDlg.xaml">
+    <Page Include="Views\Words\WordsSelectUnitDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
