@@ -22,8 +22,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new DictsViewModel(MainWindow.vmSettings, needCopy: true);
-            DataContext = vm;
+            DataContext = vm = new DictsViewModel(MainWindow.vmSettings, needCopy: true);
         }
 
         void dgDicts_RowDoubleClick(object sender, MouseButtonEventArgs e)

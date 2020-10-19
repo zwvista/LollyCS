@@ -26,8 +26,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new TextbooksViewModel(MainWindow.vmSettings, needCopy: true);
-            DataContext = vm;
+            DataContext = vm = new TextbooksViewModel(MainWindow.vmSettings, needCopy: true);
         }
 
         void dgTextbooks_RowDoubleClick(object sender, MouseButtonEventArgs e)

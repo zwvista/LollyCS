@@ -36,9 +36,18 @@ namespace LollyCloud
         {
             dgWords.CancelEdit();
             var item = (MUnitWord)((DataGridRow)sender).Item;
-            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
-            dlg.ShowDialog();
+            // https://stackoverflow.com/questions/14178800/how-can-i-check-if-ctrl-alt-are-pressed-on-left-mouse-click-in-c
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+            {
+                var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), selectedWordID, selectedWord);
+                dlg.ShowDialog();
+            }
+            else
+            {
+                // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+                var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
+                dlg.ShowDialog();
+            }
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
@@ -56,8 +65,7 @@ namespace LollyCloud
 
         public override async Task OnSettingsChanged()
         {
-            vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true);
-            DataContext = vm;
+            DataContext = vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }

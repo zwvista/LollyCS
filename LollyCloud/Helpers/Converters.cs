@@ -1,11 +1,35 @@
 ﻿using System;
-using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace LollyCloud
 {
+    // https://stackoverflow.com/questions/1039636/how-to-bind-inverse-boolean-properties-in-wpf
+    public class BoolInverterConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            if (value is bool)
+            {
+                return !(bool)value;
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            if (value is bool)
+            {
+                return !(bool)value;
+            }
+            return value;
+        }
+
+        #endregion
+    }
     // https://stackoverflow.com/questions/20707160/data-binding-int-property-to-enum-in-wpf
     public class EnumConverter : IValueConverter
     {

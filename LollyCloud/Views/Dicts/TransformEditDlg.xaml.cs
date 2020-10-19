@@ -38,8 +38,7 @@ namespace LollyCloud
             InitializeComponent();
             //SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            vm = new TransformEditViewModelWPF(vmSettings, itemEdit);
-            DataContext = vm;
+            DataContext = vm = new TransformEditViewModelWPF(vmSettings, itemEdit);
             tcTranform.DataContext = this;
             templateCtrl = new TransformTemplateControl(vm);
             sourceCtrl = new TransformSourceControl(vm);

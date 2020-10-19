@@ -274,8 +274,8 @@
     <Compile Include="Views\Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Phrases\PhrasesSelectUnitDlg.xaml.cs">
-      <DependentUpon>PhrasesSelectUnitDlg.xaml</DependentUpon>
+    <Compile Include="Views\Phrases\PhrasesSelectDlg.xaml.cs">
+      <DependentUpon>PhrasesSelectDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesTextbookControl.xaml.cs">
       <DependentUpon>PhrasesTextbookControl.xaml</DependentUpon>
@@ -285,9 +285,6 @@
     </Compile>
     <Compile Include="Views\Phrases\PhrasesTextbookDetailDlg.xaml.cs">
       <DependentUpon>PhrasesTextbookDetailDlg.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Phrases\PhrasesSelectLangDlg.xaml.cs">
-      <DependentUpon>PhrasesSelectLangDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesUnitBatchDlg.xaml.cs">
       <DependentUpon>PhrasesUnitBatchDlg.xaml</DependentUpon>
@@ -327,6 +324,9 @@
     </Compile>
     <Compile Include="Views\Words\WordsReviewControl.xaml.cs">
       <DependentUpon>WordsReviewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Words\WordsSelectDlg.xaml.cs">
+      <DependentUpon>WordsSelectDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Words\WordsUnitControl.xaml.cs">
       <DependentUpon>WordsUnitControl.xaml</DependentUpon>
@@ -435,7 +435,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Phrases\PhrasesSelectUnitDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesSelectDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -448,10 +448,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Phrases\PhrasesTextbookDetailDlg.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Phrases\PhrasesSelectLangDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -500,6 +496,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Words\WordsReviewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Words\WordsSelectDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -26,8 +26,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new BlogViewModel(MainWindow.vmSettings, true);
-            DataContext = vm;
+            DataContext = vm = new BlogViewModel(MainWindow.vmSettings, true);
         }
 
         void ReplaceSelection(Func<string, string> f) =>

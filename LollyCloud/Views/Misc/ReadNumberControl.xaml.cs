@@ -26,8 +26,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new ReadNumberViewModel(MainWindow.vmSettings, true);
-            DataContext = vm;
+            DataContext = vm = new ReadNumberViewModel(MainWindow.vmSettings, true);
             ToolBar1.Items.Clear();
             foreach (var o in vmSettings.ReadNumberCodes)
             {

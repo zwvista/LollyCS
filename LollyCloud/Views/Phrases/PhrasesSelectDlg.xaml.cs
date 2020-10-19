@@ -11,30 +11,26 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesSelectUnitDlg : Window
     {
-        public PhrasesUnitViewModelWPF vm;
-        public SettingsViewModel vmSettings => vm.vmSettings;
+        public PhrasesSelectViewModel vm;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
-        public PhrasesSelectUnitDlg()
+        public PhrasesSelectUnitDlg(Window owner, int wordid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
+            Owner = owner;
+            DataContext = vm = new PhrasesSelectViewModel(MainWindow.vmSettings, wordid, textFilter);
+            Reload();
         }
-
-        void Window_Loaded(object sender, RoutedEventArgs e)
+        void Reload()
         {
-            foreach (var o in vm.PhraseItems)
-                o.IsChecked = false;
-            //DataContext = vmBatch;
+            
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
         {
             int n = int.Parse((string)((Button)sender).Tag);
-            var checkedItems = dgPhrases.SelectedItems.Cast<MUnitPhrase>();
-            foreach (var o in vm.PhraseItems)
-                o.IsChecked = n == 0 ? true : n == 1 ? false :
-                    !checkedItems.Contains(o) ? o.IsChecked :
-                    n == 2;
+            var checkedItems = dgPhrases.SelectedItems.Cast<MUnitPhrase>().ToList();
+            vm.CheckItems(n, checkedItems);
         }
     }
 }

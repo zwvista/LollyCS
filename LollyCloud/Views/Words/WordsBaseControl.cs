@@ -87,7 +87,7 @@ namespace LollyCloud
         public ItemActionCallback ClosingTabItemHandler { get; } = args =>
         {
             var name = ((ActionTabItem)args.DragablzItem.Content).Header;
-            var self = UIHelper.FindVisualParent<WordsBaseControl>(args.DragablzItem);
+            var self = UIHelper.FindVisualParent<WordsPhraseBaseControl>(args.DragablzItem);
             var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
             o.IsChecked = false;
         };

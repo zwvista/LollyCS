@@ -109,8 +109,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            vm = new PatternsViewModelWPF(MainWindow.vmSettings, needCopy: true);
-            DataContext = vm;
+            DataContext = vm = new PatternsViewModelWPF(MainWindow.vmSettings, needCopy: true);
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
