@@ -76,6 +76,7 @@
                             <Separator />
                             <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
                             <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                            <MenuItem x:Name="miOnlineDict" Header="Online Dictionary" Click="miOnlineDict_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

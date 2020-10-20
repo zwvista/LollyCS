@@ -17,7 +17,7 @@ namespace LollyCloud
         public MDictionary Dict;
         public string Word = "";
         public SettingsViewModel vmSettings;
-        string Url;
+        public string Url;
         public WordsDictControl()
         {
             InitializeComponent();

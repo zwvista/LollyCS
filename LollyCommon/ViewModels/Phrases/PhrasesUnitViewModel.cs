@@ -1,39 +1,24 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class PhrasesUnitViewModel : ReactiveObject
+    public class PhrasesUnitViewModel : PhrasesBaseViewModel
     {
-        public SettingsViewModel vmSettings;
         bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         List<MUnitPhrase> PhraseItemsAll { get; set; } = new List<MUnitPhrase>();
         public ObservableCollection<MUnitPhrase> PhraseItems { get; set; } = new ObservableCollection<MUnitPhrase>();
-        public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
-        [Reactive]
-        public string TextFilter { get; set; } = "";
-        [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
-        [Reactive]
-        public int TextbookFilter { get; set; }
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public string StatusText => $"{PhraseItems.Count} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
-        public bool IsBusy { get; set; } = true;
-        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
-        public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
+        public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy) : base(vmSettings, needCopy)
         {
-            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.inTextbook = inTextbook;
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
@@ -99,11 +84,6 @@ namespace LollyCommon
                 SEQNUM = (maxElem?.SEQNUM ?? 0) + 1,
                 Textbook = vmSettings.SelectedTextbook,
             };
-        }
-        public async Task SearchWords(int phraseid)
-        {
-            WordItems = new ObservableCollection<MLangWord>(await wordPhraseDS.GetWordsByPhraseId(phraseid));
-            this.RaisePropertyChanged(nameof(WordItems));
         }
     }
 }

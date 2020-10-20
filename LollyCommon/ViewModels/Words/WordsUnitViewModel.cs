@@ -1,42 +1,25 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class WordsUnitViewModel : ReactiveObject
+    public class WordsUnitViewModel : WordsBaseViewModel
     {
-        public SettingsViewModel vmSettings { get; }
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         List<MUnitWord> WordItemsAll { get; set; } = new List<MUnitWord>();
         public ObservableCollection<MUnitWord> WordItems { get; set; } = new ObservableCollection<MUnitWord>();
-        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
-        [Reactive]
-        public string NewWord { get; set; } = "";
-        [Reactive]
-        public string TextFilter { get; set; } = "";
-        [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
-        [Reactive]
-        public int TextbookFilter { get; set; }
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems.Count} Words in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
-        public bool IsBusy { get; set; } = true;
-        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
-        public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy)
+        public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy) : base(vmSettings, needCopy)
         {
-            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.inTextbook = inTextbook;
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
@@ -133,10 +116,5 @@ namespace LollyCommon
                     oneComplete(i);
                 });
 
-        public async Task SearchPhrases(int wordid)
-        {
-            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWordId(wordid));
-            this.RaisePropertyChanged(nameof(PhraseItems));
-        }
     }
 }

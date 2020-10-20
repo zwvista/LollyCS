@@ -35,19 +35,11 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgWords.CancelEdit();
-            var item = (MUnitWord)((DataGridRow)sender).Item;
             // https://stackoverflow.com/questions/14178800/how-can-i-check-if-ctrl-alt-are-pressed-on-left-mouse-click-in-c
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-            {
-                var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, selectedWordID, selectedWord);
-                dlg.ShowDialog();
-            }
+                miEdit_Click(sender, null);
             else
-            {
-                // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-                var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
-                dlg.ShowDialog();
-            }
+                miSelectPhrase_Click(sender, null);
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
@@ -71,16 +63,22 @@ namespace LollyCloud
         }
         void miEdit_Click(object sender, RoutedEventArgs e)
         {
+            var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, selectedWordID, selectedWord);
+            dlg.ShowDialog();
         }
         void miSelectPhrase_Click(object sender, RoutedEventArgs e)
         {
+            var item = dgWords.SelectedItem as MUnitWord;
+            if (item == null) return;
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
+            dlg.ShowDialog();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row = dgWords.SelectedIndex;
-            if (row == -1) return;
-            var item = vm.WordItems[row];
+            var item = dgWords.SelectedItem as MUnitWord;
+            if (item == null) return;
             await vm.Delete(item);
             vm.Reload();
         }

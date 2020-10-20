@@ -1,35 +1,22 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class PhrasesLangViewModel : ReactiveObject
+    public class PhrasesLangViewModel : PhrasesBaseViewModel
     {
-        public SettingsViewModel vmSettings;
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         List<MLangPhrase> PhraseItemsAll { get; set; } = new List<MLangPhrase>();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
-        public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
-        [Reactive]
-        public string TextFilter { get; set; } = "";
-        [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
         public string StatusText => $"{PhraseItems.Count} Phrases in {vmSettings.LANGINFO}";
-        public bool IsBusy { get; set; } = true;
-        public ReactiveCommand<Unit, Unit> ReloadCommand { get; }
 
-        public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
-            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -64,10 +51,5 @@ namespace LollyCommon
             {
                 LANGID = vmSettings.SelectedLang.ID,
             };
-        public async Task SearchWords(int phraseid)
-        {
-            WordItems = new ObservableCollection<MLangWord>(await wordPhraseDS.GetWordsByPhraseId(phraseid));
-            this.RaisePropertyChanged(nameof(WordItems));
-        }
     }
 }
