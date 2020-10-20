@@ -64,7 +64,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgWords_SelectionChanged">
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>

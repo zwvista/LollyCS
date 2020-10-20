@@ -23,7 +23,9 @@ namespace LollyCloud
         {
             SearchWord(vmWP.SelectedWord == "" ? vmWP.NewWord : vmWP.SelectedWord);
             App.Speak(vmSettings, vmWP.SelectedWord);
+            SearchPhrases();
         }
+        public virtual async Task SearchPhrases() { }
 
         protected void SearchWord(string word) =>
             Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
@@ -77,21 +79,13 @@ namespace LollyCloud
             var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
             o.IsChecked = false;
         };
-
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
-        public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            base.dgWords_SelectionChanged(sender, e);
-            SearchPhrases();
-        }
-
         public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedWord);
         public void miGoogle_Click(object sender, RoutedEventArgs e) => vmWP.SelectedWord.Google();
         public void miOnlineDict_Click(object sender, RoutedEventArgs e) =>
             Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
 
-        public virtual async Task SearchPhrases() { }
     }
 }
