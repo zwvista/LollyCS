@@ -21,14 +21,12 @@ namespace LollyCloud
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SearchWord(vmWP.SelectedWord == "" ? vmWP.NewWord : vmWP.SelectedWord);
+            var word = vmWP.SelectedWord == "" ? vmWP.NewWord : vmWP.SelectedWord;
+            Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchDict(word));
             App.Speak(vmSettings, vmWP.SelectedWord);
             SearchPhrases();
         }
         public virtual async Task SearchPhrases() { }
-
-        protected void SearchWord(string word) =>
-            Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchWord(word));
 
         public virtual async Task OnSettingsChanged()
         {
@@ -46,7 +44,7 @@ namespace LollyCloud
                     // c.wbDict.BrowserSettings.ImageLoading = CefState.Disabled;
                     Tabs.Add(new ActionTabItem { Header = name, Content = c });
                     tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-                    await c.SearchWord(vmWP.SelectedWord);
+                    await c.SearchDict(vmWP.SelectedWord);
                 }
                 else
                     Tabs.Remove(o);

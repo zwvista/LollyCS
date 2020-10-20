@@ -57,11 +57,11 @@ namespace LollyCloud
         }
 
         void miSearch_Click(object sender, RoutedEventArgs e) => AddTab<WordsSearchControl>("Search");
-        public void SearchWord(string word)
+        public void AddWordToSearch(string word)
         {
             miSearch_Click(this, null);
             var c = (WordsSearchControl)Tabs[tcMain.SelectedIndex].Content;
-            c.SearchWord(word);
+            c.AddWordToSearch(word);
         }
         void WordsUnitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
         void PhrasesUnitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => AddTab<PhrasesUnitControl>("Phrases in Unit");

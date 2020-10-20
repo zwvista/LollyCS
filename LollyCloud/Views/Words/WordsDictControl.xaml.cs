@@ -22,7 +22,7 @@ namespace LollyCloud
         {
             InitializeComponent();
         }
-        public async Task SearchWord(string word)
+        public async Task SearchDict(string word)
         {
             Word = word;
             dictStatus = DictWebBrowserStatus.Ready;

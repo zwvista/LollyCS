@@ -44,11 +44,11 @@ namespace LollyCloud
         void tbNewWord_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.Key == Key.Return || e.Key == Key.System) || string.IsNullOrEmpty(vm.NewWord)) return;
-            SearchWord(vm.NewWord);
+            AddWordToSearch(vm.NewWord);
             vm.NewWord = "";
         }
 
-        public void SearchWord(string word)
+        public void AddWordToSearch(string word)
         {
             var item = new MUnitWord
             {
