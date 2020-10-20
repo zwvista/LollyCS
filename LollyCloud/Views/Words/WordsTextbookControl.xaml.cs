@@ -33,10 +33,7 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgWords.CancelEdit();
-            var item = (MUnitWord)((DataGridRow)sender).Item;
-            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), vm, item);
-            dlg.ShowDialog();
+            miEdit_Click(sender, null);
         }
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
@@ -68,6 +65,13 @@ namespace LollyCloud
             DataContext = vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: false, needCopy: true);
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
+        }
+        void miEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MUnitWord)vm.SelectedWordItem;
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), vm, item);
+            dlg.ShowDialog();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)

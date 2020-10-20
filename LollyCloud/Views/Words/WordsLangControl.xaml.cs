@@ -32,10 +32,7 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgWords.CancelEdit();
-            var item = (MLangWord)((DataGridRow)sender).Item;
-            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm, item);
-            dlg.ShowDialog();
+            miEdit_Click(sender, null);
         }
 
         void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -74,6 +71,13 @@ namespace LollyCloud
             DataContext = vm = new WordsLangViewModel(MainWindow.vmSettings, needCopy: true);
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
+        }
+        void miEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MLangWord)vm.SelectedWordItem;
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm, item);
+            dlg.ShowDialog();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)

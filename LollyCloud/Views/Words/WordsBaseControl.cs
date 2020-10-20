@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace LollyCloud
 {
-    public class WordsPhraseBaseControl : UserControl, ILollySettings
+    public class WordsPhrasesBaseControl : UserControl, ILollySettings
     {
         protected string originalText = "";
         public virtual WordsPhrasesBaseViewModel vmWP => null;
@@ -73,13 +73,13 @@ namespace LollyCloud
         public ItemActionCallback ClosingTabItemHandler { get; } = args =>
         {
             var name = ((ActionTabItem)args.DragablzItem.Content).Header;
-            var self = UIHelper.FindVisualParent<WordsPhraseBaseControl>(args.DragablzItem);
+            var self = UIHelper.FindVisualParent<WordsPhrasesBaseControl>(args.DragablzItem);
             var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
             o.IsChecked = false;
         };
 
     }
-    public class WordsBaseControl : WordsPhraseBaseControl
+    public class WordsBaseControl : WordsPhrasesBaseControl
     {
         public override void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

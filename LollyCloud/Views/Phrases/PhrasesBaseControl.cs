@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace LollyCloud
 {
-    public class PhrasesBaseControl : WordsPhraseBaseControl
+    public class PhrasesBaseControl : WordsPhrasesBaseControl
     {
         public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
