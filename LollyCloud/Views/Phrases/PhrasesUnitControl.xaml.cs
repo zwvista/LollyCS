@@ -23,6 +23,7 @@ namespace LollyCloud
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
         EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
+        MUnitPhrase SelectedPhraseItem => (MUnitPhrase)vm.SelectedPhraseItem;
 
         public PhrasesUnitControl()
         {
@@ -35,7 +36,6 @@ namespace LollyCloud
         void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgPhrases.CancelEdit();
-            var item = (MUnitPhrase)((DataGridRow)sender).Item;
             if (Keyboard.IsKeyDown(Key.LeftAlt))
                 miSelectWord_Click(sender, null);
             else
@@ -71,9 +71,8 @@ namespace LollyCloud
         }
         void miEdit_Click(object sender, RoutedEventArgs e)
         {
-            var item = (MUnitPhrase)vm.SelectedPhraseItem;
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item);
+            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, SelectedPhraseItem);
             dlg.ShowDialog();
         }
         void miSelectWord_Click(object sender, RoutedEventArgs e)
@@ -84,17 +83,13 @@ namespace LollyCloud
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row = dgPhrases.SelectedIndex;
-            if (row == -1) return;
-            var item = vm.PhraseItems[row];
-            await vm.Delete(item);
+            await vm.Delete(SelectedPhraseItem);
             vm.Reload();
         }
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)
         {
-            var row = dgPhrases.SelectedIndex;
-            var part = row == -1 ? vmSettings.Parts[0].Value : vm.PhraseItems[row].PART;
+            var part = SelectedPhraseItem == null ? vmSettings.Parts[0].Value : SelectedPhraseItem.PART;
             await vmSettings.ToggleToType(part);
             vm.Reload();
         }

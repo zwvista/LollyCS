@@ -23,6 +23,7 @@ namespace LollyCloud
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
         EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
+        MUnitWord SelectedWordItem => (MUnitWord)vm.SelectedWordItem;
 
         public WordsUnitControl()
         {
@@ -62,9 +63,8 @@ namespace LollyCloud
         }
         void miEdit_Click(object sender, RoutedEventArgs e)
         {
-            var item = (MUnitWord)vm.SelectedWordItem;
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
+            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, SelectedWordItem);
             dlg.ShowDialog();
         }
         void miSelectPhrase_Click(object sender, RoutedEventArgs e)
@@ -75,9 +75,7 @@ namespace LollyCloud
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
         {
-            var item = dgWords.SelectedItem as MUnitWord;
-            if (item == null) return;
-            await vm.Delete(item);
+            await vm.Delete(SelectedWordItem);
             vm.Reload();
         }
 
@@ -93,8 +91,7 @@ namespace LollyCloud
 
         async void btnToggleToType_Click(object sender, RoutedEventArgs e)
         {
-            var row = dgWords.SelectedIndex;
-            var part = row == -1 ? vmSettings.Parts[0].Value : vm.WordItems[row].PART;
+            var part = SelectedWordItem == null ? vmSettings.Parts[0].Value : SelectedWordItem.PART;
             await vmSettings.ToggleToType(part);
             vm.Reload();
         }
@@ -108,18 +105,10 @@ namespace LollyCloud
             await vmSettings.NextUnitPart();
             vm.Reload();
         }
-        async void miGetNote_Click(object sender, RoutedEventArgs e)
-        {
-            var row = dgWords.SelectedIndex;
-            if (row == -1) return;
-            await vm.GetNote(row);
-        }
-        async void miClearNote_Click(object sender, RoutedEventArgs e)
-        {
-            var row = dgWords.SelectedIndex;
-            if (row == -1) return;
-            await vm.ClearNote(row);
-        }
+        async void miGetNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.GetNote(SelectedWordItem);
+        async void miClearNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.ClearNote(SelectedWordItem);
         async void btnGetNotes_Click(object sender, RoutedEventArgs e) =>
             await vm.GetNotes(_ => { });
         async void btnClearNotes_Click(object sender, RoutedEventArgs e) =>

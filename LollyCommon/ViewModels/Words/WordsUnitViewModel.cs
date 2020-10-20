@@ -87,16 +87,14 @@ namespace LollyCommon
             };
         }
 
-        public async Task GetNote(int index)
+        public async Task GetNote(MUnitWord item)
         {
-            var item = WordItemsAll[index];
             var note = await vmSettings.GetNote(item.WORD);
             item.NOTE = note;
             await Update(item);
         }
-        public async Task ClearNote(int index)
+        public async Task ClearNote(MUnitWord item)
         {
-            var item = WordItemsAll[index];
             item.NOTE = SettingsViewModel.ZeroNote;
             await Update(item);
         }
@@ -105,14 +103,14 @@ namespace LollyCommon
             await vmSettings.GetNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
-                    await GetNote(i);
+                    await GetNote(WordItemsAll[i]);
                     oneComplete(i);
                 });
         public async Task ClearNotes(Action<int> oneComplete) =>
             await vmSettings.ClearNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
-                    await ClearNote(i);
+                    await ClearNote(WordItemsAll[i]);
                     oneComplete(i);
                 });
 

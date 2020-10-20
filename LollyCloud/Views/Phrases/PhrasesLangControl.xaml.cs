@@ -22,6 +22,7 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
+        MLangPhrase SelectedPhraseItem => (MLangPhrase)vm.SelectedPhraseItem;
 
         public PhrasesLangControl()
         {
@@ -75,18 +76,14 @@ namespace LollyCloud
         }
         void miEdit_Click(object sender, RoutedEventArgs e)
         {
-            var item = (MLangPhrase)vm.SelectedPhraseItem;
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vm, item);
+            var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vm, SelectedPhraseItem);
             dlg.ShowDialog();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row = dgPhrases.SelectedIndex;
-            if (row == -1) return;
-            var item = vm.PhraseItems[row];
-            await vm.Delete(item);
+            await vm.Delete(SelectedPhraseItem);
             vm.Reload();
         }
         public override async Task SearchWords()
