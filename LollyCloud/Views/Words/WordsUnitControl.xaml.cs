@@ -37,9 +37,9 @@ namespace LollyCloud
             dgWords.CancelEdit();
             // https://stackoverflow.com/questions/14178800/how-can-i-check-if-ctrl-alt-are-pressed-on-left-mouse-click-in-c
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-                miEdit_Click(sender, null);
-            else
                 miSelectPhrase_Click(sender, null);
+            else
+                miEdit_Click(sender, null);
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
@@ -63,15 +63,14 @@ namespace LollyCloud
         }
         void miEdit_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, vm.SelectedWordID, vm.SelectedWord);
+            var item = (MUnitWord)vm.SelectedWordItem;
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
             dlg.ShowDialog();
         }
         void miSelectPhrase_Click(object sender, RoutedEventArgs e)
         {
-            var item = dgWords.SelectedItem as MUnitWord;
-            if (item == null) return;
-            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, item);
+            var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, vm.SelectedWordID, vm.SelectedWord);
             dlg.ShowDialog();
         }
 

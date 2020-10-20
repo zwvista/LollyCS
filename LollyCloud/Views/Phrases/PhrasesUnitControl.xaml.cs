@@ -39,16 +39,9 @@ namespace LollyCloud
             dgPhrases.CancelEdit();
             var item = (MUnitPhrase)((DataGridRow)sender).Item;
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-            {
-                var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vmWP.SelectedPhraseID, vmWP.SelectedPhrase);
-                dlg.ShowDialog();
-            }
+                miSelectWord_Click(sender, null);
             else
-            {
-                // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-                var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item);
-                dlg.ShowDialog();
-            }
+                miEdit_Click(sender, null);
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
@@ -77,6 +70,18 @@ namespace LollyCloud
             DataContext = vm = new PhrasesUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
+        }
+        void miEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (MUnitPhrase)vm.SelectedPhraseItem;
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item);
+            dlg.ShowDialog();
+        }
+        void miSelectWord_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vmWP.SelectedPhraseID, vmWP.SelectedPhrase);
+            dlg.ShowDialog();
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)

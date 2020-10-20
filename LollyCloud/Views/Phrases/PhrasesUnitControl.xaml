@@ -65,6 +65,9 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedPhraseItem}" />
                                 </Style>
                             </ContextMenu.Resources>
+                            <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
+                            <MenuItem x:Name="miSelectWord" Header="Select Word" Click="miSelectWord_Click" />
+                            <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <Separator />
                             <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
