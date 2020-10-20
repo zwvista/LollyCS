@@ -9,13 +9,11 @@ namespace LollyCommon
     public class PhrasesBaseViewModel : WordsPhrasesBaseViewModel
     {
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
-
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
-        [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePhraseFilters[0];
 
         public PhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
+            ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
         }
         public async Task SearchWords(int phraseid)
         {

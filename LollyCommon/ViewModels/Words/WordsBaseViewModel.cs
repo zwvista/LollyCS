@@ -22,6 +22,8 @@ namespace LollyCommon
         public string SelectedPhrase => SelectedPhraseItem?.PHRASE ?? "";
         public int SelectedPhraseID => SelectedPhraseItem?.PHRASEID ?? 0;
         [Reactive]
+        public string ScopeFilter { get; set; }
+        [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
         public int TextbookFilter { get; set; }
@@ -39,11 +41,10 @@ namespace LollyCommon
     {
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
-        [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
 
         public WordsBaseViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
+            ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
         }
         public async Task SearchPhrases(int wordid)
         {
