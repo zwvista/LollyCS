@@ -17,7 +17,6 @@ namespace LollyCloud
     {
         public WordsSearchViewModel vm { get; set; }
         public override WordsPhrasesBaseViewModel vmWP => vm;
-        public override DataGrid dgWordsBase => dgWords;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;

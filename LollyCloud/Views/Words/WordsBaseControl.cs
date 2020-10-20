@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace LollyCloud
 {
@@ -14,7 +13,6 @@ namespace LollyCloud
     {
         protected string originalText = "";
         public virtual WordsPhrasesBaseViewModel vmWP => null;
-        public virtual DataGrid dgWordsBase => null;
         public virtual SettingsViewModel vmSettings => null;
         public virtual ToolBar ToolBarDictBase => null;
         public virtual TabablzControl tcDictsBase => null;

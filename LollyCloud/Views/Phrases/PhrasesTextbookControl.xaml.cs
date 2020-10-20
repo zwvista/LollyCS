@@ -22,8 +22,6 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
         public override TabablzControl tcDictsBase => tcDicts;
-        public override DataGrid dgPhrasesBase => dgPhrases;
-        public override DataGrid dgWordsBase => dgWords;
 
         public PhrasesTextbookControl()
         {
