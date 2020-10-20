@@ -12,10 +12,8 @@ namespace LollyCloud
 {
     public class WordsPhraseBaseControl : UserControl, ILollySettings
     {
-        protected virtual string NewWord => "";
-        protected string selectedWord = "";
-        protected int selectedWordID = 0;
         protected string originalText = "";
+        public virtual WordsPhrasesBaseViewModel vmWP => null;
         public virtual DataGrid dgWordsBase => null;
         public virtual SettingsViewModel vmSettings => null;
         public virtual ToolBar ToolBarDictBase => null;
@@ -25,19 +23,8 @@ namespace LollyCloud
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (MWordInterface)dgWordsBase.SelectedItem;
-            if (item == null)
-            {
-                selectedWord = "";
-                selectedWordID = 0;
-            }
-            else
-            {
-                selectedWord = item.WORD;
-                selectedWordID = item.WORDID;
-            }
-            SearchWord(selectedWord == "" ? NewWord : selectedWord);
-            App.Speak(vmSettings, selectedWord);
+            SearchWord(vmWP.SelectedWord == "" ? vmWP.NewWord : vmWP.SelectedWord);
+            App.Speak(vmSettings, vmWP.SelectedWord);
         }
 
         protected void SearchWord(string word) =>
@@ -59,7 +46,7 @@ namespace LollyCloud
                     // c.wbDict.BrowserSettings.ImageLoading = CefState.Disabled;
                     Tabs.Add(new ActionTabItem { Header = name, Content = c });
                     tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-                    await c.SearchWord(selectedWord);
+                    await c.SearchWord(vmWP.SelectedWord);
                 }
                 else
                     Tabs.Remove(o);
@@ -102,8 +89,8 @@ namespace LollyCloud
             SearchPhrases();
         }
 
-        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedWord);
-        public void miGoogle_Click(object sender, RoutedEventArgs e) => selectedWord.Google();
+        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedWord);
+        public void miGoogle_Click(object sender, RoutedEventArgs e) => vmWP.SelectedWord.Google();
         public void miOnlineDict_Click(object sender, RoutedEventArgs e) =>
             Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
 

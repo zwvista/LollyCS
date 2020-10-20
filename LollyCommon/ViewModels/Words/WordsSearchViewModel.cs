@@ -7,17 +7,12 @@ using ReactiveUI.Fody.Helpers;
 
 namespace LollyCommon
 {
-    public class WordsSearchViewModel : ReactiveObject
+    public class WordsSearchViewModel : WordsBaseViewModel
     {
-        public SettingsViewModel vmSettings;
-
         public ObservableCollection<MUnitWord> WordItems { get; set; }
-        [Reactive]
-        public string NewWord { get; set; } = "";
 
-        public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
-            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             WordItems = new ObservableCollection<MUnitWord>();
         }
     }

@@ -34,7 +34,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectionChanged="dgPhrases_SelectionChanged">
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedPhraseItem}" SelectionChanged="dgPhrases_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
@@ -48,7 +48,13 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedPhraseItem}" />
+                                </Style>
+                            </ContextMenu.Resources>
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                            <Separator />
                             <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
                             <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
                         </ContextMenu>

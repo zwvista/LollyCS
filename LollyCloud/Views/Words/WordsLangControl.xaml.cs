@@ -17,7 +17,7 @@ namespace LollyCloud
     public partial class WordsLangControl : WordsBaseControl
     {
         public WordsLangViewModel vm { get; set; }
-        protected override string NewWord => vm.NewWord;
+        public override WordsPhrasesBaseViewModel vmWP => vm;
         public override DataGrid dgWordsBase => dgWords;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -96,6 +96,6 @@ namespace LollyCloud
             vm.WordItems.Add(item);
         }
         public override async Task SearchPhrases() =>
-            await vm.SearchPhrases(selectedWordID);
+            await vm.SearchPhrases(vm.SelectedWordID);
     }
 }

@@ -16,7 +16,7 @@ namespace LollyCloud
     public partial class WordsSearchControl : WordsBaseControl
     {
         public WordsSearchViewModel vm { get; set; }
-        protected override string NewWord => vm.NewWord;
+        public override WordsPhrasesBaseViewModel vmWP => vm;
         public override DataGrid dgWordsBase => dgWords;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;

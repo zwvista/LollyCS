@@ -11,29 +11,16 @@ namespace LollyCloud
 {
     public class PhrasesBaseControl : WordsPhraseBaseControl
     {
-        protected string selectedPhrase = "";
-        protected int selectedPhraseID = 0;
         public virtual DataGrid dgPhrasesBase => null;
 
         public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (MPhraseInterface)dgPhrasesBase.SelectedItem;
-            if (item == null)
-            {
-                selectedPhrase = "";
-                selectedPhraseID = 0;
-            }
-            else
-            {
-                selectedPhrase = item.PHRASE;
-                selectedPhraseID = item.PHRASEID;
-            }
-            App.Speak(vmSettings, selectedPhrase);
+            App.Speak(vmSettings, vmWP.SelectedPhrase);
             SearchWords();
         }
-        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPhrase);
+        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedPhrase);
 
-        public void miGoogle_Click(object sender, RoutedEventArgs e) => selectedPhrase.Google();
+        public void miGoogle_Click(object sender, RoutedEventArgs e) => vmWP.SelectedPhrase.Google();
         public virtual async Task SearchWords() { }
     }
 }

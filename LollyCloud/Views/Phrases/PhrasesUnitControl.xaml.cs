@@ -18,6 +18,7 @@ namespace LollyCloud
     public partial class PhrasesUnitControl : PhrasesBaseControl
     {
         public PhrasesUnitViewModelWPF vm { get; set; }
+        public override WordsPhrasesBaseViewModel vmWP => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override DataGrid dgPhrasesBase => dgPhrases;
         public override DataGrid dgWordsBase => dgWords;
@@ -39,7 +40,7 @@ namespace LollyCloud
             var item = (MUnitPhrase)((DataGridRow)sender).Item;
             if (Keyboard.IsKeyDown(Key.LeftAlt))
             {
-                var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, selectedPhraseID, selectedPhrase);
+                var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vmWP.SelectedPhraseID, vmWP.SelectedPhrase);
                 dlg.ShowDialog();
             }
             else
@@ -143,7 +144,7 @@ namespace LollyCloud
         }
         public override async Task SearchWords()
         {
-            await vm.SearchWords(selectedPhraseID);
+            await vm.SearchWords(vmWP.SelectedPhraseID);
             if (vm.WordItems.Any())
                 dgWords.SelectedIndex = 0;
         }

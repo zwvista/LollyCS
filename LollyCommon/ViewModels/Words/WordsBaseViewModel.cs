@@ -6,25 +6,44 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class WordsBaseViewModel : ReactiveObject
+    public class WordsPhrasesBaseViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings { get; }
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
-        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
         [Reactive]
         public string NewWord { get; set; } = "";
         [Reactive]
-        public string TextFilter { get; set; } = "";
+        public MWordInterface SelectedWordItem { get; set; }
+        public bool HasSelectedWordItem { [ObservableAsProperty] get; }
+        public string SelectedWord => SelectedWordItem?.WORD ?? "";
+        public int SelectedWordID => SelectedWordItem?.WORDID ?? 0;
         [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
+        public MPhraseInterface SelectedPhraseItem { get; set; }
+        public bool HasSelectedPhraseItem { [ObservableAsProperty] get; }
+        public string SelectedPhrase => SelectedPhraseItem?.PHRASE ?? "";
+        public int SelectedPhraseID => SelectedPhraseItem?.PHRASEID ?? 0;
+        [Reactive]
+        public string TextFilter { get; set; } = "";
         [Reactive]
         public int TextbookFilter { get; set; }
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
-        public WordsBaseViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public WordsPhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            this.WhenAnyValue(x => x.SelectedWordItem, (MWordInterface v) => v != null).ToPropertyEx(this, x => x.HasSelectedWordItem);
+            this.WhenAnyValue(x => x.SelectedPhraseItem, (MPhraseInterface v) => v != null).ToPropertyEx(this, x => x.HasSelectedPhraseItem);
+        }
+    }
+    public class WordsBaseViewModel : WordsPhrasesBaseViewModel
+    {
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
+        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
+        [Reactive]
+        public string ScopeFilter { get; set; } = SettingsViewModel.ScopeWordFilters[0];
+
+        public WordsBaseViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
+        {
         }
         public async Task SearchPhrases(int wordid)
         {

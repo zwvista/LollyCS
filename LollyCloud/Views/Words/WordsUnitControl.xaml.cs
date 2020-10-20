@@ -18,7 +18,7 @@ namespace LollyCloud
     public partial class WordsUnitControl : WordsBaseControl
     {
         public WordsUnitViewModelWPF vm { get; set; }
-        protected override string NewWord => vm.NewWord;
+        public override WordsPhrasesBaseViewModel vmWP => vm;
         public override DataGrid dgWordsBase => dgWords;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         public override ToolBar ToolBarDictBase => ToolBarDict;
@@ -63,7 +63,7 @@ namespace LollyCloud
         }
         void miEdit_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, selectedWordID, selectedWord);
+            var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, vm.SelectedWordID, vm.SelectedWord);
             dlg.ShowDialog();
         }
         void miSelectPhrase_Click(object sender, RoutedEventArgs e)
@@ -140,7 +140,7 @@ namespace LollyCloud
             }
         }
         public override async Task SearchPhrases() =>
-            await vm.SearchPhrases(selectedWordID);
+            await vm.SearchPhrases(vm.SelectedWordID);
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {

@@ -50,9 +50,16 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
+                                </Style>
+                            </ContextMenu.Resources>
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                            <Separator />
                             <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
                             <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                            <MenuItem x:Name="miOnlineDict" Header="Online Dictionary" Click="miOnlineDict_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
