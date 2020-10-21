@@ -104,7 +104,7 @@ namespace LollyCloud
             vm.Reload();
         }
 
-        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+        void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "PHRASE", async item => await vm.Update((MUnitPhrase)item));
         void btnReview_Click(object sender, RoutedEventArgs e)
         {

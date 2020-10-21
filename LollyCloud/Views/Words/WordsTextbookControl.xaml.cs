@@ -37,7 +37,7 @@ namespace LollyCloud
             miEdit_Click(sender, null);
         }
 
-        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+        void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "WORD", async item => await vm.Update((MUnitWord)item));
 
         public override async Task OnSettingsChanged()

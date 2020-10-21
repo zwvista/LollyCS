@@ -15,7 +15,7 @@ namespace LollyCloud
 {
     public class WordsPhrasesBaseControl : UserControl, ILollySettings
     {
-        protected string originalText = "";
+        string originalText = "";
         protected virtual WordsPhrasesBaseViewModel vmWP => null;
         public virtual SettingsViewModel vmSettings => null;
         protected virtual ToolBar ToolBarDictBase => null;
@@ -117,5 +117,13 @@ namespace LollyCloud
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
+        protected PhrasesLangViewModel vmPhrasesLang;
+        public override async Task OnSettingsChanged()
+        {
+            await base.OnSettingsChanged();
+            vmPhrasesLang = new PhrasesLangViewModel(vmSettings, false);
+        }
+        public void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
+            OnEndEdit(sender, e, "PHRASE", async item => await vmPhrasesLang.Update((MLangPhrase)item));
     }
 }

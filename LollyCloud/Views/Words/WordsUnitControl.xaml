@@ -47,7 +47,7 @@
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
                           dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditWord" SelectedItem="{Binding SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
@@ -87,7 +87,8 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                      ItemsSource="{Binding PhraseItems}" SelectedItem="{Binding SelectedPhraseItem}">
+                          ItemsSource="{Binding PhraseItems}" SelectedItem="{Binding SelectedPhraseItem}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditPhrase">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>

@@ -43,7 +43,7 @@ namespace LollyCloud
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
-        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+        void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "WORD", async item => await vm.Update((MLangWord)item));
 
         public override async Task OnSettingsChanged()
