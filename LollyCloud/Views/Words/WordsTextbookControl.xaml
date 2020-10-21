@@ -64,8 +64,8 @@
                             <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <Separator />
-                            <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
-                            <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
+                            <MenuItem x:Name="miCopyWord" Header="Copy" Click="miCopyWord_Click" />
+                            <MenuItem x:Name="miGoogleWord" Header="Google" Click="miGoogleWord_Click" />
                             <MenuItem x:Name="miOnlineDict" Header="Online Dictionary" Click="miOnlineDict_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>

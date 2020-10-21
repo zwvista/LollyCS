@@ -16,10 +16,10 @@ namespace LollyCloud
     public partial class WordsSearchControl : WordsBaseControl
     {
         public WordsSearchViewModel vm { get; set; }
-        public override WordsPhrasesBaseViewModel vmWP => vm;
+        protected override WordsPhrasesBaseViewModel vmWP => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
-        public override ToolBar ToolBarDictBase => ToolBarDict;
-        public override TabablzControl tcDictsBase => tcDicts;
+        protected override ToolBar ToolBarDictBase => ToolBarDict;
+        protected override TabablzControl tcDictsBase => tcDicts;
 
         public WordsSearchControl()
         {
@@ -44,11 +44,11 @@ namespace LollyCloud
         void tbNewWord_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.Key == Key.Return || e.Key == Key.System) || string.IsNullOrEmpty(vm.NewWord)) return;
-            AddWordToSearch(vm.NewWord);
+            SearchNewWord(vm.NewWord);
             vm.NewWord = "";
         }
 
-        public void AddWordToSearch(string word)
+        public void SearchNewWord(string word)
         {
             var item = new MUnitWord
             {

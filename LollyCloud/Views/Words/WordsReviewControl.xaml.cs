@@ -61,7 +61,7 @@ namespace LollyCloud
         void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             var w = (MainWindow)Window.GetWindow(this);
-            w.AddWordToSearch(vm.CurrentWord);
+            w.SearchNewWord(vm.CurrentWord);
         }
         void btnGoogle_Click(object sender, RoutedEventArgs e) =>
             vm.CurrentWord.Google();

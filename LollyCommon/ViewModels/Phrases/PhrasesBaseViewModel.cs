@@ -15,7 +15,7 @@ namespace LollyCommon
         {
             ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
         }
-        public async Task SearchWords(int phraseid)
+        public async Task GetWords(int phraseid)
         {
             WordItems = new ObservableCollection<MLangWord>(await wordPhraseDS.GetWordsByPhraseId(phraseid));
             this.RaisePropertyChanged(nameof(WordItems));

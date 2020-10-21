@@ -108,7 +108,7 @@ namespace LollyCommon
 
         public async Task UpdatePhrase(MPatternPhrase item) =>
             await patternPhraseDS.Update(item);
-        public async Task SearchPhrases(int patternid)
+        public async Task GetPhrases(int patternid)
         {
             PhraseItems = new ObservableCollection<MPatternPhrase>(await patternPhraseDS.GetDataByPatternId(patternid));
             this.RaisePropertyChanged(nameof(PhraseItems));

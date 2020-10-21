@@ -18,10 +18,10 @@ namespace LollyCloud
     public partial class PhrasesUnitControl : PhrasesBaseControl
     {
         public PhrasesUnitViewModelWPF vm { get; set; }
-        public override WordsPhrasesBaseViewModel vmWP => vm;
+        protected override WordsPhrasesBaseViewModel vmWP => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
-        public override ToolBar ToolBarDictBase => ToolBarDict;
-        public override TabablzControl tcDictsBase => tcDicts;
+        protected override ToolBar ToolBarDictBase => ToolBarDict;
+        protected override TabablzControl tcDictsBase => tcDicts;
         EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
         MUnitPhrase SelectedPhraseItem => (MUnitPhrase)vm.SelectedPhraseItem;
 
@@ -140,9 +140,9 @@ namespace LollyCloud
                 });
             }
         }
-        public override async Task SearchWords()
+        public override async Task GetWords()
         {
-            await vm.SearchWords(vmWP.SelectedPhraseID);
+            await vm.GetWords(vmWP.SelectedPhraseID);
             if (vm.WordItems.Any())
                 dgWords.SelectedIndex = 0;
         }

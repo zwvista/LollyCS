@@ -153,7 +153,7 @@ namespace LollyCloud
             wbWebPage.Load(item.URL);
         }
         async Task SearchPhrase() =>
-            await vm.SearchPhrases(selectedPatternID);
+            await vm.GetPhrases(selectedPatternID);
 
         void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -12,10 +12,10 @@ namespace LollyCloud
     public class WordsPhrasesBaseControl : UserControl, ILollySettings
     {
         protected string originalText = "";
-        public virtual WordsPhrasesBaseViewModel vmWP => null;
+        protected virtual WordsPhrasesBaseViewModel vmWP => null;
         public virtual SettingsViewModel vmSettings => null;
-        public virtual ToolBar ToolBarDictBase => null;
-        public virtual TabablzControl tcDictsBase => null;
+        protected virtual ToolBar ToolBarDictBase => null;
+        protected virtual TabablzControl tcDictsBase => null;
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
@@ -24,9 +24,15 @@ namespace LollyCloud
             var word = vmWP.SelectedWord == "" ? vmWP.NewWord : vmWP.SelectedWord;
             Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchDict(word));
             App.Speak(vmSettings, vmWP.SelectedWord);
-            SearchPhrases();
+            GetPhrases();
         }
-        public virtual async Task SearchPhrases() { }
+        public virtual async Task GetPhrases() { }
+        public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            App.Speak(vmSettings, vmWP.SelectedPhrase);
+            GetWords();
+        }
+        public virtual async Task GetWords() { }
 
         public virtual async Task OnSettingsChanged()
         {
@@ -77,13 +83,14 @@ namespace LollyCloud
             var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
             o.IsChecked = false;
         };
+        public void miCopyWord_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedWord);
+        public void miGoogleWord_Click(object sender, RoutedEventArgs e) => vmWP.SelectedWord.Google();
+        public void miOnlineDict_Click(object sender, RoutedEventArgs e) =>
+            Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
+        public void miCopyPhrase_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedPhrase);
+        public void miGooglePhrase_Click(object sender, RoutedEventArgs e) => vmWP.SelectedPhrase.Google();
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
-        public void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedWord);
-        public void miGoogle_Click(object sender, RoutedEventArgs e) => vmWP.SelectedWord.Google();
-        public void miOnlineDict_Click(object sender, RoutedEventArgs e) =>
-            Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
-
     }
 }
