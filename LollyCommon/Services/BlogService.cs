@@ -123,7 +123,7 @@ namespace LollyCommon
                 return s;
             }
             var items = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
-            await vmSettings.GetNotes(items.Count, i =>
+            await vmSettings.RetrieveNotes(items.Count, i =>
             {
                 var m = regMarkedEntry.Match(items[i]);
                 if (!m.Success) return false;
@@ -134,7 +134,7 @@ namespace LollyCommon
             {
                 var m = regMarkedEntry.Match(items[i]);
                 var (s1, word, s3, s4) = (m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value, m.Groups[4].Value);
-                var note = await vmSettings.GetNote(word);
+                var note = await vmSettings.RetrieveNote(word);
                 int j = note.ToList().FindIndex(char.IsDigit);
                 var s21 = j == -1 ? note : note.Substring(0, j);
                 var s22 = j == -1 ? "" : F(note.Substring(j));

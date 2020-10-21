@@ -77,6 +77,18 @@
                         <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
                         <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
+                                </Style>
+                            </ContextMenu.Resources>
+                            <MenuItem x:Name="miCopyWord" Header="Copy" Click="miCopyWord_Click" />
+                            <MenuItem x:Name="miGoogleWord" Header="Google" Click="miGoogleWord_Click" />
+                            <MenuItem x:Name="miOnlineDict" Header="Online Dictionary" Click="miOnlineDict_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
                 <StatusBar Grid.Row="3">
                     <Label Content="{Binding StatusText}"/>

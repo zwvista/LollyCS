@@ -105,12 +105,12 @@ namespace LollyCloud
             await vmSettings.NextUnitPart();
             vm.Reload();
         }
-        async void miGetNote_Click(object sender, RoutedEventArgs e) =>
-            await vm.GetNote(SelectedWordItem);
+        async void miRetrieveNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.RetrieveNote(SelectedWordItem);
         async void miClearNote_Click(object sender, RoutedEventArgs e) =>
             await vm.ClearNote(SelectedWordItem);
-        async void btnGetNotes_Click(object sender, RoutedEventArgs e) =>
-            await vm.GetNotes(_ => { });
+        async void btnRetrieveNotes_Click(object sender, RoutedEventArgs e) =>
+            await vm.RetrieveNotes(_ => { });
         async void btnClearNotes_Click(object sender, RoutedEventArgs e) =>
             await vm.ClearNotes(_ => { });
         void btnReview_Click(object sender, RoutedEventArgs e)

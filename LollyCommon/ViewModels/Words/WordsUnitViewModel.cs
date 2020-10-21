@@ -87,9 +87,9 @@ namespace LollyCommon
             };
         }
 
-        public async Task GetNote(MUnitWord item)
+        public async Task RetrieveNote(MUnitWord item)
         {
-            var note = await vmSettings.GetNote(item.WORD);
+            var note = await vmSettings.RetrieveNote(item.WORD);
             item.NOTE = note;
             await Update(item);
         }
@@ -99,11 +99,11 @@ namespace LollyCommon
             await Update(item);
         }
 
-        public async Task GetNotes(Action<int> oneComplete) =>
-            await vmSettings.GetNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+        public async Task RetrieveNotes(Action<int> oneComplete) =>
+            await vmSettings.RetrieveNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
                 async i =>
                 {
-                    await GetNote(WordItemsAll[i]);
+                    await RetrieveNote(WordItemsAll[i]);
                     oneComplete(i);
                 });
         public async Task ClearNotes(Action<int> oneComplete) =>

@@ -78,6 +78,17 @@
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
                         <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedPhraseItem}" />
+                                </Style>
+                            </ContextMenu.Resources>
+                            <MenuItem x:Name="miCopyPhrase" Header="Copy" Click="miCopyPhrase_Click" />
+                            <MenuItem x:Name="miGooglePhrase" Header="Google" Click="miGooglePhrase_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
                 <StatusBar Grid.Row="3">
                     <Label Content="{Binding StatusText}"/>
