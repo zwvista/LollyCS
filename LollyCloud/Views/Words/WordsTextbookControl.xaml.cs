@@ -37,29 +37,8 @@ namespace LollyCloud
             miEdit_Click(sender, null);
         }
 
-        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            var o = e.EditingEventArgs.Source;
-            var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
-            originalText = o2.Text;
-        }
-
-        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            if (e.EditAction == DataGridEditAction.Commit)
-            {
-                var item = (MUnitWord)e.Row.DataContext;
-                var el = (TextBox)e.EditingElement;
-                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == "WORD")
-                    el.Text = vm.vmSettings.AutoCorrectInput(el.Text);
-                if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ =>
-                    {
-                        await vm.Update(item);
-                        dgWords.CancelEdit();
-                    });
-            }
-        }
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+            OnEndEdit(sender, e, "WORD", async item => await vm.Update((MUnitWord)item));
 
         public override async Task OnSettingsChanged()
         {

@@ -1,11 +1,15 @@
 ﻿using Dragablz;
 using LollyCommon;
+using ReactiveUI;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace LollyCloud
 {
@@ -89,6 +93,27 @@ namespace LollyCloud
             Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
         public void miCopyPhrase_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedPhrase);
         public void miGooglePhrase_Click(object sender, RoutedEventArgs e) => vmWP.SelectedPhrase.Google();
+        public void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            var o = e.EditingEventArgs.Source;
+            var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
+            originalText = o2.Text;
+        }
+        protected void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e, string autoCorrectColumnName, Func<object, Task> updateFunc)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var item = e.Row.DataContext;
+                var el = (TextBox)e.EditingElement;
+                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == autoCorrectColumnName)
+                    el.Text = vmSettings.AutoCorrectInput(el.Text);
+                if (el.Text != originalText)
+                    Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ => {
+                        await updateFunc(item);
+                        ((DataGrid)sender).CancelEdit();
+                    });
+            }
+        }
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
