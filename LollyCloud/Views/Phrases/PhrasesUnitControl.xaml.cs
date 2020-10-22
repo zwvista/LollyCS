@@ -18,7 +18,7 @@ namespace LollyCloud
     public partial class PhrasesUnitControl : PhrasesBaseControl
     {
         public PhrasesUnitViewModelWPF vm { get; set; }
-        protected override WordsPhrasesBaseViewModel vmWP => vm;
+        protected override PhrasesBaseViewModel vmPhrases => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
         protected override TabablzControl tcDictsBase => tcDicts;
@@ -77,7 +77,7 @@ namespace LollyCloud
         }
         void miSelectWord_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vmWP.SelectedPhraseID, vmWP.SelectedPhrase);
+            var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vmPhrases.SelectedPhraseID, vmPhrases.SelectedPhrase);
             dlg.ShowDialog();
         }
 
@@ -118,12 +118,6 @@ namespace LollyCloud
                     dgPhrases.SelectedItem = vm.PhraseItems.FirstOrDefault(o => o.ID == id);
                 });
             }
-        }
-        public override async Task GetWords()
-        {
-            await vm.GetWords(vmWP.SelectedPhraseID);
-            if (vm.WordItems.Any())
-                dgWords.SelectedIndex = 0;
         }
     }
 }

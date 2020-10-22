@@ -10,6 +10,7 @@ namespace LollyCommon
     public class PhrasesLangViewModel : PhrasesBaseViewModel
     {
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         List<MLangPhrase> PhraseItemsAll { get; set; } = new List<MLangPhrase>();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
@@ -35,6 +36,18 @@ namespace LollyCommon
                 string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())
             ));
             this.RaisePropertyChanged(nameof(PhraseItems));
+        }
+
+        public PhrasesLangViewModel(SettingsViewModel vmSettings, int wordid) : base(vmSettings, false)
+        {
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                IsBusy = true;
+                PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWordId(wordid));
+                this.RaisePropertyChanged(nameof(PhraseItems));
+                IsBusy = false;
+            });
+            Reload();
         }
 
         public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);

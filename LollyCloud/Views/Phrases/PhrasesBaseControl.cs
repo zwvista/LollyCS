@@ -9,12 +9,14 @@ namespace LollyCloud
 {
     public class PhrasesBaseControl : WordsPhrasesBaseControl
     {
+        protected virtual DataGrid dgWordsBase => null;
         protected WordsLangViewModel vmWordsLang;
-        MLangWord SelectedWordItem => (MLangWord)vmWP.SelectedWordItem;
+        protected override WordsBaseViewModel vmWords => vmWordsLang;
+        MLangWord SelectedWordItem => (MLangWord)vmWordsLang.SelectedWordItem;
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            vmWordsLang = new WordsLangViewModel(vmSettings, false);
+            GetWords(0);
         }
         public void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "WORD", async item => await vmWordsLang.Update((MLangWord)item));
@@ -31,5 +33,7 @@ namespace LollyCloud
             var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vmWordsLang, SelectedWordItem);
             dlg.ShowDialog();
         }
+        public override void GetWords(int phraseid) =>
+            dgWordsBase.DataContext = vmWordsLang = new WordsLangViewModel(vmSettings, phraseid);
     }
 }

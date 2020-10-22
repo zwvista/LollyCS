@@ -18,7 +18,8 @@ namespace LollyCloud
     public class WordsPhrasesBaseControl : UserControl, ILollySettings
     {
         string originalText = "";
-        protected virtual WordsPhrasesBaseViewModel vmWP => null;
+        protected virtual WordsBaseViewModel vmWords => null;
+        protected virtual PhrasesBaseViewModel vmPhrases => null;
         public virtual SettingsViewModel vmSettings => null;
         protected virtual ToolBar ToolBarDictBase => null;
         protected virtual TabablzControl tcDictsBase => null;
@@ -27,18 +28,18 @@ namespace LollyCloud
 
         public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var word = vmWP.SelectedWord == "" ? vmWP.NewWord : vmWP.SelectedWord;
+            var word = vmWords.SelectedWord == "" ? vmWords.NewWord : vmWords.SelectedWord;
             Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchDict(word));
-            App.Speak(vmSettings, vmWP.SelectedWord);
-            GetPhrases();
+            App.Speak(vmSettings, vmWords.SelectedWord);
+            GetPhrases(vmWords.SelectedWordID);
         }
-        public virtual async Task GetPhrases() { }
+        public virtual void GetPhrases(int wordid) { }
         public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            App.Speak(vmSettings, vmWP.SelectedPhrase);
-            GetWords();
+            App.Speak(vmSettings, vmPhrases.SelectedPhrase);
+            GetWords(vmPhrases.SelectedPhraseID);
         }
-        public virtual async Task GetWords() { }
+        public virtual void GetWords(int phraseid) { }
 
         public virtual async Task OnSettingsChanged()
         {
@@ -56,7 +57,7 @@ namespace LollyCloud
                     // c.wbDict.BrowserSettings.ImageLoading = CefState.Disabled;
                     Tabs.Add(new ActionTabItem { Header = name, Content = c });
                     tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-                    await c.SearchDict(vmWP.SelectedWord);
+                    await c.SearchDict(vmWords.SelectedWord);
                 }
                 else
                     Tabs.Remove(o);
@@ -89,12 +90,12 @@ namespace LollyCloud
             var o = self.ToolBarDictBase.Items.Cast<CheckBox>().First(o2 => (string)o2.Content == name);
             o.IsChecked = false;
         };
-        public void miCopyWord_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedWord);
-        public void miGoogleWord_Click(object sender, RoutedEventArgs e) => vmWP.SelectedWord.Google();
+        public void miCopyWord_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWords.SelectedWord);
+        public void miGoogleWord_Click(object sender, RoutedEventArgs e) => vmWords.SelectedWord.Google();
         public void miOnlineDict_Click(object sender, RoutedEventArgs e) =>
             Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
-        public void miCopyPhrase_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmWP.SelectedPhrase);
-        public void miGooglePhrase_Click(object sender, RoutedEventArgs e) => vmWP.SelectedPhrase.Google();
+        public void miCopyPhrase_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmPhrases.SelectedPhrase);
+        public void miGooglePhrase_Click(object sender, RoutedEventArgs e) => vmPhrases.SelectedPhrase.Google();
         public void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             var o = e.EditingEventArgs.Source;
@@ -119,12 +120,14 @@ namespace LollyCloud
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
-        protected PhrasesLangViewModel vmPhrasesLang;
-        MLangPhrase SelectedPhraseItem => (MLangPhrase)vmWP.SelectedPhraseItem;
+        protected virtual DataGrid dgPhrasesBase => null;
+        PhrasesLangViewModel vmPhrasesLang;
+        protected override PhrasesBaseViewModel vmPhrases => vmPhrasesLang;
+        MLangPhrase SelectedPhraseItem => (MLangPhrase)vmPhrases.SelectedPhraseItem;
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            vmPhrasesLang = new PhrasesLangViewModel(vmSettings, false);
+            GetPhrases(0);
         }
         public void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "PHRASE", async item => await vmPhrasesLang.Update((MLangPhrase)item));
@@ -141,5 +144,7 @@ namespace LollyCloud
             var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vmPhrasesLang, SelectedPhraseItem);
             dlg.ShowDialog();
         }
+        public override void GetPhrases(int wordid) =>
+            dgPhrasesBase.DataContext = vmPhrasesLang = new PhrasesLangViewModel(vmSettings, wordid);
     }
 }

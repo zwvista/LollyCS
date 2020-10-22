@@ -17,10 +17,11 @@ namespace LollyCloud
     public partial class WordsTextbookControl : WordsBaseControl
     {
         public WordsUnitViewModelWPF vm { get; set; }
-        protected override WordsPhrasesBaseViewModel vmWP => vm;
+        protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
         protected override TabablzControl tcDictsBase => tcDicts;
+        protected override DataGrid dgPhrasesBase => dgPhrases;
         MUnitWord SelectedWordItem => (MUnitWord)vm.SelectedWordItem;
 
         public WordsTextbookControl()
@@ -58,7 +59,5 @@ namespace LollyCloud
             await vm.Delete(SelectedWordItem);
             vm.Reload();
         }
-        public override async Task GetPhrases() =>
-            await vm.GetPhrases(vm.SelectedWordID);
     }
 }
