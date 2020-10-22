@@ -16,7 +16,7 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsTextbookControl : WordsBaseControl
     {
-        public WordsUnitViewModelWPF vm { get; set; }
+        WordsUnitViewModelWPF vm;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;

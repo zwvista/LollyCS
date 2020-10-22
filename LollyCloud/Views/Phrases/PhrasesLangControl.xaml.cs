@@ -17,12 +17,13 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesLangControl : PhrasesBaseControl
     {
-        public PhrasesLangViewModel vm { get; set; }
+        PhrasesLangViewModel vm;
         protected override PhrasesBaseViewModel vmPhrases => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
         protected override TabablzControl tcDictsBase => tcDicts;
         MLangPhrase SelectedPhraseItem => (MLangPhrase)vm.SelectedPhraseItem;
+        protected override DataGrid dgWordsBase => dgWords;
 
         public PhrasesLangControl()
         {

@@ -57,7 +57,7 @@ namespace LollyCloud
                     // c.wbDict.BrowserSettings.ImageLoading = CefState.Disabled;
                     Tabs.Add(new ActionTabItem { Header = name, Content = c });
                     tcDictsBase.SelectedIndex = tcDictsBase.Items.Count - 1;
-                    await c.SearchDict(vmWords.SelectedWord);
+                    await c.SearchDict(vmWords?.SelectedWord ?? "");
                 }
                 else
                     Tabs.Remove(o);

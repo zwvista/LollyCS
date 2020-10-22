@@ -17,12 +17,13 @@ namespace LollyCloud
     /// </summary>
     public partial class PhrasesTextbookControl : PhrasesBaseControl
     {
-        public PhrasesUnitViewModelWPF vm { get; set; }
+        PhrasesUnitViewModelWPF vm;
         protected override PhrasesBaseViewModel vmPhrases => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
         protected override TabablzControl tcDictsBase => tcDicts;
         MUnitPhrase SelectedPhraseItem => (MUnitPhrase)vm.SelectedPhraseItem;
+        protected override DataGrid dgWordsBase => dgWords;
 
         public PhrasesTextbookControl()
         {

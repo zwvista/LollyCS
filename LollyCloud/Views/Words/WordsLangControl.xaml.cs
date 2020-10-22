@@ -16,7 +16,7 @@ namespace LollyCloud
     /// </summary>
     public partial class WordsLangControl : WordsBaseControl
     {
-        public WordsLangViewModel vm { get; set; }
+        WordsLangViewModel vm;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
