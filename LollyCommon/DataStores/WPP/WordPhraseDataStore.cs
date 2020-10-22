@@ -30,7 +30,7 @@ namespace LollyCommon
             Debug.WriteLine(await DeleteByUrl($"WORDSPHRASES/{ids}"));
         }
 
-        public async Task Connect(int wordid, int phraseid)
+        public async Task Link(int wordid, int phraseid)
         {
             var lst = await GetDataByWordPhrase(wordid, phraseid);
             if (lst.Any()) return;
@@ -42,7 +42,7 @@ namespace LollyCommon
             Debug.WriteLine(Create(item));
         }
 
-        public async Task Disconnect(int wordid, int phraseid)
+        public async Task Unlink(int wordid, int phraseid)
         {
             var lst = await GetDataByWordPhrase(wordid, phraseid);
             foreach (var o in lst)

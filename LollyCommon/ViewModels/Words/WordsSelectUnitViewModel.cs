@@ -27,7 +27,7 @@ namespace LollyCommon
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.WordItems)
-                    await wordPhraseDS.Connect(phraseid, o.ID);
+                    await wordPhraseDS.Link(phraseid, o.ID);
             });
         }
         void Reload()
