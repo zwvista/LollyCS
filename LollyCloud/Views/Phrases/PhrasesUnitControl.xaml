@@ -65,7 +65,7 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedPhraseItem}" />
                                 </Style>
                             </ContextMenu.Resources>
-                            <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
+                            <MenuItem x:Name="miEditPhrase" Header="Edit" Click="miEditPhrase_Click" />
                             <MenuItem x:Name="miSelectWord" Header="Select Word" Click="miSelectWord_Click" />
                             <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
@@ -82,9 +82,14 @@
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
                         <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
+                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
                     </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgWords_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <ContextMenu.Resources>
@@ -92,6 +97,8 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
                                 </Style>
                             </ContextMenu.Resources>
+                            <MenuItem x:Name="miEditWord" Header="Edit" Click="miEditWord_Click" />
+                            <Separator />
                             <MenuItem x:Name="miCopyWord" Header="Copy" Click="miCopyWord_Click" />
                             <MenuItem x:Name="miGoogleWord" Header="Google" Click="miGoogleWord_Click" />
                             <MenuItem x:Name="miOnlineDict" Header="Online Dictionary" Click="miOnlineDict_Click" />

@@ -39,7 +39,7 @@ namespace LollyCloud
             if (Keyboard.IsKeyDown(Key.LeftAlt))
                 miSelectWord_Click(sender, null);
             else
-                miEdit_Click(sender, null);
+                miEditPhrase_Click(sender, null);
         }
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
@@ -69,7 +69,7 @@ namespace LollyCloud
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }
-        void miEdit_Click(object sender, RoutedEventArgs e)
+        void miEditPhrase_Click(object sender, RoutedEventArgs e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, SelectedPhraseItem);

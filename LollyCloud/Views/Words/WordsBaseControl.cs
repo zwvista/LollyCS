@@ -1,4 +1,5 @@
 ﻿using Dragablz;
+using Hardcodet.Wpf.Util;
 using LollyCommon;
 using ReactiveUI;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace LollyCloud
 {
@@ -118,6 +120,7 @@ namespace LollyCloud
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
         protected PhrasesLangViewModel vmPhrasesLang;
+        MLangPhrase SelectedPhraseItem => (MLangPhrase)vmWP.SelectedPhraseItem;
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
@@ -125,5 +128,18 @@ namespace LollyCloud
         }
         public void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "PHRASE", async item => await vmPhrasesLang.Update((MLangPhrase)item));
+
+        // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
+        public void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            UIHelpers.TryFindParent<DataGrid>((DataGridRow)sender).CancelEdit();
+            miEditPhrase_Click(sender, null);
+        }
+        public void miEditPhrase_Click(object sender, RoutedEventArgs e)
+        {
+            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
+            var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vmPhrasesLang, SelectedPhraseItem);
+            dlg.ShowDialog();
+        }
     }
 }

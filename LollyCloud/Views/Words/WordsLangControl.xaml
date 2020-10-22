@@ -40,7 +40,7 @@
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
                         <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
-                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY"/>
+                        <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding FAMIID}" Header="FAMIID" IsReadOnly="True" />
                     </DataGrid.Columns>
                     <DataGrid.Resources>
@@ -55,7 +55,7 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
                                 </Style>
                             </ContextMenu.Resources>
-                            <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
+                            <MenuItem x:Name="miEditWord" Header="Edit" Click="miEditWord_Click" />
                             <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <Separator />
@@ -74,6 +74,11 @@
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
                         <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
                     </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgPhrases_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <ContextMenu.Resources>

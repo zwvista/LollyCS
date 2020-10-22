@@ -34,7 +34,7 @@ namespace LollyCloud
         void dgWords_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgWords.CancelEdit();
-            miEdit_Click(sender, null);
+            miEditWord_Click(sender, null);
         }
 
         void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
@@ -46,7 +46,7 @@ namespace LollyCloud
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }
-        void miEdit_Click(object sender, RoutedEventArgs e)
+        void miEditWord_Click(object sender, RoutedEventArgs e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), vm, SelectedWordItem);

@@ -74,7 +74,7 @@
                             <MenuItem x:Name="miRetrieveNote" Header="Retrieve Note" Click="miRetrieveNote_Click" />
                             <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
                             <Separator />
-                            <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
+                            <MenuItem x:Name="miEditWord" Header="Edit" Click="miEditWord_Click" />
                             <MenuItem x:Name="miSelectPhrase" Header="Select Phrase" Click="miSelectPhrase_Click" />
                             <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
@@ -94,6 +94,11 @@
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
                         <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
                     </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgPhrases_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <ContextMenu.Resources>
@@ -101,6 +106,8 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedPhraseItem}" />
                                 </Style>
                             </ContextMenu.Resources>
+                            <MenuItem x:Name="miEditPhrase" Header="Edit" Click="miEditPhrase_Click" />
+                            <Separator />
                             <MenuItem x:Name="miCopyPhrase" Header="Copy" Click="miCopyPhrase_Click" />
                             <MenuItem x:Name="miGooglePhrase" Header="Google" Click="miGooglePhrase_Click" />
                         </ContextMenu>
