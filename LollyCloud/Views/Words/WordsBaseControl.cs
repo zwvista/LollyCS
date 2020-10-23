@@ -33,13 +33,13 @@ namespace LollyCloud
             App.Speak(vmSettings, vmWords.SelectedWord);
             GetPhrases(vmWords.SelectedWordID);
         }
-        public virtual void GetPhrases(int wordid) { }
+        public virtual async Task GetPhrases(int wordid) { }
         public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             App.Speak(vmSettings, vmPhrases.SelectedPhrase);
             GetWords(vmPhrases.SelectedPhraseID);
         }
-        public virtual void GetWords(int phraseid) { }
+        public virtual async Task GetWords(int phraseid) { }
 
         public virtual async Task OnSettingsChanged()
         {
@@ -127,7 +127,7 @@ namespace LollyCloud
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            GetPhrases(0);
+            dgPhrasesBase.DataContext = vmPhrasesLang = new PhrasesLangViewModel(vmSettings);
         }
         public void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "PHRASE", async item => await vmPhrasesLang.Update((MLangPhrase)item));
@@ -144,7 +144,7 @@ namespace LollyCloud
             var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vmPhrasesLang, SelectedPhraseItem);
             dlg.ShowDialog();
         }
-        public override void GetPhrases(int wordid) =>
-            dgPhrasesBase.DataContext = vmPhrasesLang = new PhrasesLangViewModel(vmSettings, wordid);
+        public override async Task GetPhrases(int wordid) =>
+            await vmPhrasesLang.GetPhrases(wordid);
     }
 }

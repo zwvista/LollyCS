@@ -16,7 +16,7 @@ namespace LollyCloud
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            GetWords(0);
+            dgWordsBase.DataContext = vmWordsLang = new WordsLangViewModel(vmSettings);
         }
         public void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "WORD", async item => await vmWordsLang.Update((MLangWord)item));
@@ -33,7 +33,7 @@ namespace LollyCloud
             var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vmWordsLang, SelectedWordItem);
             dlg.ShowDialog();
         }
-        public override void GetWords(int phraseid) =>
-            dgWordsBase.DataContext = vmWordsLang = new WordsLangViewModel(vmSettings, phraseid);
+        public override async Task GetWords(int phraseid) =>
+            await vmWordsLang.GetWords(phraseid);
     }
 }

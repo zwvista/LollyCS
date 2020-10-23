@@ -38,18 +38,6 @@ namespace LollyCommon
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
 
-        public PhrasesLangViewModel(SettingsViewModel vmSettings, int wordid) : base(vmSettings, false)
-        {
-            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
-            {
-                IsBusy = true;
-                PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWordId(wordid));
-                this.RaisePropertyChanged(nameof(PhraseItems));
-                IsBusy = false;
-            });
-            Reload();
-        }
-
         public async Task Update(MLangPhrase item) => await langPhraseDS.Update(item);
         public async Task Create(MLangPhrase item)
         {
@@ -64,5 +52,17 @@ namespace LollyCommon
             {
                 LANGID = vmSettings.SelectedLang.ID,
             };
+
+        public PhrasesLangViewModel(SettingsViewModel vmSettings) : base(vmSettings, false)
+        {
+        }
+        public async Task GetPhrases(int wordid)
+        {
+            IsBusy = true;
+            PhraseItems = new ObservableCollection<MLangPhrase>(await wordPhraseDS.GetPhrasesByWordId(wordid));
+            this.RaisePropertyChanged(nameof(PhraseItems));
+            IsBusy = false;
+        }
     }
+
 }
