@@ -63,9 +63,9 @@ namespace LollyCommon
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= WordItemsAll.Count; i++)
+            for (int i = 1; i <= WordItems.Count; i++)
             {
-                var item = WordItemsAll[i - 1];
+                var item = WordItems[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await unitWordDS.UpdateSeqNum(item.ID, item.SEQNUM);

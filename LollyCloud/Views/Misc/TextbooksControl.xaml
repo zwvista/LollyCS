@@ -21,7 +21,7 @@
             </StatusBar>
             <DataGrid x:Name="dgTextbooks" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
                       dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedTextbookItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
@@ -33,6 +33,20 @@
                         <EventSetter Event="MouseDoubleClick" Handler="dgTextbooks_RowDoubleClick"/>
                     </Style>
                 </DataGrid.Resources>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Resources>
+                            <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                <Setter Property="IsEnabled" Value="{Binding HasSelectedTextbookItem}" />
+                            </Style>
+                        </ContextMenu.Resources>
+                        <Separator />
+                        <MenuItem x:Name="miAddByCopy" Header="Add by Copy" Click="miAddByCopy_Click" />
+                        <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
+                        <Separator />
+                        <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
         </DockPanel>
     </DockPanel>

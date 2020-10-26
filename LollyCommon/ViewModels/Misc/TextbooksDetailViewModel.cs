@@ -9,18 +9,18 @@ namespace LollyCommon
         TextbooksViewModel vm;
         public MTextbookEdit ItemEdit = new MTextbookEdit();
         public string LANGNAME { get; private set; }
-        public ReactiveCommand<Unit, Unit> Save { get; }
 
         public TextbooksDetailViewModel(MTextbook item, TextbooksViewModel vm)
         {
+            bool isNew = item.ID == 0;
             this.item = item;
             this.vm = vm;
             item.CopyProperties(ItemEdit);
             LANGNAME = vm.vmSettings.SelectedLang.LANGNAME;
-            Save = ReactiveCommand.CreateFromTask(async () =>
+            ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 ItemEdit.CopyProperties(item);
-                if (item.ID == 0)
+                if (isNew)
                     await vm.Create(item);
                 else
                     await vm.Update(item);

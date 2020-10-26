@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" />
         <Label Content="LANGUAGE:" Grid.Row="1" />
         <TextBox x:Name="tbLangName" Grid.Row="1" Grid.Column="1" IsReadOnly="True" />
         <Label Content="TEXTBOOKNAME:" Grid.Row="2" />

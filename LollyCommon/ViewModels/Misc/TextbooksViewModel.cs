@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         TextbookDataStore textbookDS = new TextbookDataStore();
+        [Reactive]
+        public MTextbook SelectedTextbookItem { get; set; }
+        public bool HasSelectedTextbookItem { [ObservableAsProperty] get; }
 
         public ObservableCollection<MTextbook> Items { get; set; } = new ObservableCollection<MTextbook>();
         public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
@@ -20,6 +24,7 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.Items).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
+            this.WhenAnyValue(x => x.SelectedTextbookItem, (MTextbook v) => v != null).ToPropertyEx(this, x => x.HasSelectedTextbookItem);
             Reload();
         }
         public void Reload() =>
@@ -33,6 +38,13 @@ namespace LollyCommon
             {
                 LANGID = vmSettings.SelectedLang.ID,
             };
+        public MTextbook NewTextbookByCopy(MTextbook item)
+        {
+            var o = new MTextbook();
+            item.CopyProperties(o, nameof(MTextbook.ID));
+            return o;
+        }
+            
 
         public void Add(MTextbook item)
         {

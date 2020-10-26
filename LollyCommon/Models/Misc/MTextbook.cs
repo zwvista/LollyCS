@@ -51,7 +51,7 @@ namespace LollyCommon
         public string UNITS { get; set; }
         [Reactive]
         public string PARTS { get; set; }
-        public ReactiveCommand<Unit, Unit> Save { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MTextbookEdit()
         {
             this.ValidationRule(x => x.TEXTBOOKNAME, v => !string.IsNullOrWhiteSpace(v), "TEXTBOOKNAME must not be empty");
