@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ namespace LollyCommon
         LangWordDataStore langWordDS = new LangWordDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
-        List<MLangWord> WordItemsAll { get; set; } = new List<MLangWord>();
+        ObservableCollection<MLangWord> WordItemsAll { get; set; } = new ObservableCollection<MLangWord>();
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
         public string StatusText => $"{WordItems.Count} Words in {vmSettings.LANGINFO}";
 
@@ -23,7 +22,7 @@ namespace LollyCommon
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                WordItemsAll = await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID);
+                WordItemsAll = new ObservableCollection<MLangWord>(await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
                 ApplyFilters();
                 IsBusy = false;
             });
@@ -32,7 +31,7 @@ namespace LollyCommon
         public void Reload() => ReloadCommand.Execute().Subscribe();
         void ApplyFilters()
         {
-            WordItems = new ObservableCollection<MLangWord>(string.IsNullOrEmpty(TextFilter) ? WordItemsAll : WordItemsAll.Where(o =>
+            WordItems = string.IsNullOrEmpty(TextFilter) ? WordItemsAll : new ObservableCollection<MLangWord>(WordItemsAll.Where(o =>
                 string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())
             ));
             this.RaisePropertyChanged(nameof(WordItems));

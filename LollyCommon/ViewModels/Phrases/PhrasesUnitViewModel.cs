@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ namespace LollyCommon
         bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
 
-        List<MUnitPhrase> PhraseItemsAll { get; set; } = new List<MUnitPhrase>();
+        ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; } = new ObservableCollection<MUnitPhrase>();
         public ObservableCollection<MUnitPhrase> PhraseItems { get; set; } = new ObservableCollection<MUnitPhrase>();
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public string StatusText => $"{PhraseItems.Count} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
@@ -25,9 +24,9 @@ namespace LollyCommon
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                PhraseItemsAll = inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
+                PhraseItemsAll = new ObservableCollection<MUnitPhrase>(inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
                     vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks);
+                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks));
                 ApplyFilters();
                 IsBusy = false;
             });
@@ -36,7 +35,7 @@ namespace LollyCommon
         public void Reload() => ReloadCommand.Execute().Subscribe();
         void ApplyFilters()
         {
-            PhraseItems = new ObservableCollection<MUnitPhrase>(NoFilter ? PhraseItemsAll : PhraseItemsAll.Where(o =>
+            PhraseItems = NoFilter ? PhraseItemsAll : new ObservableCollection<MUnitPhrase>(PhraseItemsAll.Where(o =>
                 (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
                 (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
             ));

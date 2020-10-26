@@ -40,8 +40,8 @@
                                 <Setter Property="IsEnabled" Value="{Binding HasSelectedTextbookItem}" />
                             </Style>
                         </ContextMenu.Resources>
-                        <Separator />
                         <MenuItem x:Name="miAddByCopy" Header="Add by Copy" Click="miAddByCopy_Click" />
+                        <Separator />
                         <MenuItem x:Name="miEdit" Header="Edit" Click="miEdit_Click" />
                         <Separator />
                         <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />

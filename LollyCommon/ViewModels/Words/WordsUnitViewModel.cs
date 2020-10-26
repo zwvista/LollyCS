@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ namespace LollyCommon
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
 
-        List<MUnitWord> WordItemsAll { get; set; } = new List<MUnitWord>();
+        ObservableCollection<MUnitWord> WordItemsAll { get; set; } = new ObservableCollection<MUnitWord>();
         public ObservableCollection<MUnitWord> WordItems { get; set; } = new ObservableCollection<MUnitWord>();
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public bool IfEmpty { get; set; } = true;
@@ -26,9 +25,9 @@ namespace LollyCommon
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                WordItemsAll = inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
+                WordItemsAll = new ObservableCollection<MUnitWord>(inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
                     vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks);
+                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks));
                 ApplyFilters();
                 IsBusy = false;
             });
@@ -37,7 +36,7 @@ namespace LollyCommon
         public void Reload() => ReloadCommand.Execute().Subscribe();
         void ApplyFilters()
         {
-            WordItems = new ObservableCollection<MUnitWord>(NoFilter ? WordItemsAll : WordItemsAll.Where(o =>
+            WordItems = NoFilter ? WordItemsAll : new ObservableCollection<MUnitWord>(WordItemsAll.Where(o =>
                  (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
                  (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
             ));
@@ -63,9 +62,9 @@ namespace LollyCommon
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= WordItems.Count; i++)
+            for (int i = 1; i <= WordItemsAll.Count; i++)
             {
-                var item = WordItems[i - 1];
+                var item = WordItemsAll[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await unitWordDS.UpdateSeqNum(item.ID, item.SEQNUM);

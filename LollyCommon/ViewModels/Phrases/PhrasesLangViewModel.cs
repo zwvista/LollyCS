@@ -1,6 +1,5 @@
 ﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ namespace LollyCommon
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
-        List<MLangPhrase> PhraseItemsAll { get; set; } = new List<MLangPhrase>();
+        ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; } = new ObservableCollection<MLangPhrase>();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
         public string StatusText => $"{PhraseItems.Count} Phrases in {vmSettings.LANGINFO}";
 
@@ -23,7 +22,7 @@ namespace LollyCommon
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                PhraseItemsAll = await langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID);
+                PhraseItemsAll = new ObservableCollection<MLangPhrase>(await langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID));
                 ApplyFilters();
                 IsBusy = false;
             });
@@ -32,7 +31,7 @@ namespace LollyCommon
         public void Reload() => ReloadCommand.Execute().Subscribe();
         void ApplyFilters()
         {
-            PhraseItems = new ObservableCollection<MLangPhrase>(string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll : PhraseItemsAll.Where(o =>
+            PhraseItems = string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll : new ObservableCollection<MLangPhrase>(PhraseItemsAll.Where(o =>
                 string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())
             ));
             this.RaisePropertyChanged(nameof(PhraseItems));

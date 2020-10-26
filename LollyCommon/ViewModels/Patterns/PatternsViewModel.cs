@@ -1,13 +1,10 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace LollyCommon
 {
@@ -19,7 +16,7 @@ namespace LollyCommon
         WebPageDataStore webPageDS = new WebPageDataStore();
         PatternPhraseDataStore patternPhraseDS = new PatternPhraseDataStore();
 
-        List<MPattern> PatternItemsAll { get; set; } = new List<MPattern>();
+        ObservableCollection<MPattern> PatternItemsAll { get; set; } = new ObservableCollection<MPattern>();
         public ObservableCollection<MPattern> PatternItems { get; set; } = new ObservableCollection<MPattern>();
         public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
         public ObservableCollection<MPatternPhrase> PhraseItems { get; set; }
@@ -40,12 +37,12 @@ namespace LollyCommon
         public void Reload() =>
             patternDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
-                PatternItemsAll = lst;
+                PatternItemsAll = new ObservableCollection<MPattern>(lst);
                 ApplyFilters();
             });
         void ApplyFilters()
         {
-            PatternItems = new ObservableCollection<MPattern>(NoFilter ? PatternItemsAll : PatternItemsAll.Where(o =>
+            PatternItems = NoFilter ? PatternItemsAll : new ObservableCollection<MPattern>(PatternItemsAll.Where(o =>
                 (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : ScopeFilter == "Note" ? o.NOTE ?? "" : o.TAGS ?? "").ToLower().Contains(TextFilter.ToLower()))
             ));
             this.RaisePropertyChanged(nameof(PatternItems));
