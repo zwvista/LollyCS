@@ -28,10 +28,10 @@ namespace LollyCommon
         public string PATTERN { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string NOTE { get; set; }
+        public string NOTE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TAGS { get; set; }
+        public string TAGS { get; set; } = "";
         [JsonIgnore]
         public string IDS_MERGE { get; set; }
         [JsonIgnore]

@@ -23,13 +23,13 @@ namespace LollyCommon
         public int LANGIDFROM { get; set; }
         [JsonProperty]
         [Reactive]
-        public string LANGNAMEFROM { get; set; }
+        public string LANGNAMEFROM { get; set; } = "";
         [JsonProperty]
         [Reactive]
         public int LANGIDTO { get; set; }
         [JsonProperty]
         [Reactive]
-        public string LANGNAMETO { get; set; }
+        public string LANGNAMETO { get; set; } = "";
         [JsonProperty]
         [Reactive]
         public int SEQNUM { get; set; }
@@ -38,34 +38,34 @@ namespace LollyCommon
         public int DICTTYPECODE { get; set; }
         [JsonProperty]
         [Reactive]
-        public string DICTTYPENAME { get; set; }
+        public string DICTTYPENAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string DICTNAME { get; set; }
+        public string DICTNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string URL { get; set; }
+        public string URL { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string CHCONV { get; set; }
+        public string CHCONV { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string AUTOMATION { get; set; }
+        public string AUTOMATION { get; set; } = "";
         [JsonProperty]
         [Reactive]
         public int SITEID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TRANSFORM { get; set; }
+        public string TRANSFORM { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int? WAIT { get; set; }
+        public int WAIT { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TEMPLATE { get; set; }
+        public string TEMPLATE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TEMPLATE2 { get; set; }
+        public string TEMPLATE2 { get; set; } = "";
 
         public string UrlString(string word, List<MAutoCorrect> lstAutoCorrects)
         {

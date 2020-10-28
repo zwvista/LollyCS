@@ -11,18 +11,18 @@ namespace LollyCommon
         [Reactive]
         public int Index { get; set; }
         [Reactive]
-        public string Extractor { get; set; }
+        public string Extractor { get; set; } = "";
         [Reactive]
-        public string Replacement { get; set; }
+        public string Replacement { get; set; } = "";
     }
     public class MTransformItemEdit : ReactiveValidationObject<MTransformItemEdit>
     {
         [Reactive]
         public int Index { get; set; }
         [Reactive]
-        public string Extractor { get; set; }
+        public string Extractor { get; set; } = "";
         [Reactive]
-        public string Replacement { get; set; }
+        public string Replacement { get; set; } = "";
         public ReactiveCommand<Unit, Unit> Save { get; }
         public MTransformItemEdit()
         {

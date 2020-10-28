@@ -18,6 +18,6 @@ namespace LollyCommon
         public int ID { get; set; }
         [JsonProperty("NAME")]
         [Reactive]
-        public string LANGNAME { get; set; }
+        public string LANGNAME { get; set; } = "";
     }
 }

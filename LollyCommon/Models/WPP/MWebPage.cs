@@ -18,9 +18,9 @@ namespace LollyCommon
         public int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TITLE { get; set; }
+        public string TITLE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string URL { get; set; }
+        public string URL { get; set; } = "";
     }
 }

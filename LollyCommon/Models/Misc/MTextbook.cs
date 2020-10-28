@@ -25,13 +25,13 @@ namespace LollyCommon
         public int LANGID { get; set; }
         [JsonProperty("NAME")]
         [Reactive]
-        public string TEXTBOOKNAME { get; set; }
+        public string TEXTBOOKNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string UNITS { get; set; }
+        public string UNITS { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string PARTS { get; set; }
+        public string PARTS { get; set; } = "";
 
         [Reactive]
         public List<MSelectItem> Units { get; set; }

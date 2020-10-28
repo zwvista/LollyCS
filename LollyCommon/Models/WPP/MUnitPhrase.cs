@@ -45,7 +45,7 @@ namespace LollyCommon
         public string PHRASE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TRANSLATION { get; set; }
+        public string TRANSLATION { get; set; } = "";
         [Reactive]
         public bool IsChecked { get; set; }
 

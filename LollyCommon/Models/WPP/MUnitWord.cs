@@ -46,7 +46,7 @@ namespace LollyCommon
         public string WORD { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string NOTE { get; set; }
+        public string NOTE { get; set; } = "";
         [JsonProperty]
         [Reactive]
         public int FAMIID { get; set; }

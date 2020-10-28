@@ -27,13 +27,13 @@ namespace LollyCommon
         public int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
-        public string INPUT { get; set; }
+        public string INPUT { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string EXTENDED { get; set; }
+        public string EXTENDED { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string BASIC { get; set; }
+        public string BASIC { get; set; } = "";
 
         public static string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,
                                   Func<MAutoCorrect, string> colFunc1, Func<MAutoCorrect, string> colFunc2) =>

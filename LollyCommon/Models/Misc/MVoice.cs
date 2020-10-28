@@ -24,9 +24,9 @@ namespace LollyCommon
         public int VOICETYPEID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string VOICELANG { get; set; }
+        public string VOICELANG { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string VOICENAME { get; set; }
+        public string VOICENAME { get; set; } = "";
     }
 }
