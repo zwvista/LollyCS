@@ -68,7 +68,12 @@ namespace LollyCloud
             var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, SelectedWordItem);
             dlg.ShowDialog();
         }
-        void miSelectPhrase_Click(object sender, RoutedEventArgs e)
+        void miNewPhrase_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, vm.SelectedWordID, vm.SelectedWord);
+            dlg.ShowDialog();
+        }
+        void miLinkPhrases_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new PhrasesSelectUnitDlg(Window.GetWindow(this), vmSettings, vm.SelectedWordID, vm.SelectedWord);
             dlg.ShowDialog();

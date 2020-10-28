@@ -32,8 +32,8 @@ namespace LollyCloud
 
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            var c = new MarishaCrawler();
-            await c.Step2();
+            //var c = new Crawler();
+            //await c.Step2();
         }
 
     }
