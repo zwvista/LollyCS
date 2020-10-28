@@ -53,6 +53,7 @@ namespace LollyCommon
         {
             int id = await unitPhraseDS.Create(item);
             var o = await unitPhraseDS.GetDataById(id, vmSettings.Textbooks);
+            o?.CopyProperties(item);
             PhraseItemsAll.Add(o);
             ApplyFilters();
         }
