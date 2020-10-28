@@ -25,19 +25,20 @@ namespace LollyCommon.Crawlers
                 var html = await client.GetStringAsync($"https://www.kpedia.jp/p/379?nCP=1");
                 var ms2 = reg2.Matches(html).Cast<Match>().ToList();
                 foreach (var m2 in ms2)
-                {
-                    var html2 = await client.GetStringAsync(home + m2.Groups[1].Value);
-                    var ms3 = reg3.Matches(html2).Cast<Match>().ToList();
-                    foreach (var m3 in ms3)
+                    for (int i = 1; i <= 2; i++)
                     {
-                        var url = home + m3.Groups[2].Value;
-                        if (urlSet.Contains(url)) continue;
-                        urlSet.Add(url);
-                        var title = $"{m3.Groups[1].Value}（{m3.Groups[3].Value}）";
-                        var s = url + delim + title;
-                        lines2.Add(s);
+                        var html2 = await client.GetStringAsync($"{home}{m2.Groups[1].Value}?nCP={i}");
+                        var ms3 = reg3.Matches(html2).Cast<Match>().ToList();
+                        foreach (var m3 in ms3)
+                        {
+                            var url = home + m3.Groups[2].Value;
+                            if (urlSet.Contains(url)) continue;
+                            urlSet.Add(url);
+                            var title = $"{m3.Groups[1].Value}（{m3.Groups[3].Value}）";
+                            var s = url + delim + title;
+                            lines2.Add(s);
+                        }
                     }
-                }
             }
             for (int i = 1; i <= 2; i++)
             {
@@ -77,8 +78,9 @@ namespace LollyCommon.Crawlers
                     TITLE = title,
                     URL = url,
                 };
-                var ptid = await storept.Create(pt);
                 var wpid = await storewp.Create(wp);
+                if (wpid == 0) continue;
+                var ptid = await storept.Create(pt);
                 var ptwp = new MPatternWebPage
                 {
                     PATTERNID = ptid,
