@@ -29,7 +29,7 @@ namespace LollyCloud
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbWord.Focus();
             Owner = owner;
-            vmDetail = new WordsUnitDetailViewModel(vm, item);
+            vmDetail = new WordsUnitDetailViewModel(vm, item, 0);
             DataContext = vmDetail.ItemEdit;
             dgWords.DataContext = vmDetail.vmSingleWord;
         }

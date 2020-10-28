@@ -23,13 +23,13 @@ namespace LollyCloud
     public partial class WordsUnitDetailDlg : Window
     {
         WordsUnitDetailViewModel vmDetail;
-        public WordsUnitDetailDlg(Window owner, WordsUnitViewModelWPF vm, MUnitWord item)
+        public WordsUnitDetailDlg(Window owner, WordsUnitViewModelWPF vm, MUnitWord item, int phraseid)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbWord.Focus();
             Owner = owner;
-            vmDetail = new WordsUnitDetailViewModel(vm, item);
+            vmDetail = new WordsUnitDetailViewModel(vm, item, phraseid);
             DataContext = vmDetail.ItemEdit;
             dgWords.DataContext = vmDetail.vmSingleWord;
         }

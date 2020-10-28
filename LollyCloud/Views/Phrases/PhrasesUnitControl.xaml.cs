@@ -38,7 +38,7 @@ namespace LollyCloud
         {
             dgPhrases.CancelEdit();
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-                miSelectWord_Click(sender, null);
+                miLinkWords_Click(sender, null);
             else
                 miEditPhrase_Click(sender, null);
         }
@@ -49,11 +49,15 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
-        void btnAdd_Click(object sender, RoutedEventArgs e)
+        public void AddNewUnitPhrase(int wordid)
         {
-            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, vm.NewUnitPhrase());
+            var item = vm.NewUnitPhrase();
+            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, item, wordid);
             dlg.ShowDialog();
         }
+
+        void btnAdd_Click(object sender, RoutedEventArgs e) =>
+            AddNewUnitPhrase(0);
 
         async void dgPhrases_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
@@ -73,13 +77,18 @@ namespace LollyCloud
         void miEditPhrase_Click(object sender, RoutedEventArgs e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, SelectedPhraseItem);
+            var dlg = new PhrasesUnitDetailDlg(Window.GetWindow(this), vm, SelectedPhraseItem, 0);
             dlg.ShowDialog();
         }
-        void miSelectWord_Click(object sender, RoutedEventArgs e)
+        void miNewWord_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vmPhrases.SelectedPhraseID, vmPhrases.SelectedPhrase);
+            var dlg = new WordsSelectUnitDlg(Window.GetWindow(this), vmSettings, vm.SelectedPhraseID, vm.SelectedPhrase);
             dlg.ShowDialog();
+        }
+        void miLinkWords_Click(object sender, RoutedEventArgs e)
+        {
+            var w = (MainWindow)Window.GetWindow(this);
+            w.AddNewUnitWord(vm.SelectedPhraseID);
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)

@@ -7,8 +7,9 @@ namespace LollyCommon
     {
         public MUnitWordEdit ItemEdit = new MUnitWordEdit();
         public SingleWordViewModel vmSingleWord;
+        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
-        public WordsUnitDetailViewModel(WordsUnitViewModel vm, MUnitWord item)
+        public WordsUnitDetailViewModel(WordsUnitViewModel vm, MUnitWord item, int phraseid)
         {
             item.CopyProperties(ItemEdit);
             vmSingleWord = new SingleWordViewModel(item.WORD, vm.vmSettings);
@@ -16,10 +17,14 @@ namespace LollyCommon
             {
                 ItemEdit.CopyProperties(item);
                 item.WORD = vm.vmSettings.AutoCorrectInput(item.WORD);
-                if (item.ID == 0)
-                    await vm.Create(item);
-                else
+                if (item.ID != 0)
                     await vm.Update(item);
+                else
+                {
+                    await vm.Create(item);
+                    if (phraseid != 0)
+                        await wordPhraseDS.Link(item.WORDID, phraseid);
+                }
             }, ItemEdit.IsValid());
         }
     }

@@ -304,6 +304,9 @@
     <Compile Include="Views\Misc\ReadNumberControl.xaml.cs">
       <DependentUpon>ReadNumberControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Words\WordsSelectLangDlg.xaml.cs">
+      <DependentUpon>WordsSelectLangDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
@@ -483,6 +486,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Misc\ReadNumberControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Words\WordsSelectLangDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -66,7 +66,8 @@
                                 </Style>
                             </ContextMenu.Resources>
                             <MenuItem x:Name="miEditPhrase" Header="Edit" Click="miEditPhrase_Click" />
-                            <MenuItem x:Name="miSelectWord" Header="Select Word" Click="miSelectWord_Click" />
+                            <MenuItem x:Name="miNewWord" Header="Link a New Word" Click="miNewWord_Click" />
+                            <MenuItem x:Name="miLinkWords" Header="Link Existing Words" Click="miLinkWords_Click" />
                             <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <Separator />
