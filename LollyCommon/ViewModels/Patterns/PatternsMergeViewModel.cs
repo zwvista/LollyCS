@@ -28,7 +28,7 @@ namespace LollyCommon
             PatternItems = new ObservableCollection<MPattern>(items);
             var strs = items.SelectMany(o => o.PATTERN.Split('／')).OrderBy(s => s).Distinct().ToList();
             PatternVariations = new BindingList<MPatternVariation>(strs.Select((s, i) => new MPatternVariation { Index = i + 1, Variation = s }).ToList());
-            Action f = () => MergedItemEdit.PATTERN = string.Join("／", PatternVariations.Select(o => o.Variation));
+            Action f = () => MergedItemEdit.PATTERN = string.Join("／", PatternVariations.Select(o => o.Variation).Distinct());
             PatternVariations.ListChanged += (s, e) =>
             {
                 Reindex();
