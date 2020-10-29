@@ -127,7 +127,8 @@ namespace LollyCloud
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            dgPhrasesBase.DataContext = vmPhrasesLang = new PhrasesLangViewModel(vmSettings);
+            vmPhrasesLang = new PhrasesLangViewModel(vmSettings);
+            if (dgPhrasesBase != null) dgPhrasesBase.DataContext = vmPhrasesLang;
         }
         public void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "PHRASE", async item => await vmPhrasesLang.Update((MLangPhrase)item));

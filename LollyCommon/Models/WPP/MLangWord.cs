@@ -41,6 +41,8 @@ namespace LollyCommon
         [Reactive]
         public int TOTAL { get; set; }
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
+        [Reactive]
+        public bool IsChecked { get; set; }
 
         void WhenAnyValueChanged()
         {

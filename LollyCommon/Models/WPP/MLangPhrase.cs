@@ -30,6 +30,8 @@ namespace LollyCommon
         [JsonProperty]
         [Reactive]
         public string TRANSLATION { get; set; } = "";
+        [Reactive]
+        public bool IsChecked { get; set; }
 
         public MLangPhrase()
         {

@@ -7,24 +7,20 @@ using System.Reactive.Linq;
 
 namespace LollyCommon
 {
-    public class PhrasesSelectUnitViewModel : ReactiveObject
+    public class PhrasesLinkViewModel : ReactiveObject
     {
         [Reactive]
-        public PhrasesUnitViewModel vm { get; set; }
+        public PhrasesLangViewModel vm { get; set; }
         public SettingsViewModel vmSettings { get; set; }
         string textFilter;
         WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
-
-        [Reactive]
-        public bool InTextbook { get; set; } = true;
         public ReactiveCommand<Unit, Unit> Save { get; }
 
-        public PhrasesSelectUnitViewModel(SettingsViewModel vmSettings, int wordid, string textFilter)
+        public PhrasesLinkViewModel(SettingsViewModel vmSettings, int wordid, string textFilter)
         {
             this.vmSettings = vmSettings;
             this.textFilter = textFilter;
             Reload();
-            this.WhenAnyValue(x => x.InTextbook).Subscribe(_ => Reload());
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.PhraseItems)
@@ -33,13 +29,13 @@ namespace LollyCommon
         }
         void Reload()
         {
-            vm = new PhrasesUnitViewModel(vmSettings, InTextbook, false);
+            vm = new PhrasesLangViewModel(vmSettings, false);
             vm.TextFilter = textFilter;
             foreach (var o in vm.PhraseItems)
                 o.IsChecked = false;
         }
 
-        public void CheckItems(int n, List<MUnitPhrase> selectedItems)
+        public void CheckItems(int n, List<MLangPhrase> selectedItems)
         {
             foreach (var o in vm.PhraseItems)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
