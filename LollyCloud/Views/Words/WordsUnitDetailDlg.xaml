@@ -64,7 +64,6 @@
                 <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" />
                 <DataGridTextColumn Binding="{Binding WORD}" Header="WORD" />
                 <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE" />
-                <DataGridTextColumn Binding="{Binding LEVEL}" Header="LEVEL" />
                 <DataGridTextColumn Binding="{Binding ACCURACY}" Header="ACCURACY" />
                 <DataGridTextColumn Binding="{Binding WORDID}" Header="WORDID" />
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
