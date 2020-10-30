@@ -62,7 +62,6 @@ namespace LollyCloud
                 selectedPattern = o.PATTERN;
                 selectedPatternID = o.ID;
                 await vm.GetWebPages(selectedPatternID);
-                await SearchPhrase();
                 if (vm.WebPageItems.Any())
                     dgWebPages.SelectedIndex = 0;
             }
@@ -151,15 +150,6 @@ namespace LollyCloud
             var item = (MPatternWebPage)dgWebPages.SelectedItem;
             if (item == null) return;
             wbWebPage.Load(item.URL);
-        }
-        async Task SearchPhrase() =>
-            await vm.GetPhrases(selectedPatternID);
-
-        void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var item = (MPatternPhrase)dgPhrases.SelectedItem;
-            if (item == null) return;
-            App.Speak(vmSettings, item.PHRASE);
         }
     }
 }

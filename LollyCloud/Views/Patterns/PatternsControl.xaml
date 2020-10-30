@@ -78,23 +78,7 @@
                 </StatusBar>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
-            <Grid Grid.Column="2" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgPhrases_SelectionChanged"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding PhraseItems}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
-                        <DataGridTextColumn Binding="{Binding TRANSLATION}" Header="TRANSLATION"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <cef:ChromiumWebBrowser x:Name="wbWebPage" Grid.Row="2"/>
-            </Grid>
+            <cef:ChromiumWebBrowser x:Name="wbWebPage" Grid.Column="2"/>
         </Grid>
     </DockPanel>
 </UserControl>

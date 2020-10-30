@@ -14,12 +14,10 @@ namespace LollyCommon
         PatternDataStore patternDS = new PatternDataStore();
         PatternWebPageDataStore patternWebPageDS = new PatternWebPageDataStore();
         WebPageDataStore webPageDS = new WebPageDataStore();
-        PatternPhraseDataStore patternPhraseDS = new PatternPhraseDataStore();
 
         ObservableCollection<MPattern> PatternItemsAll { get; set; } = new ObservableCollection<MPattern>();
         public ObservableCollection<MPattern> PatternItems { get; set; } = new ObservableCollection<MPattern>();
         public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
-        public ObservableCollection<MPatternPhrase> PhraseItems { get; set; }
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
@@ -101,14 +99,6 @@ namespace LollyCommon
                 await patternWebPageDS.UpdateSeqNum(item.ID, item.SEQNUM);
                 complete(i - 1);
             }
-        }
-
-        public async Task UpdatePhrase(MPatternPhrase item) =>
-            await patternPhraseDS.Update(item);
-        public async Task GetPhrases(int patternid)
-        {
-            PhraseItems = new ObservableCollection<MPatternPhrase>(await patternPhraseDS.GetDataByPatternId(patternid));
-            this.RaisePropertyChanged(nameof(PhraseItems));
         }
     }
 }
