@@ -59,6 +59,7 @@
                                 </Style>
                             </ContextMenu.Resources>
                             <MenuItem x:Name="miEditPhrase" Header="Edit" Click="miEditPhrase_Click" />
+                            <MenuItem x:Name="miLinkWords" Header="Link Existing Words" Click="miLinkWords_Click" />
                             <Separator />
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <Separator />
@@ -90,6 +91,7 @@
                                 </Style>
                             </ContextMenu.Resources>
                             <MenuItem x:Name="miEditWord" Header="Edit" Click="miEditWord_Click" />
+                            <MenuItem x:Name="miUnlinkWord" Header="Unlink" Click="miUnlinkWord_Click" />
                             <Separator />
                             <MenuItem x:Name="miCopyWord" Header="Copy" Click="miCopyWord_Click" />
                             <MenuItem x:Name="miGoogleWord" Header="Google" Click="miGoogleWord_Click" />

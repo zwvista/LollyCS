@@ -145,7 +145,14 @@ namespace LollyCloud
             var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vmPhrasesLang, SelectedPhraseItem);
             dlg.ShowDialog();
         }
+        public void miLinkPhrases_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new PhrasesLinkDlg(Window.GetWindow(this), vmSettings, vmWords.SelectedWordID, vmWords.SelectedWord);
+            dlg.ShowDialog();
+        }
         public override async Task GetPhrases(int wordid) =>
             await vmPhrasesLang.GetPhrases(wordid);
+        public async void miUnlinkPhrase_Click(object sender, RoutedEventArgs e) =>
+            await vmPhrasesLang.Unlink(vmWords.SelectedWordID, vmPhrasesLang.SelectedPhraseID);
     }
 }

@@ -35,7 +35,10 @@ namespace LollyCloud
         void dgPhrases_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgPhrases.CancelEdit();
-            miEditPhrase_Click(sender, null);
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+                miLinkWords_Click(sender, null);
+            else
+                miEditPhrase_Click(sender, null);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 

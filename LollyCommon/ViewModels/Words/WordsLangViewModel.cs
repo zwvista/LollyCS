@@ -65,5 +65,7 @@ namespace LollyCommon
             if (WordItems.Any())
                 SelectedWordItem = WordItems[0];
         }
+        public Task Unlink(int wordid, int phraseid) =>
+            wordPhraseDS.Unlink(wordid, phraseid);
     }
 }

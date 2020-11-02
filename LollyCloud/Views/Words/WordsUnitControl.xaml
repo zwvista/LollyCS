@@ -108,6 +108,7 @@
                                 </Style>
                             </ContextMenu.Resources>
                             <MenuItem x:Name="miEditPhrase" Header="Edit" Click="miEditPhrase_Click" />
+                            <MenuItem x:Name="miUnlinkPhrase" Header="Unlink" Click="miUnlinkPhrase_Click" />
                             <Separator />
                             <MenuItem x:Name="miCopyPhrase" Header="Copy" Click="miCopyPhrase_Click" />
                             <MenuItem x:Name="miGooglePhrase" Header="Google" Click="miGooglePhrase_Click" />

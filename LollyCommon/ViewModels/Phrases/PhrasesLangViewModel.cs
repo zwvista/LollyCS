@@ -62,6 +62,8 @@ namespace LollyCommon
             this.RaisePropertyChanged(nameof(PhraseItems));
             IsBusy = false;
         }
+        public Task Unlink(int wordid, int phraseid) =>
+            wordPhraseDS.Unlink(wordid, phraseid);
     }
 
 }
