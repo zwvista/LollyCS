@@ -59,5 +59,9 @@ namespace LollyCloud
             await vm.Delete(SelectedWordItem);
             vm.Reload();
         }
+        async void miRetrieveNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.RetrieveNote(SelectedWordItem);
+        async void miClearNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.ClearNote(SelectedWordItem);
     }
 }

@@ -55,6 +55,9 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
                                 </Style>
                             </ContextMenu.Resources>
+                            <MenuItem x:Name="miRetrieveNote" Header="Retrieve Note" Click="miRetrieveNote_Click" />
+                            <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
+                            <Separator />
                             <MenuItem x:Name="miEditWord" Header="Edit" Click="miEditWord_Click" />
                             <MenuItem x:Name="miLinkPhrases" Header="Link Existing Phrases" Click="miLinkPhrases_Click" />
                             <Separator />

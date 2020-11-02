@@ -42,5 +42,9 @@ namespace LollyCloud
             await vmWordsLang.GetWords(phraseid);
         public async void miUnlinkWord_Click(object sender, RoutedEventArgs e) =>
             await vmWordsLang.Unlink(vmWordsLang.SelectedWordID, vmPhrases.SelectedPhraseID);
+        public async void miRetrieveNote_Click(object sender, RoutedEventArgs e) =>
+            await vmWordsLang.RetrieveNote(SelectedWordItem);
+        public async void miClearNote_Click(object sender, RoutedEventArgs e) =>
+            await vmWordsLang.ClearNote(SelectedWordItem);
     }
 }

@@ -52,6 +52,17 @@ namespace LollyCommon
                 LANGID = vmSettings.SelectedLang.ID,
             };
 
+        public async Task RetrieveNote(MLangWord item)
+        {
+            var note = await vmSettings.RetrieveNote(item.WORD);
+            item.NOTE = note;
+            await Update(item);
+        }
+        public async Task ClearNote(MLangWord item)
+        {
+            item.NOTE = SettingsViewModel.ZeroNote;
+            await Update(item);
+        }
 
         public WordsLangViewModel(SettingsViewModel vmSettings) : base(vmSettings, false)
         {
