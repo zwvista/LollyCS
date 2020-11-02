@@ -33,6 +33,7 @@ namespace LollyCommon
             {
                 foreach (var o in vm.WordItems)
                 {
+                    if (!o.IsChecked) continue;
                     bool b = false;
                     if (UnitIsChecked)
                     {

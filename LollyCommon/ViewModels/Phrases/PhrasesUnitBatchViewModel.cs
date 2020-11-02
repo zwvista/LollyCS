@@ -32,27 +32,27 @@ namespace LollyCommon
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in vm.PhraseItems)
-                    if (UnitIsChecked || PartIsChecked || SeqNumIsChecked)
+                {
+                    if (!o.IsChecked) continue;
+                    bool b = false;
+                    if (UnitIsChecked)
                     {
-                        bool b = false;
-                        if (UnitIsChecked)
-                        {
-                            o.UNIT = UNIT;
-                            b = true;
-                        }
-                        if (PartIsChecked)
-                        {
-                            o.PART = PART;
-                            b = true;
-                        }
-                        if (SeqNumIsChecked)
-                        {
-                            o.SEQNUM += SEQNUM;
-                            b = true;
-                        }
-                        if (b)
-                            await vm.Update(o);
+                        o.UNIT = UNIT;
+                        b = true;
                     }
+                    if (PartIsChecked)
+                    {
+                        o.PART = PART;
+                        b = true;
+                    }
+                    if (SeqNumIsChecked)
+                    {
+                        o.SEQNUM += SEQNUM;
+                        b = true;
+                    }
+                    if (b)
+                        await vm.Update(o);
+                }
             });
         }
 

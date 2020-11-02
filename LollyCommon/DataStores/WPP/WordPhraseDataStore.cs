@@ -32,14 +32,12 @@ namespace LollyCommon
 
         public async Task Link(int wordid, int phraseid)
         {
-            var lst = await GetDataByWordPhrase(wordid, phraseid);
-            if (lst.Any()) return;
             var item = new MWordPhrase
             {
                 WORDID = wordid,
                 PHRASEID = phraseid
             };
-            Debug.WriteLine(Create(item));
+            Debug.WriteLine(await Create(item));
         }
 
         public async Task Unlink(int wordid, int phraseid)
