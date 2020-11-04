@@ -1,7 +1,9 @@
 ﻿using ReactiveUI;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 
 namespace LollyCommon
@@ -9,7 +11,7 @@ namespace LollyCommon
     public class WordsLangViewModel : WordsBaseViewModel
     {
         LangWordDataStore langWordDS = new LangWordDataStore();
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
+        protected WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         ObservableCollection<MLangWord> WordItemsAll { get; set; } = new ObservableCollection<MLangWord>();
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
@@ -29,7 +31,7 @@ namespace LollyCommon
             Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
-        void ApplyFilters()
+        protected virtual void ApplyFilters()
         {
             WordItems = string.IsNullOrEmpty(TextFilter) ? WordItemsAll : new ObservableCollection<MLangWord>(WordItemsAll.Where(o =>
                 string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())
@@ -78,5 +80,32 @@ namespace LollyCommon
         }
         public Task Unlink(int wordid, int phraseid) =>
             wordPhraseDS.Unlink(wordid, phraseid);
+    }
+    public class WordsLinkViewModel : WordsLangViewModel
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; }
+        public WordsLinkViewModel(SettingsViewModel vmSettings, int phraseid, string textFilter) : base(vmSettings, false)
+        {
+            TextFilter = textFilter;
+            Save = ReactiveCommand.CreateFromTask(async () =>
+            {
+                foreach (var o in WordItems)
+                    if (o.IsChecked)
+                        await wordPhraseDS.Link(phraseid, o.ID);
+            });
+        }
+        protected override void ApplyFilters()
+        {
+            base.ApplyFilters();
+            foreach (var o in WordItems)
+                o.IsChecked = false;
+        }
+        public void CheckItems(int n, List<MLangWord> selectedItems)
+        {
+            foreach (var o in WordItems)
+                o.IsChecked = n == 0 ? true : n == 1 ? false :
+                    !selectedItems.Contains(o) ? o.IsChecked :
+                    n == 2;
+        }
     }
 }

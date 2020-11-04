@@ -1,7 +1,9 @@
 ﻿using ReactiveUI;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 
 namespace LollyCommon
@@ -9,7 +11,7 @@ namespace LollyCommon
     public class PhrasesLangViewModel : PhrasesBaseViewModel
     {
         LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
+        protected WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
 
         ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; } = new ObservableCollection<MLangPhrase>();
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
@@ -29,7 +31,7 @@ namespace LollyCommon
             Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
-        void ApplyFilters()
+        protected virtual void ApplyFilters()
         {
             PhraseItems = string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll : new ObservableCollection<MLangPhrase>(PhraseItemsAll.Where(o =>
                 string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())
@@ -64,6 +66,34 @@ namespace LollyCommon
         }
         public Task Unlink(int wordid, int phraseid) =>
             wordPhraseDS.Unlink(wordid, phraseid);
+    }
+    public class PhrasesLinkViewModel : PhrasesLangViewModel
+    {
+        public ReactiveCommand<Unit, Unit> Save { get; }
+
+        public PhrasesLinkViewModel(SettingsViewModel vmSettings, int wordid, string textFilter) : base(vmSettings, false)
+        {
+            TextFilter = textFilter;
+            Save = ReactiveCommand.CreateFromTask(async () =>
+            {
+                foreach (var o in PhraseItems)
+                    if (o.IsChecked)
+                        await wordPhraseDS.Link(wordid, o.ID);
+            });
+        }
+        protected override void ApplyFilters()
+        {
+            base.ApplyFilters();
+            foreach (var o in PhraseItems)
+                o.IsChecked = false;
+        }
+        public void CheckItems(int n, List<MLangPhrase> selectedItems)
+        {
+            foreach (var o in PhraseItems)
+                o.IsChecked = n == 0 ? true : n == 1 ? false :
+                    !selectedItems.Contains(o) ? o.IsChecked :
+                    n == 2;
+        }
     }
 
 }
