@@ -35,7 +35,6 @@ namespace LollyCloud
             var dlg = new SettingsDlg();
             dlg.Owner = this;
             dlg.ShowDialog();
-            await vmSettings.GetData();
             if (dlg.Result == SettingsDlgResult.ApplyToNone) return;
             Tabs.ForEach((t, i) =>
             {

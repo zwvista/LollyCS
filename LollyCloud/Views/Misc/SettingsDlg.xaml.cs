@@ -12,7 +12,7 @@ namespace LollyCloud
     /// </summary>
     public partial class SettingsDlg : Window
     {
-        SettingsViewModel vm = new SettingsViewModel();
+        SettingsViewModel vm => MainWindow.vmSettings;
         public SettingsDlgResult Result { get; private set; }
 
         public SettingsDlg()
