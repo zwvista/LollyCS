@@ -44,7 +44,7 @@ namespace LollyCommon
         [JsonProperty]
         [Reactive]
         public string DICTTYPENAME { get; set; } = "";
-        [JsonProperty]
+        [JsonProperty("NAME")]
         [Reactive]
         public string DICTNAME { get; set; } = "";
         [JsonProperty]
