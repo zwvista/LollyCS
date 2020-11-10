@@ -17,18 +17,10 @@ namespace LollyCommon
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 ItemEdit.CopyProperties(item);
-                var itemDict = new MDictionaryDict();
-                var itemSite = new MDictionarySite();
-                ItemEdit.CopyProperties(itemDict);
-                ItemEdit.CopyProperties(itemSite);
-                if (itemDict.ID == 0)
-                    await vm.CreateDict(itemDict);
+                if (item.ID == 0)
+                    await vm.Create(item);
                 else
-                    await vm.UpdateDict(itemDict);
-                if (itemSite.SITEID != 0)
-                    await vm.UpdateSite(itemSite);
-                else if (!string.IsNullOrEmpty(itemSite.TRANSFORM))
-                    await vm.CreateSite(itemSite);
+                    await vm.Update(item);
             }, ItemEdit.IsValid());
         }
     }

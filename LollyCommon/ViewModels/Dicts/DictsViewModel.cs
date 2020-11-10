@@ -12,8 +12,6 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         DictionaryDataStore dictDS = new DictionaryDataStore();
-        DictionaryDictDataStore dictDictDS = new DictionaryDictDataStore();
-        DictionarySiteDataStore dictSiteDS = new DictionarySiteDataStore();
 
         public ObservableCollection<MDictionary> Items { get; set; } = new ObservableCollection<MDictionary>();
         public string StatusText => $"{Items.Count} Dictionaries in {vmSettings.LANGINFO}";
@@ -43,12 +41,8 @@ namespace LollyCommon
             Items.Add(item);
         }
 
-        public async Task UpdateDict(MDictionaryDict item) => await dictDictDS.Update(item);
-        public async Task CreateDict(MDictionaryDict item) => item.ID = await dictDictDS.Create(item);
-        public async Task DeleteDict(int id) => await dictDictDS.Delete(id);
-        public async Task UpdateSite(MDictionarySite item) => await dictSiteDS.Update(item);
-        public async Task CreateSite(MDictionarySite item) => item.SITEID = await dictSiteDS.Create(item);
-        public async Task DeleteSite(int id) => await dictSiteDS.Delete(id);
-
+        public async Task Update(MDictionary item) => await dictDS.Update(item);
+        public async Task Create(MDictionary item) => item.ID = await dictDS.Create(item);
+        public async Task Delete(int id) => await dictDS.Delete(id);
     }
 }

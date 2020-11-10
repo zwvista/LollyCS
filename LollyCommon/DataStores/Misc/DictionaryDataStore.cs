@@ -15,23 +15,11 @@ namespace LollyCommon
         (await GetDataByUrl<MDictionaries>($"VDICTSNOTE?filter=LANGIDFROM,eq,{langid}")).Records;
         public async Task<List<MDictionary>> GetDictsTranslationByLang(int langid) =>
         (await GetDataByUrl<MDictionaries>($"VDICTSTRANSLATION?filter=LANGIDFROM,eq,{langid}")).Records;
-    }
-    public class DictionaryDictDataStore : LollyDataStore<MDictionaryDict>
-    {
-        public async Task<int> Create(MDictionaryDict item) =>
+        public async Task<int> Create(MDictionary item) =>
         await CreateByUrl($"DICTIONARIES", item);
-        public async Task Update(MDictionaryDict item) =>
+        public async Task Update(MDictionary item) =>
         Debug.WriteLine(await UpdateByUrl($"DICTIONARIES/{item.ID}", JsonConvert.SerializeObject(item)));
         public async Task Delete(int id) =>
         Debug.WriteLine(await DeleteByUrl($"DICTIONARIES/{id}"));
-    }
-    public class DictionarySiteDataStore : LollyDataStore<MDictionarySite>
-    {
-        public async Task<int> Create(MDictionarySite item) =>
-        await CreateByUrl($"SITES", item);
-        public async Task Update(MDictionarySite item) =>
-        Debug.WriteLine(await UpdateByUrl($"SITES/{item.SITEID}", JsonConvert.SerializeObject(item)));
-        public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"SITES/{id}"));
     }
 }
