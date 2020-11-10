@@ -237,13 +237,16 @@
     <Compile Include="Views\Dicts\TransformEditDlg.xaml.cs">
       <DependentUpon>TransformEditDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\TextbooksDetailDlg.xaml.cs">
+    <Compile Include="Views\Textbooks\WebTextbooksControl.xaml.cs">
+      <DependentUpon>WebTextbooksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Textbooks\TextbooksDetailDlg.xaml.cs">
       <DependentUpon>TextbooksDetailDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dicts\DictsDetailDlg.xaml.cs">
       <DependentUpon>DictsDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\TextbooksControl.xaml.cs">
+    <Compile Include="Views\Textbooks\TextbooksControl.xaml.cs">
       <DependentUpon>TextbooksControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Patterns\PatternsControl.xaml.cs">
@@ -387,7 +390,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\TextbooksDetailDlg.xaml">
+    <Page Include="Views\Textbooks\WebTextbooksControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Textbooks\TextbooksDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -395,7 +402,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\TextbooksControl.xaml">
+    <Page Include="Views\Textbooks\TextbooksControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

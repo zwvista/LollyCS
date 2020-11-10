@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyCloud"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
-             xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -20,7 +19,6 @@
                 <Label Content="{Binding StatusText}"/>
             </StatusBar>
             <DataGrid x:Name="dgTextbooks" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
-                      dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedTextbookItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />

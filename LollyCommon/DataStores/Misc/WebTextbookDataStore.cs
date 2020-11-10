@@ -9,6 +9,8 @@ namespace LollyCommon
 {
     public class WebTextbookDataStore : LollyDataStore<MWebTextbook>
     {
+        public async Task<List<MWebTextbook>> GetDataByLang(int langid) =>
+            (await GetDataByUrl<MWebTextbooks>($"VWEBTEXTBOOKS?filter=LANGID,eq,{langid}")).Records;
         public async Task<int> Create(MWebTextbook item) =>
         await CreateByUrl($"WEBTEXTBOOKS", item);
         public async Task Update(MWebTextbook item) =>

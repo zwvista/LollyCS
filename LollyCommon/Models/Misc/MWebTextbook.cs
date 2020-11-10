@@ -25,9 +25,18 @@ namespace LollyCommon
         public int TEXTBOOKID { get; set; }
         [JsonProperty]
         [Reactive]
+        public string TEXTBOOKNAME { get; set; } = "";
+        [JsonProperty]
+        [Reactive]
         public int UNIT { get; set; }
         [JsonProperty]
         [Reactive]
         public int WEBPAGEID { get; set; }
+        [JsonProperty]
+        [Reactive]
+        public string TITLE { get; set; } = "";
+        [JsonProperty]
+        [Reactive]
+        public string URL { get; set; } = "";
     }
 }
