@@ -1,6 +1,5 @@
 ﻿using Hardcodet.Wpf.Util;
 using LollyCommon;
-using LollyCommon.Crawlers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,7 +32,7 @@ namespace LollyCloud
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
             //var c = new Crawler();
-            //await c.Step2();
+            //await c.Step1();
         }
 
     }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace LollyCommon.Crawlers
+namespace LollyCommon
 {
     // 絵でわかる日本語
     public class EdeCrawler : PatternsCrawler

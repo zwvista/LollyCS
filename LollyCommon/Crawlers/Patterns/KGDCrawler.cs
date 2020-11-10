@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace LollyCommon.Crawlers
+namespace LollyCommon
 {
     // Korean Grammar Dictionary
     public class KGDCrawler : PatternsCrawler

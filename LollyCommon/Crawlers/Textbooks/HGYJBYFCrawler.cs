@@ -7,14 +7,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace LollyCommon.Crawlers
+namespace LollyCommon
 {
-    // 韓国語勉強ブログ MARISHA [マリシャ]
-    public class MarishaCrawler : PatternsCrawler
+    // 韩国语基本语法
+    public class HGYJBYFCrawler : TextbooksCrawler
     {
         public override async Task Step1()
         {
-            var reg1 = new Regex(@"<h1 class=""entryTitle inblock""><a href=""(.+?)"" title="".+?"" class=""arr1"">(.+?)</a>");
+            var reg1 = new Regex(@"<a href=""(http://kr.tingroom.com/.+?)"" target=""_blank"" title=""(.+?)"" style=""color: #039;"">.+?</a>");
             var client = new HttpClient();
             var lines2 = new List<string>();
             for (int i = 1; i < 100; i++)
@@ -22,7 +22,7 @@ namespace LollyCommon.Crawlers
                 string html;
                 try
                 {
-                    html = await client.GetStringAsync($"https://marisha39.com/ending/page/{i}/");
+                    html = await client.GetStringAsync($"http://kr.tingroom.com/yufafudao/hanguoyujibenyufa/list_{i}.html");
                 }
                 catch (Exception ex)
                 {
@@ -34,13 +34,12 @@ namespace LollyCommon.Crawlers
                     var url = m.Groups[1].Value;
                     var title = m.Groups[2].Value;
                     var s = url + delim + title;
-                    lines2.Add(s);
+                    lines2.Insert(0, s);
                 }
             }
             File.WriteAllLines("b.txt", lines2);
         }
-
         public override async Task Step2() =>
-            await Step2(7, "Marisha");
+            await Step2(702);
     }
 }

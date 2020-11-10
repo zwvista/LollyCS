@@ -6,25 +6,23 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 
-namespace LollyCommon.Crawlers
+namespace LollyCommon
 {
-    // まいと学ぼう韓国語
-    public class MaiBlogCrawler : PatternsCrawler
+    // 韓国語勉強ブログ MARISHA [マリシャ]
+    public class MarishaCrawler : PatternsCrawler
     {
         public override async Task Step1()
         {
-            var reg1 = new Regex(@"<a href=""(http://00mai00.blog110.fc2.com/blog-entry[^""]+?)"">(.+?)</a>");
-            var urlSet = new HashSet<string>();
+            var reg1 = new Regex(@"<h1 class=""entryTitle inblock""><a href=""(.+?)"" title="".+?"" class=""arr1"">(.+?)</a>");
             var client = new HttpClient();
             var lines2 = new List<string>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 100; i++)
             {
                 string html;
                 try
                 {
-                    html = await client.GetStringAsync($"http://00mai00.blog110.fc2.com/blog-category-19-{i}.html");
+                    html = await client.GetStringAsync($"https://marisha39.com/ending/page/{i}/");
                 }
                 catch (Exception ex)
                 {
@@ -34,9 +32,7 @@ namespace LollyCommon.Crawlers
                 foreach (var m in ms)
                 {
                     var url = m.Groups[1].Value;
-                    if (urlSet.Contains(url)) continue;
-                    urlSet.Add(url);
-                    var title = HttpUtility.HtmlDecode(m.Groups[2].Value);
+                    var title = m.Groups[2].Value;
                     var s = url + delim + title;
                     lines2.Add(s);
                 }
@@ -45,6 +41,6 @@ namespace LollyCommon.Crawlers
         }
 
         public override async Task Step2() =>
-            await Step2(7, "MaiBlog");
+            await Step2(7, "Marisha");
     }
 }
