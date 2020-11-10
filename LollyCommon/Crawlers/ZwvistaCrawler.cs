@@ -40,15 +40,9 @@ namespace LollyCommon.Crawlers
             File.WriteAllLines("b.txt", lines2);
         }
 
-        public override async Task Step2()
-        {
-            var lines = File.ReadAllLines("b.txt");
-            var storewp = new WebPageDataStore();
-            var storept = new PatternDataStore();
-            var storeptwp = new PatternWebPageDataStore();
-            foreach (var s in lines)
+        public override async Task Step2() =>
+            await Step2(a =>
             {
-                var a = s.Split(new[] { delim }, StringSplitOptions.RemoveEmptyEntries);
                 string url = a[0], title = a[1];
                 var pt = new MPattern
                 {
@@ -61,16 +55,7 @@ namespace LollyCommon.Crawlers
                     TITLE = "【日语句型】" + title,
                     URL = url,
                 };
-                var ptid = await storept.Create(pt);
-                var wpid = await storewp.Create(wp);
-                var ptwp = new MPatternWebPage
-                {
-                    PATTERNID = ptid,
-                    WEBPAGEID = wpid,
-                    SEQNUM = 1,
-                };
-                await storeptwp.Create(ptwp);
-            }
-        }
+                return (pt, wp);
+            });
     }
 }

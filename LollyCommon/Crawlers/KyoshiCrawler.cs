@@ -40,14 +40,9 @@ namespace LollyCommon.Crawlers
 
         public override async Task Step2()
         {
-            var lines = File.ReadAllLines("b.txt");
-            var storewp = new WebPageDataStore();
-            var storept = new PatternDataStore();
-            var storeptwp = new PatternWebPageDataStore();
             var reg1 = new Regex(@"【JLPT(N\d)】文法・例文：(.+)");
-            foreach (var s in lines)
+            await Step2(a =>
             {
-                var a = s.Split(new[] { delim }, StringSplitOptions.RemoveEmptyEntries);
                 string url = a[0], title = a[1];
                 var m = reg1.Match(title);
                 string tag = m.Groups[1].Value, title2 = m.Groups[2].Value;
@@ -62,16 +57,8 @@ namespace LollyCommon.Crawlers
                     TITLE = $"【{tag}】{title2}",
                     URL = url,
                 };
-                var ptid = await storept.Create(pt);
-                var wpid = await storewp.Create(wp);
-                var ptwp = new MPatternWebPage
-                {
-                    PATTERNID = ptid,
-                    WEBPAGEID = wpid,
-                    SEQNUM = 1,
-                };
-                await storeptwp.Create(ptwp);
-            }
+                return (pt, wp);
+            });
         }
     }
 }
