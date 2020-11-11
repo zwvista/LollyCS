@@ -11,13 +11,17 @@ namespace LollyCommon
 {
     public class WebTextbooksViewModel : ReactiveObject
     {
-        public SettingsViewModel vmSettings;
+        public SettingsViewModel vmSettings { get; set; }
         WebTextbookDataStore WebTextbookDS = new WebTextbookDataStore();
+        [Reactive]
+        public int WebTextbookFilter { get; set; }
         [Reactive]
         public MWebTextbook SelectedWebTextbookItem { get; set; }
         public bool HasSelectedWebTextbookItem { [ObservableAsProperty] get; }
 
+        public ObservableCollection<MWebTextbook> ItemsAll { get; set; } = new ObservableCollection<MWebTextbook>();
         public ObservableCollection<MWebTextbook> Items { get; set; } = new ObservableCollection<MWebTextbook>();
+        public bool NoFilter => WebTextbookFilter == 0;
         public string StatusText => $"{Items.Count} WebTextbooks in {vmSettings.LANGINFO}";
 
         public WebTextbooksViewModel(SettingsViewModel vmSettings, bool needCopy)
@@ -30,9 +34,15 @@ namespace LollyCommon
         public void Reload() =>
             WebTextbookDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
-                Items = new ObservableCollection<MWebTextbook>(lst);
-                this.RaisePropertyChanged(nameof(Items));
+                ItemsAll = new ObservableCollection<MWebTextbook>(lst);
+                ApplyFilters();
             });
-
+        void ApplyFilters()
+        {
+            Items = NoFilter ? ItemsAll : new ObservableCollection<MWebTextbook>(ItemsAll.Where(o =>
+                 (WebTextbookFilter == 0 || o.TEXTBOOKID == WebTextbookFilter)
+            ));
+            this.RaisePropertyChanged(nameof(Items));
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace LollyCloud
     public partial class WebTextbooksControl : UserControl, ILollySettings
     {
         public WebTextbooksViewModel vm { get; set; }
-        string originalText = "";
+        public SettingsViewModel vmSettings => vm.vmSettings;
         public WebTextbooksControl()
         {
             InitializeComponent();

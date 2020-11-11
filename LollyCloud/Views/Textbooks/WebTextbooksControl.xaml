@@ -12,6 +12,8 @@
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar x:Name="ToolBar1" Band="1">
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
+                <ComboBox x:Name="cbWebTextbookFilter" ItemsSource="{Binding vmSettings.WebTextbookFilters}" DisplayMemberPath="Label" SelectedValuePath="Value"
+                          SelectedValue="{Binding WebTextbookFilter}" />
             </ToolBar>
         </ToolBarTray>
         <Grid>
