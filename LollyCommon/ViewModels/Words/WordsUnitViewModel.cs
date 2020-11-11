@@ -87,6 +87,15 @@ namespace LollyCommon
             };
         }
 
+        public async Task AddNewWord()
+        {
+            var item = NewUnitWord();
+            item.WORD = vmSettings.AutoCorrectInput(NewWord);
+            NewWord = "";
+            await Create(item);
+            SelectedWordItem = WordItems.Last();
+        }
+
         public async Task RetrieveNote(MUnitWord item)
         {
             var note = await vmSettings.RetrieveNote(item.WORD);

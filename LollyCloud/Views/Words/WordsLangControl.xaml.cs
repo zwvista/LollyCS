@@ -69,11 +69,7 @@ namespace LollyCloud
         async void tbNewWord_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Return || string.IsNullOrEmpty(vm.NewWord)) return;
-            var item = vm.NewLangWord();
-            item.WORD = vmSettings.AutoCorrectInput(vm.NewWord);
-            vm.NewWord = "";
-            await vm.Create(item);
-            vm.WordItems.Add(item);
+            await vm.AddNewWord();
         }
         async void miRetrieveNote_Click(object sender, RoutedEventArgs e) =>
             await vm.RetrieveNote(SelectedWordItem);
