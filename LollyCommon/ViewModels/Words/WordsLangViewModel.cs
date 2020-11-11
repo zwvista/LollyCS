@@ -67,12 +67,12 @@ namespace LollyCommon
         {
             var note = await vmSettings.RetrieveNote(item.WORD);
             item.NOTE = note;
-            await Update(item);
+            await langWordDS.UpdateNote(item.ID, item.NOTE);
         }
         public async Task ClearNote(MLangWord item)
         {
             item.NOTE = SettingsViewModel.ZeroNote;
-            await Update(item);
+            await langWordDS.UpdateNote(item.ID, item.NOTE);
         }
 
         public WordsLangViewModel(SettingsViewModel vmSettings) : base(vmSettings, false)

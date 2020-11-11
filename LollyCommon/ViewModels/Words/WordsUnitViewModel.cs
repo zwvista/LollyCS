@@ -10,6 +10,7 @@ namespace LollyCommon
     {
         bool inTextbook;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
+        LangWordDataStore langWordDS = new LangWordDataStore();
 
         ObservableCollection<MUnitWord> WordItemsAll { get; set; } = new ObservableCollection<MUnitWord>();
         public ObservableCollection<MUnitWord> WordItems { get; set; } = new ObservableCollection<MUnitWord>();
@@ -100,26 +101,26 @@ namespace LollyCommon
         {
             var note = await vmSettings.RetrieveNote(item.WORD);
             item.NOTE = note;
-            await Update(item);
+            await langWordDS.UpdateNote(item.WORDID, item.NOTE);
         }
         public async Task ClearNote(MUnitWord item)
         {
             item.NOTE = SettingsViewModel.ZeroNote;
-            await Update(item);
+            await langWordDS.UpdateNote(item.WORDID, item.NOTE);
         }
 
         public async Task RetrieveNotes(Action<int> oneComplete) =>
-            await vmSettings.RetrieveNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+            await vmSettings.RetrieveNotes(WordItems.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItems[i].NOTE),
                 async i =>
                 {
-                    await RetrieveNote(WordItemsAll[i]);
+                    await RetrieveNote(WordItems[i]);
                     oneComplete(i);
                 });
         public async Task ClearNotes(Action<int> oneComplete) =>
-            await vmSettings.ClearNotes(WordItemsAll.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItemsAll[i].NOTE),
+            await vmSettings.ClearNotes(WordItems.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItems[i].NOTE),
                 async i =>
                 {
-                    await ClearNote(WordItemsAll[i]);
+                    await ClearNote(WordItems[i]);
                     oneComplete(i);
                 });
 
