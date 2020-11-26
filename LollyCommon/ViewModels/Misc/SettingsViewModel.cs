@@ -355,7 +355,7 @@ namespace LollyCommon
                 PartFromIsEnabled = b2 && !IsSinglePart;
                 if (v == UnitPartToType.Unit)
                     await DoUpdateSingleUnit();
-                else if (ToType == UnitPartToType.Part)
+                else if (v == UnitPartToType.Part)
                     await DoUpdateUnitPartTo();
             });
             this.WhenAnyValue(x => x.USUNITFROM).Skip(1).Subscribe(async v =>
