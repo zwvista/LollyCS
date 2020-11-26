@@ -27,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Misc\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Phrases\PhrasesLangPage.xaml.cs">
       <DependentUpon>PhrasesLangPage.xaml</DependentUpon>
     </Compile>

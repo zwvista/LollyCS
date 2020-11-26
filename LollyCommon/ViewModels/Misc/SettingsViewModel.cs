@@ -2,8 +2,10 @@
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Reflection;
@@ -198,6 +200,26 @@ namespace LollyCommon
         public string LANGINFO => SelectedLang.LANGNAME;
         public string TEXTBOOKINFO => $"{LANGINFO}/{SelectedTextbook.TEXTBOOKNAME}";
         public string UNITINFO => $"{TEXTBOOKINFO}/{USUNITFROMSTR} {USPARTFROMSTR} ~ {USUNITTOSTR} {USPARTTOSTR}";
+        public MSelectItem USUNITFROMItem
+        {
+            get => Units.SingleOrDefault(o => o.Value == USUNITFROM);
+            set => USUNITFROM = value.Value;
+        }
+        public MSelectItem USPARTFROMItem
+        {
+            get => Parts.SingleOrDefault(o => o.Value == USPARTFROM);
+            set => USPARTFROM = value.Value;
+        }
+        public MSelectItem USUNITTOItem
+        {
+            get => Units.SingleOrDefault(o => o.Value == USUNITTO);
+            set => USPARTFROM = value.Value;
+        }
+        public MSelectItem USPARTTOItem
+        {
+            get => Parts.SingleOrDefault(o => o.Value == USPARTTO);
+            set => USPARTFROM = value.Value;
+        }
 
         public static List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
         {
@@ -313,6 +335,10 @@ namespace LollyCommon
                 this.RaisePropertyChanged(nameof(USPARTFROM));
                 this.RaisePropertyChanged(nameof(USUNITTO));
                 this.RaisePropertyChanged(nameof(USPARTTO));
+                this.RaisePropertyChanged(nameof(USUNITFROMItem));
+                this.RaisePropertyChanged(nameof(USPARTFROMItem));
+                this.RaisePropertyChanged(nameof(USUNITTOItem));
+                this.RaisePropertyChanged(nameof(USPARTTOItem));
                 await UserSettingDS.Update(INFO_USTEXTBOOK, USTEXTBOOK);
             });
             this.WhenAnyValue(x => x.ToType).Where(_ => Units != null).Subscribe(async v =>

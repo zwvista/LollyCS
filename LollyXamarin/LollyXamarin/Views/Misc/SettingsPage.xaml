@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyXamarin.Views.SettingsPage"
+             Title="Settings"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Language:" />
+            <Picker ItemsSource="{Binding Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding SelectedLang}" />
+            <Label Text="Voice:" />
+            <Picker ItemsSource="{Binding Voices}" ItemDisplayBinding="{Binding VOICENAME}" SelectedItem="{Binding SelectedVoice}" />
+            <Label Text="Dictionary(Reference):" />
+            <Picker ItemsSource="{Binding DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictReference}" />
+            <Label Text="Dictionary(Note):" />
+            <Picker ItemsSource="{Binding DictsNote}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictNote}" />
+            <Label Text="Dictionary(Translation):" />
+            <Picker ItemsSource="{Binding DictsTranslation}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictTranslation}" />
+            <Label Text="Textbook:" />
+            <Picker ItemsSource="{Binding Textbooks}" ItemDisplayBinding="{Binding TEXTBOOKNAME}" SelectedItem="{Binding SelectedTextbook}" />
+            <Label Text="Units &amp; Parts:" />
+            <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITFROMItem}" />
+            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" />
+            <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITTOItem}" />
+            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTTOItem}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
