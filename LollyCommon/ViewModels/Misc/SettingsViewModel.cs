@@ -221,7 +221,7 @@ namespace LollyCommon
             set { if (value != null) USPARTTO = value.Value; }
         }
 
-        public List<MSelectItem> ToTypes { get; } = new List<MSelectItem>
+        public static List<MSelectItem> ToTypes { get; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Unit"),
             new MSelectItem(1, "Part"),

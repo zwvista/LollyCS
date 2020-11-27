@@ -12,7 +12,7 @@
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     <ScrollView>
-        <StackLayout>
+        <StackLayout Padding="10">
             <Label Text="Language:" />
             <Picker ItemsSource="{Binding Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding SelectedLang}" />
             <Label Text="Voice:" />
@@ -28,9 +28,16 @@
             <Label Text="Units &amp; Parts:" />
             <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITFROMItem}" />
             <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" IsEnabled="{Binding PartFromIsEnabled}" />
-            <StackLayout Orientation="Horizontal">
-                <Picker ItemsSource="{Binding ToTypes}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ToTypeItem}" />
-            </StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ToTypes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ToTypeItem}" />
+                <Button Text="{Binding PreviousText}" IsEnabled="{Binding PreviousIsEnabled}" Grid.Column="1" />
+                <Button Text="{Binding NextText}" IsEnabled="{Binding NextIsEnabled}" Grid.Column="2" />
+            </Grid>
             <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITTOItem}" IsEnabled="{Binding UnitToIsEnabled}" />
             <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTTOItem}" IsEnabled="{Binding PartToIsEnabled}" />
         </StackLayout>
