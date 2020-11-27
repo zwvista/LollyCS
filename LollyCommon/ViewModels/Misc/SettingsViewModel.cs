@@ -203,25 +203,25 @@ namespace LollyCommon
         public MSelectItem USUNITFROMItem
         {
             get => Units.SingleOrDefault(o => o.Value == USUNITFROM);
-            set => USUNITFROM = value.Value;
+            set { if (value != null) USUNITFROM = value.Value; }
         }
         public MSelectItem USPARTFROMItem
         {
             get => Parts.SingleOrDefault(o => o.Value == USPARTFROM);
-            set => USPARTFROM = value.Value;
+            set { if (value != null) USPARTFROM = value.Value; }
         }
         public MSelectItem USUNITTOItem
         {
             get => Units.SingleOrDefault(o => o.Value == USUNITTO);
-            set => USPARTFROM = value.Value;
+            set { if (value != null) USUNITTO = value.Value; }
         }
         public MSelectItem USPARTTOItem
         {
             get => Parts.SingleOrDefault(o => o.Value == USPARTTO);
-            set => USPARTFROM = value.Value;
+            set { if (value != null) USPARTTO = value.Value; }
         }
 
-        public static List<MSelectItem> ToTypes { get; set; } = new List<MSelectItem>
+        public List<MSelectItem> ToTypes { get; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Unit"),
             new MSelectItem(1, "Part"),
@@ -229,6 +229,11 @@ namespace LollyCommon
         };
         [Reactive]
         public UnitPartToType ToType { get; set; } = UnitPartToType.To;
+        public MSelectItem ToTypeItem
+        {
+            get => ToTypes.SingleOrDefault(o => o.Value == (int)ToType);
+            set { if (value != null) ToType = (UnitPartToType)Enum.ToObject(typeof(UnitPartToType), value.Value); }
+        }
         public bool ToTypeIsMovable => ToType != UnitPartToType.To;
         [Reactive]
         public bool UnitToIsEnabled { get; set; }
@@ -339,6 +344,7 @@ namespace LollyCommon
                 this.RaisePropertyChanged(nameof(USPARTFROMItem));
                 this.RaisePropertyChanged(nameof(USUNITTOItem));
                 this.RaisePropertyChanged(nameof(USPARTTOItem));
+                this.RaisePropertyChanged(nameof(ToTypeItem));
                 await UserSettingDS.Update(INFO_USTEXTBOOK, USTEXTBOOK);
             });
             this.WhenAnyValue(x => x.ToType).Where(_ => Units != null).Subscribe(async v =>

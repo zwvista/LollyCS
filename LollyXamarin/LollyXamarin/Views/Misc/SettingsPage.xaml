@@ -28,6 +28,9 @@
             <Label Text="Units &amp; Parts:" />
             <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITFROMItem}" />
             <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" IsEnabled="{Binding PartFromIsEnabled}" />
+            <StackLayout Orientation="Horizontal">
+                <Picker ItemsSource="{Binding ToTypes}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ToTypeItem}" />
+            </StackLayout>
             <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITTOItem}" IsEnabled="{Binding UnitToIsEnabled}" />
             <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTTOItem}" IsEnabled="{Binding PartToIsEnabled}" />
         </StackLayout>
