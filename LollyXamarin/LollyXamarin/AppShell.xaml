@@ -89,6 +89,7 @@
         <ShellContent Title="Phrases in Unit" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
         <ShellContent Title="Phrases in Textbooks" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
         <ShellContent Title="Phrases in Language" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
+        <ShellContent Title="Patterns in Language" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PatternsPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

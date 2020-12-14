@@ -3,6 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
@@ -24,20 +25,24 @@ namespace LollyCommon
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
         bool NoFilter => string.IsNullOrEmpty(TextFilter);
         public string StatusText => $"{PatternItems.Count} Patterns in {vmSettings.LANGINFO}";
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
         public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                IsBusy = true;
+                PatternItemsAll = new ObservableCollection<MPattern>(await patternDS.GetDataByLang(vmSettings.SelectedLang.ID));
+                ApplyFilters();
+                IsBusy = false;
+            });
             Reload();
         }
-        public void Reload() =>
-            patternDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
-            {
-                PatternItemsAll = new ObservableCollection<MPattern>(lst);
-                ApplyFilters();
-            });
+        public void Reload() => ReloadCommand.Execute().Subscribe();
         void ApplyFilters()
         {
             PatternItems = NoFilter ? PatternItemsAll : new ObservableCollection<MPattern>(PatternItemsAll.Where(o =>

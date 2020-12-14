@@ -27,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Patterns\WordsLangPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Views\Misc\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -52,5 +55,6 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Patterns\" />
   </ItemGroup>
 </Project>
