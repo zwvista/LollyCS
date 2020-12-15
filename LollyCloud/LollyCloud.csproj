@@ -261,8 +261,8 @@
     <Compile Include="Views\Patterns\WebPageSelectDlg.xaml.cs">
       <DependentUpon>WebPageSelectDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Patterns\PatternsWebPageDlg.xaml.cs">
-      <DependentUpon>PatternsWebPageDlg.xaml</DependentUpon>
+    <Compile Include="Views\Patterns\PatternsWebPageEditDlg.xaml.cs">
+      <DependentUpon>PatternsWebPageEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Patterns\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
@@ -422,7 +422,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Patterns\PatternsWebPageDlg.xaml">
+    <Page Include="Views\Patterns\PatternsWebPageEditDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

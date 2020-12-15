@@ -25,6 +25,11 @@ namespace LollyCommon
         public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
         bool NoFilter => string.IsNullOrEmpty(TextFilter);
         public string StatusText => $"{PatternItems.Count} Patterns in {vmSettings.LANGINFO}";
+        [Reactive]
+        public MPattern SelectedPatternItem { get; set; }
+        public bool HasSelectedPatternItem { [ObservableAsProperty] get; }
+        public string SelectedPattern => SelectedPatternItem?.PATTERN ?? "";
+        public int SelectedPatternID => SelectedPatternItem?.PATTERNID ?? 0;
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
@@ -33,6 +38,7 @@ namespace LollyCommon
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
+            this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToPropertyEx(this, x => x.HasSelectedPatternItem);
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
@@ -66,9 +72,9 @@ namespace LollyCommon
                 LANGID = vmSettings.SelectedLang.ID,
             };
 
-        public async Task GetWebPages(int patternid)
+        public async Task GetWebPages()
         {
-            WebPageItems = new ObservableCollection<MPatternWebPage>(await patternWebPageDS.GetDataByPattern(patternid));
+            WebPageItems = new ObservableCollection<MPatternWebPage>(await patternWebPageDS.GetDataByPattern(SelectedPatternID));
             this.RaisePropertyChanged(nameof(WebPageItems));
         }
         public async Task UpdatePatternWebPage(MPatternWebPage item) =>
@@ -86,11 +92,11 @@ namespace LollyCommon
             item.WEBPAGEID = await webPageDS.Create(item);
         public async Task DeleteWebPage(int id) =>
             await webPageDS.Delete(id);
-        public MPatternWebPage NewPatternWebPage(int patternid, string pattern) =>
+        public MPatternWebPage NewPatternWebPage() =>
             new MPatternWebPage
             {
-                PATTERNID = patternid,
-                PATTERN = pattern,
+                PATTERNID = SelectedPatternID,
+                PATTERN = SelectedPattern,
                 SEQNUM = WebPageItems.Select(o => o.SEQNUM).StartWith(0).Max() + 1
             };
 

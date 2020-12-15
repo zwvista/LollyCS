@@ -17,18 +17,18 @@ using System.Windows.Shapes;
 namespace LollyCloud
 {
     /// <summary>
-    /// PatternsWebPageDlg.xaml の相互作用ロジック
+    /// PatternsWebPageEditDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class PatternsWebPageDlg : Window
+    public partial class PatternsWebPageEditDlg : Window
     {
-        PatternsWebPageViewModel vmDetail;
-        public PatternsWebPageDlg(Window owner, PatternsViewModelWPF vm, MPatternWebPage item)
+        PatternsWebPageEditViewModel vmDetail;
+        public PatternsWebPageEditDlg(Window owner, PatternsViewModelWPF vm, MPatternWebPage item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
             Owner = owner;
-            vmDetail = new PatternsWebPageViewModel(vm, item);
+            vmDetail = new PatternsWebPageEditViewModel(vm, item);
             DataContext = vmDetail.ItemEdit;
             btnExisting.IsEnabled = btnNew.IsEnabled = vmDetail.ItemEdit.ID == 0;
         }

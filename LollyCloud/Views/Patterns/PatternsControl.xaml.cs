@@ -17,8 +17,6 @@ namespace LollyCloud
     public partial class PatternsControl : UserControl, ILollySettings
     {
         public PatternsViewModelWPF vm { get; set; }
-        public string selectedPattern = "";
-        public int selectedPatternID = 0;
         public string originalText = "";
         public SettingsViewModel vmSettings => vm.vmSettings;
 
@@ -45,23 +43,15 @@ namespace LollyCloud
 
         void btnAddWebPage_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), vm, vm.NewPatternWebPage(selectedPatternID, selectedPattern));
+            var dlg = new PatternsWebPageEditDlg(Window.GetWindow(this), vm, vm.NewPatternWebPage());
             dlg.ShowDialog();
         }
 
         async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var o = (MPattern)dgPatterns.SelectedItem;
-            if (o == null)
+            if (dgPatterns.SelectedItem != null)
             {
-                selectedPattern = "";
-                selectedPatternID = 0;
-            }
-            else
-            {
-                selectedPattern = o.PATTERN;
-                selectedPatternID = o.ID;
-                await vm.GetWebPages(selectedPatternID);
+                await vm.GetWebPages();
                 if (vm.WebPageItems.Any())
                     dgWebPages.SelectedIndex = 0;
             }
@@ -119,9 +109,9 @@ namespace LollyCloud
             await vm.Delete(item.ID);
             vm.Reload();
         }
-        void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(selectedPattern);
+        void miCopy_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vm.SelectedPattern);
 
-        void miGoogle_Click(object sender, RoutedEventArgs e) => selectedPattern.Google();
+        void miGoogle_Click(object sender, RoutedEventArgs e) => vm.SelectedPattern.Google();
 
         void miMerge_Click(object sender, RoutedEventArgs e)
         {
@@ -141,7 +131,7 @@ namespace LollyCloud
         {
             dgWebPages.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PatternsWebPageDlg(Window.GetWindow(this), vm, (MPatternWebPage)((DataGridRow)sender).Item);
+            var dlg = new PatternsWebPageEditDlg(Window.GetWindow(this), vm, (MPatternWebPage)((DataGridRow)sender).Item);
             dlg.ShowDialog();
         }
 
