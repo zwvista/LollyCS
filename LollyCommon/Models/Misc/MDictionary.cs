@@ -83,7 +83,7 @@ namespace LollyCommon
                 HtmlTransformService.ApplyTemplate(template2, word, text));
         }
     }
-    public class MDictionaryEdit : ReactiveValidationObject<MDictionaryEdit>
+    public class MDictionaryEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }

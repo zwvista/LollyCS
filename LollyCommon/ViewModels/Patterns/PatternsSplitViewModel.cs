@@ -10,7 +10,7 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class PatternsSplitViewModel : ReactiveValidationObject<PatternsSplitViewModel>
+    public class PatternsSplitViewModel : ReactiveValidationObject
     {
         PatternDataStore patternDS = new PatternDataStore();
         public ObservableCollection<MPattern> PatternItems { get; set; }

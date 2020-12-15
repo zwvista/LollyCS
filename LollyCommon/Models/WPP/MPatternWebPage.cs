@@ -45,7 +45,7 @@ namespace LollyCommon
         {
         }
     }
-    public class MPatternWebPageEdit : ReactiveValidationObject<MPatternWebPageEdit>
+    public class MPatternWebPageEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }

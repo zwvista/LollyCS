@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class PatternsMergeViewModel : ReactiveValidationObject<PatternsMergeViewModel>
+    public class PatternsMergeViewModel : ReactiveValidationObject
     {
         PatternDataStore patternDS = new PatternDataStore();
         public ObservableCollection<MPattern> PatternItems { get; set; }

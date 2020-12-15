@@ -44,7 +44,7 @@ namespace LollyCommon
         public string UNITSTR(int UNIT) => Units.First(o => o.Value == UNIT).Label;
         public string PARTSTR(int PART) => Parts.First(o => o.Value == PART).Label;
     }
-    public class MTextbookEdit : ReactiveValidationObject<MTextbookEdit>
+    public class MTextbookEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }

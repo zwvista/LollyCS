@@ -76,7 +76,7 @@ namespace LollyCommon
             return oldNote != NOTE;
         }
     }
-    public class MLangWordEdit : ReactiveValidationObject<MLangWordEdit>
+    public class MLangWordEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }

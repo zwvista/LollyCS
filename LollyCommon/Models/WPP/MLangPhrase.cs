@@ -60,7 +60,7 @@ namespace LollyCommon
             return oldTranslation != TRANSLATION;
         }
     }
-    public class MLangPhraseEdit : ReactiveValidationObject<MLangPhraseEdit>
+    public class MLangPhraseEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }

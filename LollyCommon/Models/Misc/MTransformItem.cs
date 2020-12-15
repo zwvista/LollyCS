@@ -15,7 +15,7 @@ namespace LollyCommon
         [Reactive]
         public string Replacement { get; set; } = "";
     }
-    public class MTransformItemEdit : ReactiveValidationObject<MTransformItemEdit>
+    public class MTransformItemEdit : ReactiveValidationObject
     {
         [Reactive]
         public int Index { get; set; }

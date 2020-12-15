@@ -69,7 +69,7 @@ namespace LollyCommon
         {
         }
     }
-    public class MUnitWordEdit : ReactiveValidationObject<MUnitWordEdit>
+    public class MUnitWordEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }
