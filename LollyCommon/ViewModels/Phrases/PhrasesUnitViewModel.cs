@@ -36,7 +36,7 @@ namespace LollyCommon
         void ApplyFilters()
         {
             PhraseItems = NoFilter ? PhraseItemsAll : new ObservableCollection<MUnitPhrase>(PhraseItemsAll.Where(o =>
-                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION).ToLower().Contains(TextFilter.ToLower())) &&
                 (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
             ));
             this.RaisePropertyChanged(nameof(PhraseItems));

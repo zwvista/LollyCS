@@ -38,7 +38,7 @@ namespace LollyCommon
         void ApplyFilters()
         {
             WordItems = NoFilter ? WordItemsAll : new ObservableCollection<MUnitWord>(WordItemsAll.Where(o =>
-                 (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE ?? "").ToLower().Contains(TextFilter.ToLower())) &&
+                 (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE).ToLower().Contains(TextFilter.ToLower())) &&
                  (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
             ));
             this.RaisePropertyChanged(nameof(WordItems));

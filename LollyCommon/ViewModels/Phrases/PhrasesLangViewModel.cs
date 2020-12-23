@@ -34,7 +34,7 @@ namespace LollyCommon
         protected virtual void ApplyFilters()
         {
             PhraseItems = string.IsNullOrEmpty(TextFilter) ? PhraseItemsAll : new ObservableCollection<MLangPhrase>(PhraseItemsAll.Where(o =>
-                string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION ?? "").ToLower().Contains(TextFilter.ToLower())
+                string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Phrase" ? o.PHRASE : o.TRANSLATION).ToLower().Contains(TextFilter.ToLower())
             ));
             this.RaisePropertyChanged(nameof(PhraseItems));
         }
