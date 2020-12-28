@@ -59,25 +59,20 @@ namespace LollyCloud
 
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            var o = e.EditingEventArgs.Source;
-            var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
-            originalText = o2.Text;
+            var item = e.Row.Item;
+            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
+            originalText = (string)item.GetType().GetProperty(propertyName).GetValue(item);
         }
 
-        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
+        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
         {
-            if (e.EditAction == DataGridEditAction.Commit)
-            {
-                var item = (MTextbook)e.Row.DataContext;
-                var el = (TextBox)e.EditingElement;
-                if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ =>
-                    {
-                        await vm.Update(item);
-                        dgTextbooks.CancelEdit();
-                    });
-            }
+            if (e.EditAction != DataGridEditAction.Commit) return;
+            var item = e.Row.Item;
+            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
+            var el = (TextBox)e.EditingElement;
+            if (el.Text == originalText) return;
+            item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
+            await vm.Update((MTextbook)item);
         }
-
     }
 }

@@ -4,6 +4,7 @@ using LollyCommon;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -98,24 +99,22 @@ namespace LollyCloud
         public void miGooglePhrase_Click(object sender, RoutedEventArgs e) => vmPhrases.SelectedPhrase.Google();
         public void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            var o = e.EditingEventArgs.Source;
-            var o2 = (TextBlock)((o as DataGridCell)?.Content ?? o);
-            originalText = o2.Text;
+            var item = e.Row.Item;
+            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
+            originalText = (string)item.GetType().GetProperty(propertyName).GetValue(item);
         }
-        protected void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e, string autoCorrectColumnName, Func<object, Task> updateFunc)
+        protected async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e, string autoCorrectColumnName, Func<object, Task> updateFunc)
         {
-            if (e.EditAction == DataGridEditAction.Commit)
-            {
-                var item = e.Row.DataContext;
-                var el = (TextBox)e.EditingElement;
-                if (((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path == autoCorrectColumnName)
-                    el.Text = vmSettings.AutoCorrectInput(el.Text);
-                if (el.Text != originalText)
-                    Observable.Timer(TimeSpan.FromMilliseconds(100), RxApp.MainThreadScheduler).Subscribe(async _ => {
-                        await updateFunc(item);
-                        ((DataGrid)sender).CancelEdit();
-                    });
-            }
+            if (e.EditAction != DataGridEditAction.Commit) return;
+            var item = e.Row.Item;
+            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
+            var el = (TextBox)e.EditingElement;
+            if (propertyName == autoCorrectColumnName)
+                el.Text = vmSettings.AutoCorrectInput(el.Text);
+            if (el.Text == originalText) return;
+            item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
+            await updateFunc(item);
+            ((DataGrid)sender).CancelEdit();
         }
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
