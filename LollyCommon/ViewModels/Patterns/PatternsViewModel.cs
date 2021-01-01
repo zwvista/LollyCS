@@ -4,7 +4,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace LollyCommon
@@ -13,12 +12,8 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
-        PatternWebPageDataStore patternWebPageDS = new PatternWebPageDataStore();
-        WebPageDataStore webPageDS = new WebPageDataStore();
-
         ObservableCollection<MPattern> PatternItemsAll { get; set; } = new ObservableCollection<MPattern>();
         public ObservableCollection<MPattern> PatternItems { get; set; } = new ObservableCollection<MPattern>();
-        public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]
@@ -72,44 +67,5 @@ namespace LollyCommon
                 LANGID = vmSettings.SelectedLang.ID,
             };
 
-        public async Task GetWebPages()
-        {
-            WebPageItems = new ObservableCollection<MPatternWebPage>(await patternWebPageDS.GetDataByPattern(SelectedPatternID));
-            this.RaisePropertyChanged(nameof(WebPageItems));
-        }
-        public async Task UpdatePatternWebPage(MPatternWebPage item) =>
-            await patternWebPageDS.Update(item);
-        public async Task CreatePatternWebPage(MPatternWebPage item)
-        {
-            item.ID = await patternWebPageDS.Create(item);
-            WebPageItems.Add(item);
-        }
-        public async Task DeletePatternWebPage(int id) =>
-            await patternWebPageDS.Delete(id);
-        public async Task UpdateWebPage(MPatternWebPage item) =>
-            await webPageDS.Update(item);
-        public async Task CreateWebPage(MPatternWebPage item) =>
-            item.WEBPAGEID = await webPageDS.Create(item);
-        public async Task DeleteWebPage(int id) =>
-            await webPageDS.Delete(id);
-        public MPatternWebPage NewPatternWebPage() =>
-            new MPatternWebPage
-            {
-                PATTERNID = SelectedPatternID,
-                PATTERN = SelectedPattern,
-                SEQNUM = WebPageItems.Select(o => o.SEQNUM).StartWith(0).Max() + 1
-            };
-
-        public async Task Reindex(Action<int> complete)
-        {
-            for (int i = 1; i <= WebPageItems.Count; i++)
-            {
-                var item = WebPageItems[i - 1];
-                if (item.SEQNUM == i) continue;
-                item.SEQNUM = i;
-                await patternWebPageDS.UpdateSeqNum(item.ID, item.SEQNUM);
-                complete(i - 1);
-            }
-        }
     }
 }

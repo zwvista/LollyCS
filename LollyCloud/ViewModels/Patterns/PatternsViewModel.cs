@@ -8,9 +8,9 @@ using System.Windows;
 
 namespace LollyCloud
 {
-    public class PatternsViewModelWPF : PatternsViewModel, IDragSource
+    public class PatternsWebPagesViewModelWPF : PatternsWebPagesViewModel, IDragSource
     {
-        public PatternsViewModelWPF(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
+        public PatternsWebPagesViewModelWPF(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
         }
 

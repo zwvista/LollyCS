@@ -16,7 +16,8 @@ namespace LollyCloud
     /// </summary>
     public partial class PatternsControl : UserControl, ILollySettings
     {
-        public PatternsViewModelWPF vm { get; set; }
+        public PatternsViewModel vm { get; set; }
+        public PatternsWebPagesViewModelWPF vmWP { get; set; }
         public string originalText = "";
         public SettingsViewModel vmSettings => vm.vmSettings;
 
@@ -43,18 +44,16 @@ namespace LollyCloud
 
         void btnAddWebPage_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new PatternsWebPageEditDlg(Window.GetWindow(this), vm, vm.NewPatternWebPage());
+            var dlg = new PatternsWebPagesDetailDlg(Window.GetWindow(this), vmWP, vmWP.NewPatternWebPage());
             dlg.ShowDialog();
         }
 
         async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgPatterns.SelectedItem != null)
-            {
-                await vm.GetWebPages();
-                if (vm.WebPageItems.Any())
-                    dgWebPages.SelectedIndex = 0;
-            }
+            vmWP.SelectedPatternItem = vm.SelectedPatternItem;
+            await vmWP.GetWebPages();
+            if (vmWP.WebPageItems.Any())
+                dgWebPages.SelectedIndex = 0;
         }
         void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
@@ -78,13 +77,15 @@ namespace LollyCloud
             if (sender == dgPatterns)
                 await vm.Update((MPattern)item);
             else
-                await vm.UpdatePatternWebPage((MPatternWebPage)item);
+                await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
             ((DataGrid)sender).CancelEdit();
         }
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new PatternsViewModelWPF(MainWindow.vmSettings, needCopy: true);
+            vm = new PatternsViewModel(MainWindow.vmSettings, needCopy: true);
+            vmWP = new PatternsWebPagesViewModelWPF(vmSettings, needCopy: false);
+            DataContext = this;
         }
 
         async void miDelete_Click(object sender, RoutedEventArgs e)
@@ -117,7 +118,7 @@ namespace LollyCloud
         {
             dgWebPages.CancelEdit();
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PatternsWebPageEditDlg(Window.GetWindow(this), vm, (MPatternWebPage)((DataGridRow)sender).Item);
+            var dlg = new PatternsWebPagesDetailDlg(Window.GetWindow(this), vmWP, (MPatternWebPage)((DataGridRow)sender).Item);
             dlg.ShowDialog();
         }
 

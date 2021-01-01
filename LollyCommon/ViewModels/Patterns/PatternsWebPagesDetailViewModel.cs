@@ -3,11 +3,11 @@ using ReactiveUI.Validation.Extensions;
 
 namespace LollyCommon
 {
-    public class PatternsWebPageEditViewModel : ReactiveObject
+    public class PatternsWebPagesDetailViewModel : ReactiveObject
     {
         public MPatternWebPageEdit ItemEdit = new MPatternWebPageEdit();
 
-        public PatternsWebPageEditViewModel(PatternsViewModel vm, MPatternWebPage item)
+        public PatternsWebPagesDetailViewModel(PatternsWebPagesViewModel vm, MPatternWebPage item)
         {
             item.CopyProperties(ItemEdit);
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
