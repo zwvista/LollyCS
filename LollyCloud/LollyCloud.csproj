@@ -309,7 +309,7 @@
     <Compile Include="Views\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Patterns\PatternsViewModel.cs" />
+    <Compile Include="ViewModels\Patterns\PatternsWebPagesViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
     <Compile Include="Views\Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
