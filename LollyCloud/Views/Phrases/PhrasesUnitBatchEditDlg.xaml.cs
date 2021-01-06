@@ -6,17 +6,17 @@ using System.Windows.Controls;
 namespace LollyCloud
 {
     /// <summary>
-    /// PhrasesUnitBatchDlg.xaml の相互作用ロジック
+    /// PhrasesUnitBatchEditDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class PhrasesUnitBatchDlg : Window
+    public partial class PhrasesUnitBatchEditDlg : Window
     {
-        public PhrasesUnitBatchViewModel vmBatch;
-        public PhrasesUnitBatchDlg(Window owner, PhrasesUnitViewModelWPF vm)
+        public PhrasesUnitBatchEditViewModel vmBatch;
+        public PhrasesUnitBatchEditDlg(Window owner, PhrasesUnitViewModelWPF vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vmBatch = new PhrasesUnitBatchViewModel(vm);
+            DataContext = vmBatch = new PhrasesUnitBatchEditViewModel(vm);
         }
 
         void btnCheckItems_Click(object sender, RoutedEventArgs e)

@@ -5,9 +5,9 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class WordsUnitBatchViewModel : ReactiveObject
+    public class PhrasesUnitBatchEditViewModel : ReactiveObject
     {
-        public WordsUnitViewModel vm { get; set; }
+        public PhrasesUnitViewModel vm { get; set; }
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
 
         [Reactive]
@@ -24,14 +24,14 @@ namespace LollyCommon
         public int SEQNUM { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; }
 
-        public WordsUnitBatchViewModel(WordsUnitViewModel vm)
+        public PhrasesUnitBatchEditViewModel(PhrasesUnitViewModel vm)
         {
             this.vm = vm;
-            foreach (var o in vm.WordItems)
+            foreach (var o in vm.PhraseItems)
                 o.IsChecked = false;
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
-                foreach (var o in vm.WordItems)
+                foreach (var o in vm.PhraseItems)
                 {
                     if (!o.IsChecked) continue;
                     bool b = false;
@@ -56,9 +56,9 @@ namespace LollyCommon
             });
         }
 
-        public void CheckItems(int n, List<MUnitWord> selectedItems)
+        public void CheckItems(int n, List<MUnitPhrase> selectedItems)
         {
-            foreach (var o in vm.WordItems)
+            foreach (var o in vm.PhraseItems)
                 o.IsChecked = n == 0 ? true : n == 1 ? false :
                     !selectedItems.Contains(o) ? o.IsChecked :
                     n == 2;

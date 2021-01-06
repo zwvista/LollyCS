@@ -45,7 +45,7 @@ namespace LollyCloud
 
         void btnBatch_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsUnitBatchDlg(Window.GetWindow(this), vm);
+            var dlg = new WordsUnitBatchEditDlg(Window.GetWindow(this), vm);
             dlg.ShowDialog();
         }
 

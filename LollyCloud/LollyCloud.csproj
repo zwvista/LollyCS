@@ -288,8 +288,8 @@
     <Compile Include="Views\Phrases\PhrasesTextbookDetailDlg.xaml.cs">
       <DependentUpon>PhrasesTextbookDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Phrases\PhrasesUnitBatchDlg.xaml.cs">
-      <DependentUpon>PhrasesUnitBatchDlg.xaml</DependentUpon>
+    <Compile Include="Views\Phrases\PhrasesUnitBatchEditDlg.xaml.cs">
+      <DependentUpon>PhrasesUnitBatchEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesReviewControl.xaml.cs">
       <DependentUpon>PhrasesReviewControl.xaml</DependentUpon>
@@ -343,8 +343,8 @@
     <Compile Include="Views\Words\WordsTextbookDetailDlg.xaml.cs">
       <DependentUpon>WordsTextbookDetailDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Words\WordsUnitBatchDlg.xaml.cs">
-      <DependentUpon>WordsUnitBatchDlg.xaml</DependentUpon>
+    <Compile Include="Views\Words\WordsUnitBatchEditDlg.xaml.cs">
+      <DependentUpon>WordsUnitBatchEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Words\WordsUnitDetailDlg.xaml.cs">
       <DependentUpon>WordsUnitDetailDlg.xaml</DependentUpon>
@@ -457,7 +457,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Phrases\PhrasesUnitBatchDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesUnitBatchEditDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -525,7 +525,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Words\WordsUnitBatchDlg.xaml">
+    <Page Include="Views\Words\WordsUnitBatchEditDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
