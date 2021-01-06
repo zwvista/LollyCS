@@ -16,7 +16,8 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <Button x:Name="btnBatch" Content="Batch" Click="btnBatch_Click"/>
+                <Button x:Name="btnBatchAdd" Content="Batch Add" Click="btnBatchAdd_Click"/>
+                <Button x:Name="btnBatchEdit" Content="Batch Edit" Click="btnBatchEdit_Click"/>
                 <Button x:Name="btnToggleToType" Content="Toggle" IsEnabled="{Binding vmSettings.ToTypeIsMovable}" Click="btnToggleToType_Click"/>
                 <Button x:Name="btnPreviousUnitPart" Content="Previous" IsEnabled="{Binding vmSettings.ToTypeIsMovable}" Click="btnPreviousUnitPart_Click"/>
                 <Button x:Name="btnNextUnitPart" Content="Next" IsEnabled="{Binding vmSettings.ToTypeIsMovable}" Click="btnNextUnitPart_Click"/>

@@ -92,6 +92,8 @@ namespace LollyCommon
         public MTextbook Textbook { get; set; }
         [Reactive]
         public string ACCURACY { get; set; }
+        [Reactive]
+        public string WORDS { get; set; } = "";
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MUnitWordEdit()
         {
