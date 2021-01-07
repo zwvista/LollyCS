@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <Compile Remove="Views\Patterns\WordsLangPage.xaml.cs" />
+    <Compile Remove="Views\Words\WordsUnitDetailPage %282 番目のコピー%29.xaml.cs" />
+    <Compile Remove="Views\Phrases\WordsUnitDetailPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\Misc\SettingsPage.xaml.cs">

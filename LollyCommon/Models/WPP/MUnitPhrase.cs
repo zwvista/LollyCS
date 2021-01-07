@@ -4,6 +4,7 @@ using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 
 namespace LollyCommon
@@ -79,6 +80,16 @@ namespace LollyCommon
         public MTextbook Textbook { get; set; }
         [Reactive]
         public string PHRASES { get; set; } = "";
+        public MSelectItem UNITItem
+        {
+            get => Textbook.Units.SingleOrDefault(o => o.Value == UNIT);
+            set { if (value != null) UNIT = value.Value; }
+        }
+        public MSelectItem PARTItem
+        {
+            get => Textbook.Parts.SingleOrDefault(o => o.Value == PART);
+            set { if (value != null) PART = value.Value; }
+        }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MUnitPhraseEdit()
         {
