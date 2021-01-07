@@ -5,6 +5,7 @@ using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 
 namespace LollyCommon
@@ -94,6 +95,16 @@ namespace LollyCommon
         public string ACCURACY { get; set; }
         [Reactive]
         public string WORDS { get; set; } = "";
+        public MSelectItem UNITItem
+        {
+            get => Textbook.Units.SingleOrDefault(o => o.Value == UNIT);
+            set { if (value != null) UNIT = value.Value; }
+        }
+        public MSelectItem PARTItem
+        {
+            get => Textbook.Parts.SingleOrDefault(o => o.Value == PART);
+            set { if (value != null) PART = value.Value; }
+        }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MUnitWordEdit()
         {

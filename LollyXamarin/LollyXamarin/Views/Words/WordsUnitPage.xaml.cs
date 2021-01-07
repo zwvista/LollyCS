@@ -24,5 +24,14 @@ namespace LollyXamarin.Views
         {
             base.OnAppearing();
         }
+
+        void TapGestureRecognizer_Tapped(Object sender, EventArgs e)
+        {
+            var item = (MUnitWord)((TappedEventArgs)e).Parameter;
+            Navigation.PushAsync(new WordsUnitDetailPage
+            {
+                BindingContext = new WordsUnitDetailViewModel(vm, item, 0),
+            });
+        }
     }
 }

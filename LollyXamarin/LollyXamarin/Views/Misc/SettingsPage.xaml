@@ -7,10 +7,6 @@
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
-    <!--
-      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
-      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
-    -->
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Language:" />
