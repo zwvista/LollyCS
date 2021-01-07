@@ -25,13 +25,25 @@ namespace LollyXamarin.Views
             base.OnAppearing();
         }
 
-        void TapGestureRecognizer_Tapped(Object sender, EventArgs e)
+        void OnItemTapped(object sender, EventArgs e)
         {
             var item = (MLangWord)((TappedEventArgs)e).Parameter;
             Navigation.PushAsync(new WordsLangDetailPage
             {
                 BindingContext = new WordsLangDetailViewModel(vm, item),
             });
+        }
+
+        void OnEditSwipeItemInvoked(object sender, EventArgs e)
+        {
+        }
+
+        void OnMoreSwipeItemInvoked(object sender, EventArgs e)
+        {
+        }
+
+        void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
+        {
         }
     }
 }
