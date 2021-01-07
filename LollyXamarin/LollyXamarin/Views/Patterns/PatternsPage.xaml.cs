@@ -24,5 +24,26 @@ namespace LollyXamarin.Views
         {
             base.OnAppearing();
         }
+
+        void OnItemTapped(object sender, EventArgs e)
+        {
+            var item = (MPattern)((TappedEventArgs)e).Parameter;
+            Navigation.PushAsync(new PatternsDetailPage
+            {
+                BindingContext = new PatternsDetailViewModel(vm, item),
+            });
+        }
+
+        void OnEditSwipeItemInvoked(object sender, EventArgs e)
+        {
+        }
+
+        void OnMoreSwipeItemInvoked(object sender, EventArgs e)
+        {
+        }
+
+        void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
+        {
+        }
     }
 }
