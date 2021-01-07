@@ -236,6 +236,9 @@
     <Compile Include="Views\Dicts\TransformEditDlg.xaml.cs">
       <DependentUpon>TransformEditDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Phrases\PhrasesUnitBatchAddDlg.xaml.cs">
+      <DependentUpon>PhrasesUnitBatchAddDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Textbooks\WebTextbooksControl.xaml.cs">
       <DependentUpon>WebTextbooksControl.xaml</DependentUpon>
     </Compile>
@@ -389,6 +392,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dicts\TransformEditDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Phrases\PhrasesUnitBatchAddDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

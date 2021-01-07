@@ -77,6 +77,8 @@ namespace LollyCommon
         [Reactive]
         public string TRANSLATION { get; set; }
         public MTextbook Textbook { get; set; }
+        [Reactive]
+        public string PHRASES { get; set; } = "";
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MUnitPhraseEdit()
         {

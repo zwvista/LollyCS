@@ -1,7 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System.Linq;
-using System.Reactive;
 
 namespace LollyCommon
 {

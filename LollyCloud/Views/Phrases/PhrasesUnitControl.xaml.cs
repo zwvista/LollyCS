@@ -43,7 +43,12 @@ namespace LollyCloud
                 miEditPhrase_Click(sender, null);
         }
 
-        void btnBatch_Click(object sender, RoutedEventArgs e)
+        void btnBatchAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new PhrasesUnitBatchAddDlg(Window.GetWindow(this), vm);
+            dlg.ShowDialog();
+        }
+        void btnBatchEdit_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new PhrasesUnitBatchEditDlg(Window.GetWindow(this), vm);
             dlg.ShowDialog();
