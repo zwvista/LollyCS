@@ -67,7 +67,7 @@ namespace LollyCloud
             {
                 case DictWebBrowserStatus.Automating:
                     var s = Dict.AUTOMATION.Replace("{0}", Word);
-                    frame.ExecuteJavaScriptAsync(s);
+                    await frame.ExecuteJavaScriptAsync(s);
                     dictStatus = DictWebBrowserStatus.Ready;
                     if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
                         dictStatus = DictWebBrowserStatus.Navigating;

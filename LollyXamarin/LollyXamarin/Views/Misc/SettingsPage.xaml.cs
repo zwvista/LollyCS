@@ -10,11 +10,11 @@ using LollyCommon;
 
 namespace LollyXamarin.Views
 {
-    public partial class SearchPage : ContentPage
+    public partial class SettingsPage : ContentPage
     {
         SettingsViewModel vm = AppShell.vmSettings;
 
-        public SearchPage()
+        public SettingsPage()
         {
             InitializeComponent();
         }
