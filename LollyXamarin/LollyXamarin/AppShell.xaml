@@ -82,6 +82,7 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="Browse" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Search" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:SearchPage}" />
         <ShellContent Title="Settings" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:SettingsPage}" />
         <ShellContent Title="Words in Unit" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsUnitPage}" />
         <ShellContent Title="Words in Textbooks" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsTextbookPage}" />

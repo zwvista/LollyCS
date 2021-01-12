@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyXamarin.Views.SearchPage"
+             Title="Settings"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <SearchBar Grid.ColumnSpan="2" Placeholder="Enter a word here" />
+        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding SelectedLang}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictReference}" />
+        <WebView Grid.Row="2" Grid.ColumnSpan="2" />
+    </Grid>
+</ContentPage>
