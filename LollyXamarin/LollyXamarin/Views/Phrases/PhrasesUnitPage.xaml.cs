@@ -38,8 +38,20 @@ namespace LollyXamarin.Views
         {
         }
 
-        void OnMoreSwipeItemInvoked(object sender, EventArgs e)
+        async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
+            var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Copy Phrase", "Google Phrase");
+            switch (a)
+            {
+                case "Delete":
+                    break;
+                case "Edit":
+                    break;
+                case "Copy Phrase":
+                    break;
+                case "Google Phrase":
+                    break;
+            }
         }
 
         void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
