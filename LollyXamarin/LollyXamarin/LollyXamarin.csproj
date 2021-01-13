@@ -20,6 +20,7 @@
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
+    <PackageReference Include="Xamarin.Plugins.Clipboard" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
