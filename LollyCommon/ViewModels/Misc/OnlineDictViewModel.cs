@@ -10,7 +10,7 @@ namespace LollyCommon.ViewModels
     {
         void LoadURL(string url);
         void LoadHtml(string html);
-        Task ExecuteJavaScriptAsync(string javascript);
+        Task EvaluateScriptAsync(string javascript);
         Task<string> GetSourceAsync();
     }
 
@@ -60,7 +60,7 @@ namespace LollyCommon.ViewModels
             {
                 case DictWebBrowserStatus.Automating:
                     var s = Dict.AUTOMATION.Replace("{0}", Word);
-                    await OnlineDict.ExecuteJavaScriptAsync(s);
+                    await OnlineDict.EvaluateScriptAsync(s);
                     dictStatus = DictWebBrowserStatus.Ready;
                     if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
                         dictStatus = DictWebBrowserStatus.Navigating;

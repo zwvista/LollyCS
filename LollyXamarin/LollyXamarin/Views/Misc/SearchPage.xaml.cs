@@ -38,7 +38,7 @@ namespace LollyXamarin.Views
         public void LoadHtml(string html) =>
             wbDict.Source = html;
 
-        public async Task ExecuteJavaScriptAsync(string javascript) =>
+        public async Task EvaluateScriptAsync(string javascript) =>
             await wbDict.EvaluateJavaScriptAsync(javascript);
 
         public async Task<string> GetSourceAsync() =>

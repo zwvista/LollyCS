@@ -49,11 +49,7 @@ namespace LollyCloud
                 var o = Tabs.FirstOrDefault(o2 => o2.Header == name);
                 if (o == null)
                 {
-                    var c = new WordsDictControl
-                    {
-                        vmSettings = vmSettings,
-                        Dict = vmSettings.DictsReference.First(o2 => o2.DICTNAME == name)
-                    };
+                    var c = new WordsDictControl(vmSettings, vmSettings.DictsReference.First(o2 => o2.DICTNAME == name));
                     // Disable image loading
                     // c.wbDict.BrowserSettings.ImageLoading = CefState.Disabled;
                     Tabs.Add(new ActionTabItem { Header = name, Content = c });
