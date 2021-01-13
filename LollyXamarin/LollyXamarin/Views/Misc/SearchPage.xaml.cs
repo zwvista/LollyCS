@@ -6,19 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using LollyCommon;
-using ReactiveUI;
-using System.Reactive.Linq;
+using LollyCommon.ViewModels;
 
 namespace LollyXamarin.Views
 {
-    public partial class SearchPage : ContentPage
+    public partial class SearchPage : ContentPage, IOnlineDict
     {
-        SettingsViewModel vm = AppShell.vmSettings;
-        public DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
-        public MDictionary Dict;
-        public string Word = "";
-        public string Url;
+        SearchViewModel vm;
 
         public SearchPage()
         {
@@ -28,50 +22,26 @@ namespace LollyXamarin.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await vm.GetData();
+            vm = new SearchViewModel(AppShell.vmSettings, this);
+            await vm.vmSettings.GetData();
             BindingContext = vm;
-            vm.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v =>
-            {
-                Dict = v;
-                dictStatus = DictWebBrowserStatus.Ready;
-                Url = Dict.UrlString(Word, vm.AutoCorrects.ToList());
-                if (Dict.DICTTYPENAME == "OFFLINE")
-                {
-                    wbDict.Source = "about:blank";
-                    var html = await vm.client.GetStringAsync(Url);
-                    var str = Dict.HtmlString(html, Word);
-                    wbDict.Source = str;
-                }
-                else
-                {
-                    wbDict.Source = Url;
-                    if (Dict.AUTOMATION != null)
-                        dictStatus = DictWebBrowserStatus.Automating;
-                    else if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                }
-            });
         }
 
         async void wbDict_Navigated(object sender, WebNavigatedEventArgs e)
         {
-            if (dictStatus == DictWebBrowserStatus.Ready) return;
-            switch (dictStatus)
-            {
-                case DictWebBrowserStatus.Automating:
-                    var s = Dict.AUTOMATION.Replace("{0}", Word);
-                    await wbDict.EvaluateJavaScriptAsync(s);
-                    dictStatus = DictWebBrowserStatus.Ready;
-                    if (Dict.DICTTYPENAME == "OFFLINE-ONLINE")
-                        dictStatus = DictWebBrowserStatus.Navigating;
-                    break;
-                case DictWebBrowserStatus.Navigating:
-                    var html = await wbDict.EvaluateJavaScriptAsync("document.body.innerHTML");
-                    var str = Dict.HtmlString(html, Word);
-                    dictStatus = DictWebBrowserStatus.Ready;
-                    wbDict.Source = str;
-                    break;
-            }
+            await vm.vmDict.OnNavigationFinished();
         }
+
+        public void LoadURL(string url) =>
+            wbDict.Source = url;
+
+        public void LoadHtml(string html) =>
+            wbDict.Source = html;
+
+        public async Task ExecuteJavaScriptAsync(string javascript) =>
+            await wbDict.EvaluateJavaScriptAsync(javascript);
+
+        public async Task<string> GetSourceAsync() =>
+            await wbDict.EvaluateJavaScriptAsync("document.body.innerHTML");
     }
 }

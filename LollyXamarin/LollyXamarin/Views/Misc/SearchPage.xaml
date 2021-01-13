@@ -17,9 +17,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <SearchBar Grid.ColumnSpan="2" Placeholder="Enter a word here" />
-        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding SelectedLang}" />
-        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictReference}" />
+        <SearchBar Grid.ColumnSpan="2" Placeholder="Enter a word here" Text="{Binding vmDict.Word, Mode=TwoWay}" />
+        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{Binding vmSettings.Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding vmSettings.SelectedLang}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding vmSettings.DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding vmSettings.SelectedDictReference}" />
         <WebView Grid.Row="2" Grid.ColumnSpan="2" x:Name="wbDict" Navigated="wbDict_Navigated" />
     </Grid>
 </ContentPage>
