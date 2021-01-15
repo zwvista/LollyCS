@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using LollyCommon;
+using Plugin.Clipboard;
 
 namespace LollyXamarin.Views
 {
@@ -40,6 +41,7 @@ namespace LollyXamarin.Views
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
+            var item = (MPattern)((SwipeItem)sender).BindingContext;
             var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Browse Web Pages", "Edit Web Pages", "Copy Pattern", "Google Pattern");
             switch (a)
             {
@@ -52,6 +54,7 @@ namespace LollyXamarin.Views
                 case "Edit Web Pages":
                     break;
                 case "Copy Pattern":
+                    CrossClipboard.Current.SetText(item.PATTERN);
                     break;
                 case "Google Pattern":
                     break;

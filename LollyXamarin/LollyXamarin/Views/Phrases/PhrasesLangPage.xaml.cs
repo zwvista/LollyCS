@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using LollyCommon;
+using Plugin.Clipboard;
 
 namespace LollyXamarin.Views
 {
@@ -41,6 +42,7 @@ namespace LollyXamarin.Views
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
+            var item = (MLangPhrase)((SwipeItem)sender).BindingContext;
             var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Copy Phrase", "Google Phrase");
             switch (a)
             {
@@ -49,6 +51,7 @@ namespace LollyXamarin.Views
                 case "Edit":
                     break;
                 case "Copy Phrase":
+                    CrossClipboard.Current.SetText(item.PHRASE);
                     break;
                 case "Google Phrase":
                     break;
