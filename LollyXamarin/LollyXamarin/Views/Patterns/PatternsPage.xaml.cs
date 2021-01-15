@@ -57,6 +57,7 @@ namespace LollyXamarin.Views
                     CrossClipboard.Current.SetText(item.PATTERN);
                     break;
                 case "Google Pattern":
+                    await item.PATTERN.GoogleXamarin();
                     break;
             }
         }

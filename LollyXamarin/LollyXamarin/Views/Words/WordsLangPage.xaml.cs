@@ -57,6 +57,7 @@ namespace LollyXamarin.Views
                     CrossClipboard.Current.SetText(item.WORD);
                     break;
                 case "Google Word":
+                    await item.WORD.GoogleXamarin();
                     break;
                 case "Online Dictionary":
                     break;
