@@ -10,7 +10,7 @@ using LollyCommon;
 
 namespace LollyXamarin.Views
 {
-    public partial class WordsLangDetailPage : ContentPage
+    public partial class WordsLangDetailPage : ContentPage, IPageNavigate
     {
         WordsLangDetailViewModel vmDetail;
 
@@ -22,7 +22,11 @@ namespace LollyXamarin.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            vmDetail = (WordsLangDetailViewModel)BindingContext;
+        }
+
+        public void OnPageNavigated(object navigationData)
+        {
+            vmDetail = (WordsLangDetailViewModel)navigationData;
             BindingContext = vmDetail.ItemEdit;
         }
     }

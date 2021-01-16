@@ -27,22 +27,19 @@ namespace LollyXamarin.Views
             base.OnAppearing();
         }
 
-        void Edit(MUnitWord item) =>
-            Navigation.PushAsync(new WordsUnitDetailPage
-            {
-                BindingContext = new WordsUnitDetailViewModel(vm, item, 0),
-            });
+        async Task Edit(MUnitWord item) =>
+            await Shell.Current.GoToAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, item, 0));
 
-        void OnItemTapped(object sender, EventArgs e)
+        async void OnItemTapped(object sender, EventArgs e)
         {
             var item = (MUnitWord)((TappedEventArgs)e).Parameter;
-            Edit(item);
+            await Edit(item);
         }
 
-        void OnEditSwipeItemInvoked(object sender, EventArgs e)
+        async void OnEditSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MUnitWord)((SwipeItem)sender).BindingContext;
-            Edit(item);
+            await Edit(item);
         }
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
@@ -55,7 +52,7 @@ namespace LollyXamarin.Views
                 case "Delete":
                     break;
                 case "Edit":
-                    Edit(item);
+                    await Edit(item);
                     break;
                 case "Retrieve Note":
                     break;

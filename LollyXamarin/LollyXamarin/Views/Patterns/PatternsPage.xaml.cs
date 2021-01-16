@@ -26,22 +26,19 @@ namespace LollyXamarin.Views
             base.OnAppearing();
         }
 
-        void Edit(MPattern item) =>
-            Navigation.PushAsync(new PatternsDetailPage
-            {
-                BindingContext = new PatternsDetailViewModel(vm, item),
-            });
+        async Task Edit(MPattern item) =>
+            await Shell.Current.GoToAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, item));
 
-        void OnItemTapped(object sender, EventArgs e)
+        async void OnItemTapped(object sender, EventArgs e)
         {
             var item = (MPattern)((TappedEventArgs)e).Parameter;
-            Edit(item);
+            await Edit(item);
         }
 
-        void OnEditSwipeItemInvoked(object sender, EventArgs e)
+        async void OnEditSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MPattern)((SwipeItem)sender).BindingContext;
-            Edit(item);
+            await Edit(item);
         }
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
@@ -53,7 +50,7 @@ namespace LollyXamarin.Views
                 case "Delete":
                     break;
                 case "Edit":
-                    Edit(item);
+                    await Edit(item);
                     break;
                 case "Browse Web Pages":
                     break;

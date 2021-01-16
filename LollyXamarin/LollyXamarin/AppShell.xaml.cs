@@ -16,8 +16,8 @@ namespace LollyXamarin
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-            // https://stackoverflow.com/questions/56748966/hide-tabbar-in-xamarin-forms-shell
-            SetTabBarIsVisible(this, false);
+            Routing.RegisterRoute(nameof(WordsUnitDetailPage), typeof(WordsUnitDetailPage));
+
             Task.Run(() => vmSettings.GetData()).Wait();
         }
 
