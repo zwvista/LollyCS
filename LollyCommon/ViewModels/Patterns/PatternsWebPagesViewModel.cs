@@ -17,9 +17,10 @@ namespace LollyCommon
         public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
-        public PatternsWebPagesViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public PatternsWebPagesViewModel(SettingsViewModel vmSettings, bool needCopy, MPattern item)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            SelectedPatternItem = item;
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
@@ -27,9 +28,9 @@ namespace LollyCommon
                 this.RaisePropertyChanged(nameof(WebPageItems));
                 IsBusy = false;
             });
-            GetWebPages();
+            GetWebPages().Subscribe();
         }
-        public void GetWebPages() => ReloadCommand.Execute().Subscribe();
+        public IObservable<Unit> GetWebPages() => ReloadCommand.Execute();
         public async Task UpdatePatternWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Update(item);
         public async Task CreatePatternWebPage(MPatternWebPage item)

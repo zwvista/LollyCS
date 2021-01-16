@@ -10,7 +10,7 @@ namespace LollyCloud
 {
     public class PatternsWebPagesViewModelWPF : PatternsWebPagesViewModel, IDragSource
     {
-        public PatternsWebPagesViewModelWPF(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
+        public PatternsWebPagesViewModelWPF(SettingsViewModel vmSettings, bool needCopy, MPattern item) : base(vmSettings, needCopy, item)
         {
         }
 

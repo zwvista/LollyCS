@@ -48,12 +48,14 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
-        async void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             vmWP.SelectedPatternItem = vm.SelectedPatternItem;
-            await vmWP.GetWebPages();
-            if (vmWP.WebPageItems.Any())
-                dgWebPages.SelectedIndex = 0;
+            vmWP.GetWebPages().Subscribe(_ =>
+            {
+                if (vmWP.WebPageItems.Any())
+                    dgWebPages.SelectedIndex = 0;
+            });
         }
         void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
@@ -84,7 +86,7 @@ namespace LollyCloud
         public async Task OnSettingsChanged()
         {
             vm = new PatternsViewModel(MainWindow.vmSettings, needCopy: true);
-            vmWP = new PatternsWebPagesViewModelWPF(vmSettings, needCopy: false);
+            vmWP = new PatternsWebPagesViewModelWPF(vmSettings, needCopy: false, vm.SelectedPatternItem);
             DataContext = this;
         }
 
