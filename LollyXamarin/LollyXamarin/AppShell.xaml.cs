@@ -23,6 +23,8 @@ namespace LollyXamarin
             Routing.RegisterRoute(nameof(PhrasesTextbookDetailPage), typeof(PhrasesTextbookDetailPage));
             Routing.RegisterRoute(nameof(PhrasesLangDetailPage), typeof(PhrasesLangDetailPage));
             Routing.RegisterRoute(nameof(PatternsDetailPage), typeof(PatternsDetailPage));
+            Routing.RegisterRoute(nameof(PatternsWebPagesListPage), typeof(PatternsWebPagesListPage));
+            Routing.RegisterRoute(nameof(PatternsWebPagesDetailPage), typeof(PatternsWebPagesDetailPage));
 
             Task.Run(() => vmSettings.GetData()).Wait();
         }

@@ -11,14 +11,13 @@ using Plugin.Clipboard;
 
 namespace LollyXamarin.Views
 {
-    public partial class PatternsWebPagesListPage : ContentPage
+    public partial class PatternsWebPagesListPage : ContentPage, IPageNavigate
     {
         PatternsWebPagesViewModel vm;
 
         public PatternsWebPagesListPage()
         {
             InitializeComponent();
-            BindingContext = vm = new PatternsWebPagesViewModel(AppShell.vmSettings, false);
         }
 
         protected override void OnAppearing()
@@ -26,8 +25,13 @@ namespace LollyXamarin.Views
             base.OnAppearing();
         }
 
+        public void OnPageNavigated(object navigationData)
+        {
+            BindingContext = vm = (PatternsWebPagesViewModel)navigationData;
+        }
+
         async Task Edit(MPatternWebPage item) =>
-            await Shell.Current.GoToAsync(nameof(PatternsDetailPage), new PatternsWebPagesDetailViewModel(vm, item));
+            await Shell.Current.GoToAsync(nameof(PatternsWebPagesDetailPage), new PatternsWebPagesDetailViewModel(vm, item));
 
         async void OnItemTapped(object sender, EventArgs e)
         {

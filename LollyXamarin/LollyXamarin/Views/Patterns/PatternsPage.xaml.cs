@@ -55,6 +55,7 @@ namespace LollyXamarin.Views
                 case "Browse Web Pages":
                     break;
                 case "Edit Web Pages":
+                    await Shell.Current.GoToAsync(nameof(PatternsWebPagesListPage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
                     break;
                 case "Copy Pattern":
                     CrossClipboard.Current.SetText(item.PATTERN);

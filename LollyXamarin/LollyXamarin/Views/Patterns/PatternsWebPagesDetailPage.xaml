@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyXamarin.Views.PatternsWebPagesDetailPage"
+             Title="Patterns Web Pages(Detail)"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="ID:" />
+            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Label Text="PATTERN:" />
+            <Entry Text="{Binding PATTERN}" />
+            <Label Text="NOTE:" />
+            <Entry Text="{Binding NOTE}" />
+            <Label Text="TAGS:" />
+            <Entry Text="{Binding TAGS}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
