@@ -27,17 +27,22 @@ namespace LollyXamarin.Views
             base.OnAppearing();
         }
 
-        void OnItemTapped(object sender, EventArgs e)
-        {
-            var item = (MLangPhrase)((TappedEventArgs)e).Parameter;
+        void Edit(MLangPhrase item) =>
             Navigation.PushAsync(new PhrasesLangDetailPage
             {
                 BindingContext = new PhrasesLangDetailViewModel(vm, item),
             });
+
+        void OnItemTapped(object sender, EventArgs e)
+        {
+            var item = (MLangPhrase)((TappedEventArgs)e).Parameter;
+            Edit(item);
         }
 
         void OnEditSwipeItemInvoked(object sender, EventArgs e)
         {
+            var item = (MLangPhrase)((SwipeItem)sender).BindingContext;
+            Edit(item);
         }
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
@@ -49,6 +54,7 @@ namespace LollyXamarin.Views
                 case "Delete":
                     break;
                 case "Edit":
+                    Edit(item);
                     break;
                 case "Copy Phrase":
                     CrossClipboard.Current.SetText(item.PHRASE);

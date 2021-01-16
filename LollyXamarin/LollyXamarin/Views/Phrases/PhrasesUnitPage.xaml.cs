@@ -26,17 +26,22 @@ namespace LollyXamarin.Views
             base.OnAppearing();
         }
 
-        void OnItemTapped(object sender, EventArgs e)
-        {
-            var item = (MUnitPhrase)((TappedEventArgs)e).Parameter;
+        void Edit(MUnitPhrase item) =>
             Navigation.PushAsync(new PhrasesUnitDetailPage
             {
                 BindingContext = new PhrasesUnitDetailViewModel(vm, item, 0),
             });
+
+        void OnItemTapped(object sender, EventArgs e)
+        {
+            var item = (MUnitPhrase)((TappedEventArgs)e).Parameter;
+            Edit(item);
         }
 
         void OnEditSwipeItemInvoked(object sender, EventArgs e)
         {
+            var item = (MUnitPhrase)((SwipeItem)sender).BindingContext;
+            Edit(item);
         }
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
@@ -48,6 +53,7 @@ namespace LollyXamarin.Views
                 case "Delete":
                     break;
                 case "Edit":
+                    Edit(item);
                     break;
                 case "Copy Phrase":
                     CrossClipboard.Current.SetText(item.PHRASE);
