@@ -48,11 +48,10 @@
                             </SwipeView.RightItems>
                             <Grid Padding="10" x:DataType="common:MLangWord">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <StackLayout Padding="10">
+                                <StackLayout VerticalOptions="Center">
                                     <Label Text="{Binding WORD}" Style="{StaticResource Key=Text2}" />
                                     <Label Text="{Binding NOTE}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>

@@ -37,7 +37,10 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <StackLayout Padding="10">
+                            <StackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding SEQNUM}" Style="{StaticResource Key=Text1}" />
+                            </StackLayout>
+                            <StackLayout Padding="10" VerticalOptions="Center">
                                 <Label Text="{Binding TITLE}" Style="{StaticResource Key=Text2}" />
                                 <Label Text="{Binding URL}" Style="{StaticResource Key=Text3}" />
                             </StackLayout>
