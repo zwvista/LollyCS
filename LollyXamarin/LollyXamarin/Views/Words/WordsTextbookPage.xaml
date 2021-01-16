@@ -19,10 +19,10 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <SearchBar Grid.ColumnSpan="2" Placeholder="Filter" Text="{Binding TextFilter, Mode=TwoWay}" />
+        <SearchBar Grid.ColumnSpan="2" Placeholder="Filter" Text="{Binding TextFilter}" />
         <Picker Grid.Row="1" ItemsSource="{Binding vmSettings.TextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding TextbookFilterItem}" />
         <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedItem="{Binding ScopeFilter}" />
-        <RefreshView Grid.Row="2" Grid.ColumnSpan="2" x:DataType="common:WordsUnitViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <RefreshView Grid.Row="2" Grid.ColumnSpan="2" x:DataType="common:WordsUnitViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding WordItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

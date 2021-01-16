@@ -18,9 +18,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <SearchBar Placeholder="Filter" Text="{Binding TextFilter, Mode=TwoWay}" />
+        <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
         <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedItem="{Binding ScopeFilter}" />
-        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:WordsUnitViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:WordsUnitViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding WordItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

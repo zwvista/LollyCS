@@ -9,7 +9,7 @@
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
         <ToolbarItem Text="Add" Order="Secondary" />
     </ContentPage.ToolbarItems>
-    <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PatternsWebPagesViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PatternsWebPagesViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
         <CollectionView ItemsSource="{Binding WebPageItems}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

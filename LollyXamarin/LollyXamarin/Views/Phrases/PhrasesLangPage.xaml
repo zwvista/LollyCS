@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
         <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
         <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedItem="{Binding ScopeFilter}" />
-        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PhrasesLangViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PhrasesLangViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding PhraseItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
