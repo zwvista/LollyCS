@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 
 namespace LollyCommon
@@ -14,15 +15,21 @@ namespace LollyCommon
         PatternWebPageDataStore patternWebPageDS = new PatternWebPageDataStore();
         WebPageDataStore webPageDS = new WebPageDataStore();
         public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
         public PatternsWebPagesViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                IsBusy = true;
+                WebPageItems = new ObservableCollection<MPatternWebPage>(SelectedPatternItem == null ? new List<MPatternWebPage>() : await patternWebPageDS.GetDataByPattern(SelectedPatternItem.ID));
+                this.RaisePropertyChanged(nameof(WebPageItems));
+                IsBusy = false;
+            });
+            GetWebPages();
         }
-        public async Task GetWebPages()
-        {
-            WebPageItems = new ObservableCollection<MPatternWebPage>(SelectedPatternItem == null ? new List<MPatternWebPage>() : await patternWebPageDS.GetDataByPattern(SelectedPatternItem.ID));
-            this.RaisePropertyChanged(nameof(WebPageItems));
-        }
+        public void GetWebPages() => ReloadCommand.Execute().Subscribe();
         public async Task UpdatePatternWebPage(MPatternWebPage item) =>
             await patternWebPageDS.Update(item);
         public async Task CreatePatternWebPage(MPatternWebPage item)

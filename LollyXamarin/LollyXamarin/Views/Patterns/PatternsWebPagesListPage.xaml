@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyXamarin.Views.PatternsWebPagesListPage"
+             Title="Patterns in Language"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Add" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PatternsWebPagesViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView ItemsSource="{Binding WebPageItems}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Edit"
+                                            BackgroundColor="LightBlue"
+                                            Invoked="OnEditSwipeItemInvoked" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="More"
+                                            BackgroundColor="LightGreen"
+                                            Invoked="OnMoreSwipeItemInvoked" />
+                                <SwipeItem Text="Delete"
+                                            BackgroundColor="LightPink"
+                                            Invoked="OnDeleteSwipeItemInvoked" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="10" x:DataType="common:MPatternWebPage">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding TITLE}" Style="{StaticResource Key=Text2}" />
+                                <Label Text="{Binding URL}" Style="{StaticResource Key=Text3}" />
+                            </StackLayout>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
