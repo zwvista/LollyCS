@@ -34,7 +34,7 @@ namespace LollyCommon.ViewModels
         public async Task SearchDict()
         {
             dictStatus = DictWebBrowserStatus.Ready;
-            Url = Dict.UrlString(Word, vmSettings.AutoCorrects.ToList());
+            Url = Dict.UrlString(Word, vmSettings.AutoCorrects);
             if (Dict.DICTTYPENAME == "OFFLINE")
             {
                 OnlineDict.LoadURL("about:blank");

@@ -501,7 +501,7 @@ namespace LollyCommon
         public async Task<string> RetrieveNote(string word)
         {
             if (SelectedDictNote == null) return "";
-            var url = SelectedDictNote.UrlString(word, AutoCorrects.ToList());
+            var url = SelectedDictNote.UrlString(word, AutoCorrects);
             var html = await client.GetStringAsync(url);
             return HtmlTransformService.ExtractTextFromHtml(html, SelectedDictNote.TRANSFORM, "", (text, _) => text);
         }

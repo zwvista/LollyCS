@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using LollyCommon;
 using Plugin.Clipboard;
+using Xamarin.Essentials;
 
 namespace LollyXamarin.Views
 {
@@ -60,6 +61,8 @@ namespace LollyXamarin.Views
                     await item.WORD.GoogleXamarin();
                     break;
                 case "Online Dictionary":
+                    var url = vm.vmSettings.SelectedDictReference.UrlString(item.WORD, vm.vmSettings.AutoCorrects);
+                    await Launcher.OpenAsync(new Uri(url));
                     break;
             }
         }
