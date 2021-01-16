@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Linq;
 using System.Reactive;
 
 namespace LollyCommon
@@ -13,6 +14,11 @@ namespace LollyCommon
         public string TextFilter { get; set; } = "";
         [Reactive]
         public int TextbookFilter { get; set; }
+        public MSelectItem TextbookFilterItem
+        {
+            get => vmSettings.TextbookFilters.SingleOrDefault(o => o.Value == TextbookFilter);
+            set { if (value != null) TextbookFilter = value.Value; }
+        }
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
