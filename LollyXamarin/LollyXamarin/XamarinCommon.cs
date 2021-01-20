@@ -23,8 +23,7 @@ namespace LollyXamarin
         public static async Task GoToAsync(this Shell shell, ShellNavigationState state, object navigationData, bool animate = false)
         {
             // https://stackoverflow.com/questions/2051357/adding-and-removing-anonymous-event-handler/30763657
-            EventHandler<ShellNavigatedEventArgs> handler = null;
-            handler = (sender, e) =>
+            void handler(object sender, EventArgs e)
             {
                 ((Shell.Current?.CurrentItem?.CurrentItem as IShellSectionController)?.PresentedPage
                 as IPageNavigate)?.OnPageNavigated(navigationData);
