@@ -12,6 +12,10 @@ namespace LollyXamarin
         public App()
         {
             InitializeComponent();
+            Plugin.Iconize.Iconize
+                      .With(new Plugin.Iconize.Fonts.FontAwesomeRegularModule())
+                      .With(new Plugin.Iconize.Fonts.FontAwesomeBrandsModule())
+                      .With(new Plugin.Iconize.Fonts.FontAwesomeSolidModule());
 
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
