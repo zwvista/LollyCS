@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyCommon.ViewModels
+namespace LollyCommon
 {
     public interface IOnlineDict
     {

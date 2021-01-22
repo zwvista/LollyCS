@@ -1,6 +1,5 @@
 ﻿using CefSharp;
 using LollyCommon;
-using LollyCommon.ViewModels;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;

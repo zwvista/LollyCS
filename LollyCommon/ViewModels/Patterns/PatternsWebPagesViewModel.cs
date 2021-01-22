@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,8 @@ namespace LollyCommon
         PatternWebPageDataStore patternWebPageDS = new PatternWebPageDataStore();
         WebPageDataStore webPageDS = new WebPageDataStore();
         public ObservableCollection<MPatternWebPage> WebPageItems { get; set; }
+        [Reactive]
+        public MPatternWebPage SelectedWebPageItem { get; set; }
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
         public PatternsWebPagesViewModel(SettingsViewModel vmSettings, bool needCopy, MPattern item)
@@ -26,6 +29,7 @@ namespace LollyCommon
                 IsBusy = true;
                 WebPageItems = new ObservableCollection<MPatternWebPage>(SelectedPatternItem == null ? new List<MPatternWebPage>() : await patternWebPageDS.GetDataByPattern(SelectedPatternItem.ID));
                 this.RaisePropertyChanged(nameof(WebPageItems));
+                SelectedWebPageItem = WebPageItems.FirstOrDefault();
                 IsBusy = false;
             });
             GetWebPages().Subscribe();

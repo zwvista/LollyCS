@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyCommon.ViewModels
+namespace LollyCommon
 {
     public class SearchViewModel : ReactiveObject
     {

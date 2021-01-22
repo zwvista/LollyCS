@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using LollyCommon.ViewModels;
+using LollyCommon;
 
 namespace LollyXamarin.Views
 {

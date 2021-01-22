@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ReactiveUI.Fody.Helpers;
 
-namespace LollyCommon.ViewModels
+namespace LollyCommon
 {
     public class WordsDictViewModel
     {

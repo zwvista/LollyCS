@@ -53,6 +53,7 @@ namespace LollyXamarin.Views
                     await Edit(item);
                     break;
                 case "Browse Web Pages":
+                    await Shell.Current.GoToAsync(nameof(PatternsWebPagesBrowsePage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
                     break;
                 case "Edit Web Pages":
                     await Shell.Current.GoToAsync(nameof(PatternsWebPagesListPage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
