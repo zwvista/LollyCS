@@ -28,7 +28,7 @@ namespace LollyXamarin
                 ((Shell.Current?.CurrentItem?.CurrentItem as IShellSectionController)?.PresentedPage
                 as IPageNavigate)?.OnPageNavigated(navigationData);
                 shell.Navigated -= handler;
-            };
+            }
             shell.Navigated += handler;
             await shell.GoToAsync(state, animate);
         }
