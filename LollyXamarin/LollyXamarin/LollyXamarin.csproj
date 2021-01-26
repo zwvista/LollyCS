@@ -35,6 +35,7 @@
     <Compile Remove="Views\Phrases\WordsUnitDetailPage.xaml.cs" />
     <Compile Remove="Views\Patterns\PatternsWebPagesDetailPage.xaml.cs" />
     <Compile Remove="Views\Patterns\SearchPage.xaml.cs" />
+    <Compile Remove="Views\Phrases\WordsUnitBatchEditPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\Misc\SettingsPage.xaml.cs">

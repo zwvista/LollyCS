@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 
 namespace LollyCommon
@@ -22,6 +23,16 @@ namespace LollyCommon
         public int PART { get; set; }
         [Reactive]
         public int SEQNUM { get; set; }
+        public MSelectItem UNITItem
+        {
+            get => Textbook.Units.SingleOrDefault(o => o.Value == UNIT);
+            set { if (value != null) UNIT = value.Value; }
+        }
+        public MSelectItem PARTItem
+        {
+            get => Textbook.Parts.SingleOrDefault(o => o.Value == PART);
+            set { if (value != null) PART = value.Value; }
+        }
         public ReactiveCommand<Unit, Unit> Save { get; }
 
         public PhrasesUnitBatchEditViewModel(PhrasesUnitViewModel vm)

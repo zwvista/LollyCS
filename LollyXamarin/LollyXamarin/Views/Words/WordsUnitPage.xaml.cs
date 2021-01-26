@@ -93,6 +93,7 @@ namespace LollyXamarin.Views
                 case "Clear Notes If Empty":
                     break;
                 case "Batch Edit":
+                    await Shell.Current.GoToAsync(nameof(WordsUnitBatchEditPage), new WordsUnitBatchEditViewModel(vm));
                     break;
             }
         }

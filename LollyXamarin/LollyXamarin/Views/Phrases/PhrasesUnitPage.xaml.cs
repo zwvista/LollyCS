@@ -74,6 +74,7 @@ namespace LollyXamarin.Views
                     await Shell.Current.GoToAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, vm.NewUnitPhrase(), 0));
                     break;
                 case "Batch Edit":
+                    await Shell.Current.GoToAsync(nameof(PhrasesUnitBatchEditPage), new PhrasesUnitBatchEditViewModel(vm));
                     break;
             }
         }
