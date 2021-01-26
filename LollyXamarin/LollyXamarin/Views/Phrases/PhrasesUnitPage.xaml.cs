@@ -64,5 +64,18 @@ namespace LollyXamarin.Views
         void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
         {
         }
+
+        async void ToolbarItemMore_Clicked(object sender, EventArgs e)
+        {
+            var a = await DisplayActionSheet("More", "Cancel", null, "Add", "Batch Edit");
+            switch (a)
+            {
+                case "Add":
+                    await Shell.Current.GoToAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, vm.NewUnitPhrase(), 0));
+                    break;
+                case "Batch Edit":
+                    break;
+            }
+        }
     }
 }

@@ -65,5 +65,11 @@ namespace LollyXamarin.Views
         void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
         {
         }
+
+        async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(PhrasesLangDetailPage), new PhrasesLangDetailViewModel(vm, vm.NewLangPhrase()));
+
+        }
     }
 }

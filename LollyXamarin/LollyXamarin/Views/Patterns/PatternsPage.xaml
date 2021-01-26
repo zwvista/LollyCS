@@ -6,8 +6,7 @@
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
-        <ToolbarItem Text="Add" Order="Secondary" />
+        <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10">
         <Grid.RowDefinitions>

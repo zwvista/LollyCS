@@ -7,6 +7,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="More" Clicked="ToolbarItemMore_Clicked" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10">
         <Grid.RowDefinitions>

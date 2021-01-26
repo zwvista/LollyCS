@@ -75,5 +75,26 @@ namespace LollyXamarin.Views
         void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
         {
         }
+
+        async void ToolbarItemMore_Clicked(object sender, EventArgs e)
+        {
+            var a = await DisplayActionSheet("More", "Cancel", null, "Add", "Retrieve All Notes", "Retrieve Notes If Empty", "Clear All Notes", "Clear Notes If Empty", "Batch Edit");
+            switch (a)
+            {
+                case "Add":
+                    await Shell.Current.GoToAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, vm.NewUnitWord(), 0));
+                    break;
+                case "Retrieve All Notes":
+                    break;
+                case "Retrieve Notes If Empty":
+                    break;
+                case "Clear All Notes":
+                    break;
+                case "Clear Notes If Empty":
+                    break;
+                case "Batch Edit":
+                    break;
+            }
+        }
     }
 }
