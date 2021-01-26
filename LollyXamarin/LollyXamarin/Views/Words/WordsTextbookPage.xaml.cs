@@ -54,8 +54,10 @@ namespace LollyXamarin.Views
                     await Edit(item);
                     break;
                 case "Retrieve Note":
+                    await vm.RetrieveNote(item);
                     break;
                 case "Clear Note":
+                    await vm.ClearNote(item);
                     break;
                 case "Copy Word":
                     CrossClipboard.Current.SetText(item.WORD);

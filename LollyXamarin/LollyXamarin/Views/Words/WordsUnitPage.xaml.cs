@@ -55,8 +55,10 @@ namespace LollyXamarin.Views
                     await Edit(item);
                     break;
                 case "Retrieve Note":
+                    await vm.RetrieveNote(item);
                     break;
                 case "Clear Note":
+                    await vm.ClearNote(item);
                     break;
                 case "Copy Word":
                     // https://forums.xamarin.com/discussion/126579/how-to-copy-a-value-to-clipboard
@@ -85,12 +87,20 @@ namespace LollyXamarin.Views
                     await Shell.Current.GoToAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, vm.NewUnitWord(), 0));
                     break;
                 case "Retrieve All Notes":
+                    vm.IfEmpty = false;
+                    await vm.RetrieveNotes(_ => { });
                     break;
                 case "Retrieve Notes If Empty":
+                    vm.IfEmpty = true;
+                    await vm.RetrieveNotes(_ => { });
                     break;
                 case "Clear All Notes":
+                    vm.IfEmpty = false;
+                    await vm.ClearNotes(_ => { });
                     break;
                 case "Clear Notes If Empty":
+                    vm.IfEmpty = true;
+                    await vm.ClearNotes(_ => { });
                     break;
                 case "Batch Edit":
                     await Shell.Current.GoToAsync(nameof(WordsUnitBatchEditPage), new WordsUnitBatchEditViewModel(vm));
