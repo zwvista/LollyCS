@@ -8,7 +8,7 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,*">
-        <Picker ItemsSource="{Binding Words}" SelectedIndex="{Binding CurrentWordIndex}" SelectedItem="{Binding vmDict.Word}" />
+        <Picker ItemsSource="{Binding Words}" SelectedIndex="{Binding CurrentWordIndex}" />
         <Picker Grid.Column="1" ItemsSource="{Binding vmSettings.DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding vmSettings.SelectedDictReference}" />
         <WebView Grid.Row="1" Grid.ColumnSpan="2" x:Name="wbDict" Navigated="wbDict_Navigated" />
     </Grid>

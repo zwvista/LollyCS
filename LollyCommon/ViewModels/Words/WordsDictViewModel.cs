@@ -6,30 +6,31 @@ using ReactiveUI.Fody.Helpers;
 
 namespace LollyCommon
 {
-    public class WordsDictViewModel
+    public class WordsDictViewModel : ReactiveObject
     {
         public OnlineDictViewModel vmDict { get; set; }
         public SettingsViewModel vmSettings { get; }
-        [Reactive]
         public List<string> Words { get; }
         [Reactive]
         public int CurrentWordIndex { get; set; }
-        public WordsDictViewModel(SettingsViewModel vmSettings, List<string> Words)
+        public WordsDictViewModel(SettingsViewModel vmSettings, List<string> words, int index)
         {
             this.vmSettings = vmSettings;
-            this.Words = Words;
+            Words = words;
+            CurrentWordIndex = index;
         }
 
-        public void InitDictViewModel(OnlineDictViewModel vmDict)
+        public void SetOnlineDict(IOnlineDict dict)
         {
-            this.vmDict = vmDict;
-            this.WhenAnyValue(x => x.CurrentWordIndex).Skip(1).Subscribe(async v =>
-            {
-                await vmDict.SearchDict();
-            });
-            vmSettings.WhenAnyValue(x => x.SelectedDictReference).Subscribe(async v =>
+            vmDict = new OnlineDictViewModel(vmSettings, dict);
+            vmSettings.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v =>
             {
                 vmDict.Dict = v;
+                await vmDict.SearchDict();
+            });
+            this.WhenAnyValue(x => x.CurrentWordIndex).Subscribe(async v =>
+            {
+                vmDict.Word = Words[CurrentWordIndex];
                 await vmDict.SearchDict();
             });
         }

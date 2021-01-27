@@ -27,7 +27,7 @@ namespace LollyXamarin.Views
         public void OnPageNavigated(object navigationData)
         {
             vm = (WordsDictViewModel)navigationData;
-            vm.InitDictViewModel(new OnlineDictViewModel(vm.vmSettings, this));
+            vm.SetOnlineDict(this);
             BindingContext = vm;
         }
 
