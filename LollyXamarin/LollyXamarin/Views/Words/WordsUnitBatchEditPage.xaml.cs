@@ -28,5 +28,11 @@ namespace LollyXamarin.Views
         {
             BindingContext = vmBatch = (WordsUnitBatchEditViewModel)navigationData;
         }
+
+        void OnItemTapped(object sender, EventArgs e)
+        {
+            var item = (MUnitWord)((TappedEventArgs)e).Parameter;
+            item.IsChecked = !item.IsChecked;
+        }
     }
 }
