@@ -10,15 +10,7 @@
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
         <ToolbarItem Text="More" Clicked="ToolbarItemMore_Clicked" />
     </ContentPage.ToolbarItems>
-    <Grid Padding="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
         <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
         <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedItem="{Binding ScopeFilter}" />
         <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:WordsUnitViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
@@ -43,12 +35,7 @@
                                                Invoked="OnDeleteSwipeItemInvoked" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="10" x:DataType="common:MUnitWord">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Grid Padding="10" x:DataType="common:MUnitWord" ColumnDefinitions="Auto,*,Auto">
                                 <StackLayout Spacing="2" VerticalOptions="Center">
                                     <Label Text="{Binding UNITSTR}" Style="{StaticResource Key=Text1}" />
                                     <Label Text="{Binding PARTSTR}" Style="{StaticResource Key=Text1}" />

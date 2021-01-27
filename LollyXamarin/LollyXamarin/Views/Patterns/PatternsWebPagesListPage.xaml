@@ -31,12 +31,7 @@
                                             Invoked="OnDeleteSwipeItemInvoked" />
                             </SwipeItems>
                         </SwipeView.RightItems>
-                        <Grid Padding="10" x:DataType="common:MPatternWebPage">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                        <Grid Padding="10" x:DataType="common:MPatternWebPage" ColumnDefinitions="Auto,*,Auto">
                             <StackLayout Spacing="2" VerticalOptions="Center">
                                 <Label Text="{Binding SEQNUM}" Style="{StaticResource Key=Text1}" />
                             </StackLayout>

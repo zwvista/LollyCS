@@ -24,12 +24,7 @@
             <Label Text="Units &amp; Parts:" />
             <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITFROMItem}" />
             <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" IsEnabled="{Binding PartFromIsEnabled}" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid ColumnDefinitions="100,*,*">
                 <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ToTypes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ToTypeItem}" />
                 <Button Text="{Binding PreviousText}" IsEnabled="{Binding PreviousIsEnabled}" Grid.Column="1" />
                 <Button Text="{Binding NextText}" IsEnabled="{Binding NextIsEnabled}" Grid.Column="2" />

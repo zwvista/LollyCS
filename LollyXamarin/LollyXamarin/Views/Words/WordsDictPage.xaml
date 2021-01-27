@@ -7,16 +7,7 @@
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,*">
         <SearchBar Grid.ColumnSpan="2" Placeholder="Enter a word here" Text="{Binding vmDict.Word}" />
         <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{Binding vmSettings.Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding vmSettings.SelectedLang}" />
         <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding vmSettings.DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding vmSettings.SelectedDictReference}" />

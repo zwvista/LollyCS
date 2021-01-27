@@ -7,17 +7,7 @@
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
-    <Grid Padding="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
         <Label Text="UNIT:" VerticalTextAlignment="Center" />
         <Picker Grid.Column="1" ItemsSource="{Binding Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding UNITItem}" />
         <Label Grid.Row="1" Text="PART:" VerticalTextAlignment="Center" />

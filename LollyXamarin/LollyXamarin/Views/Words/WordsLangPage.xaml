@@ -12,15 +12,7 @@
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
-    <Grid Padding="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
         <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
         <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedItem="{Binding ScopeFilter}" />
         <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:WordsLangViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
@@ -45,11 +37,7 @@
                                                Invoked="OnDeleteSwipeItemInvoked" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="10" x:DataType="common:MLangWord">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Grid Padding="10" x:DataType="common:MLangWord" ColumnDefinitions="*,Auto">
                                 <StackLayout VerticalOptions="Center">
                                     <Label Text="{Binding WORD}" Style="{StaticResource Key=Text2}" />
                                     <Label Text="{Binding NOTE}" Style="{StaticResource Key=Text3}" />
