@@ -47,5 +47,11 @@ namespace LollyXamarin.Views
 
         public async Task<string> GetSourceAsync() =>
             await wbDict.EvaluateJavaScriptAsync("document.body.innerHTML");
+
+        void WebView_SwipedLeft(object sender, SwipedEventArgs e) =>
+            vm.Next(-1);
+
+        void WebView_SwipedRight(object sender, SwipedEventArgs e) =>
+            vm.Next(1);
     }
 }
