@@ -45,7 +45,8 @@
                                     <Label Text="{Binding WORD}" Style="{StaticResource Key=Text2}" />
                                     <Label Text="{Binding NOTE}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
-                                <iconize:IconButton Grid.Column="2" FontSize="20" Text="far-bell" TextColor="Red" WidthRequest="48" />
+                                <iconize:IconButton Grid.Column="2" FontSize="20" Text="fas-angle-right" TextColor="Red"
+                                                    WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>

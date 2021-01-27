@@ -75,5 +75,11 @@ namespace LollyXamarin.Views
         void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
         {
         }
+
+        async void IconButton_Clicked(object sender, EventArgs e)
+        {
+            var words = vm.WordItems.Select(o => o.WORD).ToList();
+            await Shell.Current.GoToAsync(nameof(WordsDictPage), new WordsDictViewModel(vm.vmSettings, words));
+        }
     }
 }

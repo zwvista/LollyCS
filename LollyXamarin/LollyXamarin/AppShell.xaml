@@ -76,37 +76,37 @@
 
     <!--https://github.com/xamarin/Xamarin.Forms/issues/12563-->
     <FlyoutItem Title="Search">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:SearchPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Settings">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    <FlyoutItem Title="Settings" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words in Unit">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsUnitPage}" />
+    <FlyoutItem Title="Words in Unit" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:WordsUnitPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words in Textbooks">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
+    <FlyoutItem Title="Words in Textbooks" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words in Language">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:WordsLangPage}" />
+    <FlyoutItem Title="Words in Language" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:WordsLangPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases in Unit">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
+    <FlyoutItem Title="Phrases in Unit" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases in Textbooks">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
+    <FlyoutItem Title="Phrases in Textbooks" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases in Language">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
+    <FlyoutItem Title="Phrases in Language" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Patterns in Language">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:PatternsPage}" />
+    <FlyoutItem Title="Patterns in Language" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PatternsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="About">
-        <ShellContent Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+    <FlyoutItem Title="About" Icon="tab_about.png">
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Browse">
-        <ShellContent Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <FlyoutItem Title="Browse" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

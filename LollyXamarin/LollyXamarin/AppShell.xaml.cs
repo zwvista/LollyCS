@@ -20,6 +20,7 @@ namespace LollyXamarin
             Routing.RegisterRoute(nameof(WordsUnitBatchEditPage), typeof(WordsUnitBatchEditPage));
             Routing.RegisterRoute(nameof(WordsTextbookDetailPage), typeof(WordsTextbookDetailPage));
             Routing.RegisterRoute(nameof(WordsLangDetailPage), typeof(WordsLangDetailPage));
+            Routing.RegisterRoute(nameof(WordsDictPage), typeof(WordsDictPage));
             Routing.RegisterRoute(nameof(PhrasesUnitDetailPage), typeof(PhrasesUnitDetailPage));
             Routing.RegisterRoute(nameof(PhrasesUnitBatchEditPage), typeof(PhrasesUnitBatchEditPage));
             Routing.RegisterRoute(nameof(PhrasesTextbookDetailPage), typeof(PhrasesTextbookDetailPage));

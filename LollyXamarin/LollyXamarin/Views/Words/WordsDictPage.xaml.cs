@@ -10,20 +10,24 @@ using LollyCommon;
 
 namespace LollyXamarin.Views
 {
-    public partial class WordsDictPage : ContentPage, IOnlineDict
+    public partial class WordsDictPage : ContentPage, IOnlineDict, IPageNavigate
     {
-        SearchViewModel vm;
+        WordsDictViewModel vm;
 
         public WordsDictPage()
         {
             InitializeComponent();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            vm = new SearchViewModel(AppShell.vmSettings, this);
-            await vm.vmSettings.GetData();
+        }
+
+        public void OnPageNavigated(object navigationData)
+        {
+            vm = (WordsDictViewModel)navigationData;
+            vm.InitDictViewModel(new OnlineDictViewModel(vm.vmSettings, this));
             BindingContext = vm;
         }
 
