@@ -17,9 +17,9 @@ namespace LollyXamarin
     {
         void OnPageNavigated(object navigationData);
     }
-    // https://stackoverflow.com/questions/57554375/xamarin-forms-4-shell-navigation-with-complex-parameters
     public static class ShellExtensions
     {
+        // https://stackoverflow.com/questions/57554375/xamarin-forms-4-shell-navigation-with-complex-parameters
         public static async Task GoToAsync(this Shell shell, ShellNavigationState state, object navigationData, bool animate = false)
         {
             // https://stackoverflow.com/questions/2051357/adding-and-removing-anonymous-event-handler/30763657
@@ -32,6 +32,7 @@ namespace LollyXamarin
             shell.Navigated += handler;
             await shell.GoToAsync(state, animate);
         }
+        // https://forums.xamarin.com/discussion/168512/shell-showing-modal-pages
         public static Task GoToModalAsync(this Shell shell, string route, object navigationData)
         {
             var page = Routing.GetOrCreateContent(route) as Page;
