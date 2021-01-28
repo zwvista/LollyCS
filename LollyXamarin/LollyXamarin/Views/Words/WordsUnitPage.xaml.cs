@@ -28,7 +28,7 @@ namespace LollyXamarin.Views
         }
 
         async Task Edit(MUnitWord item) =>
-            await Shell.Current.GoToAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, item, 0));
+            await Shell.Current.GoToModalAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, item, 0));
 
         async void OnItemTapped(object sender, EventArgs e)
         {
@@ -84,7 +84,7 @@ namespace LollyXamarin.Views
             switch (a)
             {
                 case "Add":
-                    await Shell.Current.GoToAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, vm.NewUnitWord(), 0));
+                    await Shell.Current.GoToModalAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, vm.NewUnitWord(), 0));
                     break;
                 case "Retrieve All Notes":
                     vm.IfEmpty = false;
@@ -103,7 +103,7 @@ namespace LollyXamarin.Views
                     await vm.ClearNotes(_ => { });
                     break;
                 case "Batch Edit":
-                    await Shell.Current.GoToAsync(nameof(WordsUnitBatchEditPage), new WordsUnitBatchEditViewModel(vm));
+                    await Shell.Current.GoToModalAsync(nameof(WordsUnitBatchEditPage), new WordsUnitBatchEditViewModel(vm));
                     break;
             }
         }

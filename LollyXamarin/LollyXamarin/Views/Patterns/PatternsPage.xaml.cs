@@ -27,7 +27,7 @@ namespace LollyXamarin.Views
         }
 
         async Task Edit(MPattern item) =>
-            await Shell.Current.GoToAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, item));
+            await Shell.Current.GoToModalAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, item));
 
         async void OnItemTapped(object sender, EventArgs e)
         {
@@ -73,7 +73,7 @@ namespace LollyXamarin.Views
 
         async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, vm.NewPattern()));
+            await Shell.Current.GoToModalAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, vm.NewPattern()));
         }
     }
 }

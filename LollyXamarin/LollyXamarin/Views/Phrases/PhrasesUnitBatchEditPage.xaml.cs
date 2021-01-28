@@ -10,7 +10,7 @@ using LollyCommon;
 
 namespace LollyXamarin.Views
 {
-    public partial class PhrasesUnitBatchEditPage : ContentPage, IPageNavigate
+    public partial class PhrasesUnitBatchEditPage : ContentPage
     {
         PhrasesUnitBatchEditViewModel vmBatch;
 
@@ -22,11 +22,15 @@ namespace LollyXamarin.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            vmBatch = (PhrasesUnitBatchEditViewModel)BindingContext;
         }
 
-        public void OnPageNavigated(object navigationData)
+        void OnCancel(object sender, EventArgs e) =>
+            Navigation.PopModalAsync();
+
+        void OnSave(object sender, EventArgs e)
         {
-            BindingContext = vmBatch = (PhrasesUnitBatchEditViewModel)navigationData;
+            Navigation.PopModalAsync();
         }
     }
 }

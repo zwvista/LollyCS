@@ -27,7 +27,7 @@ namespace LollyXamarin.Views
         }
 
         async Task Edit(MUnitPhrase item) =>
-            await Shell.Current.GoToAsync(nameof(PhrasesTextbookDetailPage), new PhrasesUnitDetailViewModel(vm, item, 0));
+            await Shell.Current.GoToModalAsync(nameof(PhrasesTextbookDetailPage), new PhrasesUnitDetailViewModel(vm, item, 0));
 
         async void OnItemTapped(object sender, EventArgs e)
         {

@@ -32,5 +32,12 @@ namespace LollyXamarin
             shell.Navigated += handler;
             await shell.GoToAsync(state, animate);
         }
+        public static Task GoToModalAsync(this Shell shell, string route, object navigationData)
+        {
+            var page = Routing.GetOrCreateContent(route) as Page;
+            if (page is null) return Task.CompletedTask;
+            page.BindingContext = navigationData;
+            return shell.Navigation.PushModalAsync(new NavigationPage(page));
+        }
     }
 }

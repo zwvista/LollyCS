@@ -27,7 +27,7 @@ namespace LollyXamarin.Views
         }
 
         async Task Edit(MUnitPhrase item) =>
-            await Shell.Current.GoToAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, item, 0));
+            await Shell.Current.GoToModalAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, item, 0));
 
         async void OnItemTapped(object sender, EventArgs e)
         {
@@ -71,10 +71,10 @@ namespace LollyXamarin.Views
             switch (a)
             {
                 case "Add":
-                    await Shell.Current.GoToAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, vm.NewUnitPhrase(), 0));
+                    await Shell.Current.GoToModalAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, vm.NewUnitPhrase(), 0));
                     break;
                 case "Batch Edit":
-                    await Shell.Current.GoToAsync(nameof(PhrasesUnitBatchEditPage), new PhrasesUnitBatchEditViewModel(vm));
+                    await Shell.Current.GoToModalAsync(nameof(PhrasesUnitBatchEditPage), new PhrasesUnitBatchEditViewModel(vm));
                     break;
             }
         }

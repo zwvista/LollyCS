@@ -10,7 +10,7 @@ using LollyCommon;
 
 namespace LollyXamarin.Views
 {
-    public partial class WordsUnitBatchEditPage : ContentPage, IPageNavigate
+    public partial class WordsUnitBatchEditPage : ContentPage
     {
         WordsUnitBatchEditViewModel vmBatch;
 
@@ -22,17 +22,21 @@ namespace LollyXamarin.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-        }
-
-        public void OnPageNavigated(object navigationData)
-        {
-            BindingContext = vmBatch = (WordsUnitBatchEditViewModel)navigationData;
+            vmBatch = (WordsUnitBatchEditViewModel)BindingContext;
         }
 
         void OnItemTapped(object sender, EventArgs e)
         {
             var item = (MUnitWord)((TappedEventArgs)e).Parameter;
             item.IsChecked = !item.IsChecked;
+        }
+
+        void OnCancel(object sender, EventArgs e) =>
+            Navigation.PopModalAsync();
+
+        void OnSave(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

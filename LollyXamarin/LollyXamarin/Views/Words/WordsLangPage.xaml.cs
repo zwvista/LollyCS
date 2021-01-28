@@ -28,7 +28,7 @@ namespace LollyXamarin.Views
         }
 
         async Task Edit(MLangWord item) =>
-            await Shell.Current.GoToAsync(nameof(WordsLangDetailPage), new WordsLangDetailViewModel(vm, item));
+            await Shell.Current.GoToModalAsync(nameof(WordsLangDetailPage), new WordsLangDetailViewModel(vm, item));
 
         async void OnItemTapped(object sender, EventArgs e)
         {
@@ -78,7 +78,7 @@ namespace LollyXamarin.Views
 
         async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(WordsLangDetailPage), new WordsLangDetailViewModel(vm, vm.NewLangWord()));
+            await Shell.Current.GoToModalAsync(nameof(WordsLangDetailPage), new WordsLangDetailViewModel(vm, vm.NewLangWord()));
         }
 
         async void IconButton_Clicked(object sender, EventArgs e)

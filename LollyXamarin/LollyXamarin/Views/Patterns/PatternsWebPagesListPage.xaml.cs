@@ -31,7 +31,7 @@ namespace LollyXamarin.Views
         }
 
         async Task Edit(MPatternWebPage item) =>
-            await Shell.Current.GoToAsync(nameof(PatternsWebPagesDetailPage), new PatternsWebPagesDetailViewModel(vm, item));
+            await Shell.Current.GoToModalAsync(nameof(PatternsWebPagesDetailPage), new PatternsWebPagesDetailViewModel(vm, item));
 
         async void OnItemTapped(object sender, EventArgs e)
         {
