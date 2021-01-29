@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyXamarin.Views.PhrasesUnitBatchEditPage"
              Title="Phrases in Unit(Batch Edit)"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Activated="OnSave" Priority="0" Order="Primary" />
@@ -16,5 +17,27 @@
         <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
         <Label Grid.Row="2" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
         <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SEQNUM}" />
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding vm.WordItems}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:DataType="common:MUnitPhrase" ColumnDefinitions="Auto,*,Auto">
+                        <StackLayout Spacing="2" VerticalOptions="Center">
+                            <Label Text="{Binding UNITSTR}" Style="{StaticResource Key=Text1}" />
+                            <Label Text="{Binding PARTSTR}" Style="{StaticResource Key=Text1}" />
+                            <Label Text="{Binding SEQNUM}" Style="{StaticResource Key=Text1}" />
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="{Binding PHRASE}" Style="{StaticResource Key=Text2}" />
+                            <Label Text="{Binding TRANSLATION}" Style="{StaticResource Key=Text3}" />
+                        </StackLayout>
+                        <iconize:IconButton Grid.Column="2" FontSize="20" Text="fas-angle-right" TextColor="Red"
+                                            WidthRequest="20" HeightRequest="20" IsVisible="{Binding IsChecked}" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>

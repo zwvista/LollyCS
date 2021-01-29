@@ -25,6 +25,12 @@ namespace LollyXamarin.Views
             vmBatch = (PhrasesUnitBatchEditViewModel)BindingContext;
         }
 
+        void OnItemTapped(object sender, EventArgs e)
+        {
+            var item = (MUnitPhrase)((TappedEventArgs)e).Parameter;
+            item.IsChecked = !item.IsChecked;
+        }
+
         void OnCancel(object sender, EventArgs e) =>
             Navigation.PopModalAsync();
 
