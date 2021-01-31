@@ -6,7 +6,7 @@
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Activated="OnSave" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
         <ToolbarItem Text="Cancel" Activated="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ScrollView>

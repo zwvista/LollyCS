@@ -24,14 +24,10 @@ namespace LollyXamarin.Views
             base.OnAppearing();
             vmDetail = (PhrasesUnitDetailViewModel)BindingContext;
             BindingContext = vmDetail.ItemEdit;
+            vmDetail.ItemEdit.Save.WhenFinishedExecuting().Subscribe(_ => Navigation.PopModalAsync());
         }
 
         void OnCancel(object sender, EventArgs e) =>
             Navigation.PopModalAsync();
-
-        void OnSave(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
-        }
     }
 }
