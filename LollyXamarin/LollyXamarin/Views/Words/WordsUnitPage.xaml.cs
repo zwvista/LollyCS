@@ -33,7 +33,7 @@ namespace LollyXamarin.Views
         async void OnItemTapped(object sender, EventArgs e)
         {
             var item = (MUnitWord)((TappedEventArgs)e).Parameter;
-            await Edit(item);
+            await vm.vmSettings.SpeakXamarin(item.WORD);
         }
 
         async void OnEditSwipeItemInvoked(object sender, EventArgs e)

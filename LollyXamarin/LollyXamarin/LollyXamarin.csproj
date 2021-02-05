@@ -30,7 +30,6 @@
     <PackageReference Include="Xam.Plugin.Iconize.WeatherIcons" Version="3.5.0.129" />
     <PackageReference Include="Xam.Plugin.Iconize.JamIcons" Version="3.5.0.129" />
     <PackageReference Include="Xam.Plugin.Iconize.SimpleLineIcons" Version="3.5.0.129" />
-    <PackageReference Include="Xam.Plugins.TextToSpeech" Version="4.0.0.7" />
   </ItemGroup>
 
   <ItemGroup>

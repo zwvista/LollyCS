@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using LollyCommon;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -11,6 +13,15 @@ namespace LollyXamarin
     {
         public static async Task GoogleXamarin(this string str) =>
             await Browser.OpenAsync($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");
+        public static async Task SpeakXamarin(this SettingsViewModel vmSettings, string text)
+        {
+            var locales = await TextToSpeech.GetLocalesAsync();
+            var local = locales.FirstOrDefault(o => vmSettings.Voices.First(o2 => o2.VOICETYPEID == 4).VOICELANG.StartsWith(o.Language));
+            await TextToSpeech.SpeakAsync(text, new SpeechOptions
+            {
+                Locale = local
+            });
+        }
     }
 
     public interface IPageNavigate
