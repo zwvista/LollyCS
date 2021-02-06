@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LollyCommon;
 using LollyXamarin.ViewModels;
 using LollyXamarin.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LollyXamarin
@@ -11,6 +13,7 @@ namespace LollyXamarin
     public partial class AppShell : Shell
     {
         public static SettingsViewModel vmSettings = new SettingsViewModel();
+        public static List<Locale> SpeechLocales;
         public AppShell()
         {
             InitializeComponent();
@@ -30,7 +33,11 @@ namespace LollyXamarin
             Routing.RegisterRoute(nameof(PatternsWebPagesDetailPage), typeof(PatternsWebPagesDetailPage));
             Routing.RegisterRoute(nameof(PatternsWebPagesBrowsePage), typeof(PatternsWebPagesBrowsePage));
 
-            Task.Run(() => vmSettings.GetData()).Wait();
+            Task.Run(async () =>
+            {
+                SpeechLocales = (await TextToSpeech.GetLocalesAsync()).ToList();
+                await vmSettings.GetData();
+            });
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

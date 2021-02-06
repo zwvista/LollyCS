@@ -15,11 +15,13 @@ namespace LollyXamarin
             await Browser.OpenAsync($"https://www.google.com/search?q={HttpUtility.UrlEncode(str)}");
         public static async Task SpeakXamarin(this SettingsViewModel vmSettings, string text)
         {
-            var locales = await TextToSpeech.GetLocalesAsync();
-            var local = locales.FirstOrDefault(o => vmSettings.Voices.First(o2 => o2.VOICETYPEID == 4).VOICELANG.StartsWith(o.Language));
+            var vls = vmSettings.Voices
+                .Where(o => o.VOICELANG.Length >= 2)
+                .Select(o => o.VOICELANG.Substring(0, 2)).ToList();
+            var locale = AppShell.SpeechLocales.FirstOrDefault(o => vls.Contains(o.Language.Substring(0, 2)));
             await TextToSpeech.SpeakAsync(text, new SpeechOptions
             {
-                Locale = local
+                Locale = locale
             });
         }
     }
