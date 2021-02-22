@@ -46,9 +46,10 @@ namespace LollyCommon
 
         public async Task Update(MUnitWord item)
         {
-            await unitWordDS.Update(item);
+            var result = (await unitWordDS.Update(item)).Result;
             var o = await unitWordDS.GetDataById(item.ID, vmSettings.Textbooks);
-            bool b = o.WORD != item.WORD;
+            // new word
+            bool b = result == "2" || result == "4";
             o?.CopyProperties(item);
             if (b || item.NOTE.IsEmpty())
                 await RetrieveNote(item);

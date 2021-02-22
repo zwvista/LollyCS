@@ -61,8 +61,12 @@ namespace LollyCommon
         public async Task UpdateNote(int id, string note) =>
         Debug.WriteLine(await UpdateByUrl($"UNITWORDS/{id}", $"NOTE={note}"));
 
-        public async Task Update(MUnitWord item) =>
-        Debug.WriteLine(await CallSPByUrl("UNITWORDS_UPDATE", item));
+        public async Task<MSPResult> Update(MUnitWord item)
+        {
+            var result = await CallSPByUrl("UNITWORDS_UPDATE", item);
+            Debug.WriteLine(result);
+            return result;
+        }
 
         public async Task Delete(MUnitWord item) =>
         Debug.WriteLine(await CallSPByUrl("UNITWORDS_DELETE", item));
