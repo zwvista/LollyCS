@@ -48,13 +48,18 @@ namespace LollyCommon
         {
             await unitWordDS.Update(item);
             var o = await unitWordDS.GetDataById(item.ID, vmSettings.Textbooks);
+            bool b = o.WORD != item.WORD;
             o?.CopyProperties(item);
+            if (b || item.NOTE.IsEmpty())
+                await RetrieveNote(item);
         }
         public async Task Create(MUnitWord item)
         {
             int id = await unitWordDS.Create(item);
             var o = await unitWordDS.GetDataById(id, vmSettings.Textbooks);
             o?.CopyProperties(item);
+            if (item.NOTE.IsEmpty())
+                await RetrieveNote(item);
             WordItemsAll.Add(o);
             ApplyFilters();
         }
