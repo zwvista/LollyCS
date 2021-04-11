@@ -1,5 +1,7 @@
 ﻿using LollyCommon;
+using System;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,10 +29,13 @@ namespace LollyCloud
         {
             InitializeComponent();
             DataContext = this;
+            CommonApi.UserId = ConfigurationManager.AppSettings["userid"];
+            if (string.IsNullOrEmpty(CommonApi.UserId))
+                miLogout_Click(null, null);
             Task.Run(() => vmSettings.GetData()).Wait();
         }
 
-        async void ShowSettingsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        void ShowSettingsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var dlg = new SettingsDlg();
             dlg.Owner = this;
@@ -95,6 +100,14 @@ namespace LollyCloud
         void miWebTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<WebTextbooksControl>("WebTextbooks");
         void miDictionaries_Click(object sender, RoutedEventArgs e) => AddTab<DictsControl>("Dictionaries");
         void miTest_Click(object sender, RoutedEventArgs e) => AddTab<TestControl>("Test");
-
+        void miLogout_Click(object sender, RoutedEventArgs e)
+        {
+            CommonApi.UserId = "";
+            App.SaveUserId();
+            Tabs.Clear();
+            var dlg = new LoginDlg();
+            dlg.ShowDialog();
+        }
+        void miExit_Click(object sender, RoutedEventArgs e) => Environment.Exit(0);
     }
 }

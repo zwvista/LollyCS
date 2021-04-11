@@ -239,6 +239,9 @@
     <Compile Include="Views\Dicts\TransformSourceControl.xaml.cs">
       <DependentUpon>TransformSourceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Misc\LoginDlg.xaml.cs">
+      <DependentUpon>LoginDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Misc\TestControl.xaml.cs">
       <DependentUpon>TestControl.xaml</DependentUpon>
     </Compile>
@@ -393,6 +396,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dicts\TransformSourceControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Misc\LoginDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

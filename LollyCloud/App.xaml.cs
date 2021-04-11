@@ -49,5 +49,13 @@ namespace LollyCloud
             });
             Cef.Initialize(new CefSettings());
         }
+        public static void SaveUserId()
+        {
+            // https://stackoverflow.com/questions/4216809/configurationmanager-doesnt-save-settings
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["userid"].Value = CommonApi.UserId;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
     }
 }

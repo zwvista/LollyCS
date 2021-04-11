@@ -40,6 +40,8 @@
                 <MenuItem x:Name="miPhrasesLang" Header="Phrases in Language" Click="miPhrasesLang_Click" />
                 <Separator />
                 <MenuItem x:Name="miPatterns" Header="Patterns in Language" Click="miPatterns_Click" />
+                <Separator />
+                <MenuItem x:Name="miExit" Header="Exit" Click="miExit_Click" />
             </MenuItem>
             <MenuItem Header="Tools">
                 <MenuItem x:Name="miBlog" Header="Blog" Click="miBlog_Click" />
@@ -49,6 +51,7 @@
                 <MenuItem x:Name="miDictionaries" Header="Dictionaries" Click="miDictionaries_Click" />
                 <MenuItem x:Name="miTest" Header="Test" Click="miTest_Click" />
                 <Separator />
+                <MenuItem x:Name="miLogout" Header="Logout" Click="miLogout_Click" />
             </MenuItem>
         </Menu>
         <dragablz:TabablzControl Grid.Row="1" x:Name="tcMain" ItemsSource="{Binding Tabs}" ShowDefaultCloseButton="True">

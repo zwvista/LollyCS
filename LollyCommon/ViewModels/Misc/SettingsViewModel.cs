@@ -406,7 +406,7 @@ namespace LollyCommon
         public async Task GetData()
         {
             var t = await LanguageDS.GetData().ToObservable().Zip(USMappingDS.GetData().ToObservable(),
-                UserSettingDS.GetDataByUser(CommonApi.UserId).ToObservable(), CodeDS.GetDictCodes().ToObservable(), (a, b, c, d) => (a, b, c, d)).ToTask();
+                UserSettingDS.GetDataByUser().ToObservable(), CodeDS.GetDictCodes().ToObservable(), (a, b, c, d) => (a, b, c, d)).ToTask();
             LanguagesAll = t.a;
             Languages = LanguagesAll.Where(o => o.ID != 0).ToList();
             USMappings = t.b;

@@ -18,7 +18,7 @@ namespace LollyCommon
         public int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int USERID { get; set; }
+        public string USERID { get; set; } = "";
         [JsonProperty]
         [Reactive]
         public int KIND { get; set; }

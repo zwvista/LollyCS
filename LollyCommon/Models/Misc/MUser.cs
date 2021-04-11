@@ -1,17 +1,20 @@
-﻿using Newtonsoft.Json;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
+using ReactiveUI.Fody.Helpers;
 
 namespace LollyCommon
 {
-    public class MWordsFami
+    public class MUsers
     {
         [JsonProperty("records")]
-        public List<MWordFami> Records { get; set; }
+        public List<MUser> Records { get; set; }
     }
+
     [JsonObject(MemberSerialization.OptIn)]
-    public class MWordFami : ReactiveObject
+    public class MUser : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
@@ -21,12 +24,10 @@ namespace LollyCommon
         public string USERID { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int WORDID { get; set; }
+        public string USERNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int CORRECT { get; set; }
-        [JsonProperty]
-        [Reactive]
-        public int TOTAL { get; set; }
+        public string PASSWORD { get; set; } = "";
     }
+
 }
