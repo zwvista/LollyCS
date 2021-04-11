@@ -87,20 +87,20 @@ namespace LollyCommon
             if (WordItems.Any())
                 SelectedWordItem = WordItems[0];
         }
-        public Task Unlink(int wordid, int phraseid) =>
-            wordPhraseDS.Unlink(wordid, phraseid);
+        public Task Dissociate(int wordid, int phraseid) =>
+            wordPhraseDS.Dissociate(wordid, phraseid);
     }
-    public class WordsLinkViewModel : WordsLangViewModel
+    public class WordsAssociateViewModel : WordsLangViewModel
     {
         public ReactiveCommand<Unit, Unit> Save { get; }
-        public WordsLinkViewModel(SettingsViewModel vmSettings, int phraseid, string textFilter) : base(vmSettings, false)
+        public WordsAssociateViewModel(SettingsViewModel vmSettings, int phraseid, string textFilter) : base(vmSettings, false)
         {
             TextFilter = textFilter;
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in WordItems)
                     if (o.IsChecked)
-                        await wordPhraseDS.Link(phraseid, o.ID);
+                        await wordPhraseDS.Associate(phraseid, o.ID);
             });
         }
         protected override void ApplyFilters()

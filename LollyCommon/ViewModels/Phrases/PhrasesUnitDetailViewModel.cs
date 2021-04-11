@@ -23,7 +23,7 @@ namespace LollyCommon
                 {
                     await vm.Create(item);
                     if (wordid != 0)
-                        await wordPhraseDS.Link(wordid, item.PHRASEID);
+                        await wordPhraseDS.Associate(wordid, item.PHRASEID);
                 }
             }, ItemEdit.IsValid());
         }

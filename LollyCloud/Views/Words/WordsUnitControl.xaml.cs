@@ -38,7 +38,7 @@ namespace LollyCloud
             dgWords.CancelEdit();
             // https://stackoverflow.com/questions/14178800/how-can-i-check-if-ctrl-alt-are-pressed-on-left-mouse-click-in-c
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-                miLinkPhrases_Click(sender, null);
+                miAssociatePhrases_Click(sender, null);
             else
                 miEditWord_Click(sender, null);
         }

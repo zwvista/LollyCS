@@ -38,7 +38,7 @@ namespace LollyCloud
         {
             dgPhrases.CancelEdit();
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-                miLinkWords_Click(sender, null);
+                miAssociateWords_Click(sender, null);
             else
                 miEditPhrase_Click(sender, null);
         }
@@ -87,7 +87,7 @@ namespace LollyCloud
         }
         void miNewWord_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new WordsLinkDlg(Window.GetWindow(this), vmSettings, vm.SelectedPhraseID, vm.SelectedPhrase);
+            var dlg = new WordsAssociateDlg(Window.GetWindow(this), vmSettings, vm.SelectedPhraseID, vm.SelectedPhrase);
             dlg.ShowDialog();
         }
 

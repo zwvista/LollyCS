@@ -36,7 +36,7 @@ namespace LollyCloud
         {
             dgPhrases.CancelEdit();
             if (Keyboard.IsKeyDown(Key.LeftAlt))
-                miLinkWords_Click(sender, null);
+                miAssociateWords_Click(sender, null);
             else
                 miEditPhrase_Click(sender, null);
         }

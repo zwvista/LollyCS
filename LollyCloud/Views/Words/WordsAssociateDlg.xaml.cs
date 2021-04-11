@@ -7,17 +7,17 @@ using System.Windows.Input;
 namespace LollyCloud
 {
     /// <summary>
-    /// PhrasesLinkDlg.xaml の相互作用ロジック
+    /// WordsAssociateDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class PhrasesLinkDlg : Window
+    public partial class WordsAssociateDlg : Window
     {
-        public PhrasesLinkViewModel vm;
-        public PhrasesLinkDlg(Window owner, SettingsViewModel vmSettings, int wordid, string textFilter)
+        public WordsAssociateViewModel vm;
+        public WordsAssociateDlg(Window owner, SettingsViewModel vmSettings, int phraseid, string textFilter)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            vm = new PhrasesLinkViewModel(vmSettings, wordid, textFilter);
+            vm = new WordsAssociateViewModel(vmSettings, phraseid, textFilter);
         }
 
         void Window_Loaded(object sender, RoutedEventArgs e)
@@ -28,7 +28,7 @@ namespace LollyCloud
         void btnCheckItems_Click(object sender, RoutedEventArgs e)
         {
             int n = int.Parse((string)((Button)sender).Tag);
-            var checkedItems = dgPhrases.SelectedItems.Cast<MLangPhrase>().ToList();
+            var checkedItems = dgWords.SelectedItems.Cast<MLangWord>().ToList();
             vm.CheckItems(n, checkedItems);
         }
     }

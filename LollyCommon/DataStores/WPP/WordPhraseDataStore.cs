@@ -30,7 +30,7 @@ namespace LollyCommon
             Debug.WriteLine(await DeleteByUrl($"WORDSPHRASES/{ids}"));
         }
 
-        public async Task Link(int wordid, int phraseid)
+        public async Task Associate(int wordid, int phraseid)
         {
             var item = new MWordPhrase
             {
@@ -40,7 +40,7 @@ namespace LollyCommon
             Debug.WriteLine(await Create(item));
         }
 
-        public async Task Unlink(int wordid, int phraseid)
+        public async Task Dissociate(int wordid, int phraseid)
         {
             var lst = await GetDataByWordPhrase(wordid, phraseid);
             foreach (var o in lst)

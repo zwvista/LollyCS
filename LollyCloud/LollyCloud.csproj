@@ -288,8 +288,8 @@
     <Compile Include="Views\Phrases\PhrasesLangControl.xaml.cs">
       <DependentUpon>PhrasesLangControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Phrases\PhrasesLinkDlg.xaml.cs">
-      <DependentUpon>PhrasesLinkDlg.xaml</DependentUpon>
+    <Compile Include="Views\Phrases\PhrasesAssociateDlg.xaml.cs">
+      <DependentUpon>PhrasesAssociateDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Phrases\PhrasesTextbookControl.xaml.cs">
       <DependentUpon>PhrasesTextbookControl.xaml</DependentUpon>
@@ -315,8 +315,8 @@
     <Compile Include="Views\Misc\ReadNumberControl.xaml.cs">
       <DependentUpon>ReadNumberControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Words\WordsLinkDlg.xaml.cs">
-      <DependentUpon>WordsLinkDlg.xaml</DependentUpon>
+    <Compile Include="Views\Words\WordsAssociateDlg.xaml.cs">
+      <DependentUpon>WordsAssociateDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
@@ -460,7 +460,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Phrases\PhrasesLinkDlg.xaml">
+    <Page Include="Views\Phrases\PhrasesAssociateDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -504,7 +504,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Words\WordsLinkDlg.xaml">
+    <Page Include="Views\Words\WordsAssociateDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

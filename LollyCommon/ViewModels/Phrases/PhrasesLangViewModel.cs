@@ -64,21 +64,21 @@ namespace LollyCommon
             this.RaisePropertyChanged(nameof(PhraseItems));
             IsBusy = false;
         }
-        public Task Unlink(int wordid, int phraseid) =>
-            wordPhraseDS.Unlink(wordid, phraseid);
+        public Task Dissociate(int wordid, int phraseid) =>
+            wordPhraseDS.Dissociate(wordid, phraseid);
     }
-    public class PhrasesLinkViewModel : PhrasesLangViewModel
+    public class PhrasesAssociateViewModel : PhrasesLangViewModel
     {
         public ReactiveCommand<Unit, Unit> Save { get; }
 
-        public PhrasesLinkViewModel(SettingsViewModel vmSettings, int wordid, string textFilter) : base(vmSettings, false)
+        public PhrasesAssociateViewModel(SettingsViewModel vmSettings, int wordid, string textFilter) : base(vmSettings, false)
         {
             TextFilter = textFilter;
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
                 foreach (var o in PhraseItems)
                     if (o.IsChecked)
-                        await wordPhraseDS.Link(wordid, o.ID);
+                        await wordPhraseDS.Associate(wordid, o.ID);
             });
         }
         protected override void ApplyFilters()
