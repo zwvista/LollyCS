@@ -79,28 +79,28 @@
         <ShellContent Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Settings" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
+        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Words in Unit" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:WordsUnitPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Words in Textbooks" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Words in Language" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:WordsLangPage}" />
+        <ShellContent Route="WordsUnitPage" ContentTemplate="{DataTemplate local:WordsUnitPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Phrases in Unit" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
+        <ShellContent Route="PhrasesUnitPage" ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Words in Textbooks" Icon="tab_feed.png">
+        <ShellContent Route="WordsTextbookPage" ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Phrases in Textbooks" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
+        <ShellContent Route="PhrasesTextbookPage" ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Words in Language" Icon="tab_feed.png">
+        <ShellContent Route="WordsLangPage" ContentTemplate="{DataTemplate local:WordsLangPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Phrases in Language" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
+        <ShellContent Route="PhrasesLangPage" ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Patterns in Language" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:PatternsPage}" />
+        <ShellContent Route="PatternsPage" ContentTemplate="{DataTemplate local:PatternsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="About" Icon="tab_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />

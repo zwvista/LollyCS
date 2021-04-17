@@ -50,12 +50,12 @@ namespace LollyXamarin
             await shell.GoToAsync(state, animate);
         }
         // https://forums.xamarin.com/discussion/168512/shell-showing-modal-pages
-        public static Task GoToModalAsync(this Shell shell, string route, object navigationData)
+        public static Task GoToModalAsync(this Shell shell, string route, object navigationData, bool animate = false)
         {
             var page = Routing.GetOrCreateContent(route) as Page;
             if (page is null) return Task.CompletedTask;
             page.BindingContext = navigationData;
-            return shell.Navigation.PushModalAsync(new NavigationPage(page));
+            return shell.Navigation.PushModalAsync(new NavigationPage(page), animate);
         }
     }
 }

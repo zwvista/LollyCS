@@ -37,7 +37,7 @@
                                                Invoked="OnDeleteSwipeItemInvoked" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="10" x:DataType="common:MLangPhrase" ColumnDefinitions="*,Auto">
+                            <Grid Padding="10" x:DataType="common:MLangPhrase">
                                 <StackLayout VerticalOptions="Center">
                                     <Label Text="{Binding PHRASE}" Style="{StaticResource Key=Text2}" />
                                     <Label Text="{Binding TRANSLATION}" Style="{StaticResource Key=Text3}" />
