@@ -37,32 +37,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="UI\Patterns\WordsLangPage.xaml.cs" />
-    <Compile Remove="UI\Words\WordsUnitDetailPage %282 番目のコピー%29.xaml.cs" />
-    <Compile Remove="UI\Phrases\WordsUnitDetailPage.xaml.cs" />
-    <Compile Remove="UI\Patterns\SearchPage.xaml.cs" />
-    <Compile Remove="UI\Phrases\WordsUnitBatchEditPage.xaml.cs" />
+    <Compile Remove="Views\Patterns\WordsLangPage.xaml.cs" />
+    <Compile Remove="Views\Words\WordsUnitDetailPage %282 番目のコピー%29.xaml.cs" />
+    <Compile Remove="Views\Phrases\WordsUnitDetailPage.xaml.cs" />
+    <Compile Remove="Views\Patterns\SearchPage.xaml.cs" />
+    <Compile Remove="Views\Phrases\WordsUnitBatchEditPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="UI\Misc\SettingsPage.xaml.cs">
+    <Compile Update="Views\Misc\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UI\Phrases\PhrasesLangPage.xaml.cs">
+    <Compile Update="Views\Phrases\PhrasesLangPage.xaml.cs">
       <DependentUpon>PhrasesLangPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UI\Phrases\PhrasesTextbookPage.xaml.cs">
+    <Compile Update="Views\Phrases\PhrasesTextbookPage.xaml.cs">
       <DependentUpon>PhrasesTextbookPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UI\Phrases\PhrasesUnitPage.xaml.cs">
+    <Compile Update="Views\Phrases\PhrasesUnitPage.xaml.cs">
       <DependentUpon>PhrasesUnitPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UI\Words\WordsLangPage.xaml.cs">
+    <Compile Update="Views\Words\WordsLangPage.xaml.cs">
       <DependentUpon>WordsLangPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UI\Words\WordsTextbookPage.xaml.cs">
+    <Compile Update="Views\Words\WordsTextbookPage.xaml.cs">
       <DependentUpon>WordsTextbookPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UI\Words\WordsUnitPage.xaml.cs">
+    <Compile Update="Views\Words\WordsUnitPage.xaml.cs">
       <DependentUpon>WordsUnitPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
