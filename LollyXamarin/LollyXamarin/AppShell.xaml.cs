@@ -16,6 +16,8 @@ namespace LollyXamarin
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
+            Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(WordsUnitDetailPage), typeof(WordsUnitDetailPage));
             Routing.RegisterRoute(nameof(WordsUnitBatchEditPage), typeof(WordsUnitBatchEditPage));
@@ -39,6 +41,8 @@ namespace LollyXamarin
 
         public async void OnMenuItemClicked(object sender, EventArgs e)
         {
+            CommonApi.UserId = "";
+            XamarinCommon.SaveUserId();
             await Current.GoToAsync("//LoginPage");
         }
     }

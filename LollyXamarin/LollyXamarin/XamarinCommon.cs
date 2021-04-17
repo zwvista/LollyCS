@@ -24,6 +24,10 @@ namespace LollyXamarin
                 Locale = locale
             });
         }
+        public static void SaveUserId()
+        {
+            Preferences.Set("userid", CommonApi.UserId);
+        }
     }
 
     public interface IPageNavigate

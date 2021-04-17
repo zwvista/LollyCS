@@ -76,7 +76,7 @@
 
     <!--https://github.com/xamarin/Xamarin.Forms/issues/12563-->
     <FlyoutItem Title="Search">
-        <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+        <ShellContent Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Settings" Icon="tab_feed.png">
         <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />

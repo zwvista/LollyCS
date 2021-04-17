@@ -34,10 +34,11 @@ namespace LollyXamarin
             CommonApi.UserId = Preferences.Get("userid", "");
             if (string.IsNullOrEmpty(CommonApi.UserId))
                 shell.OnMenuItemClicked(null, null);
-            Task.Run(async () =>
-            {
-                await AppShell.vmSettings.GetData();
-            });
+            else
+                Task.Run(async () =>
+                {
+                    await AppShell.vmSettings.GetData();
+                });
         }
 
         protected override void OnStart()
