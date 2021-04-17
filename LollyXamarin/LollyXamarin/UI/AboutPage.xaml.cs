@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class AboutPage : ContentPage
     {

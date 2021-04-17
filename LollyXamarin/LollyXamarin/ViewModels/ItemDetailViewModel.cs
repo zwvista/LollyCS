@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using LollyXamarin.Models;
 using Xamarin.Forms;
 
-namespace LollyXamarin.ViewModels
+namespace LollyXamarin
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel

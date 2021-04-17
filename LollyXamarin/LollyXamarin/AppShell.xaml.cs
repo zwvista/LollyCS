@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LollyCommon;
-using LollyXamarin.ViewModels;
-using LollyXamarin.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -36,11 +34,10 @@ namespace LollyXamarin
             Task.Run(async () =>
             {
                 SpeechLocales = (await TextToSpeech.GetLocalesAsync()).ToList();
-                await vmSettings.GetData();
             });
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        public async void OnMenuItemClicked(object sender, EventArgs e)
         {
             await Current.GoToAsync("//LoginPage");
         }

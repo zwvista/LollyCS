@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 using LollyCommon;
 using Plugin.Clipboard;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class PhrasesLangPage : ContentPage
     {

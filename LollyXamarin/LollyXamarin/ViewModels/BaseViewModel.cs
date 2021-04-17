@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using LollyXamarin.Models;
 using LollyXamarin.Services;
 
-namespace LollyXamarin.ViewModels
+namespace LollyXamarin
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

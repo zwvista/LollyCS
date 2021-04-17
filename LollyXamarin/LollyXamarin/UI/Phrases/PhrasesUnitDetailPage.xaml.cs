@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using LollyCommon;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class PhrasesUnitDetailPage : ContentPage
     {

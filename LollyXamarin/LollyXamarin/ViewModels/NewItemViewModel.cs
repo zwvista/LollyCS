@@ -5,7 +5,7 @@ using System.Windows.Input;
 using LollyXamarin.Models;
 using Xamarin.Forms;
 
-namespace LollyXamarin.ViewModels
+namespace LollyXamarin
 {
     public class NewItemViewModel : BaseViewModel
     {

@@ -2,7 +2,9 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using LollyXamarin.Services;
-using LollyXamarin.Views;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
+using LollyCommon;
 
 namespace LollyXamarin
 {
@@ -27,6 +29,15 @@ namespace LollyXamarin
 
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+            var shell = MainPage as AppShell;
+
+            CommonApi.UserId = Preferences.Get("userid", "");
+            if (string.IsNullOrEmpty(CommonApi.UserId))
+                shell.OnMenuItemClicked(null, null);
+            Task.Run(async () =>
+            {
+                await AppShell.vmSettings.GetData();
+            });
         }
 
         protected override void OnStart()

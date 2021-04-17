@@ -10,7 +10,7 @@ using LollyCommon;
 using ReactiveUI;
 using System.Reactive.Linq;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class PatternsWebPagesBrowsePage : ContentPage, IPageNavigate
     {

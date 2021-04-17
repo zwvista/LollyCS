@@ -8,10 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using LollyXamarin.Models;
-using LollyXamarin.Views;
-using LollyXamarin.ViewModels;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class ItemsPage : ContentPage
     {

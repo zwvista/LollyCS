@@ -10,7 +10,7 @@ using LollyCommon;
 using Plugin.Clipboard;
 using Xamarin.Essentials;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class WordsTextbookPage : ContentPage
     {

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using LollyXamarin.Models;
-using LollyXamarin.Views;
 
-namespace LollyXamarin.ViewModels
+namespace LollyXamarin
 {
     public class ItemsViewModel : BaseViewModel
     {

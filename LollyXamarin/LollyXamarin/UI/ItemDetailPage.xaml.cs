@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
-using LollyXamarin.ViewModels;
 
-namespace LollyXamarin.Views
+namespace LollyXamarin
 {
     public partial class ItemDetailPage : ContentPage
     {
