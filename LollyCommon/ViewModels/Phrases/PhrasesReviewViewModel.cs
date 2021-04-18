@@ -29,17 +29,17 @@ namespace LollyCommon
         [Reactive]
         public string IndexString { get; set; }
         [Reactive]
-        public bool IndexIsVisible { get; set; } = true;
+        public bool IndexVisible { get; set; } = true;
         [Reactive]
-        public bool CorrectIsVisible { get; set; }
+        public bool CorrectVisible { get; set; }
         [Reactive]
-        public bool IncorrectIsVisible { get; set; }
+        public bool IncorrectVisible { get; set; }
         [Reactive]
         public bool CheckEnabled { get; set; }
         [Reactive]
         public string PhraseTargetString { get; set; }
         [Reactive]
-        public bool PhraseTargetIsVisible { get; set; } = true;
+        public bool PhraseTargetVisible { get; set; } = true;
         [Reactive]
         public string TranslationString { get; set; }
         [Reactive]
@@ -99,7 +99,7 @@ namespace LollyCommon
                 if (Options.Mode == ReviewMode.ReviewManual && !PhraseInputString.IsEmpty() && PhraseInputString != CurrentPhrase)
                 {
                     b = false;
-                    IncorrectIsVisible = true;
+                    IncorrectVisible = true;
                 }
                 if (b)
                 {
@@ -107,14 +107,14 @@ namespace LollyCommon
                     DoTest();
                 }
             }
-            else if (!CorrectIsVisible && !IncorrectIsVisible)
+            else if (!CorrectVisible && !IncorrectVisible)
             {
                 PhraseInputString = vmSettings.AutoCorrectInput(PhraseInputString);
-                PhraseTargetIsVisible = true;
+                PhraseTargetVisible = true;
                 if (PhraseInputString == CurrentPhrase)
-                    CorrectIsVisible = true;
+                    CorrectVisible = true;
                 else
-                    IncorrectIsVisible = true;
+                    IncorrectVisible = true;
                 CheckString = "Next";
                 if (!HasNext) return;
                 var o = CurrentItem;
@@ -130,13 +130,13 @@ namespace LollyCommon
         }
         public void DoTest()
         {
-            IndexIsVisible = HasNext;
-            CorrectIsVisible = false;
-            IncorrectIsVisible = false;
+            IndexVisible = HasNext;
+            CorrectVisible = false;
+            IncorrectVisible = false;
             CheckEnabled = HasNext;
             PhraseTargetString = CurrentPhrase;
             TranslationString = CurrentItem?.TRANSLATION ?? "";
-            PhraseTargetIsVisible = !IsTestMode;
+            PhraseTargetVisible = !IsTestMode;
             PhraseInputString = "";
             DoTestAction?.Invoke();
             if (HasNext)

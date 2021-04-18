@@ -31,15 +31,15 @@ namespace LollyCommon
         [Reactive]
         public string IndexString { get; set; }
         [Reactive]
-        public bool IndexIsVisible { get; set; } = true;
+        public bool IndexVisible { get; set; } = true;
         [Reactive]
-        public bool CorrectIsVisible { get; set; }
+        public bool CorrectVisible { get; set; }
         [Reactive]
-        public bool IncorrectIsVisible { get; set; }
+        public bool IncorrectVisible { get; set; }
         [Reactive]
         public string AccuracyString { get; set; }
         [Reactive]
-        public bool AccuracyIsVisible { get; set; } = true;
+        public bool AccuracyVisible { get; set; } = true;
         [Reactive]
         public bool CheckEnabled { get; set; }
         [Reactive]
@@ -49,11 +49,11 @@ namespace LollyCommon
         [Reactive]
         public string WordHintString { get; set; }
         [Reactive]
-        public bool WordHintIsVisible { get; set; }
+        public bool WordHintVisible { get; set; }
         [Reactive]
-        public bool WordTargetIsVisible { get; set; } = true;
+        public bool WordTargetVisible { get; set; } = true;
         [Reactive]
-        public bool NoteTargetIsVisible { get; set; } = true;
+        public bool NoteTargetVisible { get; set; } = true;
         [Reactive]
         public string TranslationString { get; set; }
         [Reactive]
@@ -136,7 +136,7 @@ namespace LollyCommon
                 if (Options.Mode == ReviewMode.ReviewManual && !WordInputString.IsEmpty() && WordInputString != CurrentWord)
                 {
                     b = false;
-                    IncorrectIsVisible = true;
+                    IncorrectVisible = true;
                 }
                 if (b)
                 {
@@ -144,16 +144,16 @@ namespace LollyCommon
                     await DoTest();
                 }
             }
-            else if (!CorrectIsVisible && !IncorrectIsVisible)
+            else if (!CorrectVisible && !IncorrectVisible)
             {
                 WordInputString = vmSettings.AutoCorrectInput(WordInputString);
-                WordTargetIsVisible = true;
-                NoteTargetIsVisible = true;
+                WordTargetVisible = true;
+                NoteTargetVisible = true;
                 if (WordInputString == CurrentWord)
-                    CorrectIsVisible = true;
+                    CorrectVisible = true;
                 else
-                    IncorrectIsVisible = true;
-                WordHintIsVisible = false;
+                    IncorrectVisible = true;
+                WordHintVisible = false;
                 GoogleEnabled = SearchEnabled = true;
                 CheckString = "Next";
                 if (!HasNext) return;
@@ -174,17 +174,17 @@ namespace LollyCommon
         }
         async Task DoTest()
         {
-            IndexIsVisible = HasNext;
-            CorrectIsVisible = false;
-            IncorrectIsVisible = false;
-            AccuracyIsVisible = IsTestMode && HasNext;
+            IndexVisible = HasNext;
+            CorrectVisible = false;
+            IncorrectVisible = false;
+            AccuracyVisible = IsTestMode && HasNext;
             CheckEnabled = HasNext;
             WordTargetString = CurrentWord;
             NoteTargetString = CurrentItem?.NOTE ?? "";
             WordHintString = CurrentItem?.WORD.Length.ToString() ?? "";
-            WordTargetIsVisible = !IsTestMode;
-            NoteTargetIsVisible = !IsTestMode;
-            WordHintIsVisible = IsTestMode;
+            WordTargetVisible = !IsTestMode;
+            NoteTargetVisible = !IsTestMode;
+            WordHintVisible = IsTestMode;
             TranslationString = "";
             WordInputString = "";
             GoogleEnabled = SearchEnabled = false;
