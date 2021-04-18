@@ -12,11 +12,11 @@ namespace LollyCommon
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
 
         [Reactive]
-        public bool UnitIsChecked { get; set; }
+        public bool UnitChecked { get; set; }
         [Reactive]
-        public bool PartIsChecked { get; set; }
+        public bool PartChecked { get; set; }
         [Reactive]
-        public bool SeqNumIsChecked { get; set; }
+        public bool SeqNumChecked { get; set; }
         [Reactive]
         public int UNIT { get; set; }
         [Reactive]
@@ -46,17 +46,17 @@ namespace LollyCommon
                 {
                     if (!o.IsChecked) continue;
                     bool b = false;
-                    if (UnitIsChecked)
+                    if (UnitChecked)
                     {
                         o.UNIT = UNIT;
                         b = true;
                     }
-                    if (PartIsChecked)
+                    if (PartChecked)
                     {
                         o.PART = PART;
                         b = true;
                     }
-                    if (SeqNumIsChecked)
+                    if (SeqNumChecked)
                     {
                         o.SEQNUM += SEQNUM;
                         b = true;

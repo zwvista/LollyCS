@@ -11,15 +11,15 @@
         <ToolbarItem Text="Cancel" Activated="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,Auto,*">
-        <CheckBox IsChecked="{Binding UnitIsChecked}"/>
+        <CheckBox IsChecked="{Binding UnitChecked}"/>
         <Label Grid.Column="1" Text="UNIT:" VerticalTextAlignment="Center" />
-        <Picker Grid.Column="2" IsEnabled="{Binding UnitIsChecked}" ItemsSource="{Binding Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding UNITItem}" />
-        <CheckBox Grid.Row="1" IsChecked="{Binding PartIsChecked}"/>
+        <Picker Grid.Column="2" IsEnabled="{Binding UnitChecked}" ItemsSource="{Binding Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding UNITItem}" />
+        <CheckBox Grid.Row="1" IsChecked="{Binding PartChecked}"/>
         <Label Grid.Row="1" Grid.Column="1" Text="PART:" VerticalTextAlignment="Center" />
-        <Picker Grid.Row="1" IsEnabled="{Binding PartIsChecked}" Grid.Column="2" ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
-        <CheckBox Grid.Row="2" IsChecked="{Binding SeqNumIsChecked}"/>
+        <Picker Grid.Row="1" IsEnabled="{Binding PartChecked}" Grid.Column="2" ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
+        <CheckBox Grid.Row="2" IsChecked="{Binding SeqNumChecked}"/>
         <Label Grid.Row="2" Grid.Column="1" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
-        <Entry Grid.Row="2" Grid.Column="2" IsEnabled="{Binding SeqNumIsChecked}" Text="{Binding SEQNUM}" />
+        <Entry Grid.Row="2" Grid.Column="2" IsEnabled="{Binding SeqNumChecked}" Text="{Binding SEQNUM}" />
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding vm.WordItems}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

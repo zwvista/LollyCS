@@ -23,14 +23,14 @@
             <Picker ItemsSource="{Binding Textbooks}" ItemDisplayBinding="{Binding TEXTBOOKNAME}" SelectedItem="{Binding SelectedTextbook}" />
             <Label Text="Units &amp; Parts:" />
             <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITFROMItem}" />
-            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" IsEnabled="{Binding PartFromIsEnabled}" />
+            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" IsEnabled="{Binding PartFromEnabled}" />
             <Grid ColumnDefinitions="100,*,*">
                 <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ToTypes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ToTypeItem}" />
-                <Button Text="{Binding PreviousText}" IsEnabled="{Binding PreviousIsEnabled}" Grid.Column="1" />
-                <Button Text="{Binding NextText}" IsEnabled="{Binding NextIsEnabled}" Grid.Column="2" />
+                <Button Text="{Binding PreviousText}" IsEnabled="{Binding PreviousEnabled}" Grid.Column="1" />
+                <Button Text="{Binding NextText}" IsEnabled="{Binding NextEnabled}" Grid.Column="2" />
             </Grid>
-            <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITTOItem}" IsEnabled="{Binding UnitToIsEnabled}" />
-            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTTOItem}" IsEnabled="{Binding PartToIsEnabled}" />
+            <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITTOItem}" IsEnabled="{Binding UnitToEnabled}" />
+            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTTOItem}" IsEnabled="{Binding PartToEnabled}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

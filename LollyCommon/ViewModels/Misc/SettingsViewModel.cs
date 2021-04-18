@@ -234,21 +234,21 @@ namespace LollyCommon
             get => ToTypes.SingleOrDefault(o => o.Value == (int)ToType);
             set { if (value != null) ToType = (UnitPartToType)Enum.ToObject(typeof(UnitPartToType), value.Value); }
         }
-        public bool ToTypeIsMovable => ToType != UnitPartToType.To;
+        public bool ToTypeMovable => ToType != UnitPartToType.To;
         [Reactive]
-        public bool UnitToIsEnabled { get; set; }
+        public bool UnitToEnabled { get; set; }
         [Reactive]
-        public bool PartToIsEnabled { get; set; }
+        public bool PartToEnabled { get; set; }
         [Reactive]
-        public bool PreviousIsEnabled { get; set; }
+        public bool PreviousEnabled { get; set; }
         [Reactive]
-        public bool NextIsEnabled { get; set; }
+        public bool NextEnabled { get; set; }
         [Reactive]
         public string PreviousText { get; set; }
         [Reactive]
         public string NextText { get; set; }
         [Reactive]
-        public bool PartFromIsEnabled { get; set; }
+        public bool PartFromEnabled { get; set; }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictTypeCodes { get; set; }
@@ -350,15 +350,15 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.ToType).Where(_ => Units != null).Subscribe(async v =>
             {
                 var b = v == UnitPartToType.To;
-                UnitToIsEnabled = b;
-                PartToIsEnabled = b && !IsSinglePart;
-                PreviousIsEnabled = !b;
-                NextIsEnabled = !b;
+                UnitToEnabled = b;
+                PartToEnabled = b && !IsSinglePart;
+                PreviousEnabled = !b;
+                NextEnabled = !b;
                 var b2 = v != UnitPartToType.Unit;
                 var t = !b2 ? "Unit" : "Part";
                 PreviousText = "Previous " + t;
                 NextText = "Next " + t;
-                PartFromIsEnabled = b2 && !IsSinglePart;
+                PartFromEnabled = b2 && !IsSinglePart;
                 if (v == UnitPartToType.Unit)
                     await DoUpdateSingleUnit();
                 else if (v == UnitPartToType.Part)

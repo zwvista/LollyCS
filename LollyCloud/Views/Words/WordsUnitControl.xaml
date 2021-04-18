@@ -18,9 +18,9 @@
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                 <Button x:Name="btnBatchAdd" Content="Batch Add" Click="btnBatchAdd_Click"/>
                 <Button x:Name="btnBatchEdit" Content="Batch Edit" Click="btnBatchEdit_Click"/>
-                <Button x:Name="btnToggleToType" Content="Toggle" IsEnabled="{Binding vmSettings.ToTypeIsMovable}" Click="btnToggleToType_Click"/>
-                <Button x:Name="btnPreviousUnitPart" Content="Previous" IsEnabled="{Binding vmSettings.ToTypeIsMovable}" Click="btnPreviousUnitPart_Click"/>
-                <Button x:Name="btnNextUnitPart" Content="Next" IsEnabled="{Binding vmSettings.ToTypeIsMovable}" Click="btnNextUnitPart_Click"/>
+                <Button x:Name="btnToggleToType" Content="Toggle" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnToggleToType_Click"/>
+                <Button x:Name="btnPreviousUnitPart" Content="Previous" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnPreviousUnitPart_Click"/>
+                <Button x:Name="btnNextUnitPart" Content="Next" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnNextUnitPart_Click"/>
                 <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{Binding IfEmpty}" />
                 <Button x:Name="btnRetrieveNotes" Content="Retrieve Notes" Click="btnRetrieveNotes_Click"/>
                 <Button x:Name="btnClearNotes" Content="Clear Notes" Click="btnClearNotes_Click"/>
