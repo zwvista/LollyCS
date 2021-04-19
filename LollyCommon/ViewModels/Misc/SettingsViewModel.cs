@@ -273,7 +273,8 @@ namespace LollyCommon
 
             this.WhenAnyValue(x => x.SelectedLang).Where(v => v != null).Subscribe(async v =>
             {
-                var isinit = USLANG == v.ID;
+                var newVal = v.ID;
+                var dirty = USLANG != newVal;
                 USLANG = v.ID;
                 INFO_USTEXTBOOK = GetUSInfo(MUSMapping.NAME_USTEXTBOOK);
                 INFO_USDICTREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTREFERENCE);
@@ -300,34 +301,48 @@ namespace LollyCommon
                 WebTextbookFilters = Textbooks.Where(o => o.ISWEB).Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
                     .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
                 SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? Voices.FirstOrDefault();
-                if (!isinit)
+                if (dirty)
                     await UserSettingDS.Update(INFO_USLANG, USLANG);
             });
-            this.WhenAnyValue(x => x.SelectedVoice).Skip(1).Subscribe(async v =>
+            this.WhenAnyValue(x => x.SelectedVoice).Where(v => v != null).Subscribe(async v =>
             {
-                USVOICE = v?.ID ?? 0;
-                await UserSettingDS.Update(INFO_USVOICE, USVOICE);
+                var newVal = v.ID;
+                var dirty = USVOICE != newVal;
+                USVOICE = newVal;
+                if (dirty)
+                    await UserSettingDS.Update(INFO_USVOICE, USVOICE);
             });
             this.WhenAnyValue(x => x.SelectedDictReference).Where(v => v != null).Subscribe(async v =>
             {
-                USDICTREFERENCE = v.DICTID.ToString();
-                await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE);
+                var newVal = v.DICTID.ToString();
+                var dirty = USDICTREFERENCE != newVal;
+                USDICTREFERENCE = newVal;
+                if (dirty)
+                    await UserSettingDS.Update(INFO_USDICTREFERENCE, USDICTREFERENCE);
             });
             this.WhenAnyValue(x => x.SelectedDictsReference).Where(v => v != null)
                 .Subscribe(v => USDICTSREFERENCE = string.Join(",", v.Select(v2 => v2.DICTID.ToString())));
             this.WhenAnyValue(x => x.SelectedDictNote).Where(v => v != null).Subscribe(async v =>
             {
-                USDICTNOTE = v?.DICTID ?? 0;
-                await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE);
+                var newVal = v.DICTID;
+                var dirty = USDICTNOTE != newVal;
+                USDICTNOTE = newVal;
+                if (dirty)
+                    await UserSettingDS.Update(INFO_USDICTNOTE, USDICTNOTE);
             });
             this.WhenAnyValue(x => x.SelectedDictTranslation).Where(v => v != null).Subscribe(async v =>
             {
-                USDICTTRANSLATION = v?.DICTID ?? 0;
-                await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION);
+                var newVal = v.DICTID;
+                var dirty = USDICTTRANSLATION != newVal;
+                USDICTTRANSLATION = newVal;
+                if (dirty)
+                    await UserSettingDS.Update(INFO_USDICTTRANSLATION, USDICTTRANSLATION);
             });
             this.WhenAnyValue(x => x.SelectedTextbook).Where(v => v != null).Subscribe(async v =>
             {
-                USTEXTBOOK = v.ID;
+                var newVal = v.ID;
+                var dirty = USTEXTBOOK != newVal;
+                USTEXTBOOK = newVal;
                 INFO_USUNITFROM = GetUSInfo(MUSMapping.NAME_USUNITFROM);
                 INFO_USPARTFROM = GetUSInfo(MUSMapping.NAME_USPARTFROM);
                 INFO_USUNITTO = GetUSInfo(MUSMapping.NAME_USUNITTO);
@@ -345,7 +360,8 @@ namespace LollyCommon
                 this.RaisePropertyChanged(nameof(USUNITTOItem));
                 this.RaisePropertyChanged(nameof(USPARTTOItem));
                 this.RaisePropertyChanged(nameof(ToTypeItem));
-                await UserSettingDS.Update(INFO_USTEXTBOOK, USTEXTBOOK);
+                if (dirty)
+                    await UserSettingDS.Update(INFO_USTEXTBOOK, USTEXTBOOK);
             });
             this.WhenAnyValue(x => x.ToType).Where(_ => Units != null).Subscribe(async v =>
             {
@@ -366,7 +382,7 @@ namespace LollyCommon
             });
             this.WhenAnyValue(x => x.USUNITFROM).Skip(1).Subscribe(async v =>
             {
-                await DoUpdateUnitFrom(v, check: false);
+                await DoUpdateUnitFrom(v);
                 if (ToType == UnitPartToType.Unit)
                     await DoUpdateSingleUnit();
                 else if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
@@ -374,19 +390,19 @@ namespace LollyCommon
             });
             this.WhenAnyValue(x => x.USPARTFROM).Skip(1).Subscribe(async v =>
             {
-                await DoUpdatePartFrom(v, check: false);
+                await DoUpdatePartFrom(v);
                 if (ToType == UnitPartToType.Part || IsInvalidUnitPart)
                     await DoUpdateUnitPartTo();
             });
             this.WhenAnyValue(x => x.USUNITTO).Skip(1).Subscribe(async v =>
             {
-                await DoUpdateUnitTo(v, check: false);
+                await DoUpdateUnitTo(v);
                 if (IsInvalidUnitPart)
                     await DoUpdateUnitPartFrom();
             });
             this.WhenAnyValue(x => x.USPARTTO).Skip(1).Subscribe(async v =>
             {
-                await DoUpdatePartTo(v, check: false);
+                await DoUpdatePartTo(v);
                 if (IsInvalidUnitPart)
                     await DoUpdateUnitPartFrom();
             });
@@ -475,24 +491,24 @@ namespace LollyCommon
             await Task.WhenAll(DoUpdateUnitTo(USUNITFROM), DoUpdatePartTo(USPARTFROM));
         async Task DoUpdateSingleUnit() =>
             await Task.WhenAll(DoUpdateUnitTo(USUNITFROM), DoUpdatePartFrom(1), DoUpdatePartTo(PartCount));
-        async Task DoUpdateUnitFrom(int v, bool check = true)
+        async Task DoUpdateUnitFrom(int v)
         {
-            if (check && USUNITFROM == v) return;
+            if (USUNITFROM == v) return;
             await UserSettingDS.Update(INFO_USUNITFROM, USUNITFROM = v);
         }
-        async Task DoUpdatePartFrom(int v, bool check = true)
+        async Task DoUpdatePartFrom(int v)
         {
-            if (check && USPARTFROM == v) return;
+            if (USPARTFROM == v) return;
             await UserSettingDS.Update(INFO_USPARTFROM, USPARTFROM = v);
         }
-        async Task DoUpdateUnitTo(int v, bool check = true)
+        async Task DoUpdateUnitTo(int v)
         {
-            if (check && USUNITTO == v) return;
+            if (USUNITTO == v) return;
             await UserSettingDS.Update(INFO_USUNITTO, USUNITTO = v);
         }
-        async Task DoUpdatePartTo(int v, bool check = true)
+        async Task DoUpdatePartTo(int v)
         {
-            if (check && USPARTTO == v) return;
+            if (USPARTTO == v) return;
             await UserSettingDS.Update(INFO_USPARTTO, USPARTTO = v);
         }
         public async Task UpdateReadNumberId() => await UserSettingDS.Update(INFO_USREADNUMBER, USREADNUMBER);
