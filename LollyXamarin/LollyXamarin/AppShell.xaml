@@ -87,6 +87,12 @@
     <FlyoutItem Title="Phrases in Unit" Icon="tab_feed.png">
         <ShellContent Route="PhrasesUnitPage" ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Words Review" Icon="tab_feed.png">
+        <ShellContent Route="WordsReviewPage" ContentTemplate="{DataTemplate local:WordsReviewPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Phrases Review" Icon="tab_feed.png">
+        <ShellContent Route="PhrasesReviewPage" ContentTemplate="{DataTemplate local:PhrasesReviewPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Words in Textbooks" Icon="tab_feed.png">
         <ShellContent Route="WordsTextbookPage" ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
     </FlyoutItem>

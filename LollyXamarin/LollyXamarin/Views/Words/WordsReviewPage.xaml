@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyXamarin.WordsReviewPage"
+             Title="Words Review"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Test" Clicked="ToolbarItemNewTest_Clicked" />
+    </ContentPage.ToolbarItems>
+    <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
+    </Grid>
+</ContentPage>
