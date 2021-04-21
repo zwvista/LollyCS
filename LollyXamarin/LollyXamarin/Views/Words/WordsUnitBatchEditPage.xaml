@@ -7,8 +7,8 @@
              xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Activated="OnSave" Priority="0" Order="Primary" />
-        <ToolbarItem Text="Cancel" Activated="OnCancel" Priority="1" Order="Primary" />
+        <ToolbarItem Text="Save" Clicked="OnSave" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,Auto,*">
         <CheckBox IsChecked="{Binding UnitChecked}"/>

@@ -30,6 +30,7 @@ namespace LollyXamarin
             Routing.RegisterRoute(nameof(PatternsWebPagesListPage), typeof(PatternsWebPagesListPage));
             Routing.RegisterRoute(nameof(PatternsWebPagesDetailPage), typeof(PatternsWebPagesDetailPage));
             Routing.RegisterRoute(nameof(PatternsWebPagesBrowsePage), typeof(PatternsWebPagesBrowsePage));
+            Routing.RegisterRoute(nameof(ReviewOptionsPage), typeof(ReviewOptionsPage));
 
             Task.Run(async () =>
             {
