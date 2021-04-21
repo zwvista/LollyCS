@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
+using System.Linq;
 using System.Reactive.Linq;
 
 namespace LollyCommon
@@ -27,6 +28,11 @@ namespace LollyCommon
         public bool SpeakingEnabled { get; set; } = true;
         [Reactive]
         public int ReviewCount { get; set; } = 10;
+        public MSelectItem ModeItem
+        {
+            get => SettingsViewModel.ReviewModes.SingleOrDefault(o => o.Value == (int)Mode);
+            set { if (value != null) Mode = (ReviewMode)Enum.ToObject(typeof(ReviewMode), value.Value); }
+        }
 
         public MReviewOptions()
         {

@@ -14,18 +14,19 @@ namespace LollyXamarin
 {
     public partial class WordsReviewPage : ContentPage
     {
-
+        WordsReviewViewModel vm = new WordsReviewViewModel();
         public WordsReviewPage()
         {
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
+            await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options);
         }
 
-        void ToolbarItemNewTest_Clicked(object sender, EventArgs e)
+        void NewTest_Clicked(object sender, EventArgs e)
         {
         }
     }

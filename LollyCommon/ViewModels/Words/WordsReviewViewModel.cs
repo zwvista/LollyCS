@@ -71,6 +71,10 @@ namespace LollyCommon
             DoTestAction = doTestAction;
         }
 
+        public WordsReviewViewModel()
+        {
+        }
+
         public async Task NewTest()
         {
             SubscriptionTimer?.Dispose();
