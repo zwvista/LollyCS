@@ -15,12 +15,12 @@
             <Label Grid.Column="1" Text="{Binding AccuracyString}" IsVisible="{Binding AccuracyVisible}" HorizontalOptions="Center" />
             <Label Grid.Column="2" Text="Correct" IsVisible="{Binding CorrectVisible}" TextColor="Green" />
             <Label Grid.Column="2" Text="Incorrect" IsVisible="{Binding IncorrectVisible}" TextColor="Red" />
-            <Button Grid.Row="1" Text="Speak" WidthRequest="50" />
+            <Button Grid.Row="1" Text="Speak" WidthRequest="75" />
             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <CheckBox IsChecked="{Binding IsSpeaking}" />
                 <Label Text="Speak" VerticalOptions="Center" />
             </StackLayout>
-            <Button Grid.Row="1" Grid.Column="2" WidthRequest="50" Text="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Clicked="OnCheck" />
+            <Button Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Clicked="OnCheck" />
         </Grid>
         <StackLayout Grid.Row="1" VerticalOptions="Center">
             <Label Text="{Binding WordTargetString}" FontSize="50" TextColor="Orange" IsVisible="{Binding WordTargetVisible}" HorizontalOptions="Center" />

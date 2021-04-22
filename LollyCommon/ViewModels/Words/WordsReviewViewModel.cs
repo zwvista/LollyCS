@@ -27,6 +27,7 @@ namespace LollyCommon
         public MReviewOptions Options { get; set; } = new MReviewOptions();
         public IDisposable SubscriptionTimer;
         public Action DoTestAction;
+        [Reactive]
         public bool IsSpeaking { get; set; }
         [Reactive]
         public string IndexString { get; set; }
@@ -74,6 +75,7 @@ namespace LollyCommon
         public async Task NewTest()
         {
             SubscriptionTimer?.Dispose();
+            IsSpeaking = Options.SpeakingEnabled;
             if (Options.Mode == ReviewMode.Textbook)
             {
                 var rand = new Random();
