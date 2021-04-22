@@ -14,20 +14,28 @@ namespace LollyXamarin
 {
     public partial class WordsReviewPage : ContentPage
     {
-        WordsReviewViewModel vm = new WordsReviewViewModel();
+        WordsReviewViewModel vm;
+
         public WordsReviewPage()
         {
             InitializeComponent();
+            vm = new WordsReviewViewModel(AppShell.vmSettings, false, async () =>
+            {
+                WordInputEntry.Focus();
+                if (vm.HasNext && vm.IsSpeaking)
+                    await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentWord);
+            });
+            NewTest_Clicked(null, null);
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options);
         }
 
-        void NewTest_Clicked(object sender, EventArgs e)
+        async void NewTest_Clicked(object sender, EventArgs e)
         {
+            await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options);
         }
     }
 }

@@ -14,10 +14,20 @@ namespace LollyXamarin
 {
     public partial class PhrasesReviewPage : ContentPage
     {
+        PhrasesReviewViewModel vm = new PhrasesReviewViewModel(AppShell.vmSettings, false, () =>
+        {
+        });
 
         public PhrasesReviewPage()
         {
             InitializeComponent();
+            vm = new PhrasesReviewViewModel(AppShell.vmSettings, false, async () =>
+            {
+                PhraseInputEntry.Focus();
+                if (vm.HasNext && vm.IsSpeaking)
+                    await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentPhrase);
+            });
+            NewTest_Clicked(null, null);
         }
 
         protected override void OnAppearing()
@@ -25,8 +35,9 @@ namespace LollyXamarin
             base.OnAppearing();
         }
 
-        void ToolbarItemNewTest_Clicked(object sender, EventArgs e)
+        async void NewTest_Clicked(object sender, EventArgs e)
         {
+            await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options);
         }
     }
 }
