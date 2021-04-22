@@ -7,7 +7,7 @@
              xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Test" Clicked="NewTest_Clicked" />
+        <ToolbarItem Text="New Test" Clicked="OnNewTest" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
         <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto">
@@ -20,7 +20,7 @@
                 <CheckBox IsChecked="{Binding IsSpeaking}" />
                 <Label Text="Speak" VerticalOptions="Center" />
             </StackLayout>
-            <Button Grid.Row="1" Grid.Column="2" Text="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" />
+            <Button Grid.Row="1" Grid.Column="2" Text="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Clicked="OnCheck" />
         </Grid>
         <StackLayout Grid.Row="1" VerticalOptions="Center">
             <Label Text="{Binding WordTargetString}" FontSize="50" IsVisible="{Binding WordTargetVisible}" HorizontalOptions="Center" />

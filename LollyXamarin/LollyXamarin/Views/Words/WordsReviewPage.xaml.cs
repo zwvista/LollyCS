@@ -25,7 +25,7 @@ namespace LollyXamarin
                 if (vm.HasNext && vm.IsSpeaking)
                     await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentWord);
             });
-            NewTest_Clicked(null, null);
+            OnNewTest(null, null);
         }
 
         protected override void OnAppearing()
@@ -33,9 +33,12 @@ namespace LollyXamarin
             base.OnAppearing();
         }
 
-        async void NewTest_Clicked(object sender, EventArgs e)
+        async void OnNewTest(object sender, EventArgs e)
         {
             await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options);
         }
+
+        async void OnCheck(object sender, EventArgs e) =>
+            await vm.Check();
     }
 }
