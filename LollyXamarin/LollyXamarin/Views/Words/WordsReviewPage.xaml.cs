@@ -25,6 +25,7 @@ namespace LollyXamarin
                 if (vm.HasNext && vm.IsSpeaking)
                     await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentWord);
             });
+            BindingContext = vm;
             OnNewTest(null, null);
         }
 
@@ -35,7 +36,10 @@ namespace LollyXamarin
 
         async void OnNewTest(object sender, EventArgs e)
         {
-            await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options);
+            await Shell.Current.GoToModalAsync(nameof(ReviewOptionsPage), vm.Options, onOK: async (s, e2) =>
+            {
+                await vm.NewTest();
+            });
         }
 
         async void OnCheck(object sender, EventArgs e) =>

@@ -10,10 +10,11 @@ using LollyCommon;
 
 namespace LollyXamarin
 {
-    public partial class ReviewOptionsPage : ContentPage
+    public partial class ReviewOptionsPage : ContentPage, IPageOK
     {
         MReviewOptions options;
         MReviewOptions optionsEdit = new MReviewOptions();
+        public event EventHandler OnOK;
 
         public ReviewOptionsPage()
         {
@@ -32,6 +33,7 @@ namespace LollyXamarin
         {
             optionsEdit.CopyProperties(options);
             Navigation.PopModalAsync();
+            OnOK?.Invoke(this, EventArgs.Empty);
         }
 
         void OnCancel(object sender, EventArgs e) =>

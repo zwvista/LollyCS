@@ -34,6 +34,10 @@ namespace LollyXamarin
     {
         void OnPageNavigated(object navigationData);
     }
+    public interface IPageOK
+    {
+        event EventHandler OnOK;
+    }
     public static class ShellExtensions
     {
         // https://stackoverflow.com/questions/57554375/xamarin-forms-4-shell-navigation-with-complex-parameters
@@ -50,11 +54,13 @@ namespace LollyXamarin
             await shell.GoToAsync(state, animate);
         }
         // https://forums.xamarin.com/discussion/168512/shell-showing-modal-pages
-        public static Task GoToModalAsync(this Shell shell, string route, object navigationData, bool animate = false)
+        public static Task GoToModalAsync(this Shell shell, string route, object navigationData, bool animate = false, EventHandler onOK = null)
         {
             var page = Routing.GetOrCreateContent(route) as Page;
             if (page is null) return Task.CompletedTask;
             page.BindingContext = navigationData;
+            if (page is IPageOK iPage)
+                iPage.OnOK += onOK;
             return shell.Navigation.PushModalAsync(new NavigationPage(page), animate);
         }
     }

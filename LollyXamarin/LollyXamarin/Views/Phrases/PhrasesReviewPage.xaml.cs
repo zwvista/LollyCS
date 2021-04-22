@@ -27,6 +27,7 @@ namespace LollyXamarin
                 if (vm.HasNext && vm.IsSpeaking)
                     await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentPhrase);
             });
+            BindingContext = vm;
             OnNewTest(null, null);
         }
 
