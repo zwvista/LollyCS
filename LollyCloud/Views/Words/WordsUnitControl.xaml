@@ -24,7 +24,6 @@
                 <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{Binding IfEmpty}" />
                 <Button x:Name="btnRetrieveNotes" Content="Retrieve Notes" Click="btnRetrieveNotes_Click"/>
                 <Button x:Name="btnClearNotes" Content="Clear Notes" Click="btnClearNotes_Click"/>
-                <Button x:Name="btnReview" Content="Review" Click="btnReview_Click"/>
             </ToolBar>
             <ToolBar Band="2">
                 <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />

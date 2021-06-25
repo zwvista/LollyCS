@@ -22,7 +22,6 @@ namespace LollyCloud
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
         protected override TabablzControl tcDictsBase => tcDicts;
-        EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
         MUnitPhrase SelectedPhraseItem => (MUnitPhrase)vm.SelectedPhraseItem;
         protected override DataGrid dgWordsBase => dgWords;
 
@@ -116,18 +115,5 @@ namespace LollyCloud
 
         void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "PHRASE", async item => await vm.Update((MUnitPhrase)item));
-        void btnReview_Click(object sender, RoutedEventArgs e)
-        {
-            vmReview.Stop();
-            var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
-            if (dlg.ShowDialog() == true)
-            {
-                var ids = vm.PhraseItems.Select(o => o.ID).ToList();
-                vmReview.Start(ids, id =>
-                {
-                    dgPhrases.SelectedItem = vm.PhraseItems.FirstOrDefault(o => o.ID == id);
-                });
-            }
-        }
     }
 }

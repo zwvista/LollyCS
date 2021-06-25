@@ -12,8 +12,6 @@ namespace LollyCommon
     }
     public class MReviewOptions : ReactiveObject
     {
-        public bool IsEmbedded { get; set; }
-        public bool CanChangeMode => !IsEmbedded;
         [Reactive]
         public ReviewMode Mode { get; set; } = ReviewMode.ReviewAuto;
         [Reactive]
@@ -28,6 +26,10 @@ namespace LollyCommon
         public bool SpeakingEnabled { get; set; } = true;
         [Reactive]
         public int ReviewCount { get; set; } = 10;
+        [Reactive]
+        public bool OnRepeat { get; set; } = true;
+        [Reactive]
+        public bool MoveForward { get; set; } = true;
         public MSelectItem ModeItem
         {
             get => SettingsViewModel.ReviewModes.SingleOrDefault(o => o.Value == (int)Mode);

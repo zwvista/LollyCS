@@ -23,7 +23,6 @@ namespace LollyCloud
         protected override ToolBar ToolBarDictBase => ToolBarDict;
         protected override TabablzControl tcDictsBase => tcDicts;
         protected override DataGrid dgPhrasesBase => dgPhrases;
-        EmbeddedReviewViewModel vmReview = new EmbeddedReviewViewModel();
         MUnitWord SelectedWordItem => (MUnitWord)vm.SelectedWordItem;
 
         public WordsUnitControl()
@@ -118,19 +117,6 @@ namespace LollyCloud
             await vm.RetrieveNotes(_ => { });
         async void btnClearNotes_Click(object sender, RoutedEventArgs e) =>
             await vm.ClearNotes(_ => { });
-        void btnReview_Click(object sender, RoutedEventArgs e)
-        {
-            vmReview.Stop();
-            var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vmReview.Options);
-            if (dlg.ShowDialog() == true)
-            {
-                var ids = vm.WordItems.Select(o => o.ID).ToList();
-                vmReview.Start(ids, id =>
-                {
-                    dgWords.SelectedItem = vm.WordItems.FirstOrDefault(o => o.ID == id);
-                });
-            }
-        }
         void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "WORD", async item => await vm.Update((MUnitWord)item));
     }
