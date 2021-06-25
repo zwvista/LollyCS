@@ -20,9 +20,9 @@ namespace LollyCommon
         public List<int> CorrectIDs { get; set; }
         [Reactive]
         public int Index { get; set; }
-        public bool HasNext => Index < Count;
-        public MUnitWord CurrentItem => HasNext ? Items[Index] : null;
-        public string CurrentWord => HasNext ? Items[Index].WORD : "";
+        public bool HasCurrent => Items.Any() && (OnRepeat || (Index >= 0 && Index < Count));
+        public MUnitWord CurrentItem => HasCurrent ? Items[Index] : null;
+        public string CurrentWord => HasCurrent ? Items[Index].WORD : "";
         public bool IsTestMode => Options.Mode == ReviewMode.Test || Options.Mode == ReviewMode.Textbook;
         public MReviewOptions Options { get; set; } = new MReviewOptions();
         public IDisposable SubscriptionTimer;
@@ -42,7 +42,15 @@ namespace LollyCommon
         [Reactive]
         public bool AccuracyVisible { get; set; } = true;
         [Reactive]
-        public bool CheckEnabled { get; set; }
+        public bool CheckNextEnabled { get; set; }
+        [Reactive]
+        public string CheckNextString { get; set; } = "Check";
+        [Reactive]
+        public bool CheckPrevEnabled { get; set; }
+        [Reactive]
+        public string CheckPrevString { get; set; } = "Check";
+        [Reactive]
+        public bool CheckPrevVisible { get; set; } = true;
         [Reactive]
         public string WordTargetString { get; set; }
         [Reactive]
@@ -60,11 +68,13 @@ namespace LollyCommon
         [Reactive]
         public string WordInputString { get; set; }
         [Reactive]
-        public string CheckString { get; set; } = "Check";
+        public bool OnRepeat { get; set; } = true;
         [Reactive]
-        public bool SearchEnabled { get; set; }
+        public bool MoveForward { get; set; } = true;
         [Reactive]
-        public bool GoogleEnabled { get; set; }
+        public bool OnRepeatVisible { get; set; } = true;
+        [Reactive]
+        public bool MoveForwardVisible { get; set; } = true;
 
         public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)
         {
@@ -74,8 +84,16 @@ namespace LollyCommon
 
         public async Task NewTest()
         {
+            Index = 0;
+            Items = new List<MUnitWord>();
+            CorrectIDs = new List<int>();
             SubscriptionTimer?.Dispose();
             IsSpeaking = Options.SpeakingEnabled;
+            MoveForward = Options.MoveForward;
+            MoveForwardVisible = !IsTestMode;
+            OnRepeat = !IsTestMode && Options.OnRepeat;
+            OnRepeatVisible = !IsTestMode;
+            CheckPrevVisible = !IsTestMode;
             if (Options.Mode == ReviewMode.Textbook)
             {
                 var rand = new Random();
@@ -107,20 +125,34 @@ namespace LollyCommon
                 if (Options.Shuffled)
                     Items.Shuffle();
             }
-            CorrectIDs = new List<int>();
-            Index = 0;
+            Index = MoveForward ? 0 : Count - 1;
             await DoTest();
-            CheckString = IsTestMode ? "Check" : "Next";
+            CheckNextString = IsTestMode ? "Check" : "Next";
+            CheckPrevString = IsTestMode ? "Check" : "Prev";
             if (Options.Mode == ReviewMode.ReviewAuto)
-                SubscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(async _ => await Check());
+                SubscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(async _ => await Check(true));
         }
-        public void Next()
+        public void Move(bool toNext)
         {
-            Index++;
-            if (IsTestMode && !HasNext)
+            void CheckOnRepeat()
             {
-                Index = 0;
-                Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
+                if (OnRepeat)
+                    Index = (Index + Count) % Count;
+            }
+            if (MoveForward == toNext)
+            {
+                Index++;
+                CheckOnRepeat();
+                if (IsTestMode && !HasCurrent)
+                {
+                    Index = 0;
+                    Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
+                }
+            }
+            else
+            {
+                Index--;
+                CheckOnRepeat();
             }
         }
         async Task<string> GetTranslation()
@@ -130,7 +162,7 @@ namespace LollyCommon
             var html = await vmSettings.client.GetStringAsync(url);
             return HtmlTransformService.ExtractTextFromHtml(html, DictTranslation.TRANSFORM, "", (text, _) => text);
         }
-        public async Task Check()
+        public async Task Check(bool toNext)
         {
             if (!IsTestMode)
             {
@@ -142,7 +174,7 @@ namespace LollyCommon
                 }
                 if (b)
                 {
-                    Next();
+                    Move(toNext);
                     await DoTest();
                 }
             }
@@ -156,9 +188,9 @@ namespace LollyCommon
                 else
                     IncorrectVisible = true;
                 WordHintVisible = false;
-                GoogleEnabled = SearchEnabled = true;
-                CheckString = "Next";
-                if (!HasNext) return;
+                CheckNextString = "Next";
+                CheckPrevString = "Next";
+                if (!HasCurrent) return;
                 var o = CurrentItem;
                 var isCorrect = o.WORD == WordInputString;
                 if (isCorrect) CorrectIDs.Add(o.ID);
@@ -169,18 +201,20 @@ namespace LollyCommon
             }
             else
             {
-                Next();
+                Move(toNext);
                 await DoTest();
-                CheckString = "Check";
+                CheckNextString = "Check";
+                CheckPrevString = "Check";
             }
         }
         async Task DoTest()
         {
-            IndexVisible = HasNext;
+            IndexVisible = HasCurrent;
             CorrectVisible = false;
             IncorrectVisible = false;
-            AccuracyVisible = IsTestMode && HasNext;
-            CheckEnabled = HasNext;
+            AccuracyVisible = IsTestMode && HasCurrent;
+            CheckNextEnabled = HasCurrent;
+            CheckPrevEnabled = HasCurrent;
             WordTargetString = CurrentWord;
             NoteTargetString = CurrentItem?.NOTE ?? "";
             WordHintString = CurrentItem?.WORD.Length.ToString() ?? "";
@@ -189,9 +223,8 @@ namespace LollyCommon
             WordHintVisible = IsTestMode;
             TranslationString = "";
             WordInputString = "";
-            GoogleEnabled = SearchEnabled = false;
             DoTestAction?.Invoke();
-            if (HasNext)
+            if (HasCurrent)
             {
                 IndexString = $"{Index + 1}/{Count}";
                 AccuracyString = CurrentItem.ACCURACY;

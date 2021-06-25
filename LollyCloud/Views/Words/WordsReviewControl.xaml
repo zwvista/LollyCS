@@ -47,11 +47,12 @@
             <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
             <TextBox x:Name="tbWordInput" Text="{Binding WordInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
-            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="Search" IsEnabled="{Binding SearchEnabled}" Width="100" Margin="0,0,10,0" Click="btnSearch_Click"/>
-                <Button Content="Google" IsEnabled="{Binding GoogleEnabled}" Width="100" Click="btnGoogle_Click"/>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <CheckBox Content="On Repeat" IsChecked="{Binding OnRepeat}" VerticalAlignment="Center" />
+                <CheckBox Content="Forward" IsChecked="{Binding MoveForward}" VerticalAlignment="Center" />
+                <Button x:Name="btnCheckPrev" Content="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Visibility="{Binding CheckPrevVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Width="100" Click="btnCheck_Click"/>
+                <Button x:Name="btnCheckNext" Content="{Binding CheckNextString}" IsEnabled="{Binding CheckNextEnabled}" Width="100" Click="btnCheck_Click"/>
             </StackPanel>
-            <Button Grid.Row="4" Content="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Width="100" HorizontalAlignment="Right" Click="btnCheck_Click"/>
         </Grid>
     </DockPanel>
 </UserControl>

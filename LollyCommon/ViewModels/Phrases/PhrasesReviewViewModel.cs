@@ -18,9 +18,9 @@ namespace LollyCommon
         public List<int> CorrectIDs { get; set; }
         [Reactive]
         public int Index { get; set; }
-        public bool HasNext => Index < Count;
-        public MUnitPhrase CurrentItem => HasNext ? Items[Index] : null;
-        public string CurrentPhrase => HasNext ? Items[Index].PHRASE : "";
+        public bool HasCurrent => Items.Any() && (OnRepeat || (Index >= 0 && Index < Count));
+        public MUnitPhrase CurrentItem => HasCurrent ? Items[Index] : null;
+        public string CurrentPhrase => HasCurrent ? Items[Index].PHRASE : "";
         public bool IsTestMode => Options.Mode == ReviewMode.Test || Options.Mode == ReviewMode.Textbook;
         public MReviewOptions Options { get; set; } = new MReviewOptions();
         public IDisposable SubscriptionTimer;
@@ -36,7 +36,15 @@ namespace LollyCommon
         [Reactive]
         public bool IncorrectVisible { get; set; }
         [Reactive]
-        public bool CheckEnabled { get; set; }
+        public bool CheckNextEnabled { get; set; }
+        [Reactive]
+        public string CheckNextString { get; set; } = "Check";
+        [Reactive]
+        public bool CheckPrevEnabled { get; set; }
+        [Reactive]
+        public string CheckPrevString { get; set; } = "Check";
+        [Reactive]
+        public bool CheckPrevVisible { get; set; } = true;
         [Reactive]
         public string PhraseTargetString { get; set; }
         [Reactive]
@@ -46,7 +54,13 @@ namespace LollyCommon
         [Reactive]
         public string PhraseInputString { get; set; }
         [Reactive]
-        public string CheckString { get; set; } = "Check";
+        public bool OnRepeat { get; set; } = true;
+        [Reactive]
+        public bool MoveForward { get; set; } = true;
+        [Reactive]
+        public bool OnRepeatVisible { get; set; } = true;
+        [Reactive]
+        public bool MoveForwardVisible { get; set; } = true;
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public PhrasesReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)
@@ -57,8 +71,16 @@ namespace LollyCommon
 
         public async Task NewTest()
         {
+            Index = 0;
+            Items = new List<MUnitPhrase>();
+            CorrectIDs = new List<int>();
             SubscriptionTimer?.Dispose();
             IsSpeaking = Options.SpeakingEnabled;
+            MoveForward = Options.MoveForward;
+            MoveForwardVisible = !IsTestMode;
+            OnRepeat = !IsTestMode && Options.OnRepeat;
+            OnRepeatVisible = !IsTestMode;
+            CheckPrevVisible = !IsTestMode;
             if (Options.Mode == ReviewMode.Textbook)
             {
                 var rand = new Random();
@@ -77,23 +99,37 @@ namespace LollyCommon
                 if (Options.Shuffled)
                     Items.Shuffle();
             }
-            CorrectIDs = new List<int>();
-            Index = 0;
+            Index = MoveForward ? 0 : Count - 1;
             DoTest();
-            CheckString = IsTestMode ? "Check" : "Next";
+            CheckNextString = IsTestMode ? "Check" : "Next";
+            CheckPrevString = IsTestMode ? "Check" : "Prev";
             if (Options.Mode == ReviewMode.ReviewAuto)
-                SubscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(_ => Check());
+                SubscriptionTimer = Observable.Interval(TimeSpan.FromSeconds(Options.Interval), RxApp.MainThreadScheduler).Subscribe(_ => Check(true));
         }
-        public void Next()
+        public void Move(bool toNext)
         {
-            Index++;
-            if (IsTestMode && !HasNext)
+            void CheckOnRepeat()
             {
-                Index = 0;
-                Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
+                if (OnRepeat)
+                    Index = (Index + Count) % Count;
+            }
+            if (MoveForward == toNext)
+            {
+                Index++;
+                CheckOnRepeat();
+                if (IsTestMode && !HasCurrent)
+                {
+                    Index = 0;
+                    Items = Items.Where(o => !CorrectIDs.Contains(o.ID)).ToList();
+                }
+            }
+            else
+            {
+                Index--;
+                CheckOnRepeat();
             }
         }
-        public void Check()
+        public void Check(bool toNext)
         {
             if (!IsTestMode)
             {
@@ -105,7 +141,7 @@ namespace LollyCommon
                 }
                 if (b)
                 {
-                    Next();
+                    Move(toNext);
                     DoTest();
                 }
             }
@@ -117,31 +153,34 @@ namespace LollyCommon
                     CorrectVisible = true;
                 else
                     IncorrectVisible = true;
-                CheckString = "Next";
-                if (!HasNext) return;
+                CheckNextString = "Next";
+                CheckPrevString = "Next";
+                if (!HasCurrent) return;
                 var o = CurrentItem;
                 var isCorrect = o.PHRASE == PhraseInputString;
                 if (isCorrect) CorrectIDs.Add(o.ID);
             }
             else
             {
-                Next();
+                Move(toNext);
                 DoTest();
-                CheckString = "Check";
+                CheckNextString = "Check";
+                CheckPrevString = "Check";
             }
         }
         public void DoTest()
         {
-            IndexVisible = HasNext;
+            IndexVisible = HasCurrent;
             CorrectVisible = false;
             IncorrectVisible = false;
-            CheckEnabled = HasNext;
+            CheckNextEnabled = HasCurrent;
+            CheckPrevEnabled = HasCurrent;
             PhraseTargetString = CurrentPhrase;
             TranslationString = CurrentItem?.TRANSLATION ?? "";
             PhraseTargetVisible = !IsTestMode;
             PhraseInputString = "";
             DoTestAction?.Invoke();
-            if (HasNext)
+            if (HasCurrent)
                 IndexString = $"{Index + 1}/{Count}";
             else if (Options.Mode == ReviewMode.ReviewAuto)
                 SubscriptionTimer?.Dispose();

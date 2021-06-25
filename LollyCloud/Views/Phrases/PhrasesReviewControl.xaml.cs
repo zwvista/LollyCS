@@ -31,7 +31,7 @@ namespace LollyCloud
             DataContext = vm = new PhrasesReviewViewModel(MainWindow.vmSettings, needCopy: true, () =>
             {
                 tbPhraseInput.Focus();
-                if (vm.HasNext && vm.IsSpeaking)
+                if (vm.HasCurrent && vm.IsSpeaking)
                     App.Speak(vm.vmSettings, vm.CurrentPhrase);
             });
             btnNewTest_Click(null, null);
@@ -44,12 +44,12 @@ namespace LollyCloud
         }
 
         void btnCheck_Click(object sender, RoutedEventArgs e) =>
-            vm.Check();
+            vm.Check(sender == btnCheckNext);
 
         void tbPhraseInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Return) return;
-            vm.Check();
+            vm.Check(true);
         }
     }
 }

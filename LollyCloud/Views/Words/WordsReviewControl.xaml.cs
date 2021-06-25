@@ -31,7 +31,7 @@ namespace LollyCloud
             DataContext = vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true, () =>
             {
                 tbWordInput.Focus();
-                if (vm.HasNext && vm.IsSpeaking)
+                if (vm.HasCurrent && vm.IsSpeaking)
                     App.Speak(vm.vmSettings, vm.CurrentWord);
             });
             btnNewTest_Click(null, null);
@@ -45,17 +45,17 @@ namespace LollyCloud
         }
 
         async void btnCheck_Click(object sender, RoutedEventArgs e) =>
-            await vm.Check();
+            await vm.Check(sender == btnCheckNext);
 
         async void tbWordInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && !(vm.IsTestMode && string.IsNullOrEmpty(vm.WordInputString)))
-                await vm.Check();
+                await vm.Check(true);
         }
 
         void btnSpeak_Click(object sender, RoutedEventArgs e)
         {
-            if (vm.HasNext)
+            if (vm.HasCurrent)
                 App.Speak(vm.vmSettings, vm.CurrentWord);
         }
         void btnSearch_Click(object sender, RoutedEventArgs e)
