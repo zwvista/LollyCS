@@ -275,7 +275,7 @@ namespace LollyCommon
             {
                 var newVal = v.ID;
                 var dirty = USLANG != newVal;
-                USLANG = v.ID;
+                USLANG = newVal;
                 INFO_USTEXTBOOK = GetUSInfo(MUSMapping.NAME_USTEXTBOOK);
                 INFO_USDICTREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTREFERENCE);
                 INFO_USDICTNOTE = GetUSInfo(MUSMapping.NAME_USDICTNOTE);

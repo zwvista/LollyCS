@@ -24,7 +24,7 @@ namespace LollyXamarin
             vm = new PhrasesReviewViewModel(AppShell.vmSettings, false, async () =>
             {
                 PhraseInputEntry.Focus();
-                if (vm.HasNext && vm.IsSpeaking)
+                if (vm.HasCurrent && vm.IsSpeaking)
                     await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentPhrase);
             });
             BindingContext = vm;
@@ -42,6 +42,6 @@ namespace LollyXamarin
         }
 
         void OnCheck(object sender, EventArgs e) =>
-            vm.Check();
+            vm.Check(sender == btnCheckNext);
     }
 }

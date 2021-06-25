@@ -22,7 +22,7 @@ namespace LollyXamarin
             vm = new WordsReviewViewModel(AppShell.vmSettings, false, async () =>
             {
                 WordInputEntry.Focus();
-                if (vm.HasNext && vm.IsSpeaking)
+                if (vm.HasCurrent && vm.IsSpeaking)
                     await XamarinCommon.SpeakXamarin(AppShell.vmSettings, vm.CurrentWord);
             });
             BindingContext = vm;
@@ -43,6 +43,6 @@ namespace LollyXamarin
         }
 
         async void OnCheck(object sender, EventArgs e) =>
-            await vm.Check();
+            await vm.Check(sender == btnCheckNext);
     }
 }

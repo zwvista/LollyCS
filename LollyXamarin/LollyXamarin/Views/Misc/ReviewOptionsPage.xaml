@@ -17,6 +17,10 @@
             <CheckBox IsChecked="{Binding SpeakingEnabled}" />
             <Label Text="Shuffled:" />
             <CheckBox IsChecked="{Binding Shuffled}" />
+            <Label Text="On Repeat:" />
+            <CheckBox IsChecked="{Binding OnRepeat}" />
+            <Label Text="Forward:" />
+            <CheckBox IsChecked="{Binding MoveForward}" />
             <Label Text="Interval:" />
             <Entry Text="{Binding Interval}" />
             <Label Text="Group:" />

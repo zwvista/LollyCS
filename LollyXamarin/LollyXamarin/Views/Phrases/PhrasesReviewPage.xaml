@@ -10,7 +10,7 @@
         <ToolbarItem Text="New Test" Clicked="OnNewTest" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
-        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto">
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto">
             <Label Text="{Binding IndexString}" />
             <Label Grid.Column="2" Text="Correct" IsVisible="{Binding CorrectVisible}" TextColor="Green" />
             <Label Grid.Column="2" Text="Incorrect" IsVisible="{Binding IncorrectVisible}" TextColor="Red" />
@@ -19,7 +19,16 @@
                 <CheckBox IsChecked="{Binding IsSpeaking}" />
                 <Label Text="Speak" VerticalOptions="Center" />
             </StackLayout>
-            <Button Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckString}" IsEnabled="{Binding CheckEnabled}" Clicked="OnCheck" />
+            <Button x:Name="btnCheckNext" Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckNextString}" IsEnabled="{Binding CheckNextEnabled}" Clicked="OnCheck" />
+            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding IsSpeaking}" />
+                <Label Text="Speak" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding IsSpeaking}" />
+                <Label Text="Speak" VerticalOptions="Center" />
+            </StackLayout>
+            <Button x:Name="btnCheckPrev" Grid.Row="2" Grid.Column="2" WidthRequest="75" Text="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Clicked="OnCheck" />
         </Grid>
         <StackLayout Grid.Row="1" VerticalOptions="Center">
             <Label Text="{Binding PhraseTargetString}" FontSize="50" TextColor="Orange" IsVisible="{Binding PhraseTargetVisible}" />
