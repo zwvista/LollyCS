@@ -21,15 +21,15 @@
                 <Label Text="Speak" VerticalOptions="Center" />
             </StackLayout>
             <Button x:Name="btnCheckNext" Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Clicked="OnCheck" />
-            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center">
-                <CheckBox IsChecked="{Binding IsSpeaking}" />
-                <Label Text="Speak" VerticalOptions="Center" />
+            <StackLayout Grid.Row="2" IsVisible="{Binding OnRepeatVisible}" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding OnRepeat}" />
+                <Label Text="On Repeat" VerticalOptions="Center" />
             </StackLayout>
-            <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-                <CheckBox IsChecked="{Binding IsSpeaking}" />
-                <Label Text="Speak" VerticalOptions="Center" />
+            <StackLayout Grid.Row="2" Grid.Column="1" IsVisible="{Binding MoveForwardVisible}" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding MoveForward}" />
+                <Label Text="Forward" VerticalOptions="Center" />
             </StackLayout>
-            <Button x:Name="btnCheckPrev" Grid.Row="2" Grid.Column="2" WidthRequest="75" Text="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Clicked="OnCheck" />
+            <Button x:Name="btnCheckPrev" Grid.Row="2" Grid.Column="2" IsVisible="{Binding CheckPrevVisible}" WidthRequest="75" Text="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Clicked="OnCheck" />
         </Grid>
         <StackLayout Grid.Row="1" VerticalOptions="Center">
             <Label Text="{Binding WordTargetString}" FontSize="50" TextColor="Orange" IsVisible="{Binding WordTargetVisible}" HorizontalOptions="Center" />
