@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class WordsReviewViewModel : ReactiveObject
+    public class WordsReviewViewModel : WordsBaseViewModel
     {
-        public SettingsViewModel vmSettings;
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         WordFamiDataStore wordFamiDS = new WordFamiDataStore();
         MDictionary DictTranslation => vmSettings.SelectedDictTranslation;
@@ -75,10 +74,10 @@ namespace LollyCommon
         public bool OnRepeatVisible { get; set; } = true;
         [Reactive]
         public bool MoveForwardVisible { get; set; } = true;
+        public override string SelectedWord => CurrentWord;
 
-        public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)
+        public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction) : base(vmSettings, needCopy)
         {
-            this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             DoTestAction = doTestAction;
         }
 

@@ -1,4 +1,5 @@
-﻿using Hardcodet.Wpf.Util;
+﻿using Dragablz;
+using Hardcodet.Wpf.Util;
 using LollyCommon;
 using System;
 using System.Threading.Tasks;
@@ -12,10 +13,13 @@ namespace LollyCloud
     /// <summary>
     /// WordsReviewControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class WordsReviewControl : UserControl, ILollySettings
+    public partial class WordsReviewControl : WordsBaseControl
     {
         public WordsReviewViewModel vm { get; set; }
-        public SettingsViewModel vmSettings => vm.vmSettings;
+        protected override WordsBaseViewModel vmWords => vm;
+        public override SettingsViewModel vmSettings => vm.vmSettings;
+        protected override ToolBar ToolBarDictBase => ToolBarDict;
+        protected override TabablzControl tcDictsBase => tcDicts;
 
         public WordsReviewControl()
         {
@@ -26,14 +30,17 @@ namespace LollyCloud
             OnSettingsChanged();
         }
 
-        public async Task OnSettingsChanged()
+        public override async Task OnSettingsChanged()
         {
             DataContext = vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true, () =>
             {
                 tbWordInput.Focus();
                 if (vm.HasCurrent && vm.IsSpeaking)
                     App.Speak(vm.vmSettings, vm.CurrentWord);
+                if (!vm.IsTestMode)
+                    dgWords_SelectionChanged(null, null);
             });
+            await base.OnSettingsChanged();
             btnNewTest_Click(null, null);
         }
 
@@ -58,12 +65,6 @@ namespace LollyCloud
             if (vm.HasCurrent)
                 App.Speak(vm.vmSettings, vm.CurrentWord);
         }
-        void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            var w = (MainWindow)Window.GetWindow(this);
-            w.SearchNewWord(vm.CurrentWord);
-        }
-        void btnGoogle_Click(object sender, RoutedEventArgs e) =>
-            vm.CurrentWord.Google();
+        public override async Task GetPhrases(int wordid) { }
     }
 }

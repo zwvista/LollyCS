@@ -34,7 +34,7 @@ namespace LollyCommon
         [Reactive]
         public MWordInterface SelectedWordItem { get; set; }
         public bool HasSelectedWordItem { [ObservableAsProperty] get; }
-        public string SelectedWord => SelectedWordItem?.WORD ?? "";
+        public virtual string SelectedWord => SelectedWordItem?.WORD ?? "";
         public int SelectedWordID => SelectedWordItem?.WORDID ?? 0;
         public WordsBaseViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
