@@ -60,6 +60,7 @@ namespace LollyCloud
                     Tabs.Remove(o);
             }
 
+            tcDictsBase.DataContext = this;
             Tabs.Clear();
             ToolBarDictBase.Items.Clear();
             foreach (var o in vmSettings.DictsReference)
