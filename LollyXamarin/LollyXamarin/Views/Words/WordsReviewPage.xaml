@@ -20,7 +20,7 @@
                 <CheckBox IsChecked="{Binding IsSpeaking}" />
                 <Label Text="Speak" VerticalOptions="Center" />
             </StackLayout>
-            <Button x:Name="btnCheckNext" Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Clicked="OnCheck" />
+            <Button x:Name="btnCheckNext" Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckNextString}" IsEnabled="{Binding CheckNextEnabled}" Clicked="OnCheck" />
             <StackLayout Grid.Row="2" IsVisible="{Binding OnRepeatVisible}" Orientation="Horizontal" HorizontalOptions="Center">
                 <CheckBox IsChecked="{Binding OnRepeat}" />
                 <Label Text="On Repeat" VerticalOptions="Center" />
