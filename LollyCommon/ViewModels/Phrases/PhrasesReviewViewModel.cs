@@ -13,9 +13,9 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
 
-        public List<MUnitPhrase> Items { get; set; }
+        public List<MUnitPhrase> Items { get; set; } = new List<MUnitPhrase>();
         public int Count => Items.Count;
-        public List<int> CorrectIDs { get; set; }
+        public List<int> CorrectIDs { get; set; } = new List<int>();
         [Reactive]
         public int Index { get; set; }
         public bool HasCurrent => Items.Any() && (OnRepeat || (Index >= 0 && Index < Count));
