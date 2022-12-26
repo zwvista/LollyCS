@@ -282,15 +282,18 @@ namespace LollyCommon
                 INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
                 INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
                 INFO_USVOICE = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICE);
-                var t = await DictionaryDS.GetDictsReferenceByLang(USLANG).ToObservable().Zip(DictionaryDS.GetDictsNoteByLang(USLANG).ToObservable(),
-                    DictionaryDS.GetDictsTranslationByLang(USLANG).ToObservable(), TextbookDS.GetDataByLang(USLANG).ToObservable(),
-                    AutoCorrectDS.GetDataByLang(USLANG).ToObservable(), VoiceDS.GetDataByLang(USLANG).ToObservable(), (a, b, c, d, e, f) => (a, b, c, d, e, f)).ToTask();
-                DictsReference = t.a;
-                DictsNote = t.b;
-                DictsTranslation = t.c;
-                Textbooks = t.d;
-                AutoCorrects = t.e;
-                Voices = t.f;
+                var res1 = DictionaryDS.GetDictsReferenceByLang(USLANG);
+                var res2 = DictionaryDS.GetDictsNoteByLang(USLANG);
+                var res3 = DictionaryDS.GetDictsTranslationByLang(USLANG);
+                var res4 = TextbookDS.GetDataByLang(USLANG);
+                var res5 = AutoCorrectDS.GetDataByLang(USLANG);
+                var res6 = VoiceDS.GetDataByLang(USLANG).ToObservable();
+                DictsReference = await res1;
+                DictsNote = await res2;
+                DictsTranslation = await res3;
+                Textbooks = await res4;
+                AutoCorrects = await res5;
+                Voices = await res6;
                 SelectedDictReference = DictsReference.FirstOrDefault(o => o.DICTID.ToString() == USDICTREFERENCE);
                 SelectedDictNote = DictsNote.FirstOrDefault(o => o.DICTID == USDICTNOTE) ?? DictsNote.FirstOrDefault();
                 SelectedDictsReference = USDICTSREFERENCE.Split(',').SelectMany(d => DictsReference.Where(o => o.DICTID.ToString() == d)).ToList();
@@ -421,13 +424,15 @@ namespace LollyCommon
 
         public async Task GetData()
         {
-            var t = await LanguageDS.GetData().ToObservable().Zip(USMappingDS.GetData().ToObservable(),
-                UserSettingDS.GetDataByUser().ToObservable(), CodeDS.GetDictCodes().ToObservable(), (a, b, c, d) => (a, b, c, d)).ToTask();
-            LanguagesAll = t.a;
+            var res1 = LanguageDS.GetData();
+            var res2 = USMappingDS.GetData();
+            var res3 = UserSettingDS.GetDataByUser();
+            var res4 = CodeDS.GetDictCodes();
+            LanguagesAll = await res1;
             Languages = LanguagesAll.Where(o => o.ID != 0).ToList();
-            USMappings = t.b;
-            UserSettings = t.c;
-            DictTypeCodes = t.d;
+            USMappings = await res2;
+            UserSettings = await res3;
+            DictTypeCodes = await res4;
             ReadNumberCodes = await CodeDS.GetReadNumberCodes();
             INFO_USLANG = GetUSInfo(MUSMapping.NAME_USLANG);
             INFO_USROWSPERPAGEOPTIONS = GetUSInfo(MUSMapping.NAME_USROWSPERPAGEOPTIONS);
