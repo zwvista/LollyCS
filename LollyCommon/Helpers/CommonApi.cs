@@ -13,9 +13,9 @@ namespace LollyCommon
 {
     public static class CommonApi
     {
-        public static string LollyUrlAPI = "https://zwvista2.tk/lolly/api.php/records/";
-        public static string LollyUrlSP = "https://zwvista2.tk/lolly/sp.php/";
-        public static string CssFolder = "https://zwvista2.tk/lolly/css/";
+        public static string LollyUrlAPI = "https://zwvista.com/lolly/api.php/records/";
+        public static string LollyUrlSP = "https://zwvista.com/lolly/sp.php/";
+        public static string CssFolder = "https://zwvista.com/lolly/css/";
         public static string UserId = "";
 
         public static void Google(this string str) =>
