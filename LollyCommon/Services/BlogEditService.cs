@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    class BlogService
+    class BlogEditService
     {
         string Html1With(string s) =>
             $"<strong><span style=\"color:#0000ff;\">{s}</span></strong>";

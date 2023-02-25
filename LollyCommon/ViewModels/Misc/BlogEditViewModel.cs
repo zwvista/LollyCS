@@ -3,17 +3,16 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class BlogViewModel : MBlog
+    public class BlogEditViewModel : MBlogEdit
     {
         public SettingsViewModel vmSettings;
-        BlogService service = new BlogService();
+        BlogEditService service = new BlogEditService();
 
         public ReactiveCommand<Unit, Unit> HtmlToMarkedCommand { get; }
         public string PatternUrl => service.GetPatternUrl(PatternNo);
-        public string PatternMarkDown => service.GetPatternMarkDown(PatternText);
         public ReactiveCommand<Unit, Unit> AddNotesCommand { get; }
 
-        public BlogViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public BlogEditViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
 

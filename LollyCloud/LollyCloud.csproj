@@ -226,6 +226,9 @@
     <Compile Include="ViewModels\Dicts\TransformEditViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsSplitViewModel.cs" />
     <Compile Include="ViewModels\Patterns\PatternsMergeViewModel.cs" />
+    <Compile Include="Views\Blogs\LangBlogsControl.xaml.cs">
+      <DependentUpon>LangBlogsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dicts\TransformItemEditDlg.xaml.cs">
       <DependentUpon>TransformItemEditDlg.xaml</DependentUpon>
     </Compile>
@@ -314,8 +317,8 @@
     <Compile Include="Views\Misc\SettingsDlg.xaml.cs">
       <DependentUpon>SettingsDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Misc\BlogControl.xaml.cs">
-      <DependentUpon>BlogControl.xaml</DependentUpon>
+    <Compile Include="Views\Blogs\BlogEditControl.xaml.cs">
+      <DependentUpon>BlogEditControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Misc\ReadNumberControl.xaml.cs">
       <DependentUpon>ReadNumberControl.xaml</DependentUpon>
@@ -381,6 +384,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Blogs\LangBlogsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Dicts\TransformItemEditDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -505,7 +512,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Misc\BlogControl.xaml">
+    <Page Include="Views\Blogs\BlogEditControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace LollyCloud
 {
     /// <summary>
-    /// BlogControl.xaml の相互作用ロジック
+    /// ReadNumberControl.xaml の相互作用ロジック
     /// </summary>
     public partial class ReadNumberControl : UserControl, ILollySettings
     {

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LollyCloud.BlogControl"
+﻿<UserControl x:Class="LollyCloud.BlogEditControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,8 +19,6 @@
                 <Button x:Name="btnMarkedToHtml" Content="MarkedToHtml" Click="btnMarkedToHtml_Click"/>
                 <Button x:Name="btnPatternToHtml" Content="PatternToHtml" Click="btnPatternToHtml_Click"/>
                 <TextBox Text="{Binding PatternNo}" Width="60" wpf:HintAssist.Hint="Pattern No." />
-                <Button x:Name="btnCopyPatternMarkDown" Content="PatternMarkDown" Click="btnCopyPatternMarkDown_Click"/>
-                <TextBox Text="{Binding PatternText}" Width="96" wpf:HintAssist.Hint="Pattern Text" />
                 <Button Content="AddNotes" Command="{Binding AddNotesCommand}"/>
             </ToolBar>
         </ToolBarTray>  

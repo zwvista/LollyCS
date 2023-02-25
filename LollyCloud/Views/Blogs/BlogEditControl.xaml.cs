@@ -10,13 +10,13 @@ using System.Windows.Input;
 namespace LollyCloud
 {
     /// <summary>
-    /// BlogControl.xaml の相互作用ロジック
+    /// BlogEditControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class BlogControl : UserControl, ILollySettings
+    public partial class BlogEditControl : UserControl, ILollySettings
     {
-        BlogViewModel vm;
+        BlogEditViewModel vm;
 
-        public BlogControl()
+        public BlogEditControl()
         {
             InitializeComponent();
             // Disable image loading
@@ -26,7 +26,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new BlogViewModel(MainWindow.vmSettings, true);
+            DataContext = vm = new BlogEditViewModel(MainWindow.vmSettings, true);
         }
 
         void ReplaceSelection(Func<string, string> f) =>
@@ -54,7 +54,5 @@ namespace LollyCloud
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
             wbBlog.Load(vm.PatternUrl);
-        void btnCopyPatternMarkDown_Click(object sender, RoutedEventArgs e) =>
-            Clipboard.SetDataObject(vm.PatternMarkDown);
     }
 }

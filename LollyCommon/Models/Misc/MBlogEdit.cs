@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class MBlog : ReactiveObject
+    public class MBlogEdit : ReactiveObject
     {
         [Reactive]
         public string MarkedText { get; set; } = "";
@@ -16,7 +16,5 @@ namespace LollyCommon
         public string HtmlText { get; set; } = "";
         [Reactive]
         public string PatternNo { get; set; } = "001";
-        [Reactive]
-        public string PatternText { get; set; } = "";
     }
 }
