@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29123.88
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LollyCloud", "LollyCloud\LollyCloud.csproj", "{D7269E32-A0D9-446D-904A-8256BCF6D1E6}"
 EndProject
@@ -93,6 +93,7 @@ Global
 		{984C63E7-2448-432E-8396-B3DEA934A0C2}.Release|x86.Build.0 = Release|Any CPU
 		{984C63E7-2448-432E-8396-B3DEA934A0C2}.Release|x86.Deploy.0 = Release|Any CPU
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Debug|iPhone.Build.0 = Debug|iPhone
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
@@ -110,7 +111,6 @@ Global
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Release|Mixed Platforms.Build.0 = Release|iPhone
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Release|x64.ActiveCfg = Release|iPhone
 		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Release|x86.ActiveCfg = Release|iPhone
-		{398A84CC-B37E-4D16-9DBC-3C31632F1AAB}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{9D7DBE4C-2E01-4E7B-BCA3-EA319294B7DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D7DBE4C-2E01-4E7B-BCA3-EA319294B7DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D7DBE4C-2E01-4E7B-BCA3-EA319294B7DE}.Debug|iPhone.ActiveCfg = Debug|Any CPU
