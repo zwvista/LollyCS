@@ -42,11 +42,11 @@ namespace LollyCommon
                 {
                     LANGID = 2,
                     PATTERN = title,
-                    TAGS = "zwvista",
+                    TAGS = $"表現{patternNo}",
                 };
                 var wp = new MWebPage
                 {
-                    TITLE = "【日语句型】" + title,
+                    TITLE = title,
                     URL = url,
                 };
                 return (pt, wp);

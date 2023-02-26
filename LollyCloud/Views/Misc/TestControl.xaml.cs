@@ -32,7 +32,7 @@ namespace LollyCloud
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
             var c = new HyogenCrawler();
-            await c.Step1();
+            await c.Step2();
         }
 
     }
