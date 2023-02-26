@@ -32,6 +32,9 @@ namespace LollyCommon
         [JsonProperty]
         [Reactive]
         public string TAGS { get; set; } = "";
+        [JsonProperty]
+        [Reactive]
+        public int WEBPAGEID { get; set; }
         [JsonIgnore]
         public string IDS_MERGE { get; set; }
         [JsonIgnore]
