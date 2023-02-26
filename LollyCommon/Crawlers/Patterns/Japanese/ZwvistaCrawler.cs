@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace LollyCommon.Crawlers.Patterns.Japanese
+namespace LollyCommon
 {
     // ZwvistaWordPress
     public class ZwvistaCrawler : PatternsCrawler

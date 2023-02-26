@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace LollyCommon.Crawlers.Patterns.Korean
+namespace LollyCommon
 {
     // Kpedia
     public class KpediaCrawler : PatternsCrawler

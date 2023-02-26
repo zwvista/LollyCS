@@ -18,21 +18,14 @@ namespace LollyCommon
             var lines = File.ReadAllLines("b.txt");
             var storewp = new WebPageDataStore();
             var storept = new PatternDataStore();
-            var storeptwp = new PatternWebPageDataStore();
             foreach (var s in lines)
             {
                 var a = s.Split(new[] { delim }, StringSplitOptions.RemoveEmptyEntries);
                 var (pt, wp) = f(a);
                 var wpid = await storewp.Create(wp);
                 if (wpid == 0) continue;
-                var ptid = await storept.Create(pt);
-                var ptwp = new MPatternWebPage
-                {
-                    PATTERNID = ptid,
-                    WEBPAGEID = wpid,
-                    SEQNUM = 1,
-                };
-                await storeptwp.Create(ptwp);
+                pt.WEBPAGEID = wpid;
+                await storept.Create(pt);
             }
         }
         protected async Task Step2(int langid, string tags) =>
