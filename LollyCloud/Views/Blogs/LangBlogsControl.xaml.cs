@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace LollyCloud
@@ -14,6 +15,7 @@ namespace LollyCloud
     /// </summary>
     public partial class LangBlogsControl : UserControl, ILollySettings
     {
+        string originalText = "";
         BlogEditViewModel vm;
 
         public LangBlogsControl()
@@ -28,6 +30,44 @@ namespace LollyCloud
         {
             DataContext = vm = new BlogEditViewModel(MainWindow.vmSettings, true);
         }
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
+            originalText = DataGridHelper.OnBeginEditCell(e);
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+            DataGridHelper.OnEndEditCell(sender, e, originalText, null, null, async item =>
+            {
+                //if (sender == dgPatterns)
+                //    await vm.Update((MPattern)item);
+                //else
+                //    await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
+            });
+        void dgGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+        void dgGroups_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
+        }
+        void miAddGroup_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void miEditGroup_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void miDeleteGroup_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void miAddBlog_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void miEditBlog_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void miDeleteBlog_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

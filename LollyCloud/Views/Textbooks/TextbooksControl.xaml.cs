@@ -57,22 +57,10 @@ namespace LollyCloud
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
-        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            var item = e.Row.Item;
-            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
-            originalText = (string)item.GetType().GetProperty(propertyName).GetValue(item);
-        }
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
+            originalText = DataGridHelper.OnBeginEditCell(e);
 
-        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            if (e.EditAction != DataGridEditAction.Commit) return;
-            var item = e.Row.Item;
-            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
-            var el = (TextBox)e.EditingElement;
-            if (el.Text == originalText) return;
-            item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
-            await vm.Update((MTextbook)item);
-        }
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+            DataGridHelper.OnEndEditCell(sender, e, originalText, null, null, async item => await vm.Update((MTextbook)item));
     }
 }

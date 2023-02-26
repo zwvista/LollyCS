@@ -94,25 +94,10 @@ namespace LollyCloud
             Tabs.ForEach(o => Process.Start(((WordsDictControl)o.Content).Url));
         public void miCopyPhrase_Click(object sender, RoutedEventArgs e) => Clipboard.SetText(vmPhrases.SelectedPhrase);
         public void miGooglePhrase_Click(object sender, RoutedEventArgs e) => vmPhrases.SelectedPhrase.Google();
-        public void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            var item = e.Row.Item;
-            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
-            originalText = (string)item.GetType().GetProperty(propertyName).GetValue(item);
-        }
-        protected async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e, string autoCorrectColumnName, Func<object, Task> updateFunc)
-        {
-            if (e.EditAction != DataGridEditAction.Commit) return;
-            var item = e.Row.Item;
-            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
-            var el = (TextBox)e.EditingElement;
-            if (propertyName == autoCorrectColumnName)
-                el.Text = vmSettings.AutoCorrectInput(el.Text);
-            if (el.Text == originalText) return;
-            item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
-            await updateFunc(item);
-            ((DataGrid)sender).CancelEdit();
-        }
+        public void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
+            originalText = DataGridHelper.OnBeginEditCell(e);
+        protected void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e, string autoCorrectColumnName, Func<object, Task> updateFunc) =>
+            DataGridHelper.OnEndEditCell(sender, e, originalText, vmSettings, autoCorrectColumnName, updateFunc);
     }
     public class WordsBaseControl : WordsPhrasesBaseControl
     {

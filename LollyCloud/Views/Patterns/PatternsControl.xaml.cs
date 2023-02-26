@@ -59,29 +59,17 @@ namespace LollyCloud
         }
         void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
-        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            var item = e.Row.Item;
-            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
-            originalText = (string)item.GetType().GetProperty(propertyName).GetValue(item);
-        }
+        void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
+            originalText = DataGridHelper.OnBeginEditCell(e);
 
-        async void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            if (e.EditAction != DataGridEditAction.Commit) return;
-            var item = e.Row.Item;
-            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
-            var el = (TextBox)e.EditingElement;
-            if (sender == dgPatterns && propertyName == "PATTERN")
-                el.Text = vmSettings.AutoCorrectInput(el.Text);
-            if (el.Text == originalText) return;
-            item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
-            if (sender == dgPatterns)
-                await vm.Update((MPattern)item);
-            else
-                await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
-            ((DataGrid)sender).CancelEdit();
-        }
+        void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
+            DataGridHelper.OnEndEditCell(sender, e, originalText, vmSettings, "PATTERN", async item =>
+            {
+                if (sender == dgPatterns)
+                    await vm.Update((MPattern)item);
+                else
+                    await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
+            });
 
         public async Task OnSettingsChanged()
         {

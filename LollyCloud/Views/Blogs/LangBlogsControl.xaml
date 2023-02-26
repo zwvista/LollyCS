@@ -15,20 +15,69 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="tbMarked" Text="{Binding MarkedText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"></TextBox>
-                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <TextBox Text="{Binding HtmlText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                <DataGrid x:Name="dgGroups" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding GroupItems}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedGroupItem}" SelectionChanged="dgGroups_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding GROUP}" Header="GROUP" />
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgGroups_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
+                                </Style>
+                            </ContextMenu.Resources>
+                            <MenuItem x:Name="miAddGroup" Header="Add" Click="miAddGroup_Click" />
+                            <MenuItem x:Name="miEditGroup" Header="Edit" Click="miEditGroup_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDeleteGroup" Header="Delete" Click="miDeleteGroup_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
+                <DataGrid Grid.Row="2" x:Name="dgBlogs" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
+                          ItemsSource="{Binding BlogItems}" SelectedItem="{Binding SelectedBlogItem}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgBlogs_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <ContextMenu.Resources>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedPhraseItem}" />
+                                </Style>
+                            </ContextMenu.Resources>
+                            <MenuItem x:Name="miAddBlog" Header="Add" Click="miAddBlog_Click" />
+                            <MenuItem x:Name="miEditBlog" Header="Edit" Click="miEditBlog_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDeleteBlog" Header="Delete" Click="miDeleteBlog_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
             </Grid>
-            <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
+            <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />
             <cef:ChromiumWebBrowser x:Name="wbBlog" Grid.Column="2" />
         </Grid>
     </DockPanel>

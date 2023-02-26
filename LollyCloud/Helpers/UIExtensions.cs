@@ -1,11 +1,14 @@
 ﻿using CefSharp.Wpf;
 using Dragablz;
+using LollyCommon;
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace LollyCloud
@@ -113,5 +116,29 @@ namespace LollyCloud
                 };
             }
         });
+    }
+    public class DataGridHelper
+    {
+        public static string OnBeginEditCell(DataGridBeginningEditEventArgs e)
+        {
+            var item = e.Row.Item;
+            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
+            return (string)item.GetType().GetProperty(propertyName).GetValue(item);
+        }
+        public static async void OnEndEditCell(object sender, DataGridCellEditEndingEventArgs e,
+            string originalText, SettingsViewModel vmSettings,
+            string autoCorrectColumnName, Func<object, Task> updateFunc)
+        {
+            if (e.EditAction != DataGridEditAction.Commit) return;
+            var item = e.Row.Item;
+            var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
+            var el = (TextBox)e.EditingElement;
+            if (propertyName == autoCorrectColumnName)
+                el.Text = vmSettings.AutoCorrectInput(el.Text);
+            if (el.Text == originalText) return;
+            item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
+            await updateFunc(item);
+            ((DataGrid)sender).CancelEdit();
+        }
     }
 }
