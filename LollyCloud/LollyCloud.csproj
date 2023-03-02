@@ -224,8 +224,6 @@
     <Compile Include="Helpers\UIExtensions.cs" />
     <Compile Include="Helpers\UIHelpers.cs" />
     <Compile Include="ViewModels\Dicts\TransformEditViewModel.cs" />
-    <Compile Include="ViewModels\Patterns\PatternsSplitViewModel.cs" />
-    <Compile Include="ViewModels\Patterns\PatternsMergeViewModel.cs" />
     <Compile Include="Views\Blogs\LangBlogsControl.xaml.cs">
       <DependentUpon>LangBlogsControl.xaml</DependentUpon>
     </Compile>
@@ -270,18 +268,6 @@
     </Compile>
     <Compile Include="Views\Patterns\PatternsControl.xaml.cs">
       <DependentUpon>PatternsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Patterns\PatternsSplitDlg.xaml.cs">
-      <DependentUpon>PatternsSplitDlg.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Patterns\PatternsMergeDlg.xaml.cs">
-      <DependentUpon>PatternsMergeDlg.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Patterns\WebPageSelectDlg.xaml.cs">
-      <DependentUpon>WebPageSelectDlg.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Patterns\PatternsWebPagesDetailDlg.xaml.cs">
-      <DependentUpon>PatternsWebPagesDetailDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Patterns\PatternsDetailDlg.xaml.cs">
       <DependentUpon>PatternsDetailDlg.xaml</DependentUpon>
@@ -329,7 +315,6 @@
     <Compile Include="Views\Words\WordsDictControl.xaml.cs">
       <DependentUpon>WordsDictControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Patterns\PatternsWebPagesViewModel.cs" />
     <Compile Include="ViewModels\Phrases\PhrasesUnitViewModel.cs" />
     <Compile Include="Views\Phrases\PhrasesUnitControl.xaml.cs">
       <DependentUpon>PhrasesUnitControl.xaml</DependentUpon>
@@ -441,22 +426,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Patterns\PatternsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Patterns\PatternsSplitDlg.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Patterns\PatternsMergeDlg.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Patterns\WebPageSelectDlg.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Patterns\PatternsWebPagesDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

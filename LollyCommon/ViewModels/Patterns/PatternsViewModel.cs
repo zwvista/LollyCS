@@ -47,7 +47,7 @@ namespace LollyCommon
         void ApplyFilters()
         {
             PatternItems = NoFilter ? PatternItemsAll : new ObservableCollection<MPattern>(PatternItemsAll.Where(o =>
-                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : ScopeFilter == "Note" ? o.NOTE ?? "" : o.TAGS ?? "").ToLower().Contains(TextFilter.ToLower()))
+                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : o.TAGS ?? "").ToLower().Contains(TextFilter.ToLower()))
             ));
             this.RaisePropertyChanged(nameof(PatternItems));
         }

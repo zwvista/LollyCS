@@ -13,7 +13,6 @@
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar>
                 <Button x:Name="btnAddPattern" Content="Add Pattern" Click="btnAddPattern_Click"/>
-                <Button x:Name="btnAddWebPage" Content="Add Web Page" Click="btnAddWebPage_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePatternFilters}}" SelectedValue="{Binding vm.ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
@@ -29,8 +28,6 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="100" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPatterns" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding vm.PatternItems}"
@@ -38,8 +35,9 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
-                        <DataGridTextColumn Binding="{Binding NOTE}" Header="NOTE"/>
                         <DataGridTextColumn Binding="{Binding TAGS}" Header="TAGS" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
+                        <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">
@@ -51,29 +49,10 @@
                             <MenuItem x:Name="miDelete" Header="Delete" Click="miDelete_Click" />
                             <MenuItem x:Name="miCopy" Header="Copy" Click="miCopy_Click" />
                             <MenuItem x:Name="miGoogle" Header="Google" Click="miGoogle_Click" />
-                            <MenuItem x:Name="miMerge" Header="Merge" Click="miMerge_Click" />
-                            <MenuItem x:Name="miSplit" Header="Split" Click="miSplit_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
-                <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <DataGrid x:Name="dgWebPages" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWebPages_SelectionChanged"
-                          dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding vmWP}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" ItemsSource="{Binding vmWP.WebPageItems}" Grid.Row="2">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
-                        <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
-                        <DataGridTextColumn Binding="{Binding WEBPAGEID}" Header="WEBPAGEID" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                    <DataGrid.Resources>
-                        <Style TargetType="DataGridRow">
-                            <EventSetter Event="MouseDoubleClick" Handler="dgWebPages_RowDoubleClick"/>
-                        </Style>
-                    </DataGrid.Resources>
-                </DataGrid>
-                <StatusBar Grid.Row="3">
+                <StatusBar Grid.Row="1">
                     <Label Content="{Binding vm.StatusText}"/>
                 </StatusBar>
             </Grid>

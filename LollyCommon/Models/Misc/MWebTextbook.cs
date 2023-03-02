@@ -31,9 +31,6 @@ namespace LollyCommon
         public int UNIT { get; set; }
         [JsonProperty]
         [Reactive]
-        public int WEBPAGEID { get; set; }
-        [JsonProperty]
-        [Reactive]
         public string TITLE { get; set; } = "";
         [JsonProperty]
         [Reactive]

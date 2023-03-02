@@ -44,18 +44,14 @@ namespace LollyCommon
             await Step2(a =>
             {
                 string url = a[0], title = a[1];
-                var pt = new MPattern
+                return new MPattern
                 {
                     LANGID = 2,
                     PATTERN = title,
                     TAGS = "zwvista",
-                };
-                var wp = new MWebPage
-                {
                     TITLE = "【日语句型】" + title,
                     URL = url,
                 };
-                return (pt, wp);
             });
     }
 }

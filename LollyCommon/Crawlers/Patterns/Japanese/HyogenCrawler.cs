@@ -38,18 +38,14 @@ namespace LollyCommon
             await Step2(a =>
             {
                 string url = a[0], patternNo = a[1], title = a[2];
-                var pt = new MPattern
+                return new MPattern
                 {
                     LANGID = 2,
                     PATTERN = title,
                     TAGS = $"表現{patternNo}",
-                };
-                var wp = new MWebPage
-                {
                     TITLE = title,
                     URL = url,
                 };
-                return (pt, wp);
             });
     }
 }

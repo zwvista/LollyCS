@@ -35,7 +35,6 @@
                         <DataGridTextColumn Binding="{Binding URL}" Header="URL" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding TEXTBOOKID}" Header="TEXTBOOKID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding WEBPAGEID}" Header="WEBPAGEID" IsReadOnly="True" />
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

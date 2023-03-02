@@ -28,17 +28,13 @@ namespace LollyCommon
         public string PATTERN { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string NOTE { get; set; } = "";
-        [JsonProperty]
-        [Reactive]
         public string TAGS { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int WEBPAGEID { get; set; }
-        [JsonIgnore]
-        public string IDS_MERGE { get; set; }
-        [JsonIgnore]
-        public string PATTERNS_SPLIT { get; set; }
+        public string TITLE { get; set; } = "";
+        [JsonProperty]
+        [Reactive]
+        public string URL { get; set; } = "";
 
         public MPattern()
         {
@@ -52,9 +48,11 @@ namespace LollyCommon
         [Reactive]
         public string PATTERN { get; set; } = "";
         [Reactive]
-        public string NOTE { get; set; }
-        [Reactive]
         public string TAGS { get; set; }
+        [Reactive]
+        public string TITLE { get; set; }
+        [Reactive]
+        public string URL { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MPatternEdit()
         {

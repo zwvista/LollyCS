@@ -24,11 +24,5 @@ namespace LollyCommon
 
         public async Task Delete(int id) =>
         Debug.WriteLine(await DeleteByUrl($"PATTERNS/{id}"));
-
-        public async Task MergePatterns(MPattern item) =>
-        Debug.WriteLine(await CallSPByUrl("PATTERNS_MERGE", item));
-
-        public async Task SplitPattern(MPattern item) =>
-        Debug.WriteLine(await CallSPByUrl("PATTERNS_SPLIT", item));
     }
 }

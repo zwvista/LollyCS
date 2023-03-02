@@ -46,18 +46,14 @@ namespace LollyCommon
                 string url = a[0], title = a[1];
                 var m = reg1.Match(title);
                 string tag = m.Groups[1].Value, title2 = m.Groups[2].Value;
-                var pt = new MPattern
+                return new MPattern
                 {
                     LANGID = 2,
                     PATTERN = title2,
                     TAGS = "教師" + tag,
-                };
-                var wp = new MWebPage
-                {
                     TITLE = $"【{tag}】{title2}",
                     URL = url,
                 };
-                return (pt, wp);
             });
         }
     }

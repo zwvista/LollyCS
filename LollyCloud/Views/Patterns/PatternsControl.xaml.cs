@@ -17,7 +17,6 @@ namespace LollyCloud
     public partial class PatternsControl : UserControl, ILollySettings
     {
         public PatternsViewModel vm { get; set; }
-        public PatternsWebPagesViewModelWPF vmWP { get; set; }
         public string originalText = "";
         public SettingsViewModel vmSettings => vm.vmSettings;
 
@@ -42,20 +41,9 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
 
-        void btnAddWebPage_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new PatternsWebPagesDetailDlg(Window.GetWindow(this), vmWP, vmWP.NewPatternWebPage());
-            dlg.ShowDialog();
-        }
-
         void dgPatterns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            vmWP.SelectedPatternItem = vm.SelectedPatternItem;
-            vmWP.GetWebPages().Subscribe(_ =>
-            {
-                if (vmWP.WebPageItems.Any())
-                    dgWebPages.SelectedIndex = 0;
-            });
+            wbWebPage.Load(vm.SelectedPatternItem.URL);
         }
         void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
@@ -65,16 +53,12 @@ namespace LollyCloud
         void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
             DataGridHelper.OnEndEditCell(sender, e, originalText, vmSettings, "PATTERN", async item =>
             {
-                if (sender == dgPatterns)
-                    await vm.Update((MPattern)item);
-                else
-                    await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
+                await vm.Update((MPattern)item);
             });
 
         public async Task OnSettingsChanged()
         {
             vm = new PatternsViewModel(MainWindow.vmSettings, needCopy: true);
-            vmWP = new PatternsWebPagesViewModelWPF(vmSettings, needCopy: false, vm.SelectedPatternItem);
             DataContext = this;
         }
 
@@ -90,33 +74,5 @@ namespace LollyCloud
 
         void miGoogle_Click(object sender, RoutedEventArgs e) => vm.SelectedPattern.Google();
 
-        void miMerge_Click(object sender, RoutedEventArgs e)
-        {
-            var lst = dgPatterns.SelectedItems.Cast<MPattern>().ToList();
-            var dlg = new PatternsMergeDlg(Window.GetWindow(this), lst);
-            dlg.ShowDialog();
-        }
-
-        void miSplit_Click(object sender, RoutedEventArgs e)
-        {
-            var item = (MPattern)dgPatterns.SelectedItem;
-            var dlg = new PatternsSplitDlg(Window.GetWindow(this), item);
-            dlg.ShowDialog();
-        }
-
-        void dgWebPages_RowDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            dgWebPages.CancelEdit();
-            // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
-            var dlg = new PatternsWebPagesDetailDlg(Window.GetWindow(this), vmWP, (MPatternWebPage)((DataGridRow)sender).Item);
-            dlg.ShowDialog();
-        }
-
-        void dgWebPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var item = (MPatternWebPage)dgWebPages.SelectedItem;
-            if (item == null) return;
-            wbWebPage.Load(item.URL);
-        }
     }
 }
