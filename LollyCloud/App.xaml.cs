@@ -9,6 +9,7 @@ using System.Speech.Synthesis;
 using CefSharp;
 using CefSharp.Wpf;
 using LollyCommon;
+using LollyCloud.Properties;
 
 namespace LollyCloud
 {
@@ -47,7 +48,8 @@ namespace LollyCloud
             {
                 DefaultValue = FindResource(typeof(Window))
             });
-            Cef.Initialize(new CefSettings());
+            var settings = new CefSettings();
+            Cef.Initialize(settings);
         }
         public static void SaveUserId()
         {

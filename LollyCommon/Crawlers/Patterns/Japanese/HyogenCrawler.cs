@@ -25,9 +25,9 @@ namespace LollyCommon
                 if (m.Success)
                 {
                     var patternNo = m.Groups[1].Value;
-                    var title = m.Groups[2].Value.Replace("*", "");
+                    var pattern = m.Groups[2].Value.Replace("*", "");
                     var url = $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
-                    var t = url + delim + patternNo + delim + title;
+                    var t = url + delim + patternNo + delim + pattern + delim + s;
                     lines2.Add(t);
                 }
             }
@@ -37,11 +37,11 @@ namespace LollyCommon
         public override async Task Step2() =>
             await Step2(a =>
             {
-                string url = a[0], patternNo = a[1], title = a[2];
+                string url = a[0], patternNo = a[1], pattern = a[2], title = a[3];
                 return new MPattern
                 {
                     LANGID = 2,
-                    PATTERN = title,
+                    PATTERN = pattern,
                     TAGS = $"表現{patternNo}",
                     TITLE = title,
                     URL = url,
