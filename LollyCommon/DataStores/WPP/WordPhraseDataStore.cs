@@ -8,19 +8,19 @@ namespace LollyCommon
     public class WordPhraseDataStore : LollyDataStore<MWordPhrase>
     {
         async Task<List<MWordPhrase>> GetDataByWordPhrase(int wordid, int phraseid) =>
-        (await GetDataByUrl<MWordsPhrases>($"WORDSPHRASES?filter=WORDID,eq,{wordid}&filter=PHRASEID,eq,{phraseid}")).Records;
+            (await GetDataByUrl<MWordsPhrases>($"WORDSPHRASES?filter=WORDID,eq,{wordid}&filter=PHRASEID,eq,{phraseid}")).Records;
 
         public async Task<List<MLangPhrase>> GetPhrasesByWordId(int wordid) =>
-        (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).Records;
+            (await GetDataByUrl<MLangPhrases>($"VPHRASESWORD?filter=WORDID,eq,{wordid}")).Records;
 
         public async Task<List<MLangWord>> GetWordsByPhraseId(int phraseid) =>
-        (await GetDataByUrl<MLangWords>($"VWORDSPHRASE?filter=PHRASEID,eq,{phraseid}")).Records;
+            (await GetDataByUrl<MLangWords>($"VWORDSPHRASE?filter=PHRASEID,eq,{phraseid}")).Records;
 
         async Task<int> Create(MWordPhrase item) =>
-        await CreateByUrl($"WORDSPHRASES", item);
+            await CreateByUrl($"WORDSPHRASES", item);
 
         async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"WORDSPHRASES/{id}"));
+            Debug.WriteLine(await DeleteByUrl($"WORDSPHRASES/{id}"));
 
         public async Task DeleteByWordId(int wordid)
         {

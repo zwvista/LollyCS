@@ -55,18 +55,18 @@ namespace LollyCommon
         }
 
         public async Task<int> Create(MUnitPhrase item) =>
-        (await CallSPByUrl("UNITPHRASES_CREATE", item)).NewID.Value;
+            (await CallSPByUrl("UNITPHRASES_CREATE", item)).NewID.Value;
 
         public async Task UpdateSeqNum(int id, int seqnum) =>
-        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"SEQNUM={seqnum}"));
+            Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"SEQNUM={seqnum}"));
 
         public async Task UpdateTranslation(int id, string translation) =>
-        Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"TRANSLATION={translation}"));
+            Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"TRANSLATION={translation}"));
 
         public async Task Update(MUnitPhrase item) =>
-        Debug.WriteLine(await CallSPByUrl("UNITPHRASES_UPDATE", item));
+            Debug.WriteLine(await CallSPByUrl("UNITPHRASES_UPDATE", item));
 
         public async Task Delete(MUnitPhrase item) =>
-        Debug.WriteLine(await CallSPByUrl("UNITPHRASES_DELETE", item));
+            Debug.WriteLine(await CallSPByUrl("UNITPHRASES_DELETE", item));
     }
 }

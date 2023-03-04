@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    class BlogEditService
+    public class BlogEditService
     {
         string Html1With(string s) =>
             $"<strong><span style=\"color:#0000ff;\">{s}</span></strong>";
@@ -112,7 +112,6 @@ namespace LollyCommon
         }
         public string GetExplanation(string text) => $"* {text}：：\r\n";
         public string GetPatternUrl(string patternNo) => $"http://viethuong.web.fc2.com/MONDAI/{patternNo}.html";
-        public string GetPatternMarkDown(string patternText) => $"* [{patternText}　文法](https://www.google.com/search?q={patternText}　文法)\n* [{patternText}　句型](https://www.google.com/search?q={patternText}　句型)";
         readonly string bigDigits = "０１２３４５６７８９";
         public async Task<string> AddNotes(SettingsViewModel vmSettings, string text)
         {

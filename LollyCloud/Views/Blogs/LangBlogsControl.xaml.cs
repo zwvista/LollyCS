@@ -17,6 +17,7 @@ namespace LollyCloud
     {
         string originalText = "";
         LangBlogsViewModel vm;
+        BlogEditService editService = new BlogEditService();
 
         public LangBlogsControl()
         {
@@ -40,8 +41,8 @@ namespace LollyCloud
                 else
                     await vm.UpdateBlog((MLangBlog)item);
             });
-        void dgGroups_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            vm.OnSelectedGroupChanged();
+        async void dgGroups_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            await vm.OnSelectedGroupChanged();
         void dgGroups_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             miEditGroup_Click(sender, null);
@@ -69,6 +70,11 @@ namespace LollyCloud
         }
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)
         {
+        }
+        async void dgBlogs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await vm.OnSelectedBlogChanged();
+            wbBlog.LoadLargeHtml(editService.MarkedToHtml(vm.BlogContent));
         }
         void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

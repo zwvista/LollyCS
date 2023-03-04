@@ -9,16 +9,16 @@ namespace LollyCommon
     public class WordFamiDataStore : LollyDataStore<MWordFami>
     {
         public async Task<List<MWordFami>> GetDataByUserWord(int wordid) =>
-        (await GetDataByUrl<MWordsFami>($"WORDSFAMI?filter=USERID,eq,{CommonApi.UserId}&filter=WORDID,eq,{wordid}")).Records;
+            (await GetDataByUrl<MWordsFami>($"WORDSFAMI?filter=USERID,eq,{CommonApi.UserId}&filter=WORDID,eq,{wordid}")).Records;
 
         async Task<int> Create(MWordFami item) =>
-        await CreateByUrl($"WORDSFAMI", item);
+            await CreateByUrl($"WORDSFAMI", item);
 
         async Task Update(MWordFami item) =>
-        Debug.WriteLine(await UpdateByUrl($"WORDSFAMI/{item.ID}", JsonConvert.SerializeObject(item)));
+            Debug.WriteLine(await UpdateByUrl($"WORDSFAMI/{item.ID}", JsonConvert.SerializeObject(item)));
 
         public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"WORDSFAMI/{id}"));
+            Debug.WriteLine(await DeleteByUrl($"WORDSFAMI/{id}"));
 
         public async Task<MWordFami> Update(int wordid, bool isCorrect)
         {

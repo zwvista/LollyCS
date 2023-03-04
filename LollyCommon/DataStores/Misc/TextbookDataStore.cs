@@ -41,10 +41,10 @@ namespace LollyCommon
             return lst;
         }
         public async Task<int> Create(MTextbook item) =>
-        await CreateByUrl($"TEXTBOOKS", item);
+            await CreateByUrl($"TEXTBOOKS", item);
         public async Task Update(MTextbook item) =>
-        Debug.WriteLine(await UpdateByUrl($"TEXTBOOKS/{item.ID}", JsonConvert.SerializeObject(item)));
+            Debug.WriteLine(await UpdateByUrl($"TEXTBOOKS/{item.ID}", JsonConvert.SerializeObject(item)));
         public async Task Delete(int id) =>
-        Debug.WriteLine(await DeleteByUrl($"TEXTBOOKS/{id}"));
+            Debug.WriteLine(await DeleteByUrl($"TEXTBOOKS/{id}"));
     }
 }

@@ -53,13 +53,13 @@ namespace LollyCommon
         }
 
         public async Task<int> Create(MUnitWord item) =>
-        (await CallSPByUrl("UNITWORDS_CREATE", item)).NewID.Value;
+            (await CallSPByUrl("UNITWORDS_CREATE", item)).NewID.Value;
 
         public async Task UpdateSeqNum(int id, int seqnum) =>
-        Debug.WriteLine(await UpdateByUrl($"UNITWORDS/{id}", $"SEQNUM={seqnum}"));
+            Debug.WriteLine(await UpdateByUrl($"UNITWORDS/{id}", $"SEQNUM={seqnum}"));
 
         public async Task UpdateNote(int id, string note) =>
-        Debug.WriteLine(await UpdateByUrl($"UNITWORDS/{id}", $"NOTE={note}"));
+            Debug.WriteLine(await UpdateByUrl($"UNITWORDS/{id}", $"NOTE={note}"));
 
         public async Task<MSPResult> Update(MUnitWord item)
         {
@@ -69,6 +69,6 @@ namespace LollyCommon
         }
 
         public async Task Delete(MUnitWord item) =>
-        Debug.WriteLine(await CallSPByUrl("UNITWORDS_DELETE", item));
+            Debug.WriteLine(await CallSPByUrl("UNITWORDS_DELETE", item));
     }
 }
