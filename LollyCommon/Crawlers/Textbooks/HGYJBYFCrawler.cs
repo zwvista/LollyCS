@@ -14,7 +14,7 @@ namespace LollyCommon
     {
         public override async Task Step1()
         {
-            var reg1 = new Regex(@"<a href=""(http://kr.tingroom.com/.+?)"" target=""_blank"" title=""(.+?)"" style=""color: #039;"">.+?</a>");
+            var reg1 = new Regex(@"<a href=""http://(www.krlearn.com/.+?)"" target=""_blank"" title=""(.+?)"" style=""color: #039;"">.+?</a>");
             var client = new HttpClient();
             var lines2 = new List<string>();
             for (int i = 1; i < 100; i++)
@@ -22,7 +22,7 @@ namespace LollyCommon
                 string html;
                 try
                 {
-                    html = await client.GetStringAsync($"http://kr.tingroom.com/yufafudao/hanguoyujibenyufa/list_{i}.html");
+                    html = await client.GetStringAsync($"https://www.krlearn.com/yufafudao/hanguoyujibenyufa/list_{i}.html");
                 }
                 catch (Exception ex)
                 {
@@ -31,7 +31,7 @@ namespace LollyCommon
                 var ms = reg1.Matches(html).Cast<Match>().ToList();
                 foreach (var m in ms)
                 {
-                    var url = m.Groups[1].Value;
+                    var url = "https://" + m.Groups[1].Value;
                     var title = m.Groups[2].Value;
                     var s = url + delim + title;
                     lines2.Insert(0, s);
