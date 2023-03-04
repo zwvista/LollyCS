@@ -19,7 +19,7 @@ namespace LollyCloud
         string originalText = "";
         LangBlogsViewModel vm;
         BlogEditService editService = new BlogEditService();
-        LangBlogContentDataStore contentDS = new LangBlogContentDataStore();
+        LangBlogContentDataStore blogContentDS = new LangBlogContentDataStore();
 
         public LangBlogsControl()
         {
@@ -78,7 +78,7 @@ namespace LollyCloud
         async void miEditBlogContent_Click(object sender, RoutedEventArgs e)
         {
             var w = (MainWindow)Window.GetWindow(this);
-            var itemBlog = await contentDS.GetDataById(vm.SelectedBlogItem.ID);
+            var itemBlog = await blogContentDS.GetDataById(vm.SelectedBlogItem.ID);
             w.AddBlogEditTab("Language Blog", itemBlog);
         }
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)

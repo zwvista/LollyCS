@@ -43,18 +43,9 @@ namespace LollyCommon
             var str = HtmlTransformService.ToHtml(HtmlText);
             return str;
         }
-        public async Task<string> LoadBlog()
-        {
-            if (isUnitBlog)
-            {
-                return await vmSettings.GetBlogContent();
-            }
-            else
-            {
-                var item = await blogContentDS.GetDataById(itemBlog.ID);
-                return item?.CONTENT ?? "";
-            }
-        }
+        public async Task<string> LoadBlog() =>
+            isUnitBlog ? await vmSettings.GetBlogContent() :
+            (await blogContentDS.GetDataById(itemBlog.ID))?.CONTENT ?? "";
         public async Task SaveBlog(string content)
         {
             if (isUnitBlog)
