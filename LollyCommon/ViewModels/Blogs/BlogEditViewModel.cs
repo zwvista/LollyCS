@@ -9,8 +9,9 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         BlogEditService service = new BlogEditService();
         LangBlogContentDataStore blogContentDS = new LangBlogContentDataStore();
-        bool isUnitBlog = false;
         MLangBlogContent itemBlog = null;
+        bool isUnitBlog => itemBlog == null;
+        public string Title { get; set; }
 
         public ReactiveCommand<Unit, Unit> HtmlToMarkedCommand { get; }
         public string PatternUrl => service.GetPatternUrl(PatternNo);
@@ -20,7 +21,7 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.itemBlog = itemBlog;
-            isUnitBlog = itemBlog == null;
+            Title = isUnitBlog ? vmSettings.UNITINFO : itemBlog.TITLE;
 
             HtmlToMarkedCommand = ReactiveCommand.Create(() =>
             {

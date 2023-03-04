@@ -40,7 +40,10 @@
                 <TextBox Text="{Binding HtmlText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
-            <cef:ChromiumWebBrowser x:Name="wbBlog" Grid.Column="2" />
+            <DockPanel Grid.Column="2">
+                <TextBlock Text="{Binding Title}" DockPanel.Dock="Top" />
+                <cef:ChromiumWebBrowser x:Name="wbBlog" />
+            </DockPanel>
         </Grid>
     </DockPanel>
 </UserControl>
