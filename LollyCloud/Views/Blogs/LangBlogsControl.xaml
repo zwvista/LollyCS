@@ -28,7 +28,7 @@
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedGroupItem}" SelectionChanged="dgGroups_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding GROUP}" Header="GROUP" />
+                        <DataGridTextColumn Binding="{Binding GROUPNAME}" Header="GROUP" />
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">

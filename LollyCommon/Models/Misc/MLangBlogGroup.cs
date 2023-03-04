@@ -23,7 +23,7 @@ namespace LollyCommon
         [JsonProperty]
         [Reactive]
         public int LANGID { get; set; }
-        [JsonProperty]
+        [JsonProperty("NAME")]
         [Reactive]
         public string GROUPNAME { get; set; } = "";
     }

@@ -16,7 +16,7 @@ namespace LollyCloud
     public partial class LangBlogsControl : UserControl, ILollySettings
     {
         string originalText = "";
-        BlogEditViewModel vm;
+        LangBlogsViewModel vm;
 
         public LangBlogsControl()
         {
@@ -28,14 +28,14 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new BlogEditViewModel(MainWindow.vmSettings, true);
+            DataContext = vm = new LangBlogsViewModel(MainWindow.vmSettings, true);
         }
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
             originalText = DataGridHelper.OnBeginEditCell(e);
         void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
             DataGridHelper.OnEndEditCell(sender, e, originalText, null, null, async item =>
             {
-                //if (sender == dgPatterns)
+                //if (sender == dgGroups)
                 //    await vm.Update((MPattern)item);
                 //else
                 //    await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
