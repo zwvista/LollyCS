@@ -9,6 +9,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LollyCommon
@@ -23,6 +24,7 @@ namespace LollyCommon
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
         VoiceDataStore VoiceDS = new VoiceDataStore();
         CodeDataStore CodeDS = new CodeDataStore();
+        UnitBlogDataStore unitBlogDS = new UnitBlogDataStore();
 
         public SettingsViewModel ShallowCopy() => (SettingsViewModel)this.MemberwiseClone();
 
@@ -552,5 +554,12 @@ namespace LollyCommon
                 i++;
             }
         }
+        public async Task<string> GetBlogContent()
+        {
+            var item = await unitBlogDS.GetDataByTextbook(SelectedTextbook.ID, USUNITTOItem.Value);
+            return item.CONTENT ?? "";
+        }
+        public async Task SaveBlogContent(string content) =>
+            await unitBlogDS.Update(SelectedTextbook.ID, USUNITTOItem.Value, content);
     }
 }
