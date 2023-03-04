@@ -32,7 +32,17 @@ namespace LollyCommon
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
+            this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
+            {
+                var lst = await blogDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v.ID);
+                BlogItems = new ObservableCollection<MLangBlog>(lst);
+                this.RaisePropertyChanged(nameof(BlogItems));
+            });
             this.WhenAnyValue(x => x.SelectedBlogItem, (MLangBlog v) => v != null).ToPropertyEx(this, x => x.HasSelectedBlogItem);
+            this.WhenAnyValue(x => x.SelectedBlogItem).Where(v => v != null).Subscribe(async v => 
+            {
+                BlogContent = (await blogContentDS.GetDataById(v.ID))?.CONTENT;
+            });
             Reload();
         }
         public void Reload() =>
@@ -41,16 +51,6 @@ namespace LollyCommon
                 GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
                 this.RaisePropertyChanged(nameof(GroupItems));
             });
-        public async Task OnSelectedGroupChanged()
-        {
-            var lst = await blogDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, SelectedGroupItem.ID);
-            BlogItems = new ObservableCollection<MLangBlog>(lst);
-            this.RaisePropertyChanged(nameof(BlogItems));
-        }
-        public async Task OnSelectedBlogChanged()
-        {
-            BlogContent = (await blogContentDS.GetDataById(SelectedBlogItem.ID))?.CONTENT;
-        }
         public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);
         public async Task CreateGroup(MLangBlogGroup item) => item.ID = await groupDS.Create(item);
         public async Task DeleteGroup(int id) => await groupDS.Delete(id);
@@ -64,6 +64,7 @@ namespace LollyCommon
         public MLangBlog NewBlog() => new MLangBlog
         {
             LANGID = vmSettings.SelectedLang.ID,
+            GROUPID = SelectedGroupItem.ID,
         };
     }
 }

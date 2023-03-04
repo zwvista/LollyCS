@@ -32,6 +32,7 @@ namespace LollyCloud
         public async Task OnSettingsChanged()
         {
             DataContext = vm = new LangBlogsViewModel(MainWindow.vmSettings, true);
+            vm.WhenAnyValue(x => x.BlogContent).Subscribe(v => wbBlog.LoadLargeHtml(editService.MarkedToHtml(v, "\n")));
         }
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
             originalText = DataGridHelper.OnBeginEditCell(e);
@@ -43,8 +44,6 @@ namespace LollyCloud
                 else
                     await vm.UpdateBlog((MLangBlog)item);
             });
-        async void dgGroups_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
-            await vm.OnSelectedGroupChanged();
         void dgGroups_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             miEditGroup_Click(sender, null);
@@ -67,13 +66,13 @@ namespace LollyCloud
         void miAddBlog_Click(object sender, RoutedEventArgs e)
         {
             dgBlogs.CancelEdit();
-            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedBlogItem, vm);
+            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.NewBlog(), vm);
             dlg.ShowDialog();
         }
         void miEditBlog_Click(object sender, RoutedEventArgs e)
         {
             dgBlogs.CancelEdit();
-            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.NewBlog(), vm);
+            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedBlogItem, vm);
             dlg.ShowDialog();
         }
         async void miEditBlogContent_Click(object sender, RoutedEventArgs e)
@@ -84,11 +83,6 @@ namespace LollyCloud
         }
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)
         {
-        }
-        async void dgBlogs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            await vm.OnSelectedBlogChanged();
-            wbBlog.LoadLargeHtml(editService.MarkedToHtml(vm.BlogContent, "\n"));
         }
         void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

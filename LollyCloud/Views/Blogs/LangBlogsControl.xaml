@@ -25,7 +25,7 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgGroups" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding GroupItems}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedGroupItem}" SelectionChanged="dgGroups_SelectionChanged">
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedGroupItem}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding GROUPNAME}" Header="GROUP" />
@@ -47,7 +47,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgBlogs" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                          ItemsSource="{Binding BlogItems}" SelectedItem="{Binding SelectedBlogItem}" SelectionChanged="dgBlogs_SelectionChanged"
+                          ItemsSource="{Binding BlogItems}" SelectedItem="{Binding SelectedBlogItem}"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />

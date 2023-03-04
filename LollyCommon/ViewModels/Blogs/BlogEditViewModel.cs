@@ -38,7 +38,7 @@ namespace LollyCommon
         public string GetExplanation(string str) => service.GetExplanation(str);
         public string MarkedToHtml()
         {
-            HtmlText = service.MarkedToHtml(MarkedText, "\r\n");
+            HtmlText = service.MarkedToHtml(MarkedText, "\n");
             var str = HtmlTransformService.ToHtml(HtmlText);
             return str;
         }
