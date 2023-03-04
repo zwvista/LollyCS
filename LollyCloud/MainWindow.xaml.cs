@@ -94,7 +94,7 @@ namespace LollyCloud
         void miWordsTextbook_Click(object sender, RoutedEventArgs e) => AddTab<WordsTextbookControl>("Words in Textbook");
         void miPhrasesTextbook_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesTextbookControl>("Phrases in Textbook");
         void miPatterns_Click(object sender, RoutedEventArgs e) => AddTab<PatternsControl>("Patterns in Language");
-        void miUnitBlog_Click(object sender, RoutedEventArgs e) => AddTab<BlogEditControl>("Unit Blog");
+        void miUnitBlog_Click(object sender, RoutedEventArgs e) => AddBlogEditTab("Unit Blog", null);
         void miLangBlogs_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogsControl>("Language Blogs");
         void miReadNumber_Click(object sender, RoutedEventArgs e) => AddTab<ReadNumberControl>("Read Number");
         void miTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<TextbooksControl>("Textbooks");
@@ -110,5 +110,10 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
         void miExit_Click(object sender, RoutedEventArgs e) => Environment.Exit(0);
+        public void AddBlogEditTab(string header, MLangBlogContent itemBlog)
+        {
+            Tabs.Add(new ActionTabItem { Header = header, Content = new BlogEditControl(itemBlog) });
+            tcMain.SelectedIndex = tcMain.Items.Count - 1;
+        }
     }
 }

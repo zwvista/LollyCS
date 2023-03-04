@@ -10,6 +10,7 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
+                <Button Content="Save" Click="btnSave_Click"/>
                 <Button Content="HtmlToMarked" Command="{Binding HtmlToMarkedCommand}"/>
                 <Button x:Name="btnAddTagB" Content="Add B" Click="btnAddTagB_Click"/>
                 <Button x:Name="btnAddTagI" Content="Add I" Click="btnAddTagI_Click"/>

@@ -1,4 +1,5 @@
-﻿using CefSharp.Wpf;
+﻿using CefSharp;
+using CefSharp.Wpf;
 using Dragablz;
 using LollyCommon;
 using System;
@@ -20,11 +21,10 @@ namespace LollyCloud
         {
             btn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
-        // https://github.com/cefsharp/CefSharp/issues/2788
+        // https://stackoverflow.com/questions/27659086/cefsharp-loadhtml
         public static void LoadLargeHtml(this ChromiumWebBrowser wb, string html)
         {
-            var base64EncodedHtml = Convert.ToBase64String(Encoding.UTF8.GetBytes(html));
-            wb.Load("data:text/html;base64," + base64EncodedHtml);
+            wb.LoadHtml(html, "http://www.example.com/");
         }
     }
     public static class UIHelper

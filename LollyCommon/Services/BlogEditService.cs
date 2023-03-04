@@ -23,9 +23,9 @@ namespace LollyCommon
         readonly Regex regMarkedEntry = new Regex(@"(\*\*?)\s*(.*?)：(.*?)：(.*)");
         readonly Regex regMarkedB = new Regex("<B>(.+?)</B>");
         readonly Regex regMarkedI = new Regex("<I>(.+?)</I>");
-        public string MarkedToHtml(string text)
+        public string MarkedToHtml(string text, string lineSeparator)
         {
-            var lst = text.Split(new[] { "\r\n" }, StringSplitOptions.None).ToList();
+            var lst = text.Split(new[] { lineSeparator }, StringSplitOptions.None).ToList();
             for (int i = 0; i < lst.Count; i++)
             {
                 var s = lst[i];

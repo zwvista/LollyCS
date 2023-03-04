@@ -15,18 +15,21 @@ namespace LollyCloud
     public partial class BlogEditControl : UserControl, ILollySettings
     {
         BlogEditViewModel vm;
+        MLangBlogContent itemBlog;
 
-        public BlogEditControl()
+        public BlogEditControl(MLangBlogContent itemBlog)
         {
             InitializeComponent();
             // Disable image loading
             // wbBlog.BrowserSettings.ImageLoading = CefState.Disabled;
+            this.itemBlog = itemBlog;
             OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new BlogEditViewModel(MainWindow.vmSettings, true);
+            DataContext = vm = new BlogEditViewModel(MainWindow.vmSettings, true, itemBlog);
+            tbMarked.Text = await vm.LoadBlog();
         }
 
         void ReplaceSelection(Func<string, string> f) =>
@@ -54,5 +57,7 @@ namespace LollyCloud
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
             wbBlog.Load(vm.PatternUrl);
+        async void btnSave_Click(object sender, RoutedEventArgs e) =>
+            await vm.SaveBlog(tbMarked.Text);
     }
 }

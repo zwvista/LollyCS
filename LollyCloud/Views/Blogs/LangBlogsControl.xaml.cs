@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LollyCloud
 {
@@ -18,6 +19,7 @@ namespace LollyCloud
         string originalText = "";
         LangBlogsViewModel vm;
         BlogEditService editService = new BlogEditService();
+        LangBlogContentDataStore contentDS = new LangBlogContentDataStore();
 
         public LangBlogsControl()
         {
@@ -49,6 +51,9 @@ namespace LollyCloud
         }
         void miAddGroup_Click(object sender, RoutedEventArgs e)
         {
+            dgGroups.CancelEdit();
+            var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
+            dlg.ShowDialog();
         }
         void miEditGroup_Click(object sender, RoutedEventArgs e)
         {
@@ -61,12 +66,21 @@ namespace LollyCloud
         }
         void miAddBlog_Click(object sender, RoutedEventArgs e)
         {
+            dgBlogs.CancelEdit();
+            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedBlogItem, vm);
+            dlg.ShowDialog();
         }
         void miEditBlog_Click(object sender, RoutedEventArgs e)
         {
-            dgGroups.CancelEdit();
-            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedBlogItem, vm);
+            dgBlogs.CancelEdit();
+            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.NewBlog(), vm);
             dlg.ShowDialog();
+        }
+        async void miEditBlogContent_Click(object sender, RoutedEventArgs e)
+        {
+            var w = (MainWindow)Window.GetWindow(this);
+            var itemBlog = await contentDS.GetDataById(vm.SelectedBlogItem.ID);
+            w.AddBlogEditTab("Language Blog", itemBlog);
         }
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)
         {
@@ -74,7 +88,7 @@ namespace LollyCloud
         async void dgBlogs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await vm.OnSelectedBlogChanged();
-            wbBlog.LoadLargeHtml(editService.MarkedToHtml(vm.BlogContent));
+            wbBlog.LoadLargeHtml(editService.MarkedToHtml(vm.BlogContent, "\n"));
         }
         void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

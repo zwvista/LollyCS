@@ -37,15 +37,11 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <ContextMenu.Resources>
-                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
-                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
-                                </Style>
-                            </ContextMenu.Resources>
                             <MenuItem x:Name="miAddGroup" Header="Add" Click="miAddGroup_Click" />
-                            <MenuItem x:Name="miEditGroup" Header="Edit" Click="miEditGroup_Click" />
                             <Separator />
-                            <MenuItem x:Name="miDeleteGroup" Header="Delete" Click="miDeleteGroup_Click" />
+                            <MenuItem x:Name="miEditGroup" Header="Edit" IsEnabled="{Binding HasSelectedGroupItem}" Click="miEditGroup_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDeleteGroup" Header="Delete" IsEnabled="{Binding HasSelectedGroupItem}" Click="miDeleteGroup_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
@@ -64,15 +60,12 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <ContextMenu.Resources>
-                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
-                                    <Setter Property="IsEnabled" Value="{Binding HasSelectedBlogItem}" />
-                                </Style>
-                            </ContextMenu.Resources>
                             <MenuItem x:Name="miAddBlog" Header="Add" Click="miAddBlog_Click" />
-                            <MenuItem x:Name="miEditBlog" Header="Edit" Click="miEditBlog_Click" />
                             <Separator />
-                            <MenuItem x:Name="miDeleteBlog" Header="Delete" Click="miDeleteBlog_Click" />
+                            <MenuItem x:Name="miEditBlog" Header="Edit" IsEnabled="{Binding HasSelectedBlogItem}" Click="miEditBlog_Click" />
+                            <MenuItem x:Name="miEditContentBlog" Header="Edit Content" IsEnabled="{Binding HasSelectedBlogItem}" Click="miEditBlogContent_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDeleteBlog" Header="Delete" IsEnabled="{Binding HasSelectedBlogItem}" Click="miDeleteBlog_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

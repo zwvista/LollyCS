@@ -32,6 +32,7 @@ namespace LollyCommon
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
+            this.WhenAnyValue(x => x.SelectedBlogItem, (MLangBlog v) => v != null).ToPropertyEx(this, x => x.HasSelectedBlogItem);
             Reload();
         }
         public void Reload() =>
@@ -53,8 +54,16 @@ namespace LollyCommon
         public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);
         public async Task CreateGroup(MLangBlogGroup item) => item.ID = await groupDS.Create(item);
         public async Task DeleteGroup(int id) => await groupDS.Delete(id);
+        public MLangBlogGroup NewGroup() => new MLangBlogGroup
+        {
+            LANGID = vmSettings.SelectedLang.ID,
+        };
         public async Task UpdateBlog(MLangBlog item) => await blogDS.Update(item);
         public async Task CreateBlog(MLangBlog item) => item.ID = await blogDS.Create(item);
         public async Task DeleteBlog(int id) => await blogDS.Delete(id);
+        public MLangBlog NewBlog() => new MLangBlog
+        {
+            LANGID = vmSettings.SelectedLang.ID,
+        };
     }
 }
