@@ -35,23 +35,25 @@ namespace LollyCloud
         void OnEndEdit(object sender, DataGridCellEditEndingEventArgs e) =>
             DataGridHelper.OnEndEditCell(sender, e, originalText, null, null, async item =>
             {
-                //if (sender == dgGroups)
-                //    await vm.Update((MPattern)item);
-                //else
-                //    await vmWP.UpdatePatternWebPage((MPatternWebPage)item);
+                if (sender == dgGroups)
+                    await vm.UpdateGroup((MLangBlogGroup)item);
+                else
+                    await vm.UpdateBlog((MLangBlog)item);
             });
-        void dgGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
+        void dgGroups_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            vm.OnSelectedGroupChanged();
         void dgGroups_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            miEditGroup_Click(sender, null);
         }
         void miAddGroup_Click(object sender, RoutedEventArgs e)
         {
         }
         void miEditGroup_Click(object sender, RoutedEventArgs e)
         {
+            dgGroups.CancelEdit();
+            var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedGroupItem, vm);
+            dlg.ShowDialog();
         }
         void miDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
@@ -61,13 +63,16 @@ namespace LollyCloud
         }
         void miEditBlog_Click(object sender, RoutedEventArgs e)
         {
+            dgGroups.CancelEdit();
+            var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedBlogItem, vm);
+            dlg.ShowDialog();
         }
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)
         {
         }
         void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            miEditBlog_Click(sender, null);
         }
     }
 }

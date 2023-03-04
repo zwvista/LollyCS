@@ -227,6 +227,12 @@
     <Compile Include="Views\Blogs\LangBlogsControl.xaml.cs">
       <DependentUpon>LangBlogsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Blogs\LangBlogGroupsDetailDlg.xaml.cs">
+      <DependentUpon>LangBlogGroupsDetailDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Blogs\LangBlogsDetailDlg.xaml.cs">
+      <DependentUpon>LangBlogsDetailDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dicts\TransformItemEditDlg.xaml.cs">
       <DependentUpon>TransformItemEditDlg.xaml</DependentUpon>
     </Compile>
@@ -370,6 +376,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Blogs\LangBlogsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Blogs\LangBlogGroupsDetailDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Blogs\LangBlogsDetailDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

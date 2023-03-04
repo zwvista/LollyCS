@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LollyCommon
 {
@@ -18,6 +19,8 @@ namespace LollyCommon
         public MLangBlogGroup SelectedGroupItem { get; set; }
         public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
         public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = new ObservableCollection<MLangBlogGroup>();
+        public MLangBlog SelectedBlogItem { get; set; }
+        public bool HasSelectedBlogItem { [ObservableAsProperty] get; }
         public ObservableCollection<MLangBlog> BlogItems { get; set; } = new ObservableCollection<MLangBlog>();
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
         public LangBlogsViewModel(SettingsViewModel vmSettings, bool needCopy)
@@ -33,5 +36,17 @@ namespace LollyCommon
                 GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
                 this.RaisePropertyChanged(nameof(GroupItems));
             });
+        public async void OnSelectedGroupChanged()
+        {
+            var lst = await blogDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, SelectedGroupItem.ID);
+            BlogItems = new ObservableCollection<MLangBlog>(lst);
+            this.RaisePropertyChanged(nameof(BlogItems));
+        }
+        public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);
+        public async Task CreateGroup(MLangBlogGroup item) => item.ID = await groupDS.Create(item);
+        public async Task DeleteGroup(int id) => await groupDS.Delete(id);
+        public async Task UpdateBlog(MLangBlog item) => await blogDS.Update(item);
+        public async Task CreateBlog(MLangBlog item) => item.ID = await blogDS.Create(item);
+        public async Task DeleteBlog(int id) => await blogDS.Delete(id);
     }
 }
