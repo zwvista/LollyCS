@@ -31,7 +31,7 @@ namespace LollyCloud
 
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            var c = new HGYJBYFCrawler();
+            var c = new KpediaCrawler();
             await c.Step2();
         }
 
