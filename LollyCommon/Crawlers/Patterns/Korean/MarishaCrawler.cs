@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace LollyCommon
+namespace LollyCommon.Crawlers.Patterns.Korean
 {
     // 韓国語勉強ブログ MARISHA [マリシャ]
     public class MarishaCrawler : PatternsCrawler

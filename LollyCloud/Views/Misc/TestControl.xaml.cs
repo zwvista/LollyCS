@@ -24,14 +24,16 @@ namespace LollyCloud
     /// </summary>
     public partial class TestControl : UserControl
     {
+        TestViewModel vm = new TestViewModel();
         public TestControl()
         {
             InitializeComponent();
+            DataContext = vm;
         }
 
         async void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            var c = new KpediaCrawler();
+            var c = new KyoshiCrawler();
             await c.Step2();
         }
 

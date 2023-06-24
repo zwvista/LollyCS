@@ -103,6 +103,7 @@
       <Name>LollyXamarin</Name>
       <TargetPlatformIdentifier>Android</TargetPlatformIdentifier>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IsAppExtension>false</IsAppExtension>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

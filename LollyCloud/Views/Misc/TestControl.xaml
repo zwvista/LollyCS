@@ -14,7 +14,26 @@
                 <Button x:Name="btnTest" Content="Test" Click="btnTest_Click"/>
             </ToolBar>
         </ToolBarTray>
-        <DockPanel>
-        </DockPanel>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ComboBox VerticalAlignment="Center" Grid.Row="0"
+                      SelectedValuePath="Content" SelectedValue="{Binding SelectedLang}">
+                <ComboBoxItem Content="Japanese"/>
+                <ComboBoxItem Content="Korean"/>
+            </ComboBox>
+            <ComboBox VerticalAlignment="Center" Grid.Row="1"
+                      ItemsSource="{Binding Crawlers}" SelectedValue="{Binding SelectedCrawler}" />
+            <ComboBox VerticalAlignment="Center" Grid.Row="2"
+                      SelectedValuePath="Content" SelectedValue="{Binding SelectedStep}">
+                <ComboBoxItem Content="Step1"/>
+                <ComboBoxItem Content="Step2"/>
+            </ComboBox>
+            <Button x:Name="btnExecute" Grid.Row="3" Content="Execute" Width="100" HorizontalAlignment="Right" Command="{Binding ExecuteCommand}" />
+        </Grid>
     </DockPanel>
 </UserControl>

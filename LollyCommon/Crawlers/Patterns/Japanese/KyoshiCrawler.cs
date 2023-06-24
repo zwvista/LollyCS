@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LollyCommon.Crawlers.Patterns;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace LollyCommon
         {
             var client = new HttpClient();
             var html = await client.GetStringAsync("https://nihongokyoshi-net.com/category/jlpt/");
-            var reg1 = new Regex(@"<a class=""page-numbers"" href=""https://nihongokyoshi-net.com/category/jlpt/page/(\d+)/"">\d+</a> <a class=""next page-numbers""");
+            var reg1 = new Regex(@"<a class=""page-numbers"" href=""https://nihongokyoshi-net.com/category/jlpt/page/(\d+)/"">\d+</a></div></main>");
             var m = reg1.Match(html);
             if (!m.Success) return;
             var pages = int.Parse(m.Groups[1].Value);

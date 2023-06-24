@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace LollyCommon
+namespace LollyCommon.Crawlers.Patterns.Korean
 {
     // まいと学ぼう韓国語
     public class MaiBlogCrawler : PatternsCrawler

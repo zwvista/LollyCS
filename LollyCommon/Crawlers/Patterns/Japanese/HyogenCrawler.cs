@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace LollyCommon
+namespace LollyCommon.Crawlers.Patterns.Japanese
 {
     // 日本語表現文型辞典
     public class HyogenCrawler : PatternsCrawler
