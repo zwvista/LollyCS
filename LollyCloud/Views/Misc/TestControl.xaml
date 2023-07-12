@@ -10,9 +10,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
-            <ToolBar x:Name="ToolBar1" Band="1">
-                <Button x:Name="btnTest" Content="Test" Click="btnTest_Click"/>
-            </ToolBar>
         </ToolBarTray>
         <Grid Margin="10">
             <Grid.RowDefinitions>
