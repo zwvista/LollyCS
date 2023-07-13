@@ -34,10 +34,10 @@
                       BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding vm.SelectedPatternItem}" SelectionChanged="dgPatterns_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN"/>
-                        <DataGridTextColumn Binding="{Binding TAGS}" Header="TAGS" Width="100"/>
-                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
-                        <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding TAGS}" Header="TAGS" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding URL}" Header="URL" Width="100" IsReadOnly="True"/>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">

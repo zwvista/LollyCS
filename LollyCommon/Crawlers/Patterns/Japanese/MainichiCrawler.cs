@@ -12,20 +12,22 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
     {
         public override async Task Step1()
         {
-            var reg1 = new Regex(@"font -weight:800; padding-left:10px;"">(.+?)</p>");
+            var reg1 = new Regex(@"font-weight:800; padding-left:10px; padding-top:40px;"">(.+?)</p>");
             var reg2 = new Regex(@"<a href=""(https://nihongonosensei.net/\?p=.+?)"">(.+?)</a>");
-            // source code of https://nihongonosensei.net/?page_id=10246#linkn3 (日本語の文法)
-            var lines = File.ReadAllLines("a.txt");
+            // 日本語の文法
+            var text = await client.GetStringAsync("https://nihongonosensei.net/?page_id=10246");
+            var lines = text.Split('\n');
             var lines2 = new List<string>();
             var ptext = "";
+            var dic = new Dictionary<string, string> { { "Ｎ", "N" }, { "文法", "" }, { "、", "" }, { "０", "0" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" } };
             foreach (var s in lines)
             {
                 var m = reg1.Match(s);
                 if (m.Success)
                 {
-                    ptext = m.Groups[1].Value;
-                    if (ptext == "Ｎ１　似ている文法の比較")
-                        ptext = "Ｎ１文法の比較";
+                    ptext = m.Groups[1].Value.Replace(dic);
+                    if (ptext == "敬語")
+                        break;
                     continue;
                 }
                 m = reg2.Match(s);

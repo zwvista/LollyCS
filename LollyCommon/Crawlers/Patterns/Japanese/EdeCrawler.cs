@@ -14,11 +14,9 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
     {
         public override async Task Step1()
         {
-            var client = new HttpClient();
-            // (日本語文法リスト（あいうえお順）)
-            var html = await client.GetStringAsync("http://www.edewakaru.com/archives/cat_179055.html");
+            // 日本語文法リスト（あいうえお順）
+            var text = await client.GetStringAsync("http://www.edewakaru.com/archives/cat_179055.html");
             var reg1 = new Regex(@"href=""(http://www.edewakaru.com/archives/.+?\.html)"".*?>(.*?)<");
-            var text = html;
             var ms = reg1.Matches(text);
             var lines2 = new List<string>();
             var dic = new Dictionary<string, string> { { "〜", "～" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" } };
