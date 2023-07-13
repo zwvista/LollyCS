@@ -24,6 +24,7 @@ namespace LollyCommon.Crawlers.Patterns
                 var pt2 = patterns.Find(o => o.URL == pt.URL);
                 if (pt2 != null)
                 {
+                    pt.ID = pt2.ID;
                     await storept.Update(pt);
                     patterns.Remove(pt2);
                 }

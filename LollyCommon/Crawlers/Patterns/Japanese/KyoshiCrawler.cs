@@ -21,7 +21,7 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
             var m = reg1.Match(html);
             if (!m.Success) return;
             var pages = int.Parse(m.Groups[1].Value);
-            var reg2 = new Regex(@"<a href=""(https://nihongokyoshi-net.com/[^""]+?)"" title=""(【JLPT[^】]+?】文法・例文：[^""]+?)"" rel=""bookmark"">.+?</a>");
+            var reg2 = new Regex(@"<a href=""(https://nihongokyoshi-net.com/[^""]+?)"" title=""【JLPT([^】]+?)】文法・例文：([^""]+?)"" rel=""bookmark"">.+?</a>");
             var lines2 = new List<string>();
             var dic = new Dictionary<string, string> { { "〜", "～" }, { "/", "／" }, { " ", "" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" }, { "に出ない？", "0" } };
             for (int i = 1; i <= pages; i++)
@@ -31,31 +31,28 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
                 foreach (Match m2 in ms)
                 {
                     var url = m2.Groups[1].Value;
-                    var title = m2.Groups[2].Value.Replace(dic).Trim();
-                    var s = url + delim + title;
+                    var tag = m2.Groups[2].Value.Replace(dic).Trim();
+                    var title = m2.Groups[3].Value.Replace(dic).Trim();
+                    if (!tag.StartsWith("N")) tag = "N0";
+                    var s = url + delim + tag + delim + title;
                     lines2.Add(s);
                 }
             }
             File.WriteAllLines("b.txt", lines2);
         }
 
-        public override async Task Step2()
-        {
-            var reg1 = new Regex(@"【JLPT(N\d)】文法・例文：(.+)");
+        public override async Task Step2() =>
             await Step2("教師", a =>
             {
-                string url = a[0], title = a[1];
-                var m = reg1.Match(title);
-                string tag = m.Groups[1].Value, title2 = m.Groups[2].Value;
+                string url = a[0], tag = a[1], title = a[2];
                 return new MPattern
                 {
                     LANGID = 2,
-                    PATTERN = title2,
+                    PATTERN = title,
                     TAGS = "教師" + tag,
-                    TITLE = $"【{tag}】{title2}",
+                    TITLE = $"【{tag}】{title}",
                     URL = url,
                 };
             });
-        }
     }
 }
