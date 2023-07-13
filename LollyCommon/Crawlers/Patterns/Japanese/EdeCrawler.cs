@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -13,9 +14,11 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
     {
         public override async Task Step1()
         {
+            var client = new HttpClient();
+            // (日本語文法リスト（あいうえお順）)
+            var html = await client.GetStringAsync("http://www.edewakaru.com/archives/cat_179055.html");
             var reg1 = new Regex(@"href=""(http://www.edewakaru.com/archives/.+?\.html)"".*?>(.*?)<");
-            // source code of http://www.edewakaru.com/archives/cat_179055.html (日本語文法リスト（あいうえお順）)
-            var text = File.ReadAllLines("a.txt").MaxBy(s => s.Length).Single();
+            var text = html;
             var ms = reg1.Matches(text);
             var lines2 = new List<string>();
             var dic = new Dictionary<string, string> { { "〜", "～" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" } };

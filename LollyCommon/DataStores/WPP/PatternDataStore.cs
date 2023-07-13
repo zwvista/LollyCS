@@ -13,6 +13,9 @@ namespace LollyCommon
         public async Task<List<MPattern>> GetDataById(int id) =>
             (await GetDataByUrl<MPatterns>($"PATTERNS?filter=ID,eq,{id}")).Records;
 
+        public async Task<List<MPattern>> GetDataByTag(string tag) =>
+            (await GetDataByUrl<MPatterns>($"PATTERNS?filter=TAGS,sw,{tag}")).Records;
+
         public async Task<int> Create(MPattern item) =>
             await CreateByUrl($"PATTERNS", item);
 

@@ -42,7 +42,7 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
         public override async Task Step2()
         {
             var reg1 = new Regex(@"【JLPT(N\d)】文法・例文：(.+)");
-            await Step2(a =>
+            await Step2("教師", a =>
             {
                 string url = a[0], title = a[1];
                 var m = reg1.Match(title);

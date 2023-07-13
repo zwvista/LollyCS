@@ -35,7 +35,7 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
         }
 
         public override async Task Step2() =>
-            await Step2(a =>
+            await Step2("表現", a =>
             {
                 string url = a[0], patternNo = a[1], pattern = a[2], title = a[3];
                 return new MPattern
