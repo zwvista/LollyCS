@@ -24,7 +24,7 @@ namespace LollyCommon
         AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
         VoiceDataStore VoiceDS = new VoiceDataStore();
         CodeDataStore CodeDS = new CodeDataStore();
-        UnitBlogDataStore unitBlogDS = new UnitBlogDataStore();
+        UnitBlogPostDataStore unitBlogDS = new UnitBlogPostDataStore();
 
         public SettingsViewModel ShallowCopy() => (SettingsViewModel)this.MemberwiseClone();
 

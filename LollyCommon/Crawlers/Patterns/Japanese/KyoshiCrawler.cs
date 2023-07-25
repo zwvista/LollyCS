@@ -15,7 +15,6 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
     {
         public override async Task Step1()
         {
-            var client = new HttpClient();
             var html = await client.GetStringAsync("https://nihongokyoshi-net.com/category/jlpt/");
             var reg1 = new Regex(@"<a class=""page-numbers"" href=""https://nihongokyoshi-net.com/category/jlpt/page/(\d+)/"">\d+</a></div></main>");
             var m = reg1.Match(html);

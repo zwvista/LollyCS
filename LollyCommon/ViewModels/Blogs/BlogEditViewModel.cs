@@ -10,7 +10,7 @@ namespace LollyCommon
         BlogEditService service = new BlogEditService();
         LangBlogContentDataStore blogContentDS = new LangBlogContentDataStore();
         MLangBlogContent itemBlog = null;
-        bool isUnitBlog => itemBlog == null;
+        bool isUnitBlogPost => itemBlog == null;
         public string Title { get; set; }
 
         public ReactiveCommand<Unit, Unit> HtmlToMarkedCommand { get; }
@@ -21,7 +21,7 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.itemBlog = itemBlog;
-            Title = isUnitBlog ? vmSettings.UNITINFO : itemBlog.TITLE;
+            Title = isUnitBlogPost ? vmSettings.UNITINFO : itemBlog.TITLE;
 
             HtmlToMarkedCommand = ReactiveCommand.Create(() =>
             {
@@ -44,11 +44,11 @@ namespace LollyCommon
             return str;
         }
         public async Task<string> LoadBlog() =>
-            isUnitBlog ? await vmSettings.GetBlogContent() :
+            isUnitBlogPost ? await vmSettings.GetBlogContent() :
             (await blogContentDS.GetDataById(itemBlog.ID))?.CONTENT ?? "";
         public async Task SaveBlog(string content)
         {
-            if (isUnitBlog)
+            if (isUnitBlogPost)
             {
                 await vmSettings.SaveBlogContent(content);
             }
