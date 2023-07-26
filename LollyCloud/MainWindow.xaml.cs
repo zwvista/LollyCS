@@ -100,6 +100,7 @@ namespace LollyCloud
         void miTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<TextbooksControl>("Textbooks");
         void miWebTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<WebTextbooksControl>("WebTextbooks");
         void miDictionaries_Click(object sender, RoutedEventArgs e) => AddTab<DictsControl>("Dictionaries");
+        void miPatternCrawlers_Click(object sender, RoutedEventArgs e) => AddTab<PatternCrawlersControl>("Pattern Crawlers");
         void miTest_Click(object sender, RoutedEventArgs e) => AddTab<TestControl>("Test");
         void miLogout_Click(object sender, RoutedEventArgs e)
         {
