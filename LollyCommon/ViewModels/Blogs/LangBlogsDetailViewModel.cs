@@ -7,12 +7,12 @@ namespace LollyCommon
 {
     public class LangBlogsDetailViewModel : ReactiveObject
     {
-        MLangBlog item;
+        MLangBlogPost item;
         LangBlogsViewModel vm;
-        public MLangBlogEdit ItemEdit = new MLangBlogEdit();
+        public MLangBlogPostEdit ItemEdit = new MLangBlogPostEdit();
         public string LANGNAME { get; private set; }
 
-        public LangBlogsDetailViewModel(MLangBlog item, LangBlogsViewModel vm)
+        public LangBlogsDetailViewModel(MLangBlogPost item, LangBlogsViewModel vm)
         {
             bool isNew = item.ID == 0;
             this.item = item;

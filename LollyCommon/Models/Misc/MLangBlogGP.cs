@@ -9,22 +9,22 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class MLangBlogsContent
+    public class MLangBlogGPs
     {
         [JsonProperty("records")]
-        public List<MLangBlogPostContent> Records { get; set; }
+        public List<MLangBlogGPs> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangBlogPostContent : ReactiveObject
+    public class MLangBlogGP : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
         public int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TITLE { get; set; } = "";
+        public int GROUPID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string CONTENT { get; set; } = "";
+        public int POSTID { get; set; }
     }
 }

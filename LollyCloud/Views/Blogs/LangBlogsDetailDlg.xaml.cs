@@ -22,8 +22,8 @@ namespace LollyCloud
     public partial class LangBlogsDetailDlg : Window
     {
         LangBlogsDetailViewModel vmDetail;
-        public MLangBlog Item { get; set; }
-        public LangBlogsDetailDlg(Window owner, MLangBlog item, LangBlogsViewModel vm)
+        public MLangBlogPost Item { get; set; }
+        public LangBlogsDetailDlg(Window owner, MLangBlogPost item, LangBlogsViewModel vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();

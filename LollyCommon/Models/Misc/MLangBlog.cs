@@ -9,13 +9,13 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class MLangBlogs
+    public class MLangBlogPosts
     {
         [JsonProperty("records")]
-        public List<MLangBlog> Records { get; set; }
+        public List<MLangBlogPost> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangBlog : ReactiveObject
+    public class MLangBlogPost : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
@@ -33,7 +33,7 @@ namespace LollyCommon
         [Reactive]
         public string TITLE { get; set; } = "";
     }
-    public class MLangBlogEdit : ReactiveValidationObject
+    public class MLangBlogPostEdit : ReactiveValidationObject
     {
         [Reactive]
         public int ID { get; set; }
@@ -46,7 +46,7 @@ namespace LollyCommon
         [Reactive]
         public string TITLE { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
-        public MLangBlogEdit()
+        public MLangBlogPostEdit()
         {
             this.ValidationRule(x => x.TITLE, v => !string.IsNullOrWhiteSpace(v), "TITLE must not be empty");
             Save = ReactiveCommand.Create(() => { }, this.IsValid());

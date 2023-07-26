@@ -19,7 +19,7 @@ namespace LollyCloud
         string originalText = "";
         LangBlogsViewModel vm;
         BlogEditService editService = new BlogEditService();
-        LangBlogContentDataStore blogContentDS = new LangBlogContentDataStore();
+        LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
 
         public LangBlogsControl()
         {
@@ -42,7 +42,7 @@ namespace LollyCloud
                 if (sender == dgGroups)
                     await vm.UpdateGroup((MLangBlogGroup)item);
                 else
-                    await vm.UpdateBlog((MLangBlog)item);
+                    await vm.UpdateBlog((MLangBlogPost)item);
             });
         void dgGroups_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

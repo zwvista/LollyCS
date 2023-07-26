@@ -8,8 +8,8 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         BlogEditService service = new BlogEditService();
-        LangBlogContentDataStore blogContentDS = new LangBlogContentDataStore();
-        MLangBlogContent itemBlog = null;
+        LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
+        MLangBlogPostContent itemBlog = null;
         bool isUnitBlogPost => itemBlog == null;
         public string Title { get; set; }
 
@@ -17,7 +17,7 @@ namespace LollyCommon
         public string PatternUrl => service.GetPatternUrl(PatternNo);
         public ReactiveCommand<Unit, Unit> AddNotesCommand { get; }
 
-        public BlogEditViewModel(SettingsViewModel vmSettings, bool needCopy, MLangBlogContent itemBlog)
+        public BlogEditViewModel(SettingsViewModel vmSettings, bool needCopy, MLangBlogPostContent itemBlog)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.itemBlog = itemBlog;

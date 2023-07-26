@@ -15,9 +15,9 @@ namespace LollyCloud
     public partial class BlogEditControl : UserControl, ILollySettings
     {
         BlogEditViewModel vm;
-        MLangBlogContent itemBlog;
+        MLangBlogPostContent itemBlog;
 
-        public BlogEditControl(MLangBlogContent itemBlog)
+        public BlogEditControl(MLangBlogPostContent itemBlog)
         {
             InitializeComponent();
             // Disable image loading

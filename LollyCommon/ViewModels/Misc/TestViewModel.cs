@@ -17,8 +17,9 @@ namespace LollyCommon
 
         public TestViewModel()
         {
-            ExecuteCommand = ReactiveCommand.Create(() =>
+            ExecuteCommand = ReactiveCommand.CreateFromTask(async () =>
             {
+                await new ZwvistaBlogCrawler().GetLangBlogPosts();
             });
         }
     }

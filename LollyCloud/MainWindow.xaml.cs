@@ -111,7 +111,7 @@ namespace LollyCloud
             dlg.ShowDialog();
         }
         void miExit_Click(object sender, RoutedEventArgs e) => Environment.Exit(0);
-        public void AddBlogEditTab(string header, MLangBlogContent itemBlog)
+        public void AddBlogEditTab(string header, MLangBlogPostContent itemBlog)
         {
             Tabs.Add(new ActionTabItem { Header = header, Content = new BlogEditControl(itemBlog) });
             tcMain.SelectedIndex = tcMain.Items.Count - 1;
