@@ -15,7 +15,6 @@ namespace LollyCommon
         public override async Task Step1()
         {
             var reg1 = new Regex(@"<a href=""http://(www.krlearn.com/.+?)"" target=""_blank"" title=""(.+?)"" style=""color: #039;"">.+?</a>");
-            var client = new HttpClient();
             var lines2 = new List<string>();
             for (int i = 1; i < 100; i++)
             {

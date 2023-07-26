@@ -15,7 +15,6 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
         public override async Task Step1()
         {
             var reg1 = new Regex(@"<h2 class=""post-title"">\n\s+<a href=""(https://zwvista.wordpress.com/.+?)"" rel=""bookmark"">【日语句型】(.+?)</a>\n\s+</h2>");
-            var client = new HttpClient();
             var lines2 = new List<string>();
             for (int i = 1; i < 100; i++)
             {

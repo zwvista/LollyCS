@@ -19,7 +19,6 @@ namespace LollyCommon.Crawlers.Patterns.Korean
             var reg2 = new Regex(@"<td width=""25%"" style=""padding-left:8px;""><a href=""(.+?)"" class=""menu_d"">");
             var reg3 = new Regex(@"\s+<tr>\r\n\s+<td>(.+?)</td>\r\n\s+<td>.+\r\n\s+<td><a href=""(/w/.+?)"">(.+?)&nbsp;</a>");
             var urlSet = new HashSet<string>();
-            var client = new HttpClient();
             var lines2 = new List<string>();
             {
                 var html = await client.GetStringAsync($"https://www.kpedia.jp/p/379?nCP=1");

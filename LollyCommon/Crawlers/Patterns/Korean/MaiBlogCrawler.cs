@@ -17,7 +17,6 @@ namespace LollyCommon.Crawlers.Patterns.Korean
         {
             var reg1 = new Regex(@"<a href=""(http://00mai00.blog110.fc2.com/blog-entry[^""]+?)"">(.+?)</a>");
             var urlSet = new HashSet<string>();
-            var client = new HttpClient();
             var lines2 = new List<string>();
             for (int i = 0; i < 100; i++)
             {

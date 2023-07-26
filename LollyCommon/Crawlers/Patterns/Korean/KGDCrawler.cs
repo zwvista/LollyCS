@@ -16,7 +16,6 @@ namespace LollyCommon.Crawlers.Patterns.Korean
         public override async Task Step1()
         {
             var home = "http://koreangrammaticalforms.com/";
-            var client = new HttpClient();
             var html = await client.GetStringAsync($"{home}index.php");
             var reg1 = new Regex(@"<a href=""javascript: GetPage\('(.+?)'\);"">.+?</a>");
             var reg2 = new Regex(@"<li><a href=""(.+?)"" target=""_blank"">(.+?)</a></li>");

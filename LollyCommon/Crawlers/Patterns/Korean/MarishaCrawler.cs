@@ -15,7 +15,6 @@ namespace LollyCommon.Crawlers.Patterns.Korean
         public override async Task Step1()
         {
             var reg1 = new Regex(@"<h1 class=""entryTitle inblock""><a href=""(.+?)"" title="".+?"" class=""arr1"">(.+?)</a>");
-            var client = new HttpClient();
             var lines2 = new List<string>();
             for (int i = 1; i < 100; i++)
             {
