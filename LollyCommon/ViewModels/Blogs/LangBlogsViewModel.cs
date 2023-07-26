@@ -14,7 +14,7 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
-        LangBlogDataStore blogDS = new LangBlogDataStore();
+        LangBlogPostDataStore blogDS = new LangBlogPostDataStore();
         LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
         [Reactive]
         public MLangBlogGroup SelectedGroupItem { get; set; }

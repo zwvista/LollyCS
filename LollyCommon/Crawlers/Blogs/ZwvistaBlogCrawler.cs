@@ -16,6 +16,10 @@ namespace LollyCommon
         public async Task GetLangBlogPosts()
         {
             var blogGroups = await new LangBlogGroupDataStore().GetDataByLang(2);
+            var dsGP = new LangBlogGPDataStore();
+            var dsPost = new LangBlogPostDataStore();
+            var dsContent = new LangBlogPostContentDataStore();
+            var service = new BlogEditService();
             var reg1 = new Regex(@"\s+<a href=""(https://zwvista.wordpress.com/.+?)"" rel=""bookmark"">【日语句型】(.+?)</a>");
             var reg2 = new Regex(@"<div class=""entry"">");
             var reg3 = new Regex(@"<div id=""atatags.+?""></div>");
@@ -34,6 +38,7 @@ namespace LollyCommon
                 var lines = html.Split('\n');
                 string url = "", title = "", content = "";
                 var state = 0;
+                var itemContent = new MLangBlogPostContent();
                 foreach (var line in lines)
                 {
                     var m = reg1.Match(line);
@@ -41,6 +46,13 @@ namespace LollyCommon
                     {
                         url = m.Groups[1].Value;
                         title = m.Groups[2].Value;
+                        var item = new MLangBlogPost
+                        {
+                            TITLE = title,
+                            URL = url,
+                        };
+                        itemContent.ID = await dsPost.Create(item);
+                        itemContent.TITLE = title;
                         continue;
                     }
                     m = reg2.Match(line);
@@ -58,6 +70,8 @@ namespace LollyCommon
                         if (line.IsEmpty() || reg3.Match(line).Success)
                         {
                             state = 0;
+                            itemContent.CONTENT = service.HtmlToMarked(content);
+                            await dsContent.Update(itemContent);
                             content = "";
                             continue;
                         }
@@ -67,13 +81,18 @@ namespace LollyCommon
                     {
                         var ms = reg4.Matches(line).Cast<Match>().ToList();
                         if (ms.IsEmpty()) continue;
-                        var groups = ms.Select(m2 => m2.Groups[1].Value).ToList();
-                        var groupIds = groups
-                            .Select(g => blogGroups.First(bg => bg.GROUPNAME == g).ID)
+                        var groupNames = ms.Select(m2 => m2.Groups[1].Value).ToList();
+                        var groupIds = groupNames
+                            .Select(s => blogGroups.First(g => g.GROUPNAME == s).ID)
                             .ToList();
-                        groupIds.ForEach(t =>
+                        groupIds.ForEach(async id =>
                         {
-
+                            var item = new MLangBlogGP
+                            {
+                                POSTID = itemContent.ID,
+                                GROUPID = id,
+                            };
+                            await dsGP.Create(item);
                         });
                     }
                 }

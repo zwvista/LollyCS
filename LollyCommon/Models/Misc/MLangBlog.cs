@@ -32,6 +32,9 @@ namespace LollyCommon
         [JsonProperty]
         [Reactive]
         public string TITLE { get; set; } = "";
+        [JsonProperty]
+        [Reactive]
+        public string URL { get; set; } = "";
     }
     public class MLangBlogPostEdit : ReactiveValidationObject
     {
@@ -45,6 +48,8 @@ namespace LollyCommon
         public string GROUPNAME { get; set; }
         [Reactive]
         public string TITLE { get; set; }
+        [Reactive]
+        public string URL { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangBlogPostEdit()
         {

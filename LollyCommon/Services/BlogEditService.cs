@@ -60,9 +60,10 @@ namespace LollyCommon
             return string.Join("\r\n", lst);
         }
         readonly Regex regLine = new Regex("<div>(.*?)</div>");
-        Regex regHtmlB => new Regex(HtmlBWith("(.+?)"));
-        Regex regHtmlI => new Regex(HtmlIWith("(.+?)"));
-        Regex regHtmlEntry => new Regex($"(<li>|<br>){HtmlWordWith("(.*?)")}(?:{HtmlE1With("(.*?)")})?(?:{HtmlE2With("(.*?)")})?(?:</li>)?");
+        string AddQMToColon(string s) => s.Replace(";", ";?");
+        Regex regHtmlB => new Regex(AddQMToColon(HtmlBWith("(.+?)")));
+        Regex regHtmlI => new Regex(AddQMToColon(HtmlIWith("(.+?)")));
+        Regex regHtmlEntry => new Regex($"(<li>|<br>){AddQMToColon(HtmlWordWith("(.*?)"))}(?:{AddQMToColon(HtmlE1With("(.*?)"))})?(?:{AddQMToColon(HtmlE2With("(.*?)"))})?(?:</li>)?");
         public string HtmlToMarked(string text)
         {
             var lst = text.Split(new[] { text.Contains('\r') ? "\r\n" : "\n" }, StringSplitOptions.None).ToList();
