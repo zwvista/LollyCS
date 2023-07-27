@@ -17,19 +17,19 @@ using System.Windows.Shapes;
 namespace LollyCloud
 {
     /// <summary>
-    /// LangBlogsDetailDlg.xaml の相互作用ロジック
+    /// LangBlogPostsDetailDlg.xaml の相互作用ロジック
     /// </summary>
-    public partial class LangBlogsDetailDlg : Window
+    public partial class LangBlogPostsDetailDlg : Window
     {
-        LangBlogsDetailViewModel vmDetail;
+        LangBlogPostsDetailViewModel vmDetail;
         public MLangBlogPost Item { get; set; }
-        public LangBlogsDetailDlg(Window owner, MLangBlogPost item, LangBlogsViewModel vm)
+        public LangBlogPostsDetailDlg(Window owner, MLangBlogPost item, LangBlogPostsViewModel vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
             Owner = owner;
-            vmDetail = new LangBlogsDetailViewModel(Item = item, vm);
+            vmDetail = new LangBlogPostsDetailViewModel(Item = item, vm);
             DataContext = vmDetail.ItemEdit;
             tbLangName.Text = vmDetail.LANGNAME;
         }

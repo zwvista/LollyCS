@@ -8,11 +8,11 @@ namespace LollyCommon
     public class LangBlogGroupsDetailViewModel : ReactiveObject
     {
         MLangBlogGroup item;
-        LangBlogsViewModel vm;
+        LangBlogGroupsViewModel vm;
         public MLangBlogGroupEdit ItemEdit = new MLangBlogGroupEdit();
         public string LANGNAME { get; private set; }
 
-        public LangBlogGroupsDetailViewModel(MLangBlogGroup item, LangBlogsViewModel vm)
+        public LangBlogGroupsDetailViewModel(MLangBlogGroup item, LangBlogGroupsViewModel vm)
         {
             bool isNew = item.ID == 0;
             this.item = item;

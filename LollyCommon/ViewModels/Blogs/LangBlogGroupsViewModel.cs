@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class LangBlogsViewModel : ReactiveObject
+    public class LangBlogGroupsViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
@@ -24,10 +24,10 @@ namespace LollyCommon
         public MLangBlogPost SelectedBlogItem { get; set; }
         public bool HasSelectedBlogItem { [ObservableAsProperty] get; }
         [Reactive]
-        public string BlogContent { get; set; } = "";
+        public string PostContent { get; set; } = "";
         public ObservableCollection<MLangBlogPost> BlogItems { get; set; } = new ObservableCollection<MLangBlogPost>();
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
-        public LangBlogsViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public LangBlogGroupsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
@@ -41,7 +41,7 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.SelectedBlogItem, (MLangBlogPost v) => v != null).ToPropertyEx(this, x => x.HasSelectedBlogItem);
             this.WhenAnyValue(x => x.SelectedBlogItem).Where(v => v != null).Subscribe(async v => 
             {
-                BlogContent = (await blogContentDS.GetDataById(v.ID))?.CONTENT;
+                PostContent = (await blogContentDS.GetDataById(v.ID))?.CONTENT;
             });
             Reload();
         }

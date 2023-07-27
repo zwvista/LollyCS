@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class BlogEditViewModel : MBlogEdit
+    public class BlogPostEditViewModel : MBlogPostEdit
     {
         public SettingsViewModel vmSettings;
-        BlogEditService service = new BlogEditService();
+        BlogPostEditService service = new BlogPostEditService();
         LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
         MLangBlogPostContent itemBlog = null;
         bool isUnitBlogPost => itemBlog == null;
@@ -17,7 +17,7 @@ namespace LollyCommon
         public string PatternUrl => service.GetPatternUrl(PatternNo);
         public ReactiveCommand<Unit, Unit> AddNotesCommand { get; }
 
-        public BlogEditViewModel(SettingsViewModel vmSettings, bool needCopy, MLangBlogPostContent itemBlog)
+        public BlogPostEditViewModel(SettingsViewModel vmSettings, bool needCopy, MLangBlogPostContent itemBlog)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.itemBlog = itemBlog;

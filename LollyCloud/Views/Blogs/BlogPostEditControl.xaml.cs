@@ -10,14 +10,14 @@ using System.Windows.Input;
 namespace LollyCloud
 {
     /// <summary>
-    /// BlogEditControl.xaml の相互作用ロジック
+    /// BlogPostEditControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class BlogEditControl : UserControl, ILollySettings
+    public partial class BlogPostEditControl : UserControl, ILollySettings
     {
-        BlogEditViewModel vm;
+        BlogPostEditViewModel vm;
         MLangBlogPostContent itemBlog;
 
-        public BlogEditControl(MLangBlogPostContent itemBlog)
+        public BlogPostEditControl(MLangBlogPostContent itemBlog)
         {
             InitializeComponent();
             // Disable image loading
@@ -28,7 +28,7 @@ namespace LollyCloud
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new BlogEditViewModel(MainWindow.vmSettings, true, itemBlog);
+            DataContext = vm = new BlogPostEditViewModel(MainWindow.vmSettings, true, itemBlog);
             tbMarked.Text = await vm.LoadBlog();
         }
 

@@ -5,14 +5,14 @@ using System.Text;
 
 namespace LollyCommon
 {
-    public class LangBlogsDetailViewModel : ReactiveObject
+    public class LangBlogPostsDetailViewModel : ReactiveObject
     {
         MLangBlogPost item;
-        LangBlogsViewModel vm;
+        LangBlogPostsViewModel vm;
         public MLangBlogPostEdit ItemEdit = new MLangBlogPostEdit();
         public string LANGNAME { get; private set; }
 
-        public LangBlogsDetailViewModel(MLangBlogPost item, LangBlogsViewModel vm)
+        public LangBlogPostsDetailViewModel(MLangBlogPost item, LangBlogPostsViewModel vm)
         {
             bool isNew = item.ID == 0;
             this.item = item;
