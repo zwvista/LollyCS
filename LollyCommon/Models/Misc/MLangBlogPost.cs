@@ -25,12 +25,6 @@ namespace LollyCommon
         public int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int GROUPID { get; set; }
-        [JsonProperty]
-        [Reactive]
-        public string GROUPNAME { get; set; } = "";
-        [JsonProperty]
-        [Reactive]
         public string TITLE { get; set; } = "";
         [JsonProperty]
         [Reactive]
@@ -42,10 +36,6 @@ namespace LollyCommon
         public int ID { get; set; }
         [Reactive]
         public int LANGID { get; set; }
-        [Reactive]
-        public int GROUPID { get; set; }
-        [Reactive]
-        public string GROUPNAME { get; set; }
         [Reactive]
         public string TITLE { get; set; }
         [Reactive]

@@ -12,16 +12,16 @@ using static System.Net.Mime.MediaTypeNames;
 namespace LollyCloud
 {
     /// <summary>
-    /// LangBlogsControl.xaml の相互作用ロジック
+    /// LangBlogPostsControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class LangBlogsControl : UserControl, ILollySettings
+    public partial class LangBlogPostsControl : UserControl, ILollySettings
     {
         string originalText = "";
         LangBlogsViewModel vm;
         BlogEditService editService = new BlogEditService();
         LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
 
-        public LangBlogsControl()
+        public LangBlogPostsControl()
         {
             InitializeComponent();
             // Disable image loading

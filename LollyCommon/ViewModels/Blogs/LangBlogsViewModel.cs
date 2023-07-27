@@ -64,7 +64,6 @@ namespace LollyCommon
         public MLangBlogPost NewBlog() => new MLangBlogPost
         {
             LANGID = vmSettings.SelectedLang.ID,
-            GROUPID = SelectedGroupItem.ID,
         };
     }
 }
