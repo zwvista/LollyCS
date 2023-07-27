@@ -46,16 +46,17 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
-                <DataGrid Grid.Row="2" x:Name="dgBlogs" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
+                <DataGrid Grid.Row="2" x:Name="dgPosts" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
                           ItemsSource="{Binding PostItems}" SelectedItem="{Binding SelectedPostItem}"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
+                        <DataGridTextColumn Binding="{Binding URL}" Header="URL" />
                     </DataGrid.Columns>
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                            <EventSetter Event="MouseDoubleClick" Handler="dgBlogs_RowDoubleClick"/>
+                            <EventSetter Event="MouseDoubleClick" Handler="dgPosts_RowDoubleClick"/>
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>

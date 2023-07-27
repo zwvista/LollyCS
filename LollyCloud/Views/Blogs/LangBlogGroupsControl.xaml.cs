@@ -65,13 +65,13 @@ namespace LollyCloud
         }
         void miAddBlog_Click(object sender, RoutedEventArgs e)
         {
-            //dgBlogs.CancelEdit();
+            //dgPosts.CancelEdit();
             //var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
             //dlg.ShowDialog();
         }
         void miEditBlog_Click(object sender, RoutedEventArgs e)
         {
-            //dgBlogs.CancelEdit();
+            //dgPosts.CancelEdit();
             //var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
             //dlg.ShowDialog();
         }
@@ -84,7 +84,7 @@ namespace LollyCloud
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)
         {
         }
-        void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        void dgPosts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             miEditBlog_Click(sender, null);
         }

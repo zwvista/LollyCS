@@ -24,7 +24,32 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgGroups" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding GroupItems}"
+                <DataGrid x:Name="dgPosts" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
+                          ItemsSource="{Binding PostItems}" SelectedItem="{Binding SelectedPostItem}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
+                        <DataGridTextColumn Binding="{Binding URL}" Header="URL" />
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="dgPosts_RowDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="miAddBlog" Header="Add" Click="miAddBlog_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miEditBlog" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlog_Click" />
+                            <MenuItem x:Name="miEditContentBlog" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlogContent_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDeleteBlog" Header="Delete" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeleteBlog_Click" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
+                <DataGrid Grid.Row="2" x:Name="dgGroups" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding GroupItems}"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedGroupItem}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
@@ -42,30 +67,6 @@
                             <MenuItem x:Name="miEditGroup" Header="Edit" IsEnabled="{Binding HasSelectedGroupItem}" Click="miEditGroup_Click" />
                             <Separator />
                             <MenuItem x:Name="miDeleteGroup" Header="Delete" IsEnabled="{Binding HasSelectedGroupItem}" Click="miDeleteGroup_Click" />
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
-                </DataGrid>
-                <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
-                <DataGrid Grid.Row="2" x:Name="dgBlogs" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                          ItemsSource="{Binding PostItems}" SelectedItem="{Binding SelectedPostItem}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding TITLE}" Header="TITLE"/>
-                    </DataGrid.Columns>
-                    <DataGrid.Resources>
-                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                            <EventSetter Event="MouseDoubleClick" Handler="dgBlogs_RowDoubleClick"/>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem x:Name="miAddBlog" Header="Add" Click="miAddBlog_Click" />
-                            <Separator />
-                            <MenuItem x:Name="miEditBlog" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlog_Click" />
-                            <MenuItem x:Name="miEditContentBlog" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlogContent_Click" />
-                            <Separator />
-                            <MenuItem x:Name="miDeleteBlog" Header="Delete" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeleteBlog_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

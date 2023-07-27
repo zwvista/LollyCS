@@ -32,7 +32,7 @@ namespace LollyCloud
         public async Task OnSettingsChanged()
         {
             DataContext = vm = new LangBlogPostsViewModel(MainWindow.vmSettings, true);
-            vm.WhenAnyValue(x => x.BlogContent).Subscribe(v => wbBlog.LoadLargeHtml(editService.MarkedToHtml(v, "\n")));
+            vm.WhenAnyValue(x => x.PostContent).Subscribe(v => wbBlog.LoadLargeHtml(editService.MarkedToHtml(v, "\n")));
         }
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
             originalText = DataGridHelper.OnBeginEditCell(e);
@@ -65,13 +65,13 @@ namespace LollyCloud
         }
         void miAddBlog_Click(object sender, RoutedEventArgs e)
         {
-            //dgBlogs.CancelEdit();
+            //dgPosts.CancelEdit();
             //var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.NewBlog(), vm);
             //dlg.ShowDialog();
         }
         void miEditBlog_Click(object sender, RoutedEventArgs e)
         {
-            //dgBlogs.CancelEdit();
+            //dgPosts.CancelEdit();
             //var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
             //dlg.ShowDialog();
         }
@@ -84,7 +84,7 @@ namespace LollyCloud
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)
         {
         }
-        void dgBlogs_RowDoubleClick(object sender, MouseButtonEventArgs e)
+        void dgPosts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
             miEditBlog_Click(sender, null);
         }

@@ -13,43 +13,40 @@ namespace LollyCommon
     public class LangBlogPostsViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
-        LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
         LangBlogPostDataStore postDS = new LangBlogPostDataStore();
         LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
-        [Reactive]
-        public MLangBlogGroup SelectedGroupItem { get; set; }
-        public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
-        public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = new ObservableCollection<MLangBlogGroup>();
+        LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
         [Reactive]
         public MLangBlogPost SelectedPostItem { get; set; }
         public bool HasSelectedPostItem { [ObservableAsProperty] get; }
         [Reactive]
-        public string BlogContent { get; set; } = "";
+        public string PostContent { get; set; } = "";
+        [Reactive]
+        public MLangBlogGroup SelectedGroupItem { get; set; }
+        public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
         public ObservableCollection<MLangBlogPost> PostItems { get; set; } = new ObservableCollection<MLangBlogPost>();
+        public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = new ObservableCollection<MLangBlogGroup>();
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
         public LangBlogPostsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
-            this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
-            {
-                var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v.ID);
-                PostItems = new ObservableCollection<MLangBlogPost>(lst);
-                this.RaisePropertyChanged(nameof(PostItems));
-            });
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
-                BlogContent = (await contentDS.GetDataById(v.ID))?.CONTENT;
+                PostContent = (await contentDS.GetDataById(v.ID))?.CONTENT;
+                var lst = await groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, v.ID);
+                GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
+                this.RaisePropertyChanged(nameof(GroupItems));
             });
+            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
             Reload();
         }
         public void Reload() =>
-            groupDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
+            postDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
-                GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
-                this.RaisePropertyChanged(nameof(GroupItems));
+                PostItems = new ObservableCollection<MLangBlogPost>(lst);
+                this.RaisePropertyChanged(nameof(PostItems));
             });
         public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);
         public async Task CreateGroup(MLangBlogGroup item) => item.ID = await groupDS.Create(item);
