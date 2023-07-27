@@ -95,7 +95,7 @@ namespace LollyCloud
         void miPhrasesTextbook_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesTextbookControl>("Phrases in Textbook");
         void miPatterns_Click(object sender, RoutedEventArgs e) => AddTab<PatternsControl>("Patterns in Language");
         void miUnitBlogPost_Click(object sender, RoutedEventArgs e) => AddBlogPostEditTab("Unit Blog", null);
-        void miLangBlogGroups_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogPostsControl>("Language Blog Groups");
+        void miLangBlogGroups_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogGroupsControl>("Language Blog Groups");
         void miLangBlogPosts_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogPostsControl>("Language Blog Posts");
         void miReadNumber_Click(object sender, RoutedEventArgs e) => AddTab<ReadNumberControl>("Read Number");
         void miTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<TextbooksControl>("Textbooks");

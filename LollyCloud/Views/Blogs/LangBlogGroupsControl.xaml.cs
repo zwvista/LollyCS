@@ -72,13 +72,13 @@ namespace LollyCloud
         void miEditBlog_Click(object sender, RoutedEventArgs e)
         {
             //dgBlogs.CancelEdit();
-            //var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedBlogItem, vm);
+            //var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
             //dlg.ShowDialog();
         }
         async void miEditBlogContent_Click(object sender, RoutedEventArgs e)
         {
             var w = (MainWindow)Window.GetWindow(this);
-            var itemBlog = await blogContentDS.GetDataById(vm.SelectedBlogItem.ID);
+            var itemBlog = await blogContentDS.GetDataById(vm.SelectedPostItem.ID);
             w.AddBlogPostEditTab("Language Blog", itemBlog);
         }
         void miDeleteBlog_Click(object sender, RoutedEventArgs e)

@@ -47,7 +47,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgBlogs" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                          ItemsSource="{Binding BlogItems}" SelectedItem="{Binding SelectedBlogItem}"
+                          ItemsSource="{Binding BlogItems}" SelectedItem="{Binding SelectedPostItem}"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
@@ -62,10 +62,10 @@
                         <ContextMenu>
                             <MenuItem x:Name="miAddBlog" Header="Add" Click="miAddBlog_Click" />
                             <Separator />
-                            <MenuItem x:Name="miEditBlog" Header="Edit" IsEnabled="{Binding HasSelectedBlogItem}" Click="miEditBlog_Click" />
-                            <MenuItem x:Name="miEditContentBlog" Header="Edit Content" IsEnabled="{Binding HasSelectedBlogItem}" Click="miEditBlogContent_Click" />
+                            <MenuItem x:Name="miEditBlog" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlog_Click" />
+                            <MenuItem x:Name="miEditContentBlog" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlogContent_Click" />
                             <Separator />
-                            <MenuItem x:Name="miDeleteBlog" Header="Delete" IsEnabled="{Binding HasSelectedBlogItem}" Click="miDeleteBlog_Click" />
+                            <MenuItem x:Name="miDeleteBlog" Header="Delete" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeleteBlog_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

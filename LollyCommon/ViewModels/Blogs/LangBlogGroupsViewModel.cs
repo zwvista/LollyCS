@@ -14,15 +14,16 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
-        LangBlogPostDataStore blogDS = new LangBlogPostDataStore();
+        LangBlogPostDataStore postDS = new LangBlogPostDataStore();
+        LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
         LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
         [Reactive]
         public MLangBlogGroup SelectedGroupItem { get; set; }
         public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
         public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = new ObservableCollection<MLangBlogGroup>();
         [Reactive]
-        public MLangBlogPost SelectedBlogItem { get; set; }
-        public bool HasSelectedBlogItem { [ObservableAsProperty] get; }
+        public MLangBlogPost SelectedPostItem { get; set; }
+        public bool HasSelectedPostItem { [ObservableAsProperty] get; }
         [Reactive]
         public string PostContent { get; set; } = "";
         public ObservableCollection<MLangBlogPost> BlogItems { get; set; } = new ObservableCollection<MLangBlogPost>();
@@ -34,12 +35,12 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
             this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
             {
-                var lst = await blogDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v.ID);
+                var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v.ID);
                 BlogItems = new ObservableCollection<MLangBlogPost>(lst);
                 this.RaisePropertyChanged(nameof(BlogItems));
             });
-            this.WhenAnyValue(x => x.SelectedBlogItem, (MLangBlogPost v) => v != null).ToPropertyEx(this, x => x.HasSelectedBlogItem);
-            this.WhenAnyValue(x => x.SelectedBlogItem).Where(v => v != null).Subscribe(async v => 
+            this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
+            this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
                 PostContent = (await blogContentDS.GetDataById(v.ID))?.CONTENT;
             });
@@ -58,9 +59,9 @@ namespace LollyCommon
         {
             LANGID = vmSettings.SelectedLang.ID,
         };
-        public async Task UpdateBlog(MLangBlogPost item) => await blogDS.Update(item);
-        public async Task CreateBlog(MLangBlogPost item) => item.ID = await blogDS.Create(item);
-        public async Task DeleteBlog(int id) => await blogDS.Delete(id);
+        public async Task UpdateBlog(MLangBlogPost item) => await postDS.Update(item);
+        public async Task CreateBlog(MLangBlogPost item) => item.ID = await postDS.Create(item);
+        public async Task DeleteBlog(int id) => await postDS.Delete(id);
         public MLangBlogPost NewBlog() => new MLangBlogPost
         {
             LANGID = vmSettings.SelectedLang.ID,
