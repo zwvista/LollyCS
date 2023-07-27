@@ -47,7 +47,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgBlogs" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                          ItemsSource="{Binding BlogItems}" SelectedItem="{Binding SelectedPostItem}"
+                          ItemsSource="{Binding PostItems}" SelectedItem="{Binding SelectedPostItem}"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />

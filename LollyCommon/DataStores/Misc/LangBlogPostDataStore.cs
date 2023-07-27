@@ -10,9 +10,16 @@ namespace LollyCommon
     public class LangBlogPostDataStore : LollyDataStore<MLangBlogPost>
     {
         public async Task<List<MLangBlogPost>> GetDataByLang(int langid) =>
-            (await GetDataByUrl<MLangBlogPosts>($"VLANGBLOGGP?filter=LANGID,eq,{langid}")).Records;
+            (await GetDataByUrl<MLangBlogPosts>($"LANGBLOGPOSTS?filter=LANGID,eq,{langid}")).Records;
         public async Task<List<MLangBlogPost>> GetDataByLangGroup(int langid, int groupid) =>
-            (await GetDataByUrl<MLangBlogPosts>($"VLANGBLOGGP?filter=LANGID,eq,{langid}&GROUPID,eq,{groupid}")).Records;
+            (await GetDataByUrl<MLangBlogGPs>($"VLANGBLOGGP?filter=LANGID,eq,{langid}&filter=GROUPID,eq,{groupid}")).Records
+            .Select(o => new MLangBlogPost
+            {
+                ID = o.POSTID,
+                LANGID = langid,
+                TITLE = o.TITLE,
+                URL = o.URL,
+            }).Distinct(o => o.ID).ToList();
         public async Task<int> Create(MLangBlogPost item) =>
             await CreateByUrl($"LANGBLOGPOSTS", item);
         public async Task Update(MLangBlogPost item) =>

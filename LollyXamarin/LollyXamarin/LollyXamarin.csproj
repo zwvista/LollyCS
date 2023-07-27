@@ -8,17 +8,17 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody" Version="6.6.4">
+    <PackageReference Include="Fody" Version="6.8.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="ReactiveUI" Version="18.4.26" />
-    <PackageReference Include="ReactiveUI.Fody" Version="18.4.26" />
+    <PackageReference Include="ReactiveUI" Version="19.4.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
     <PackageReference Include="ReactiveUI.Validation" Version="3.1.7" />
-    <PackageReference Include="ReactiveUI.XamForms" Version="18.4.26" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="19.4.1" />
     <PackageReference Include="System.Interactive" Version="6.0.1" />
-    <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
+    <PackageReference Include="System.Reactive.Linq" Version="6.0.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Iconize.FontAwesome" Version="3.5.0.129" />
     <PackageReference Include="Xamarin.Plugins.Clipboard" Version="2.3.0" />
@@ -30,7 +30,7 @@
     <PackageReference Include="Xam.Plugin.Iconize.WeatherIcons" Version="3.5.0.129" />
     <PackageReference Include="Xam.Plugin.Iconize.JamIcons" Version="3.5.0.129" />
     <PackageReference Include="Xam.Plugin.Iconize.SimpleLineIcons" Version="3.5.0.129" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>

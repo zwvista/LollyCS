@@ -12,7 +12,13 @@ namespace LollyCommon
         public async Task<List<MLangBlogGroup>> GetDataByLang(int langid) =>
             (await GetDataByUrl<MLangBlogGroups>($"LANGBLOGGROUPS?filter=LANGID,eq,{langid}")).Records;
         public async Task<List<MLangBlogGroup>> GetDataByLangPost(int langid, int postid) =>
-            (await GetDataByUrl<MLangBlogGroups>($"VLANGBLOGGP?filter=LANGID,eq,{langid}&POSTID,eq,{postid}")).Records;
+            (await GetDataByUrl<MLangBlogGPs>($"VLANGBLOGGP?filter=LANGID,eq,{langid}&filter=POSTID,eq,{postid}")).Records
+            .Select(o => new MLangBlogGroup
+            {
+                ID = o.GROUPID,
+                LANGID = langid,
+                GROUPNAME = o.GROUPNAME,
+            }).Distinct(o => o.ID).ToList();
         public async Task<int> Create(MLangBlogGroup item) =>
             await CreateByUrl($"LANGBLOGGROUPS", item);
         public async Task Update(MLangBlogGroup item) =>

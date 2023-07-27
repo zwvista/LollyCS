@@ -15,8 +15,8 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
         LangBlogPostDataStore postDS = new LangBlogPostDataStore();
+        LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
         LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
-        LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
         [Reactive]
         public MLangBlogGroup SelectedGroupItem { get; set; }
         public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
@@ -26,7 +26,7 @@ namespace LollyCommon
         public bool HasSelectedPostItem { [ObservableAsProperty] get; }
         [Reactive]
         public string PostContent { get; set; } = "";
-        public ObservableCollection<MLangBlogPost> BlogItems { get; set; } = new ObservableCollection<MLangBlogPost>();
+        public ObservableCollection<MLangBlogPost> PostItems { get; set; } = new ObservableCollection<MLangBlogPost>();
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
         public LangBlogGroupsViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
@@ -36,13 +36,13 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
             {
                 var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v.ID);
-                BlogItems = new ObservableCollection<MLangBlogPost>(lst);
-                this.RaisePropertyChanged(nameof(BlogItems));
+                PostItems = new ObservableCollection<MLangBlogPost>(lst);
+                this.RaisePropertyChanged(nameof(PostItems));
             });
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
-                PostContent = (await blogContentDS.GetDataById(v.ID))?.CONTENT;
+                PostContent = (await contentDS.GetDataById(v.ID))?.CONTENT;
             });
             Reload();
         }

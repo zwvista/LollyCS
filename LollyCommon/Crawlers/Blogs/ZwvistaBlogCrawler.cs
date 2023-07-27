@@ -20,7 +20,7 @@ namespace LollyCommon
             var dsPost = new LangBlogPostDataStore();
             var dsContent = new LangBlogPostContentDataStore();
             var service = new BlogPostEditService();
-            var reg1 = new Regex(@"\s+<a href=""(https://zwvista.wordpress.com/.+?)"" rel=""bookmark"">【日语句型】(.+?)</a>");
+            var reg1 = new Regex(@"\s+<a href=""(https://zwvista.wordpress.com/.+?)"" rel=""bookmark"">(【日语句型】.+?)</a>");
             var reg2 = new Regex(@"<div class=""entry"">");
             var reg3 = new Regex(@"<div id=""atatags.+?""></div>");
             var reg4 = new Regex(@"<a href=""https://zwvista.wordpress.com/.+?"" rel=""category tag"">(.+?)</a>");
@@ -48,6 +48,7 @@ namespace LollyCommon
                         title = m.Groups[2].Value;
                         var item = new MLangBlogPost
                         {
+                            LANGID = 2,
                             TITLE = title,
                             URL = url,
                         };

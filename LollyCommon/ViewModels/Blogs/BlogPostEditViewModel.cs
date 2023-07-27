@@ -8,7 +8,7 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         BlogPostEditService service = new BlogPostEditService();
-        LangBlogPostContentDataStore blogContentDS = new LangBlogPostContentDataStore();
+        LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
         MLangBlogPostContent itemBlog = null;
         bool isUnitBlogPost => itemBlog == null;
         public string Title { get; set; }
@@ -45,7 +45,7 @@ namespace LollyCommon
         }
         public async Task<string> LoadBlog() =>
             isUnitBlogPost ? await vmSettings.GetBlogContent() :
-            (await blogContentDS.GetDataById(itemBlog.ID))?.CONTENT ?? "";
+            (await contentDS.GetDataById(itemBlog.ID))?.CONTENT ?? "";
         public async Task SaveBlog(string content)
         {
             if (isUnitBlogPost)
@@ -55,7 +55,7 @@ namespace LollyCommon
             else
             {
                 itemBlog.CONTENT = content;
-                await blogContentDS.Update(itemBlog);
+                await contentDS.Update(itemBlog);
             }
         }
     }
