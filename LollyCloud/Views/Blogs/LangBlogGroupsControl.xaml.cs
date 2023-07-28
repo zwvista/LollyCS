@@ -63,11 +63,9 @@ namespace LollyCloud
         void miDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
         }
-        void miAddPost_Click(object sender, RoutedEventArgs e)
+        void miSelectPosts_Click(object sender, RoutedEventArgs e)
         {
             dgPosts.CancelEdit();
-            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm);
-            dlg.ShowDialog();
         }
         void miEditPost_Click(object sender, RoutedEventArgs e)
         {
@@ -80,9 +78,6 @@ namespace LollyCloud
             var w = (MainWindow)Window.GetWindow(this);
             var itemPost = await contentDS.GetDataById(vm.SelectedPostItem.ID);
             w.AddPostPostEditTab("Language Blog Post", itemPost);
-        }
-        void miDeletePost_Click(object sender, RoutedEventArgs e)
-        {
         }
         void dgPosts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

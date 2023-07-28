@@ -48,20 +48,15 @@ namespace LollyCloud
         {
             miEditGroup_Click(sender, null);
         }
-        void miAddGroup_Click(object sender, RoutedEventArgs e)
+        void miSelectGroups_Click(object sender, RoutedEventArgs e)
         {
             dgGroups.CancelEdit();
-            var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
-            dlg.ShowDialog();
         }
         void miEditGroup_Click(object sender, RoutedEventArgs e)
         {
             dgGroups.CancelEdit();
             var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedGroupItem, vm);
             dlg.ShowDialog();
-        }
-        void miDeleteGroup_Click(object sender, RoutedEventArgs e)
-        {
         }
         void miAddPost_Click(object sender, RoutedEventArgs e)
         {

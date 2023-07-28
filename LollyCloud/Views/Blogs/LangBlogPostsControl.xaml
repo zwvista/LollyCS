@@ -62,11 +62,9 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="miAddGroup" Header="Add" Click="miAddGroup_Click" />
+                            <MenuItem x:Name="miSelectGroups" Header="Select Groups" Click="miSelectGroups_Click" />
                             <Separator />
                             <MenuItem x:Name="miEditGroup" Header="Edit" IsEnabled="{Binding HasSelectedGroupItem}" Click="miEditGroup_Click" />
-                            <Separator />
-                            <MenuItem x:Name="miDeleteGroup" Header="Delete" IsEnabled="{Binding HasSelectedGroupItem}" Click="miDeleteGroup_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
