@@ -16,7 +16,6 @@ namespace LollyCommon
         protected LangBlogPostDataStore postDS = new LangBlogPostDataStore();
         protected LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
         protected LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
-        protected LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
         [Reactive]
         public MLangBlogPost SelectedPostItem { get; set; }
         public bool HasSelectedPostItem { [ObservableAsProperty] get; }
@@ -33,12 +32,6 @@ namespace LollyCommon
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
         }
-        public void Reload() =>
-            postDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
-            {
-                PostItems = new ObservableCollection<MLangBlogPost>(lst);
-                this.RaisePropertyChanged(nameof(PostItems));
-            });
         public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);
         public async Task CreateGroup(MLangBlogGroup item) => item.ID = await groupDS.Create(item);
         public async Task DeleteGroup(int id) => await groupDS.Delete(id);

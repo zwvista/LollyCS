@@ -1,24 +1,37 @@
 ﻿using ReactiveUI;
 using System.Collections.ObjectModel;
+using System;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class LangBlogSelectGroupsViewModel
+    public class LangBlogSelectGroupsViewModel : ReactiveObject
     {
         SettingsViewModel vmSettings;
-        public ObservableCollection<MDictionary> DictsAvailable { get; }
-        public ObservableCollection<MDictionary> DictsSelected { get; }
+        LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
+        LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
+        public string PostTitle { get; }
+        public ObservableCollection<MLangBlogGroup> GroupsAvailable { get; private set; }
+        public ObservableCollection<MLangBlogGroup> GroupsSelected { get; private set; }
         public ReactiveCommand<Unit, Unit> Save { get; }
-        public LangBlogSelectGroupsViewModel(SettingsViewModel vmSettings)
+        public LangBlogSelectGroupsViewModel(SettingsViewModel vmSettings, MLangBlogPost item)
         {
             this.vmSettings = vmSettings;
-            DictsSelected = new ObservableCollection<MDictionary>(vmSettings.SelectedDictsReference);
-            DictsAvailable = new ObservableCollection<MDictionary>(vmSettings.DictsReference.Except(vmSettings.SelectedDictsReference));
+            PostTitle = item.TITLE;
+            groupDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
+            {
+                GroupsAvailable = new ObservableCollection<MLangBlogGroup>(lst);
+                this.RaisePropertyChanged(nameof(GroupsAvailable));
+            });
+            groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, item.ID).ToObservable().Subscribe(lst =>
+            {
+                GroupsSelected = new ObservableCollection<MLangBlogGroup>(lst);
+                this.RaisePropertyChanged(nameof(GroupsSelected));
+            });
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
-                await vmSettings.UpdateDictsReference(DictsSelected.ToList());
             });
         }
     }

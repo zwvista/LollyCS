@@ -20,19 +20,13 @@ namespace LollyCloud
     /// </summary>
     public partial class LangBlogSelectPostsDlg : Window
     {
-        public SettingsViewModel vmSettings;
         LangBlogSelectPostsViewModel vm;
-        public LangBlogSelectPostsDlg()
+        public LangBlogSelectPostsDlg(Window owner, SettingsViewModel vmSettings, MLangBlogGroup item)
         {
             InitializeComponent();
-            // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
+            Owner = owner;
+            DataContext = vm = new LangBlogSelectPostsViewModel(vmSettings, item);
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            DataContext = vm = new LangBlogSelectPostsViewModel(vmSettings);
-        }
-
     }
 }
