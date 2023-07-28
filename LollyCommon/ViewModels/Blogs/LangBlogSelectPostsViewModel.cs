@@ -1,0 +1,25 @@
+﻿using ReactiveUI;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive;
+
+namespace LollyCommon
+{
+    public class LangBlogSelectPostsViewModel
+    {
+        SettingsViewModel vmSettings;
+        public ObservableCollection<MDictionary> DictsAvailable { get; }
+        public ObservableCollection<MDictionary> DictsSelected { get; }
+        public ReactiveCommand<Unit, Unit> Save { get; }
+        public LangBlogSelectPostsViewModel(SettingsViewModel vmSettings)
+        {
+            this.vmSettings = vmSettings;
+            DictsSelected = new ObservableCollection<MDictionary>(vmSettings.SelectedDictsReference);
+            DictsAvailable = new ObservableCollection<MDictionary>(vmSettings.DictsReference.Except(vmSettings.SelectedDictsReference));
+            Save = ReactiveCommand.CreateFromTask(async () =>
+            {
+                await vmSettings.UpdateDictsReference(DictsSelected.ToList());
+            });
+        }
+    }
+}
