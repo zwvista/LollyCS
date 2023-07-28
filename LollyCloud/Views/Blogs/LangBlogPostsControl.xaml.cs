@@ -50,30 +50,30 @@ namespace LollyCloud
         }
         void miAddGroup_Click(object sender, RoutedEventArgs e)
         {
-            //dgGroups.CancelEdit();
-            //var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
-            //dlg.ShowDialog();
+            dgGroups.CancelEdit();
+            var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
+            dlg.ShowDialog();
         }
         void miEditGroup_Click(object sender, RoutedEventArgs e)
         {
-            //dgGroups.CancelEdit();
-            //var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedGroupItem, vm);
-            //dlg.ShowDialog();
+            dgGroups.CancelEdit();
+            var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedGroupItem, vm);
+            dlg.ShowDialog();
         }
         void miDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
         }
         void miAddPost_Click(object sender, RoutedEventArgs e)
         {
-            //dgPosts.CancelEdit();
-            //var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.NewBlog(), vm);
-            //dlg.ShowDialog();
+            dgPosts.CancelEdit();
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm);
+            dlg.ShowDialog();
         }
         void miEditPost_Click(object sender, RoutedEventArgs e)
         {
-            //dgPosts.CancelEdit();
-            //var dlg = new LangBlogsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
-            //dlg.ShowDialog();
+            dgPosts.CancelEdit();
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
+            dlg.ShowDialog();
         }
         async void miEditPostContent_Click(object sender, RoutedEventArgs e)
         {

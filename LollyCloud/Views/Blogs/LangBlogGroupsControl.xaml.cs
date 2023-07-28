@@ -65,15 +65,15 @@ namespace LollyCloud
         }
         void miAddPost_Click(object sender, RoutedEventArgs e)
         {
-            //dgPosts.CancelEdit();
-            //var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm);
-            //dlg.ShowDialog();
+            dgPosts.CancelEdit();
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm);
+            dlg.ShowDialog();
         }
         void miEditPost_Click(object sender, RoutedEventArgs e)
         {
-            //dgPosts.CancelEdit();
-            //var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
-            //dlg.ShowDialog();
+            dgPosts.CancelEdit();
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
+            dlg.ShowDialog();
         }
         async void miEditPostContent_Click(object sender, RoutedEventArgs e)
         {

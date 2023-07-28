@@ -23,7 +23,7 @@ namespace LollyCloud
     {
         LangBlogGroupsDetailViewModel vmDetail;
         public MLangBlogGroup Item { get; set; }
-        public LangBlogGroupsDetailDlg(Window owner, MLangBlogGroup item, LangBlogGroupsViewModel vm)
+        public LangBlogGroupsDetailDlg(Window owner, MLangBlogGroup item, LangBlogViewModel vm)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
