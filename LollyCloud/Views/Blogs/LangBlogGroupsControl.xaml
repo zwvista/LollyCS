@@ -61,12 +61,12 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="miAddBlog" Header="Add" Click="miAddBlog_Click" />
+                            <MenuItem x:Name="miAddPost" Header="Add" Click="miAddPost_Click" />
                             <Separator />
-                            <MenuItem x:Name="miEditBlog" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlog_Click" />
-                            <MenuItem x:Name="miEditContentBlog" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditBlogContent_Click" />
+                            <MenuItem x:Name="miEditPost" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPost_Click" />
+                            <MenuItem x:Name="miEditPostContent" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPostContent_Click" />
                             <Separator />
-                            <MenuItem x:Name="miDeleteBlog" Header="Delete" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeleteBlog_Click" />
+                            <MenuItem x:Name="miDeletePost" Header="Delete" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeletePost_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

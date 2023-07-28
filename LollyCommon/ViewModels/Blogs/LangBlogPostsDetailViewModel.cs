@@ -23,9 +23,9 @@ namespace LollyCommon
             {
                 ItemEdit.CopyProperties(item);
                 if (isNew)
-                    await vm.CreateBlog(item);
+                    await vm.CreatePost(item);
                 else
-                    await vm.UpdateBlog(item);
+                    await vm.UpdatePost(item);
             });
         }
     }

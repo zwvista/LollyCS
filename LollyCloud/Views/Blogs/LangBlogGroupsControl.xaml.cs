@@ -42,7 +42,7 @@ namespace LollyCloud
                 if (sender == dgGroups)
                     await vm.UpdateGroup((MLangBlogGroup)item);
                 else
-                    await vm.UpdateBlog((MLangBlogPost)item);
+                    await vm.UpdatePost((MLangBlogPost)item);
             });
         void dgGroups_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -63,30 +63,30 @@ namespace LollyCloud
         void miDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
         }
-        void miAddBlog_Click(object sender, RoutedEventArgs e)
+        void miAddPost_Click(object sender, RoutedEventArgs e)
         {
             //dgPosts.CancelEdit();
-            //var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
+            //var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm);
             //dlg.ShowDialog();
         }
-        void miEditBlog_Click(object sender, RoutedEventArgs e)
+        void miEditPost_Click(object sender, RoutedEventArgs e)
         {
             //dgPosts.CancelEdit();
-            //var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
+            //var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
             //dlg.ShowDialog();
         }
-        async void miEditBlogContent_Click(object sender, RoutedEventArgs e)
+        async void miEditPostContent_Click(object sender, RoutedEventArgs e)
         {
             var w = (MainWindow)Window.GetWindow(this);
-            var itemBlog = await contentDS.GetDataById(vm.SelectedPostItem.ID);
-            w.AddBlogPostEditTab("Language Blog", itemBlog);
+            var itemPost = await contentDS.GetDataById(vm.SelectedPostItem.ID);
+            w.AddPostPostEditTab("Language Blog Post", itemPost);
         }
-        void miDeleteBlog_Click(object sender, RoutedEventArgs e)
+        void miDeletePost_Click(object sender, RoutedEventArgs e)
         {
         }
         void dgPosts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            miEditBlog_Click(sender, null);
+            miEditPost_Click(sender, null);
         }
     }
 }

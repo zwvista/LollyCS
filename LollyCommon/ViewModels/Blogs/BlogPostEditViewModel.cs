@@ -9,19 +9,19 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         BlogPostEditService service = new BlogPostEditService();
         LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
-        MLangBlogPostContent itemBlog = null;
-        bool isUnitBlogPost => itemBlog == null;
+        MLangBlogPostContent itemPost = null;
+        bool isUnitBlogPost => itemPost == null;
         public string Title { get; set; }
 
         public ReactiveCommand<Unit, Unit> HtmlToMarkedCommand { get; }
         public string PatternUrl => service.GetPatternUrl(PatternNo);
         public ReactiveCommand<Unit, Unit> AddNotesCommand { get; }
 
-        public BlogPostEditViewModel(SettingsViewModel vmSettings, bool needCopy, MLangBlogPostContent itemBlog)
+        public BlogPostEditViewModel(SettingsViewModel vmSettings, bool needCopy, MLangBlogPostContent itemPost)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            this.itemBlog = itemBlog;
-            Title = isUnitBlogPost ? vmSettings.UNITINFO : itemBlog.TITLE;
+            this.itemPost = itemPost;
+            Title = isUnitBlogPost ? vmSettings.UNITINFO : itemPost.TITLE;
 
             HtmlToMarkedCommand = ReactiveCommand.Create(() =>
             {
@@ -45,7 +45,7 @@ namespace LollyCommon
         }
         public async Task<string> LoadBlog() =>
             isUnitBlogPost ? await vmSettings.GetBlogContent() :
-            (await contentDS.GetDataById(itemBlog.ID))?.CONTENT ?? "";
+            (await contentDS.GetDataById(itemPost.ID))?.CONTENT ?? "";
         public async Task SaveBlog(string content)
         {
             if (isUnitBlogPost)
@@ -54,8 +54,8 @@ namespace LollyCommon
             }
             else
             {
-                itemBlog.CONTENT = content;
-                await contentDS.Update(itemBlog);
+                itemPost.CONTENT = content;
+                await contentDS.Update(itemPost);
             }
         }
     }

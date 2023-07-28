@@ -15,20 +15,20 @@ namespace LollyCloud
     public partial class BlogPostEditControl : UserControl, ILollySettings
     {
         BlogPostEditViewModel vm;
-        MLangBlogPostContent itemBlog;
+        MLangBlogPostContent itemPost;
 
-        public BlogPostEditControl(MLangBlogPostContent itemBlog)
+        public BlogPostEditControl(MLangBlogPostContent itemPost)
         {
             InitializeComponent();
             // Disable image loading
             // wbBlog.BrowserSettings.ImageLoading = CefState.Disabled;
-            this.itemBlog = itemBlog;
+            this.itemPost = itemPost;
             OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new BlogPostEditViewModel(MainWindow.vmSettings, true, itemBlog);
+            DataContext = vm = new BlogPostEditViewModel(MainWindow.vmSettings, true, itemPost);
             tbMarked.Text = await vm.LoadBlog();
         }
 
