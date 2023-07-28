@@ -61,7 +61,7 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="miSelectPosts" Header="Select Posts" Click="miSelectPosts_Click" />
+                            <MenuItem x:Name="miSelectPosts" Header="Select Posts" IsEnabled="{Binding HasSelectedGroupItem}" Click="miSelectPosts_Click" />
                             <Separator />
                             <MenuItem x:Name="miEditPost" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPost_Click" />
                             <MenuItem x:Name="miEditPostContent" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPostContent_Click" />
@@ -70,7 +70,7 @@
                 </DataGrid>
             </Grid>
             <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />
-            <cef:ChromiumWebBrowser x:Name="wbBlog" Grid.Column="2" />
+            <cef:ChromiumWebBrowser x:Name="wbPost" Grid.Column="2" />
         </Grid>
     </DockPanel>
 </UserControl>

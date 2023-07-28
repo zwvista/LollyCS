@@ -21,7 +21,7 @@ namespace LollyCloud
         {
             InitializeComponent();
             // Disable image loading
-            // wbBlog.BrowserSettings.ImageLoading = CefState.Disabled;
+            // wbPost.BrowserSettings.ImageLoading = CefState.Disabled;
             this.itemPost = itemPost;
             OnSettingsChanged();
         }
@@ -52,11 +52,11 @@ namespace LollyCloud
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {
             var str = vm.MarkedToHtml();
-            wbBlog.LoadLargeHtml(str);
+            wbPost.LoadLargeHtml(str);
             Clipboard.SetDataObject(vm.HtmlText);
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
-            wbBlog.Load(vm.PatternUrl);
+            wbPost.Load(vm.PatternUrl);
         async void btnSave_Click(object sender, RoutedEventArgs e) =>
             await vm.SaveBlog(tbMarked.Text);
     }
