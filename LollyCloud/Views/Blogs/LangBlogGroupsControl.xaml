@@ -41,8 +41,6 @@
                             <Separator />
                             <MenuItem x:Name="miEditGroup" Header="Edit Group" IsEnabled="{Binding HasSelectedGroupItem}" Click="miEditGroup_Click" />
                             <Separator />
-                            <MenuItem x:Name="miSelectPosts" Header="Select Posts" IsEnabled="{Binding HasSelectedGroupItem}" Click="miSelectPosts_Click" />
-                            <Separator />
                             <MenuItem x:Name="miDeleteGroup" Header="Delete Group" IsEnabled="{Binding HasSelectedGroupItem}" Click="miDeleteGroup_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
