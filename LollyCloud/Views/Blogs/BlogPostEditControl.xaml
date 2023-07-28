@@ -42,7 +42,7 @@
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <DockPanel Grid.Column="2">
                 <TextBlock Text="{Binding Title}" DockPanel.Dock="Top" />
-                <cef:ChromiumWebBrowser x:Name="wbBlog" />
+                <cef:ChromiumWebBrowser x:Name="wbPost" />
             </DockPanel>
         </Grid>
     </DockPanel>
