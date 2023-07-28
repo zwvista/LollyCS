@@ -79,7 +79,7 @@ namespace LollyCloud
         {
             var w = (MainWindow)Window.GetWindow(this);
             var itemPost = await contentDS.GetDataById(vm.SelectedPostItem.ID);
-            w.AddPostPostEditTab("Language Blog Post", itemPost);
+            w.AddBlogPostEditTab("Language Blog Post", itemPost);
         }
         void dgPosts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {

@@ -44,7 +44,7 @@
                 <MenuItem x:Name="miExit" Header="Exit" Click="miExit_Click" />
             </MenuItem>
             <MenuItem Header="Tools">
-                <MenuItem x:Name="miUnitBlogPost" Header="Edit Unit Blog" Click="miUnitBlogPost_Click" />
+                <MenuItem x:Name="miUnitBlogPost" Header="Unit Blog Post" Click="miUnitBlogPost_Click" />
                 <MenuItem x:Name="miLangBlogGroups" Header="Language Blog Groups" Click="miLangBlogGroups_Click" />
                 <MenuItem x:Name="miLangBlogPosts" Header="Language Blog Posts" Click="miLangBlogPosts_Click" />
                 <MenuItem x:Name="miReadNumber" Header="Read Number" Click="miReadNumber_Click" />

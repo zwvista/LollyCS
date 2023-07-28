@@ -76,7 +76,7 @@ namespace LollyCloud
         {
             var w = (MainWindow)Window.GetWindow(this);
             var itemPost = await contentDS.GetDataById(vm.SelectedPostItem.ID);
-            w.AddPostPostEditTab("Language Blog", itemPost);
+            w.AddBlogPostEditTab("Language Blog Post", itemPost);
         }
         void miDeletePost_Click(object sender, RoutedEventArgs e)
         {

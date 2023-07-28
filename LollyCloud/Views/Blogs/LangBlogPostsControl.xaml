@@ -39,12 +39,14 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="miAddPost" Header="Add" Click="miAddPost_Click" />
+                            <MenuItem x:Name="miAddPost" Header="Add Post" Click="miAddPost_Click" />
                             <Separator />
-                            <MenuItem x:Name="miEditPost" Header="Edit" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPost_Click" />
+                            <MenuItem x:Name="miEditPost" Header="Edit Post" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPost_Click" />
                             <MenuItem x:Name="miEditPostContent" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPostContent_Click" />
                             <Separator />
-                            <MenuItem x:Name="miDeletePost" Header="Delete" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeletePost_Click" />
+                            <MenuItem x:Name="miSelectGroups" Header="Select Groups" IsEnabled="{Binding HasSelectedPostItem}" Click="miSelectGroups_Click" />
+                            <Separator />
+                            <MenuItem x:Name="miDeletePost" Header="Delete Post" IsEnabled="{Binding HasSelectedPostItem}" Click="miDeletePost_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
@@ -62,8 +64,6 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="miSelectGroups" Header="Select Groups" IsEnabled="{Binding HasSelectedPostItem}" Click="miSelectGroups_Click" />
-                            <Separator />
                             <MenuItem x:Name="miEditGroup" Header="Edit" IsEnabled="{Binding HasSelectedGroupItem}" Click="miEditGroup_Click" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
