@@ -1,6 +1,8 @@
 ﻿using ReactiveUI;
-using System.Collections.ObjectModel;
+using ReactiveUI.Fody.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Threading.Tasks;
@@ -12,27 +14,46 @@ namespace LollyCommon
         SettingsViewModel vmSettings;
         LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
         LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
-        public string PostTitle { get; }
-        public ObservableCollection<MLangBlogGroup> GroupsAvailable { get; private set; }
-        public ObservableCollection<MLangBlogGroup> GroupsSelected { get; private set; }
+        public MLangBlogPost Item { get; }
+        [Reactive]
+        public ObservableCollection<MLangBlogGroup> GroupsAvailable { get; set; }
+        [Reactive]
+        public ObservableCollection<MLangBlogGroup> GroupsSelected { get; set; }
+        List<MLangBlogGroup> GroupsSelectedOriginal;
         public ReactiveCommand<Unit, Unit> Save { get; }
         public LangBlogSelectGroupsViewModel(SettingsViewModel vmSettings, MLangBlogPost item)
         {
             this.vmSettings = vmSettings;
-            PostTitle = item.TITLE;
+            Item = item;
             groupDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
                 GroupsAvailable = new ObservableCollection<MLangBlogGroup>(lst);
-                this.RaisePropertyChanged(nameof(GroupsAvailable));
+                AdjustGroupsAvailable();
             });
             groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, item.ID).ToObservable().Subscribe(lst =>
             {
-                GroupsSelected = new ObservableCollection<MLangBlogGroup>(lst);
-                this.RaisePropertyChanged(nameof(GroupsSelected));
+                GroupsSelected = new ObservableCollection<MLangBlogGroup>(GroupsSelectedOriginal = lst);
+                AdjustGroupsAvailable();
             });
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
+                var lstRemove = GroupsSelectedOriginal.Where(o => !GroupsSelected.Any(o2 => o.ID == o2.ID)).ToList();
+                var lstAdd = GroupsSelected.Where(o => !GroupsSelectedOriginal.Any(o2 => o.ID == o2.ID)).ToList();
+                foreach (var o in lstRemove)
+                    await gpDS.Delete(o.GPID);
+                foreach (var o in lstAdd)
+                    await gpDS.Create(new MLangBlogGP
+                    {
+                        POSTID = Item.ID,
+                        GROUPID = o.ID,
+                    });
             });
+        }
+        void AdjustGroupsAvailable()
+        {
+            if (GroupsAvailable == null || GroupsSelected == null) return;
+            GroupsAvailable = new ObservableCollection<MLangBlogGroup>(
+                GroupsAvailable.Where(o => !GroupsSelected.Any(o2 => o.ID == o2.ID)));
         }
     }
 }

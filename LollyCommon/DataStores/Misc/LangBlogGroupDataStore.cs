@@ -4,20 +4,22 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System;
 
 namespace LollyCommon
 {
     public class LangBlogGroupDataStore : LollyDataStore<MLangBlogGroup>
     {
         public async Task<List<MLangBlogGroup>> GetDataByLang(int langid) =>
-            (await GetDataByUrl<MLangBlogGroups>($"LANGBLOGGROUPS?filter=LANGID,eq,{langid}")).Records;
+            (await GetDataByUrl<MLangBlogGroups>($"LANGBLOGGROUPS?filter=LANGID,eq,{langid}&order=NAME")).Records;
         public async Task<List<MLangBlogGroup>> GetDataByLangPost(int langid, int postid) =>
-            (await GetDataByUrl<MLangBlogGPs>($"VLANGBLOGGP?filter=LANGID,eq,{langid}&filter=POSTID,eq,{postid}")).Records
+            (await GetDataByUrl<MLangBlogGPs>($"VLANGBLOGGP?filter=LANGID,eq,{langid}&filter=POSTID,eq,{postid}&order=GROUPNAME")).Records
             .Select(o => new MLangBlogGroup
             {
                 ID = o.GROUPID,
                 LANGID = langid,
                 GROUPNAME = o.GROUPNAME,
+                GPID = o.ID,
             }).Distinct(o => o.ID).ToList();
         public async Task<int> Create(MLangBlogGroup item) =>
             await CreateByUrl($"LANGBLOGGROUPS", item);

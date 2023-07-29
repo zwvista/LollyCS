@@ -29,6 +29,9 @@ namespace LollyCommon
         [JsonProperty]
         [Reactive]
         public string URL { get; set; } = "";
+        [JsonIgnore]
+        [Reactive]
+        public int GPID { get; set; }
     }
     public class MLangBlogPostEdit : ReactiveValidationObject
     {

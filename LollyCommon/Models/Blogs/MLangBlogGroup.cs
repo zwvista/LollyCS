@@ -26,6 +26,9 @@ namespace LollyCommon
         [JsonProperty("NAME")]
         [Reactive]
         public string GROUPNAME { get; set; } = "";
+        [JsonIgnore]
+        [Reactive]
+        public int GPID { get; set; }
     }
     public class MLangBlogGroupEdit : ReactiveValidationObject
     {
