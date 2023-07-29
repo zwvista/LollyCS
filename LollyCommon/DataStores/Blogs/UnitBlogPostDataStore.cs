@@ -17,7 +17,7 @@ namespace LollyCommon
             Debug.WriteLine(await UpdateByUrl($"UNITBLOGPOSTS/{item.ID}", JsonConvert.SerializeObject(item)));
         public async Task Update(int textbookid, int unit, string content)
         {
-            var item = (await GetDataByTextbook(textbookid, unit)) ?? new MUnitBlogPost
+            var item = await GetDataByTextbook(textbookid, unit) ?? new MUnitBlogPost
             {
                 TEXTBOOKID = textbookid,
                 UNIT = unit,
