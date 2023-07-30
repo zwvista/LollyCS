@@ -51,7 +51,7 @@ namespace LollyCloud
         void miSelectGroups_Click(object sender, RoutedEventArgs e)
         {
             dgGroups.CancelEdit();
-            var dlg = new LangBlogSelectGroupsDlg(Window.GetWindow(this), vm.vmSettings, vm.SelectedPostItem);
+            var dlg = new LangBlogSelectGroupsDlg(Window.GetWindow(this), vm.SelectedPostItem);
             dlg.ShowDialog();
         }
         void miEditGroup_Click(object sender, RoutedEventArgs e)

@@ -20,13 +20,12 @@ namespace LollyCloud
     /// </summary>
     public partial class LangBlogSelectGroupsDlg : Window
     {
-        LangBlogSelectGroupsViewModel vm;
-        public LangBlogSelectGroupsDlg(Window owner, SettingsViewModel vmSettings, MLangBlogPost item)
+        public LangBlogSelectGroupsDlg(Window owner, MLangBlogPost item)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             Owner = owner;
-            DataContext = vm = new LangBlogSelectGroupsViewModel(vmSettings, item);
+            DataContext = new LangBlogSelectGroupsViewModel(item);
         }
     }
 }

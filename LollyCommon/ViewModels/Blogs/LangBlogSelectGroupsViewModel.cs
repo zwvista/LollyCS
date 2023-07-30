@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 
 namespace LollyCommon
 {
     public class LangBlogSelectGroupsViewModel : ReactiveObject
     {
-        SettingsViewModel vmSettings;
         LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
         LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
         public MLangBlogPost Item { get; }
@@ -21,19 +21,17 @@ namespace LollyCommon
         public ObservableCollection<MLangBlogGroup> GroupsSelected { get; set; }
         List<MLangBlogGroup> GroupsSelectedOriginal;
         public ReactiveCommand<Unit, Unit> Save { get; }
-        public LangBlogSelectGroupsViewModel(SettingsViewModel vmSettings, MLangBlogPost item)
+        public LangBlogSelectGroupsViewModel(MLangBlogPost item)
         {
-            this.vmSettings = vmSettings;
             Item = item;
-            groupDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
+            groupDS.GetDataByLang(item.LANGID).ToObservable()
+                .Zip(groupDS.GetDataByLangPost(item.LANGID, item.ID).ToObservable())
+                .Subscribe(result =>
             {
-                GroupsAvailable = new ObservableCollection<MLangBlogGroup>(lst);
-                AdjustGroupsAvailable();
-            });
-            groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, item.ID).ToObservable().Subscribe(lst =>
-            {
-                GroupsSelected = new ObservableCollection<MLangBlogGroup>(GroupsSelectedOriginal = lst);
-                AdjustGroupsAvailable();
+                var (lst1, lst2) = result;
+                GroupsSelected = new ObservableCollection<MLangBlogGroup>(GroupsSelectedOriginal = lst2);
+                GroupsAvailable = new ObservableCollection<MLangBlogGroup>(
+                    lst1.Where(o => !lst2.Any(o2 => o.ID == o2.ID)));
             });
             Save = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -48,12 +46,6 @@ namespace LollyCommon
                         GROUPID = o.ID,
                     });
             });
-        }
-        void AdjustGroupsAvailable()
-        {
-            if (GroupsAvailable == null || GroupsSelected == null) return;
-            GroupsAvailable = new ObservableCollection<MLangBlogGroup>(
-                GroupsAvailable.Where(o => !GroupsSelected.Any(o2 => o.ID == o2.ID)));
         }
     }
 }
