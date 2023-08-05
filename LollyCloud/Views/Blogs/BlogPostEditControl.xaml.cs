@@ -30,6 +30,7 @@ namespace LollyCloud
         {
             DataContext = vm = new BlogPostEditViewModel(MainWindow.vmSettings, true, itemPost);
             tbMarked.Text = await vm.LoadBlog();
+            MarkedToHtml();
         }
 
         void ReplaceSelection(Func<string, string> f) =>
@@ -51,13 +52,20 @@ namespace LollyCloud
         }
         void btnMarkedToHtml_Click(object sender, RoutedEventArgs e)
         {
+            MarkedToHtml();
+            Clipboard.SetDataObject(vm.HtmlText);
+        }
+        void MarkedToHtml()
+        {
             var str = vm.MarkedToHtml();
             wbPost.LoadLargeHtml(str);
-            Clipboard.SetDataObject(vm.HtmlText);
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
             wbPost.Load(vm.PatternUrl);
-        async void btnSave_Click(object sender, RoutedEventArgs e) =>
+        async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
             await vm.SaveBlog(tbMarked.Text);
+            btnMarkedToHtml_Click(sender, e);
+        }
     }
 }
