@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 using LollyCommon;
 using Plugin.Clipboard;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
 
 namespace LollyXamarin
 {
@@ -53,10 +53,10 @@ namespace LollyXamarin
                     await Edit(item);
                     break;
                 case "Browse Web Pages":
-                    await Shell.Current.GoToAsync(nameof(PatternsWebPagesBrowsePage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
+                    //await Shell.Current.GoToAsync(nameof(PatternsWebPagesBrowsePage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
                     break;
                 case "Edit Web Pages":
-                    await Shell.Current.GoToAsync(nameof(PatternsWebPagesListPage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
+                    //await Shell.Current.GoToAsync(nameof(PatternsWebPagesListPage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
                     break;
                 case "Copy Pattern":
                     CrossClipboard.Current.SetText(item.PATTERN);

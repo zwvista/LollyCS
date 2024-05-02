@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using LollyXamarin.Models;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
+using Xamarin.Forms;
 
 namespace LollyXamarin
 {

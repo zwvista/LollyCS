@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace LollyXamarin
 {

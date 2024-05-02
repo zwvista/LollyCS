@@ -2,8 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using LollyXamarin.Models;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
+using Xamarin.Forms;
 
 namespace LollyXamarin
 {

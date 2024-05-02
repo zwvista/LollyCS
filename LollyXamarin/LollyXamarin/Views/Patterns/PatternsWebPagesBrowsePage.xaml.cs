@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 using LollyCommon;
 using ReactiveUI;
 using System.Reactive.Linq;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
 
 namespace LollyXamarin
 {
     public partial class PatternsWebPagesBrowsePage : ContentPage, IPageNavigate
     {
-        PatternsWebPagesViewModel vm;
+        //PatternsWebPagesViewModel vm;
 
         public PatternsWebPagesBrowsePage()
         {
@@ -28,13 +28,13 @@ namespace LollyXamarin
 
         public void OnPageNavigated(object navigationData)
         {
-            BindingContext = vm = (PatternsWebPagesViewModel)navigationData;
+            //BindingContext = vm = (PatternsWebPagesViewModel)navigationData;
         }
 
         void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (vm == null) return;
-            wbWebPage.Source = vm.SelectedWebPageItem.URL;
+            //if (vm == null) return;
+            //wbWebPage.Source = vm.SelectedWebPageItem.URL;
         }
     }
 }

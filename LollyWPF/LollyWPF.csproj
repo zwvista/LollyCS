@@ -35,18 +35,18 @@
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
     <PackageReference Include="ControlzEx" Version="6.0.0" />
     <PackageReference Include="Dragablz" Version="0.0.3.234" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
     <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
-    <PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
     <PackageReference Include="ReactiveUI.Validation" Version="3.1.7" />
-    <PackageReference Include="ReactiveUI.WPF" Version="19.4.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="20.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
@@ -56,7 +56,7 @@
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Others\EBWin.cs" />

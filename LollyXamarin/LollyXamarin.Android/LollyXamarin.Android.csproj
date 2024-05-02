@@ -32,10 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,8 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>28.0.0.3</Version>
     </PackageReference>
@@ -101,9 +97,6 @@
     <ProjectReference Include="..\LollyXamarin\LollyXamarin.csproj">
       <Project>{9D7DBE4C-2E01-4E7B-BCA3-EA319294B7DE}</Project>
       <Name>LollyXamarin</Name>
-      <TargetPlatformIdentifier>Android</TargetPlatformIdentifier>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <IsAppExtension>false</IsAppExtension>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

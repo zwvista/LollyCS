@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
+using Xamarin.Forms;
+
 using LollyXamarin.Models;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
 
 namespace LollyXamarin
 {

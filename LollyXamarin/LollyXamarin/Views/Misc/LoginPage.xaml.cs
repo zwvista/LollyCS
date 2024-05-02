@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LollyCommon;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace LollyXamarin
 {
