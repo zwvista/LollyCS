@@ -31,7 +31,7 @@ namespace LollyMaui
         }
 
         public void LoadURL(string url) =>
-            wbDict.Source = url;
+            MainThread.BeginInvokeOnMainThread(() => wbDict.Source = url);
 
         public void LoadHtml(string html) =>
             wbDict.Source = html;
