@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.ReviewOptionsPage"
+             Title="Review Options"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="OnSave" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="Mode:" />
+            <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ModeItem}" />
+            <Label Text="Speaking Enabled:" />
+            <CheckBox IsChecked="{Binding SpeakingEnabled}" />
+            <Label Text="Shuffled:" />
+            <CheckBox IsChecked="{Binding Shuffled}" />
+            <Label Text="On Repeat:" />
+            <CheckBox IsChecked="{Binding OnRepeat}" />
+            <Label Text="Forward:" />
+            <CheckBox IsChecked="{Binding MoveForward}" />
+            <Label Text="Interval:" />
+            <Entry Text="{Binding Interval}" />
+            <Label Text="Group:" />
+            <Entry Text="{Binding GroupSelected}" />
+            <Label Text="Groups:" />
+            <Entry Text="{Binding GroupCount}" />
+            <Label Text="Review:" />
+            <Entry Text="{Binding ReviewCount}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

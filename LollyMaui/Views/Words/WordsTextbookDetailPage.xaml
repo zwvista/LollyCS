@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.WordsTextbookDetailPage"
+             Title="Words in Textbook(Detail)"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="ID:" />
+            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Label Text="TEXTBOOK:" />
+            <Entry Text="{Binding TEXTBOOKNAME}" IsReadOnly="True" />
+            <Label Text="UNIT:" />
+            <Picker ItemsSource="{Binding Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding UNITItem}" />
+            <Label Text="PART:" />
+            <Picker ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
+            <Label Text="SEQNUM:" />
+            <Entry Text="{Binding SEQNUM}" />
+            <Label Text="WORDID:" />
+            <Entry Text="{Binding WORDID}" IsReadOnly="True" />
+            <Label Text="WORD:" />
+            <Entry Text="{Binding WORD}" />
+            <Label Text="NOTE:" />
+            <Entry Text="{Binding NOTE}" />
+            <Label Text="FAMIID:" />
+            <Entry Text="{Binding FAMIID}" IsReadOnly="True" />
+            <Label Text="ACCURACY:" />
+            <Entry Text="{Binding ACCURACY}" IsReadOnly="True" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

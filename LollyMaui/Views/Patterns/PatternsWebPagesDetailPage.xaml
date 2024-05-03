@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.PatternsWebPagesDetailPage"
+             Title="Patterns Web Pages(Detail)"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="ID:" />
+            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Label Text="PATTERN:" />
+            <Entry Text="{Binding PATTERN}" />
+            <Label Text="NOTE:" />
+            <Entry Text="{Binding NOTE}" />
+            <Label Text="TAGS:" />
+            <Entry Text="{Binding TAGS}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

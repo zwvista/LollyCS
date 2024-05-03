@@ -17,6 +17,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyWPF", "LollyWPF\LollyWPF.csproj", "{8F460021-7C98-4FA4-92EC-B9BB155386FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyMaui", "LollyMaui\LollyMaui.csproj", "{D8D2757A-276B-4E5E-822F-1E17CA05DC02}"
+	ProjectSection(ProjectDependencies) = postProject
+		{24352E07-B701-4735-B319-494B9D011679} = {24352E07-B701-4735-B319-494B9D011679}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

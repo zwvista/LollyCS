@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.WordsReviewPage"
+             Title="Words Review"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Test" Clicked="OnNewTest" />
+    </ContentPage.ToolbarItems>
+    <Grid Padding="10" RowDefinitions="Auto,*">
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto">
+            <Label Text="{Binding IndexString}" />
+            <Label Grid.Column="1" Text="{Binding AccuracyString}" IsVisible="{Binding AccuracyVisible}" HorizontalOptions="Center" />
+            <Label Grid.Column="2" Text="Correct" IsVisible="{Binding CorrectVisible}" TextColor="Green" />
+            <Label Grid.Column="2" Text="Incorrect" IsVisible="{Binding IncorrectVisible}" TextColor="Red" />
+            <Button Grid.Row="1" Text="Speak" WidthRequest="75" />
+            <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding IsSpeaking}" />
+                <Label Text="Speak" VerticalOptions="Center" />
+            </StackLayout>
+            <Button x:Name="btnCheckNext" Grid.Row="1" Grid.Column="2" WidthRequest="75" Text="{Binding CheckNextString}" IsEnabled="{Binding CheckNextEnabled}" Clicked="OnCheck" />
+            <StackLayout Grid.Row="2" IsVisible="{Binding OnRepeatVisible}" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding OnRepeat}" />
+                <Label Text="On Repeat" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Grid.Row="2" Grid.Column="1" IsVisible="{Binding MoveForwardVisible}" Orientation="Horizontal" HorizontalOptions="Center">
+                <CheckBox IsChecked="{Binding MoveForward}" />
+                <Label Text="Forward" VerticalOptions="Center" />
+            </StackLayout>
+            <Button x:Name="btnCheckPrev" Grid.Row="2" Grid.Column="2" IsVisible="{Binding CheckPrevVisible}" WidthRequest="75" Text="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Clicked="OnCheck" />
+        </Grid>
+        <StackLayout Grid.Row="1" VerticalOptions="Center">
+            <Label Text="{Binding WordTargetString}" FontSize="50" TextColor="Orange" IsVisible="{Binding WordTargetVisible}" HorizontalOptions="Center" />
+            <Label Text="{Binding NoteTargetString}" FontSize="40" TextColor="Magenta" IsVisible="{Binding NoteTargetVisible}" HorizontalOptions="Center" />
+            <Label Text="{Binding TranslationString}" />
+            <Entry x:Name="WordInputEntry" Text="{Binding WordInputString}" FontSize="40" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

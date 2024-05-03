@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.PatternsPage"
+             Title="Patterns in Language"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />
+    </ContentPage.ToolbarItems>
+    <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
+        <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
+        <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePatternFilters}}" SelectedItem="{Binding ScopeFilter}" />
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PatternsViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding PatternItems}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Edit"
+                                               BackgroundColor="LightBlue"
+                                               Invoked="OnEditSwipeItemInvoked" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="More"
+                                               BackgroundColor="LightGreen"
+                                               Invoked="OnMoreSwipeItemInvoked" />
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="LightPink"
+                                               Invoked="OnDeleteSwipeItemInvoked" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10" x:DataType="common:MPattern" ColumnDefinitions="Auto,*,Auto">
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding PATTERN}" Style="{StaticResource Key=Text2}" />
+                                    <Label Text="{Binding TAGS}" Style="{StaticResource Key=Text3}" />
+                                </StackLayout>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
