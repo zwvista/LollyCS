@@ -10,7 +10,7 @@ namespace LollyMaui
 {
     public partial class WordsLangDetailPage : ContentPage
     {
-        WordsLangDetailViewModel vmDetail;
+        WordsLangDetailViewModel vmDetail = null!;
 
         public WordsLangDetailPage()
         {

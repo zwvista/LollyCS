@@ -10,7 +10,7 @@ namespace LollyMaui
 {
     public partial class PhrasesUnitBatchEditPage : ContentPage
     {
-        PhrasesUnitBatchEditViewModel vmBatch;
+        PhrasesUnitBatchEditViewModel vmBatch = null!;
 
         public PhrasesUnitBatchEditPage()
         {

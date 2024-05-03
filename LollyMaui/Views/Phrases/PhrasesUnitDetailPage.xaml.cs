@@ -10,7 +10,7 @@ namespace LollyMaui
 {
     public partial class PhrasesUnitDetailPage : ContentPage
     {
-        PhrasesUnitDetailViewModel vmDetail;
+        PhrasesUnitDetailViewModel vmDetail = null!;
 
         public PhrasesUnitDetailPage()
         {

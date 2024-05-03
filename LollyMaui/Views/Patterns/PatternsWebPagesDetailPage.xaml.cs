@@ -10,7 +10,7 @@ namespace LollyMaui
 {
     public partial class PatternsWebPagesDetailPage : ContentPage
     {
-        PatternsDetailViewModel vmDetail;
+        PatternsDetailViewModel vmDetail = null!;
 
         public PatternsWebPagesDetailPage()
         {
