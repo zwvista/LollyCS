@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.SearchPage"
              Title="Search"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:SearchViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>

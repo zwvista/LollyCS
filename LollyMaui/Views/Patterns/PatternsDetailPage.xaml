@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.PatternsDetailPage"
              Title="Patterns in Language(Detail)"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:MPatternEdit">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
@@ -15,8 +16,6 @@
             <Entry Text="{Binding ID}" IsReadOnly="True" />
             <Label Text="PATTERN:" />
             <Entry Text="{Binding PATTERN}" />
-            <Label Text="NOTE:" />
-            <Entry Text="{Binding NOTE}" />
             <Label Text="TAGS:" />
             <Entry Text="{Binding TAGS}" />
         </StackLayout>

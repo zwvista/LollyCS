@@ -4,7 +4,8 @@
              x:Class="LollyMaui.WordsReviewPage"
              Title="Words Review"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
+             x:DataType="common:WordsReviewViewModel"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New Test" Clicked="OnNewTest" />

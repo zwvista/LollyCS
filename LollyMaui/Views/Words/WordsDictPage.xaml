@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.WordsDictPage"
              Title="Dictionary"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:WordsDictViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>

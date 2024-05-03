@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.PhrasesLangPage"
              Title="Phrases in Language"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:PhrasesLangViewModel">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />

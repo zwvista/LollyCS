@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.PatternsPage"
              Title="Patterns in Language"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:PatternsViewModel">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />
