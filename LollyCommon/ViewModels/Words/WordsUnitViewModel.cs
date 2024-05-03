@@ -82,7 +82,7 @@ namespace LollyCommon
 
         public MUnitWord NewUnitWord()
         {
-            var maxElem = WordItemsAll.IsEmpty() ? null : WordItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).First();
+            var maxElem = WordItemsAll.IsEmpty() ? null : WordItemsAll.MaxByWithTies(o => (o.UNIT, o.PART, o.SEQNUM)).First();
             return new MUnitWord
             {
                 LANGID = vmSettings.SelectedLang.ID,

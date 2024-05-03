@@ -74,7 +74,7 @@ namespace LollyCommon
 
         public MUnitPhrase NewUnitPhrase()
         {
-            var maxElem = PhraseItemsAll.IsEmpty() ? null : PhraseItemsAll.MaxBy(o => (o.UNIT, o.PART, o.SEQNUM)).First();
+            var maxElem = PhraseItemsAll.IsEmpty() ? null : PhraseItemsAll.MaxByWithTies(o => (o.UNIT, o.PART, o.SEQNUM)).First();
             return new MUnitPhrase
             {
                 LANGID = vmSettings.SelectedLang.ID,
