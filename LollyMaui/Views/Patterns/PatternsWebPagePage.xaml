@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.PatternsWebPagePage"
-             Title="Patterns Web Pages(Browse)"
+             Title="Patterns Web Pages"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              x:DataType="common:MPatternEdit">
 

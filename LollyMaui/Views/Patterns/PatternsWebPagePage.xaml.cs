@@ -10,7 +10,7 @@ using System.Reactive.Linq;
 
 namespace LollyMaui
 {
-    public partial class PatternsWebPagePage : ContentPage
+    public partial class PatternsWebPagePage : ContentPage, IPageNavigate
     {
         PatternsDetailViewModel vmDetail = null!;
 
@@ -22,7 +22,11 @@ namespace LollyMaui
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            vmDetail = (PatternsDetailViewModel)BindingContext;
+        }
+
+        public void OnPageNavigated(object navigationData)
+        {
+            vmDetail = (PatternsDetailViewModel)navigationData;
             BindingContext = vmDetail.ItemEdit;
             wbWebPage.Source = vmDetail.ItemEdit.URL;
         }
