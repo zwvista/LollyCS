@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LollyMaui.PatternsWebPagesBrowsePage"
+             x:Class="LollyMaui.PatternsWebPagePage"
              Title="Patterns Web Pages(Browse)"
-             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon">
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:MPatternEdit">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding WebPageItems}" ItemDisplayBinding="{Binding TITLE}" SelectedItem="{Binding SelectedWebPageItem}"
-                SelectedIndexChanged="Picker_SelectedIndexChanged" />
+        <Label Text="{Binding PATTERN}" />
         <WebView Grid.Row="1" x:Name="wbWebPage" />
     </Grid>
 </ContentPage>

@@ -19,9 +19,7 @@ namespace LollyMaui
             Routing.RegisterRoute(nameof(PhrasesTextbookDetailPage), typeof(PhrasesTextbookDetailPage));
             Routing.RegisterRoute(nameof(PhrasesLangDetailPage), typeof(PhrasesLangDetailPage));
             Routing.RegisterRoute(nameof(PatternsDetailPage), typeof(PatternsDetailPage));
-            Routing.RegisterRoute(nameof(PatternsWebPagesListPage), typeof(PatternsWebPagesListPage));
-            Routing.RegisterRoute(nameof(PatternsWebPagesDetailPage), typeof(PatternsWebPagesDetailPage));
-            Routing.RegisterRoute(nameof(PatternsWebPagesBrowsePage), typeof(PatternsWebPagesBrowsePage));
+            Routing.RegisterRoute(nameof(PatternsWebPagePage), typeof(PatternsWebPagePage));
             Routing.RegisterRoute(nameof(ReviewOptionsPage), typeof(ReviewOptionsPage));
 
             Task.Run(async () =>

@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LollyCommon;
+using ReactiveUI;
+using System.Reactive.Linq;
 
 namespace LollyMaui
 {
-    public partial class PatternsWebPagesDetailPage : ContentPage
+    public partial class PatternsWebPagePage : ContentPage
     {
         PatternsDetailViewModel vmDetail = null!;
 
-        public PatternsWebPagesDetailPage()
+        public PatternsWebPagePage()
         {
             InitializeComponent();
         }
@@ -22,10 +24,7 @@ namespace LollyMaui
             base.OnAppearing();
             vmDetail = (PatternsDetailViewModel)BindingContext;
             BindingContext = vmDetail.ItemEdit;
-            vmDetail.ItemEdit.Save.WhenFinishedExecuting().Subscribe(_ => Navigation.PopModalAsync());
+            wbWebPage.Source = vmDetail.ItemEdit.URL;
         }
-
-        void OnCancel(object sender, EventArgs e) =>
-            Navigation.PopModalAsync();
     }
 }

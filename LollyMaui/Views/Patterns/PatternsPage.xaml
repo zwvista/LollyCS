@@ -29,9 +29,6 @@
                                     <SwipeItem Text="More"
                                                BackgroundColor="LightGreen"
                                                Invoked="OnMoreSwipeItemInvoked" />
-                                    <SwipeItem Text="Delete"
-                                               BackgroundColor="LightPink"
-                                               Invoked="OnDeleteSwipeItemInvoked" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Grid Padding="10" x:DataType="common:MPattern" ColumnDefinitions="Auto,*,Auto">

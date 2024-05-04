@@ -41,19 +41,14 @@ namespace LollyMaui
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MPattern)((SwipeItem)sender).BindingContext;
-            var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Browse Web Pages", "Edit Web Pages", "Copy Pattern", "Google Pattern");
+            var a = await DisplayActionSheet("More", "Cancel", null, "Edit", "Browse Web Page", "Copy Pattern", "Google Pattern");
             switch (a)
             {
-                case "Delete":
-                    break;
                 case "Edit":
                     await Edit(item);
                     break;
-                case "Browse Web Pages":
-                    //await Shell.Current.GoToAsync(nameof(PatternsWebPagesBrowsePage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
-                    break;
-                case "Edit Web Pages":
-                    //await Shell.Current.GoToAsync(nameof(PatternsWebPagesListPage), new PatternsWebPagesViewModel(vm.vmSettings, false, item));
+                case "Browse Web Page":
+                    await Shell.Current.GoToAsync(nameof(PatternsWebPagePage), new PatternsDetailViewModel(vm, item));
                     break;
                 case "Copy Pattern":
                     await Clipboard.Default.SetTextAsync(item.PATTERN);
@@ -62,10 +57,6 @@ namespace LollyMaui
                     await item.PATTERN.GoogleMaui();
                     break;
             }
-        }
-
-        void OnDeleteSwipeItemInvoked(object sender, EventArgs e)
-        {
         }
 
         async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
