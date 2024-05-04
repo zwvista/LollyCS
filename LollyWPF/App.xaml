@@ -13,9 +13,7 @@
                 <!--https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/tree/v4.9.0-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />-->
-                <!--https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/v4.9.0/MaterialDesignColors.Wpf/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml-->
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Blue.Primary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Secondary/MaterialDesignColor.Amber.xaml" />
                 <!--https://github.com/ButchersBoy/Dragablz/blob/master/Dragablz/Themes/MaterialDesign.xaml-->
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/MaterialDesign.xaml"/>
