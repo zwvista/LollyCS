@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// PhrasesAssociateDlg.xaml の相互作用ロジック

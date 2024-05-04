@@ -13,7 +13,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     public class WordsUnitViewModelWPF : WordsUnitViewModel, IDragSource
     {

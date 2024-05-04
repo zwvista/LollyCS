@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// WordsUnitControl.xaml の相互作用ロジック

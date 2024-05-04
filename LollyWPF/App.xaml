@@ -1,7 +1,7 @@
-﻿<Application x:Class="LollyCloud.App"
+﻿<Application x:Class="LollyWPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:LollyCloud"
+             xmlns:local="clr-namespace:LollyWPF"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              StartupUri="MainWindow.xaml" Startup="Application_Startup">
     <Application.Resources>

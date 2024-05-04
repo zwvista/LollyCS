@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     public enum SettingsDlgResult { ApplyToAll, ApplyToCurrent, ApplyToNone };
     /// <summary>

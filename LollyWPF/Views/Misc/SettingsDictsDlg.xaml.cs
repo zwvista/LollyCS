@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// SettingsDictsDlg.xaml の相互作用ロジック

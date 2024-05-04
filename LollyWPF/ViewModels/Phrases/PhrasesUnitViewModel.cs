@@ -6,7 +6,7 @@ using System.Collections;
 using System.Linq;
 using System.Windows;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     public class PhrasesUnitViewModelWPF : PhrasesUnitViewModel, IDragSource
     {

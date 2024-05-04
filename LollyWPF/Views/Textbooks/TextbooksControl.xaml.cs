@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// TextbooksControl.xaml の相互作用ロジック

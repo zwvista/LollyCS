@@ -12,7 +12,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     public static class ControlExtensions
     {

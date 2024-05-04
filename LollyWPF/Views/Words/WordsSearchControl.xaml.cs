@@ -8,7 +8,7 @@ using System.Linq;
 using Dragablz;
 using LollyCommon;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// WordsSearchControl.xaml の相互作用ロジック

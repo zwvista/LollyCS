@@ -17,7 +17,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Shapes;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// TestControl.xaml の相互作用ロジック

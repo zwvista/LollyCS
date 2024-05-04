@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// WordsTextbookDetailDlg.xaml の相互作用ロジック

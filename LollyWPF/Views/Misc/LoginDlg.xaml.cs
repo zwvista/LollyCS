@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// LoginDlg.xaml の相互作用ロジック

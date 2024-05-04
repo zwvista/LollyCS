@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// TransformResultControl.xaml の相互作用ロジック

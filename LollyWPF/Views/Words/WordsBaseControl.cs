@@ -14,7 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     public class WordsPhrasesBaseControl : UserControl, ILollySettings
     {

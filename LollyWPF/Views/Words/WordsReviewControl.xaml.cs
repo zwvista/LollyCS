@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// WordsReviewControl.xaml の相互作用ロジック

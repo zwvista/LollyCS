@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     // https://stackoverflow.com/questions/1039636/how-to-bind-inverse-boolean-properties-in-wpf
     public class BoolInverterConverter : IValueConverter

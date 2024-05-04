@@ -1,9 +1,9 @@
-﻿<Window x:Class="LollyCloud.PhrasesUnitDetailDlg"
+﻿<Window x:Class="LollyWPF.PhrasesUnitDetailDlg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LollyCloud"
+        xmlns:local="clr-namespace:LollyWPF"
         mc:Ignorable="d"
         Title="Phrases in Unit Details" Height="520" Width="660" WindowStartupLocation="CenterOwner">
     <Window.Resources>

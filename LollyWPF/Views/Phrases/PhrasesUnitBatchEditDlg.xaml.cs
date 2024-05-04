@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// PhrasesUnitBatchEditDlg.xaml の相互作用ロジック

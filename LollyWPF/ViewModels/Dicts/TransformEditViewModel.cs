@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     public class TransformEditViewModelWPF : TransformEditViewModel, IDragSource
     {

@@ -9,7 +9,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace LollyCloud
+namespace LollyWPF
 {
     /// <summary>
     /// LangBlogPostsControl.xaml の相互作用ロジック

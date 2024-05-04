@@ -1,10 +1,10 @@
-﻿<Window x:Class="LollyCloud.SettingsDictsDlg"
+﻿<Window x:Class="LollyWPF.SettingsDictsDlg"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dd="urn:gong-wpf-dragdrop"
-        xmlns:local="clr-namespace:LollyCloud"
+        xmlns:local="clr-namespace:LollyWPF"
         mc:Ignorable="d"
         Title="Select Dictionaries" Height="450" Width="800" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid Margin="10">
