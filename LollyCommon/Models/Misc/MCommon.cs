@@ -47,7 +47,7 @@ namespace LollyCommon
         public int? NewID { get; set; }
         [JsonProperty("result")]
         [Reactive]
-        public string Result { get; set; }
+        public string Result { get; set; } = null!;
 
         public override string ToString() => JsonConvert.SerializeObject(this);
     }

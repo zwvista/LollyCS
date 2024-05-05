@@ -25,7 +25,7 @@ namespace LollyCommon.Crawlers.Patterns.Korean
                 {
                     html = await client.GetStringAsync($"http://00mai00.blog110.fc2.com/blog-category-19-{i}.html");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     break;
                 }

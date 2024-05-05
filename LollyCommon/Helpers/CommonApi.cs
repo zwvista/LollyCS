@@ -31,7 +31,7 @@ namespace LollyCommon
         // https://stackoverflow.com/questions/273313/randomize-a-listt
         public static void Shuffle<T>(this IList<T> list)
         {
-            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+            var provider = RandomNumberGenerator.Create();
             int n = list.Count;
             while (n > 1)
             {

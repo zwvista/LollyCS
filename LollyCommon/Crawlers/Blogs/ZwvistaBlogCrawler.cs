@@ -31,7 +31,7 @@ namespace LollyCommon
                 {
                     html = await client.GetStringAsync($"https://zwvista.wordpress.com/category/%E6%97%A5%E8%AF%AD%E5%8F%A5%E5%9E%8B/page/{i}/");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     break;
                 }

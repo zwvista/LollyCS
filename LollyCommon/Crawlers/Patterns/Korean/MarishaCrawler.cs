@@ -23,7 +23,7 @@ namespace LollyCommon.Crawlers.Patterns.Korean
                 {
                     html = await client.GetStringAsync($"https://marisha39.com/ending/page/{i}/");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     break;
                 }

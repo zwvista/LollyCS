@@ -12,7 +12,7 @@ namespace LollyCommon
     public class MLangBlogsContent
     {
         [JsonProperty("records")]
-        public List<MLangBlogPostContent> Records { get; set; }
+        public List<MLangBlogPostContent> Records { get; set; } = null!;
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MLangBlogPostContent : ReactiveObject

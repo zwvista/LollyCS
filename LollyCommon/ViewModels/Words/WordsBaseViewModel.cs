@@ -32,7 +32,7 @@ namespace LollyCommon
         [Reactive]
         public string NewWord { get; set; } = "";
         [Reactive]
-        public MWordInterface SelectedWordItem { get; set; }
+        public MWordInterface SelectedWordItem { get; set; } = null!;
         public bool HasSelectedWordItem { [ObservableAsProperty] get; }
         public virtual string SelectedWord => SelectedWordItem?.WORD ?? "";
         public int SelectedWordID => SelectedWordItem?.WORDID ?? 0;

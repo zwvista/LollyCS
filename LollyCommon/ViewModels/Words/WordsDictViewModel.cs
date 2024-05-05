@@ -8,7 +8,7 @@ namespace LollyCommon
 {
     public class WordsDictViewModel : ReactiveObject
     {
-        public OnlineDictViewModel vmDict { get; set; }
+        public OnlineDictViewModel vmDict { get; set; } = null!;
         public SettingsViewModel vmSettings { get; }
         public List<string> Words { get; }
         [Reactive]

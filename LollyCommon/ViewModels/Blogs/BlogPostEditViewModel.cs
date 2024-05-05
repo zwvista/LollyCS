@@ -9,7 +9,7 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         BlogPostEditService service = new BlogPostEditService();
         LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
-        MLangBlogPostContent itemPost = null;
+        MLangBlogPostContent? itemPost = null;
         bool isUnitBlogPost => itemPost == null;
         public string Title { get; set; }
 

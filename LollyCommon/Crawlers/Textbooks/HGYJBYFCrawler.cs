@@ -23,7 +23,7 @@ namespace LollyCommon
                 {
                     html = await client.GetStringAsync($"https://www.krlearn.com/yufafudao/hanguoyujibenyufa/list_{i}.html");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     break;
                 }

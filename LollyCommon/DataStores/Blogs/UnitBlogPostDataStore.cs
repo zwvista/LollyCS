@@ -9,7 +9,7 @@ namespace LollyCommon
 {
     public class UnitBlogPostDataStore : LollyDataStore<MUnitBlogPost>
     {
-        public async Task<MUnitBlogPost> GetDataByTextbook(int textbookid, int unit) =>
+        public async Task<MUnitBlogPost?> GetDataByTextbook(int textbookid, int unit) =>
             (await GetDataByUrl<MUnitBlogPosts>($"UNITBLOGPOSTS?filter=TEXTBOOKID,eq,{textbookid}&filter=UNIT,eq,{unit}")).Records.FirstOrDefault();
         private async Task<int> Create(MUnitBlogPost item) =>
             await CreateByUrl($"UNITBLOGPOSTS", item);

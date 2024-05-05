@@ -55,7 +55,7 @@ namespace LollyCommon
         }
 
         public async Task<int> Create(MUnitPhrase item) =>
-            (await CallSPByUrl("UNITPHRASES_CREATE", item)).NewID.Value;
+            (await CallSPByUrl("UNITPHRASES_CREATE", item)).NewID!.Value;
 
         public async Task UpdateSeqNum(int id, int seqnum) =>
             Debug.WriteLine(await UpdateByUrl($"UNITPHRASES/{id}", $"SEQNUM={seqnum}"));

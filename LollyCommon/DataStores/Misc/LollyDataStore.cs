@@ -21,18 +21,18 @@ namespace LollyCommon
             BaseAddress = new Uri(CommonApi.LollyUrlSP)
         };
 
-        protected async Task<U> GetDataByUrl<U>(string url) where U : class
+        protected async Task<U?> GetDataByUrl<U>(string url) where U : class
         {
             if (!CrossConnectivity.Current.IsConnected) return null;
 
             var json = await clientAPI.GetStringAsync(url);
-            U u = await Task.Run(() =>
+            U? u = await Task.Run(() =>
             {
                 try
                 {
                     return JsonConvert.DeserializeObject<U>(json);
                 }
-                catch (JsonException ex)
+                catch (JsonException)
                 {
                     return null;
                 }
@@ -96,7 +96,7 @@ namespace LollyCommon
                 {
                     return JsonConvert.DeserializeObject<List<List<MSPResult>>>(json)[0][0];
                 }
-                catch (JsonException ex)
+                catch (JsonException)
                 {
                     return null;
                 }
