@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MauiIcons.FontAwesome.Solid;
 
 namespace LollyMaui
 {
@@ -9,6 +10,7 @@ namespace LollyMaui
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseFontAwesomeSolidMauiIcons()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
