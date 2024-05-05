@@ -16,7 +16,7 @@ namespace LollyWPF
     /// </summary>
     public partial class WordsTextbookControl : WordsBaseControl
     {
-        WordsUnitViewModelWPF vm;
+        WordsUnitViewModelWPF vm = null!;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
@@ -27,7 +27,7 @@ namespace LollyWPF
         public WordsTextbookControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
@@ -46,7 +46,7 @@ namespace LollyWPF
             DataContext = vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: false, needCopy: true);
             await base.OnSettingsChanged();
         }
-        void miEditWord_Click(object sender, RoutedEventArgs e)
+        void miEditWord_Click(object sender, RoutedEventArgs? e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsTextbookDetailDlg(Window.GetWindow(this), vm, SelectedWordItem);

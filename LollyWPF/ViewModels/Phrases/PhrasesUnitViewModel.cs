@@ -4,6 +4,7 @@ using LollyCommon;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Windows;
 
 namespace LollyWPF
@@ -16,6 +17,7 @@ namespace LollyWPF
 
         // Copied from DefaultDragHandler
         // https://github.com/punker76/gong-wpf-dragdrop/blob/dev/src/GongSolutions.WPF.DragDrop/DefaultDragHandler.cs
+        [SupportedOSPlatform("windows")]
         void IDragSource.StartDrag(IDragInfo dragInfo)
         {
             var items = TypeUtilities.CreateDynamicallyTypedList(dragInfo.SourceItems).Cast<object>().ToList();

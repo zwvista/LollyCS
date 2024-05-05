@@ -10,7 +10,7 @@ namespace LollyWPF
     public class PhrasesBaseControl : WordsPhrasesBaseControl
     {
         protected virtual DataGrid dgWordsBase => null;
-        protected WordsLangViewModel vmWordsLang;
+        protected WordsLangViewModel vmWordsLang = null!;
         protected override WordsBaseViewModel vmWords => vmWordsLang;
         MLangWord SelectedWordItem => (MLangWord)vmWordsLang.SelectedWordItem;
         public override async Task OnSettingsChanged()
@@ -27,13 +27,13 @@ namespace LollyWPF
             UIHelpers.TryFindParent<DataGrid>((DataGridRow)sender).CancelEdit();
             miEditWord_Click(sender, null);
         }
-        public void miEditWord_Click(object sender, RoutedEventArgs e)
+        public void miEditWord_Click(object sender, RoutedEventArgs? e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vmWordsLang, SelectedWordItem);
             dlg.ShowDialog();
         }
-        public void miAssociateWords_Click(object sender, RoutedEventArgs e)
+        public void miAssociateWords_Click(object sender, RoutedEventArgs? e)
         {
             var w = (MainWindow)Window.GetWindow(this);
             w.AddNewUnitWord(vmPhrases.SelectedPhraseID);

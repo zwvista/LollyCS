@@ -16,7 +16,7 @@ namespace LollyWPF
     /// </summary>
     public partial class WordsLangControl : WordsBaseControl
     {
-        WordsLangViewModel vm;
+        WordsLangViewModel vm = null!;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
@@ -27,7 +27,7 @@ namespace LollyWPF
         public WordsLangControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
@@ -52,7 +52,7 @@ namespace LollyWPF
             DataContext = vm = new WordsLangViewModel(MainWindow.vmSettings, needCopy: true);
             await base.OnSettingsChanged();
         }
-        void miEditWord_Click(object sender, RoutedEventArgs e)
+        void miEditWord_Click(object sender, RoutedEventArgs? e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsLangDetailDlg(Window.GetWindow(this), vm, SelectedWordItem);

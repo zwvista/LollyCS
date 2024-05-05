@@ -14,7 +14,7 @@ namespace LollyWPF
     /// </summary>
     public partial class BlogPostEditControl : UserControl, ILollySettings
     {
-        BlogPostEditViewModel vm;
+        BlogPostEditViewModel vm = null!;
         MLangBlogPostContent itemPost;
 
         public BlogPostEditControl(MLangBlogPostContent itemPost)
@@ -23,7 +23,7 @@ namespace LollyWPF
             // Disable image loading
             // wbPost.BrowserSettings.ImageLoading = CefState.Disabled;
             this.itemPost = itemPost;
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()

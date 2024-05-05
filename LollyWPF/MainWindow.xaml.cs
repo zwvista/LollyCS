@@ -29,8 +29,8 @@ namespace LollyWPF
         {
             InitializeComponent();
             DataContext = this;
-            CommonApi.UserId = ConfigurationManager.AppSettings["userid"];
-            if (string.IsNullOrEmpty(CommonApi.UserId))
+            CommonApi.UserId = ConfigurationManager.AppSettings["userid"] ?? "";
+            if (CommonApi.UserId == "")
                 miLogout_Click(null, null);
             Task.Run(() => vmSettings.GetData()).Wait();
         }
@@ -60,7 +60,7 @@ namespace LollyWPF
                 tcMain.SelectedIndex = i;
         }
 
-        void miSearch_Click(object sender, RoutedEventArgs e) => AddTab<WordsSearchControl>("Search");
+        void miSearch_Click(object sender, RoutedEventArgs? e) => AddTab<WordsSearchControl>("Search");
         public void SearchNewWord(string word)
         {
             int i = tcMain.SelectedIndex;
@@ -85,8 +85,8 @@ namespace LollyWPF
             c.AddNewUnitWord(phraseid);
             tcMain.SelectedIndex = i;
         }
-        void WordsUnitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => AddTab<WordsUnitControl>("Words in Unit");
-        void PhrasesUnitCommand_Executed(object sender, ExecutedRoutedEventArgs e) => AddTab<PhrasesUnitControl>("Phrases in Unit");
+        void WordsUnitCommand_Executed(object sender, ExecutedRoutedEventArgs? e) => AddTab<WordsUnitControl>("Words in Unit");
+        void PhrasesUnitCommand_Executed(object sender, ExecutedRoutedEventArgs? e) => AddTab<PhrasesUnitControl>("Phrases in Unit");
         void miWordsReview_Click(object sender, RoutedEventArgs e) => AddTab<WordsReviewControl>("Words Review");
         void miPhrasesReview_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesReviewControl>("Phrases Review");
         void miWordsLang_Click(object sender, RoutedEventArgs e) => AddTab<WordsLangControl>("Words in Language");
@@ -103,7 +103,7 @@ namespace LollyWPF
         void miDictionaries_Click(object sender, RoutedEventArgs e) => AddTab<DictsControl>("Dictionaries");
         void miPatternCrawlers_Click(object sender, RoutedEventArgs e) => AddTab<PatternCrawlersControl>("Pattern Crawlers");
         void miTest_Click(object sender, RoutedEventArgs e) => AddTab<TestControl>("Test");
-        void miLogout_Click(object sender, RoutedEventArgs e)
+        void miLogout_Click(object? sender, RoutedEventArgs? e)
         {
             CommonApi.UserId = "";
             App.SaveUserId();
@@ -112,7 +112,7 @@ namespace LollyWPF
             dlg.ShowDialog();
         }
         void miExit_Click(object sender, RoutedEventArgs e) => Environment.Exit(0);
-        public void AddBlogPostEditTab(string header, MLangBlogPostContent itemPost)
+        public void AddBlogPostEditTab(string header, MLangBlogPostContent? itemPost)
         {
             Tabs.Add(new ActionTabItem { Header = header, Content = new BlogPostEditControl(itemPost) });
             tcMain.SelectedIndex = tcMain.Items.Count - 1;

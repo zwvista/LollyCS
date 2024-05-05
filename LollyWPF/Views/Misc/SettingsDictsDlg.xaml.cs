@@ -20,8 +20,8 @@ namespace LollyWPF
     /// </summary>
     public partial class SettingsDictsDlg : Window
     {
-        public SettingsViewModel vmSettings;
-        SettingsDictsViewModel vm;
+        public SettingsViewModel vmSettings = null!;
+        SettingsDictsViewModel vm = null!;
         public SettingsDictsDlg()
         {
             InitializeComponent();

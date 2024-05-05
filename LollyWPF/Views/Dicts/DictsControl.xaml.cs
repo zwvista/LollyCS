@@ -13,11 +13,11 @@ namespace LollyWPF
     /// </summary>
     public partial class DictsControl : UserControl, ILollySettings
     {
-        public DictsViewModel vm { get; set; }
+        public DictsViewModel vm { get; set; } = null!;
         public DictsControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()

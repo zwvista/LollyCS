@@ -17,7 +17,7 @@ namespace LollyWPF
     public partial class LangBlogGroupsControl : UserControl, ILollySettings
     {
         string originalText = "";
-        LangBlogGroupsViewModel vm;
+        LangBlogGroupsViewModel vm = null!;
         BlogPostEditService editService = new BlogPostEditService();
         LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
 
@@ -26,7 +26,7 @@ namespace LollyWPF
             InitializeComponent();
             // Disable image loading
             // wbPost.BrowserSettings.ImageLoading = CefState.Disabled;
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
@@ -54,7 +54,7 @@ namespace LollyWPF
             var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.NewGroup(), vm);
             dlg.ShowDialog();
         }
-        void miEditGroup_Click(object sender, RoutedEventArgs e)
+        void miEditGroup_Click(object sender, RoutedEventArgs? e)
         {
             dgGroups.CancelEdit();
             var dlg = new LangBlogGroupsDetailDlg(Window.GetWindow(this), vm.SelectedGroupItem, vm);
@@ -63,7 +63,7 @@ namespace LollyWPF
         void miDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
         }
-        void miEditPost_Click(object sender, RoutedEventArgs e)
+        void miEditPost_Click(object sender, RoutedEventArgs? e)
         {
             dgPosts.CancelEdit();
             var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);

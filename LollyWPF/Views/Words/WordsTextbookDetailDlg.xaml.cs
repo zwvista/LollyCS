@@ -22,7 +22,7 @@ namespace LollyWPF
     public partial class WordsTextbookDetailDlg : Window
     {
         WordsUnitDetailViewModel vmDetail;
-        public MUnitWord Item { get; set; }
+        public MUnitWord Item { get; set; } = null!;
         public WordsTextbookDetailDlg(Window owner, WordsUnitViewModelWPF vm, MUnitWord item)
         {
             InitializeComponent();

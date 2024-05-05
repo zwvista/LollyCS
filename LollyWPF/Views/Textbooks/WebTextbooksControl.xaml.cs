@@ -16,12 +16,12 @@ namespace LollyWPF
     /// </summary>
     public partial class WebTextbooksControl : UserControl, ILollySettings
     {
-        public WebTextbooksViewModel vm { get; set; }
+        public WebTextbooksViewModel vm { get; set; } = null!;
         public SettingsViewModel vmSettings => vm.vmSettings;
         public WebTextbooksControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()

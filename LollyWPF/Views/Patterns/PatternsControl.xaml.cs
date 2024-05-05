@@ -16,14 +16,14 @@ namespace LollyWPF
     /// </summary>
     public partial class PatternsControl : UserControl, ILollySettings
     {
-        public PatternsViewModel vm { get; set; }
+        public PatternsViewModel vm { get; set; } = null!;
         public string originalText = "";
         public SettingsViewModel vmSettings => vm.vmSettings;
 
         public PatternsControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically

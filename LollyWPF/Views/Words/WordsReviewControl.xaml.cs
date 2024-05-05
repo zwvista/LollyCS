@@ -15,7 +15,7 @@ namespace LollyWPF
     /// </summary>
     public partial class WordsReviewControl : WordsBaseControl
     {
-        public WordsReviewViewModel vm { get; set; }
+        public WordsReviewViewModel vm { get; set; } = null!;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
@@ -27,7 +27,7 @@ namespace LollyWPF
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public override async Task OnSettingsChanged()
@@ -44,7 +44,7 @@ namespace LollyWPF
             btnNewTest_Click(null, null);
         }
 
-        async void btnNewTest_Click(object sender, RoutedEventArgs e)
+        async void btnNewTest_Click(object? sender, RoutedEventArgs? e)
         {
             var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vm.Options);
             if (dlg.ShowDialog() == true)

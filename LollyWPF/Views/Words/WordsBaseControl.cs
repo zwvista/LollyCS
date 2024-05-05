@@ -8,6 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,18 +28,20 @@ namespace LollyWPF
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
         public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
 
-        public virtual void dgWords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        [SupportedOSPlatform("windows")]
+        public virtual void dgWords_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
         {
             var word = vmWords.SelectedWord == "" ? vmWords.NewWord : vmWords.SelectedWord;
             Tabs.ForEach(async o => await ((WordsDictControl)o.Content).SearchDict(word));
             App.Speak(vmSettings, vmWords.SelectedWord);
-            GetPhrases(vmWords.SelectedWordID);
+            _ = GetPhrases(vmWords.SelectedWordID);
         }
         public virtual async Task GetPhrases(int wordid) { }
+        [SupportedOSPlatform("windows")]
         public void dgPhrases_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             App.Speak(vmSettings, vmPhrases.SelectedPhrase);
-            GetWords(vmPhrases.SelectedPhraseID);
+            _ = GetWords(vmPhrases.SelectedPhraseID);
         }
         public virtual async Task GetWords(int phraseid) { }
 
@@ -102,7 +105,7 @@ namespace LollyWPF
     public class WordsBaseControl : WordsPhrasesBaseControl
     {
         protected virtual DataGrid dgPhrasesBase => null;
-        PhrasesLangViewModel vmPhrasesLang;
+        PhrasesLangViewModel vmPhrasesLang = null!;
         protected override PhrasesBaseViewModel vmPhrases => vmPhrasesLang;
         MLangPhrase SelectedPhraseItem => (MLangPhrase)vmPhrases.SelectedPhraseItem;
         public override async Task OnSettingsChanged()
@@ -120,13 +123,13 @@ namespace LollyWPF
             UIHelpers.TryFindParent<DataGrid>((DataGridRow)sender).CancelEdit();
             miEditPhrase_Click(sender, null);
         }
-        public void miEditPhrase_Click(object sender, RoutedEventArgs e)
+        public void miEditPhrase_Click(object sender, RoutedEventArgs? e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new PhrasesLangDetailDlg(Window.GetWindow(this), vmPhrasesLang, SelectedPhraseItem);
             dlg.ShowDialog();
         }
-        public void miAssociatePhrases_Click(object sender, RoutedEventArgs e)
+        public void miAssociatePhrases_Click(object sender, RoutedEventArgs? e)
         {
             var dlg = new PhrasesAssociateDlg(Window.GetWindow(this), vmSettings, vmWords.SelectedWordID, vmWords.SelectedWord);
             dlg.ShowDialog();

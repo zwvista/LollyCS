@@ -13,7 +13,7 @@ namespace LollyWPF
     /// </summary>
     public partial class TransformTemplateControl : UserControl
     {
-        TransformEditViewModelWPF vm;
+        TransformEditViewModelWPF vm = null!;
         public TransformTemplateControl(TransformEditViewModelWPF vm)
         {
             InitializeComponent();

@@ -14,14 +14,14 @@ namespace LollyWPF
     /// </summary>
     public partial class ReadNumberControl : UserControl, ILollySettings
     {
-        ReadNumberViewModel vm;
+        ReadNumberViewModel vm = null!;
         private SettingsViewModel vmSettings => vm.vmSettings;
         private ComparisonConverter converter = new ComparisonConverter();
 
         public ReadNumberControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()

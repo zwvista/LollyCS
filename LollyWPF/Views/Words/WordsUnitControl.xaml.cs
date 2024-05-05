@@ -17,7 +17,7 @@ namespace LollyWPF
     /// </summary>
     public partial class WordsUnitControl : WordsBaseControl
     {
-        WordsUnitViewModelWPF vm;
+        WordsUnitViewModelWPF vm = null!;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
@@ -28,7 +28,7 @@ namespace LollyWPF
         public WordsUnitControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         // https://stackoverflow.com/questions/22790181/wpf-datagrid-row-double-click-event-programmatically
@@ -68,7 +68,7 @@ namespace LollyWPF
             DataContext = vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true);
             await base.OnSettingsChanged();
         }
-        void miEditWord_Click(object sender, RoutedEventArgs e)
+        void miEditWord_Click(object sender, RoutedEventArgs? e)
         {
             // https://stackoverflow.com/questions/16236905/access-parent-window-from-user-control
             var dlg = new WordsUnitDetailDlg(Window.GetWindow(this), vm, SelectedWordItem, 0);

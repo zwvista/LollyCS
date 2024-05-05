@@ -21,7 +21,7 @@ namespace LollyWPF
             DataContext = vm;
             // https://stackoverflow.com/questions/339620/how-do-i-remove-minimize-and-maximize-from-a-resizable-window-in-wpf
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
-            Init();
+            _ = Init();
         }
 
         async Task Init() => await vm.GetData();

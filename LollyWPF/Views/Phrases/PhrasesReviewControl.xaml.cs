@@ -14,7 +14,7 @@ namespace LollyWPF
     /// </summary>
     public partial class PhrasesReviewControl : UserControl, ILollySettings
     {
-        public PhrasesReviewViewModel vm { get; set; }
+        public PhrasesReviewViewModel vm { get; set; } = null!;
         public SettingsViewModel vmSettings => vm.vmSettings;
 
         public PhrasesReviewControl()
@@ -23,7 +23,7 @@ namespace LollyWPF
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
@@ -36,7 +36,7 @@ namespace LollyWPF
             });
             btnNewTest_Click(null, null);
         }
-        async void btnNewTest_Click(object sender, RoutedEventArgs e)
+        async void btnNewTest_Click(object? sender, RoutedEventArgs? e)
         {
             var dlg = new ReviewOptionsDlg(Window.GetWindow(this), vm.Options);
             if (dlg.ShowDialog() == true)

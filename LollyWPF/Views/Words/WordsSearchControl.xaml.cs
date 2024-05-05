@@ -15,7 +15,7 @@ namespace LollyWPF
     /// </summary>
     public partial class WordsSearchControl : WordsBaseControl
     {
-        WordsSearchViewModel vm;
+        WordsSearchViewModel vm = null!;
         protected override WordsBaseViewModel vmWords => vm;
         public override SettingsViewModel vmSettings => vm.vmSettings;
         protected override ToolBar ToolBarDictBase => ToolBarDict;
@@ -24,7 +24,7 @@ namespace LollyWPF
         public WordsSearchControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public override async Task OnSettingsChanged()

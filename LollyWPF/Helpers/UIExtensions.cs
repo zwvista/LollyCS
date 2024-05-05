@@ -85,9 +85,9 @@ namespace LollyWPF
     public class ActionTabItem
     {
         // This will be the text in the tab control
-        public string Header { get; set; }
+        public string Header { get; set; } = null!;
         // This will be the content of the tab control It is a UserControl whits you need to create manually
-        public UserControl Content { get; set; }
+        public UserControl Content { get; set; } = null!;
     }
     // https://github.com/ButchersBoy/Dragablz/issues/13
     public class ActionInterTabClient : DefaultInterTabClient
@@ -106,7 +106,7 @@ namespace LollyWPF
             PropertyChangedCallback = (obj, e) =>
             {
                 // Implementation of DialogResult functionality
-                Button button = obj as Button;
+                Button? button = obj as Button;
                 if (button == null)
                     throw new InvalidOperationException(
                       "Can only use ButtonHelper.DialogResult on a Button control");
@@ -126,15 +126,15 @@ namespace LollyWPF
             return (string)item.GetType().GetProperty(propertyName).GetValue(item);
         }
         public static async void OnEndEditCell(object sender, DataGridCellEditEndingEventArgs e,
-            string originalText, SettingsViewModel vmSettings,
-            string autoCorrectColumnName, Func<object, Task> updateFunc)
+            string originalText, SettingsViewModel? vmSettings,
+            string? autoCorrectColumnName, Func<object, Task> updateFunc)
         {
             if (e.EditAction != DataGridEditAction.Commit) return;
             var item = e.Row.Item;
             var propertyName = ((Binding)((DataGridBoundColumn)e.Column).Binding).Path.Path;
             var el = (TextBox)e.EditingElement;
             if (propertyName == autoCorrectColumnName)
-                el.Text = vmSettings.AutoCorrectInput(el.Text);
+                el.Text = vmSettings!.AutoCorrectInput(el.Text);
             if (el.Text == originalText) return;
             item.GetType().GetProperty(propertyName).SetValue(item, el.Text);
             await updateFunc(item);

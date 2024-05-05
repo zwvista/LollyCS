@@ -22,7 +22,7 @@ namespace LollyWPF
     public partial class PhrasesTextbookDetailDlg : Window
     {
         PhrasesUnitDetailViewModel vmDetail;
-        public MUnitPhrase Item { get; set; }
+        public MUnitPhrase Item { get; set; } = null!;
         public PhrasesTextbookDetailDlg(Window owner, PhrasesUnitViewModelWPF vm, MUnitPhrase item)
         {
             InitializeComponent();

@@ -10,6 +10,7 @@ using CefSharp;
 using CefSharp.Wpf;
 using LollyCommon;
 using LollyWPF.Properties;
+using System.Runtime.Versioning;
 
 namespace LollyWPF
 {
@@ -18,9 +19,12 @@ namespace LollyWPF
     /// </summary>
     public partial class App : Application
     {
+        [SupportedOSPlatform("windows")]
         static SpeechSynthesizer synth = new SpeechSynthesizer();
+        [SupportedOSPlatform("windows")]
         static List<InstalledVoice> voices = synth.GetInstalledVoices().ToList();
 
+        [SupportedOSPlatform("windows")]
         public static void Speak(SettingsViewModel vmSettings, string text)
         {
             if (!App.voices.Any(o => o.VoiceInfo.Name == vmSettings.SelectedVoice.VOICENAME)) return;
@@ -29,12 +33,14 @@ namespace LollyWPF
             synth.SpeakAsync(text);
         }
 
+        [SupportedOSPlatform("windows")]
         public static void Speak(PromptBuilder pb)
         {
             synth.SpeakAsyncCancelAll();
             synth.SpeakAsync(pb);
         }
 
+        [SupportedOSPlatform("windows")]
         public static void AddPrompt(PromptBuilder pb, SettingsViewModel vmSettings, string text)
         {
             pb.StartVoice(vmSettings.SelectedVoice.VOICENAME);

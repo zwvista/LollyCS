@@ -16,12 +16,12 @@ namespace LollyWPF
     /// </summary>
     public partial class TextbooksControl : UserControl, ILollySettings
     {
-        public TextbooksViewModel vm { get; set; }
+        public TextbooksViewModel vm { get; set; } = null!;
         string originalText = "";
         public TextbooksControl()
         {
             InitializeComponent();
-            OnSettingsChanged();
+            _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
@@ -39,7 +39,7 @@ namespace LollyWPF
             if (dlg.ShowDialog() == true)
                 vm.Add(dlg.Item);
         }
-        void miEdit_Click(object sender, RoutedEventArgs e)
+        void miEdit_Click(object sender, RoutedEventArgs? e)
         {
             dgTextbooks.CancelEdit();
             var dlg = new TextbooksDetailDlg(Window.GetWindow(this), vm.SelectedTextbookItem, vm);
