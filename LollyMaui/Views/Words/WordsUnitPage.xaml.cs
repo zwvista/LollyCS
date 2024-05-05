@@ -74,6 +74,11 @@ namespace LollyMaui
         {
         }
 
+        async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToModalAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, vm.NewUnitWord(), 0));
+        }
+
         async void ToolbarItemMore_Clicked(object sender, EventArgs e)
         {
             var a = await DisplayActionSheet("More", "Cancel", null, "Add", "Retrieve All Notes", "Retrieve Notes If Empty", "Clear All Notes", "Clear Notes If Empty", "Batch Edit");

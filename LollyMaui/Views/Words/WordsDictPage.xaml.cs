@@ -10,7 +10,7 @@ namespace LollyMaui
 {
     public partial class WordsDictPage : ContentPage, IOnlineDict, IPageNavigate
     {
-        WordsDictViewModel vm;
+        WordsDictViewModel vm = null!;
 
         public WordsDictPage()
         {

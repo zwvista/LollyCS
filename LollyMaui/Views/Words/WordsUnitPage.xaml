@@ -8,7 +8,7 @@
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />
         <ToolbarItem Text="More" Clicked="ToolbarItemMore_Clicked" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">

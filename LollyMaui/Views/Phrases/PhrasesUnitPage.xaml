@@ -7,7 +7,7 @@
              x:DataType="common:PhrasesUnitViewModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />
         <ToolbarItem Text="More" Clicked="ToolbarItemMore_Clicked" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">

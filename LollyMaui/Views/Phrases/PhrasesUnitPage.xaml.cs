@@ -38,6 +38,11 @@ namespace LollyMaui
             await Edit(item);
         }
 
+        async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToModalAsync(nameof(PhrasesUnitDetailPage), new PhrasesUnitDetailViewModel(vm, vm.NewUnitPhrase(), 0));
+        }
+
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MUnitPhrase)((SwipeItem)sender).BindingContext;

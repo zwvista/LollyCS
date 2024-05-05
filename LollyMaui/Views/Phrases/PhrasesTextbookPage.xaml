@@ -7,7 +7,6 @@
              x:DataType="common:PhrasesUnitViewModel">
 
     <ContentPage.ToolbarItems>
-        <!--<ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />-->
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,Auto,*" ColumnDefinitions="2*,1*">
         <SearchBar Grid.ColumnSpan="2" Placeholder="Filter" Text="{Binding TextFilter}" />
