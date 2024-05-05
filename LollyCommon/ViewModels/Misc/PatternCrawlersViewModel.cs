@@ -14,13 +14,13 @@ namespace LollyCommon
     public class PatternCrawlersViewModel : ReactiveValidationObject
     {
         [Reactive]
-        public string SelectedLang { get; set; }
+        public string SelectedLang { get; set; } = null!;
         [Reactive]
-        public string SelectedCrawler { get; set; }
+        public string SelectedCrawler { get; set; } = null!;
         [Reactive]
-        public List<string> Crawlers { get; set; }
+        public List<string> Crawlers { get; set; } = null!;
         [Reactive]
-        public string SelectedStep { get; set; }
+        public string SelectedStep { get; set; } = null!;
         public ReactiveCommand<Unit, Unit> ExecuteCommand { get; }
 
         public PatternCrawlersViewModel()
@@ -37,7 +37,7 @@ namespace LollyCommon
             this.ValidationRule(x => x.SelectedStep, v => !string.IsNullOrWhiteSpace(v), "SelectedStep must not be empty");
             ExecuteCommand = ReactiveCommand.Create(() =>
             {
-                var t = GetType().Assembly.GetType($"LollyCommon.Crawlers.Patterns.{SelectedLang}.{SelectedCrawler}");
+                var t = GetType().Assembly.GetType($"LollyCommon.Crawlers.Patterns.{SelectedLang}.{SelectedCrawler}")!;
                 var i = Activator.CreateInstance(t);
                 var m = t.GetMethod(SelectedStep);
                 m.Invoke(i, new object[] {});

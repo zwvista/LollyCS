@@ -17,7 +17,7 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
-                PostContent = (await contentDS.GetDataById(v.ID))?.CONTENT;
+                PostContent = (await contentDS.GetDataById(v.ID))?.CONTENT ?? "";
                 var lst = await groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, v.ID);
                 GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
                 this.RaisePropertyChanged(nameof(GroupItems));

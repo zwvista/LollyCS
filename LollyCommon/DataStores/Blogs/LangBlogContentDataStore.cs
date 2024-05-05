@@ -10,7 +10,7 @@ namespace LollyCommon
     public class LangBlogPostContentDataStore : LollyDataStore<MLangBlogPostContent>
     {
         public async Task<MLangBlogPostContent?> GetDataById(int id) =>
-            (await GetDataByUrl<MLangBlogsContent>($"LANGBLOGPOSTS?filter=ID,eq,{id}")).Records.FirstOrDefault();
+            (await GetDataByUrl<MLangBlogsContent>($"LANGBLOGPOSTS?filter=ID,eq,{id}"))?.Records.FirstOrDefault();
 
         public async Task Update(MLangBlogPostContent item) =>
             Debug.WriteLine(await UpdateByUrl($"LANGBLOGPOSTS/{item.ID}", JsonConvert.SerializeObject(item)));

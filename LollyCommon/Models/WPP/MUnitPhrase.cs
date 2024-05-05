@@ -80,12 +80,12 @@ namespace LollyCommon
         public MTextbook Textbook { get; set; }
         [Reactive]
         public string PHRASES { get; set; } = "";
-        public MSelectItem UNITItem
+        public MSelectItem? UNITItem
         {
             get => Textbook.Units.SingleOrDefault(o => o.Value == UNIT);
             set { if (value != null) UNIT = value.Value; }
         }
-        public MSelectItem PARTItem
+        public MSelectItem? PARTItem
         {
             get => Textbook.Parts.SingleOrDefault(o => o.Value == PART);
             set { if (value != null) PART = value.Value; }

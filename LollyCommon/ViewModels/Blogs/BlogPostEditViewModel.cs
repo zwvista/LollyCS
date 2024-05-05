@@ -45,7 +45,7 @@ namespace LollyCommon
         }
         public async Task<string> LoadBlog() =>
             isUnitBlogPost ? await vmSettings.GetBlogContent() :
-            (await contentDS.GetDataById(itemPost.ID))?.CONTENT ?? "";
+            (await contentDS.GetDataById(itemPost!.ID))?.CONTENT ?? "";
         public async Task SaveBlog(string content)
         {
             if (isUnitBlogPost)

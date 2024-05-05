@@ -8,7 +8,7 @@ namespace LollyCommon
     public class MWordsFami
     {
         [JsonProperty("records")]
-        public List<MWordFami> Records { get; set; }
+        public List<MWordFami> Records { get; set; } = null!;
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MWordFami : ReactiveObject

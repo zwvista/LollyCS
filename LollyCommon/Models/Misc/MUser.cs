@@ -10,7 +10,7 @@ namespace LollyCommon
     public class MUsers
     {
         [JsonProperty("records")]
-        public List<MUser> Records { get; set; }
+        public List<MUser> Records { get; set; } = null!;
     }
 
     [JsonObject(MemberSerialization.OptIn)]

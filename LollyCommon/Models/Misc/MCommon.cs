@@ -26,7 +26,7 @@ namespace LollyCommon
     public class MCodes
     {
         [JsonProperty("records")]
-        public List<MCode> Records { get; set; }
+        public List<MCode> Records { get; set; } = null!;
     }
     [JsonObject(MemberSerialization.OptIn)]
     public class MCode : ReactiveObject
