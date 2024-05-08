@@ -5,11 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+             xmlns:fa="http://schemas.fontawesome.com/icons/fonts/properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
+                <Button x:Name="btnAdd" fa:FontAwesome.Icon="Solid_Plus" ToolTip="Add" Click="miAddPost_Click"/>
+                <Button x:Name="btnRefresh" fa:FontAwesome.Icon="Solid_RotateRight" ToolTip="Refresh" Click="btnRefresh_Click"/>
             </ToolBar>
         </ToolBarTray>  
         <Grid>
