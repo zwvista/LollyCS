@@ -12,8 +12,8 @@ namespace LollyCommon
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         LangWordDataStore langWordDS = new LangWordDataStore();
 
-        ObservableCollection<MUnitWord> WordItemsAll { get; set; } = new ObservableCollection<MUnitWord>();
-        public ObservableCollection<MUnitWord> WordItems { get; set; } = new ObservableCollection<MUnitWord>();
+        ObservableCollection<MUnitWord> WordItemsAll { get; set; } = [];
+        public ObservableCollection<MUnitWord> WordItems { get; set; } = [];
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems.Count} Words in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";

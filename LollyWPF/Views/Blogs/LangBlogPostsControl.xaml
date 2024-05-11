@@ -13,8 +13,10 @@
             <ToolBar Band="1">
                 <Button x:Name="btnAdd" fa:FontAwesome.Icon="Solid_Plus" ToolTip="Add" Click="miAddPost_Click"/>
                 <Button x:Name="btnRefresh" fa:FontAwesome.Icon="Solid_RotateRight" ToolTip="Refresh" Click="btnRefresh_Click"/>
+                <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
+                <TextBox x:Name="tbTitleFilter" Text="{Binding TitleFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Title Filter" />
             </ToolBar>
-        </ToolBarTray>  
+        </ToolBarTray>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
