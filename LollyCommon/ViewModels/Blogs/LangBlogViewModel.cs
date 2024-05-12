@@ -24,7 +24,9 @@ namespace LollyCommon
         [Reactive]
         public MLangBlogGroup? SelectedGroupItem { get; set; }
         public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
+        public ObservableCollection<MLangBlogPost> PostItemsAll { get; set; } = [];
         public ObservableCollection<MLangBlogPost> PostItems { get; set; } = [];
+        public ObservableCollection<MLangBlogGroup> GroupItemsAll { get; set; } = [];
         public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = [];
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
         public LangBlogViewModel(SettingsViewModel vmSettings, bool needCopy)
