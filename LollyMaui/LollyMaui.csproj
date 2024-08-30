@@ -76,4 +76,28 @@
 	  <ProjectReference Include="..\LollyCommon\LollyCommon.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\WebTextbooks\WebTextbooksDetailPage.xaml.cs">
+	    <DependentUpon>WebTextbooksDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\WebTextbooks\WebTextbooksPage.xaml.cs">
+	    <DependentUpon>WebTextbooksPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\WebTextbooks\WebTextbooksWebPagePage.xaml.cs">
+	    <DependentUpon>WebTextbooksWebPagePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\WebTextbooks\WebTextbooksDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\WebTextbooks\WebTextbooksPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\WebTextbooks\WebTextbooksWebPagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

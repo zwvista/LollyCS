@@ -13,9 +13,9 @@ namespace LollyCommon
     public class LangBlogViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
-        protected LangBlogPostDataStore postDS = new LangBlogPostDataStore();
-        protected LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
-        protected LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
+        protected LangBlogPostDataStore postDS = new();
+        protected LangBlogPostContentDataStore contentDS = new();
+        protected LangBlogGroupDataStore groupDS = new();
         [Reactive]
         public MLangBlogPost? SelectedPostItem { get; set; }
         public bool HasSelectedPostItem { [ObservableAsProperty] get; }

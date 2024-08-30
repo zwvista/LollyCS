@@ -1,27 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LollyMaui.PatternsDetailPage"
-             Title="Patterns in Language(Detail)"
+             x:Class="LollyMaui.WebTextbooksDetailPage"
+             Title="WebTextbooks(Detail)"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             x:DataType="common:MPatternEdit">
+             x:DataType="common:MWebTextbook">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
-        <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
+        <ToolbarItem Text="Close" Clicked="OnCancel" Priority="0" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="ID:" />
             <Entry Text="{Binding ID}" IsReadOnly="True" />
-            <Label Text="PATTERN:" />
-            <Entry Text="{Binding PATTERN}" />
-            <Label Text="TAGS:" />
-            <Entry Text="{Binding TAGS}" />
+            <Label Text="TEXTBOOK:" />
+            <Entry Text="{Binding TEXTBOOKNAME}" IsReadOnly="True" />
             <Label Text="TITLE:" />
-            <Entry Text="{Binding TITLE}" />
+            <Entry Text="{Binding TITLE}" IsReadOnly="True" />
             <Label Text="URL:" />
-            <Entry Text="{Binding URL}" />
+            <Entry Text="{Binding URL}" IsReadOnly="True" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

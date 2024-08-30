@@ -14,14 +14,14 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
             this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
             {
-                var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v.ID);
+                var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v!.ID);
                 PostItems = new ObservableCollection<MLangBlogPost>(lst);
                 this.RaisePropertyChanged(nameof(PostItems));
             });
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
-                PostContent = (await contentDS.GetDataById(v.ID))?.CONTENT ?? "";
+                PostContent = (await contentDS.GetDataById(v!.ID))?.CONTENT ?? "";
             });
             Reload();
         }

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.WebTextbooksPage"
+             Title="WebTextbooks"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:WebTextbooksViewModel">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <Grid Padding="10" RowDefinitions="Auto,*">
+        <Picker ItemsSource="{Binding vmSettings.WebTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding WebTextbookFilterItem}" />
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:WebTextbooksViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Edit"
+                                               BackgroundColor="LightBlue"
+                                               Invoked="OnEditSwipeItemInvoked" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="More"
+                                               BackgroundColor="LightGreen"
+                                               Invoked="OnMoreSwipeItemInvoked" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10" x:DataType="common:MWebTextbook" ColumnDefinitions="Auto,*,Auto">
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding TEXTBOOKNAME}" Style="{StaticResource Key=Text2}" />
+                                    <Label Text="{Binding TITLE}" Style="{StaticResource Key=Text3}" />
+                                </StackLayout>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
