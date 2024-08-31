@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LollyMaui"
+    xmlns:icons="http://www.aathifmahir.com/dotnet/2022/maui/icons"
     Shell.FlyoutBehavior="Flyout"
     Title="LollyMaui">
 
@@ -71,40 +72,40 @@
     </Shell.Resources>
 
     <!--https://github.com/xamarin/Xamarin.Forms/issues/12563-->
-    <FlyoutItem Title="Search">
+    <FlyoutItem Title="Search" Icon="{icons:FontAwesomeSolid Icon=MagnifyingGlass,IconColor=Red}">
         <ShellContent Route="SearchPage" ContentTemplate="{DataTemplate local:SearchPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Settings" Icon="tab_feed.png">
+    <FlyoutItem Title="Settings" Icon="{icons:FontAwesomeSolid Icon=Gear,IconColor=Red}">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words in Unit" Icon="tab_feed.png">
+    <FlyoutItem Title="Words in Unit" Icon="{icons:FontAwesomeSolid Icon=Bus,IconColor=Red}">
         <ShellContent Route="WordsUnitPage" ContentTemplate="{DataTemplate local:WordsUnitPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases in Unit" Icon="tab_feed.png">
+    <FlyoutItem Title="Phrases in Unit" Icon="{icons:FontAwesomeSolid Icon=Train,IconColor=Red}">
         <ShellContent Route="PhrasesUnitPage" ContentTemplate="{DataTemplate local:PhrasesUnitPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words Review" Icon="tab_feed.png">
+    <FlyoutItem Title="Words Review" Icon="{icons:FontAwesomeSolid Icon=Truck,IconColor=Red}">
         <ShellContent Route="WordsReviewPage" ContentTemplate="{DataTemplate local:WordsReviewPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases Review" Icon="tab_feed.png">
+    <FlyoutItem Title="Phrases Review" Icon="{icons:FontAwesomeSolid Icon=VanShuttle,IconColor=Red}">
         <ShellContent Route="PhrasesReviewPage" ContentTemplate="{DataTemplate local:PhrasesReviewPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words in Textbooks" Icon="tab_feed.png">
+    <FlyoutItem Title="Words in Textbooks" Icon="{icons:FontAwesomeSolid Icon=Car,IconColor=Red}">
         <ShellContent Route="WordsTextbookPage" ContentTemplate="{DataTemplate local:WordsTextbookPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases in Textbooks" Icon="tab_feed.png">
+    <FlyoutItem Title="Phrases in Textbooks" Icon="{icons:FontAwesomeSolid Icon=Taxi,IconColor=Red}">
         <ShellContent Route="PhrasesTextbookPage" ContentTemplate="{DataTemplate local:PhrasesTextbookPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Words in Language" Icon="tab_feed.png">
+    <FlyoutItem Title="Words in Language" Icon="{icons:FontAwesomeSolid Icon=Plane,IconColor=Red}">
         <ShellContent Route="WordsLangPage" ContentTemplate="{DataTemplate local:WordsLangPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Phrases in Language" Icon="tab_feed.png">
+    <FlyoutItem Title="Phrases in Language" Icon="{icons:FontAwesomeSolid Icon=Rocket,IconColor=Red}">
         <ShellContent Route="PhrasesLangPage" ContentTemplate="{DataTemplate local:PhrasesLangPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Patterns in Language" Icon="tab_feed.png">
+    <FlyoutItem Title="Patterns in Language" Icon="{icons:FontAwesomeSolid Icon=Motorcycle,IconColor=Red}">
         <ShellContent Route="PatternsPage" ContentTemplate="{DataTemplate local:PatternsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="WebTextbooks" Icon="tab_feed.png">
+    <FlyoutItem Title="WebTextbooks" Icon="{icons:FontAwesomeSolid Icon=Helicopter,IconColor=Red}">
         <ShellContent Route="WebTextbooksPage" ContentTemplate="{DataTemplate local:WebTextbooksPage}" />
     </FlyoutItem>
 
