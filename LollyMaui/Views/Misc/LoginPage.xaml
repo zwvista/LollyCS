@@ -5,13 +5,11 @@
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              x:DataType="common:LoginViewModel"
              Shell.NavBarIsVisible="False">
-    <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Label Text="USERNAME:" />
-            <Entry Text="{Binding USERNAME}" />
-            <Label Text="PASSWORD:" />
-            <Entry IsPassword="True" Text="{Binding PASSWORD}" />
-            <Button Grid.ColumnSpan="2" Text="Login" Clicked="Button_Clicked"/>
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+        <Label Text="USERNAME:" />
+        <Entry Text="{Binding USERNAME}" />
+        <Label Text="PASSWORD:" />
+        <Entry IsPassword="True" Text="{Binding PASSWORD}" />
+        <Button Grid.ColumnSpan="2" Text="Login" Clicked="Button_Clicked"/>
+    </StackLayout>
 </ContentPage>
