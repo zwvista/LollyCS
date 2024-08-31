@@ -17,7 +17,7 @@
         <Label Grid.Row="1" Text="PART:" VerticalTextAlignment="Center" />
         <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
         <Label Grid.Row="2" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
-        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SEQNUM}" />
+        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SEQNUM}" Keyboard="Numeric" />
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding vm.PhraseItems}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

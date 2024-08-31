@@ -15,6 +15,8 @@
             <Entry Text="{Binding ID}" IsReadOnly="True" />
             <Label Text="TEXTBOOK:" />
             <Entry Text="{Binding TEXTBOOKNAME}" IsReadOnly="True" />
+            <Label Text="UNIT:" />
+            <Entry Text="{Binding UNIT}" IsReadOnly="True" />
             <Label Text="TITLE:" />
             <Entry Text="{Binding TITLE}" IsReadOnly="True" />
             <Label Text="URL:" />

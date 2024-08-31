@@ -20,7 +20,7 @@
         <Picker Grid.Row="1" IsEnabled="{Binding PartChecked}" Grid.Column="2" ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
         <CheckBox Grid.Row="2" IsChecked="{Binding SeqNumChecked}"/>
         <Label Grid.Row="2" Grid.Column="1" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
-        <Entry Grid.Row="2" Grid.Column="2" IsEnabled="{Binding SeqNumChecked}" Text="{Binding SEQNUM}" />
+        <Entry Grid.Row="2" Grid.Column="2" IsEnabled="{Binding SeqNumChecked}" Text="{Binding SEQNUM}" Keyboard="Numeric" />
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding vm.WordItems}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

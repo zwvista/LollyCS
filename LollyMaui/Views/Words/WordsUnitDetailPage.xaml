@@ -19,7 +19,7 @@
             <Label Text="PART:" />
             <Picker ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
             <Label Text="SEQNUM:" />
-            <Entry Text="{Binding SEQNUM}" />
+            <Entry Text="{Binding SEQNUM}" Keyboard="Numeric" />
             <Label Text="WORDID:" />
             <Entry Text="{Binding WORDID}" IsReadOnly="True" />
             <Label Text="WORD:" />

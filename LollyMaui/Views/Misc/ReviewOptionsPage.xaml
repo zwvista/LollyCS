@@ -23,13 +23,13 @@
             <Label Text="Forward:" />
             <CheckBox IsChecked="{Binding MoveForward}" />
             <Label Text="Interval:" />
-            <Entry Text="{Binding Interval}" />
+            <Entry Text="{Binding Interval}" Keyboard="Numeric" />
             <Label Text="Group:" />
-            <Entry Text="{Binding GroupSelected}" />
+            <Entry Text="{Binding GroupSelected}" Keyboard="Numeric" />
             <Label Text="Groups:" />
-            <Entry Text="{Binding GroupCount}" />
+            <Entry Text="{Binding GroupCount}" Keyboard="Numeric" />
             <Label Text="Review:" />
-            <Entry Text="{Binding ReviewCount}" />
+            <Entry Text="{Binding ReviewCount}" Keyboard="Numeric" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
