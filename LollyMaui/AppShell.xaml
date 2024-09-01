@@ -105,8 +105,8 @@
     <FlyoutItem Title="Patterns in Language" Icon="{icons:FontAwesomeSolid Icon=Motorcycle,IconColor=Red}">
         <ShellContent Route="PatternsPage" ContentTemplate="{DataTemplate local:PatternsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="WebTextbooks" Icon="{icons:FontAwesomeSolid Icon=Helicopter,IconColor=Red}">
-        <ShellContent Route="WebTextbooksPage" ContentTemplate="{DataTemplate local:WebTextbooksPage}" />
+    <FlyoutItem Title="OnlineTextbooks" Icon="{icons:FontAwesomeSolid Icon=Helicopter,IconColor=Red}">
+        <ShellContent Route="OnlineTextbooksPage" ContentTemplate="{DataTemplate local:OnlineTextbooksPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
