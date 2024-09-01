@@ -13,10 +13,10 @@ namespace LollyCommon
         protected HttpClient client = new HttpClient();
         public abstract Task Step1();
         public abstract Task Step2();
-        protected async Task Step2(Func<string[], MWebTextbook> f)
+        protected async Task Step2(Func<string[], MOnlineTextbook> f)
         {
             var lines = File.ReadAllLines("b.txt");
-            var storewt = new WebTextbookDataStore();
+            var storewt = new OnlineTextbookDataStore();
             int i = 1;
             foreach (var s in lines)
             {
@@ -30,7 +30,7 @@ namespace LollyCommon
             await Step2(a =>
             {
                 string url = a[0], title = a[1];
-                return new MWebTextbook
+                return new MOnlineTextbook
                 {
                     TEXTBOOKID = textbookid,
                     TITLE = title,

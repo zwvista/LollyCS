@@ -190,7 +190,7 @@ namespace LollyCommon
         [Reactive]
         public MTextbook SelectedTextbook { get; set; }
         public List<MSelectItem> TextbookFilters { get; set; } = new List<MSelectItem>();
-        public List<MSelectItem> WebTextbookFilters { get; set; } = new List<MSelectItem>();
+        public List<MSelectItem> OnlineTextbookFilters { get; set; } = new List<MSelectItem>();
 
         public List<MSelectItem> Units => SelectedTextbook?.Units;
         public int UnitCount => Units?.Count ?? 0;
@@ -303,7 +303,7 @@ namespace LollyCommon
                 SelectedTextbook = Textbooks.FirstOrDefault(o => o.ID == USTEXTBOOK);
                 TextbookFilters = Textbooks.Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
                     .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
-                WebTextbookFilters = Textbooks.Where(o => o.ISWEB).Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
+                OnlineTextbookFilters = Textbooks.Where(o => o.ONLINE).Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
                     .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
                 SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? Voices.FirstOrDefault();
                 if (dirty)

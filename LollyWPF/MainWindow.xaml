@@ -49,7 +49,7 @@
                 <MenuItem x:Name="miLangBlogPosts" Header="Language Blog Posts" Click="miLangBlogPosts_Click" />
                 <MenuItem x:Name="miReadNumber" Header="Read Number" Click="miReadNumber_Click" />
                 <MenuItem x:Name="miTextbooks" Header="Textbooks" Click="miTextbooks_Click" />
-                <MenuItem x:Name="miWebTextbooks" Header="WebTextbooks" Click="miWebTextbooks_Click" />
+                <MenuItem x:Name="miOnlineTextbooks" Header="Online Textbooks" Click="miOnlineTextbooks_Click" />
                 <MenuItem x:Name="miDictionaries" Header="Dictionaries" Click="miDictionaries_Click" />
                 <MenuItem x:Name="miPatternCrawlers" Header="Pattern Crawlers" Click="miPatternCrawlers_Click" />
                 <MenuItem x:Name="miTest" Header="Test" Click="miTest_Click" />

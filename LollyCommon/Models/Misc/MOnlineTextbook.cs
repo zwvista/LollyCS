@@ -9,13 +9,13 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class MWebTextbooks
+    public class MOnlineTextbooks
     {
         [JsonProperty("records")]
-        public List<MWebTextbook> Records { get; set; }
+        public List<MOnlineTextbook> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MWebTextbook : ReactiveObject
+    public class MOnlineTextbook : ReactiveObject
     {
         [JsonProperty]
         [Reactive]

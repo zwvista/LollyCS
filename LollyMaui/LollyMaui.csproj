@@ -77,25 +77,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\WebTextbooks\WebTextbooksDetailPage.xaml.cs">
-	    <DependentUpon>WebTextbooksDetailPage.xaml</DependentUpon>
+	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksDetailPage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksDetailPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\WebTextbooks\WebTextbooksPage.xaml.cs">
-	    <DependentUpon>WebTextbooksPage.xaml</DependentUpon>
+	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksPage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\WebTextbooks\WebTextbooksWebPagePage.xaml.cs">
-	    <DependentUpon>WebTextbooksWebPagePage.xaml</DependentUpon>
+	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksWebPagePage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksWebPagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksDetailPage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksPage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksWebPagePage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksWebPagePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\WebTextbooks\WebTextbooksDetailPage.xaml">
+	  <MauiXaml Update="Views\OnlineTextbooks\OnlineTextbooksDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\WebTextbooks\WebTextbooksPage.xaml">
+	  <MauiXaml Update="Views\OnlineTextbooks\OnlineTextbooksPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\WebTextbooks\WebTextbooksWebPagePage.xaml">
+	  <MauiXaml Update="Views\OnlineTextbooks\OnlineTextbooksWebPagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

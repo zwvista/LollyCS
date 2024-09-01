@@ -8,14 +8,14 @@ using LollyCommon;
 
 namespace LollyMaui
 {
-    public partial class WebTextbooksPage : ContentPage
+    public partial class OnlineTextbooksPage : ContentPage
     {
-        WebTextbooksViewModel vm;
+        OnlineTextbooksViewModel vm;
 
-        public WebTextbooksPage()
+        public OnlineTextbooksPage()
         {
             InitializeComponent();
-            BindingContext = vm = new WebTextbooksViewModel(AppShell.vmSettings, false);
+            BindingContext = vm = new OnlineTextbooksViewModel(AppShell.vmSettings, false);
         }
 
         protected override void OnAppearing()
@@ -23,24 +23,24 @@ namespace LollyMaui
             base.OnAppearing();
         }
 
-        async Task Edit(MWebTextbook item) =>
-            await Shell.Current.GoToModalAsync(nameof(WebTextbooksDetailPage), item);
+        async Task Edit(MOnlineTextbook item) =>
+            await Shell.Current.GoToModalAsync(nameof(OnlineTextbooksDetailPage), item);
 
         async void OnItemTapped(object sender, EventArgs e)
         {
-            var item = (MWebTextbook)((TappedEventArgs)e).Parameter;
+            var item = (MOnlineTextbook)((TappedEventArgs)e).Parameter;
             await Edit(item);
         }
 
         async void OnEditSwipeItemInvoked(object sender, EventArgs e)
         {
-            var item = (MWebTextbook)((SwipeItem)sender).BindingContext;
+            var item = (MOnlineTextbook)((SwipeItem)sender).BindingContext;
             await Edit(item);
         }
 
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
-            var item = (MWebTextbook)((SwipeItem)sender).BindingContext;
+            var item = (MOnlineTextbook)((SwipeItem)sender).BindingContext;
             var a = await DisplayActionSheet("More", "Cancel", null, "Edit", "Browse Web Page");
             switch (a)
             {
@@ -48,7 +48,7 @@ namespace LollyMaui
                     await Edit(item);
                     break;
                 case "Browse Web Page":
-                    await Shell.Current.GoToAsync(nameof(WebTextbooksWebPagePage), item);
+                    await Shell.Current.GoToAsync(nameof(OnlineTextbooksWebPagePage), item);
                     break;
             }
         }

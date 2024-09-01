@@ -10,11 +10,11 @@ using System.Reactive.Linq;
 
 namespace LollyMaui
 {
-    public partial class WebTextbooksWebPagePage : ContentPage, IPageNavigate
+    public partial class OnlineTextbooksWebPagePage : ContentPage, IPageNavigate
     {
-        MWebTextbook vmDetail = null!;
+        MOnlineTextbook vmDetail = null!;
 
-        public WebTextbooksWebPagePage()
+        public OnlineTextbooksWebPagePage()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace LollyMaui
 
         public void OnPageNavigated(object navigationData)
         {
-            vmDetail = (MWebTextbook)navigationData;
+            vmDetail = (MOnlineTextbook)navigationData;
             wbWebPage.Source = vmDetail.URL;
         }
     }

@@ -34,7 +34,7 @@ namespace LollyCommon
         public string PARTS { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public bool ISWEB { get; set; }
+        public bool ONLINE { get; set; }
 
         [Reactive]
         public List<MSelectItem> Units { get; set; }

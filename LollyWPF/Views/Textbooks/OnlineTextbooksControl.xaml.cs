@@ -12,13 +12,13 @@ using System.Windows.Input;
 namespace LollyWPF
 {
     /// <summary>
-    /// WebTextbooksControl.xaml の相互作用ロジック
+    /// OnlineTextbooksControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class WebTextbooksControl : UserControl, ILollySettings
+    public partial class OnlineTextbooksControl : UserControl, ILollySettings
     {
-        public WebTextbooksViewModel vm { get; set; } = null!;
+        public OnlineTextbooksViewModel vm { get; set; } = null!;
         public SettingsViewModel vmSettings => vm.vmSettings;
-        public WebTextbooksControl()
+        public OnlineTextbooksControl()
         {
             InitializeComponent();
             _ = OnSettingsChanged();
@@ -26,14 +26,14 @@ namespace LollyWPF
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new WebTextbooksViewModel(MainWindow.vmSettings, needCopy: true);
+            DataContext = vm = new OnlineTextbooksViewModel(MainWindow.vmSettings, needCopy: true);
         }
 
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
 
-        void dgWebTextbooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void dgOnlineTextbooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (MWebTextbook)dgWebTextbooks.SelectedItem;
+            var item = (MOnlineTextbook)dgOnlineTextbooks.SelectedItem;
             if (item == null) return;
             wbWebPage.Load(item.URL);
         }

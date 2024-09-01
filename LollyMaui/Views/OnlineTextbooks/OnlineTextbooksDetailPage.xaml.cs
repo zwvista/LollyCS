@@ -8,9 +8,9 @@ using LollyCommon;
 
 namespace LollyMaui
 {
-    public partial class WebTextbooksDetailPage : ContentPage
+    public partial class OnlineTextbooksDetailPage : ContentPage
     {
-        public WebTextbooksDetailPage()
+        public OnlineTextbooksDetailPage()
         {
             InitializeComponent();
         }

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LollyMaui.WebTextbooksPage"
-             Title="WebTextbooks"
+             x:Class="LollyMaui.OnlineTextbooksPage"
+             Title="Online Textbooks"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             x:DataType="common:WebTextbooksViewModel">
+             x:DataType="common:OnlineTextbooksViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding vmSettings.WebTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding WebTextbookFilterItem}" />
-        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:WebTextbooksViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
+        <Picker ItemsSource="{Binding vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding OnlineTextbookFilterItem}" />
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:OnlineTextbooksViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -29,7 +29,7 @@
                                                Invoked="OnMoreSwipeItemInvoked" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="10" x:DataType="common:MWebTextbook" ColumnDefinitions="Auto,*,Auto">
+                            <Grid Padding="10" x:DataType="common:MOnlineTextbook" ColumnDefinitions="Auto,*,Auto">
                                 <StackLayout Padding="10">
                                     <Label Text="{Binding TEXTBOOKNAME}" Style="{StaticResource Key=Text2}" />
                                     <Label Text="{Binding TITLE}" Style="{StaticResource Key=Text3}" />

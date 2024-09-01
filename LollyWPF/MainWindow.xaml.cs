@@ -99,7 +99,7 @@ namespace LollyWPF
         void miLangBlogPosts_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogPostsControl>("Language Blog Posts");
         void miReadNumber_Click(object sender, RoutedEventArgs e) => AddTab<ReadNumberControl>("Read Number");
         void miTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<TextbooksControl>("Textbooks");
-        void miWebTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<WebTextbooksControl>("WebTextbooks");
+        void miOnlineTextbooks_Click(object sender, RoutedEventArgs e) => AddTab<OnlineTextbooksControl>("Online Textbooks");
         void miDictionaries_Click(object sender, RoutedEventArgs e) => AddTab<DictsControl>("Dictionaries");
         void miPatternCrawlers_Click(object sender, RoutedEventArgs e) => AddTab<PatternCrawlersControl>("Pattern Crawlers");
         void miTest_Click(object sender, RoutedEventArgs e) => AddTab<TestControl>("Test");
