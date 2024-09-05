@@ -86,5 +86,34 @@ namespace LollyCommon
 
         public static string SplitUsingCommaAndMerge(this IEnumerable<string> strs) =>
             string.Join(",", strs.SelectMany(s => (s ?? "").Split(',')).Where(s => s.Any()).OrderBy(s => s).Distinct());
+
+        public static (int, int) GetPreferredRangeFromArray(
+            int index, int length, int preferredLength)
+        {
+            int start, end;
+            if (length < preferredLength)
+            {
+                start = 0;
+                end = length;
+            }
+            else
+            {
+                start = index - preferredLength / 2;
+                end = index + preferredLength / 2;
+                if (start < 0)
+                {
+                    end -= start;
+                    start = 0;
+                }
+
+                if (end > length)
+                {
+                    start -= end - length;
+                    end = length;
+                }
+            }
+
+            return (start, end);
+        }
     }
 }
