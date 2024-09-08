@@ -4,6 +4,7 @@
              x:Class="LollyMaui.PatternsPage"
              Title="Patterns in Language"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              x:DataType="common:PatternsViewModel">
 
     <ContentPage.ToolbarItems>
@@ -36,6 +37,8 @@
                                     <Label Text="{Binding PATTERN}" Style="{StaticResource Key=Text2}" />
                                     <Label Text="{Binding TAGS}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
+                                <ImageButton Grid.Column="2" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
+                                             WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>

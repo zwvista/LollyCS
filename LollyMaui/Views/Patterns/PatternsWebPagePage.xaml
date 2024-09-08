@@ -4,12 +4,17 @@
              x:Class="LollyMaui.PatternsWebPagePage"
              Title="Patterns Web Pages"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             x:DataType="common:MPatternEdit">
+             x:DataType="common:PatternsWebPageViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Label Text="{Binding PATTERN}" />
-        <WebView Grid.Row="1" x:Name="wbWebPage" />
+        <Picker ItemsSource="{Binding Patterns}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding CurrentPatternIndex,Mode=TwoWay}" />
+        <WebView Grid.Row="1" x:Name="wbWebPage" Source="{Binding URL}">
+            <WebView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>
+                <SwipeGestureRecognizer Direction="Right" Swiped="WebView_SwipedRight"/>
+            </WebView.GestureRecognizers>
+        </WebView>
     </Grid>
 </ContentPage>

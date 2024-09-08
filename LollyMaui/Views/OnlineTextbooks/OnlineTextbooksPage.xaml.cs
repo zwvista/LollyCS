@@ -26,6 +26,14 @@ namespace LollyMaui
         async Task Edit(MOnlineTextbook item) =>
             await Shell.Current.GoToModalAsync(nameof(OnlineTextbooksDetailPage), item);
 
+        async Task BrowseWebPage(MOnlineTextbook item)
+        {
+            var index = vm.Items.IndexOf(item);
+            var (start, end) = CommonApi.GetPreferredRangeFromArray(index, vm.Items.Count, 50);
+            var items = vm.Items.ToList().Slice(start, end);
+            await Shell.Current.GoToAsync(nameof(OnlineTextbooksWebPagePage), new OnlineTextbooksWebPageViewModel(items, index));
+        }
+
         async void OnItemTapped(object sender, EventArgs e)
         {
             var item = (MOnlineTextbook)((TappedEventArgs)e).Parameter;
@@ -48,9 +56,15 @@ namespace LollyMaui
                     await Edit(item);
                     break;
                 case "Browse Web Page":
-                    await Shell.Current.GoToAsync(nameof(OnlineTextbooksWebPagePage), item);
+                    await BrowseWebPage(item);
                     break;
             }
+        }
+
+        async void IconButton_Clicked(object sender, EventArgs e)
+        {
+            var item = (MOnlineTextbook)((ImageButton)sender).BindingContext;
+            await BrowseWebPage(item);
         }
     }
 }

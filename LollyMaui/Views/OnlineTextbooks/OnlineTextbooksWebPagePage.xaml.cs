@@ -12,7 +12,7 @@ namespace LollyMaui
 {
     public partial class OnlineTextbooksWebPagePage : ContentPage, IPageNavigate
     {
-        MOnlineTextbook vmDetail = null!;
+        OnlineTextbooksWebPageViewModel vm = null!;
 
         public OnlineTextbooksWebPagePage()
         {
@@ -26,8 +26,14 @@ namespace LollyMaui
 
         public void OnPageNavigated(object navigationData)
         {
-            vmDetail = (MOnlineTextbook)navigationData;
-            wbWebPage.Source = vmDetail.URL;
+            vm = (OnlineTextbooksWebPageViewModel)navigationData;
+            BindingContext = vm;
         }
+
+        void WebView_SwipedLeft(object sender, SwipedEventArgs e) =>
+            vm.Next(-1);
+
+        void WebView_SwipedRight(object sender, SwipedEventArgs e) =>
+            vm.Next(1);
     }
 }

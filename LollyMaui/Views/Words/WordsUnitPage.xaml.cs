@@ -112,7 +112,7 @@ namespace LollyMaui
         async void IconButton_Clicked(object sender, EventArgs e)
         {
             var words = vm.WordItems.Select(o => o.WORD).ToList();
-            var item = (MUnitWord)((Button)sender).BindingContext;
+            var item = (MUnitWord)((ImageButton)sender).BindingContext;
             int index = vm.WordItems.IndexOf(item);
             await Shell.Current.GoToAsync(nameof(WordsDictPage), new WordsDictViewModel(vm.vmSettings, words, index));
         }

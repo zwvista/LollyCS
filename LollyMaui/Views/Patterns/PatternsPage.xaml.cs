@@ -1,9 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 using LollyCommon;
 
 namespace LollyMaui
@@ -25,6 +21,14 @@ namespace LollyMaui
 
         async Task Edit(MPattern item) =>
             await Shell.Current.GoToModalAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, item));
+
+        async Task BrowseWebPage(MPattern item)
+        {
+            var index = vm.PatternItems.IndexOf(item);
+            var (start, end) = CommonApi.GetPreferredRangeFromArray(index, vm.PatternItems.Count, 50);
+            var items = vm.PatternItems.ToList().Slice(start, end);
+            await Shell.Current.GoToAsync(nameof(PatternsWebPagePage), new PatternsWebPageViewModel(items, index));
+        }
 
         async void OnItemTapped(object sender, EventArgs e)
         {
@@ -48,7 +52,7 @@ namespace LollyMaui
                     await Edit(item);
                     break;
                 case "Browse Web Page":
-                    await Shell.Current.GoToAsync(nameof(PatternsWebPagePage), new PatternsDetailViewModel(vm, item));
+                    await BrowseWebPage(item);
                     break;
                 case "Copy Pattern":
                     await Clipboard.Default.SetTextAsync(item.PATTERN);
@@ -62,6 +66,12 @@ namespace LollyMaui
         async void ToolbarItemAdd_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToModalAsync(nameof(PatternsDetailPage), new PatternsDetailViewModel(vm, vm.NewPattern()));
+        }
+
+        async void IconButton_Clicked(object sender, EventArgs e)
+        {
+            var item = (MPattern)((ImageButton)sender).BindingContext;
+            await BrowseWebPage(item);
         }
     }
 }

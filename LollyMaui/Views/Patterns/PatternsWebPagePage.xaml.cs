@@ -12,7 +12,7 @@ namespace LollyMaui
 {
     public partial class PatternsWebPagePage : ContentPage, IPageNavigate
     {
-        PatternsDetailViewModel vmDetail = null!;
+        PatternsWebPageViewModel vm = null!;
 
         public PatternsWebPagePage()
         {
@@ -26,9 +26,13 @@ namespace LollyMaui
 
         public void OnPageNavigated(object navigationData)
         {
-            vmDetail = (PatternsDetailViewModel)navigationData;
-            BindingContext = vmDetail.ItemEdit;
-            wbWebPage.Source = vmDetail.ItemEdit.URL;
+            BindingContext = vm = (PatternsWebPageViewModel)navigationData;
         }
+
+        void WebView_SwipedLeft(object sender, SwipedEventArgs e) =>
+            vm.Next(-1);
+
+        void WebView_SwipedRight(object sender, SwipedEventArgs e) =>
+            vm.Next(1);
     }
 }
