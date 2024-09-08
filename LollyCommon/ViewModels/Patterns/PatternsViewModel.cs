@@ -25,6 +25,7 @@ namespace LollyCommon
         public bool HasSelectedPatternItem { [ObservableAsProperty] get; }
         public string SelectedPattern => SelectedPatternItem?.PATTERN ?? "";
         public int SelectedPatternID => SelectedPatternItem?.PATTERNID ?? 0;
+        [Reactive]
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 

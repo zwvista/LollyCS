@@ -30,6 +30,7 @@ namespace LollyCommon
         public ObservableCollection<MOnlineTextbook> Items { get; set; } = new ObservableCollection<MOnlineTextbook>();
         public bool NoFilter => OnlineTextbookFilter == 0;
         public string StatusText => $"{Items.Count} Online Textbooks in {vmSettings.LANGINFO}";
+        [Reactive]
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 

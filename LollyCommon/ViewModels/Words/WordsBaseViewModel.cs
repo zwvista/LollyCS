@@ -19,6 +19,7 @@ namespace LollyCommon
             get => vmSettings.TextbookFilters.SingleOrDefault(o => o.Value == TextbookFilter);
             set { if (value != null) TextbookFilter = value.Value; }
         }
+        [Reactive]
         public bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 

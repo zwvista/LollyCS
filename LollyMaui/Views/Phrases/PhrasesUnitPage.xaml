@@ -35,7 +35,7 @@
                                                Invoked="OnDeleteSwipeItemInvoked" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="10" x:DataType="common:MUnitPhrase" ColumnDefinitions="Auto,*,Auto">
+                            <Grid Padding="10" x:DataType="common:MUnitPhrase" ColumnDefinitions="Auto,*">
                                 <StackLayout Spacing="2" VerticalOptions="Center">
                                     <Label Text="{Binding UNITSTR}" Style="{StaticResource Key=Text1}" />
                                     <Label Text="{Binding PARTSTR}" Style="{StaticResource Key=Text1}" />
