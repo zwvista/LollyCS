@@ -13,7 +13,6 @@ namespace LollyCommon
         [Reactive]
         public int CurrentUnitIndex { get; set; }
 
-        public MSelectItem CurrentUnit => Units[CurrentUnitIndex];
         [Reactive]
         public string Html { get; set; }
         private BlogPostEditService _editService = new BlogPostEditService();
@@ -24,7 +23,7 @@ namespace LollyCommon
             CurrentUnitIndex = Units.FindIndex(o => o.Value == vmSettings.USUNITTO);
             this.WhenAnyValue(x => x.CurrentUnitIndex).Subscribe(async (int v) =>
             {
-                var content = await vmSettings.GetBlogContent(v);
+                var content = await vmSettings.GetBlogContent(Units[v].Value);
                 Html = _editService.MarkedToHtml(content, "\n");
             });
         }
