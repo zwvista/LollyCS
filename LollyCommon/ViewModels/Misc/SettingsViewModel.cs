@@ -554,11 +554,13 @@ namespace LollyCommon
                 i++;
             }
         }
-        public async Task<string> GetBlogContent()
+        public async Task<string> GetBlogContent(int unit)
         {
-            var item = await unitBlogDS.GetDataByTextbook(SelectedTextbook.ID, USUNITTOItem.Value);
+            var item = await unitBlogDS.GetDataByTextbook(SelectedTextbook.ID, unit);
             return item.CONTENT ?? "";
         }
+        public async Task<string> GetBlogContent() =>
+            await GetBlogContent(USUNITTOItem.Value);
         public async Task SaveBlogContent(string content) =>
             await unitBlogDS.Update(SelectedTextbook.ID, USUNITTOItem.Value, content);
     }

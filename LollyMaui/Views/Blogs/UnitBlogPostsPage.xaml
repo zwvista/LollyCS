@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.UnitBlogPostsPage"
+             Title="Unit Blog Posts"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:UnitBlogPostViewModel">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*">
+        <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedIndex="{Binding CurrentUnitIndex,Mode=TwoWay}" />
+        <WebView Grid.Row="1" x:Name="wbWebPage" Source="{Binding Html}">
+            <WebView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>
+                <SwipeGestureRecognizer Direction="Right" Swiped="WebView_SwipedRight"/>
+            </WebView.GestureRecognizers>
+        </WebView>
+    </Grid>
+</ContentPage>

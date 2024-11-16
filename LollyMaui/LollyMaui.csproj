@@ -95,6 +95,10 @@
 	  <Compile Update="Views\OnlineTextbooks\OnlineTextbooksWebPagePage.xaml.cs">
 	    <DependentUpon>OnlineTextbooksWebPagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Blogs\UnitBlogPostsPage.xaml.cs">
+	    <DependentUpon>UnitBlogPostsPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -106,6 +110,9 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\OnlineTextbooks\OnlineTextbooksWebPagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Blogs\UnitBlogPostsPage.xaml">
+	    <SubType>Designer</SubType>
 	  </MauiXaml>
 	</ItemGroup>
 
