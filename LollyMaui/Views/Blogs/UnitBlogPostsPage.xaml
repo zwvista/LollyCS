@@ -10,7 +10,10 @@
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
         <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedIndex="{Binding CurrentUnitIndex,Mode=TwoWay}" />
-        <WebView Grid.Row="1" x:Name="wbWebPage" Source="{Binding Html}">
+        <WebView Grid.Row="1" x:Name="wbPost">
+            <WebView.Source>
+                <HtmlWebViewSource Html="{Binding Html}" />
+            </WebView.Source>
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>
                 <SwipeGestureRecognizer Direction="Right" Swiped="WebView_SwipedRight"/>
