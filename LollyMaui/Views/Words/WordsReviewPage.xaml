@@ -35,8 +35,9 @@
         <StackLayout Grid.Row="1" VerticalOptions="Center">
             <Label Text="{Binding WordTargetString}" FontSize="50" TextColor="Orange" IsVisible="{Binding WordTargetVisible}" HorizontalOptions="Center" />
             <Label Text="{Binding NoteTargetString}" FontSize="40" TextColor="Magenta" IsVisible="{Binding NoteTargetVisible}" HorizontalOptions="Center" />
+            <Label Text="{Binding WordHintString}" FontSize="40" IsVisible="{Binding WordHintVisible}" HorizontalOptions="Center" />
             <Label Text="{Binding TranslationString}" />
-            <Entry x:Name="WordInputEntry" Text="{Binding WordInputString}" FontSize="40" />
+            <Entry x:Name="WordInputEntry" HorizontalTextAlignment="Center" Text="{Binding WordInputString}" FontSize="40" />
         </StackLayout>
     </Grid>
 </ContentPage>
