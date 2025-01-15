@@ -57,7 +57,7 @@ namespace LollyCommon
                     lst[i] = $"<div>{s}</div>";
                 }
             }
-            return string.Join("\r\n", lst);
+            return HtmlTransformService.ToHtml(string.Join("\r\n", lst));
         }
         readonly Regex regLine = new Regex("<div>(.*?)</div>");
         string AddQMToColon(string s) => s.Replace(";", ";?");

@@ -37,12 +37,8 @@ namespace LollyCommon
         public string RemoveTagBI(string str) => service.RemoveTagBI(str);
         public string ExchangeTagBI(string str) => service.ExchangeTagBI(str);
         public string GetExplanation(string str) => service.GetExplanation(str);
-        public string MarkedToHtml()
-        {
-            HtmlText = service.MarkedToHtml(MarkedText, "\n");
-            var str = HtmlTransformService.ToHtml(HtmlText);
-            return str;
-        }
+        public string MarkedToHtml() =>
+            service.MarkedToHtml(MarkedText, "\n");
         public async Task<string> LoadBlog() =>
             isUnitBlogPost ? await vmSettings.GetBlogContent() :
             (await contentDS.GetDataById(itemPost!.ID))?.CONTENT ?? "";
