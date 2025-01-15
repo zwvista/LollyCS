@@ -34,24 +34,24 @@
     <ProjectReference Include="..\LollyCommon\LollyCommon.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="124.3.50" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="131.3.50" />
     <PackageReference Include="ControlzEx" Version="6.0.0" />
     <PackageReference Include="Dragablz" Version="0.0.3.234" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
     <PackageReference Include="FontAwesome6.Fonts" Version="2.5.1" />
     <PackageReference Include="FontAwesome6.Svg" Version="2.5.1" />
-    <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-    <PackageReference Include="ReactiveUI.Validation" Version="4.0.6" />
-    <PackageReference Include="ReactiveUI.WPF" Version="20.0.1" />
+    <PackageReference Include="ReactiveUI.Validation" Version="4.1.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="20.1.63" />
     <PackageReference Include="System.Interactive" Version="6.0.1" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Others\EBWin.cs" />
@@ -66,12 +66,12 @@
     <Content Include="appsettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="124.3.5" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="131.3.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="124.3.5" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="131.3.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="124.3.5" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="131.3.5" />
   </ItemGroup>
 </Project>
