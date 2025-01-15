@@ -16,15 +16,15 @@ namespace LollyCommon
 {
     public class SettingsViewModel : ReactiveObject
     {
-        USMappingDataStore USMappingDS = new USMappingDataStore();
-        UserSettingDataStore UserSettingDS = new UserSettingDataStore();
-        LanguageDataStore LanguageDS = new LanguageDataStore();
-        DictionaryDataStore DictionaryDS = new DictionaryDataStore();
-        TextbookDataStore TextbookDS = new TextbookDataStore();
-        AutoCorrectDataStore AutoCorrectDS = new AutoCorrectDataStore();
-        VoiceDataStore VoiceDS = new VoiceDataStore();
-        CodeDataStore CodeDS = new CodeDataStore();
-        UnitBlogPostDataStore unitBlogDS = new UnitBlogPostDataStore();
+        USMappingDataStore USMappingDS = new();
+        UserSettingDataStore UserSettingDS = new();
+        LanguageDataStore LanguageDS = new();
+        DictionaryDataStore DictionaryDS = new();
+        TextbookDataStore TextbookDS = new();
+        AutoCorrectDataStore AutoCorrectDS = new();
+        VoiceDataStore VoiceDS = new();
+        CodeDataStore CodeDS = new();
+        UnitBlogPostDataStore unitBlogDS = new();
 
         public SettingsViewModel ShallowCopy() => (SettingsViewModel)this.MemberwiseClone();
 

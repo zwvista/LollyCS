@@ -5,7 +5,7 @@ namespace LollyCommon
 {
     public class WordsLangDetailViewModel : ReactiveObject
     {
-        public MLangWordEdit ItemEdit = new MLangWordEdit();
+        public MLangWordEdit ItemEdit = new();
         public SingleWordViewModel vmSingleWord;
 
         public WordsLangDetailViewModel(WordsLangViewModel vm, MLangWord item)

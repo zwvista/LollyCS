@@ -14,7 +14,7 @@ namespace LollyCommon
     public class OnlineTextbooksViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings { get; set; }
-        OnlineTextbookDataStore OnlineTextbookDS = new OnlineTextbookDataStore();
+        OnlineTextbookDataStore OnlineTextbookDS = new();
         [Reactive]
         public int OnlineTextbookFilter { get; set; }
         public MSelectItem OnlineTextbookFilterItem

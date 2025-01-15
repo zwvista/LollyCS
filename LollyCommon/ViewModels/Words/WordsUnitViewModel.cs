@@ -9,8 +9,8 @@ namespace LollyCommon
     public class WordsUnitViewModel : WordsBaseViewModel
     {
         bool inTextbook;
-        UnitWordDataStore unitWordDS = new UnitWordDataStore();
-        LangWordDataStore langWordDS = new LangWordDataStore();
+        UnitWordDataStore unitWordDS = new();
+        LangWordDataStore langWordDS = new();
 
         ObservableCollection<MUnitWord> WordItemsAll { get; set; } = [];
         public ObservableCollection<MUnitWord> WordItems { get; set; } = [];

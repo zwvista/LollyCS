@@ -12,8 +12,8 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
-        ObservableCollection<MPattern> PatternItemsAll { get; set; } = new ObservableCollection<MPattern>();
-        public ObservableCollection<MPattern> PatternItems { get; set; } = new ObservableCollection<MPattern>();
+        ObservableCollection<MPattern> PatternItemsAll { get; set; } = [];
+        public ObservableCollection<MPattern> PatternItems { get; set; } = [];
         [Reactive]
         public string TextFilter { get; set; } = "";
         [Reactive]

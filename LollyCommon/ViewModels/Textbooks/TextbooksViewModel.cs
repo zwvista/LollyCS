@@ -12,7 +12,7 @@ namespace LollyCommon
     public class TextbooksViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
-        TextbookDataStore textbookDS = new TextbookDataStore();
+        TextbookDataStore textbookDS = new();
         [Reactive]
         public MTextbook SelectedTextbookItem { get; set; }
         public bool HasSelectedTextbookItem { [ObservableAsProperty] get; }

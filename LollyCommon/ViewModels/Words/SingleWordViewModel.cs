@@ -7,7 +7,7 @@ namespace LollyCommon
 {
     public class SingleWordViewModel : ReactiveObject
     {
-        UnitWordDataStore unitWordDS = new UnitWordDataStore();
+        UnitWordDataStore unitWordDS = new();
 
         public ObservableCollection<MUnitWord> WordItems { get; private set; } = new ObservableCollection<MUnitWord>();
 

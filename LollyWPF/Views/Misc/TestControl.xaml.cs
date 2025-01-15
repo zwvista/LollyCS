@@ -24,7 +24,7 @@ namespace LollyWPF
     /// </summary>
     public partial class TestControl : UserControl
     {
-        TestViewModel vm = new TestViewModel();
+        TestViewModel vm = new();
         public TestControl()
         {
             InitializeComponent();

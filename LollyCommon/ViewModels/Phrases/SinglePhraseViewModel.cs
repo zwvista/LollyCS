@@ -7,7 +7,7 @@ namespace LollyCommon
 {
     public class SinglePhraseViewModel : ReactiveObject
     {
-        UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
+        UnitPhraseDataStore unitPhraseDS = new();
 
         public ObservableCollection<MUnitPhrase> PhraseItems { get; private set; } = new ObservableCollection<MUnitPhrase>();
 

@@ -10,11 +10,11 @@ namespace LollyCommon
 {
     public class PhrasesLangViewModel : PhrasesBaseViewModel
     {
-        LangPhraseDataStore langPhraseDS = new LangPhraseDataStore();
-        protected WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
+        LangPhraseDataStore langPhraseDS = new();
+        protected WordPhraseDataStore wordPhraseDS = new();
 
-        ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; } = new ObservableCollection<MLangPhrase>();
-        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = new ObservableCollection<MLangPhrase>();
+        ObservableCollection<MLangPhrase> PhraseItemsAll { get; set; } = [];
+        public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = [];
         public string StatusText => $"{PhraseItems.Count} Phrases in {vmSettings.LANGINFO}";
 
         public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)

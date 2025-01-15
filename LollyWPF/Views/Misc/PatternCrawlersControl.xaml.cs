@@ -24,7 +24,7 @@ namespace LollyWPF
     /// </summary>
     public partial class PatternCrawlersControl : UserControl
     {
-        PatternCrawlersViewModel vm = new PatternCrawlersViewModel();
+        PatternCrawlersViewModel vm = new();
         public PatternCrawlersControl()
         {
             InitializeComponent();

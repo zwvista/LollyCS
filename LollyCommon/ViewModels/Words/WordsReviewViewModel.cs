@@ -14,9 +14,9 @@ namespace LollyCommon
         WordFamiDataStore wordFamiDS = new WordFamiDataStore();
         MDictionary DictTranslation => vmSettings.SelectedDictTranslation;
 
-        public List<MUnitWord> Items { get; set; } = new List<MUnitWord>();
+        public List<MUnitWord> Items { get; set; } = [];
         public int Count => Items.Count;
-        public List<int> CorrectIDs { get; set; } = new List<int>();
+        public List<int> CorrectIDs { get; set; } = [];
         [Reactive]
         public int Index { get; set; }
         public bool HasCurrent => Items.Any() && (OnRepeat || (Index >= 0 && Index < Count));

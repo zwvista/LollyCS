@@ -5,9 +5,9 @@ namespace LollyCommon
 {
     public class WordsUnitDetailViewModel : ReactiveObject
     {
-        public MUnitWordEdit ItemEdit = new MUnitWordEdit();
+        public MUnitWordEdit ItemEdit = new();
         public SingleWordViewModel vmSingleWord;
-        WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
+        WordPhraseDataStore wordPhraseDS = new();
 
         public WordsUnitDetailViewModel(WordsUnitViewModel vm, MUnitWord item, int phraseid)
         {

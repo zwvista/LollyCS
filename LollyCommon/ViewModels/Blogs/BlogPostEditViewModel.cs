@@ -7,8 +7,8 @@ namespace LollyCommon
     public class BlogPostEditViewModel : MBlogPostEdit
     {
         public SettingsViewModel vmSettings;
-        BlogPostEditService service = new BlogPostEditService();
-        LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
+        BlogPostEditService service = new();
+        LangBlogPostContentDataStore contentDS = new();
         MLangBlogPostContent? itemPost = null;
         bool isUnitBlogPost => itemPost == null;
         public string Title { get; set; }

@@ -6,7 +6,7 @@ namespace LollyCommon
 {
     public class LoginViewModel : MUser
     {
-        UserDataStore userDS = new UserDataStore();
+        UserDataStore userDS = new();
         public async Task<string> Login()
         {
             var lst = await userDS.GetData(USERNAME, PASSWORD);

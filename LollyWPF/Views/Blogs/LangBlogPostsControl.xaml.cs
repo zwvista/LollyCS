@@ -18,8 +18,8 @@ namespace LollyWPF
     {
         string originalText = "";
         LangBlogPostsViewModel vm = null!;
-        BlogPostEditService editService = new BlogPostEditService();
-        LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
+        BlogPostEditService editService = new();
+        LangBlogPostContentDataStore contentDS = new();
 
         public LangBlogPostsControl()
         {

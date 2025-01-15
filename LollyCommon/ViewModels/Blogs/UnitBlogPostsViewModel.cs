@@ -15,7 +15,7 @@ namespace LollyCommon
 
         [Reactive]
         public string Html { get; set; }
-        private BlogPostEditService _editService = new BlogPostEditService();
+        private BlogPostEditService _editService = new();
 
         public UnitBlogPostViewModel(SettingsViewModel vmSettings, bool needCopy)
         {

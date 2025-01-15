@@ -5,7 +5,7 @@ namespace LollyCommon
 {
     public class PatternsDetailViewModel : ReactiveObject
     {
-        public MPatternEdit ItemEdit = new MPatternEdit();
+        public MPatternEdit ItemEdit = new();
 
         public PatternsDetailViewModel(PatternsViewModel vm, MPattern item)
         {

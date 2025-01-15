@@ -7,7 +7,7 @@ namespace LollyCommon
 {
     public class LangBlogGroupsDetailViewModel : ReactiveObject
     {
-        public MLangBlogGroupEdit ItemEdit = new MLangBlogGroupEdit();
+        public MLangBlogGroupEdit ItemEdit = new();
         public string LANGNAME { get; private set; }
 
         public LangBlogGroupsDetailViewModel(MLangBlogGroup item, LangBlogViewModel vm)

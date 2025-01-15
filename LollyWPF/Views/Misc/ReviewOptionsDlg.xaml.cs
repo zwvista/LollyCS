@@ -22,7 +22,7 @@ namespace LollyWPF
     public partial class ReviewOptionsDlg : Window
     {
         MReviewOptions options;
-        MReviewOptions optionsEdit = new MReviewOptions();
+        MReviewOptions optionsEdit = new();
         public ReviewOptionsDlg(Window owner, MReviewOptions options)
         {
             InitializeComponent();

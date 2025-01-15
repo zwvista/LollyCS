@@ -12,8 +12,8 @@ namespace LollyCommon
 {
     public class LangBlogSelectGroupsViewModel : ReactiveObject
     {
-        LangBlogGroupDataStore groupDS = new LangBlogGroupDataStore();
-        LangBlogGPDataStore gpDS = new LangBlogGPDataStore();
+        LangBlogGroupDataStore groupDS = new();
+        LangBlogGPDataStore gpDS = new();
         public MLangBlogPost Item { get; }
         [Reactive]
         public ObservableCollection<MLangBlogGroup> GroupsAvailable { get; set; }

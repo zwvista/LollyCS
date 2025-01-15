@@ -11,9 +11,9 @@ namespace LollyCommon
     public class PhrasesReviewViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
-        UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
+        UnitPhraseDataStore unitPhraseDS = new();
 
-        public List<MUnitPhrase> Items { get; set; } = new List<MUnitPhrase>();
+        public List<MUnitPhrase> Items { get; set; } = [];
         public int Count => Items.Count;
         public List<int> CorrectIDs { get; set; } = new List<int>();
         [Reactive]

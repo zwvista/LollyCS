@@ -13,7 +13,7 @@ namespace LollyWPF
     /// </summary>
     public partial class LoginDlg : Window
     {
-        LoginViewModel vm = new LoginViewModel();
+        LoginViewModel vm = new();
         public LoginDlg()
         {
             InitializeComponent();

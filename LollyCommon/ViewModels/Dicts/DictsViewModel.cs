@@ -13,7 +13,7 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         DictionaryDataStore dictDS = new DictionaryDataStore();
 
-        public ObservableCollection<MDictionary> Items { get; set; } = new ObservableCollection<MDictionary>();
+        public ObservableCollection<MDictionary> Items { get; set; } = [];
         public string StatusText => $"{Items.Count} Dictionaries in {vmSettings.LANGINFO}";
 
         public DictsViewModel(SettingsViewModel vmSettings, bool needCopy)

@@ -6,7 +6,7 @@ namespace LollyCommon
 {
     public class PhrasesUnitBatchAddViewModel : ReactiveObject
     {
-        public MUnitPhraseEdit ItemEdit = new MUnitPhraseEdit();
+        public MUnitPhraseEdit ItemEdit = new();
         public PhrasesUnitBatchAddViewModel(PhrasesUnitViewModel vm)
         {
             var item = vm.NewUnitPhrase();

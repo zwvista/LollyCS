@@ -16,7 +16,7 @@ namespace LollyWPF
     {
         ReadNumberViewModel vm = null!;
         private SettingsViewModel vmSettings => vm.vmSettings;
-        private ComparisonConverter converter = new ComparisonConverter();
+        private ComparisonConverter converter = new();
 
         public ReadNumberControl()
         {

@@ -26,8 +26,8 @@ namespace LollyWPF
     public partial class TransformEditDlg : Window
     {
         TransformEditViewModelWPF vm;
-        public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();
-        public ActionInterTabClient ActionInterTabClient { get; } = new ActionInterTabClient();
+        public ObservableCollection<ActionTabItem> Tabs { get; } = [];
+        public ActionInterTabClient ActionInterTabClient { get; } = new();
         TransformSourceControl sourceCtrl;
         TransformResultControl resultCtrl;
         TransformIntermediateControl intermediateCtrl;

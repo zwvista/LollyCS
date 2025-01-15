@@ -36,7 +36,7 @@ namespace LollyCommon
         public int IntermediateIndex { get; set; }
         public ObservableCollection<MTransformItem> TransformItems { get; }
         [Reactive]
-        public List<string> IntermediateResults { get; private set; } = new List<string> { "" };
+        public List<string> IntermediateResults { get; private set; } = [""];
         public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; }
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; }
         public ReactiveCommand<Unit, Unit> GetAndTransformCommand { get; }

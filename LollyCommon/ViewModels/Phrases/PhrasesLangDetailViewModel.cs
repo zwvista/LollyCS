@@ -5,7 +5,7 @@ namespace LollyCommon
 {
     public class PhrasesLangDetailViewModel : ReactiveObject
     {
-        public MLangPhraseEdit ItemEdit = new MLangPhraseEdit();
+        public MLangPhraseEdit ItemEdit = new();
         public SinglePhraseViewModel vmSinglePhrase;
 
         public PhrasesLangDetailViewModel(PhrasesLangViewModel vm, MLangPhrase item)

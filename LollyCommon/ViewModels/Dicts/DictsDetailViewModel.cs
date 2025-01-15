@@ -6,7 +6,7 @@ namespace LollyCommon
     public class DictsDetailViewModel : ReactiveObject
     {
         public DictsViewModel vm;
-        public MDictionaryEdit ItemEdit = new MDictionaryEdit();
+        public MDictionaryEdit ItemEdit = new();
         public string LANGNAME { get; private set; }
 
         public DictsDetailViewModel(MDictionary item, DictsViewModel vm)

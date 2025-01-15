@@ -11,8 +11,8 @@ namespace LollyCommon
         bool inTextbook;
         UnitPhraseDataStore unitPhraseDS = new UnitPhraseDataStore();
 
-        ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; } = new ObservableCollection<MUnitPhrase>();
-        public ObservableCollection<MUnitPhrase> PhraseItems { get; set; } = new ObservableCollection<MUnitPhrase>();
+        ObservableCollection<MUnitPhrase> PhraseItemsAll { get; set; } = [];
+        public ObservableCollection<MUnitPhrase> PhraseItems { get; set; } = [];
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public string StatusText => $"{PhraseItems.Count} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
 

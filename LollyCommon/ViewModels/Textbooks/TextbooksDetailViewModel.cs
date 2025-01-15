@@ -7,7 +7,7 @@ namespace LollyCommon
     {
         MTextbook item;
         TextbooksViewModel vm;
-        public MTextbookEdit ItemEdit = new MTextbookEdit();
+        public MTextbookEdit ItemEdit = new();
         public string LANGNAME { get; private set; }
 
         public TextbooksDetailViewModel(MTextbook item, TextbooksViewModel vm)

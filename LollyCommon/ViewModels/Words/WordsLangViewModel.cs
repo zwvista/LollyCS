@@ -10,8 +10,8 @@ namespace LollyCommon
 {
     public class WordsLangViewModel : WordsBaseViewModel
     {
-        LangWordDataStore langWordDS = new LangWordDataStore();
-        protected WordPhraseDataStore wordPhraseDS = new WordPhraseDataStore();
+        LangWordDataStore langWordDS = new();
+        protected WordPhraseDataStore wordPhraseDS = new();
 
         ObservableCollection<MLangWord> WordItemsAll { get; set; } = new ObservableCollection<MLangWord>();
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
