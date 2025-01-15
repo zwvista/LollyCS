@@ -58,7 +58,7 @@ namespace LollyWPF
         void MarkedToHtml()
         {
             var str = vm.MarkedToHtml();
-            wbPost.LoadLargeHtml(str);
+            wbPost.LoadHtml(str);
         }
         void btnPatternToHtml_Click(object sender, RoutedEventArgs e) =>
             wbPost.Load(vm.PatternUrl);

@@ -55,7 +55,7 @@ namespace LollyWPF
             wbDict.Load(url);
 
         public void LoadHtml(string html) =>
-            wbDict.LoadLargeHtml(html);
+            wbDict.LoadHtml(html);
 
         public async Task EvaluateScriptAsync(string javascript) =>
             await wbDict.WebBrowser.GetMainFrame().EvaluateScriptAsync(javascript);

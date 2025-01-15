@@ -32,7 +32,7 @@ namespace LollyWPF
         void Load()
         {
             if (!wbDict.IsInitialized || string.IsNullOrEmpty(vm.ResultHtml)) return;
-            wbDict.LoadLargeHtml(vm.ResultHtml);
+            wbDict.LoadHtml(vm.ResultHtml);
         }
     }
 }

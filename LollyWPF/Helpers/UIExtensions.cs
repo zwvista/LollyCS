@@ -22,10 +22,6 @@ namespace LollyWPF
             btn.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
         // https://stackoverflow.com/questions/27659086/cefsharp-loadhtml
-        public static void LoadLargeHtml(this ChromiumWebBrowser wb, string html)
-        {
-            wb.LoadHtml(html, "http://www.example.com/");
-        }
     }
     public static class UIHelper
     {

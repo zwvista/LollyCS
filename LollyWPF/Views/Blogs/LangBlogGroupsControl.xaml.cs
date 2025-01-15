@@ -32,7 +32,7 @@ namespace LollyWPF
         public async Task OnSettingsChanged()
         {
             DataContext = vm = new LangBlogGroupsViewModel(MainWindow.vmSettings, true);
-            vm.WhenAnyValue(x => x.PostContent).Subscribe(v => wbPost.LoadLargeHtml(editService.MarkedToHtml(v, "\n")));
+            vm.WhenAnyValue(x => x.PostContent).Subscribe(v => wbPost.LoadHtml(editService.MarkedToHtml(v, "\n")));
         }
         void OnBeginEdit(object sender, DataGridBeginningEditEventArgs e) =>
             originalText = DataGridHelper.OnBeginEditCell(e);
