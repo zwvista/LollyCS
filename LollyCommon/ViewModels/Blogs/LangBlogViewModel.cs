@@ -42,7 +42,7 @@ namespace LollyCommon
             LANGID = vmSettings.SelectedLang.ID,
         };
         public async Task UpdatePost(MLangBlogPost item) => await postDS.Update(item);
-        public async Task CreatePost(MLangBlogPost item) => item.ID = await postDS.Create(item);
+        public async Task<int> CreatePost(MLangBlogPost item) => item.ID = await postDS.Create(item);
         public async Task DeletePost(int id) => await postDS.Delete(id);
         public MLangBlogPost NewPost() => new()
         {

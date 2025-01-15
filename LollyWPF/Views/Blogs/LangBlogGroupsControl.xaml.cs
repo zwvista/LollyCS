@@ -18,8 +18,8 @@ namespace LollyWPF
     {
         string originalText = "";
         LangBlogGroupsViewModel vm = null!;
-        BlogPostEditService editService = new BlogPostEditService();
-        LangBlogPostContentDataStore contentDS = new LangBlogPostContentDataStore();
+        BlogPostEditService editService = new();
+        LangBlogPostContentDataStore contentDS = new();
 
         public LangBlogGroupsControl()
         {
@@ -63,10 +63,16 @@ namespace LollyWPF
         void miDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
         }
+        void miAddPost_Click(object sender, RoutedEventArgs e)
+        {
+            dgPosts.CancelEdit();
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm, vm.SelectedGroupItem);
+            dlg.ShowDialog();
+        }
         void miEditPost_Click(object sender, RoutedEventArgs? e)
         {
             dgPosts.CancelEdit();
-            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm, vm.SelectedGroupItem);
             dlg.ShowDialog();
         }
         async void miEditPostContent_Click(object sender, RoutedEventArgs e)

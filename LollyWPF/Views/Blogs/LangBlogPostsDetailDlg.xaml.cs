@@ -22,15 +22,17 @@ namespace LollyWPF
     public partial class LangBlogPostsDetailDlg : Window
     {
         LangBlogPostsDetailViewModel vmDetail;
-        public MLangBlogPost Item { get; set; }
-        public LangBlogPostsDetailDlg(Window owner, MLangBlogPost item, LangBlogViewModel vm)
+        public MLangBlogPost ItemPost { get; set; }
+        public MLangBlogGroup? ItemGroup { get; }
+        public LangBlogPostsDetailDlg(Window owner, MLangBlogPost item, LangBlogViewModel vm, MLangBlogGroup? itemGroup = null)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
             Owner = owner;
-            vmDetail = new LangBlogPostsDetailViewModel(Item = item, vm);
+            vmDetail = new LangBlogPostsDetailViewModel(ItemPost = item, vm, ItemGroup = itemGroup);
             DataContext = vmDetail.ItemEdit;
+            tbGroup.DataContext = ItemGroup;
             tbLangName.Text = vmDetail.LANGNAME;
         }
     }

@@ -61,6 +61,8 @@
                     </DataGrid.Resources>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
+                            <MenuItem x:Name="miAddPost" Header="Add Post" IsEnabled="{Binding HasSelectedPostItem}" Click="miAddPost_Click" />
+                            <Separator />
                             <MenuItem x:Name="miEditPost" Header="Edit Post" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPost_Click" />
                             <MenuItem x:Name="miEditPostContent" Header="Edit Content" IsEnabled="{Binding HasSelectedPostItem}" Click="miEditPostContent_Click" />
                         </ContextMenu>
