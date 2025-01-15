@@ -72,7 +72,7 @@ namespace LollyWPF
             var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
             dlg.ShowDialog();
         }
-        async void miEditPostContent_Click(object sender, RoutedEventArgs e)
+        async void miEditPostContent_Click(object sender, RoutedEventArgs? e)
         {
             var w = (MainWindow)Window.GetWindow(this);
             var itemPost = await contentDS.GetDataById(vm.SelectedPostItem.ID);
@@ -83,7 +83,11 @@ namespace LollyWPF
         }
         void dgPosts_RowDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            miEditPost_Click(sender, null);
+            // https://stackoverflow.com/questions/14178800/how-can-i-check-if-ctrl-alt-are-pressed-on-left-mouse-click-in-c
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+                miEditPostContent_Click(sender, null);
+            else
+                miEditPost_Click(sender, null);
         }
         public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
     }
