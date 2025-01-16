@@ -9,31 +9,28 @@ namespace LollyCommon
     {
         public MLangBlogPostEdit ItemEdit = new();
         public string LANGNAME { get; private set; }
-        MLangBlogGroup? ItemGroup { get; }
         LangBlogGPDataStore gpDS = new();
 
-        public LangBlogPostsDetailViewModel(MLangBlogPost item, LangBlogViewModel vm, MLangBlogGroup? itemGroup = null)
+        public LangBlogPostsDetailViewModel(MLangBlogPost itemPost, LangBlogViewModel vm, MLangBlogGroup? itemGroup = null)
         {
-            ItemGroup = itemGroup;
-            bool isNew = item.ID == 0;
-            item.CopyProperties(ItemEdit);
+            bool isNew = itemPost.ID == 0;
+            itemPost.CopyProperties(ItemEdit);
             LANGNAME = vm.vmSettings.SelectedLang.LANGNAME;
             ItemEdit.Save = ReactiveCommand.CreateFromTask(async () =>
             {
-                ItemEdit.CopyProperties(item);
+                ItemEdit.CopyProperties(itemPost);
                 if (isNew)
                 {
                     var itemGP = new MLangBlogGP
                     {
                         GROUPID = itemGroup!.ID,
-                        POSTID = await vm.CreatePost(item),
+                        POSTID = await vm.CreatePost(itemPost),
                     };
                     await gpDS.Create(itemGP);
                 }
                 else
-                    await vm.UpdatePost(item);
+                    await vm.UpdatePost(itemPost);
             });
-            ItemGroup = itemGroup;
         }
     }
 }

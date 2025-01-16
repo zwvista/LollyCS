@@ -24,13 +24,13 @@ namespace LollyWPF
         LangBlogPostsDetailViewModel vmDetail;
         public MLangBlogPost ItemPost { get; set; }
         public MLangBlogGroup? ItemGroup { get; }
-        public LangBlogPostsDetailDlg(Window owner, MLangBlogPost item, LangBlogViewModel vm, MLangBlogGroup? itemGroup = null)
+        public LangBlogPostsDetailDlg(Window owner, LangBlogViewModel vm, MLangBlogPost itemPost, MLangBlogGroup? itemGroup = null)
         {
             InitializeComponent();
             SourceInitialized += (x, y) => this.HideMinimizeAndMaximizeButtons();
             tbTitle.Focus();
             Owner = owner;
-            vmDetail = new LangBlogPostsDetailViewModel(ItemPost = item, vm, ItemGroup = itemGroup);
+            vmDetail = new LangBlogPostsDetailViewModel(ItemPost = itemPost, vm, ItemGroup = itemGroup);
             DataContext = vmDetail.ItemEdit;
             tbGroup.DataContext = ItemGroup;
             tbLangName.Text = vmDetail.LANGNAME;

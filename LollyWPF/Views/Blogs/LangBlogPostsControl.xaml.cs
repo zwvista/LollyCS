@@ -63,20 +63,20 @@ namespace LollyWPF
         void miAddPost_Click(object sender, RoutedEventArgs e)
         {
             dgPosts.CancelEdit();
-            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.NewPost(), vm);
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm, vm.NewPost());
             dlg.ShowDialog();
         }
         void miEditPost_Click(object sender, RoutedEventArgs? e)
         {
             dgPosts.CancelEdit();
-            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm.SelectedPostItem, vm);
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vm, vm.SelectedPostItem);
             dlg.ShowDialog();
         }
         async void miEditPostContent_Click(object sender, RoutedEventArgs? e)
         {
             var w = (MainWindow)Window.GetWindow(this);
             var itemPost = await contentDS.GetDataById(vm.SelectedPostItem.ID);
-            w.AddBlogPostEditTab("Language Blog Post", itemPost);
+            w.AddBlogPostEditTab("Language Blog Post", vm, itemPost, vm.SelectedPostItem);
         }
         void miDeletePost_Click(object sender, RoutedEventArgs e)
         {

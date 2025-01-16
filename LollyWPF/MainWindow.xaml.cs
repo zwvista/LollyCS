@@ -94,7 +94,7 @@ namespace LollyWPF
         void miWordsTextbook_Click(object sender, RoutedEventArgs e) => AddTab<WordsTextbookControl>("Words in Textbook");
         void miPhrasesTextbook_Click(object sender, RoutedEventArgs e) => AddTab<PhrasesTextbookControl>("Phrases in Textbook");
         void miPatterns_Click(object sender, RoutedEventArgs e) => AddTab<PatternsControl>("Patterns in Language");
-        void miUnitBlogPost_Click(object sender, RoutedEventArgs e) => AddBlogPostEditTab("Unit Blog Post", null);
+        void miUnitBlogPost_Click(object sender, RoutedEventArgs e) => AddBlogPostEditTab("Unit Blog Post", null, null, null);
         void miLangBlogGroups_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogGroupsControl>("Language Blog Groups");
         void miLangBlogPosts_Click(object sender, RoutedEventArgs e) => AddTab<LangBlogPostsControl>("Language Blog Posts");
         void miReadNumber_Click(object sender, RoutedEventArgs e) => AddTab<ReadNumberControl>("Read Number");
@@ -112,9 +112,9 @@ namespace LollyWPF
             dlg.ShowDialog();
         }
         void miExit_Click(object sender, RoutedEventArgs e) => Environment.Exit(0);
-        public void AddBlogPostEditTab(string header, MLangBlogPostContent? itemPost)
+        public void AddBlogPostEditTab(string header, LangBlogViewModel? vmLangBlog, MLangBlogPostContent? itemPost, MLangBlogPost? itemPost2)
         {
-            Tabs.Add(new ActionTabItem { Header = header, Content = new BlogPostEditControl(itemPost) });
+            Tabs.Add(new ActionTabItem { Header = header, Content = new BlogPostEditControl(vmLangBlog, itemPost, itemPost2) });
             tcMain.SelectedIndex = tcMain.Items.Count - 1;
         }
     }

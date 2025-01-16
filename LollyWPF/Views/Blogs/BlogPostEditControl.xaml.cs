@@ -15,20 +15,24 @@ namespace LollyWPF
     public partial class BlogPostEditControl : UserControl, ILollySettings
     {
         BlogPostEditViewModel vm = null!;
+        LangBlogViewModel vmLangBlog;
         MLangBlogPostContent itemPost;
+        MLangBlogPost itemPost2;
 
-        public BlogPostEditControl(MLangBlogPostContent itemPost)
+        public BlogPostEditControl(LangBlogViewModel vmLangBlog, MLangBlogPostContent itemPost, MLangBlogPost itemPost2)
         {
             InitializeComponent();
             // Disable image loading
             // wbPost.BrowserSettings.ImageLoading = CefState.Disabled;
+            this.vmLangBlog = vmLangBlog;
             this.itemPost = itemPost;
+            this.itemPost2 = itemPost2;
             _ = OnSettingsChanged();
         }
 
         public async Task OnSettingsChanged()
         {
-            DataContext = vm = new BlogPostEditViewModel(MainWindow.vmSettings, true, itemPost);
+            DataContext = vm = new BlogPostEditViewModel(MainWindow.vmSettings, true, vmLangBlog, itemPost);
             tbMarked.Text = await vm.LoadBlog();
             MarkedToHtml();
         }
@@ -66,6 +70,11 @@ namespace LollyWPF
         {
             await vm.SaveBlog(tbMarked.Text);
             btnMarkedToHtml_Click(sender, e);
+        }
+        void btnEditPost_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new LangBlogPostsDetailDlg(Window.GetWindow(this), vmLangBlog, itemPost2);
+            dlg.ShowDialog();
         }
     }
 }
