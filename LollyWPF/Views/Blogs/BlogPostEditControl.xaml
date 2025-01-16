@@ -40,17 +40,19 @@
                 <TextBox Text="{Binding HtmlText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
-            <DockPanel Grid.Column="2">
-                <Grid DockPanel.Dock="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Title}" />
-                    <Button x:Name="btnEditPost" Content="Edit" IsEnabled="{Binding IsLangBlogPost}" Click="btnEditPost_Click" Grid.Column="1" />
-                </Grid>
-                <cef:ChromiumWebBrowser x:Name="wbPost" />
-            </DockPanel>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding Title}" />
+                <Button x:Name="btnEditPost" Content="Edit" IsEnabled="{Binding IsLangBlogPost}" Click="btnEditPost_Click" Grid.Column="1" />
+                <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" x:Name="wbPost" />
+            </Grid>
         </Grid>
     </DockPanel>
 </UserControl>
