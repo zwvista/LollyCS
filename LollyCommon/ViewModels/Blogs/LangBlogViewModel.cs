@@ -29,6 +29,11 @@ namespace LollyCommon
         public ObservableCollection<MLangBlogGroup> GroupItemsAll { get; set; } = [];
         public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = [];
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
+        [Reactive]
+        public string GroupFilter { get; set; } = "";
+        [Reactive]
+        public string PostFilter { get; set; } = "";
+        public bool NoPostFilter => string.IsNullOrEmpty(PostFilter);
         public LangBlogViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();

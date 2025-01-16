@@ -13,12 +13,9 @@ namespace LollyCommon
 {
     public class LangBlogPostsViewModel : LangBlogViewModel
     {
-        [Reactive]
-        public string TitleFilter { get; set; } = "";
-        public bool NoFilter => string.IsNullOrEmpty(TitleFilter);
         public LangBlogPostsViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
-            this.WhenAnyValue(x => x.TitleFilter).Subscribe(_ => ApplyFilters());
+            this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
@@ -39,8 +36,8 @@ namespace LollyCommon
             });
         void ApplyFilters()
         {
-            PostItems = NoFilter ? PostItemsAll : new ObservableCollection<MLangBlogPost>(PostItemsAll.Where(o =>
-                 o.TITLE.ToLower().Contains(TitleFilter.ToLower()))
+            PostItems = NoPostFilter ? PostItemsAll : new ObservableCollection<MLangBlogPost>(PostItemsAll.Where(o =>
+                 o.TITLE.ToLower().Contains(PostFilter.ToLower()))
             );
             this.RaisePropertyChanged(nameof(PostItems));
         }
