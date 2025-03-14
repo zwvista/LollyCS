@@ -21,7 +21,8 @@ namespace LollyMaui
         {
             base.OnAppearing();
             vm = new SearchViewModel(AppShell.vmSettings, this);
-            await vm.vmSettings.GetData();
+            if (!String.IsNullOrEmpty(CommonApi.UserId))
+                await vm.vmSettings.GetData();
             BindingContext = vm;
         }
 
