@@ -34,10 +34,10 @@
     <ProjectReference Include="..\LollyCommon\LollyCommon.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="131.3.50" />
-    <PackageReference Include="ControlzEx" Version="6.0.0" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="133.4.21" />
+    <PackageReference Include="ControlzEx" Version="7.0.0" />
     <PackageReference Include="Dragablz" Version="0.0.3.234" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
     <PackageReference Include="FontAwesome6.Fonts" Version="2.5.1" />
     <PackageReference Include="FontAwesome6.Svg" Version="2.5.1" />
     <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
@@ -51,7 +51,7 @@
     <PackageReference Include="ReactiveUI.WPF" Version="20.1.63" />
     <PackageReference Include="System.Interactive" Version="6.0.1" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Others\EBWin.cs" />
@@ -66,12 +66,12 @@
     <Content Include="appsettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="131.3.5" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="133.4.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="131.3.5" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="133.4.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="131.3.5" />
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="133.4.2" />
   </ItemGroup>
 </Project>
