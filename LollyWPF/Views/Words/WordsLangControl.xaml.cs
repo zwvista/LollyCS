@@ -70,8 +70,8 @@ namespace LollyWPF
             if (e.Key != Key.Return || string.IsNullOrEmpty(vm.NewWord)) return;
             await vm.AddNewWord();
         }
-        async void miRetrieveNote_Click(object sender, RoutedEventArgs e) =>
-            await vm.RetrieveNote(SelectedWordItem);
+        async void miGetNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.GetNote(SelectedWordItem);
         async void miClearNote_Click(object sender, RoutedEventArgs e) =>
             await vm.ClearNote(SelectedWordItem);
     }

@@ -52,7 +52,7 @@ namespace LollyCommon
             bool b = result == "2" || result == "4";
             o?.CopyProperties(item);
             if (b || item.NOTE.IsEmpty())
-                await RetrieveNote(item);
+                await GetNote(item);
         }
         public async Task Create(MUnitWord item)
         {
@@ -60,7 +60,7 @@ namespace LollyCommon
             var o = await unitWordDS.GetDataById(id, vmSettings.Textbooks);
             o?.CopyProperties(item);
             if (item.NOTE.IsEmpty())
-                await RetrieveNote(item);
+                await GetNote(item);
             WordItemsAll.Add(o);
             ApplyFilters();
         }
@@ -103,9 +103,9 @@ namespace LollyCommon
             SelectedWordItem = WordItems.Last();
         }
 
-        public async Task RetrieveNote(MUnitWord item)
+        public async Task GetNote(MUnitWord item)
         {
-            var note = await vmSettings.RetrieveNote(item.WORD);
+            var note = await vmSettings.GetNote(item.WORD);
             item.NOTE = note;
             await langWordDS.UpdateNote(item.WORDID, item.NOTE);
         }
@@ -115,11 +115,11 @@ namespace LollyCommon
             await langWordDS.UpdateNote(item.WORDID, item.NOTE);
         }
 
-        public async Task RetrieveNotes(Action<int> oneComplete) =>
-            await vmSettings.RetrieveNotes(WordItems.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItems[i].NOTE),
+        public async Task GetNotes(Action<int> oneComplete) =>
+            await vmSettings.GetNotes(WordItems.Count, i => !IfEmpty || string.IsNullOrEmpty(WordItems[i].NOTE),
                 async i =>
                 {
-                    await RetrieveNote(WordItems[i]);
+                    await GetNote(WordItems[i]);
                     oneComplete(i);
                 });
         public async Task ClearNotes(Action<int> oneComplete) =>

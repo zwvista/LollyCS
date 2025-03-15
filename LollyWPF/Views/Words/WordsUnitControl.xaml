@@ -8,21 +8,22 @@
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:fa="http://schemas.fontawesome.com/icons/fonts/properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar x:Name="ToolBarDict" Band="1" />
             <ToolBar Band="2">
-                <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
-                <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <Button x:Name="btnBatchAdd" Content="Batch Add" Click="btnBatchAdd_Click"/>
-                <Button x:Name="btnBatchEdit" Content="Batch Edit" Click="btnBatchEdit_Click"/>
-                <Button x:Name="btnToggleToType" Content="Toggle" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnToggleToType_Click"/>
-                <Button x:Name="btnPreviousUnitPart" Content="Previous" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnPreviousUnitPart_Click"/>
-                <Button x:Name="btnNextUnitPart" Content="Next" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnNextUnitPart_Click"/>
+                <Button x:Name="btnAdd" ToolTip="Add" fa:FontAwesome.Icon="Solid_Plus" Click="btnAdd_Click"/>
+                <Button x:Name="btnRefresh" ToolTip="Refresh" fa:FontAwesome.Icon="Solid_RotateRight" Click="btnRefresh_Click"/>
+                <Button x:Name="btnBatchAdd" ToolTip="Batch Add" fa:FontAwesome.Icon="Solid_SquarePlus" Click="btnBatchAdd_Click"/>
+                <Button x:Name="btnBatchEdit" ToolTip="Batch Edit" fa:FontAwesome.Icon="Solid_Pen" Click="btnBatchEdit_Click"/>
+                <Button x:Name="btnToggleToType" ToolTip="Toggle" fa:FontAwesome.Icon="Solid_TableCells" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnToggleToType_Click"/>
+                <Button x:Name="btnPreviousUnitPart" ToolTip="Previous" fa:FontAwesome.Icon="Solid_ArrowLeft" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnPreviousUnitPart_Click"/>
+                <Button x:Name="btnNextUnitPart" ToolTip="Next" fa:FontAwesome.Icon="Solid_ArrowRight" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnNextUnitPart_Click"/>
                 <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{Binding IfEmpty}" />
-                <Button x:Name="btnRetrieveNotes" Content="Retrieve Notes" Click="btnRetrieveNotes_Click"/>
+                <Button x:Name="btnGetNotes" Content="Get Notes" Click="btnGetNotes_Click"/>
                 <Button x:Name="btnClearNotes" Content="Clear Notes" Click="btnClearNotes_Click"/>
             </ToolBar>
             <ToolBar Band="2">
@@ -71,7 +72,7 @@
                                     <Setter Property="IsEnabled" Value="{Binding HasSelectedWordItem}" />
                                 </Style>
                             </ContextMenu.Resources>
-                            <MenuItem x:Name="miRetrieveNote" Header="Retrieve Note" Click="miRetrieveNote_Click" />
+                            <MenuItem x:Name="miGetNote" Header="Get Note" Click="miGetNote_Click" />
                             <MenuItem x:Name="miClearNote" Header="Clear Note" Click="miClearNote_Click" />
                             <Separator />
                             <MenuItem x:Name="miEditWord" Header="Edit" Click="miEditWord_Click" />

@@ -41,7 +41,7 @@ namespace LollyMaui
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MLangWord)((SwipeItem)sender).BindingContext;
-            var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Retrieve Note", "Clear Note", "Copy Word", "Google Word", "Online Dictionary");
+            var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Get Note", "Clear Note", "Copy Word", "Google Word", "Online Dictionary");
             switch (a)
             {
                 case "Delete":
@@ -49,8 +49,8 @@ namespace LollyMaui
                 case "Edit":
                     await Edit(item);
                     break;
-                case "Retrieve Note":
-                    await vm.RetrieveNote(item);
+                case "Get Note":
+                    await vm.GetNote(item);
                     break;
                 case "Clear Note":
                     await vm.ClearNote(item);

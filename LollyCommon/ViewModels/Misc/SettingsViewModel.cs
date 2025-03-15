@@ -521,7 +521,7 @@ namespace LollyCommon
         public async Task UpdateReadNumberId() => await UserSettingDS.Update(INFO_USREADNUMBER, USREADNUMBER);
 
         public static readonly string ZeroNote = "O";
-        public async Task<string> RetrieveNote(string word)
+        public async Task<string> GetNote(string word)
         {
             if (SelectedDictNote == null) return "";
             var url = SelectedDictNote.UrlString(word, AutoCorrects);
@@ -529,7 +529,7 @@ namespace LollyCommon
             return HtmlTransformService.ExtractTextFromHtml(html, SelectedDictNote.TRANSFORM, "", (text, _) => text);
         }
 
-        public async Task RetrieveNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
+        public async Task GetNotes(int wordCount, Func<int, bool> isNoteEmpty, Func<int, Task> getOne)
         {
             if (SelectedDictNote == null) return;
             for (int i = 0; ;)

@@ -63,9 +63,9 @@ namespace LollyCommon
             SelectedWordItem = WordItems.Last();
         }
 
-        public async Task RetrieveNote(MLangWord item)
+        public async Task GetNote(MLangWord item)
         {
-            var note = await vmSettings.RetrieveNote(item.WORD);
+            var note = await vmSettings.GetNote(item.WORD);
             item.NOTE = note;
             await langWordDS.UpdateNote(item.ID, item.NOTE);
         }

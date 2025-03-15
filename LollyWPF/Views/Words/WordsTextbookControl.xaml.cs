@@ -58,8 +58,8 @@ namespace LollyWPF
             await vm.Delete(SelectedWordItem);
             vm.Reload();
         }
-        async void miRetrieveNote_Click(object sender, RoutedEventArgs e) =>
-            await vm.RetrieveNote(SelectedWordItem);
+        async void miGetNote_Click(object sender, RoutedEventArgs e) =>
+            await vm.GetNote(SelectedWordItem);
         async void miClearNote_Click(object sender, RoutedEventArgs e) =>
             await vm.ClearNote(SelectedWordItem);
     }

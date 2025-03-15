@@ -42,7 +42,7 @@ namespace LollyMaui
         {
             // https://forums.xamarin.com/discussion/180866/how-to-set-swipeview-items-from-staticresource
             var item = (MUnitWord)((SwipeItem)sender).BindingContext;
-            var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Retrieve Note", "Clear Note", "Copy Word", "Google Word", "Online Dictionary");
+            var a = await DisplayActionSheet("More", "Cancel", null, "Delete", "Edit", "Get Note", "Clear Note", "Copy Word", "Google Word", "Online Dictionary");
             switch(a)
             {
                 case "Delete":
@@ -50,8 +50,8 @@ namespace LollyMaui
                 case "Edit":
                     await Edit(item);
                     break;
-                case "Retrieve Note":
-                    await vm.RetrieveNote(item);
+                case "Get Note":
+                    await vm.GetNote(item);
                     break;
                 case "Clear Note":
                     await vm.ClearNote(item);
@@ -81,19 +81,19 @@ namespace LollyMaui
 
         async void ToolbarItemMore_Clicked(object sender, EventArgs e)
         {
-            var a = await DisplayActionSheet("More", "Cancel", null, "Add", "Retrieve All Notes", "Retrieve Notes If Empty", "Clear All Notes", "Clear Notes If Empty", "Batch Edit");
+            var a = await DisplayActionSheet("More", "Cancel", null, "Add", "Get All Notes", "Get Notes If Empty", "Clear All Notes", "Clear Notes If Empty", "Batch Edit");
             switch (a)
             {
                 case "Add":
                     await Shell.Current.GoToModalAsync(nameof(WordsUnitDetailPage), new WordsUnitDetailViewModel(vm, vm.NewUnitWord(), 0));
                     break;
-                case "Retrieve All Notes":
+                case "Get All Notes":
                     vm.IfEmpty = false;
-                    await vm.RetrieveNotes(_ => { });
+                    await vm.GetNotes(_ => { });
                     break;
-                case "Retrieve Notes If Empty":
+                case "Get Notes If Empty":
                     vm.IfEmpty = true;
-                    await vm.RetrieveNotes(_ => { });
+                    await vm.GetNotes(_ => { });
                     break;
                 case "Clear All Notes":
                     vm.IfEmpty = false;
