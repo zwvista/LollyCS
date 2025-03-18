@@ -29,7 +29,6 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
                     var s3 = m.Groups[3].Value;
                     var s4 = "N" + s1 + delim + s2 + delim + s3;
                     lines2.Add(s4);
-                    continue;
                 }
             }
             File.WriteAllLines("b.txt", lines2);

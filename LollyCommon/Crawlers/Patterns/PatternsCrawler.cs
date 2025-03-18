@@ -21,7 +21,7 @@ namespace LollyCommon.Crawlers.Patterns
             {
                 var a = s.Split(new[] { delim }, StringSplitOptions.RemoveEmptyEntries);
                 var pt = f(a);
-                var pt2 = patterns.Find(o => o.URL == pt.URL);
+                var pt2 = patterns.Find(o => o.URL == pt.URL || o.PATTERN == pt.PATTERN);
                 if (pt2 != null)
                 {
                     pt.ID = pt2.ID;
