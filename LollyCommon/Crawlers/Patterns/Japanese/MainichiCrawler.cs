@@ -12,31 +12,23 @@ namespace LollyCommon.Crawlers.Patterns.Japanese
     {
         public override async Task Step1()
         {
-            var reg1 = new Regex(@"font-weight:800; padding-left:10px; padding-top:40px;"">(.+?)</p>");
-            var reg2 = new Regex(@"<a href=""(https://nihongonosensei.net/\?p=.+?)"">(.+?)</a>");
+            var start = "<h2>レベル順</h2>";
+            var reg1 = new Regex(@"<span class=""n(.)color"">【Ｎ.文法】</span>.+?<a href=""(.+?)"">(.+?)</a>");
             // 日本語の文法
-            var text = await client.GetStringAsync("https://nihongonosensei.net/?page_id=10246");
+            var text = await client.GetStringAsync("https://mainichi-nonbiri.com/japanese-grammar/");
+            text = text.Substring(text.IndexOf(start));
             var lines = text.Split('\n');
             var lines2 = new List<string>();
-            var ptext = "";
-            var dic = new Dictionary<string, string> { { "Ｎ", "N" }, { "文法", "" }, { "、", "" }, { "０", "0" }, { "１", "1" }, { "２", "2" }, { "３", "3" }, { "４", "4" }, { "５", "5" } };
             foreach (var s in lines)
             {
                 var m = reg1.Match(s);
                 if (m.Success)
                 {
-                    ptext = m.Groups[1].Value.Replace(dic);
-                    if (ptext == "敬語")
-                        break;
-                    continue;
-                }
-                m = reg2.Match(s);
-                if (m.Success)
-                {
                     var s1 = m.Groups[1].Value;
                     var s2 = m.Groups[2].Value;
-                    var s3 = ptext + delim + s1 + delim + s2;
-                    lines2.Add(s3);
+                    var s3 = m.Groups[3].Value;
+                    var s4 = "N" + s1 + delim + s2 + delim + s3;
+                    lines2.Add(s4);
                     continue;
                 }
             }
