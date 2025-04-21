@@ -65,11 +65,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="AathifMahir.Maui.MauiIcons.FontAwesome.Solid" Version="4.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
 		<PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-		<PackageReference Include="ReactiveUI.Maui" Version="20.1.63" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.50" />
+		<PackageReference Include="ReactiveUI.Maui" Version="20.2.45" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.60" />
     </ItemGroup>
 
 	<ItemGroup>
