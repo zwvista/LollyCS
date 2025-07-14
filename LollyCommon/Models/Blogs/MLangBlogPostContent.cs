@@ -9,7 +9,7 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class MLangBlogsContent
+    public class MLangBlogPostContents
     {
         [JsonProperty("records")]
         public List<MLangBlogPostContent> Records { get; set; } = null!;
