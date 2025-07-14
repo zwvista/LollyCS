@@ -31,6 +31,7 @@ namespace LollyCommon
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
         [Reactive]
         public string GroupFilter { get; set; } = "";
+        public bool NoGroupFilter => string.IsNullOrEmpty(GroupFilter);
         [Reactive]
         public string PostFilter { get; set; } = "";
         public bool NoPostFilter => string.IsNullOrEmpty(PostFilter);

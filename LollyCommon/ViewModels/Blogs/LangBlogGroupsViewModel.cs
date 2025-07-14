@@ -12,15 +12,16 @@ namespace LollyCommon
     {
         public LangBlogGroupsViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
+            this.WhenAnyValue(x => x.GroupFilter).Subscribe(_ => ApplyGroupFilter());
             this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
             this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
             {
                 var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v!.ID);
                 PostItemsAll = new ObservableCollection<MLangBlogPost>(lst);
-                ApplyFilters();
+                ApplyPostFilter();
                 this.RaisePropertyChanged(nameof(PostItems));
             });
-            this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyFilters());
+            this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyPostFilter());
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
@@ -31,10 +32,18 @@ namespace LollyCommon
         public void Reload() =>
             groupDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
-                GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
+                GroupItemsAll = new ObservableCollection<MLangBlogGroup>(lst);
+                ApplyGroupFilter();
                 this.RaisePropertyChanged(nameof(GroupItems));
             });
-        void ApplyFilters()
+        void ApplyGroupFilter()
+        {
+            GroupItems = NoGroupFilter ? GroupItemsAll : new ObservableCollection<MLangBlogGroup>(GroupItemsAll.Where(o =>
+                 o.GROUPNAME.ToLower().Contains(GroupFilter.ToLower()))
+            );
+            this.RaisePropertyChanged(nameof(GroupItems));
+        }
+        void ApplyPostFilter()
         {
             PostItems = NoPostFilter ? PostItemsAll : new ObservableCollection<MLangBlogPost>(PostItemsAll.Where(o =>
                  o.TITLE.ToLower().Contains(PostFilter.ToLower()))
