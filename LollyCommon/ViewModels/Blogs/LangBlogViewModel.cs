@@ -39,6 +39,12 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
+            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
+            this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
+            this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v =>
+            {
+                PostContent = (await contentDS.GetDataById(v!.ID))?.CONTENT ?? "";
+            });
         }
         public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);
         public async Task CreateGroup(MLangBlogGroup item) => item.ID = await groupDS.Create(item);

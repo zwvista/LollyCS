@@ -15,31 +15,36 @@ namespace LollyCommon
     {
         public LangBlogPostsViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
-            this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyFilters());
-            this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
+            this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyPostFilter());
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
             {
-                PostContent = (await contentDS.GetDataById(v.ID))?.CONTENT ?? "";
-                var lst = await groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, v.ID);
-                GroupItems = new ObservableCollection<MLangBlogGroup>(lst);
+                var lst = await groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, v!.ID);
+                GroupItemsAll = new ObservableCollection<MLangBlogGroup>(lst);
+                ApplyGroupFilter();
                 this.RaisePropertyChanged(nameof(GroupItems));
             });
-            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
             Reload();
         }
         public void Reload() =>
             postDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
             {
                 PostItemsAll = new ObservableCollection<MLangBlogPost>(lst);
-                ApplyFilters();
+                ApplyPostFilter();
                 this.RaisePropertyChanged(nameof(PostItems));
             });
-        void ApplyFilters()
+        void ApplyPostFilter()
         {
             PostItems = NoPostFilter ? PostItemsAll : new ObservableCollection<MLangBlogPost>(PostItemsAll.Where(o =>
                  o.TITLE.ToLower().Contains(PostFilter.ToLower()))
             );
             this.RaisePropertyChanged(nameof(PostItems));
+        }
+        void ApplyGroupFilter()
+        {
+            GroupItems = NoGroupFilter ? GroupItemsAll : new ObservableCollection<MLangBlogGroup>(GroupItemsAll.Where(o =>
+                 o.GROUPNAME.ToLower().Contains(GroupFilter.ToLower()))
+            );
+            this.RaisePropertyChanged(nameof(GroupItems));
         }
     }
 }

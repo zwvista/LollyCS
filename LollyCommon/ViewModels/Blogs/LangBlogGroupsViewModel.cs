@@ -13,7 +13,6 @@ namespace LollyCommon
         public LangBlogGroupsViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
             this.WhenAnyValue(x => x.GroupFilter).Subscribe(_ => ApplyGroupFilter());
-            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
             this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
             {
                 var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v!.ID);
@@ -22,11 +21,6 @@ namespace LollyCommon
                 this.RaisePropertyChanged(nameof(PostItems));
             });
             this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyPostFilter());
-            this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
-            this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
-            {
-                PostContent = (await contentDS.GetDataById(v!.ID))?.CONTENT ?? "";
-            });
             Reload();
         }
         public void Reload() =>
