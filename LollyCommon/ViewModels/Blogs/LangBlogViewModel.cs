@@ -38,8 +38,8 @@ namespace LollyCommon
         public bool NoPostFilter => string.IsNullOrEmpty(PostFilter);
         [Reactive]
         public bool IsBusy { get; set; } = true;
-        public ReactiveCommand<Unit, Unit> ReloadGroupCommand { get; set; }
-        public ReactiveCommand<Unit, Unit> ReloadPostCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> ReloadGroupsCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> ReloadPostsCommand { get; set; }
         public LangBlogViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();

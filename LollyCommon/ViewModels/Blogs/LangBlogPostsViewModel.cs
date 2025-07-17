@@ -16,22 +16,26 @@ namespace LollyCommon
         public LangBlogPostsViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
             this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyPostFilter());
-            this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v => 
+            this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe( v => ReloadGroups());
+            this.WhenAnyValue(x => x.GroupFilter).Subscribe(_ => ApplyGroupFilter());
+            ReloadPostsCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                var lst = await groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, v!.ID);
-                GroupItemsAll = new ObservableCollection<MLangBlogGroup>(lst);
-                ApplyGroupFilter();
-                this.RaisePropertyChanged(nameof(GroupItems));
-            });
-            Reload();
-        }
-        public void Reload() =>
-            postDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
-            {
-                PostItemsAll = new ObservableCollection<MLangBlogPost>(lst);
+                IsBusy = true;
+                PostItemsAll = new ObservableCollection<MLangBlogPost>(await postDS.GetDataByLang(vmSettings.SelectedLang.ID));
                 ApplyPostFilter();
-                this.RaisePropertyChanged(nameof(PostItems));
+                IsBusy = false;
             });
+            ReloadGroupsCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                IsBusy = true;
+                GroupItemsAll = new ObservableCollection<MLangBlogGroup>(await groupDS.GetDataByLangPost(vmSettings.SelectedLang.ID, SelectedPostItem!.ID));
+                ApplyGroupFilter();
+                IsBusy = false;
+            });
+            ReloadPosts();
+        }
+        public void ReloadPosts() => ReloadPostsCommand.Execute().Subscribe();
+        public void ReloadGroups() => ReloadGroupsCommand.Execute().Subscribe();
         void ApplyPostFilter()
         {
             PostItems = NoPostFilter ? PostItemsAll : new ObservableCollection<MLangBlogPost>(PostItemsAll.Where(o =>

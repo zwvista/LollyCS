@@ -8,19 +8,24 @@ using LollyCommon;
 
 namespace LollyMaui
 {
-    public partial class LangBlogPostsListPage : ContentPage
+    public partial class LangBlogPostsListPage : ContentPage, IPageNavigate
     {
-        LangBlogPostsViewModel vm;
+        LangBlogGroupsViewModel vm = null!;
 
         public LangBlogPostsListPage()
         {
             InitializeComponent();
-            BindingContext = vm = new LangBlogPostsViewModel(AppShell.vmSettings, false);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+        }
+
+        public void OnPageNavigated(object navigationData)
+        {
+            vm = (LangBlogGroupsViewModel)navigationData;
+            BindingContext = vm;
         }
 
         async Task Edit(MLangBlogPost item) =>

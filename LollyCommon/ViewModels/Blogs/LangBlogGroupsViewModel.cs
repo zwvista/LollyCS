@@ -13,23 +13,26 @@ namespace LollyCommon
         public LangBlogGroupsViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
         {
             this.WhenAnyValue(x => x.GroupFilter).Subscribe(_ => ApplyGroupFilter());
-            this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(async v => 
-            {
-                var lst = await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, v!.ID);
-                PostItemsAll = new ObservableCollection<MLangBlogPost>(lst);
-                ApplyPostFilter();
-                this.RaisePropertyChanged(nameof(PostItems));
-            });
+            this.WhenAnyValue(x => x.SelectedGroupItem).Where(v => v != null).Subscribe(v => ReloadPosts());
             this.WhenAnyValue(x => x.PostFilter).Subscribe(_ => ApplyPostFilter());
-            Reload();
-        }
-        public void Reload() =>
-            groupDS.GetDataByLang(vmSettings.SelectedLang.ID).ToObservable().Subscribe(lst =>
+            ReloadGroupsCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                GroupItemsAll = new ObservableCollection<MLangBlogGroup>(lst);
+                IsBusy = true;
+                GroupItemsAll = new ObservableCollection<MLangBlogGroup>(await groupDS.GetDataByLang(vmSettings.SelectedLang.ID));
                 ApplyGroupFilter();
-                this.RaisePropertyChanged(nameof(GroupItems));
+                IsBusy = false;
             });
+            ReloadPostsCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                IsBusy = true;
+                PostItemsAll = new ObservableCollection<MLangBlogPost>(await postDS.GetDataByLangGroup(vmSettings.SelectedLang.ID, SelectedGroupItem!.ID));
+                ApplyPostFilter();
+                IsBusy = false;
+            });
+            ReloadGroups();
+        }
+        public void ReloadGroups() => ReloadGroupsCommand.Execute().Subscribe();
+        public void ReloadPosts() => ReloadPostsCommand.Execute().Subscribe();
         void ApplyGroupFilter()
         {
             GroupItems = NoGroupFilter ? GroupItemsAll : new ObservableCollection<MLangBlogGroup>(GroupItemsAll.Where(o =>

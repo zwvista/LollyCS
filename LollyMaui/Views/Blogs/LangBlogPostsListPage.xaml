@@ -11,7 +11,7 @@
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
         <SearchBar Placeholder="Filter" Text="{Binding PostFilter}" />
-        <RefreshView Grid.Row="1" x:DataType="common:LangBlogGroupsViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
+        <RefreshView Grid.Row="1" x:DataType="common:LangBlogGroupsViewModel" Command="{Binding ReloadPostsCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding PostItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
