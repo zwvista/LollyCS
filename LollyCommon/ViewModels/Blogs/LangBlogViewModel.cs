@@ -3,6 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Text;
@@ -35,6 +36,10 @@ namespace LollyCommon
         [Reactive]
         public string PostFilter { get; set; } = "";
         public bool NoPostFilter => string.IsNullOrEmpty(PostFilter);
+        [Reactive]
+        public bool IsBusy { get; set; } = true;
+        public ReactiveCommand<Unit, Unit> ReloadGroupCommand { get; set; }
+        public ReactiveCommand<Unit, Unit> ReloadPostCommand { get; set; }
         public LangBlogViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();

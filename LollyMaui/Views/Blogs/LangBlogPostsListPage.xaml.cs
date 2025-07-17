@@ -28,6 +28,7 @@ namespace LollyMaui
 
         async Task ShowContent(MLangBlogPost item)
         {
+            vm.SelectedPostItem = item;
             var index = vm.PostItems.IndexOf(item);
             var (start, end) = CommonApi.GetPreferredRangeFromArray(index, vm.PostItems.Count, 50);
             var items = vm.PostItems.ToList().Slice(start, end);
@@ -49,7 +50,7 @@ namespace LollyMaui
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MLangBlogPost)((SwipeItem)sender).BindingContext;
-            var a = await DisplayActionSheet("More", "Cancel", null, "Edit", "Browse Web Page");
+            var a = await DisplayActionSheet("More", "Cancel", null, "Edit", "Show Content");
             switch (a)
             {
                 case "Edit":

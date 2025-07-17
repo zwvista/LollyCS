@@ -47,7 +47,7 @@ namespace LollyMaui
         async void OnMoreSwipeItemInvoked(object sender, EventArgs e)
         {
             var item = (MLangBlogGroup)((SwipeItem)sender).BindingContext;
-            var a = await DisplayActionSheet("More", "Cancel", null, "Edit", "Browse Web Page");
+            var a = await DisplayActionSheet("More", "Cancel", null, "Edit", "Show Posts");
             switch (a)
             {
                 case "Edit":

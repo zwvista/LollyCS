@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LollyMaui.LangBlogPostsContentPage"
-             Title="Online Textbooks (Web Page)"
+             Title="Language Blog Posts(Content)"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             x:DataType="common:OnlineTextbooksWebPageViewModel">
+             x:DataType="common:LangBlogPostsContentViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding OnlineTextbooks}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding SelectedOnlineTextbookIndex,Mode=TwoWay}" />
-        <WebView Grid.Row="1" x:Name="wbWebPage" Source="{Binding URL}">
+        <Picker ItemsSource="{Binding OnlineTextbooks}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding SelectedLangBlogPostIndex,Mode=TwoWay}" />
+        <WebView Grid.Row="1" x:Name="wbPost" Source="{Binding Html}">
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>
                 <SwipeGestureRecognizer Direction="Right" Swiped="WebView_SwipedRight"/>
