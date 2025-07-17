@@ -89,6 +89,7 @@ namespace LollyWPF
             else
                 miEditPost_Click(sender, null);
         }
-        public void btnRefresh_Click(object sender, RoutedEventArgs e) => vm.Reload();
+        public void btnRefreshGroups_Click(object sender, RoutedEventArgs e) => vm.ReloadGroups();
+        public void btnRefreshPosts_Click(object sender, RoutedEventArgs e) => vm.ReloadPosts();
     }
 }
