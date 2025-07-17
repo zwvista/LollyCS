@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.LangBlogGroupsPage"
+             Title="Language Blog Groups"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             x:DataType="common:LangBlogGroupsViewModel">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <Grid Padding="10" RowDefinitions="Auto,*">
+        <SearchBar Placeholder="Filter" Text="{Binding GroupFilter}" />
+        <RefreshView Grid.Row="1" x:DataType="common:LangBlogGroupsViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding GroupItems}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Edit"
+                                               BackgroundColor="LightBlue"
+                                               Invoked="OnEditSwipeItemInvoked" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="More"
+                                               BackgroundColor="LightGreen"
+                                               Invoked="OnMoreSwipeItemInvoked" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10" x:DataType="common:MLangBlogGroup" ColumnDefinitions="*,Auto">
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding GROUPNAME}" Style="{StaticResource Key=Text2}" />
+                                </StackLayout>
+                                <ImageButton Grid.Column="1" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
+                                             WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

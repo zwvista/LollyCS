@@ -111,6 +111,9 @@
     <FlyoutItem Title="Unit Blog Posts" Icon="{icons:FontAwesomeSolid Icon=Bicycle,IconColor=Red}">
         <ShellContent Route="UnitBlogPostsPage" ContentTemplate="{DataTemplate local:UnitBlogPostsPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Language Blog Groups" Icon="{icons:FontAwesomeSolid Icon=Bicycle,IconColor=Red}">
+        <ShellContent Route="LangBlogGroupsPage" ContentTemplate="{DataTemplate local:LangBlogGroupsPage}" />
+    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

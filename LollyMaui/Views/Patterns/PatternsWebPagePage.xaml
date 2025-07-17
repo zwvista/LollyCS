@@ -9,7 +9,7 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding Patterns}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding CurrentPatternIndex,Mode=TwoWay}" />
+        <Picker ItemsSource="{Binding Patterns}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding SelectedPatternIndex,Mode=TwoWay}" />
         <WebView Grid.Row="1" x:Name="wbWebPage" Source="{Binding URL}">
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>

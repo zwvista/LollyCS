@@ -10,18 +10,18 @@ namespace LollyCommon
     {
         public List<MPattern> Patterns { get; }
         [Reactive]
-        public int CurrentPatternIndex { get; set; }
+        public int SelectedPatternIndex { get; set; }
         public string URL { [ObservableAsProperty] get; }
 
         public PatternsWebPageViewModel(List<MPattern> patterns, int index)
         {
             Patterns = patterns;
-            CurrentPatternIndex = index;
-            this.WhenAnyValue(x => x.CurrentPatternIndex, (int v) => Patterns[v].URL)
+            SelectedPatternIndex = index;
+            this.WhenAnyValue(x => x.SelectedPatternIndex, (int v) => Patterns[v].URL)
                 .ToPropertyEx(this, x => x.URL);
         }
 
         public void Next(int delta) =>
-            CurrentPatternIndex = (CurrentPatternIndex + delta + Patterns.Count) % Patterns.Count;
+            SelectedPatternIndex = (SelectedPatternIndex + delta + Patterns.Count) % Patterns.Count;
     }
 }

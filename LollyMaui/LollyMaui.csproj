@@ -99,6 +99,22 @@
 	    <DependentUpon>UnitBlogPostsPage.xaml</DependentUpon>
 	    <SubType>Code</SubType>
 	  </Compile>
+	  <Compile Update="Views\Blogs\LangBlogGroupsPage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\Blogs\LangBlogPostsDetailPage.xaml.cs">
+	    <DependentUpon>LangBlogPostsDetailPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\Blogs\LangBlogPostsListPage.xaml.cs">
+	    <DependentUpon>LangBlogPostsListPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\Blogs\LangBlogPostsContentPage.xaml.cs">
+	    <DependentUpon>OnlineTextbooksWebPagePage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -113,6 +129,24 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Blogs\UnitBlogPostsPage.xaml">
 	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Blogs\LangBlogGroupsPage.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Blogs\LangBlogGroupsDetailPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Blogs\LangBlogPostsDetailPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Blogs\LangBlogPostsListPage.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Blogs\LangBlogPostsContentPage.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 

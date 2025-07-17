@@ -12,12 +12,12 @@ namespace LollyCommon
         public SettingsViewModel vmSettings { get; }
         public List<string> Words { get; }
         [Reactive]
-        public int CurrentWordIndex { get; set; }
+        public int SelectedWordIndex { get; set; }
         public WordsDictViewModel(SettingsViewModel vmSettings, List<string> words, int index)
         {
             this.vmSettings = vmSettings;
             Words = words;
-            CurrentWordIndex = index;
+            SelectedWordIndex = index;
         }
 
         public void SetOnlineDict(IOnlineDict dict)
@@ -28,14 +28,14 @@ namespace LollyCommon
                 vmDict.Dict = v;
                 await vmDict.SearchDict();
             });
-            this.WhenAnyValue(x => x.CurrentWordIndex).Subscribe(async v =>
+            this.WhenAnyValue(x => x.SelectedWordIndex).Subscribe(async v =>
             {
-                vmDict.Word = Words[CurrentWordIndex];
+                vmDict.Word = Words[SelectedWordIndex];
                 await vmDict.SearchDict();
             });
         }
 
         public void Next(int delta) =>
-            CurrentWordIndex = (CurrentWordIndex + delta + Words.Count) % Words.Count;
+            SelectedWordIndex = (SelectedWordIndex + delta + Words.Count) % Words.Count;
     }
 }

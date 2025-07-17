@@ -10,18 +10,18 @@ namespace LollyCommon
     {
         public List<MOnlineTextbook> OnlineTextbooks { get; }
         [Reactive]
-        public int CurrentOnlineTextbookIndex { get; set; }
+        public int SelectedOnlineTextbookIndex { get; set; }
         public string URL { [ObservableAsProperty] get; }
 
         public OnlineTextbooksWebPageViewModel(List<MOnlineTextbook> onlineTextbooks, int index)
         {
             OnlineTextbooks = onlineTextbooks;
-            CurrentOnlineTextbookIndex = index;
-            this.WhenAnyValue(x => x.CurrentOnlineTextbookIndex, (int v) => OnlineTextbooks[v].URL)
+            SelectedOnlineTextbookIndex = index;
+            this.WhenAnyValue(x => x.SelectedOnlineTextbookIndex, (int v) => OnlineTextbooks[v].URL)
                 .ToPropertyEx(this, x => x.URL);
         }
 
         public void Next(int delta) =>
-            CurrentOnlineTextbookIndex = (CurrentOnlineTextbookIndex + delta + OnlineTextbooks.Count) % OnlineTextbooks.Count;
+            SelectedOnlineTextbookIndex = (SelectedOnlineTextbookIndex + delta + OnlineTextbooks.Count) % OnlineTextbooks.Count;
     }
 }

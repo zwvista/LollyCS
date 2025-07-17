@@ -11,7 +11,7 @@ namespace LollyCommon
         public SettingsViewModel vmSettings { get; set; }
         public List<MSelectItem> Units => vmSettings.Units;
         [Reactive]
-        public int CurrentUnitIndex { get; set; }
+        public int SelectedUnitIndex { get; set; }
 
         [Reactive]
         public string Html { get; set; }
@@ -20,8 +20,8 @@ namespace LollyCommon
         public UnitBlogPostViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            CurrentUnitIndex = Units.FindIndex(o => o.Value == vmSettings.USUNITTO);
-            this.WhenAnyValue(x => x.CurrentUnitIndex).Subscribe(async (int v) =>
+            SelectedUnitIndex = Units.FindIndex(o => o.Value == vmSettings.USUNITTO);
+            this.WhenAnyValue(x => x.SelectedUnitIndex).Subscribe(async (int v) =>
             {
                 var content = await vmSettings.GetBlogContent(Units[v].Value);
                 Html = _editService.MarkedToHtml(content, "\n");
@@ -29,6 +29,6 @@ namespace LollyCommon
         }
 
         public void Next(int delta) =>
-            CurrentUnitIndex = (CurrentUnitIndex + delta + Units.Count) % Units.Count;
+            SelectedUnitIndex = (SelectedUnitIndex + delta + Units.Count) % Units.Count;
     }
 }

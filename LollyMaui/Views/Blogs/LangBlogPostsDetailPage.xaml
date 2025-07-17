@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LollyMaui.LangBlogPostsDetailPage"
+             Title="Language Blog Groups(Detail)"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             x:DataType="common:MLangBlogPost">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Close" Clicked="OnCancel" Priority="0" Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="ID:" />
+            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Label Text="TITLE:" />
+            <Entry Text="{Binding TITLE}" IsReadOnly="True" />
+            <Label Text="URL:" />
+            <Entry Text="{Binding URL}" IsReadOnly="True" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

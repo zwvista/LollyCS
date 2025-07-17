@@ -9,7 +9,7 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedIndex="{Binding CurrentUnitIndex,Mode=TwoWay}" />
+        <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedIndex="{Binding SelectedUnitIndex,Mode=TwoWay}" />
         <WebView Grid.Row="1" x:Name="wbPost">
             <WebView.Source>
                 <HtmlWebViewSource Html="{Binding Html}" />
