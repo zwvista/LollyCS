@@ -8,7 +8,6 @@ namespace LollyCommon
 {
     public class LangBlogPostsContentViewModel : ReactiveObject
     {
-        [Reactive]
         public LangBlogGroupsViewModel vmGroups { get; set; }
         public List<MLangBlogPost> PostItems { get; }
         [Reactive]
