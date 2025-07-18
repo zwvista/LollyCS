@@ -8,17 +8,22 @@ namespace LollyCommon
 {
     public class LangBlogPostsContentViewModel : ReactiveObject
     {
-        public List<MLangBlogPost> LangBlogPostContents { get; }
         [Reactive]
-        public int SelectedLangBlogPostIndex { get; set; }
+        public LangBlogGroupsViewModel vmGroups { get; set; }
+        public List<MLangBlogPost> PostItems { get; }
+        [Reactive]
+        public int SelectedPostIndex { get; set; }
 
-        public LangBlogPostsContentViewModel(List<MLangBlogPost> langBlogPosts, int index)
+        public LangBlogPostsContentViewModel(LangBlogGroupsViewModel vmGroups, List<MLangBlogPost> postItems, int index)
         {
-            LangBlogPostContents = langBlogPosts;
-            SelectedLangBlogPostIndex = index;
+            this.vmGroups = vmGroups;
+            PostItems = postItems;
+            SelectedPostIndex = index;
+            this.WhenAnyValue(x => x.SelectedPostIndex)
+                .Subscribe(v => vmGroups.SelectedPostItem = PostItems[v]);
         }
 
         public void Next(int delta) =>
-            SelectedLangBlogPostIndex = (SelectedLangBlogPostIndex + delta + LangBlogPostContents.Count) % LangBlogPostContents.Count;
+            SelectedPostIndex = (SelectedPostIndex + delta + PostItems.Count) % PostItems.Count;
     }
 }

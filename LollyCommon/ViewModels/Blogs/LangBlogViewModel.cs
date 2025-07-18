@@ -17,11 +17,12 @@ namespace LollyCommon
         protected LangBlogPostDataStore postDS = new();
         protected LangBlogPostContentDataStore contentDS = new();
         protected LangBlogGroupDataStore groupDS = new();
+        protected BlogPostEditService _editService = new();
         [Reactive]
         public MLangBlogPost? SelectedPostItem { get; set; }
         public bool HasSelectedPostItem { [ObservableAsProperty] get; }
         [Reactive]
-        public string PostContent { get; set; } = "";
+        public string PostHtml { get; set; } = "";
         [Reactive]
         public MLangBlogGroup? SelectedGroupItem { get; set; }
         public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
@@ -48,7 +49,8 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v =>
             {
-                PostContent = (await contentDS.GetDataById(v!.ID))?.CONTENT ?? "";
+                var str = (await contentDS.GetDataById(v!.ID))?.CONTENT ?? "";
+                PostHtml = _editService.MarkedToHtml(str, "\n");
             });
         }
         public async Task UpdateGroup(MLangBlogGroup item) => await groupDS.Update(item);

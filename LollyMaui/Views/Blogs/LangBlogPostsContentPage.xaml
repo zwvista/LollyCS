@@ -9,8 +9,8 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding OnlineTextbooks}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding SelectedLangBlogPostIndex,Mode=TwoWay}" />
-        <WebView Grid.Row="1" x:Name="wbPost" Source="{Binding Html}">
+        <Picker ItemsSource="{Binding PostItems}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding SelectedPostIndex,Mode=TwoWay}" />
+        <WebView Grid.Row="1" x:Name="wbPost" Source="{Binding vmGroups.PostHtml}">
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>
                 <SwipeGestureRecognizer Direction="Right" Swiped="WebView_SwipedRight"/>

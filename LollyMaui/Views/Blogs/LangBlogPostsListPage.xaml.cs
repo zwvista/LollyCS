@@ -37,7 +37,7 @@ namespace LollyMaui
             var index = vm.PostItems.IndexOf(item);
             var (start, end) = CommonApi.GetPreferredRangeFromArray(index, vm.PostItems.Count, 50);
             var items = vm.PostItems.ToList().Slice(start, end);
-            // await Shell.Current.GoToAsync(nameof(LangBlogPostsContentPage), new LangBlogPostsContentViewModel(items, index));
+            await Shell.Current.GoToAsync(nameof(LangBlogPostsContentPage), new LangBlogPostsContentViewModel(vm, items, index));
         }
 
         async void OnItemTapped(object sender, EventArgs e)
