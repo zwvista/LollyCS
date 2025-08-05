@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.ObjectModel;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {

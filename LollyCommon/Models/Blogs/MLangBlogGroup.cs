@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,29 +15,29 @@ namespace LollyCommon
         public List<MLangBlogGroup> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangBlogGroup : ReactiveObject
+    public partial class MLangBlogGroup : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty("NAME")]
         [Reactive]
-        public string GROUPNAME { get; set; } = "";
+        public partial string GROUPNAME { get; set; } = "";
         [JsonIgnore]
         [Reactive]
-        public int GPID { get; set; }
+        public partial int GPID { get; set; }
     }
-    public class MLangBlogGroupEdit : ReactiveValidationObject
+    public partial class MLangBlogGroupEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [Reactive]
-        public string GROUPNAME { get; set; }
+        public partial string GROUPNAME { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangBlogGroupEdit()
         {

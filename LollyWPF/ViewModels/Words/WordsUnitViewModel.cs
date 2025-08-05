@@ -2,7 +2,7 @@
 using GongSolutions.Wpf.DragDrop.Utilities;
 using LollyCommon;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections;
 using System.Collections.Generic;

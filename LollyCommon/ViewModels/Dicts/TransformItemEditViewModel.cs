@@ -2,7 +2,7 @@
 
 namespace LollyCommon
 {
-    public class TransformItemEditViewModel : ReactiveObject
+    public partial class TransformItemEditViewModel : ReactiveObject
     {
         MTransformItem item;
         public MTransformItemEdit ItemEdit = new();

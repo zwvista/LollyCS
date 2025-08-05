@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Reactive.Linq;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
-    public class SearchViewModel : ReactiveObject
+    public partial class SearchViewModel : ReactiveObject
     {
         public OnlineDictViewModel vmDict { get; set; }
         public SettingsViewModel vmSettings { get; set; }

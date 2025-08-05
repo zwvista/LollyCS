@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class DictsViewModel : ReactiveObject
+    public partial class DictsViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         DictionaryDataStore dictDS = new DictionaryDataStore();

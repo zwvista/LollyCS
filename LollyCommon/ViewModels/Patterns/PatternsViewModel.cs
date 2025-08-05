@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,25 +8,26 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class PatternsViewModel : ReactiveObject
+    public partial class PatternsViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
         ObservableCollection<MPattern> PatternItemsAll { get; set; } = [];
         public ObservableCollection<MPattern> PatternItems { get; set; } = [];
         [Reactive]
-        public string TextFilter { get; set; } = "";
+        public partial string TextFilter { get; set; } = "";
         [Reactive]
-        public string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
+        public partial string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
         bool NoFilter => string.IsNullOrEmpty(TextFilter);
         public string StatusText => $"{PatternItems.Count} Patterns in {vmSettings.LANGINFO}";
         [Reactive]
-        public MPattern SelectedPatternItem { get; set; }
-        public bool HasSelectedPatternItem { [ObservableAsProperty] get; }
+        public partial MPattern SelectedPatternItem { get; set; }
+        [ObservableAsProperty]
+        public partial bool HasSelectedPatternItem { get; }
         public string SelectedPattern => SelectedPatternItem?.PATTERN ?? "";
         public int SelectedPatternID => SelectedPatternItem?.PATTERNID ?? 0;
         [Reactive]
-        public bool IsBusy { get; set; } = true;
+        public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
         public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
@@ -34,7 +35,7 @@ namespace LollyCommon
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToPropertyEx(this, x => x.HasSelectedPatternItem);
+            this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToProperty(this, x => x.HasSelectedPatternItem);
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System;
@@ -16,49 +16,49 @@ namespace LollyCommon
         public List<MUnitWord> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MUnitWord : ReactiveObject, MWordInterface
+    public partial class MUnitWord : ReactiveObject, MWordInterface
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int TEXTBOOKID { get; set; }
+        public partial int TEXTBOOKID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TEXTBOOKNAME { get; set; }
+        public partial string TEXTBOOKNAME { get; set; }
         [JsonProperty]
         [Reactive]
-        public int UNIT { get; set; }
+        public partial int UNIT { get; set; }
         [JsonProperty]
         [Reactive]
-        public int PART { get; set; }
+        public partial int PART { get; set; }
         [JsonProperty]
         [Reactive]
-        public int SEQNUM { get; set; }
+        public partial int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
-        public int WORDID { get; set; }
+        public partial int WORDID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string WORD { get; set; } = "";
+        public partial string WORD { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string NOTE { get; set; } = "";
+        public partial string NOTE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int FAMIID { get; set; }
+        public partial int FAMIID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int CORRECT { get; set; }
+        public partial int CORRECT { get; set; }
         [JsonProperty]
         [Reactive]
-        public int TOTAL { get; set; }
+        public partial int TOTAL { get; set; }
         [Reactive]
-        public bool IsChecked { get; set; }
+        public partial bool IsChecked { get; set; }
 
         public MTextbook Textbook { get; set; }
 
@@ -70,31 +70,31 @@ namespace LollyCommon
         {
         }
     }
-    public class MUnitWordEdit : ReactiveValidationObject
+    public partial class MUnitWordEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public string TEXTBOOKNAME { get; set; }
+        public partial string TEXTBOOKNAME { get; set; }
         [Reactive]
-        public int UNIT { get; set; }
+        public partial int UNIT { get; set; }
         [Reactive]
-        public int PART { get; set; }
+        public partial int PART { get; set; }
         [Reactive]
-        public int SEQNUM { get; set; }
+        public partial int SEQNUM { get; set; }
         [Reactive]
-        public int WORDID { get; set; }
+        public partial int WORDID { get; set; }
         [Reactive]
-        public string WORD { get; set; } = "";
+        public partial string WORD { get; set; } = "";
         [Reactive]
-        public string NOTE { get; set; }
+        public partial string NOTE { get; set; }
         [Reactive]
-        public int FAMIID { get; set; }
+        public partial int FAMIID { get; set; }
         public MTextbook Textbook { get; set; }
         [Reactive]
-        public string ACCURACY { get; set; }
+        public partial string ACCURACY { get; set; }
         [Reactive]
-        public string WORDS { get; set; } = "";
+        public partial string WORDS { get; set; } = "";
         public MSelectItem UNITItem
         {
             get => Textbook.Units.SingleOrDefault(o => o.Value == UNIT);

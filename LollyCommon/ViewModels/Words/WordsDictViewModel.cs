@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
-    public class WordsDictViewModel : ReactiveObject
+    public partial class WordsDictViewModel : ReactiveObject
     {
         public OnlineDictViewModel vmDict { get; set; } = null!;
         public SettingsViewModel vmSettings { get; }
         public List<string> Words { get; }
         [Reactive]
-        public int SelectedWordIndex { get; set; }
+        public partial int SelectedWordIndex { get; set; }
         public WordsDictViewModel(SettingsViewModel vmSettings, List<string> words, int index)
         {
             this.vmSettings = vmSettings;

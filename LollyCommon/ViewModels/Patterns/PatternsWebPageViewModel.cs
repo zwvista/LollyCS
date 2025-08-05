@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
-    public class PatternsWebPageViewModel : ReactiveObject
+    public partial class PatternsWebPageViewModel : ReactiveObject
     {
         public List<MPattern> Patterns { get; }
         [Reactive]
-        public int SelectedPatternIndex { get; set; }
-        public string URL { [ObservableAsProperty] get; }
+        public partial int SelectedPatternIndex { get; set; }
+        [ObservableAsProperty]
+        public partial string URL { get; }
 
         public PatternsWebPageViewModel(List<MPattern> patterns, int index)
         {
             Patterns = patterns;
             SelectedPatternIndex = index;
             this.WhenAnyValue(x => x.SelectedPatternIndex, (int v) => Patterns[v].URL)
-                .ToPropertyEx(this, x => x.URL);
+                .ToProperty(this, x => x.URL);
         }
 
         public void Next(int delta) =>

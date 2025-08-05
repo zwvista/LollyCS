@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace LollyCommon
 {
-    public class WordsUnitBatchAddViewModel : ReactiveObject
+    public partial class WordsUnitBatchAddViewModel : ReactiveObject
     {
         public MUnitWordEdit ItemEdit = new();
         public WordsUnitBatchAddViewModel(WordsUnitViewModel vm)

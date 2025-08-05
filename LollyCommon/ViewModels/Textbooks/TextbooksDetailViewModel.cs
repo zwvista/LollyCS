@@ -3,7 +3,7 @@ using System.Reactive;
 
 namespace LollyCommon
 {
-    public class TextbooksDetailViewModel : ReactiveObject
+    public partial class TextbooksDetailViewModel : ReactiveObject
     {
         MTextbook item;
         TextbooksViewModel vm;

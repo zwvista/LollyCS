@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,17 +15,17 @@ namespace LollyCommon
         public List<MLangBlogGP> Records { get; set; } = null!;
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangBlogGP : ReactiveObject
+    public partial class MLangBlogGP : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int GROUPID { get; set; }
+        public partial int GROUPID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int POSTID { get; set; }
+        public partial int POSTID { get; set; }
         [JsonProperty]
         public string GROUPNAME { get; set; } = "";
         [JsonProperty]

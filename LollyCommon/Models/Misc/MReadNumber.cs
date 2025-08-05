@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -9,13 +9,13 @@ namespace LollyCommon
         KoreanNative,
         KoreanSino,
     }
-    public class MReadNumber : ReactiveObject
+    public partial class MReadNumber : ReactiveObject
     {
         [Reactive]
-        public int Number { get; set; }
+        public partial int Number { get; set; }
         [Reactive]
-        public string Text { get; set; }
+        public partial string Text { get; set; }
         [Reactive]
-        public ReadNumberType Type { get; set; }
+        public partial ReadNumberType Type { get; set; }
     }
 }

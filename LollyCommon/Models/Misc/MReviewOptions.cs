@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Linq;
 using System.Reactive.Linq;
@@ -10,26 +10,26 @@ namespace LollyCommon
     {
         ReviewAuto, ReviewManual, Test, Textbook
     }
-    public class MReviewOptions : ReactiveObject
+    public partial class MReviewOptions : ReactiveObject
     {
         [Reactive]
-        public ReviewMode Mode { get; set; } = ReviewMode.ReviewAuto;
+        public partial ReviewMode Mode { get; set; } = ReviewMode.ReviewAuto;
         [Reactive]
-        public bool Shuffled { get; set; } = true;
+        public partial bool Shuffled { get; set; } = true;
         [Reactive]
-        public int Interval { get; set; } = 5;
+        public partial int Interval { get; set; } = 5;
         [Reactive]
-        public int GroupSelected { get; set; } = 1;
+        public partial int GroupSelected { get; set; } = 1;
         [Reactive]
-        public int GroupCount { get; set; } = 1;
+        public partial int GroupCount { get; set; } = 1;
         [Reactive]
-        public bool SpeakingEnabled { get; set; } = true;
+        public partial bool SpeakingEnabled { get; set; } = true;
         [Reactive]
-        public int ReviewCount { get; set; } = 10;
+        public partial int ReviewCount { get; set; } = 10;
         [Reactive]
-        public bool OnRepeat { get; set; } = true;
+        public partial bool OnRepeat { get; set; } = true;
         [Reactive]
-        public bool MoveForward { get; set; } = true;
+        public partial bool MoveForward { get; set; } = true;
         public MSelectItem ModeItem
         {
             get => SettingsViewModel.ReviewModes.SingleOrDefault(o => o.Value == (int)Mode);

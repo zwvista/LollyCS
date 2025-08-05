@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,15 +10,15 @@ using System.Reactive.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class LangBlogSelectGroupsViewModel : ReactiveObject
+    public partial class LangBlogSelectGroupsViewModel : ReactiveObject
     {
         LangBlogGroupDataStore groupDS = new();
         LangBlogGPDataStore gpDS = new();
         public MLangBlogPost Item { get; }
         [Reactive]
-        public ObservableCollection<MLangBlogGroup> GroupsAvailable { get; set; }
+        public partial ObservableCollection<MLangBlogGroup> GroupsAvailable { get; set; }
         [Reactive]
-        public ObservableCollection<MLangBlogGroup> GroupsSelected { get; set; }
+        public partial ObservableCollection<MLangBlogGroup> GroupsSelected { get; set; }
         List<MLangBlogGroup> GroupsSelectedOriginal;
         public ReactiveCommand<Unit, Unit> Save { get; }
         public LangBlogSelectGroupsViewModel(MLangBlogPost item)

@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class TextbooksViewModel : ReactiveObject
+    public partial class TextbooksViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         TextbookDataStore textbookDS = new();
         [Reactive]
-        public MTextbook SelectedTextbookItem { get; set; }
-        public bool HasSelectedTextbookItem { [ObservableAsProperty] get; }
+        public partial MTextbook SelectedTextbookItem { get; set; }
+        [ObservableAsProperty]
+        public partial bool HasSelectedTextbookItem { get; }
 
         public ObservableCollection<MTextbook> Items { get; set; } = new ObservableCollection<MTextbook>();
         public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
@@ -24,7 +25,7 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             this.WhenAnyValue(x => x.Items).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            this.WhenAnyValue(x => x.SelectedTextbookItem, (MTextbook v) => v != null).ToPropertyEx(this, x => x.HasSelectedTextbookItem);
+            this.WhenAnyValue(x => x.SelectedTextbookItem, (MTextbook v) => v != null).ToProperty(this, x => x.HasSelectedTextbookItem);
             Reload();
         }
         public void Reload() =>

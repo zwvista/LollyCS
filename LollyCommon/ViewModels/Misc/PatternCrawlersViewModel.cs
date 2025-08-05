@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System;
@@ -11,16 +11,16 @@ using System.Reflection;
 
 namespace LollyCommon
 {
-    public class PatternCrawlersViewModel : ReactiveValidationObject
+    public partial class PatternCrawlersViewModel : ReactiveValidationObject
     {
         [Reactive]
-        public string SelectedLang { get; set; } = null!;
+        public partial string SelectedLang { get; set; } = null!;
         [Reactive]
-        public string SelectedCrawler { get; set; } = null!;
+        public partial string SelectedCrawler { get; set; } = null!;
         [Reactive]
-        public List<string> Crawlers { get; set; } = null!;
+        public partial List<string> Crawlers { get; set; } = null!;
         [Reactive]
-        public string SelectedStep { get; set; } = null!;
+        public partial string SelectedStep { get; set; } = null!;
         public ReactiveCommand<Unit, Unit> ExecuteCommand { get; }
 
         public PatternCrawlersViewModel()

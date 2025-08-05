@@ -1,28 +1,28 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 
 namespace LollyCommon
 {
-    public class PhrasesUnitBatchEditViewModel : ReactiveObject
+    public partial class PhrasesUnitBatchEditViewModel : ReactiveObject
     {
         public PhrasesUnitViewModel vm { get; set; }
         public MTextbook Textbook => vm.vmSettings.SelectedTextbook;
 
         [Reactive]
-        public bool UnitChecked { get; set; }
+        public partial bool UnitChecked { get; set; }
         [Reactive]
-        public bool PartChecked { get; set; }
+        public partial bool PartChecked { get; set; }
         [Reactive]
-        public bool SeqNumChecked { get; set; }
+        public partial bool SeqNumChecked { get; set; }
         [Reactive]
-        public int UNIT { get; set; }
+        public partial int UNIT { get; set; }
         [Reactive]
-        public int PART { get; set; }
+        public partial int PART { get; set; }
         [Reactive]
-        public int SEQNUM { get; set; }
+        public partial int SEQNUM { get; set; }
         public MSelectItem UNITItem
         {
             get => Textbook.Units.SingleOrDefault(o => o.Value == UNIT);

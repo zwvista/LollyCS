@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -11,26 +11,26 @@ namespace LollyCommon
         public List<MUSMapping> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MUSMapping : ReactiveObject
+    public partial class MUSMapping : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string NAME { get; set; }
+        public partial string NAME { get; set; }
         [JsonProperty]
         [Reactive]
-        public int KIND { get; set; }
+        public partial int KIND { get; set; }
         [JsonProperty]
         [Reactive]
-        public int ENTITYID { get; set; }
+        public partial int ENTITYID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int VALUEID { get; set; }
+        public partial int VALUEID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LEVEL { get; set; }
+        public partial int LEVEL { get; set; }
 
         public static string NAME_USLANG = "USLANG";
         public static string NAME_USROWSPERPAGEOPTIONS = "USROWSPERPAGEOPTIONS";

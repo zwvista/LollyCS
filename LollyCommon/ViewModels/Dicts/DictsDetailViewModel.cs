@@ -3,7 +3,7 @@ using ReactiveUI.Validation.Extensions;
 
 namespace LollyCommon
 {
-    public class DictsDetailViewModel : ReactiveObject
+    public partial class DictsDetailViewModel : ReactiveObject
     {
         public DictsViewModel vm;
         public MDictionaryEdit ItemEdit = new();

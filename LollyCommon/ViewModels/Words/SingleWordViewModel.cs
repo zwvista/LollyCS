@@ -5,7 +5,7 @@ using System.Reactive.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class SingleWordViewModel : ReactiveObject
+    public partial class SingleWordViewModel : ReactiveObject
     {
         UnitWordDataStore unitWordDS = new();
 

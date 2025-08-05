@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,34 +15,34 @@ namespace LollyCommon
         public List<MLangBlogPost> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangBlogPost : ReactiveObject
+    public partial class MLangBlogPost : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TITLE { get; set; } = "";
+        public partial string TITLE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string URL { get; set; } = "";
+        public partial string URL { get; set; } = "";
         [JsonIgnore]
         [Reactive]
-        public int GPID { get; set; }
+        public partial int GPID { get; set; }
     }
-    public class MLangBlogPostEdit : ReactiveValidationObject
+    public partial class MLangBlogPostEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [Reactive]
-        public string TITLE { get; set; }
+        public partial string TITLE { get; set; }
         [Reactive]
-        public string URL { get; set; }
+        public partial string URL { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangBlogPostEdit()
         {

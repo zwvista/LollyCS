@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class MBlogPostEdit : ReactiveObject
+    public partial class MBlogPostEdit : ReactiveObject
     {
         [Reactive]
-        public string MarkedText { get; set; } = "";
+        public partial string MarkedText { get; set; } = "";
         [Reactive]
-        public string HtmlText { get; set; } = "";
+        public partial string HtmlText { get; set; } = "";
         [Reactive]
-        public string PatternNo { get; set; } = "001";
+        public partial string PatternNo { get; set; } = "001";
     }
 }

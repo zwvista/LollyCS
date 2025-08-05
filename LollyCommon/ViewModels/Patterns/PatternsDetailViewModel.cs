@@ -3,7 +3,7 @@ using ReactiveUI.Validation.Extensions;
 
 namespace LollyCommon
 {
-    public class PatternsDetailViewModel : ReactiveObject
+    public partial class PatternsDetailViewModel : ReactiveObject
     {
         public MPatternEdit ItemEdit = new();
 

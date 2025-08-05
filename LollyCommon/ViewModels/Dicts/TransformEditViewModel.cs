@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,30 +13,30 @@ using System.Windows;
 
 namespace LollyCommon
 {
-    public class TransformEditViewModel : ReactiveObject
+    public partial class TransformEditViewModel : ReactiveObject
     {
         [Reactive]
-        public string TEMPLATE { get; set; }
+        public partial string TEMPLATE { get; set; }
         public string URL { get; }
         [Reactive]
-        public string SourceWord { get; set; }
+        public partial string SourceWord { get; set; }
         [Reactive]
-        public string SourceUrl { get; private set; }
+        public partial string SourceUrl { get; private set; }
         [Reactive]
-        public string SourceText { get; set; }
+        public partial string SourceText { get; set; }
         [Reactive]
-        public string ResultText { get; private set; }
+        public partial string ResultText { get; private set; }
         [Reactive]
-        public string ResultHtml { get; private set; }
+        public partial string ResultHtml { get; private set; }
         [Reactive]
-        public string IntermediateText { get; private set; }
+        public partial string IntermediateText { get; private set; }
         [Reactive]
-        public int IntermediateMaxIndex { get; private set; }
+        public partial int IntermediateMaxIndex { get; private set; }
         [Reactive]
-        public int IntermediateIndex { get; set; }
+        public partial int IntermediateIndex { get; set; }
         public ObservableCollection<MTransformItem> TransformItems { get; }
         [Reactive]
-        public List<string> IntermediateResults { get; private set; } = [""];
+        public partial List<string> IntermediateResults { get; private set; } = [""];
         public ReactiveCommand<Unit, Unit> GetHtmlCommand { get; }
         public ReactiveCommand<Unit, Unit> ExecuteTransformCommand { get; }
         public ReactiveCommand<Unit, Unit> GetAndTransformCommand { get; }

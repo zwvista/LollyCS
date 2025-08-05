@@ -3,7 +3,7 @@ using ReactiveUI.Validation.Extensions;
 
 namespace LollyCommon
 {
-    public class WordsUnitDetailViewModel : ReactiveObject
+    public partial class WordsUnitDetailViewModel : ReactiveObject
     {
         public MUnitWordEdit ItemEdit = new();
         public SingleWordViewModel vmSingleWord;

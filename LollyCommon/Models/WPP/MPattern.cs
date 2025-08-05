@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -14,45 +14,45 @@ namespace LollyCommon
         public List<MPattern> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MPattern : ReactiveObject
+    public partial class MPattern : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         public int PATTERNID => ID;
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string PATTERN { get; set; } = "";
+        public partial string PATTERN { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TAGS { get; set; } = "";
+        public partial string TAGS { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TITLE { get; set; } = "";
+        public partial string TITLE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string URL { get; set; } = "";
+        public partial string URL { get; set; } = "";
 
         public MPattern()
         {
         }
 
     }
-    public class MPatternEdit : ReactiveValidationObject
+    public partial class MPatternEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public string PATTERN { get; set; } = "";
+        public partial string PATTERN { get; set; } = "";
         [Reactive]
-        public string TAGS { get; set; }
+        public partial string TAGS { get; set; }
         [Reactive]
-        public string TITLE { get; set; }
+        public partial string TITLE { get; set; }
         [Reactive]
-        public string URL { get; set; }
+        public partial string URL { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MPatternEdit()
         {
@@ -60,11 +60,11 @@ namespace LollyCommon
         }
     }
 
-    public class MPatternVariation : ReactiveObject
+    public partial class MPatternVariation : ReactiveObject
     {
         [Reactive]
-        public int Index { get; set; }
+        public partial int Index { get; set; }
         [Reactive]
-        public string Variation { get; set; }
+        public partial string Variation { get; set; }
     }
 }

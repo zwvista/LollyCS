@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,45 +15,45 @@ namespace LollyCommon
         public List<MTextbook> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MTextbook : ReactiveObject
+    public partial class MTextbook : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty("NAME")]
         [Reactive]
-        public string TEXTBOOKNAME { get; set; } = "";
+        public partial string TEXTBOOKNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string UNITS { get; set; } = "";
+        public partial string UNITS { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string PARTS { get; set; } = "";
+        public partial string PARTS { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public bool ONLINE { get; set; }
+        public partial bool ONLINE { get; set; }
 
         [Reactive]
-        public List<MSelectItem> Units { get; set; }
+        public partial List<MSelectItem> Units { get; set; }
         [Reactive]
-        public List<MSelectItem> Parts { get; set; }
+        public partial List<MSelectItem> Parts { get; set; }
 
         public string UNITSTR(int UNIT) => Units.First(o => o.Value == UNIT).Label;
         public string PARTSTR(int PART) => Parts.First(o => o.Value == PART).Label;
     }
-    public class MTextbookEdit : ReactiveValidationObject
+    public partial class MTextbookEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public string TEXTBOOKNAME { get; set; }
+        public partial string TEXTBOOKNAME { get; set; }
         [Reactive]
-        public string UNITS { get; set; }
+        public partial string UNITS { get; set; }
         [Reactive]
-        public string PARTS { get; set; }
+        public partial string PARTS { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MTextbookEdit()
         {

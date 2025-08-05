@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -26,17 +26,17 @@ namespace LollyCommon
         public List<MWordPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MWordPhrase : ReactiveObject
+    public partial class MWordPhrase : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int WORDID { get; set; }
+        public partial int WORDID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int PHRASEID { get; set; }
+        public partial int PHRASEID { get; set; }
 
     }
 }

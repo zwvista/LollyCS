@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LollyCommon
 {
-    public class PhrasesUnitBatchAddViewModel : ReactiveObject
+    public partial class PhrasesUnitBatchAddViewModel : ReactiveObject
     {
         public MUnitPhraseEdit ItemEdit = new();
         public PhrasesUnitBatchAddViewModel(PhrasesUnitViewModel vm)

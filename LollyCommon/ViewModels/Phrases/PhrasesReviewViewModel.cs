@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class PhrasesReviewViewModel : ReactiveObject
+    public partial class PhrasesReviewViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         UnitPhraseDataStore unitPhraseDS = new();
@@ -17,7 +17,7 @@ namespace LollyCommon
         public int Count => Items.Count;
         public List<int> CorrectIDs { get; set; } = new List<int>();
         [Reactive]
-        public int Index { get; set; }
+        public partial int Index { get; set; }
         public bool HasCurrent => Items.Any() && (OnRepeat || (Index >= 0 && Index < Count));
         public MUnitPhrase CurrentItem => HasCurrent ? Items[Index] : null;
         public string CurrentPhrase => HasCurrent ? Items[Index].PHRASE : "";
@@ -26,41 +26,41 @@ namespace LollyCommon
         public IDisposable SubscriptionTimer;
         public Action DoTestAction;
         [Reactive]
-        public bool IsSpeaking { get; set; }
+        public partial bool IsSpeaking { get; set; }
         [Reactive]
-        public string IndexString { get; set; }
+        public partial string IndexString { get; set; }
         [Reactive]
-        public bool IndexVisible { get; set; } = true;
+        public partial bool IndexVisible { get; set; } = true;
         [Reactive]
-        public bool CorrectVisible { get; set; }
+        public partial bool CorrectVisible { get; set; }
         [Reactive]
-        public bool IncorrectVisible { get; set; }
+        public partial bool IncorrectVisible { get; set; }
         [Reactive]
-        public bool CheckNextEnabled { get; set; }
+        public partial bool CheckNextEnabled { get; set; }
         [Reactive]
-        public string CheckNextString { get; set; } = "Check";
+        public partial string CheckNextString { get; set; } = "Check";
         [Reactive]
-        public bool CheckPrevEnabled { get; set; }
+        public partial bool CheckPrevEnabled { get; set; }
         [Reactive]
-        public string CheckPrevString { get; set; } = "Check";
+        public partial string CheckPrevString { get; set; } = "Check";
         [Reactive]
-        public bool CheckPrevVisible { get; set; } = true;
+        public partial bool CheckPrevVisible { get; set; } = true;
         [Reactive]
-        public string PhraseTargetString { get; set; }
+        public partial string PhraseTargetString { get; set; }
         [Reactive]
-        public bool PhraseTargetVisible { get; set; } = true;
+        public partial bool PhraseTargetVisible { get; set; } = true;
         [Reactive]
-        public string TranslationString { get; set; }
+        public partial string TranslationString { get; set; }
         [Reactive]
-        public string PhraseInputString { get; set; }
+        public partial string PhraseInputString { get; set; }
         [Reactive]
-        public bool OnRepeat { get; set; } = true;
+        public partial bool OnRepeat { get; set; } = true;
         [Reactive]
-        public bool MoveForward { get; set; } = true;
+        public partial bool MoveForward { get; set; } = true;
         [Reactive]
-        public bool OnRepeatVisible { get; set; } = true;
+        public partial bool OnRepeatVisible { get; set; } = true;
         [Reactive]
-        public bool MoveForwardVisible { get; set; } = true;
+        public partial bool MoveForwardVisible { get; set; } = true;
 
         // https://stackoverflow.com/questions/15907356/how-to-initialize-an-object-using-async-await-pattern
         public PhrasesReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction)

@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class WordsReviewViewModel : WordsBaseViewModel
+    public partial class WordsReviewViewModel : WordsBaseViewModel
     {
         UnitWordDataStore unitWordDS = new UnitWordDataStore();
         WordFamiDataStore wordFamiDS = new WordFamiDataStore();
@@ -18,7 +18,7 @@ namespace LollyCommon
         public int Count => Items.Count;
         public List<int> CorrectIDs { get; set; } = [];
         [Reactive]
-        public int Index { get; set; }
+        public partial int Index { get; set; }
         public bool HasCurrent => Items.Any() && (OnRepeat || (Index >= 0 && Index < Count));
         public MUnitWord CurrentItem => HasCurrent ? Items[Index] : null;
         public string CurrentWord => HasCurrent ? Items[Index].WORD : "";
@@ -27,53 +27,53 @@ namespace LollyCommon
         public IDisposable SubscriptionTimer;
         public Action DoTestAction;
         [Reactive]
-        public bool IsSpeaking { get; set; }
+        public partial bool IsSpeaking { get; set; }
         [Reactive]
-        public string IndexString { get; set; }
+        public partial string IndexString { get; set; }
         [Reactive]
-        public bool IndexVisible { get; set; } = true;
+        public partial bool IndexVisible { get; set; } = true;
         [Reactive]
-        public bool CorrectVisible { get; set; }
+        public partial bool CorrectVisible { get; set; }
         [Reactive]
-        public bool IncorrectVisible { get; set; }
+        public partial bool IncorrectVisible { get; set; }
         [Reactive]
-        public string AccuracyString { get; set; }
+        public partial string AccuracyString { get; set; }
         [Reactive]
-        public bool AccuracyVisible { get; set; } = true;
+        public partial bool AccuracyVisible { get; set; } = true;
         [Reactive]
-        public bool CheckNextEnabled { get; set; }
+        public partial bool CheckNextEnabled { get; set; }
         [Reactive]
-        public string CheckNextString { get; set; } = "Check";
+        public partial string CheckNextString { get; set; } = "Check";
         [Reactive]
-        public bool CheckPrevEnabled { get; set; }
+        public partial bool CheckPrevEnabled { get; set; }
         [Reactive]
-        public string CheckPrevString { get; set; } = "Check";
+        public partial string CheckPrevString { get; set; } = "Check";
         [Reactive]
-        public bool CheckPrevVisible { get; set; } = true;
+        public partial bool CheckPrevVisible { get; set; } = true;
         [Reactive]
-        public string WordTargetString { get; set; }
+        public partial string WordTargetString { get; set; }
         [Reactive]
-        public string NoteTargetString { get; set; }
+        public partial string NoteTargetString { get; set; }
         [Reactive]
-        public string WordHintString { get; set; }
+        public partial string WordHintString { get; set; }
         [Reactive]
-        public bool WordHintVisible { get; set; }
+        public partial bool WordHintVisible { get; set; }
         [Reactive]
-        public bool WordTargetVisible { get; set; } = true;
+        public partial bool WordTargetVisible { get; set; } = true;
         [Reactive]
-        public bool NoteTargetVisible { get; set; } = true;
+        public partial bool NoteTargetVisible { get; set; } = true;
         [Reactive]
-        public string TranslationString { get; set; }
+        public partial string TranslationString { get; set; }
         [Reactive]
-        public string WordInputString { get; set; }
+        public partial string WordInputString { get; set; }
         [Reactive]
-        public bool OnRepeat { get; set; } = true;
+        public partial bool OnRepeat { get; set; } = true;
         [Reactive]
-        public bool MoveForward { get; set; } = true;
+        public partial bool MoveForward { get; set; } = true;
         [Reactive]
-        public bool OnRepeatVisible { get; set; } = true;
+        public partial bool OnRepeatVisible { get; set; } = true;
         [Reactive]
-        public bool MoveForwardVisible { get; set; } = true;
+        public partial bool MoveForwardVisible { get; set; } = true;
         public override string SelectedWord => CurrentWord;
 
         public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, Action doTestAction) : base(vmSettings, needCopy)

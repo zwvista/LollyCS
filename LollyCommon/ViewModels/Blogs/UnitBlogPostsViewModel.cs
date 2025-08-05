@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
-    public class UnitBlogPostViewModel : ReactiveObject
+    public partial class UnitBlogPostViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings { get; set; }
         public List<MSelectItem> Units => vmSettings.Units;
         [Reactive]
-        public int SelectedUnitIndex { get; set; }
+        public partial int SelectedUnitIndex { get; set; }
 
         [Reactive]
-        public string Html { get; set; }
+        public partial string Html { get; set; }
         private BlogPostEditService _editService = new();
 
         public UnitBlogPostViewModel(SettingsViewModel vmSettings, bool needCopy)

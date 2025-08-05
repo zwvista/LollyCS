@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,19 +15,19 @@ namespace LollyCommon
         public List<MUnitBlogPost> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MUnitBlogPost : ReactiveObject
+    public partial class MUnitBlogPost : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int TEXTBOOKID { get; set; }
+        public partial int TEXTBOOKID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int UNIT { get; set; }
+        public partial int UNIT { get; set; }
         [JsonProperty]
         [Reactive]
-        public string CONTENT { get; set; } = "";
+        public partial string CONTENT { get; set; } = "";
     }
 }

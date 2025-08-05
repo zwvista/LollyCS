@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
-    public class LangBlogPostsContentViewModel : ReactiveObject
+    public partial class LangBlogPostsContentViewModel : ReactiveObject
     {
         public LangBlogGroupsViewModel vmGroups { get; set; }
         public List<MLangBlogPost> PostItems { get; }
         [Reactive]
-        public int SelectedPostIndex { get; set; }
+        public partial int SelectedPostIndex { get; set; }
 
         public LangBlogPostsContentViewModel(LangBlogGroupsViewModel vmGroups, List<MLangBlogPost> postItems, int index)
         {

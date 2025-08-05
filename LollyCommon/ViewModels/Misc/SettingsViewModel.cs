@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class SettingsViewModel : ReactiveObject
+    public partial class SettingsViewModel : ReactiveObject
     {
         USMappingDataStore USMappingDS = new();
         UserSettingDataStore UserSettingDS = new();
@@ -156,39 +156,39 @@ namespace LollyCommon
         public bool IsInvalidUnitPart => USUNITPARTFROM > USUNITPARTTO;
 
         [Reactive]
-        public List<MLanguage> LanguagesAll { get; set; }
+        public partial List<MLanguage> LanguagesAll { get; set; }
         [Reactive]
-        public List<MLanguage> Languages { get; set; }
+        public partial List<MLanguage> Languages { get; set; }
         [Reactive]
-        public MLanguage SelectedLang { get; set; }
+        public partial MLanguage SelectedLang { get; set; }
 
         [Reactive]
-        public List<MVoice> Voices { get; set; }
+        public partial List<MVoice> Voices { get; set; }
         [Reactive]
-        public MVoice SelectedVoice { get; set; }
+        public partial MVoice SelectedVoice { get; set; }
 
         [Reactive]
-        public List<MDictionary> DictsReference { get; set; }
+        public partial List<MDictionary> DictsReference { get; set; }
         [Reactive]
-        public MDictionary SelectedDictReference { get; set; }
+        public partial MDictionary SelectedDictReference { get; set; }
         [Reactive]
-        public List<MDictionary> SelectedDictsReference { get; set; }
+        public partial List<MDictionary> SelectedDictsReference { get; set; }
 
         [Reactive]
-        public List<MDictionary> DictsNote { get; set; }
+        public partial List<MDictionary> DictsNote { get; set; }
         [Reactive]
-        public MDictionary SelectedDictNote { get; set; }
+        public partial MDictionary SelectedDictNote { get; set; }
 
         [Reactive]
-        public List<MDictionary> DictsTranslation { get; set; }
+        public partial List<MDictionary> DictsTranslation { get; set; }
         [Reactive]
-        public MDictionary SelectedDictTranslation { get; set; }
+        public partial MDictionary SelectedDictTranslation { get; set; }
         public bool HasDictTranslation => SelectedDictTranslation != null;
 
         [Reactive]
-        public List<MTextbook> Textbooks { get; set; }
+        public partial List<MTextbook> Textbooks { get; set; }
         [Reactive]
-        public MTextbook SelectedTextbook { get; set; }
+        public partial MTextbook SelectedTextbook { get; set; }
         public List<MSelectItem> TextbookFilters { get; set; } = new List<MSelectItem>();
         public List<MSelectItem> OnlineTextbookFilters { get; set; } = new List<MSelectItem>();
 
@@ -230,7 +230,7 @@ namespace LollyCommon
             new MSelectItem(2, "To"),
         };
         [Reactive]
-        public UnitPartToType ToType { get; set; } = UnitPartToType.To;
+        public partial UnitPartToType ToType { get; set; } = UnitPartToType.To;
         public MSelectItem ToTypeItem
         {
             get => ToTypes.SingleOrDefault(o => o.Value == (int)ToType);
@@ -238,19 +238,19 @@ namespace LollyCommon
         }
         public bool ToTypeMovable => ToType != UnitPartToType.To;
         [Reactive]
-        public bool UnitToEnabled { get; set; }
+        public partial bool UnitToEnabled { get; set; }
         [Reactive]
-        public bool PartToEnabled { get; set; }
+        public partial bool PartToEnabled { get; set; }
         [Reactive]
-        public bool PreviousEnabled { get; set; }
+        public partial bool PreviousEnabled { get; set; }
         [Reactive]
-        public bool NextEnabled { get; set; }
+        public partial bool NextEnabled { get; set; }
         [Reactive]
-        public string PreviousText { get; set; }
+        public partial string PreviousText { get; set; }
         [Reactive]
-        public string NextText { get; set; }
+        public partial string NextText { get; set; }
         [Reactive]
-        public bool PartFromEnabled { get; set; }
+        public partial bool PartFromEnabled { get; set; }
 
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictTypeCodes { get; set; }

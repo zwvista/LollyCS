@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -14,26 +14,26 @@ namespace LollyCommon
     }
 
     [JsonObject(MemberSerialization.OptIn)]
-    public class MAutoCorrect : ReactiveObject
+    public partial class MAutoCorrect : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int SEQNUM { get; set; }
+        public partial int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
-        public string INPUT { get; set; } = "";
+        public partial string INPUT { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string EXTENDED { get; set; } = "";
+        public partial string EXTENDED { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string BASIC { get; set; } = "";
+        public partial string BASIC { get; set; } = "";
 
         public static string AutoCorrect(string text, List<MAutoCorrect> lstAutoCorrects,
                                   Func<MAutoCorrect, string> colFunc1, Func<MAutoCorrect, string> colFunc2) =>

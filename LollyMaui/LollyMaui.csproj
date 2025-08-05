@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.26100.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.26100.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -21,6 +21,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
         <UseMauiEssentials>false</UseMauiEssentials>
+        <LangVersion>preview</LangVersion>
 
 		<!-- Display name -->
 		<ApplicationTitle>LollyMaui</ApplicationTitle>
@@ -65,11 +66,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="AathifMahir.Maui.MauiIcons.FontAwesome.Solid" Version="4.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.7" />
-		<PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 		<PackageReference Include="ReactiveUI.Maui" Version="20.4.1" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.82" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+        <PackageReference Include="ReactiveUI.SourceGenerators" Version="2.3.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
 	<ItemGroup>

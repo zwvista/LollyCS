@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,23 +15,23 @@ namespace LollyCommon
         public List<MLangPhrase> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangPhrase : ReactiveObject, MPhraseInterface
+    public partial class MLangPhrase : ReactiveObject, MPhraseInterface
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         public int PHRASEID => ID;
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string PHRASE { get; set; } = "";
+        public partial string PHRASE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TRANSLATION { get; set; } = "";
+        public partial string TRANSLATION { get; set; } = "";
         [Reactive]
-        public bool IsChecked { get; set; }
+        public partial bool IsChecked { get; set; }
 
         public MLangPhrase()
         {
@@ -60,14 +60,14 @@ namespace LollyCommon
             return oldTranslation != TRANSLATION;
         }
     }
-    public class MLangPhraseEdit : ReactiveValidationObject
+    public partial class MLangPhraseEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public string PHRASE { get; set; } = "";
+        public partial string PHRASE { get; set; } = "";
         [Reactive]
-        public string TRANSLATION { get; set; }
+        public partial string TRANSLATION { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangPhraseEdit()
         {

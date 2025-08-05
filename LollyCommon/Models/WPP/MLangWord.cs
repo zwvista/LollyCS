@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System;
@@ -16,33 +16,33 @@ namespace LollyCommon
         public List<MLangWord> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MLangWord : ReactiveObject, MWordInterface
+    public partial class MLangWord : ReactiveObject, MWordInterface
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         public int WORDID => ID;
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string WORD { get; set; } = "";
+        public partial string WORD { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string NOTE { get; set; } = "";
+        public partial string NOTE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int FAMIID { get; set; }
+        public partial int FAMIID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int CORRECT { get; set; }
+        public partial int CORRECT { get; set; }
         [JsonProperty]
         [Reactive]
-        public int TOTAL { get; set; }
+        public partial int TOTAL { get; set; }
         public string ACCURACY => TOTAL == 0 ? "N/A" : $"{Math.Floor((double)CORRECT / TOTAL * 1000) / 10}%";
         [Reactive]
-        public bool IsChecked { get; set; }
+        public partial bool IsChecked { get; set; }
 
         void WhenAnyValueChanged()
         {
@@ -76,19 +76,19 @@ namespace LollyCommon
             return oldNote != NOTE;
         }
     }
-    public class MLangWordEdit : ReactiveValidationObject
+    public partial class MLangWordEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public string WORD { get; set; } = "";
+        public partial string WORD { get; set; } = "";
         [Reactive]
-        public string NOTE { get; set; }
+        public partial string NOTE { get; set; }
         [Reactive]
-        public int FAMIID { get; set; }
+        public partial int FAMIID { get; set; }
         public MTextbook Textbook { get; set; }
         [Reactive]
-        public string ACCURACY { get; set; }
+        public partial string ACCURACY { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MLangWordEdit()
         {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -14,20 +14,20 @@ namespace LollyCommon
     }
 
     [JsonObject(MemberSerialization.OptIn)]
-    public class MUser : ReactiveObject
+    public partial class MUser : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string USERID { get; set; } = "";
+        public partial string USERID { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string USERNAME { get; set; } = "";
+        public partial string USERNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string PASSWORD { get; set; } = "";
+        public partial string PASSWORD { get; set; } = "";
     }
 
 }

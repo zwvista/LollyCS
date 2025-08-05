@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LollyCommon
 {
-    public class LangBlogViewModel : ReactiveObject
+    public partial class LangBlogViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings;
         protected LangBlogPostDataStore postDS = new();
@@ -20,34 +20,36 @@ namespace LollyCommon
         protected LangBlogGroupDataStore groupDS = new();
         protected BlogPostEditService _editService = new();
         [Reactive]
-        public MLangBlogPost? SelectedPostItem { get; set; }
-        public bool HasSelectedPostItem { [ObservableAsProperty] get; }
+        public partial MLangBlogPost? SelectedPostItem { get; set; }
+        [ObservableAsProperty]
+        public bool HasSelectedPostItem { get; }
         [Reactive]
-        public string PostHtml { get; set; } = "";
+        public partial string PostHtml { get; set; } = "";
         [Reactive]
-        public MLangBlogGroup? SelectedGroupItem { get; set; }
-        public bool HasSelectedGroupItem { [ObservableAsProperty] get; }
+        public partial MLangBlogGroup? SelectedGroupItem { get; set; }
+        [ObservableAsProperty]
+        public partial bool HasSelectedGroupItem { get; }
         public ObservableCollection<MLangBlogPost> PostItemsAll { get; set; } = [];
         public ObservableCollection<MLangBlogPost> PostItems { get; set; } = [];
         public ObservableCollection<MLangBlogGroup> GroupItemsAll { get; set; } = [];
         public ObservableCollection<MLangBlogGroup> GroupItems { get; set; } = [];
         //public string StatusText => $"{Items.Count} Textbooks in {vmSettings.LANGINFO}";
         [Reactive]
-        public string GroupFilter { get; set; } = "";
+        public partial string GroupFilter { get; set; } = "";
         public bool NoGroupFilter => string.IsNullOrEmpty(GroupFilter);
         [Reactive]
-        public string PostFilter { get; set; } = "";
+        public partial string PostFilter { get; set; } = "";
         public bool NoPostFilter => string.IsNullOrEmpty(PostFilter);
         [Reactive]
-        public bool IsBusy { get; set; } = true;
+        public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadGroupsCommand { get; set; }
         public ReactiveCommand<Unit, Unit> ReloadPostsCommand { get; set; }
         public LangBlogViewModel(SettingsViewModel vmSettings, bool needCopy)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             //this.WhenAnyValue(x => x.GroupItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToPropertyEx(this, x => x.HasSelectedGroupItem);
-            this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToPropertyEx(this, x => x.HasSelectedPostItem);
+            this.WhenAnyValue(x => x.SelectedGroupItem, (MLangBlogGroup? v) => v != null).ToProperty(this, x => x.HasSelectedGroupItem);
+            this.WhenAnyValue(x => x.SelectedPostItem, (MLangBlogPost? v) => v != null).ToProperty(this, x => x.HasSelectedPostItem);
             this.WhenAnyValue(x => x.SelectedPostItem).Where(v => v != null).Subscribe(async v =>
             {
                 var str = (await contentDS.GetDataById(v!.ID))?.CONTENT ?? "";

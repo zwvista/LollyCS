@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -14,16 +14,16 @@ namespace LollyCommon
         Task<string> GetSourceAsync();
     }
 
-    public class OnlineDictViewModel : ReactiveObject
+    public partial class OnlineDictViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings { get; set; }
         public IOnlineDict OnlineDict { get; set; }
         DictWebBrowserStatus dictStatus = DictWebBrowserStatus.Ready;
         public MDictionary Dict;
         [Reactive]
-        public string Word { get; set; } = "";
+        public partial string Word { get; set; } = "";
         [Reactive]
-        public string Url { get; set; } = "";
+        public partial string Url { get; set; } = "";
 
         public OnlineDictViewModel(SettingsViewModel vmSettings, IOnlineDict dict)
         {

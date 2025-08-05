@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -29,25 +29,25 @@ namespace LollyCommon
         public List<MCode> Records { get; set; } = null!;
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MCode : ReactiveObject
+    public partial class MCode : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int CODE { get; set; }
+        public partial int CODE { get; set; }
         [JsonProperty]
         [Reactive]
-        public string NAME { get; set; }
+        public partial string NAME { get; set; }
     }
 
     [JsonObject(MemberSerialization.OptIn)]
-    public class MSPResult : ReactiveObject
+    public partial class MSPResult : ReactiveObject
     {
         [JsonProperty("NEW_ID")]
         [Reactive]
-        public int? NewID { get; set; }
+        public partial int? NewID { get; set; }
         [JsonProperty("result")]
         [Reactive]
-        public string Result { get; set; } = null!;
+        public partial string Result { get; set; } = null!;
 
         public override string ToString() => JsonConvert.SerializeObject(this);
     }

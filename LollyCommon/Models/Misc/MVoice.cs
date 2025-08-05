@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 
 namespace LollyCommon
 {
@@ -11,22 +11,22 @@ namespace LollyCommon
         public List<MVoice> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MVoice : ReactiveObject
+    public partial class MVoice : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGID { get; set; }
+        public partial int LANGID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int VOICETYPEID { get; set; }
+        public partial int VOICETYPEID { get; set; }
         [JsonProperty]
         [Reactive]
-        public string VOICELANG { get; set; } = "";
+        public partial string VOICELANG { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string VOICENAME { get; set; } = "";
+        public partial string VOICENAME { get; set; } = "";
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LollyCommon
 {
-    public class LangBlogPostsDetailViewModel : ReactiveObject
+    public partial class LangBlogPostsDetailViewModel : ReactiveObject
     {
         public MLangBlogPostEdit ItemEdit = new();
         public string LANGNAME { get; private set; }

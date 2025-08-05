@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using ReactiveUI.SourceGenerators;
 using ReactiveUI.Validation.Extensions;
 using ReactiveUI.Validation.Helpers;
 using System.Collections.Generic;
@@ -15,59 +15,59 @@ namespace LollyCommon
         public List<MDictionary> Records { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
-    public class MDictionary : ReactiveObject
+    public partial class MDictionary : ReactiveObject
     {
         [JsonProperty]
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int DICTID { get; set; }
+        public partial int DICTID { get; set; }
         [JsonProperty]
         [Reactive]
-        public int LANGIDFROM { get; set; }
+        public partial int LANGIDFROM { get; set; }
         [JsonProperty]
         [Reactive]
-        public string LANGNAMEFROM { get; set; } = "";
+        public partial string LANGNAMEFROM { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int LANGIDTO { get; set; }
+        public partial int LANGIDTO { get; set; }
         [JsonProperty]
         [Reactive]
-        public string LANGNAMETO { get; set; } = "";
+        public partial string LANGNAMETO { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int SEQNUM { get; set; }
+        public partial int SEQNUM { get; set; }
         [JsonProperty]
         [Reactive]
-        public int DICTTYPECODE { get; set; }
+        public partial int DICTTYPECODE { get; set; }
         [JsonProperty]
         [Reactive]
-        public string DICTTYPENAME { get; set; } = "";
+        public partial string DICTTYPENAME { get; set; } = "";
         [JsonProperty("NAME")]
         [Reactive]
-        public string DICTNAME { get; set; } = "";
+        public partial string DICTNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string URL { get; set; } = "";
+        public partial string URL { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string CHCONV { get; set; } = "";
+        public partial string CHCONV { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string AUTOMATION { get; set; } = "";
+        public partial string AUTOMATION { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TRANSFORM { get; set; } = "";
+        public partial string TRANSFORM { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public int WAIT { get; set; }
+        public partial int WAIT { get; set; }
         [JsonProperty]
         [Reactive]
-        public string TEMPLATE { get; set; } = "";
+        public partial string TEMPLATE { get; set; } = "";
         [JsonProperty]
         [Reactive]
-        public string TEMPLATE2 { get; set; } = "";
+        public partial string TEMPLATE2 { get; set; } = "";
 
         public string UrlString(string word, List<MAutoCorrect> lstAutoCorrects)
         {
@@ -83,42 +83,42 @@ namespace LollyCommon
                 HtmlTransformService.ApplyTemplate(template2, word, text));
         }
     }
-    public class MDictionaryEdit : ReactiveValidationObject
+    public partial class MDictionaryEdit : ReactiveValidationObject
     {
         [Reactive]
-        public int ID { get; set; }
+        public partial int ID { get; set; }
         [Reactive]
-        public int DICTID { get; set; }
+        public partial int DICTID { get; set; }
         [Reactive]
-        public int LANGIDFROM { get; set; }
+        public partial int LANGIDFROM { get; set; }
         [Reactive]
-        public string LANGNAMEFROM { get; set; }
+        public partial string LANGNAMEFROM { get; set; }
         [Reactive]
-        public int LANGIDTO { get; set; }
+        public partial int LANGIDTO { get; set; }
         [Reactive]
-        public string LANGNAMETO { get; set; }
+        public partial string LANGNAMETO { get; set; }
         [Reactive]
-        public int SEQNUM { get; set; }
+        public partial int SEQNUM { get; set; }
         [Reactive]
-        public int DICTTYPECODE { get; set; }
+        public partial int DICTTYPECODE { get; set; }
         [Reactive]
-        public string DICTTYPENAME { get; set; }
+        public partial string DICTTYPENAME { get; set; }
         [Reactive]
-        public string DICTNAME { get; set; }
+        public partial string DICTNAME { get; set; }
         [Reactive]
-        public string URL { get; set; }
+        public partial string URL { get; set; }
         [Reactive]
-        public string CHCONV { get; set; }
+        public partial string CHCONV { get; set; }
         [Reactive]
-        public string AUTOMATION { get; set; }
+        public partial string AUTOMATION { get; set; }
         [Reactive]
-        public string TRANSFORM { get; set; }
+        public partial string TRANSFORM { get; set; }
         [Reactive]
-        public int? WAIT { get; set; }
+        public partial int? WAIT { get; set; }
         [Reactive]
-        public string TEMPLATE { get; set; }
+        public partial string TEMPLATE { get; set; }
         [Reactive]
-        public string TEMPLATE2 { get; set; }
+        public partial string TEMPLATE2 { get; set; }
         public ReactiveCommand<Unit, Unit> Save { get; set; }
         public MDictionaryEdit()
         {
