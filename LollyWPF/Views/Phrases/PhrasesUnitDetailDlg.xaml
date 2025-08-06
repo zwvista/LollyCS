@@ -38,22 +38,22 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{x:Bind ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="UNIT:" Grid.Row="1" />
-        <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
+        <ComboBox x:Name="cbUnit" ItemsSource="{x:Bind Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind UNIT}"
                   Grid.Row="1" Grid.Column="1" />
         <Label Content="PART:" Grid.Row="2" />
-        <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
+        <ComboBox x:Name="cbPart" ItemsSource="{x:Bind Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind PART}"
                   Grid.Row="2" Grid.Column="3" />
         <Label Content="SEQNUM:" Grid.Row="3" />
-        <TextBox Text="{Binding SEQNUM}" Grid.Row="3" Grid.Column="1" />
+        <TextBox Text="{x:Bind SEQNUM, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" />
         <Label Content="PHRASEID:" Grid.Row="4" />
-        <TextBox Text="{Binding PHRASEID}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{x:Bind PHRASEID, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" Grid.Row="5" />
-        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
         <Label Content="TRANSLATION:" Grid.Row="6" />
-        <TextBox Text="{Binding TRANSLATION}" Grid.Row="6" Grid.Column="1" />
-        <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}" IsReadOnly="True"
+        <TextBox Text="{x:Bind TRANSLATION, Mode=TwoWay}" Grid.Row="6" Grid.Column="1" />
+        <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind PhraseItems, DataType=common:SinglePhraseViewModel}" IsReadOnly="True"
                   Grid.Row="7" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
@@ -67,7 +67,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{Binding Save}"/>
+            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{x:Bind Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>

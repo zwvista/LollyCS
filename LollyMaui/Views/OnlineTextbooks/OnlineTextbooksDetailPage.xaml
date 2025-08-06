@@ -12,15 +12,15 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="ID:" />
-            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="TEXTBOOK:" />
-            <Entry Text="{Binding TEXTBOOKNAME}" IsReadOnly="True" />
+            <Entry Text="{x:Bind TEXTBOOKNAME, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="UNIT:" />
-            <Entry Text="{Binding UNIT}" IsReadOnly="True" />
+            <Entry Text="{x:Bind UNIT, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="TITLE:" />
-            <Entry Text="{Binding TITLE}" IsReadOnly="True" />
+            <Entry Text="{x:Bind TITLE, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="URL:" />
-            <Entry Text="{Binding URL}" IsReadOnly="True" />
+            <Entry Text="{x:Bind URL, Mode=TwoWay}" IsReadOnly="True" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -26,9 +26,9 @@
                 <Button x:Name="btnNextUnitPart" Content="Next" Click="btnNextUnitPart_Click"/>
             </ToolBar>
             <ToolBar Band="2">
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedValue="{x:Bind ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
-                <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter,UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}"  Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -44,9 +44,9 @@
                     <RowDefinition Height="150"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
+                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind PhraseItems}"
                           dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditPhrase" SelectedItem="{Binding SelectedPhraseItem}" SelectionChanged="dgPhrases_SelectionChanged">
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditPhrase" SelectedItem="{x:Bind SelectedPhraseItem}" SelectionChanged="dgPhrases_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
@@ -80,8 +80,8 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
-                <DataGrid Grid.Row="2" x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditWord" SelectedItem="{Binding SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
+                <DataGrid Grid.Row="2" x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind WordItems}" mx:DataType="common:WordsLangViewModel"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditWord" SelectedItem="{x:Bind SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>
@@ -114,7 +114,7 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <StatusBar Grid.Row="3">
-                    <Label Content="{Binding StatusText}"/>
+                    <Label Content="{x:Bind StatusText}"/>
                 </StatusBar>
             </Grid>
             <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />

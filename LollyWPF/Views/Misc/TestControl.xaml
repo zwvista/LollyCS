@@ -22,7 +22,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnExecute" Grid.Row="3" Content="Execute" Width="100" HorizontalAlignment="Right" Command="{Binding ExecuteCommand}" />
+            <Button x:Name="btnExecute" Grid.Row="3" Content="Execute" Width="100" HorizontalAlignment="Right" Command="{x:Bind ExecuteCommand}" />
         </Grid>
     </DockPanel>
 </UserControl>

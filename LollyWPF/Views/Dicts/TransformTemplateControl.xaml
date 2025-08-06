@@ -11,6 +11,6 @@
              mx:DataType="local:TransformEditViewModelWPF"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
-        <TextBox Text="{Binding TEMPLATE}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <TextBox Text="{x:Bind TEMPLATE, Mode=TwoWay}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
     </Grid>
 </UserControl>

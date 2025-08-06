@@ -10,9 +10,9 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding OnlineTextbookFilterItem}" />
-        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:OnlineTextbooksViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
+        <Picker ItemsSource="{x:Bind vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind OnlineTextbookFilterItem}" />
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:OnlineTextbooksViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
+            <CollectionView ItemsSource="{x:Bind Items}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
@@ -32,13 +32,13 @@
                             </SwipeView.RightItems>
                             <Grid Padding="10" x:DataType="common:MOnlineTextbook" ColumnDefinitions="*,Auto">
                                 <StackLayout Padding="10">
-                                    <Label Text="{Binding TEXTBOOKNAME}" Style="{StaticResource Key=Text2}" />
-                                    <Label Text="{Binding TITLE}" Style="{StaticResource Key=Text3}" />
+                                    <Label Text="{x:Bind TEXTBOOKNAME, Mode=TwoWay}" Style="{StaticResource Key=Text2}" />
+                                    <Label Text="{x:Bind TITLE, Mode=TwoWay}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
                                 <ImageButton Grid.Column="1" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                              WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

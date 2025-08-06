@@ -7,21 +7,21 @@
              x:DataType="common:MLangWordEdit">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Save" Command="{x:Bind Save}" Priority="0" Order="Primary" />
         <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="ID:" />
-            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="WORD:" />
-            <Entry Text="{Binding WORD}" />
+            <Entry Text="{x:Bind WORD, Mode=TwoWay}" />
             <Label Text="NOTE:" />
-            <Entry Text="{Binding NOTE}" />
+            <Entry Text="{x:Bind NOTE, Mode=TwoWay}" />
             <Label Text="FAMIID:" />
-            <Entry Text="{Binding FAMIID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind FAMIID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="ACCURACY:" />
-            <Entry Text="{Binding ACCURACY}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ACCURACY, Mode=TwoWay}" IsReadOnly="True" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

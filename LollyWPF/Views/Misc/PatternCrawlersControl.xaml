@@ -23,18 +23,18 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <ComboBox VerticalAlignment="Center" Grid.Row="0"
-                      SelectedValuePath="Content" SelectedValue="{Binding SelectedLang}">
+                      SelectedValuePath="Content" SelectedValue="{x:Bind SelectedLang}">
                 <ComboBoxItem Content="Japanese"/>
                 <ComboBoxItem Content="Korean"/>
             </ComboBox>
             <ComboBox VerticalAlignment="Center" Grid.Row="1"
-                      ItemsSource="{Binding Crawlers}" SelectedValue="{Binding SelectedCrawler}" />
+                      ItemsSource="{x:Bind Crawlers}" SelectedValue="{x:Bind SelectedCrawler}" />
             <ComboBox VerticalAlignment="Center" Grid.Row="2"
-                      SelectedValuePath="Content" SelectedValue="{Binding SelectedStep}">
+                      SelectedValuePath="Content" SelectedValue="{x:Bind SelectedStep}">
                 <ComboBoxItem Content="Step1"/>
                 <ComboBoxItem Content="Step2"/>
             </ComboBox>
-            <Button x:Name="btnExecute" Grid.Row="3" Content="Execute" Width="100" HorizontalAlignment="Right" Command="{Binding ExecuteCommand}" />
+            <Button x:Name="btnExecute" Grid.Row="3" Content="Execute" Width="100" HorizontalAlignment="Right" Command="{x:Bind ExecuteCommand}" />
         </Grid>
     </DockPanel>
 </UserControl>

@@ -14,10 +14,10 @@
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
-        <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
-        <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedItem="{Binding ScopeFilter}" />
-        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PhrasesLangViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
-            <CollectionView ItemsSource="{Binding PhraseItems}" SelectionMode="None">
+        <SearchBar Placeholder="Filter" Text="{x:Bind TextFilter, Mode=TwoWay}" />
+        <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedItem="{x:Bind ScopeFilter}" />
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PhrasesLangViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
+            <CollectionView ItemsSource="{x:Bind PhraseItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
@@ -40,11 +40,11 @@
                             </SwipeView.RightItems>
                             <Grid Padding="10" x:DataType="common:MLangPhrase">
                                 <StackLayout VerticalOptions="Center">
-                                    <Label Text="{Binding PHRASE}" Style="{StaticResource Key=Text2}" />
-                                    <Label Text="{Binding TRANSLATION}" Style="{StaticResource Key=Text3}" />
+                                    <Label Text="{x:Bind PHRASE, Mode=TwoWay}" Style="{StaticResource Key=Text2}" />
+                                    <Label Text="{x:Bind TRANSLATION, Mode=TwoWay}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

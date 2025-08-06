@@ -19,7 +19,7 @@
             <ToolBar x:Name="ToolBarDict" Band="1" />
             <ToolBar Band="2">
                 <Button Content="New Test" Click="btnNewTest_Click"/>
-                <CheckBox Content="Speak?" IsChecked="{Binding IsSpeaking}" />
+                <CheckBox Content="Speak?" IsChecked="{x:Bind IsSpeaking}" />
                 <Button Content="Speak" Click="btnSpeak_Click"/>
             </ToolBar>
         </ToolBarTray>
@@ -46,24 +46,24 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                    <Label Content="{Binding IndexString}" Visibility="{Binding IndexVisible, Converter={StaticResource BooleanToVisibilityConverter}}" DockPanel.Dock="Left"/>
-                    <Label Visibility="{Binding CorrectVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
-                    <Label Visibility="{Binding IncorrectVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
-                    <Label Content="{Binding AccuracyString}" Visibility="{Binding AccuracyVisible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+                    <Label Content="{x:Bind IndexString}" Visibility="{x:Bind IndexVisible, Converter={StaticResource BooleanToVisibilityConverter}}" DockPanel.Dock="Left"/>
+                    <Label Visibility="{x:Bind CorrectVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Correct" Foreground="Green" DockPanel.Dock="Left" />
+                    <Label Visibility="{x:Bind IncorrectVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Incorrect" Foreground="Red" DockPanel.Dock="Left" />
+                    <Label Content="{x:Bind AccuracyString}" Visibility="{x:Bind AccuracyVisible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" DockPanel.Dock="Right" />
                 </DockPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
-                    <Label Content="{Binding WordTargetString}" Visibility="{Binding WordTargetVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" />
-                    <Label Content="{Binding NoteTargetString}" Visibility="{Binding NoteTargetVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Magenta" FontSize="18" VerticalAlignment="Center" />
-                    <Label Content="{Binding WordHintString}" Visibility="{Binding WordHintVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" />
+                    <Label Content="{x:Bind WordTargetString}" Visibility="{x:Bind WordTargetVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" />
+                    <Label Content="{x:Bind NoteTargetString}" Visibility="{x:Bind NoteTargetVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Magenta" FontSize="18" VerticalAlignment="Center" />
+                    <Label Content="{x:Bind WordHintString}" Visibility="{x:Bind WordHintVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" />
                 </StackPanel>
-                <TextBox Text="{Binding TranslationString}" TextWrapping="Wrap" Grid.Row="2" />
-                <TextBox x:Name="tbWordInput" Text="{Binding WordInputString,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
+                <TextBox Text="{x:Bind TranslationString, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="2" />
+                <TextBox x:Name="tbWordInput" Text="{Binding WordInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
                           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
                 <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <CheckBox Content="On Repeat" IsChecked="{Binding OnRepeat}" VerticalAlignment="Center" />
-                    <CheckBox Content="Forward" IsChecked="{Binding MoveForward}" VerticalAlignment="Center" />
-                    <Button x:Name="btnCheckPrev" Content="{Binding CheckPrevString}" IsEnabled="{Binding CheckPrevEnabled}" Visibility="{Binding CheckPrevVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Width="100" Click="btnCheck_Click"/>
-                    <Button x:Name="btnCheckNext" Content="{Binding CheckNextString}" IsEnabled="{Binding CheckNextEnabled}" Width="100" Click="btnCheck_Click"/>
+                    <CheckBox Content="On Repeat" IsChecked="{x:Bind OnRepeat}" VerticalAlignment="Center" />
+                    <CheckBox Content="Forward" IsChecked="{x:Bind MoveForward}" VerticalAlignment="Center" />
+                    <Button x:Name="btnCheckPrev" Content="{x:Bind CheckPrevString}" IsEnabled="{x:Bind CheckPrevEnabled}" Visibility="{x:Bind CheckPrevVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Width="100" Click="btnCheck_Click"/>
+                    <Button x:Name="btnCheckNext" Content="{x:Bind CheckNextString}" IsEnabled="{x:Bind CheckNextEnabled}" Width="100" Click="btnCheck_Click"/>
                 </StackPanel>
             </Grid>
             <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />

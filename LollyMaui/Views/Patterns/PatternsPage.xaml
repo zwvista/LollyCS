@@ -11,10 +11,10 @@
         <ToolbarItem Text="Add" Clicked="ToolbarItemAdd_Clicked" />
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
-        <SearchBar Placeholder="Filter" Text="{Binding TextFilter}" />
-        <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePatternFilters}}" SelectedItem="{Binding ScopeFilter}" />
-        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PatternsViewModel" Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy}">
-            <CollectionView ItemsSource="{Binding PatternItems}" SelectionMode="None">
+        <SearchBar Placeholder="Filter" Text="{x:Bind TextFilter, Mode=TwoWay}" />
+        <Picker Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePatternFilters}}" SelectedItem="{x:Bind ScopeFilter}" />
+        <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PatternsViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
+            <CollectionView ItemsSource="{x:Bind PatternItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
@@ -34,13 +34,13 @@
                             </SwipeView.RightItems>
                             <Grid Padding="10" x:DataType="common:MPattern" ColumnDefinitions="*,Auto">
                                 <StackLayout Padding="10">
-                                    <Label Text="{Binding PATTERN}" Style="{StaticResource Key=Text2}" />
-                                    <Label Text="{Binding TAGS}" Style="{StaticResource Key=Text3}" />
+                                    <Label Text="{x:Bind PATTERN, Mode=TwoWay}" Style="{StaticResource Key=Text2}" />
+                                    <Label Text="{x:Bind TAGS, Mode=TwoWay}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
                                 <ImageButton Grid.Column="1" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                              WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

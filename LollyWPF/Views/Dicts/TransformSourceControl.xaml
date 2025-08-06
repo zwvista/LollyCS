@@ -27,13 +27,13 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding SourceWord}" wpf:HintAssist.Hint="Word" Width="100" />
-            <TextBox Text="{Binding URL, Mode=OneWay}" wpf:HintAssist.Hint="URL" Margin="10,0,0,0" Grid.Column="1" />
-            <Button Content="Get Html" Command="{Binding GetHtmlCommand}" Margin="10,0,0,0" Grid.Column="2" />
-            <Button Content="Transform" Margin="10,0,0,0" Command="{Binding ExecuteTransformCommand}" Grid.Column="3" />
-            <Button Content="Get &amp; Transform" Margin="10,0,0,0" Command="{Binding GetAndTransformCommand}" Grid.Column="4" />
+            <TextBox Text="{x:Bind SourceWord, Mode=TwoWay}" wpf:HintAssist.Hint="Word" Width="100" />
+            <TextBox Text="{x:Bind URL}" wpf:HintAssist.Hint="URL" Margin="10,0,0,0" Grid.Column="1" />
+            <Button Content="Get Html" Command="{x:Bind GetHtmlCommand}" Margin="10,0,0,0" Grid.Column="2" />
+            <Button Content="Transform" Margin="10,0,0,0" Command="{x:Bind ExecuteTransformCommand}" Grid.Column="3" />
+            <Button Content="Get &amp; Transform" Margin="10,0,0,0" Command="{x:Bind GetAndTransformCommand}" Grid.Column="4" />
         </Grid>
-        <TextBox Text="{Binding SourceText}" Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <TextBox Text="{x:Bind SourceText, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
         <GridSplitter Grid.Row="2" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
         <cef:ChromiumWebBrowser Grid.Row="3" x:Name="wbDict" IsBrowserInitializedChanged="wbDict_IsBrowserInitializedChanged"/>
     </Grid>

@@ -15,7 +15,7 @@
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
                 <Button Content="Save" Click="btnSave_Click"/>
-                <Button Content="HtmlToMarked" Command="{Binding HtmlToMarkedCommand}"/>
+                <Button Content="HtmlToMarked" Command="{x:Bind HtmlToMarkedCommand}"/>
                 <Button x:Name="btnAddTagB" Content="Add B" Click="btnAddTagB_Click"/>
                 <Button x:Name="btnAddTagI" Content="Add I" Click="btnAddTagI_Click"/>
                 <Button x:Name="btnRemoveTagBI" Content="Remove BI" Click="btnRemoveTagBI_Click"/>
@@ -23,8 +23,8 @@
                 <Button x:Name="btnAddExplanation" Content="AddExplanation" Click="btnAddExplanation_Click"/>
                 <Button x:Name="btnMarkedToHtml" Content="MarkedToHtml" Click="btnMarkedToHtml_Click"/>
                 <Button x:Name="btnPatternToHtml" Content="PatternToHtml" Click="btnPatternToHtml_Click"/>
-                <TextBox Text="{Binding PatternNo}" Width="60" wpf:HintAssist.Hint="Pattern No." />
-                <Button Content="AddNotes" Command="{Binding AddNotesCommand}"/>
+                <TextBox Text="{x:Bind PatternNo, Mode=TwoWay}" Width="60" wpf:HintAssist.Hint="Pattern No." />
+                <Button Content="AddNotes" Command="{x:Bind AddNotesCommand}"/>
             </ToolBar>
         </ToolBarTray>  
         <Grid>
@@ -39,9 +39,9 @@
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="tbMarked" Text="{Binding MarkedText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"></TextBox>
+                <TextBox x:Name="tbMarked" Text="{Binding MarkedText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" AcceptsReturn="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"></TextBox>
                 <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
-                <TextBox Text="{Binding HtmlText,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                <TextBox Text="{Binding HtmlText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
             <Grid Grid.Column="2">
@@ -53,8 +53,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Text="{Binding Title}" />
-                <Button x:Name="btnEditPost" Content="Edit" IsEnabled="{Binding IsLangBlogPost}" Click="btnEditPost_Click" Grid.Column="1" />
+                <TextBox Text="{x:Bind Title, Mode=TwoWay}" />
+                <Button x:Name="btnEditPost" Content="Edit" IsEnabled="{x:Bind IsLangBlogPost}" Click="btnEditPost_Click" Grid.Column="1" />
                 <cef:ChromiumWebBrowser Grid.Row="1" Grid.ColumnSpan="2" x:Name="wbPost" />
             </Grid>
         </Grid>

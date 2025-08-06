@@ -7,17 +7,17 @@
              x:DataType="common:MLangPhraseEdit">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Save" Command="{x:Bind Save}" Priority="0" Order="Primary" />
         <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="ID:" />
-            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="PHRASE:" />
-            <Entry Text="{Binding PHRASE}" />
+            <Entry Text="{x:Bind PHRASE, Mode=TwoWay}" />
             <Label Text="TRANSLATION:" />
-            <Entry Text="{Binding TRANSLATION}" />
+            <Entry Text="{x:Bind TRANSLATION, Mode=TwoWay}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

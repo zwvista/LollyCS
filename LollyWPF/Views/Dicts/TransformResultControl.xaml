@@ -17,7 +17,7 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox Text="{Binding ResultText, Mode=OneWay}" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <TextBox Text="{x:Bind ResultText}" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
         <GridSplitter Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch"/>
         <cef:ChromiumWebBrowser Grid.Row="2" x:Name="wbDict" IsBrowserInitializedChanged="wbDict_IsBrowserInitializedChanged"/>
     </Grid>

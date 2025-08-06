@@ -7,21 +7,21 @@
              x:DataType="common:MPatternEdit">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Save" Command="{x:Bind Save}" Priority="0" Order="Primary" />
         <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="ID:" />
-            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="PATTERN:" />
-            <Entry Text="{Binding PATTERN}" />
+            <Entry Text="{x:Bind PATTERN, Mode=TwoWay}" />
             <Label Text="TAGS:" />
-            <Entry Text="{Binding TAGS}" />
+            <Entry Text="{x:Bind TAGS, Mode=TwoWay}" />
             <Label Text="TITLE:" />
-            <Entry Text="{Binding TITLE}" />
+            <Entry Text="{x:Bind TITLE, Mode=TwoWay}" />
             <Label Text="URL:" />
-            <Entry Text="{Binding URL}" />
+            <Entry Text="{x:Bind URL, Mode=TwoWay}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

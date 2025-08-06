@@ -9,8 +9,8 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{Binding OnlineTextbooks}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{Binding SelectedOnlineTextbookIndex,Mode=TwoWay}" />
-        <WebView Grid.Row="1" x:Name="wbWebPage" Source="{Binding URL}">
+        <Picker ItemsSource="{x:Bind OnlineTextbooks}" ItemDisplayBinding="{x:Bind TITLE}" SelectedIndex="{x:Bind SelectedOnlineTextbookIndex,Mode=TwoWay}" />
+        <WebView Grid.Row="1" x:Name="wbWebPage" Source="{x:Bind URL}">
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>
                 <SwipeGestureRecognizer Direction="Right" Swiped="WebView_SwipedRight"/>

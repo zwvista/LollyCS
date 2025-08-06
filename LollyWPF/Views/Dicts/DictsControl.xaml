@@ -21,9 +21,9 @@
         </ToolBarTray>
         <DockPanel>
             <StatusBar DockPanel.Dock="Bottom">
-                <Label Content="{Binding StatusText}"/>
+                <Label Content="{x:Bind StatusText}"/>
             </StatusBar>
-            <DataGrid x:Name="dgDicts" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding Items}" IsReadOnly="True">
+            <DataGrid x:Name="dgDicts" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{x:Bind Items}" IsReadOnly="True" d:DataContext="{d:DesignInstance Type=common:MDictionary}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
                     <DataGridTextColumn Binding="{Binding LANGNAMETO}" Header="LANGNAMETO" />

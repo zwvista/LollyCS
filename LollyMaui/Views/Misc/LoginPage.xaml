@@ -7,9 +7,9 @@
              Shell.NavBarIsVisible="False">
     <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
         <Label Text="USERNAME:" />
-        <Entry Text="{Binding USERNAME}" />
+        <Entry Text="{x:Bind USERNAME, Mode=TwoWay}" />
         <Label Text="PASSWORD:" />
-        <Entry IsPassword="True" Text="{Binding PASSWORD}" />
+        <Entry IsPassword="True" Text="{x:Bind PASSWORD, Mode=TwoWay}" />
         <Button Grid.ColumnSpan="2" Text="Login" Clicked="Button_Clicked"/>
     </StackLayout>
 </ContentPage>

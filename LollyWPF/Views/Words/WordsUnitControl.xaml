@@ -22,18 +22,18 @@
                 <Button x:Name="btnRefresh" ToolTip="Refresh" fa:FontAwesome.Icon="Solid_RotateRight" Click="btnRefresh_Click"/>
                 <Button x:Name="btnBatchAdd" ToolTip="Batch Add" fa:FontAwesome.Icon="Solid_SquarePlus" Click="btnBatchAdd_Click"/>
                 <Button x:Name="btnBatchEdit" ToolTip="Batch Edit" fa:FontAwesome.Icon="Solid_Pen" Click="btnBatchEdit_Click"/>
-                <Button x:Name="btnToggleToType" ToolTip="Toggle" fa:FontAwesome.Icon="Solid_TableCells" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnToggleToType_Click"/>
-                <Button x:Name="btnPreviousUnitPart" ToolTip="Previous" fa:FontAwesome.Icon="Solid_ArrowLeft" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnPreviousUnitPart_Click"/>
-                <Button x:Name="btnNextUnitPart" ToolTip="Next" fa:FontAwesome.Icon="Solid_ArrowRight" IsEnabled="{Binding vmSettings.ToTypeMovable}" Click="btnNextUnitPart_Click"/>
-                <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{Binding IfEmpty}" />
+                <Button x:Name="btnToggleToType" ToolTip="Toggle" fa:FontAwesome.Icon="Solid_TableCells" IsEnabled="{x:Bind vmSettings.ToTypeMovable}" Click="btnToggleToType_Click"/>
+                <Button x:Name="btnPreviousUnitPart" ToolTip="Previous" fa:FontAwesome.Icon="Solid_ArrowLeft" IsEnabled="{x:Bind vmSettings.ToTypeMovable}" Click="btnPreviousUnitPart_Click"/>
+                <Button x:Name="btnNextUnitPart" ToolTip="Next" fa:FontAwesome.Icon="Solid_ArrowRight" IsEnabled="{x:Bind vmSettings.ToTypeMovable}" Click="btnNextUnitPart_Click"/>
+                <CheckBox x:Name="chkIfEmpty" Content="If Empty" IsChecked="{x:Bind IfEmpty}" />
                 <Button x:Name="btnGetNotes" Content="Get Notes" Click="btnGetNotes_Click"/>
                 <Button x:Name="btnClearNotes" Content="Clear Notes" Click="btnClearNotes_Click"/>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding NewWord,UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
+                <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{x:Bind ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
-                <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter,UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -49,9 +49,9 @@
                     <RowDefinition Height="150"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding WordItems}"
+                <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind WordItems}"
                           dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DragHandler="{Binding}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditWord" SelectedItem="{Binding SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditWord" SelectedItem="{x:Bind SelectedWordItem}" SelectionChanged="dgWords_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding UNITSTR}" Header="UNIT" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PARTSTR}" Header="PART" IsReadOnly="True" />
@@ -92,7 +92,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                          ItemsSource="{Binding PhraseItems}" SelectedItem="{Binding SelectedPhraseItem}"
+                          ItemsSource="{x:Bind PhraseItems}" SelectedItem="{x:Bind SelectedPhraseItem}" mx:DataType="common:PhrasesLangViewModel"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditPhrase">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
@@ -120,7 +120,7 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <StatusBar Grid.Row="3">
-                    <Label Content="{Binding StatusText}"/>
+                    <Label Content="{x:Bind StatusText}"/>
                 </StatusBar>
             </Grid>
             <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />

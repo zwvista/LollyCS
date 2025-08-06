@@ -9,8 +9,8 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,*">
-        <Picker ItemsSource="{Binding Words}" SelectedIndex="{Binding SelectedWordIndex,Mode=TwoWay}" />
-        <Picker Grid.Column="1" ItemsSource="{Binding vmSettings.DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding vmSettings.SelectedDictReference}" />
+        <Picker ItemsSource="{x:Bind Words}" SelectedIndex="{x:Bind SelectedWordIndex,Mode=TwoWay}" />
+        <Picker Grid.Column="1" ItemsSource="{x:Bind vmSettings.DictsReference}" ItemDisplayBinding="{x:Bind DICTNAME}" SelectedItem="{x:Bind vmSettings.SelectedDictReference}" />
         <WebView Grid.Row="1" Grid.ColumnSpan="2" x:Name="wbDict" Navigated="wbDict_Navigated">
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>

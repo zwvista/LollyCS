@@ -13,8 +13,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel Margin="10">
         <StackPanel DockPanel.Dock="Top">
-            <xctk:IntegerUpDown Value="{Binding IntermediateIndex}" Width="75" VerticalAlignment="Center" Minimum="0" Maximum="{Binding IntermediateMaxIndex}"/>
+            <xctk:IntegerUpDown Value="{x:Bind IntermediateIndex}" Width="75" VerticalAlignment="Center" Minimum="0" Maximum="{x:Bind IntermediateMaxIndex}"/>
         </StackPanel>
-        <TextBox Text="{Binding IntermediateText, Mode=OneWay}" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <TextBox Text="{x:Bind IntermediateText}" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
     </DockPanel>
 </UserControl>

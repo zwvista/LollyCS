@@ -11,27 +11,27 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Language:" />
-            <Picker ItemsSource="{Binding Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{Binding SelectedLang}" />
+            <Picker ItemsSource="{x:Bind Languages}" ItemDisplayBinding="{x:Bind LANGNAME}" SelectedItem="{x:Bind SelectedLang}" />
             <Label Text="Voice:" />
-            <Picker ItemsSource="{Binding Voices}" ItemDisplayBinding="{Binding VOICENAME}" SelectedItem="{Binding SelectedVoice}" />
+            <Picker ItemsSource="{x:Bind Voices}" ItemDisplayBinding="{x:Bind VOICENAME}" SelectedItem="{x:Bind SelectedVoice}" />
             <Label Text="Dictionary(Reference):" />
-            <Picker ItemsSource="{Binding DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictReference}" />
+            <Picker ItemsSource="{x:Bind DictsReference}" ItemDisplayBinding="{x:Bind DICTNAME}" SelectedItem="{x:Bind SelectedDictReference}" />
             <Label Text="Dictionary(Note):" />
-            <Picker ItemsSource="{Binding DictsNote}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictNote}" />
+            <Picker ItemsSource="{x:Bind DictsNote}" ItemDisplayBinding="{x:Bind DICTNAME}" SelectedItem="{x:Bind SelectedDictNote}" />
             <Label Text="Dictionary(Translation):" />
-            <Picker ItemsSource="{Binding DictsTranslation}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{Binding SelectedDictTranslation}" />
+            <Picker ItemsSource="{x:Bind DictsTranslation}" ItemDisplayBinding="{x:Bind DICTNAME}" SelectedItem="{x:Bind SelectedDictTranslation}" />
             <Label Text="Textbook:" />
-            <Picker ItemsSource="{Binding Textbooks}" ItemDisplayBinding="{Binding TEXTBOOKNAME}" SelectedItem="{Binding SelectedTextbook}" />
+            <Picker ItemsSource="{x:Bind Textbooks}" ItemDisplayBinding="{x:Bind TEXTBOOKNAME}" SelectedItem="{x:Bind SelectedTextbook}" />
             <Label Text="Units &amp; Parts:" />
-            <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITFROMItem}" />
-            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTFROMItem}" IsEnabled="{Binding PartFromEnabled}" />
+            <Picker ItemsSource="{x:Bind Units}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind USUNITFROMItem}" />
+            <Picker ItemsSource="{x:Bind Parts}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind USPARTFROMItem}" IsEnabled="{x:Bind PartFromEnabled}" />
             <Grid ColumnDefinitions="100,*,*">
-                <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ToTypes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ToTypeItem}" />
-                <Button Text="{Binding PreviousText}" IsEnabled="{Binding PreviousEnabled}" Grid.Column="1" />
-                <Button Text="{Binding NextText}" IsEnabled="{Binding NextEnabled}" Grid.Column="2" />
+                <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ToTypes}}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind ToTypeItem}" />
+                <Button Text="{x:Bind PreviousText, Mode=TwoWay}" IsEnabled="{x:Bind PreviousEnabled}" Grid.Column="1" />
+                <Button Text="{x:Bind NextText, Mode=TwoWay}" IsEnabled="{x:Bind NextEnabled}" Grid.Column="2" />
             </Grid>
-            <Picker ItemsSource="{Binding Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USUNITTOItem}" IsEnabled="{Binding UnitToEnabled}" />
-            <Picker ItemsSource="{Binding Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding USPARTTOItem}" IsEnabled="{Binding PartToEnabled}" />
+            <Picker ItemsSource="{x:Bind Units}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind USUNITTOItem}" IsEnabled="{x:Bind UnitToEnabled}" />
+            <Picker ItemsSource="{x:Bind Parts}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind USPARTTOItem}" IsEnabled="{x:Bind PartToEnabled}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

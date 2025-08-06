@@ -7,8 +7,8 @@
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:mx="http://compiledbindings.com/x"
         mc:Ignorable="d mx"
-        d:DataContext="{d:DesignInstance Type=common:PhrasesLangDetailViewModel}"
-        mx:DataType="common:PhrasesLangDetailViewModel"
+        d:DataContext="{d:DesignInstance Type=common:MLangPhraseEdit}"
+        mx:DataType="common:MLangPhraseEdit"
         Title="Phrases in Language Details" Height="380" Width="700" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
@@ -31,12 +31,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{x:Bind ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" Grid.Row="1" />
-        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" />
         <Label Content="TRANSLATION:" Grid.Row="2" />
-        <TextBox Text="{Binding TRANSLATION}" Grid.Row="2" Grid.Column="1" />
-        <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding PhraseItems}" IsReadOnly="True"
+        <TextBox Text="{x:Bind TRANSLATION, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" />
+        <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{x:Bind PhraseItems, DataType=common:SinglePhraseViewModel}" IsReadOnly="True"
                   Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
@@ -50,7 +50,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{Binding Save}"/>
+            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{x:Bind Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>

@@ -19,7 +19,7 @@
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding NewWord,UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
+                <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -29,7 +29,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      ItemsSource="{Binding WordItems}" SelectedItem="{Binding SelectedWordItem}">
+                      ItemsSource="{x:Bind WordItems}" SelectedItem="{x:Bind SelectedWordItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
                     <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>

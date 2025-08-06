@@ -20,10 +20,10 @@
         </ToolBarTray>
         <DockPanel>
             <StatusBar DockPanel.Dock="Bottom">
-                <Label Content="{Binding StatusText}"/>
+                <Label Content="{x:Bind StatusText}"/>
             </StatusBar>
-            <DataGrid x:Name="dgTextbooks" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Items}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedTextbookItem}">
+            <DataGrid x:Name="dgTextbooks" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind Items}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{x:Bind SelectedTextbookItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                     <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />

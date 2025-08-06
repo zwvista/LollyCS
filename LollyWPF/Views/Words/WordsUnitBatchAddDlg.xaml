@@ -7,8 +7,8 @@
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:mx="http://compiledbindings.com/x"
         mc:Ignorable="d mx"
-        d:DataContext="{d:DesignInstance Type=common:WordsUnitBatchAddViewModel}"
-        mx:DataType="common:WordsUnitBatchAddViewModel"
+        d:DataContext="{d:DesignInstance Type=common:MUnitWordEdit}"
+        mx:DataType="common:MUnitWordEdit"
         Title="Words in Unit Details" Height="300" Width="450" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
@@ -33,15 +33,15 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="UNIT:" Grid.Row="0" />
-        <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
+        <ComboBox x:Name="cbUnit" ItemsSource="{x:Bind Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind UNIT}"
                   Grid.Row="0" Grid.Column="1" />
         <Label Content="PART:" Grid.Row="1" />
-        <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
+        <ComboBox x:Name="cbPart" ItemsSource="{x:Bind Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind PART}"
                   Grid.Row="1" Grid.Column="1" />
         <Label Content="WORDS:" Grid.Row="2" />
-        <TextBox x:Name="tbWords" Text="{Binding WORDS}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="tbWords" Text="{x:Bind WORDS}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="1" />
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{Binding Save}"/>
+            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{x:Bind Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>

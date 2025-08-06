@@ -13,23 +13,23 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Mode:" />
-            <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding ModeItem}" />
+            <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind ModeItem}" />
             <Label Text="Speaking Enabled:" />
-            <CheckBox IsChecked="{Binding SpeakingEnabled}" />
+            <CheckBox IsChecked="{x:Bind SpeakingEnabled}" />
             <Label Text="Shuffled:" />
-            <CheckBox IsChecked="{Binding Shuffled}" />
+            <CheckBox IsChecked="{x:Bind Shuffled}" />
             <Label Text="On Repeat:" />
-            <CheckBox IsChecked="{Binding OnRepeat}" />
+            <CheckBox IsChecked="{x:Bind OnRepeat}" />
             <Label Text="Forward:" />
-            <CheckBox IsChecked="{Binding MoveForward}" />
+            <CheckBox IsChecked="{x:Bind MoveForward}" />
             <Label Text="Interval:" />
-            <Entry Text="{Binding Interval}" Keyboard="Numeric" />
+            <Entry Text="{x:Bind Interval, Mode=TwoWay}" Keyboard="Numeric" />
             <Label Text="Group:" />
-            <Entry Text="{Binding GroupSelected}" Keyboard="Numeric" />
+            <Entry Text="{x:Bind GroupSelected, Mode=TwoWay}" Keyboard="Numeric" />
             <Label Text="Groups:" />
-            <Entry Text="{Binding GroupCount}" Keyboard="Numeric" />
+            <Entry Text="{x:Bind GroupCount, Mode=TwoWay}" Keyboard="Numeric" />
             <Label Text="Review:" />
-            <Entry Text="{Binding ReviewCount}" Keyboard="Numeric" />
+            <Entry Text="{x:Bind ReviewCount, Mode=TwoWay}" Keyboard="Numeric" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

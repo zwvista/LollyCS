@@ -7,31 +7,31 @@
              x:DataType="common:MUnitWordEdit">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding Save}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Save" Command="{x:Bind Save}" Priority="0" Order="Primary" />
         <ToolbarItem Text="Cancel" Clicked="OnCancel" Priority="1" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="ID:" />
-            <Entry Text="{Binding ID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="TEXTBOOK:" />
-            <Entry Text="{Binding TEXTBOOKNAME}" IsReadOnly="True" />
+            <Entry Text="{x:Bind TEXTBOOKNAME, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="UNIT:" />
-            <Picker ItemsSource="{Binding Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding UNITItem}" />
+            <Picker ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind UNITItem}" />
             <Label Text="PART:" />
-            <Picker ItemsSource="{Binding Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{Binding PARTItem}" />
+            <Picker ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind PARTItem}" />
             <Label Text="SEQNUM:" />
-            <Entry Text="{Binding SEQNUM}" Keyboard="Numeric" />
+            <Entry Text="{x:Bind SEQNUM, Mode=TwoWay}" Keyboard="Numeric" />
             <Label Text="WORDID:" />
-            <Entry Text="{Binding WORDID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind WORDID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="WORD:" />
-            <Entry Text="{Binding WORD}" />
+            <Entry Text="{x:Bind WORD, Mode=TwoWay}" />
             <Label Text="NOTE:" />
-            <Entry Text="{Binding NOTE}" />
+            <Entry Text="{x:Bind NOTE, Mode=TwoWay}" />
             <Label Text="FAMIID:" />
-            <Entry Text="{Binding FAMIID}" IsReadOnly="True" />
+            <Entry Text="{x:Bind FAMIID, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="ACCURACY:" />
-            <Entry Text="{Binding ACCURACY}" IsReadOnly="True" />
+            <Entry Text="{x:Bind ACCURACY, Mode=TwoWay}" IsReadOnly="True" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

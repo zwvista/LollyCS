@@ -7,8 +7,8 @@
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:mx="http://compiledbindings.com/x"
         mc:Ignorable="d mx"
-        d:DataContext="{d:DesignInstance Type=common:WordsLangDetailViewModel}"
-        mx:DataType="common:WordsLangDetailViewModel"
+        d:DataContext="{d:DesignInstance Type=common:MLangWordEdit}"
+        mx:DataType="common:MLangWordEdit"
         Title="Words in Language Details" Height="460" Width="800" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
@@ -33,16 +33,16 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="ID:" Grid.Row="0" />
-        <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{x:Bind ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="WORD:" Grid.Row="1" />
-        <TextBox x:Name="tbWord" Text="{Binding WORD,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" />
+        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" />
         <Label Content="NOTE:" Grid.Row="2" />
-        <TextBox Text="{Binding NOTE}" Grid.Row="2" Grid.Column="1" />
+        <TextBox Text="{x:Bind NOTE, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" />
         <Label Content="FAMIID:" Grid.Row="3" />
-        <TextBox Text="{Binding FAMIID}" Grid.Row="3" Grid.Column="1" IsReadOnly="True" />
+        <TextBox Text="{x:Bind FAMIID, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" IsReadOnly="True" />
         <Label Content="ACCURACY:" Grid.Row="4" />
-        <TextBox Text="{Binding ACCURACY,Mode=OneWay}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
-        <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding WordItems}" IsReadOnly="True"
+        <TextBox Text="{x:Bind ACCURACY}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
+        <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{x:Bind WordItems, DataType=common:SingleWordViewModel}" IsReadOnly="True"
                   Grid.Row="5" Grid.ColumnSpan="2" Margin="0,10,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" />
@@ -58,7 +58,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{Binding Save}"/>
+            <Button Content="OK" Width="75" IsDefault="True" local:ButtonHelper.DialogResult="True" Command="{x:Bind Save}"/>
             <Button Content="Cancel" Width="75" IsCancel="True" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>
