@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:mx="http://compiledbindings.com/x"
-        xmlns:cb="https://compiledbindings.com"
         mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:MUnitWordEdit}"
         mx:DataType="common:MUnitWordEdit"
@@ -43,7 +42,7 @@
         <Label Content="ID:" Grid.Row="0" />
         <TextBox Text="{Binding ID}" Grid.Row="0" Grid.Column="1" IsReadOnly="True" />
         <Label Content="UNIT:" Grid.Row="1" />
-        <ComboBox x:Name="cbUnit" ItemsSource="{cb:Bind Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
+        <ComboBox x:Name="cbUnit" ItemsSource="{Binding Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding UNIT}"
                   Grid.Row="1" Grid.Column="1" />
         <Label Content="PART:" Grid.Row="2" />
         <ComboBox x:Name="cbPart" ItemsSource="{Binding Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PART}"
