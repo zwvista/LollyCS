@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyWPF"
+        xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
         Title="Phrases in Language Details" Height="380" Width="700" WindowStartupLocation="CenterOwner">
     <Window.Resources>

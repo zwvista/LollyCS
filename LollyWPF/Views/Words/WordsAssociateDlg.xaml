@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=common:WordsAssociateViewModel}"
         Title="WordsUnitDetailDlg" Height="470" Width="560" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">

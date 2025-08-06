@@ -6,6 +6,7 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:local="clr-namespace:LollyWPF"
+        xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
         Title="Transform Edit" Height="800" Width="1000" WindowStartupLocation="CenterOwner" WindowState="Maximized">
     <DockPanel Margin="10">

@@ -9,7 +9,8 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:dd="urn:gong-wpf-dragdrop"
              xmlns:fa="http://schemas.fontawesome.com/icons/fonts/properties"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=local:WordsUnitViewModelWPF}"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">

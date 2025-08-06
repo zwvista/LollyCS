@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:local="clr-namespace:LollyWPF"
+        xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
         Title="LollyWPF" Height="450" Width="800" WindowState="Maximized">
     <Window.CommandBindings>
