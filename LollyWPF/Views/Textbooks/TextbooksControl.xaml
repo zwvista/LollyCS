@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:LollyWPF"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
-             mc:Ignorable="d" 
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="d mx"
              d:DataContext="{d:DesignInstance Type=common:TextbooksViewModel}"
+             mx:DataType="common:TextbooksViewModel"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">

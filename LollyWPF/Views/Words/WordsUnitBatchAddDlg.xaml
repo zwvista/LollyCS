@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:WordsUnitBatchAddViewModel}"
+        mx:DataType="common:WordsUnitBatchAddViewModel"
         Title="Words in Unit Details" Height="300" Width="450" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">

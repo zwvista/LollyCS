@@ -6,8 +6,10 @@
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:SettingsDictsViewModel}"
+        mx:DataType="common:SettingsDictsViewModel"
         Title="Select Dictionaries" Height="450" Width="800" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>

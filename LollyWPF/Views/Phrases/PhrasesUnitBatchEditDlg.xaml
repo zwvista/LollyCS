@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:PhrasesUnitBatchEditViewModel}"
+        mx:DataType="common:PhrasesUnitBatchEditViewModel"
         Title="Phrases in Unit - Batch Edit" Height="530" Width="600" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">

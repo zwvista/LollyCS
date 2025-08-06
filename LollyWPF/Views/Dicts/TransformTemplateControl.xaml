@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LollyWPF"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             mc:Ignorable="d" 
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="d mx"
              d:DataContext="{d:DesignInstance Type=local:TransformEditViewModelWPF}"
+             mx:DataType="local:TransformEditViewModelWPF"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
         <TextBox Text="{Binding TEMPLATE}" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />

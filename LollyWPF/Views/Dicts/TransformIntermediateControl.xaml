@@ -6,8 +6,10 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:LollyWPF"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             mc:Ignorable="d" 
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="d mx"
              d:DataContext="{d:DesignInstance Type=local:TransformEditViewModelWPF}"
+             mx:DataType="local:TransformEditViewModelWPF"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel Margin="10">
         <StackPanel DockPanel.Dock="Top">

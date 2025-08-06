@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:DictsDetailViewModel}"
+        mx:DataType="common:DictsDetailViewModel"
         Title="Dictionary Details" Height="800" Width="1000" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
@@ -68,7 +70,7 @@
                 <ComboBox x:Name="cbDictType" DisplayMemberPath="NAME" SelectedValuePath="CODE" SelectedValue="{Binding DICTTYPECODE}"
                         Grid.Row="4" Grid.Column="1" />
                 <Label Content="DICTNAME:" Grid.Row="5" />
-                <TextBox x:Name="tbDictName" Text="{Binding DICTNAME, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
+                <TextBox x:Name="tbDictName" Text="{Binding DICTNAME,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
                 <Label Content="URL:" Grid.Row="6" />
                 <TextBox Text="{Binding URL}" Grid.Row="6" Grid.Column="1" />
                 <Label Content="CHCONV:" Grid.Row="7" />

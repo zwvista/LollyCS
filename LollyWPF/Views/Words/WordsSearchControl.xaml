@@ -7,8 +7,10 @@
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
-             mc:Ignorable="d" 
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="d mx"
              d:DataContext="{d:DesignInstance Type=common:WordsSearchViewModel}"
+             mx:DataType="common:WordsSearchViewModel"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
@@ -17,7 +19,7 @@
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
+                <TextBox x:Name="tbNewWord" Text="{Binding NewWord,UpdateSourceTrigger=PropertyChanged}"  Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
             </ToolBar>
         </ToolBarTray>
         <Grid>

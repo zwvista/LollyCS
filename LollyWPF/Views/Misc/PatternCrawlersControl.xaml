@@ -7,8 +7,10 @@
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:dd="urn:gong-wpf-dragdrop"
-             mc:Ignorable="d" 
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="d mx"
              d:DataContext="{d:DesignInstance Type=common:PatternCrawlersViewModel}"
+             mx:DataType="common:PatternCrawlersViewModel"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">

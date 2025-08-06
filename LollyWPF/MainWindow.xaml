@@ -6,7 +6,8 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         Title="LollyWPF" Height="450" Width="800" WindowState="Maximized">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.ShowSettingsCommand}" Executed="ShowSettingsCommand_Executed"/>

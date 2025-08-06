@@ -9,8 +9,10 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:dd="urn:gong-wpf-dragdrop"
              xmlns:fa="http://schemas.fontawesome.com/icons/fonts/properties"
-             mc:Ignorable="d"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="d mx"
              d:DataContext="{d:DesignInstance Type=local:WordsUnitViewModelWPF}"
+             mx:DataType="local:WordsUnitViewModelWPF"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
@@ -28,10 +30,10 @@
                 <Button x:Name="btnClearNotes" Content="Clear Notes" Click="btnClearNotes_Click"/>
             </ToolBar>
             <ToolBar Band="2">
-                <TextBox x:Name="tbNewWord" Text="{Binding NewWord, UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
+                <TextBox x:Name="tbNewWord" Text="{Binding NewWord,UpdateSourceTrigger=PropertyChanged}" Width="96" KeyDown="tbNewWord_KeyDown" wpf:HintAssist.Hint="New Word" />
                 <ComboBox x:Name="cbScopeFilter" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopeWordFilters}}" SelectedValue="{Binding ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
-                <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
+                <TextBox x:Name="tbTextFilter" Text="{Binding TextFilter,UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
         </ToolBarTray>
         <Grid>

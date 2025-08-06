@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="LollyWPF.ReviewOptionsDlg"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:MReviewOptions}"
+        mx:DataType="common:MReviewOptions"
         Title="Review Options" Height="360" Width="360" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <local:EnumConverter x:Key="EnumConverter"/>

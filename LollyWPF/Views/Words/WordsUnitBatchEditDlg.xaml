@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         d:DataContext="{d:DesignInstance Type=common:WordsUnitBatchEditViewModel}"
-        mc:Ignorable="d"
+        mx:DataType="common:WordsUnitBatchEditViewModel"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         Title="Words in Unit - Batch Edit" Height="640" Width="800" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">

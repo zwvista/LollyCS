@@ -7,18 +7,21 @@
              xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              xmlns:fa="http://schemas.fontawesome.com/icons/fonts/properties"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-             mc:Ignorable="d" 
+             xmlns:mx="http://compiledbindings.com/x"
+             xmlns:cb="https://compiledbindings.com"
+             mc:Ignorable="d mx cb"
              d:DataContext="{d:DesignInstance Type=common:LangBlogGroupsViewModel}"
+             mx:DataType="common:LangBlogGroupsViewModel"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
                 <Button x:Name="btnRefreshGroups" fa:FontAwesome.Icon="Solid_RotateRight" ToolTip="Refresh Groups" Click="btnRefreshGroups_Click"/>
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
-                <TextBox x:Name="tbGroupFilter" Text="{Binding GroupFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Group Filter" />
+                <TextBox x:Name="tbGroupFilter" Text="{Binding GroupFilter,UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Group Filter" />
                 <Button x:Name="btnRefreshPosts" fa:FontAwesome.Icon="Solid_RotateRight" ToolTip="Refresh Posts" Click="btnRefreshPosts_Click"/>
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
-                <TextBox x:Name="tbPostFilter" Text="{Binding PostFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Post Filter" />
+                <TextBox x:Name="tbPostFilter" Text="{Binding PostFilter,UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Post Filter" />
             </ToolBar>
         </ToolBarTray>  
         <Grid>

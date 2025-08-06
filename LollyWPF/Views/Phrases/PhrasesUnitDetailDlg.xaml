@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
-        mc:Ignorable="d"
+        xmlns:mx="http://compiledbindings.com/x"
+        mc:Ignorable="d mx"
         d:DataContext="{d:DesignInstance Type=common:MUnitPhraseEdit}"
+        mx:DataType="common:MUnitPhraseEdit"
         Title="Phrases in Unit Details" Height="520" Width="660" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
@@ -48,7 +50,7 @@
         <Label Content="PHRASEID:" Grid.Row="4" />
         <TextBox Text="{Binding PHRASEID}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" Grid.Row="5" />
-        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
         <Label Content="TRANSLATION:" Grid.Row="6" />
         <TextBox Text="{Binding TRANSLATION}" Grid.Row="6" Grid.Column="1" />
         <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}" IsReadOnly="True"
