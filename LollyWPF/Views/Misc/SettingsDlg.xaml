@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=common:SettingsViewModel}"
         Title="Settings" Height="480" Width="640" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <local:EnumConverter x:Key="EnumConverter"></local:EnumConverter>

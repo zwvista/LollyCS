@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=common:MUnitPhraseEdit}"
         Title="Phrases in Textbook Details" Height="580" Width="650" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">

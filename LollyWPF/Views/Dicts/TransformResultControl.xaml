@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              xmlns:local="clr-namespace:LollyWPF"
-        xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=local:TransformEditViewModelWPF}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>

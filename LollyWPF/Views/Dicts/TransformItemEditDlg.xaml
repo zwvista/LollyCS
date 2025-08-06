@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LollyWPF"
         xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=common:TransformItemEditViewModel}"
         Title="Transform Item Edit" Height="250" Width="600" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
