@@ -1,17 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.SearchPage"
              Title="Search"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:SearchViewModel"
              x:DataType="common:SearchViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,*">
         <SearchBar Grid.ColumnSpan="2" Placeholder="Enter a word here" Text="{x:Bind vmDict.Word, Mode=TwoWay}" />
-        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{x:Bind vmSettings.Languages}" ItemDisplayBinding="{x:Bind LANGNAME}" SelectedItem="{x:Bind vmSettings.SelectedLang}" />
-        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind vmSettings.DictsReference}" ItemDisplayBinding="{x:Bind DICTNAME}" SelectedItem="{x:Bind vmSettings.SelectedDictReference}" />
+        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{x:Bind vmSettings.Languages}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{x:Bind vmSettings.SelectedLang}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind vmSettings.DictsReference}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{x:Bind vmSettings.SelectedDictReference}" />
         <WebView Grid.Row="2" Grid.ColumnSpan="2" x:Name="wbDict" Navigated="wbDict_Navigated" />
     </Grid>
 </ContentPage>

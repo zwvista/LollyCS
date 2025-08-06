@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.ReviewOptionsPage"
              Title="Review Options"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:MReviewOptions"
              x:DataType="common:MReviewOptions">
 
     <ContentPage.ToolbarItems>
@@ -13,7 +17,7 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Mode:" />
-            <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind ModeItem}" />
+            <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind ModeItem}" />
             <Label Text="Speaking Enabled:" />
             <CheckBox IsChecked="{x:Bind SpeakingEnabled}" />
             <Label Text="Shuffled:" />

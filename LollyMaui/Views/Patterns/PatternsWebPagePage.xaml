@@ -1,15 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.PatternsWebPagePage"
              Title="Patterns Web Pages"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:PatternsWebPageViewModel"
              x:DataType="common:PatternsWebPageViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{x:Bind Patterns}" ItemDisplayBinding="{x:Bind TITLE}" SelectedIndex="{x:Bind SelectedPatternIndex,Mode=TwoWay}" />
+        <Picker ItemsSource="{x:Bind Patterns}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{x:Bind SelectedPatternIndex,Mode=TwoWay}" />
         <WebView Grid.Row="1" x:Name="wbWebPage" Source="{x:Bind URL}">
             <WebView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="WebView_SwipedLeft"/>

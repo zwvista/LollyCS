@@ -1,15 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.LangBlogPostsContentPage"
              Title="Language Blog Posts(Content)"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:LangBlogPostsContentViewModel"
              x:DataType="common:LangBlogPostsContentViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,*">
-        <Picker ItemsSource="{x:Bind PostItems}" ItemDisplayBinding="{x:Bind TITLE}" SelectedIndex="{x:Bind SelectedPostIndex,Mode=TwoWay}" />
+        <Picker ItemsSource="{x:Bind PostItems}" ItemDisplayBinding="{Binding TITLE}" SelectedIndex="{x:Bind SelectedPostIndex,Mode=TwoWay}" />
         <WebView Grid.Row="1" x:Name="wbPost">
             <WebView.Source>
                 <HtmlWebViewSource Html="{x:Bind vmGroups.PostHtml}" />

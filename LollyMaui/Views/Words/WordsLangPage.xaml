@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.WordsLangPage"
              Title="Words in Language"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
@@ -47,7 +48,7 @@
                                 <ImageButton Grid.Column="1" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                                     WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

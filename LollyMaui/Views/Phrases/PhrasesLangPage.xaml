@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.PhrasesLangPage"
              Title="Phrases in Language"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:PhrasesLangViewModel"
              x:DataType="common:PhrasesLangViewModel">
 
     <ContentPage.ToolbarItems>
@@ -44,7 +48,7 @@
                                     <Label Text="{x:Bind TRANSLATION, Mode=TwoWay}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

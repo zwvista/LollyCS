@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.PhrasesUnitPage"
              Title="Phrases in Unit"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:PhrasesUnitViewModel"
              x:DataType="common:PhrasesUnitViewModel">
 
     <ContentPage.ToolbarItems>
@@ -37,16 +41,16 @@
                             </SwipeView.RightItems>
                             <Grid Padding="10" x:DataType="common:MUnitPhrase" ColumnDefinitions="Auto,*">
                                 <StackLayout Spacing="2" VerticalOptions="Center">
-                                    <Label Text="{x:Bind UNITSTR, Mode=TwoWay}" Style="{StaticResource Key=Text1}" />
-                                    <Label Text="{x:Bind PARTSTR, Mode=TwoWay}" Style="{StaticResource Key=Text1}" />
-                                    <Label Text="{x:Bind SEQNUM, Mode=TwoWay}" Style="{StaticResource Key=Text1}" />
+                                    <Label Text="{x:Bind UNITSTR}" Style="{StaticResource Key=Text1}" />
+                                    <Label Text="{x:Bind PARTSTR}" Style="{StaticResource Key=Text1}" />
+                                    <Label Text="{x:Bind SEQNUM}" Style="{StaticResource Key=Text1}" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{x:Bind PHRASE, Mode=TwoWay}" Style="{StaticResource Key=Text2}" />
-                                    <Label Text="{x:Bind TRANSLATION, Mode=TwoWay}" Style="{StaticResource Key=Text3}" />
+                                    <Label Text="{x:Bind PHRASE}" Style="{StaticResource Key=Text2}" />
+                                    <Label Text="{x:Bind TRANSLATION}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

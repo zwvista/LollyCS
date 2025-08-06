@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.PhrasesUnitBatchEditPage"
              Title="Phrases in Unit(Batch Edit)"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
@@ -13,9 +14,9 @@
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
         <Label Text="UNIT:" VerticalTextAlignment="Center" />
-        <Picker Grid.Column="1" ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind UNITItem}" />
+        <Picker Grid.Column="1" ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem}" />
         <Label Grid.Row="1" Text="PART:" VerticalTextAlignment="Center" />
-        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind PARTItem}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem}" />
         <Label Grid.Row="2" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
         <Entry Grid.Row="2" Grid.Column="1" Text="{x:Bind SEQNUM, Mode=TwoWay}" Keyboard="Numeric" />
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{x:Bind vm.PhraseItems}" SelectionMode="None">
@@ -23,18 +24,18 @@
                 <DataTemplate>
                     <Grid x:DataType="common:MUnitPhrase" ColumnDefinitions="Auto,*,Auto">
                         <StackLayout Spacing="2" VerticalOptions="Center">
-                            <Label Text="{x:Bind UNITSTR, Mode=TwoWay}" Style="{StaticResource Key=Text1}" />
-                            <Label Text="{x:Bind PARTSTR, Mode=TwoWay}" Style="{StaticResource Key=Text1}" />
-                            <Label Text="{x:Bind SEQNUM, Mode=TwoWay}" Style="{StaticResource Key=Text1}" />
+                            <Label Text="{x:Bind UNITSTR}" Style="{StaticResource Key=Text1}" />
+                            <Label Text="{x:Bind PARTSTR}" Style="{StaticResource Key=Text1}" />
+                            <Label Text="{x:Bind SEQNUM}" Style="{StaticResource Key=Text1}" />
                         </StackLayout>
                         <StackLayout Grid.Column="1" VerticalOptions="Center">
-                            <Label Text="{x:Bind PHRASE, Mode=TwoWay}" Style="{StaticResource Key=Text2}" />
-                            <Label Text="{x:Bind TRANSLATION, Mode=TwoWay}" Style="{StaticResource Key=Text3}" />
+                            <Label Text="{x:Bind PHRASE}" Style="{StaticResource Key=Text2}" />
+                            <Label Text="{x:Bind TRANSLATION}" Style="{StaticResource Key=Text3}" />
                         </StackLayout>
                         <ImageButton Grid.Column="2" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                             WidthRequest="20" HeightRequest="20" IsVisible="{x:Bind IsChecked}" />
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
+                            <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                         </Grid.GestureRecognizers>
                     </Grid>
                 </DataTemplate>

@@ -1,16 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="LollyMaui.OnlineTextbooksPage"
              Title="Online Textbooks"
              xmlns:common="clr-namespace:LollyCommon;assembly=LollyCommon"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:mx="http://compiledbindings.com/x"
+             mc:Ignorable="mx"
+             mx:DataType="common:OnlineTextbooksViewModel"
              x:DataType="common:OnlineTextbooksViewModel">
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
-        <Picker ItemsSource="{x:Bind vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{x:Bind Label}" SelectedItem="{x:Bind OnlineTextbookFilterItem}" />
+        <Picker ItemsSource="{x:Bind vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind OnlineTextbookFilterItem}" />
         <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:OnlineTextbooksViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
             <CollectionView ItemsSource="{x:Bind Items}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
@@ -38,7 +42,7 @@
                                 <ImageButton Grid.Column="1" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                              WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>
