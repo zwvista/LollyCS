@@ -36,8 +36,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgGroups" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding GroupItems}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedGroupItem}">
+                <DataGrid x:Name="dgGroups" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind GroupItems}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{x:Bind SelectedGroupItem}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding GROUPNAME}" Header="GROUP" />
@@ -59,7 +59,7 @@
                 </DataGrid>
                 <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}" />
                 <DataGrid Grid.Row="2" x:Name="dgPosts" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False"
-                          ItemsSource="{Binding PostItems}" SelectedItem="{Binding SelectedPostItem}"
+                          ItemsSource="{x:Bind PostItems}" SelectedItem="{x:Bind SelectedPostItem}"
                           BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
