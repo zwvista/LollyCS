@@ -15,7 +15,7 @@
     <Grid Padding="10" RowDefinitions="Auto,Auto,*" ColumnDefinitions="2*,1*">
         <SearchBar Grid.ColumnSpan="2" Placeholder="Filter" Text="{x:Bind TextFilter, Mode=TwoWay}" />
         <Picker Grid.Row="1" ItemsSource="{x:Bind vmSettings.TextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind TextbookFilterItem}" />
-        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ScopePhraseFilters}}" SelectedItem="{x:Bind ScopeFilter}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind common:SettingsViewModel.ScopePhraseFilters}" SelectedItem="{x:Bind ScopeFilter}" />
         <RefreshView Grid.Row="2" Grid.ColumnSpan="2" x:DataType="common:PhrasesUnitViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
             <CollectionView ItemsSource="{x:Bind PhraseItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
@@ -49,7 +49,7 @@
                                     <Label Text="{x:Bind TRANSLATION}" Style="{StaticResource Key=Text3}" />
                                 </StackLayout>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind this}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>

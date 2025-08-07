@@ -17,7 +17,7 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Mode:" />
-            <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind ModeItem}" />
+            <Picker ItemsSource="{x:Bind common:SettingsViewModel.ReviewModes}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind ModeItem}" />
             <Label Text="Speaking Enabled:" />
             <CheckBox IsChecked="{x:Bind SpeakingEnabled}" />
             <Label Text="Shuffled:" />

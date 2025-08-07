@@ -30,7 +30,7 @@
             <Picker ItemsSource="{x:Bind Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind USUNITFROMItem}" />
             <Picker ItemsSource="{x:Bind Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind USPARTFROMItem}" IsEnabled="{x:Bind PartFromEnabled}" />
             <Grid ColumnDefinitions="100,*,*">
-                <Picker ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ToTypes}}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind ToTypeItem}" />
+                <Picker ItemsSource="{x:Bind common:SettingsViewModel.ToTypes}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind ToTypeItem}" />
                 <Button Text="{x:Bind PreviousText, Mode=TwoWay}" IsEnabled="{x:Bind PreviousEnabled}" Grid.Column="1" />
                 <Button Text="{x:Bind NextText, Mode=TwoWay}" IsEnabled="{x:Bind NextEnabled}" Grid.Column="2" />
             </Grid>

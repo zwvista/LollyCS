@@ -35,7 +35,7 @@
                         <ImageButton Grid.Column="2" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                             WidthRequest="20" HeightRequest="20" IsVisible="{x:Bind IsChecked}" />
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                            <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind this}" />
                         </Grid.GestureRecognizers>
                     </Grid>
                 </DataTemplate>

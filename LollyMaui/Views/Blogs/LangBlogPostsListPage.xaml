@@ -42,7 +42,7 @@
                                 <ImageButton Grid.Column="1" Source="{mi:FontAwesomeSolid Icon=AngleRight,IconColor=Red}"
                                              WidthRequest="20" HeightRequest="20" Clicked="IconButton_Clicked" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{x:Bind this}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </SwipeView>
