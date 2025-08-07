@@ -36,7 +36,7 @@
         <Label Content="LANGUAGE:" Grid.Row="1" />
         <TextBox x:Name="tbLangName" Grid.Row="1" Grid.Column="1" IsReadOnly="True" />
         <Label Content="TEXTBOOKNAME:" Grid.Row="2" />
-        <TextBox x:Name="tbTextbookName" Text="{Binding TEXTBOOKNAME, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="tbTextbookName" Text="{x:Bind TEXTBOOKNAME, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" />
         <Label Content="UNITS:" Grid.Row="3" />
         <TextBox Text="{x:Bind UNITS}" Grid.Row="3" Grid.Column="1" />
         <Label Content="PARTS:" Grid.Row="4" />

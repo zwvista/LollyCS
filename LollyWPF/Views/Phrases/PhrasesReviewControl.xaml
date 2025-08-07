@@ -43,7 +43,7 @@
             </DockPanel>
             <Label Content="{x:Bind PhraseTargetString}" Visibility="{x:Bind PhraseTargetVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Orange" Grid.Row="1" />
             <Label Content="{x:Bind TranslationString}" Foreground="Magenta" Grid.Row="2" />
-            <TextBox x:Name="tbPhraseInput" Text="{Binding PhraseInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
+            <TextBox x:Name="tbPhraseInput" Text="{x:Bind PhraseInputString, Mode=TwoWay}" VerticalAlignment="Center"
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" KeyDown="tbPhraseInput_KeyDown" />
             <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <CheckBox Content="On Repeat" IsChecked="{x:Bind OnRepeat}" VerticalAlignment="Center" />

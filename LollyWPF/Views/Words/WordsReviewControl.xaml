@@ -57,7 +57,7 @@
                     <Label Content="{x:Bind WordHintString}" Visibility="{x:Bind WordHintVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" />
                 </StackPanel>
                 <TextBox Text="{x:Bind TranslationString, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="2" />
-                <TextBox x:Name="tbWordInput" Text="{Binding WordInputString, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"
+                <TextBox x:Name="tbWordInput" Text="{x:Bind WordInputString, Mode=TwoWay}" VerticalAlignment="Center"
                           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" KeyDown="tbWordInput_KeyDown" />
                 <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <CheckBox Content="On Repeat" IsChecked="{x:Bind OnRepeat}" VerticalAlignment="Center" />

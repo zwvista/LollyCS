@@ -52,7 +52,7 @@
         <Label Content="WORDID:" Grid.Row="4" />
         <TextBox Text="{x:Bind WORDID, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="WORD:" Grid.Row="5" />
-        <TextBox x:Name="tbWord" Text="{Binding WORD, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbWord" Text="{x:Bind WORD, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" />
         <Label Content="NOTE:" Grid.Row="6" />
         <TextBox Text="{x:Bind NOTE, Mode=TwoWay}" Grid.Row="6" Grid.Column="1" />
         <Label Content="FAMIID:" Grid.Row="7" />

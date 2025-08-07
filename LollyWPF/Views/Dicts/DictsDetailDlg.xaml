@@ -70,7 +70,7 @@
                 <ComboBox x:Name="cbDictType" DisplayMemberPath="NAME" SelectedValuePath="CODE" SelectedValue="{Binding DICTTYPECODE}"
                         Grid.Row="4" Grid.Column="1" />
                 <Label Content="DICTNAME:" Grid.Row="5" />
-                <TextBox x:Name="tbDictName" Text="{Binding DICTNAME, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
+                <TextBox x:Name="tbDictName" Text="{x:Bind DICTNAME, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" />
                 <Label Content="URL:" Grid.Row="6" />
                 <TextBox Text="{x:Bind URL, Mode=TwoWay}" Grid.Row="6" Grid.Column="1" />
                 <Label Content="CHCONV:" Grid.Row="7" />

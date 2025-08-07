@@ -50,7 +50,7 @@
         <Label Content="PHRASEID:" Grid.Row="4" />
         <TextBox Text="{x:Bind PHRASEID, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" IsReadOnly="True" />
         <Label Content="PHRASE:" Grid.Row="5" />
-        <TextBox x:Name="tbPhrase" Text="{Binding PHRASE, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" />
+        <TextBox x:Name="tbPhrase" Text="{x:Bind PHRASE, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" />
         <Label Content="TRANSLATION:" Grid.Row="6" />
         <TextBox Text="{x:Bind TRANSLATION, Mode=TwoWay}" Grid.Row="6" Grid.Column="1" />
         <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind PhraseItems, DataType=common:SinglePhraseViewModel}" IsReadOnly="True"
