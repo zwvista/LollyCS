@@ -18,7 +18,7 @@
             <ToolBar Band="2">
                 <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{x:Bind common:SettingsViewModel.ScopePhraseFilters}" SelectedValue="{Binding ScopeFilter}" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{x:Bind common:SettingsViewModel.ScopePhraseFilters}" SelectedValue="{x:Bind ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{x:Bind TextFilter, Mode=TwoWay}" Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
@@ -36,8 +36,8 @@
                     <RowDefinition Height="150"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PhraseItems}"
-                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditPhrase" SelectedItem="{Binding SelectedPhraseItem}" SelectionChanged="dgPhrases_SelectionChanged">
+                <DataGrid x:Name="dgPhrases" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind PhraseItems}"
+                          BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEditPhrase" SelectedItem="{x:Bind SelectedPhraseItem}" SelectionChanged="dgPhrases_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PHRASE}" Header="PHRASE"/>
@@ -101,7 +101,7 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <StatusBar Grid.Row="3">
-                    <Label Content="{Binding StatusText}"/>
+                    <Label Content="{x:Bind StatusText}"/>
                 </StatusBar>
             </Grid>
             <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}" />

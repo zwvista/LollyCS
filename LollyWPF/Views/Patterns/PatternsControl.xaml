@@ -17,7 +17,7 @@
             <ToolBar>
                 <Button x:Name="btnAddPattern" Content="Add Pattern" Click="btnAddPattern_Click"/>
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{x:Bind common:SettingsViewModel.ScopePatternFilters}" SelectedValue="{Binding ScopeFilter}" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{x:Bind common:SettingsViewModel.ScopePatternFilters}" SelectedValue="{x:Bind ScopeFilter}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{x:Bind TextFilter, Mode=TwoWay}"  Width="96" wpf:HintAssist.Hint="Filter" />
             </ToolBar>
@@ -33,8 +33,8 @@
                     <RowDefinition />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <DataGrid x:Name="dgPatterns" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding PatternItems}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{Binding SelectedPatternItem}" SelectionChanged="dgPatterns_SelectionChanged">
+                <DataGrid x:Name="dgPatterns" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind PatternItems}"
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{x:Bind SelectedPatternItem}" SelectionChanged="dgPatterns_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN" IsReadOnly="True"/>
@@ -56,7 +56,7 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
                 <StatusBar Grid.Row="1">
-                    <Label Content="{Binding StatusText}"/>
+                    <Label Content="{x:Bind StatusText}"/>
                 </StatusBar>
             </Grid>
             <GridSplitter Grid.Column="1" ResizeDirection="Columns" HorizontalAlignment="Stretch"/>
