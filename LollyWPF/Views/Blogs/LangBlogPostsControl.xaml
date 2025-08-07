@@ -16,10 +16,10 @@
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Band="1">
                 <Button x:Name="btnRefreshPosts" fa:FontAwesome.Icon="Solid_RotateRight" ToolTip="Refresh Posts" Click="btnRefreshPosts_Click"/>
-                <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
+                <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbPostFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbPostFilter" Text="{Binding PostFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Post Filter" />
                 <Button x:Name="btnRefreshGroups" fa:FontAwesome.Icon="Solid_RotateRight" ToolTip="Refresh Groups" Click="btnRefreshGroups_Click"/>
-                <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
+                <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbGroupFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbGroupFilter" Text="{Binding GroupFilter, UpdateSourceTrigger=PropertyChanged}" Width="96" wpf:HintAssist.Hint="Group Filter" />
             </ToolBar>
         </ToolBarTray>
