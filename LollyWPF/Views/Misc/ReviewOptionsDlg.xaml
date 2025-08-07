@@ -31,7 +31,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Mode:" VerticalAlignment="Center" Grid.Row="0" />
-        <ComboBox x:Name="cbModes" ItemsSource="{Binding Source={x:Static common:SettingsViewModel.ReviewModes}}" DisplayMemberPath="Label" SelectedValuePath="Value"
+        <ComboBox x:Name="cbModes" ItemsSource="{x:Bind common:SettingsViewModel.ReviewModes}" DisplayMemberPath="Label" SelectedValuePath="Value"
                   SelectedValue="{Binding Mode, ConverterParameter={x:Type common:ReviewMode}, Converter={StaticResource EnumConverter}}"
                   HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
         <CheckBox Content="Speaking Enabled" IsChecked="{x:Bind SpeakingEnabled}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
