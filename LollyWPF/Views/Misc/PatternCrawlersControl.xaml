@@ -23,14 +23,14 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <ComboBox VerticalAlignment="Center" Grid.Row="0"
-                      SelectedValuePath="Content" SelectedValue="{x:Bind SelectedLang}">
+                      SelectedValuePath="Content" SelectedValue="{x:Bind SelectedLang, Mode=TwoWay}">
                 <ComboBoxItem Content="Japanese"/>
                 <ComboBoxItem Content="Korean"/>
             </ComboBox>
             <ComboBox VerticalAlignment="Center" Grid.Row="1"
-                      ItemsSource="{x:Bind Crawlers}" SelectedValue="{x:Bind SelectedCrawler}" />
+                      ItemsSource="{x:Bind Crawlers}" SelectedValue="{x:Bind SelectedCrawler, Mode=TwoWay}" />
             <ComboBox VerticalAlignment="Center" Grid.Row="2"
-                      SelectedValuePath="Content" SelectedValue="{x:Bind SelectedStep}">
+                      SelectedValuePath="Content" SelectedValue="{x:Bind SelectedStep, Mode=TwoWay}">
                 <ComboBoxItem Content="Step1"/>
                 <ComboBoxItem Content="Step2"/>
             </ComboBox>

@@ -62,12 +62,12 @@
                 <Label Content="LANGNAMEFROM:" Grid.Row="1" />
                 <TextBox Text="{x:Bind LANGNAMEFROM, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" />
                 <Label Content="LANGNAMETO:" Grid.Row="2" />
-                <ComboBox x:Name="cbLangTo" DisplayMemberPath="LANGNAME" SelectedValuePath="ID" SelectedValue="{x:Bind LANGIDTO}"
+                <ComboBox x:Name="cbLangTo" DisplayMemberPath="LANGNAME" SelectedValuePath="ID" SelectedValue="{x:Bind LANGIDTO, Mode=TwoWay}"
                         Grid.Row="2" Grid.Column="1" />
                 <Label Content="SEQNUM:" Grid.Row="3" />
                 <TextBox Text="{x:Bind SEQNUM, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" />
                 <Label Content="DICTTYPE:" Grid.Row="4" />
-                <ComboBox x:Name="cbDictType" DisplayMemberPath="NAME" SelectedValuePath="CODE" SelectedValue="{x:Bind DICTTYPECODE}"
+                <ComboBox x:Name="cbDictType" DisplayMemberPath="NAME" SelectedValuePath="CODE" SelectedValue="{x:Bind DICTTYPECODE, Mode=TwoWay}"
                         Grid.Row="4" Grid.Column="1" />
                 <Label Content="DICTNAME:" Grid.Row="5" />
                 <TextBox x:Name="tbDictName" Text="{x:Bind DICTNAME, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" />

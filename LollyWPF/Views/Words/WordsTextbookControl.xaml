@@ -17,11 +17,11 @@
             <ToolBar x:Name="ToolBarDict" Band="1" />
             <ToolBar Band="2">
                 <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
-                <ComboBox x:Name="cbScopeFilter" ItemsSource="{x:Bind common:SettingsViewModel.ScopeWordFilters}" SelectedValue="{x:Bind ScopeFilter}" />
+                <ComboBox x:Name="cbScopeFilter" ItemsSource="{x:Bind common:SettingsViewModel.ScopeWordFilters}" SelectedValue="{x:Bind ScopeFilter, Mode=TwoWay}" />
                 <wpf:PackIcon Width="24" Height="24" Margin="4 4 0 0" VerticalAlignment="Center" Kind="Magnify" Foreground="{Binding ElementName=tbTextFilter, Path=BorderBrush}"/>
                 <TextBox x:Name="tbTextFilter" Text="{x:Bind TextFilter, Mode=TwoWay}" Width="96" wpf:HintAssist.Hint="Filter" />
                 <ComboBox x:Name="cbTextbookFilter" ItemsSource="{x:Bind vmSettings.TextbookFilters}" DisplayMemberPath="Label" SelectedValuePath="Value"
-                          SelectedValue="{x:Bind TextbookFilter}" />
+                          SelectedValue="{x:Bind TextbookFilter, Mode=TwoWay}" />
             </ToolBar>
         </ToolBarTray>
         <Grid>

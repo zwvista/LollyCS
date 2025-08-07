@@ -36,10 +36,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <CheckBox Content="UNIT:" IsChecked="{x:Bind UnitChecked}" Grid.Row="0" Grid.Column="0" />
-        <ComboBox ItemsSource="{x:Bind Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind UNIT}"
+        <ComboBox ItemsSource="{x:Bind Textbook.Units}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind UNIT, Mode=TwoWay}"
                   IsEnabled="{x:Bind UnitChecked}" Grid.Row="0" Grid.Column="2" />
         <CheckBox Content="PART:" IsChecked="{x:Bind PartChecked}" Grid.Row="1" Grid.Column="0" />
-        <ComboBox ItemsSource="{x:Bind Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind PART}"
+        <ComboBox ItemsSource="{x:Bind Textbook.Parts}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{x:Bind PART, Mode=TwoWay}"
                   IsEnabled="{x:Bind PartChecked}" Grid.Row="1" Grid.Column="2" />
         <CheckBox Content="SEQNUM(+):" IsChecked="{x:Bind SeqNumChecked}" Grid.Row="2" Grid.Column="0" />
         <TextBox Text="{x:Bind SEQNUM}" IsEnabled="{x:Bind SeqNumChecked}" Grid.Row="2" Grid.Column="2" />
