@@ -21,9 +21,9 @@
             <Label Text="TEXTBOOK:" />
             <Entry Text="{x:Bind TEXTBOOKNAME, Mode=TwoWay}" IsReadOnly="True" />
             <Label Text="UNIT:" />
-            <Picker ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem}" />
+            <Picker ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem, Mode=TwoWay}" />
             <Label Text="PART:" />
-            <Picker ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem}" />
+            <Picker ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem, Mode=TwoWay}" />
             <Label Text="SEQNUM:" />
             <Entry Text="{x:Bind SEQNUM, Mode=TwoWay}" Keyboard="Numeric" />
             <Label Text="WORDID:" />

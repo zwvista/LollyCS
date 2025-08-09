@@ -34,7 +34,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="dgPatterns" SelectionMode="Extended" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind PatternItems}"
-                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{x:Bind SelectedPatternItem}" SelectionChanged="dgPatterns_SelectionChanged">
+                      BeginningEdit="OnBeginEdit" CellEditEnding="OnEndEdit" SelectedItem="{x:Bind SelectedPatternItem, Mode=TwoWay}" SelectionChanged="dgPatterns_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding PATTERN}" Header="PATTERN" IsReadOnly="True"/>

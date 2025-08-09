@@ -19,7 +19,7 @@
     -->
     <Grid Padding="10" RowDefinitions="Auto,*" ColumnDefinitions="*,Auto">
         <SearchBar Placeholder="Filter" Text="{x:Bind TextFilter, Mode=TwoWay}" />
-        <Picker Grid.Column="1" ItemsSource="{x:Bind common:SettingsViewModel.ScopePhraseFilters}" SelectedItem="{x:Bind ScopeFilter}" />
+        <Picker Grid.Column="1" ItemsSource="{x:Bind common:SettingsViewModel.ScopePhraseFilters}" SelectedItem="{x:Bind ScopeFilter, Mode=TwoWay}" />
         <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:PhrasesLangViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
             <CollectionView ItemsSource="{x:Bind PhraseItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>

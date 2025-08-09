@@ -14,9 +14,9 @@
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
         <Label Text="UNIT:" VerticalTextAlignment="Center" />
-        <Picker Grid.Column="1" ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem}" />
+        <Picker Grid.Column="1" ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem, Mode=TwoWay}" />
         <Label Grid.Row="1" Text="PART:" VerticalTextAlignment="Center" />
-        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem, Mode=TwoWay}" />
         <Label Grid.Row="2" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
         <Entry Grid.Row="2" Grid.Column="1" Text="{x:Bind SEQNUM, Mode=TwoWay}" Keyboard="Numeric" />
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{x:Bind vm.PhraseItems}" SelectionMode="None">

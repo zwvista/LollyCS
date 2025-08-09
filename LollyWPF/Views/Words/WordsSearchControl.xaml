@@ -29,7 +29,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="dgWords" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgWords_SelectionChanged"
-                      ItemsSource="{x:Bind WordItems}" SelectedItem="{x:Bind SelectedWordItem}">
+                      ItemsSource="{x:Bind WordItems}" SelectedItem="{x:Bind SelectedWordItem, Mode=TwoWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding SEQNUM}" Header="SEQNUM"/>
                     <DataGridTextColumn Binding="{Binding WORD}" Header="WORD"/>

@@ -14,7 +14,7 @@
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
     <Grid Padding="10" RowDefinitions="Auto,*">
-        <Picker ItemsSource="{x:Bind vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind OnlineTextbookFilterItem}" />
+        <Picker ItemsSource="{x:Bind vmSettings.OnlineTextbookFilters}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind OnlineTextbookFilterItem, Mode=TwoWay}" />
         <RefreshView Grid.Row="1" Grid.ColumnSpan="2" x:DataType="common:OnlineTextbooksViewModel" Command="{x:Bind ReloadCommand}" IsRefreshing="{x:Bind IsBusy}">
             <CollectionView ItemsSource="{x:Bind Items}" SelectionMode="None">
                 <CollectionView.ItemTemplate>

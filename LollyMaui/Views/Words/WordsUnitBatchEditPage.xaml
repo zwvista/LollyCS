@@ -18,10 +18,10 @@
     <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,Auto,*">
         <CheckBox IsChecked="{x:Bind UnitChecked}"/>
         <Label Grid.Column="1" Text="UNIT:" VerticalTextAlignment="Center" />
-        <Picker Grid.Column="2" IsEnabled="{x:Bind UnitChecked}" ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem}" />
+        <Picker Grid.Column="2" IsEnabled="{x:Bind UnitChecked}" ItemsSource="{x:Bind Textbook.Units}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind UNITItem, Mode=TwoWay}" />
         <CheckBox Grid.Row="1" IsChecked="{x:Bind PartChecked}"/>
         <Label Grid.Row="1" Grid.Column="1" Text="PART:" VerticalTextAlignment="Center" />
-        <Picker Grid.Row="1" IsEnabled="{x:Bind PartChecked}" Grid.Column="2" ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem}" />
+        <Picker Grid.Row="1" IsEnabled="{x:Bind PartChecked}" Grid.Column="2" ItemsSource="{x:Bind Textbook.Parts}" ItemDisplayBinding="{Binding Label}" SelectedItem="{x:Bind PARTItem, Mode=TwoWay}" />
         <CheckBox Grid.Row="2" IsChecked="{x:Bind SeqNumChecked}"/>
         <Label Grid.Row="2" Grid.Column="1" Text="SEQNUM(+):" VerticalTextAlignment="Center" />
         <Entry Grid.Row="2" Grid.Column="2" IsEnabled="{x:Bind SeqNumChecked}" Text="{x:Bind SEQNUM, Mode=TwoWay}" Keyboard="Numeric" />

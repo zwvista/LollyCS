@@ -31,7 +31,7 @@
                     <Label Content="{x:Bind StatusText}"/>
                 </StatusBar>
                 <DataGrid x:Name="dgOnlineTextbooks" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{x:Bind Items}"
-                          SelectedItem="{x:Bind SelectedOnlineTextbookItem}" SelectionChanged="dgOnlineTextbooks_SelectionChanged">
+                          SelectedItem="{x:Bind SelectedOnlineTextbookItem, Mode=TwoWay}" SelectionChanged="dgOnlineTextbooks_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding TEXTBOOKNAME}" Header="TEXTBOOKNAME" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding UNIT}" Header="UNIT" IsReadOnly="True" />

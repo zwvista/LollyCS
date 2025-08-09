@@ -14,8 +14,8 @@
     </ContentPage.ToolbarItems>
     <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*,*">
         <SearchBar Grid.ColumnSpan="2" Placeholder="Enter a word here" Text="{x:Bind vmDict.Word, Mode=TwoWay}" />
-        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{x:Bind vmSettings.Languages, Mode=OneWay}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{x:Bind vmSettings.SelectedLang, Mode=OneWay}" />
-        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind vmSettings.DictsReference, Mode=OneWay}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{x:Bind vmSettings.SelectedDictReference, Mode=OneWay}" />
+        <Picker Grid.Row="1" Grid.Column="0" ItemsSource="{x:Bind vmSettings.Languages, Mode=OneWay}" ItemDisplayBinding="{Binding LANGNAME}" SelectedItem="{x:Bind vmSettings.SelectedLang, Mode=OneWay, Mode=TwoWay}" />
+        <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind vmSettings.DictsReference, Mode=OneWay}" ItemDisplayBinding="{Binding DICTNAME}" SelectedItem="{x:Bind vmSettings.SelectedDictReference, Mode=OneWay, Mode=TwoWay}" />
         <WebView Grid.Row="2" Grid.ColumnSpan="2" x:Name="wbDict" Navigated="wbDict_Navigated" />
     </Grid> 
 </ContentPage>
