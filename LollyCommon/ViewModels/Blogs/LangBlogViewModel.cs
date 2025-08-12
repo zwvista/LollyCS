@@ -22,7 +22,7 @@ namespace LollyCommon
         [Reactive]
         public partial MLangBlogPost? SelectedPostItem { get; set; }
         [ObservableAsProperty]
-        public bool HasSelectedPostItem { get; }
+        public partial bool HasSelectedPostItem { get; }
         [Reactive]
         public partial string PostHtml { get; set; } = "";
         [Reactive]
