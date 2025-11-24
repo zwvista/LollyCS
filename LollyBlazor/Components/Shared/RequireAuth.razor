@@ -1,0 +1,36 @@
+@inject LocalUserService UserService
+@inject NavigationManager Navigation
+
+@if (isChecking)
+{
+    <p>检查权限...</p>
+}
+else if (isLoggedIn)
+{
+    @ChildContent
+}
+else
+{
+    <p>请先登录...</p>
+}
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool isChecking = true;
+    private bool isLoggedIn = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoggedIn = await UserService.IsUserLoggedInAsync();
+        
+        if (!isLoggedIn)
+        {
+            Navigation.NavigateTo("/login");
+        }
+        
+        isChecking = false;
+        StateHasChanged();
+    }
+}

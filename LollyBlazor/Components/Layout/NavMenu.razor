@@ -1,6 +1,12 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject LocalUserService UserService
+@implements IDisposable
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">LollyBlazor</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </div>
 
@@ -8,6 +14,8 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
+    @if (isLoggedIn)
+    {
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
@@ -25,6 +33,64 @@
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
             </NavLink>
         </div>
+
+        <div class="nav-item px-3">
+            <button class="nav-link btn btn-link" @onclick="Logout">
+                <span class="oi oi-account-logout" aria-hidden="true"></span> 退出
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="login">
+                <span class="oi oi-account-login" aria-hidden="true"></span> 登录
+            </NavLink>
+        </div>
+    }
     </nav>
 </div>
 
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool isLoggedIn = false;
+    private string? currentUserId;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CheckLoginStatus();
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private async Task CheckLoginStatus()
+    {
+        isLoggedIn = await UserService.IsUserLoggedInAsync();
+        if (isLoggedIn)
+        {
+            currentUserId = await UserService.GetUserIdAsync();
+        }
+        StateHasChanged();
+    }
+
+    private async void Logout()
+    {
+        await UserService.LogoutAsync();
+        await CheckLoginStatus();
+        NavigationManager.NavigateTo("/login", forceLoad: true);
+    }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
+    public void Dispose()
+    {
+        // 清理资源
+    }
+}

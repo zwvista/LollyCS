@@ -1,7 +1,58 @@
 ﻿@page "/"
+@inject LocalUserService UserService
+@inject NavigationManager Navigation
 
-<PageTitle>Home</PageTitle>
+<PageTitle>首页</PageTitle>
 
-<h1>Hello, world!</h1>
+@if (isChecking)
+{
+    <p>检查登录状态...</p>
+}
+else if (isLoggedIn)
+{
+    <h1>欢迎回来！</h1>
+    <p>用户 ID: @currentUserId</p>
+    
+    <div class="mt-4">
+        <button class="btn btn-secondary" @onclick="Logout">退出登录</button>
+    </div>
+    
+    <!-- 你的主页内容 -->
+    <div class="mt-4">
+        <p>这是应用程序的主页面。</p>
+        <a href="/counter" class="btn btn-primary">去计数器页面</a>
+    </div>
+}
+else
+{
+    <p>未登录，正在跳转到登录页面...</p>
+}
 
-Welcome to your new app.
+@code {
+    private bool isChecking = true;
+    private bool isLoggedIn = false;
+    private string? currentUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoggedIn = await UserService.IsUserLoggedInAsync();
+        
+        if (isLoggedIn)
+        {
+            currentUserId = await UserService.GetUserIdAsync();
+        }
+        else
+        {
+            Navigation.NavigateTo("/login");
+        }
+        
+        isChecking = false;
+        StateHasChanged();
+    }
+
+    private async void Logout()
+    {
+        await UserService.LogoutAsync();
+        Navigation.NavigateTo("/login", forceLoad: true);
+    }
+}
