@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LollyCommon\LollyCommon.csproj" />
+  </ItemGroup>
+
 </Project>

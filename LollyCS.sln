@@ -11,6 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyMaui", "LollyMaui\Loll
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyBlazor", "LollyBlazor\LollyBlazor.csproj", "{C16BA83B-AB0D-4447-97F7-1730D492C495}"
+	ProjectSection(ProjectDependencies) = postProject
+		{24352E07-B701-4735-B319-494B9D011679} = {24352E07-B701-4735-B319-494B9D011679}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LollyWPF", "LollyWPF\LollyWPF.csproj", "{CA09A5D1-60F3-4405-8689-0BC2FE2F6816}"
 EndProject
