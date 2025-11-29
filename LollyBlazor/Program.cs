@@ -1,5 +1,6 @@
 using LollyBlazor.Components;
 using LollyBlazor.Services;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<LocalUserService>();
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
