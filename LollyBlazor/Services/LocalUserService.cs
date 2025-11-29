@@ -1,3 +1,5 @@
+using LollyCommon;
+
 namespace LollyBlazor.Services;
 
 // Services/LocalUserService.cs
@@ -6,6 +8,7 @@ using Microsoft.JSInterop;
 public class LocalUserService
 {
     private readonly IJSRuntime _jsRuntime;
+    public readonly LoginViewModel vm = new();
     
     public LocalUserService(IJSRuntime jsRuntime)
     {
@@ -23,19 +26,12 @@ public class LocalUserService
         return await GetUserIdFromLocalStorage();
     }
     
-    public async Task<bool> ValidateUserAsync(string username, string password)
+    public async Task<bool> ValidateUserAsync()
     {
-        // 简单的本地用户验证
-        var validUsers = new Dictionary<string, string>
+        CommonApi.UserId = await vm.Login();
+        if (!string.IsNullOrEmpty(CommonApi.UserId))
         {
-            { "admin", "admin123" },
-            { "user", "user123" },
-            { "test", "test123" }
-        };
-        
-        if (validUsers.ContainsKey(username) && validUsers[username] == password)
-        {
-            await SetUserIdToLocalStorage(username);
+            await SetUserIdToLocalStorage(CommonApi.UserId);
             return true;
         }
         

@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Newtonsoft.Json;
 using ReactiveUI.SourceGenerators;
@@ -24,9 +25,11 @@ namespace LollyCommon
         public partial string USERID { get; set; } = "";
         [JsonProperty]
         [Reactive]
+        [Required(ErrorMessage = "Username is required")]
         public partial string USERNAME { get; set; } = "";
         [JsonProperty]
         [Reactive]
+        [Required(ErrorMessage = "Password is required")]
         public partial string PASSWORD { get; set; } = "";
     }
 
