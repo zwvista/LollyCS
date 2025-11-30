@@ -17,9 +17,10 @@ public class LocalUserService
     
     public async Task<bool> IsUserLoggedInAsync()
     {
-        var userId = await GetUserIdFromLocalStorage();
-        return !string.IsNullOrEmpty(userId);
+        CommonApi.UserId = (await GetUserIdFromLocalStorage()) ?? "";
+        return !string.IsNullOrEmpty(CommonApi.UserId);
     }
+    public bool IsUserLoggedIn => !string.IsNullOrEmpty(CommonApi.UserId);
     
     public async Task<string?> GetUserIdAsync()
     {
@@ -73,6 +74,7 @@ public class LocalUserService
         try
         {
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", "userid");
+            CommonApi.UserId = "";
         }
         catch
         {

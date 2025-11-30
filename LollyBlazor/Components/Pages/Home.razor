@@ -4,14 +4,10 @@
 
 <PageTitle>首页</PageTitle>
 
-@if (isChecking)
-{
-    <p>检查登录状态...</p>
-}
-else if (isLoggedIn)
+@if (isLoggedIn)
 {
     <h1>欢迎回来！</h1>
-    <p>用户 ID: @currentUserId</p>
+    <p>用户 ID: @CommonApi.UserId</p>
     
     <div class="mt-4">
         <button class="btn btn-secondary" @onclick="Logout">退出登录</button>
@@ -29,24 +25,15 @@ else
 }
 
 @code {
-    private bool isChecking = true;
     private bool isLoggedIn = false;
-    private string? currentUserId;
 
     protected override async Task OnInitializedAsync()
     {
         isLoggedIn = await UserService.IsUserLoggedInAsync();
         
-        if (isLoggedIn)
-        {
-            currentUserId = await UserService.GetUserIdAsync();
-        }
-        else
-        {
+        if (!isLoggedIn)
             Navigation.NavigateTo("/login");
-        }
         
-        isChecking = false;
         StateHasChanged();
     }
 

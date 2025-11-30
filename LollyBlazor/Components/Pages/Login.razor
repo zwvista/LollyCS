@@ -23,7 +23,9 @@
                 <ValidationMessage For="@(() => UserService.vm.PASSWORD)" />
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block" disabled="@isLoading">
+            @* <button type="submit" class="btn btn-primary btn-block" disabled="@isLoading"> *@
+            @* </button> *@
+            <MudButton FullWidth="true" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" disabled="@isLoading">
                 @if (isLoading)
                 {
                     <span>登录中...</span>
@@ -32,7 +34,7 @@
                 {
                     <span>登录</span>
                 }
-            </button>
+            </MudButton>
         </EditForm>
 
         @if (!string.IsNullOrEmpty(ErrorMessage))
@@ -62,6 +64,7 @@
         // 如果已经登录，直接跳转到首页
         if (await UserService.IsUserLoggedInAsync())
         {
+            await App.vmSettings.GetData();
             Navigation.NavigateTo("/");
         }
     }

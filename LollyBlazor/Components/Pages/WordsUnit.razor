@@ -1,0 +1,21 @@
+@page "/WordsUnit"
+
+<RequireAuth>
+
+<MudToolBar>
+    <MudTextField @bind-Value="newWord" Label="New Word" Variant="Variant.Text"></MudTextField>
+    <MudFab Color="Color.Primary" StartIcon="fa fa-volume-up" />
+    <MudSelect @bind-Value="filterType">
+        @foreach (var item in SettingsViewModel.ScopeWordFilters) {
+            <MudSelectItem Value="@item">@item</MudSelectItem>
+        }
+    </MudSelect>
+</MudToolBar>
+
+</RequireAuth>
+
+@code {
+    string newWord = "";
+    int filterType = 0;
+    WordsUnitViewModel vm = new(App.vmSettings, true, false);
+}

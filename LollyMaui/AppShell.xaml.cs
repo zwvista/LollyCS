@@ -4,7 +4,7 @@ namespace LollyMaui
 {
     public partial class AppShell : Shell
     {
-        public static SettingsViewModel vmSettings = new SettingsViewModel();
+        public static SettingsViewModel vmSettings = new();
         public static List<Locale> SpeechLocales = null!;
         public AppShell()
         {
