@@ -44,34 +44,28 @@
                 @ErrorMessage
             </div>
         }
-
-        <!-- 调试信息 -->
-        <div class="mt-3 p-2 bg-light">
-            <small>调试信息:</small>
-            <br />
-            <small>IsInitialized: @AppState.IsInitialized</small>
-            <br />
-            <small>IsLoggedIn: @UserService.IsUserLoggedIn</small>
-            <br />
-            <small>CurrentUserId: @UserService.CurrentUserId</small>
-            <br />
-            <small>CommonApi.UserId: @CommonApi.UserId</small>
-        </div>
     </div>
 </div>
 
 @code {
     private string ErrorMessage = string.Empty;
     private bool isLoading = false;
-    private bool isChecking = true;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await AppState.InitializeAsync();
-        if (UserService.IsUserLoggedIn)
+        if (firstRender)
         {
-            await App.vmSettings.GetData();
-            Navigation.NavigateTo("/");
+            // 在第一次渲染后从存储加载数据
+            await AppState.LoadFromStorageAsync();
+            
+            // 如果已经登录，直接跳转到首页
+            if (UserService.IsUserLoggedIn)
+            {
+                await App.vmSettings.GetData();
+                Navigation.NavigateTo("/");
+            }
+            
+            StateHasChanged();
         }
     }
 
@@ -79,14 +73,20 @@
     {
         ErrorMessage = string.Empty;
         isLoading = true;
-        StateHasChanged(); // 立即更新UI
+        StateHasChanged();
         
         try
         {
             if (await UserService.ValidateUserAsync())
+            {
+                // 执行存储操作
+                await AppState.FlushPendingActionsAsync();
                 Navigation.NavigateTo("/", forceLoad: true);
+            }
             else
+            {
                 ErrorMessage = "用户名或密码错误";
+            }
         }
         catch (Exception ex)
         {

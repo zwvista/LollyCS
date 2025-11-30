@@ -2,6 +2,11 @@
 @inject AppStateService AppState
 @rendermode InteractiveServer
 
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -25,8 +30,17 @@
 </div>
 
 @code {
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await AppState.InitializeAsync();
+        if (firstRender)
+        {
+            // 在第一次渲染后从存储加载数据
+            await AppState.LoadFromStorageAsync();
+            
+            // 执行所有挂起的存储操作
+            await AppState.FlushPendingActionsAsync();
+            
+            StateHasChanged();
+        }
     }
 }

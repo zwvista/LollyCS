@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject LocalUserService UserService
+@inject AppStateService AppState
 @inject NavigationManager Navigation
 
 <PageTitle>首页</PageTitle>
@@ -31,9 +32,10 @@ else
             Navigation.NavigateTo("/login");
     }
 
-    private async void Logout()
+    private async Task Logout()
     {
         await UserService.LogoutAsync();
+        await AppState.FlushPendingActionsAsync();
         Navigation.NavigateTo("/login");
     }
 }

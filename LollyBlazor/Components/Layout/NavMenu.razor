@@ -71,14 +71,20 @@
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        // 确保 AppState 已初始化
-        await AppState.InitializeAsync();
-        
         // 订阅状态变化
         AppState.OnChange += StateHasChanged;
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // 执行所有挂起的存储操作
+            await AppState.FlushPendingActionsAsync();
+        }
+    }   
 
     private void ToggleNavMenu()
     {
@@ -88,6 +94,7 @@
     private async void Logout()
     {
         await UserService.LogoutAsync();
+        await AppState.FlushPendingActionsAsync();
         Navigation.NavigateTo("/login", forceLoad: true);
     }
 
