@@ -1,7 +1,7 @@
 @inject LocalUserService UserService
 @inject NavigationManager Navigation
 
-@if (isLoggedIn)
+@if (UserService.IsUserLoggedIn)
 {
     @ChildContent
 }
@@ -13,13 +13,10 @@ else
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
-    private bool isLoggedIn;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        isLoggedIn = await UserService.IsUserLoggedInAsync();
-        if (!isLoggedIn)
+        if (!UserService.IsUserLoggedIn)
             Navigation.NavigateTo("/login");
-        StateHasChanged();
     }
 }

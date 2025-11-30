@@ -4,7 +4,7 @@
 
 <PageTitle>首页</PageTitle>
 
-@if (isLoggedIn)
+@if (UserService.IsUserLoggedIn)
 {
     <h1>欢迎回来！</h1>
     <p>用户 ID: @CommonApi.UserId</p>
@@ -25,21 +25,15 @@ else
 }
 
 @code {
-    private bool isLoggedIn = false;
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        isLoggedIn = await UserService.IsUserLoggedInAsync();
-        
-        if (!isLoggedIn)
+        if (!UserService.IsUserLoggedIn)
             Navigation.NavigateTo("/login");
-        
-        StateHasChanged();
     }
 
     private async void Logout()
     {
         await UserService.LogoutAsync();
-        Navigation.NavigateTo("/login", forceLoad: true);
+        Navigation.NavigateTo("/login");
     }
 }

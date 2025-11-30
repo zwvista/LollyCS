@@ -1,5 +1,8 @@
 ﻿@inject LocalUserService UserService
+@inject NavigationManager Navigation
+@inject AppStateService AppState
 @implements IDisposable
+@rendermode InteractiveServer
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -10,11 +13,9 @@
     </div>
 </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-    @if (isLoggedIn)
+    @if (UserService.IsUserLoggedIn)
     {
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -41,6 +42,13 @@
         </div>
 
         <div class="nav-item px-3">
+            <span class="nav-link text-info">
+                <span class="oi oi-person" aria-hidden="true"></span> 
+                用户: @UserService.CurrentUserId
+            </span>
+        </div>
+
+        <div class="nav-item px-3">
             <button class="nav-link btn btn-link" @onclick="Logout">
                 <span class="oi oi-account-logout" aria-hidden="true"></span> 退出
             </button>
@@ -60,14 +68,16 @@
 
 @code {
     private bool collapseNavMenu = true;
-    private bool isLoggedIn = false;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     protected override async Task OnInitializedAsync()
     {
-        isLoggedIn = await UserService.IsUserLoggedInAsync();
-        StateHasChanged();
+        // 确保 AppState 已初始化
+        await AppState.InitializeAsync();
+        
+        // 订阅状态变化
+        AppState.OnChange += StateHasChanged;
     }
 
     private void ToggleNavMenu()
@@ -78,14 +88,12 @@
     private async void Logout()
     {
         await UserService.LogoutAsync();
-        NavigationManager.NavigateTo("/login", forceLoad: true);
+        Navigation.NavigateTo("/login", forceLoad: true);
     }
-
-    [Inject]
-    private NavigationManager NavigationManager { get; set; } = default!;
 
     public void Dispose()
     {
-        // 清理资源
+        // 取消订阅
+        AppState.OnChange -= StateHasChanged;
     }
 }
