@@ -2,10 +2,20 @@
 @inject LocalUserService UserService
 @inject AppStateService AppState
 @inject NavigationManager Navigation
+@rendermode InteractiveServer
 
 <PageTitle>首页</PageTitle>
 
-@if (UserService.IsUserLoggedIn)
+@if (isChecking)
+{
+    <div class="loading-container">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">加载中...</span>
+        </div>
+        <p class="mt-2">正在检查登录状态...</p>
+    </div>
+}
+else if (UserService.IsUserLoggedIn)
 {
     <h1>欢迎回来！</h1>
     <p>用户 ID: @CommonApi.UserId</p>
@@ -26,10 +36,42 @@ else
 }
 
 @code {
-    protected override void OnInitialized()
+    private bool isChecking = true;
+
+    protected override async Task OnInitializedAsync()
     {
-        if (!UserService.IsUserLoggedIn)
-            Navigation.NavigateTo("/login");
+        // 订阅状态变化
+        AppState.OnChange += OnStateChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // 在第一次渲染后加载存储数据
+            await AppState.LoadFromStorageAsync();
+            await AppState.FlushPendingActionsAsync();
+            
+            // 更新检查状态
+            isChecking = false;
+            
+            // 如果未登录，跳转到登录页面
+            if (!UserService.IsUserLoggedIn)
+            {
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                await App.vmSettings.GetData();
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void OnStateChanged()
+    {
+        isChecking = false;
+        InvokeAsync(StateHasChanged);
     }
 
     private async Task Logout()
@@ -37,5 +79,11 @@ else
         await UserService.LogoutAsync();
         await AppState.FlushPendingActionsAsync();
         Navigation.NavigateTo("/login");
+    }
+
+    public void Dispose()
+    {
+        // 取消订阅
+        AppState.OnChange -= OnStateChanged;
     }
 }
