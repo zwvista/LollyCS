@@ -3,19 +3,73 @@
 <RequireAuth>
 
 <MudToolBar>
-    <MudTextField @bind-Value="newWord" Label="New Word" Variant="Variant.Text"></MudTextField>
-    <MudFab Color="Color.Primary" StartIcon="fa fa-volume-up" />
-    <MudSelect @bind-Value="filterType">
-        @foreach (var item in SettingsViewModel.ScopeWordFilters) {
+    <MudTextField @bind-Value="vm.NewWord" Label="New Word" Variant="Variant.Text" OnKeyDown="@OnKeyDownNewWord"></MudTextField>
+    <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary" />
+    <MudSelect @bind-Value="vm.ScopeFilter">
+        @foreach (var item in SettingsViewModel.ScopeWordFilters)
+        {
             <MudSelectItem Value="@item">@item</MudSelectItem>
         }
     </MudSelect>
+    <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary">Add</MudButton>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary">Refresh</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Info">Get All Notes</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Info">Get Notes If Empty</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Info">Clear All Notes</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Info">Clear Notes If Empty</MudButton>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
+
+<MudTable Items="@vm.WordItems">
+    <HeaderContent>
+        <MudTh>No.</MudTh>
+        <MudTh>ID</MudTh>
+        <MudTh>UNIT</MudTh>
+        <MudTh>PART</MudTh>
+        <MudTh>SEQNUM</MudTh>
+        <MudTh>WORDID</MudTh>
+        <MudTh>WORD</MudTh>
+        <MudTh>NOTE</MudTh>
+        <MudTh>ACCURACY</MudTh>
+        <MudTh>ACTIONS</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd></MudTd>
+        <MudTd>@context.ID</MudTd>
+        <MudTd>@context.UNITSTR</MudTd>
+        <MudTd>@context.PARTSTR</MudTd>
+        <MudTd>@context.SEQNUM</MudTd>
+        <MudTd>@context.WORDID</MudTd>
+        <MudTd>@context.WORD</MudTd>
+        <MudTd>@context.NOTE</MudTd>
+        <MudTd>@context.ACCURACY</MudTd>
+        <MudTd>
+            <MudFab StartIcon="fa fa-trash" Color="Color.Secondary"/>
+            <MudFab StartIcon="fa fa-edit" Color="Color.Primary"/>
+            <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary"/>
+            <MudFab StartIcon="fa fa-copy" Color="Color.Primary"/>
+            <MudFab StartIcon="fab fa-google" Color="Color.Primary"/>
+            <MudFab StartIcon="fa fa-book" Color="Color.Primary"/>
+            <MudButton Variant="Variant.Filled" Color="Color.Info">Get Note</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Info">Clear Note</MudButton>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
 
 </RequireAuth>
 
 @code {
-    string newWord = "";
-    int filterType = 0;
     WordsUnitViewModel vm = new(App.vmSettings, true, false);
+
+    protected override void OnInitialized()
+    {
+        vm.PropertyChanged += (_, __) => InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnKeyDownNewWord(KeyboardEventArgs e)
+    {
+        if (e.Key != "Enter" || string.IsNullOrEmpty(vm.NewWord)) return;
+
+    }
 }
