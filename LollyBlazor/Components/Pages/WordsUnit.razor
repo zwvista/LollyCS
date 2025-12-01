@@ -1,4 +1,5 @@
 @page "/WordsUnit"
+@inject IDialogService Dialog
 
 <RequireAuth>
 
@@ -11,7 +12,7 @@
         @foreach (var item in SettingsViewModel.ScopeWordFilters)
         {
             <MudSelectItem Value="@item">@item</MudSelectItem>
-        }
+        }   
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary">Add</MudButton>
@@ -50,7 +51,7 @@
                 <MudFab StartIcon="fa fa-trash" Color="Color.Secondary"/>
             </MudTooltip>
             <MudTooltip Text="Edit" Arrow="true" Placement="Placement.Top">
-                <MudFab StartIcon="fa fa-edit" Color="Color.Primary"/>
+                <MudFab StartIcon="fa fa-edit" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(context))"/>
             </MudTooltip>
             <MudTooltip Text="Speak" Arrow="true" Placement="Placement.Top">
                 <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary"/>
@@ -84,6 +85,17 @@
     {
         if (e.Key != "Enter" || string.IsNullOrEmpty(vm.NewWord)) return;
         await vm.AddNewWord();
+    }
+
+    async Task ShowDetailDialog(MUnitWord item)
+    {
+        var parameters = new DialogParameters<WordsUnitDetail> { { x => x.Item, item } };
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var dialog = await Dialog.ShowAsync<WordsUnitDetail>("Simple Dialog", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+        }
     }
 
     async Task GetNote(MUnitWord item) =>
