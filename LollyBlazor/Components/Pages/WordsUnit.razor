@@ -1,5 +1,6 @@
 @page "/WordsUnit"
 @inject IDialogService Dialog
+@inject ClipboardService ClipboardService
 
 <RequireAuth>
 
@@ -12,7 +13,7 @@
         @foreach (var item in SettingsViewModel.ScopeWordFilters)
         {
             <MudSelectItem Value="@item">@item</MudSelectItem>
-        }   
+        }
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary">Add</MudButton>
@@ -57,7 +58,7 @@
                 <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary"/>
             </MudTooltip>
             <MudTooltip Text="Copy" Arrow="true" Placement="Placement.Top">
-                <MudFab StartIcon="fa fa-copy" Color="Color.Primary"/>
+                <MudFab StartIcon="fa fa-copy" Color="Color.Primary" OnClick="@(() => CopyWord(context.WORD))"/>
             </MudTooltip>
             <MudTooltip Text="Google Word" Arrow="true" Placement="Placement.Top">
                 <MudFab StartIcon="fab fa-google" Color="Color.Primary"/>
@@ -97,6 +98,9 @@
         {
         }
     }
+
+    async Task CopyWord(string word) =>
+        await ClipboardService.WriteTextAsync(word);
 
     async Task GetNote(MUnitWord item) =>
         await vm.GetNote(item);

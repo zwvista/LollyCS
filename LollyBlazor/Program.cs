@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddScoped<LocalUserService>();
 builder.Services.AddScoped<AppStateService>();
+builder.Services.AddScoped<ClipboardService>();
+builder.Services.AddScoped<LocalUserService>();
 builder.Services.AddMudServices();
 
 var app = builder.Build();
