@@ -1,4 +1,4 @@
-@page "/words-unit"
+@page "/words-textbook"
 @inject IDialogService DialogService
 @inject CommonService CommonService
 @inject NavigationManager NavigationManager
@@ -6,10 +6,6 @@
 <RequireAuth>
 
 <MudToolBar>
-    <MudTextField @bind-Value="vm.NewWord" Label="New Word" Variant="Variant.Text" OnKeyDown="@OnKeyDownNewWord"></MudTextField>
-    <MudTooltip Text="Speak" Arrow="true" Placement="Placement.Top">
-        <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary" />
-    </MudTooltip>
     <MudSelect @bind-Value="vm.ScopeFilter">
         @foreach (var item in SettingsViewModel.ScopeWordFilters)
         {
@@ -17,7 +13,6 @@
         }
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
-    <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(null))">Add</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
@@ -73,7 +68,7 @@
 </RequireAuth>
 
 @code {
-    WordsUnitViewModel vm = new(App.vmSettings, true, false);
+    WordsUnitViewModel vm = new(App.vmSettings, false, false);
 
     protected override void OnInitialized()
     {
@@ -86,19 +81,12 @@
         await vm.AddNewWord();
     }
 
-    async Task ShowDetailDialog(MUnitWord? item)
+    async Task ShowDetailDialog(MUnitWord item)
     {
-        var isAdd = item == null;
-        MUnitWord itemEdit;
-        if (isAdd)
-            itemEdit = vm.NewUnitWord();
-        else
-        {
-            itemEdit = new MUnitWord();
-            item.CopyProperties(itemEdit);
-        }
-        var parameters = new DialogParameters<WordsUnitDetail> { { x => x.Item, itemEdit } };
-        var dialog = await DialogService.ShowAsync<WordsUnitDetail>("Simple Dialog", parameters);
+        var itemEdit = new MUnitWord();
+        item.CopyProperties(itemEdit);
+        var parameters = new DialogParameters<WordsTextbookDetail> { { x => x.Item, itemEdit } };
+        var dialog = await DialogService.ShowAsync<WordsTextbookDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
         {
@@ -119,10 +107,4 @@
 
     async Task ClearNote(MUnitWord item) =>
         await vm.ClearNote(item);
-
-    async Task GetNotes() =>
-        await vm.GetNotes(_ => { });
-
-    async Task ClearNotes() =>
-        await vm.ClearNotes(_ => { });
 }

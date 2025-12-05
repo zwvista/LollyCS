@@ -1,0 +1,40 @@
+<MudDialog>
+    <TitleContent>
+        Dialog Title
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Value="@Item.ID" Label="ID" Variant="Variant.Text" Disabled="true"></MudTextField>
+        <MudSelect @bind-Value="Item.UNIT">
+            @foreach (var o in App.vmSettings.Units)
+            {
+                <MudSelectItem Value="@o.Value">@o.Label</MudSelectItem>
+            }
+        </MudSelect>
+        <MudSelect @bind-Value="Item.PART">
+            @foreach (var o in App.vmSettings.Parts)
+            {
+                <MudSelectItem Value="@o.Value">@o.Label</MudSelectItem>
+            }
+        </MudSelect>
+        <MudTextField Value="@Item.SEQNUM" Label="SEQNUM" Variant="Variant.Text"></MudTextField>
+        <MudTextField Value="@Item.WORDID" Label="WORDID" Variant="Variant.Text" Disabled="true"></MudTextField>
+        <MudTextField Value="@Item.WORD" Label="WORD" Variant="Variant.Text"></MudTextField>
+        <MudTextField Value="@Item.NOTE" Label="NOTE" Variant="Variant.Text"></MudTextField>
+        <MudTextField Value="@Item.FAMIID" Label="FAMIID" Variant="Variant.Text" Disabled="true"></MudTextField>
+        <MudTextField Value="@Item.ACCURACY" Label="ACCURACY" Variant="Variant.Text" Disabled="true"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="@Submit">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] 
+    IMudDialogInstance MudDialog { get; set; }
+    [Parameter]
+    public MUnitWord Item { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+}
