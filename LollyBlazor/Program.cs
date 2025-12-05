@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<AppStateService>();
-builder.Services.AddScoped<ClipboardService>();
+builder.Services.AddScoped<CommonService>();
 builder.Services.AddScoped<LocalUserService>();
 builder.Services.AddMudServices();
 

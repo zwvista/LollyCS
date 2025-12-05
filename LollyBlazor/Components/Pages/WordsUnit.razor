@@ -1,6 +1,7 @@
-@page "/WordsUnit"
-@inject IDialogService Dialog
-@inject ClipboardService ClipboardService
+@page "/words-unit"
+@inject IDialogService DialogService
+@inject CommonService CommonService
+@inject NavigationManager NavigationManager
 
 <RequireAuth>
 
@@ -16,8 +17,8 @@
         }
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
-    <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary">Add</MudButton>
-    <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary">Refresh</MudButton>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(null))">Add</MudButton>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
     <MudCheckBox @bind-Value="vm.IfEmpty">If Empty</MudCheckBox>
     <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@GetNotes">Get Notes</MudButton>
     <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@ClearNotes">Clear Notes</MudButton>
@@ -61,7 +62,7 @@
                 <MudFab StartIcon="fa fa-copy" Color="Color.Primary" OnClick="@(() => CopyWord(context.WORD))"/>
             </MudTooltip>
             <MudTooltip Text="Google Word" Arrow="true" Placement="Placement.Top">
-                <MudFab StartIcon="fab fa-google" Color="Color.Primary"/>
+                <MudFab StartIcon="fab fa-google" Color="Color.Primary" OnClick="@(() => GoogleWord(context.WORD))"/>
             </MudTooltip>
             <MudTooltip Text="Dictionary" Arrow="true" Placement="Placement.Top">
                 <MudFab StartIcon="fa fa-book" Color="Color.Primary"/>
@@ -88,19 +89,33 @@
         await vm.AddNewWord();
     }
 
-    async Task ShowDetailDialog(MUnitWord item)
+    async Task ShowDetailDialog(MUnitWord? item)
     {
-        var parameters = new DialogParameters<WordsUnitDetail> { { x => x.Item, item } };
-        var options = new DialogOptions { CloseOnEscapeKey = true };
-        var dialog = await Dialog.ShowAsync<WordsUnitDetail>("Simple Dialog", parameters, options);
+        var isAdd = item == null;
+        MUnitWord itemEdit;
+        if (isAdd)
+            itemEdit = vm.NewUnitWord();
+        else
+        {
+            itemEdit = new MUnitWord();
+            item.CopyProperties(itemEdit);
+        }
+        var parameters = new DialogParameters<WordsUnitDetail> { { x => x.Item, itemEdit } };
+        var dialog = await DialogService.ShowAsync<WordsUnitDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
         {
         }
     }
+    
+    async Task OnRefresh() =>
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
 
     async Task CopyWord(string word) =>
-        await ClipboardService.WriteTextAsync(word);
+        await CommonService.WriteTextAsync(word);
+
+    async Task GoogleWord(string word) =>
+        await CommonService.GoogleStringAsync(word);
 
     async Task GetNote(MUnitWord item) =>
         await vm.GetNote(item);
