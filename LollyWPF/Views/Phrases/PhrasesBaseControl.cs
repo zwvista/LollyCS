@@ -16,7 +16,7 @@ namespace LollyWPF
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            dgWordsBase.DataContext = vmWordsLang = new WordsLangViewModel(vmSettings);
+            dgWordsBase.DataContext = vmWordsLang = new WordsLangViewModel(vmSettings, false);
         }
         public void OnEndEditWord(object sender, DataGridCellEditEndingEventArgs e) =>
             OnEndEdit(sender, e, "WORD", async item => await vmWordsLang.Update((MLangWord)item));

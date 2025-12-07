@@ -29,7 +29,7 @@ namespace LollyWPF
 
         public override async Task OnSettingsChanged()
         {
-            DataContext = vm = new WordsSearchViewModel(MainWindow.vmSettings, needCopy: true);
+            DataContext = vm = new WordsSearchViewModel(MainWindow.vmSettings, needCopy: true, paged: false);
             await base.OnSettingsChanged();
         }
 

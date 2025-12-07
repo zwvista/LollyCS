@@ -17,7 +17,7 @@ namespace LollyCommon
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
         public string StatusText => $"{WordItems.Count} Words in {vmSettings.LANGINFO}";
 
-        public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
+        public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
         {
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
@@ -75,7 +75,7 @@ namespace LollyCommon
             await langWordDS.UpdateNote(item.ID, item.NOTE);
         }
 
-        public WordsLangViewModel(SettingsViewModel vmSettings) : base(vmSettings, false)
+        public WordsLangViewModel(SettingsViewModel vmSettings, bool paged) : base(vmSettings, false, paged)
         {
         }
         public async Task GetWords(int phraseid)

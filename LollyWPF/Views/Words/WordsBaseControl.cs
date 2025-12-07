@@ -111,7 +111,7 @@ namespace LollyWPF
         public override async Task OnSettingsChanged()
         {
             await base.OnSettingsChanged();
-            vmPhrasesLang = new PhrasesLangViewModel(vmSettings);
+            vmPhrasesLang = new PhrasesLangViewModel(vmSettings, false);
             if (dgPhrasesBase != null) dgPhrasesBase.DataContext = vmPhrasesLang;
         }
         public void OnEndEditPhrase(object sender, DataGridCellEditEndingEventArgs e) =>

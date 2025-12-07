@@ -18,7 +18,7 @@ namespace LollyWPF
 {
     public class WordsUnitViewModelWPF : WordsUnitViewModel, IDragSource
     {
-        public WordsUnitViewModelWPF(SettingsViewModel vmSettings, bool inTextbook, bool needCopy) : base(vmSettings, inTextbook, needCopy)
+        public WordsUnitViewModelWPF(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paged) : base(vmSettings, inTextbook, needCopy, paged)
         {
         }
 

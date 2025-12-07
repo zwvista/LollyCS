@@ -255,9 +255,9 @@ namespace LollyCommon
         public List<MAutoCorrect> AutoCorrects { get; set; }
         public List<MCode> DictTypeCodes { get; set; }
         public List<MCode> ReadNumberCodes { get; set; }
-        public static List<string> ScopeWordFilters { get; } = new List<string> { "Word", "Note" };
-        public static List<string> ScopePhraseFilters { get; } = new List<string> { "Phrase", "Translation" };
-        public static List<string> ScopePatternFilters { get; } = new List<string> { "Pattern", "Tags" };
+        public static List<string> ScopeWordFilters { get; } = ["WORD", "NOTE"];
+        public static List<string> ScopePhraseFilters { get; } = ["PHRASE", "TRANSLATION"];
+        public static List<string> ScopePatternFilters { get; } = ["PATTERN", "TAGS"];
         public static List<MSelectItem> ReviewModes { get; set; } = new List<MSelectItem>
         {
             new MSelectItem(0, "Review(Auto)"),

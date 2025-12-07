@@ -32,7 +32,7 @@ namespace LollyWPF
 
         public override async Task OnSettingsChanged()
         {
-            DataContext = vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true, () =>
+            DataContext = vm = new WordsReviewViewModel(MainWindow.vmSettings, needCopy: true, paged: false, () =>
             {
                 tbWordInput.Focus();
                 if (vm.HasCurrent && vm.IsSpeaking)

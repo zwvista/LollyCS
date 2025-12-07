@@ -17,7 +17,7 @@ namespace LollyCommon
         public ObservableCollection<MLangPhrase> PhraseItems { get; set; } = [];
         public string StatusText => $"{PhraseItems.Count} Phrases in {vmSettings.LANGINFO}";
 
-        public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy) : base(vmSettings, needCopy)
+        public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
         {
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
@@ -54,7 +54,7 @@ namespace LollyCommon
                 LANGID = vmSettings.SelectedLang.ID,
             };
 
-        public PhrasesLangViewModel(SettingsViewModel vmSettings) : base(vmSettings, false)
+        public PhrasesLangViewModel(SettingsViewModel vmSettings, bool paged) : base(vmSettings, false, paged)
         {
         }
         public async Task GetPhrases(int wordid)

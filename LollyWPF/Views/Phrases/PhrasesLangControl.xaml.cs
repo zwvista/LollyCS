@@ -50,7 +50,7 @@ namespace LollyWPF
 
         public override async Task OnSettingsChanged()
         {
-            DataContext = vm = new PhrasesLangViewModel(MainWindow.vmSettings, needCopy: true);
+            DataContext = vm = new PhrasesLangViewModel(MainWindow.vmSettings, needCopy: true, paged: false);
             tcDicts.DataContext = this;
             await base.OnSettingsChanged();
         }

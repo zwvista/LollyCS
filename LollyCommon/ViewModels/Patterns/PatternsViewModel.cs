@@ -20,6 +20,7 @@ namespace LollyCommon
         public partial string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
         bool NoFilter => string.IsNullOrEmpty(TextFilter);
         public string StatusText => $"{PatternItems.Count} Patterns in {vmSettings.LANGINFO}";
+        public bool Paged { get; set; }
         [Reactive]
         public partial MPattern SelectedPatternItem { get; set; }
         [ObservableAsProperty]
@@ -30,9 +31,10 @@ namespace LollyCommon
         public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
-        public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy)
+        public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
+            Paged = paged;
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
             this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToProperty(this, x => x.HasSelectedPatternItem);

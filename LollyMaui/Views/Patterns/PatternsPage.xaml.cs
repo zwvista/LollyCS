@@ -11,7 +11,7 @@ namespace LollyMaui
         public PatternsPage()
         {
             InitializeComponent();
-            BindingContext = vm = new PatternsViewModel(AppShell.vmSettings, false);
+            BindingContext = vm = new PatternsViewModel(AppShell.vmSettings, false, false);
         }
 
         protected override void OnAppearing()
