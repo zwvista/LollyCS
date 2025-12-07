@@ -9,8 +9,16 @@ namespace LollyCommon
 {
     public class LangPhraseDataStore : LollyDataStore<MLangPhrase>
     {
-        public async Task<List<MLangPhrase>> GetDataByLang(int langid) =>
-            (await GetDataByUrl<MLangPhrases>($"LANGPHRASES?filter=LANGID,eq,{langid}&order=PHRASE")).Records;
+        public async Task<List<MLangPhrase>> GetDataByLang(int langid,
+            string textFilter, string scopeFilter, int? pageNo = null, int? pageSize = null)
+        {
+            var url = $"LANGPHRASES?filter=LANGID,eq,{langid}&order=PHRASE";
+            if (!string.IsNullOrEmpty(textFilter))
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+            if (pageNo.HasValue && pageSize.HasValue)
+                url += $"&page={pageNo},{pageSize}";
+            return (await GetDataByUrl<MLangPhrases>(url)).Records;
+        }
 
         public async Task<int> Create(MLangPhrase item) =>
             await CreateByUrl($"LANGPHRASES", item);

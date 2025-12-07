@@ -8,9 +8,13 @@ namespace LollyCommon
 {
     public class UnitWordDataStore : LollyDataStore<MUnitWord>
     {
-        public async Task<List<MUnitWord>> GetDataByTextbookUnitPart(MTextbook textbook, int unitPartFrom, int unitPartTo)
+        public async Task<List<MUnitWord>> GetDataByTextbookUnitPart(
+            MTextbook textbook, int unitPartFrom, int unitPartTo, string textFilter, string scopeFilter)
         {
-            var lst = (await GetDataByUrl<MUnitWords>($"VUNITWORDS?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}&order=UNITPART&order=SEQNUM")).Records;
+            var url = $"VUNITWORDS?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}&order=UNITPART&order=SEQNUM";
+            if (!string.IsNullOrEmpty(textFilter))
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+            var lst = (await GetDataByUrl<MUnitWords>(url)).Records;
             foreach (var o in lst)
                 o.Textbook = textbook;
             return lst;
@@ -32,9 +36,17 @@ namespace LollyCommon
             return lst;
         }
 
-        public async Task<List<MUnitWord>> GetDataByLang(int langid, List<MTextbook> lstTextbooks)
+        public async Task<List<MUnitWord>> GetDataByLang(int langid, List<MTextbook> lstTextbooks,
+            string textFilter, string scopeFilter, int textbookFilter, int? pageNo = null, int? pageSize = null)
         {
-            var lst = (await GetDataByUrl<MUnitWords>($"VUNITWORDS?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM")).Records;
+            var url = $"VUNITWORDS?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM";
+            if (!string.IsNullOrEmpty(textFilter))
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+            if (textbookFilter != 0)
+                url += $"&filter=TEXTBOOKID,eq,{textbookFilter}";
+            if (pageNo.HasValue && pageSize.HasValue)
+                url += $"&page={pageNo},{pageSize}";
+            var lst = (await GetDataByUrl<MUnitWords>(url)).Records;
             return SetTextbook(lst, lstTextbooks);
         }
 

@@ -25,8 +25,8 @@ namespace LollyCommon
             {
                 IsBusy = true;
                 PhraseItemsAll = new ObservableCollection<MUnitPhrase>(inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
-                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO) :
-                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks));
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
+                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter));
                 ApplyFilters();
                 IsBusy = false;
             });

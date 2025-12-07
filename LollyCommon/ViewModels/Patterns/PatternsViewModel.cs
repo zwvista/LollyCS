@@ -41,7 +41,7 @@ namespace LollyCommon
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                PatternItemsAll = new ObservableCollection<MPattern>(await patternDS.GetDataByLang(vmSettings.SelectedLang.ID));
+                PatternItemsAll = new ObservableCollection<MPattern>(await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter));
                 ApplyFilters();
                 IsBusy = false;
             });

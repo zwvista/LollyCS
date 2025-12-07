@@ -117,7 +117,7 @@ namespace LollyCommon
             else
             {
                 Items = await unitWordDS.GetDataByTextbookUnitPart(
-                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO);
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, "", "");
                 int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
                 int nTo = Count * Options.GroupSelected / Options.GroupCount;
                 Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();

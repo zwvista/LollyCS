@@ -14,12 +14,16 @@ namespace LollyCommon
         public partial string TextFilter { get; set; } = "";
         [Reactive]
         public partial int TextbookFilter { get; set; }
-        public bool Paged { get; set; }
         public MSelectItem TextbookFilterItem
         {
             get => vmSettings.TextbookFilters.SingleOrDefault(o => o.Value == TextbookFilter);
             set { if (value != null) TextbookFilter = value.Value; }
         }
+        public bool Paged { get; set; }
+        [Reactive]
+        public partial int? PageNo { get; set; }
+        [Reactive]
+        public partial int? PageSize { get; set; }
         [Reactive]
         public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
