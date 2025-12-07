@@ -19,6 +19,9 @@
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(null))">Add</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
+    <MudCheckBox @bind-Value="vm.IfEmpty">If Empty</MudCheckBox>
+    <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@GetNotes">Get Notes</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@ClearNotes">Clear Notes</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
 
@@ -95,7 +98,7 @@
         else
         {
             itemEdit = new MUnitWord();
-            item.CopyProperties(itemEdit);
+            item!.CopyProperties(itemEdit);
         }
         var parameters = new DialogParameters<WordsUnitDetail> { { x => x.Item, itemEdit } };
         var dialog = await DialogService.ShowAsync<WordsUnitDetail>("Simple Dialog", parameters);
