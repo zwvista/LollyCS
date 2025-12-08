@@ -1,0 +1,26 @@
+<MudDialog>
+    <TitleContent>
+        Dialog Title
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Value="@Item.ID" Label="ID" Variant="Variant.Text" Disabled="true"></MudTextField>
+        <MudTextField Value="@Item.PATTERN" Label="PATTERN" Variant="Variant.Text"></MudTextField>
+        <MudTextField Value="@Item.TAGS" Label="TAGS" Variant="Variant.Text"></MudTextField>
+        <MudTextField Value="@Item.TITLE" Label="TITLE" Variant="Variant.Text"></MudTextField>
+        <MudTextField Value="@Item.URL" Label="URL" Variant="Variant.Text"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="@Submit">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] 
+    IMudDialogInstance MudDialog { get; set; }
+    [Parameter]
+    public MPattern Item { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+}

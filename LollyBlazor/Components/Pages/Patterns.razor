@@ -1,0 +1,96 @@
+@page "/patterns"
+@inject IDialogService DialogService
+@inject CommonService CommonService
+@inject NavigationManager NavigationManager
+
+<RequireAuth>
+
+<MudToolBar>
+    <MudSelect @bind-Value="vm.ScopeFilter">
+        @foreach (var item in SettingsViewModel.ScopePatternFilters)
+        {
+            <MudSelectItem Value="@item">@item</MudSelectItem>
+        }
+    </MudSelect>
+    <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
+</MudToolBar>
+
+<MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy">
+    <HeaderContent>
+        <MudTh>ID</MudTh>
+        <MudTh>PATTERN</MudTh>
+        <MudTh>TAGS</MudTh>
+        <MudTh>TITLE</MudTh>
+        <MudTh>URL</MudTh>
+        <MudTh>ACTIONS</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.ID</MudTd>
+        <MudTd>@context.PATTERN</MudTd>
+        <MudTd>@context.TAGS</MudTd>
+        <MudTd>@context.TITLE</MudTd>
+        <MudTd>@context.URL</MudTd>
+        <MudTd>
+            <MudTooltip Text="Delete" Arrow="true" Placement="Placement.Top">
+                <MudFab StartIcon="fa fa-trash" Color="Color.Secondary"/>
+            </MudTooltip>
+            <MudTooltip Text="Edit" Arrow="true" Placement="Placement.Top">
+                <MudFab StartIcon="fa fa-edit" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(context))"/>
+            </MudTooltip>
+            <MudTooltip Text="Speak" Arrow="true" Placement="Placement.Top">
+                <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary"/>
+            </MudTooltip>
+            <MudTooltip Text="Copy" Arrow="true" Placement="Placement.Top">
+                <MudFab StartIcon="fa fa-copy" Color="Color.Primary" OnClick="@(() => CopyPattern(context.PATTERN))"/>
+            </MudTooltip>
+            <MudTooltip Text="Google Pattern" Arrow="true" Placement="Placement.Top">
+                <MudFab StartIcon="fab fa-google" Color="Color.Primary" OnClick="@(() => GooglePattern(context.PATTERN))"/>
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="@vm.vmSettings.USROWSPERPAGEOPTIONS.ToArray()" />
+    </PagerContent>
+</MudTable>
+
+</RequireAuth>
+
+@code {
+    PatternsViewModel vm = new(App.vmSettings, false, true);
+
+    protected override void OnInitialized()
+    {
+        vm.PropertyChanged += (_, __) => InvokeAsync(StateHasChanged);
+    }
+
+    async Task<TableData<MPattern>> ServerReload(TableState state, CancellationToken token)
+    {
+        vm.PageNo = state.Page + 1;
+        vm.PageSize = state.PageSize;
+        await vm.ReloadAsync();
+        return new TableData<MPattern> { TotalItems = vm.ItemCount, Items = vm.PatternItems };
+    }
+
+    async Task ShowDetailDialog(MPattern item)
+    {
+        var itemEdit = new MPattern();
+        item.CopyProperties(itemEdit);
+        var parameters = new DialogParameters<PatternsDetail> { { x => x.Item, itemEdit } };
+        var dialog = await DialogService.ShowAsync<PatternsDetail>("Simple Dialog", parameters);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+        }
+    }
+    
+    async Task OnRefresh() =>
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+
+    async Task CopyPattern(string phrase) =>
+        await CommonService.WriteTextAsync(phrase);
+
+    async Task GooglePattern(string phrase) =>
+        await CommonService.GoogleStringAsync(phrase);
+}
