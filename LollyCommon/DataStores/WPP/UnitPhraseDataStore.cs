@@ -13,7 +13,7 @@ namespace LollyCommon
         {
             var url = $"VUNITPHRASES?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}";
             if (!string.IsNullOrEmpty(textFilter))
-                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)}";
             var lst = (await GetDataByUrl<MUnitPhrases>(url)).Records;
             foreach (var o in lst)
                 o.Textbook = textbook;

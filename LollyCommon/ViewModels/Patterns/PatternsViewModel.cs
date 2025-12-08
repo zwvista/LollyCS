@@ -44,7 +44,6 @@ namespace LollyCommon
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => Reload());
             this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToProperty(this, x => x.HasSelectedPatternItem);
-            Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
 

@@ -13,7 +13,7 @@ namespace LollyCommon
         {
             var url = $"PATTERNS?filter=LANGID,eq,{langid}&order=PATTERN";
             if (!string.IsNullOrEmpty(textFilter))
-                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)}";
             if (pageNo.HasValue && pageSize.HasValue)
                 url += $"&page={pageNo},{pageSize}";
             return (await GetDataByUrl<MPatterns>(url)).Records;

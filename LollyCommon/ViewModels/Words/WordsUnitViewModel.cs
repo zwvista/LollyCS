@@ -31,7 +31,6 @@ namespace LollyCommon
             });
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => Reload());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
 

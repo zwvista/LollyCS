@@ -14,7 +14,7 @@ namespace LollyCommon
         {
             var url = $"LANGPHRASES?filter=LANGID,eq,{langid}&order=PHRASE";
             if (!string.IsNullOrEmpty(textFilter))
-                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)}";
             if (pageNo.HasValue && pageSize.HasValue)
                 url += $"&page={pageNo},{pageSize}";
             return (await GetDataByUrl<MLangPhrases>(url)).Records;
