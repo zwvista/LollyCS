@@ -13,38 +13,29 @@ namespace LollyCommon
         LangWordDataStore langWordDS = new();
         protected WordPhraseDataStore wordPhraseDS = new();
 
-        ObservableCollection<MLangWord> WordItemsAll { get; set; } = new ObservableCollection<MLangWord>();
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
         public string StatusText => $"{WordItems.Count} Words in {vmSettings.LANGINFO}";
 
         public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
         {
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
-            this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                WordItemsAll = new ObservableCollection<MLangWord>(await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID, TextFilter, ScopeFilter));
-                ApplyFilters();
+                WordItems = new ObservableCollection<MLangWord>(await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID, TextFilter, ScopeFilter));
+                this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
             });
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => Reload());
+            this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
-        protected virtual void ApplyFilters()
-        {
-            WordItems = string.IsNullOrEmpty(TextFilter) ? WordItemsAll : new ObservableCollection<MLangWord>(WordItemsAll.Where(o =>
-                string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE).ToLower().Contains(TextFilter.ToLower())
-            ));
-            this.RaisePropertyChanged(nameof(WordItems));
-        }
 
         public async Task Update(MLangWord item) => await langWordDS.Update(item);
         public async Task Create(MLangWord item)
         {
             await langWordDS.Create(item);
-            WordItemsAll.Add(item);
-            ApplyFilters();
+            WordItems.Add(item);
         }
         public async Task Delete(MLangWord item) => await langWordDS.Delete(item);
 
@@ -102,12 +93,6 @@ namespace LollyCommon
                     if (o.IsChecked)
                         await wordPhraseDS.Associate(phraseid, o.ID);
             });
-        }
-        protected override void ApplyFilters()
-        {
-            base.ApplyFilters();
-            foreach (var o in WordItems)
-                o.IsChecked = false;
         }
         public void CheckItems(int n, List<MLangWord> selectedItems)
         {

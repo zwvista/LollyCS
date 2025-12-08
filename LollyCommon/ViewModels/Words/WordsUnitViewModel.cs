@@ -12,7 +12,6 @@ namespace LollyCommon
         UnitWordDataStore unitWordDS = new();
         LangWordDataStore langWordDS = new();
 
-        ObservableCollection<MUnitWord> WordItemsAll { get; set; } = [];
         public ObservableCollection<MUnitWord> WordItems { get; set; } = [];
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public bool IfEmpty { get; set; } = true;
@@ -21,28 +20,20 @@ namespace LollyCommon
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
         {
             this.inTextbook = inTextbook;
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => ApplyFilters());
-            this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                WordItemsAll = new ObservableCollection<MUnitWord>(inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
+                WordItems = new ObservableCollection<MUnitWord>(inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
                     vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
                     await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter));
-                ApplyFilters();
+                this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
             });
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => Reload());
+            this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
-        void ApplyFilters()
-        {
-            WordItems = NoFilter ? WordItemsAll : new ObservableCollection<MUnitWord>(WordItemsAll.Where(o =>
-                 (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Word" ? o.WORD : o.NOTE).ToLower().Contains(TextFilter.ToLower())) &&
-                 (TextbookFilter == 0 || o.TEXTBOOKID == TextbookFilter)
-            ));
-            this.RaisePropertyChanged(nameof(WordItems));
-        }
 
         public async Task Update(MUnitWord item)
         {
@@ -61,8 +52,7 @@ namespace LollyCommon
             o?.CopyProperties(item);
             if (item.NOTE.IsEmpty())
                 await GetNote(item);
-            WordItemsAll.Add(o);
-            ApplyFilters();
+            WordItems.Add(o);
         }
 
         public async Task Delete(MUnitWord item) =>
@@ -70,9 +60,9 @@ namespace LollyCommon
 
         public async Task Reindex(Action<int> complete)
         {
-            for (int i = 1; i <= WordItemsAll.Count; i++)
+            for (int i = 1; i <= WordItems.Count; i++)
             {
-                var item = WordItemsAll[i - 1];
+                var item = WordItems[i - 1];
                 if (item.SEQNUM == i) continue;
                 item.SEQNUM = i;
                 await unitWordDS.UpdateSeqNum(item.ID, item.SEQNUM);
@@ -82,7 +72,7 @@ namespace LollyCommon
 
         public MUnitWord NewUnitWord()
         {
-            var maxElem = WordItemsAll.IsEmpty() ? null : WordItemsAll.MaxByWithTies(o => (o.UNIT, o.PART, o.SEQNUM)).First();
+            var maxElem = WordItems.IsEmpty() ? null : WordItems.MaxByWithTies(o => (o.UNIT, o.PART, o.SEQNUM)).First();
             return new MUnitWord
             {
                 LANGID = vmSettings.SelectedLang.ID,

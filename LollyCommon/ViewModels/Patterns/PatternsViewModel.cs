@@ -12,7 +12,6 @@ namespace LollyCommon
     {
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
-        ObservableCollection<MPattern> PatternItemsAll { get; set; } = [];
         public ObservableCollection<MPattern> PatternItems { get; set; } = [];
         [Reactive]
         public partial string TextFilter { get; set; } = "";
@@ -35,33 +34,25 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             Paged = paged;
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => ApplyFilters());
-            this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
-            this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToProperty(this, x => x.HasSelectedPatternItem);
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                PatternItemsAll = new ObservableCollection<MPattern>(await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter));
-                ApplyFilters();
+                PatternItems = new ObservableCollection<MPattern>(await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter));
+                this.RaisePropertyChanged(nameof(PatternItems));
                 IsBusy = false;
             });
+            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => Reload());
+            this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
+            this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToProperty(this, x => x.HasSelectedPatternItem);
             Reload();
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();
-        void ApplyFilters()
-        {
-            PatternItems = NoFilter ? PatternItemsAll : new ObservableCollection<MPattern>(PatternItemsAll.Where(o =>
-                (string.IsNullOrEmpty(TextFilter) || (ScopeFilter == "Pattern" ? o.PATTERN : o.TAGS ?? "").ToLower().Contains(TextFilter.ToLower()))
-            ));
-            this.RaisePropertyChanged(nameof(PatternItems));
-        }
 
         public async Task Update(MPattern item) => await patternDS.Update(item);
         public async Task Create(MPattern item)
         {
             item.ID = await patternDS.Create(item);
-            PatternItemsAll.Add(item);
-            ApplyFilters();
+            PatternItems.Add(item);
         }
         public async Task Delete(int id) => await patternDS.Delete(id);
 
