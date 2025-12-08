@@ -1,4 +1,4 @@
-@page "/phrases-textbook"
+@page "/phrases-lang"
 @inject IDialogService DialogService
 @inject CommonService CommonService
 @inject NavigationManager NavigationManager
@@ -20,22 +20,12 @@
 <MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy">
     <HeaderContent>
         <MudTh>ID</MudTh>
-        <MudTh>TEXTBOOKNAME</MudTh>
-        <MudTh>UNIT</MudTh>
-        <MudTh>PART</MudTh>
-        <MudTh>SEQNUM</MudTh>
-        <MudTh>PHRASEID</MudTh>
         <MudTh>PHRASE</MudTh>
         <MudTh>TRANSLATION</MudTh>
         <MudTh>ACTIONS</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>@context.ID</MudTd>
-        <MudTd>@context.TEXTBOOKNAME</MudTd>
-        <MudTd>@context.UNITSTR</MudTd>
-        <MudTd>@context.PARTSTR</MudTd>
-        <MudTd>@context.SEQNUM</MudTd>
-        <MudTd>@context.PHRASEID</MudTd>
         <MudTd>@context.PHRASE</MudTd>
         <MudTd>@context.TRANSLATION</MudTd>
         <MudTd>
@@ -64,27 +54,27 @@
 </RequireAuth>
 
 @code {
-    PhrasesUnitViewModel vm = new(App.vmSettings, false, false, true);
+    PhrasesLangViewModel vm = new(App.vmSettings, false, true);
 
     protected override void OnInitialized()
     {
         vm.PropertyChanged += (_, __) => InvokeAsync(StateHasChanged);
     }
 
-    async Task<TableData<MUnitPhrase>> ServerReload(TableState state, CancellationToken token)
+    async Task<TableData<MLangPhrase>> ServerReload(TableState state, CancellationToken token)
     {
         vm.PageNo = state.Page + 1;
         vm.PageSize = state.PageSize;
         await vm.ReloadAsync();
-        return new TableData<MUnitPhrase> {TotalItems = vm.ItemCount, Items = vm.PhraseItems};
+        return new TableData<MLangPhrase> {TotalItems = vm.ItemCount, Items = vm.PhraseItems};
     }
 
-    async Task ShowDetailDialog(MUnitPhrase item)
+    async Task ShowDetailDialog(MLangPhrase item)
     {
-        var itemEdit = new MUnitPhrase();
+        var itemEdit = new MLangPhrase();
         item.CopyProperties(itemEdit);
-        var parameters = new DialogParameters<PhrasesTextbookDetail> { { x => x.Item, itemEdit } };
-        var dialog = await DialogService.ShowAsync<PhrasesTextbookDetail>("Simple Dialog", parameters);
+        var parameters = new DialogParameters<PhrasesLangDetail> { { x => x.Item, itemEdit } };
+        var dialog = await DialogService.ShowAsync<PhrasesLangDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
         {
