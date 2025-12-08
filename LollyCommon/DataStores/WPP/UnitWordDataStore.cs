@@ -41,7 +41,7 @@ namespace LollyCommon
         {
             var url = $"VUNITWORDS?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM";
             if (!string.IsNullOrEmpty(textFilter))
-                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)})";
+                url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)}";
             if (textbookFilter != 0)
                 url += $"&filter=TEXTBOOKID,eq,{textbookFilter}";
             if (pageNo.HasValue && pageSize.HasValue)

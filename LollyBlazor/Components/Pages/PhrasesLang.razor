@@ -17,7 +17,7 @@
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
 
-<MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy">
+<MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy" @ref="table">
     <HeaderContent>
         <MudTh>ID</MudTh>
         <MudTh>PHRASE</MudTh>
@@ -55,10 +55,12 @@
 
 @code {
     PhrasesLangViewModel vm = new(App.vmSettings, false, true);
+    MudTable<MLangPhrase> table;
 
     protected override void OnInitialized()
     {
         vm.PropertyChanged += (_, __) => InvokeAsync(StateHasChanged);
+        vm.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => table?.ReloadServerData());
     }
 
     async Task<TableData<MLangPhrase>> ServerReload(TableState state, CancellationToken token)
