@@ -14,6 +14,8 @@ namespace LollyCommon
     {
         [JsonProperty("records")]
         public List<MLangWord> Records { get; set; }
+        [JsonProperty("results")]
+        public int Count { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public partial class MLangWord : ReactiveObject, MWordInterface

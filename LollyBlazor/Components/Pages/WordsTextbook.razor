@@ -17,7 +17,7 @@
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
 
-<MudTable ServerData="ServerReload" RowsPerPage="@vm.PageSize">
+<MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy">
     <HeaderContent>
         <MudTh>No.</MudTh>
         <MudTh>ID</MudTh>
@@ -80,10 +80,10 @@
 
     async Task<TableData<MUnitWord>> ServerReload(TableState state, CancellationToken token)
     {
-        vm.PageNo = state.Page;
+        vm.PageNo = state.Page + 1;
         vm.PageSize = state.PageSize;
-        vm.Reload();
-        return new TableData<MUnitWord>() {TotalItems = 250, Items = vm.WordItems};
+        await vm.ReloadAsync();
+        return new TableData<MUnitWord> {TotalItems = vm.ItemCount, Items = vm.WordItems};
     }
 
     async Task ShowDetailDialog(MUnitWord item)

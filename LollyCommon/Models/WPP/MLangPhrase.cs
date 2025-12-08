@@ -13,6 +13,8 @@ namespace LollyCommon
     {
         [JsonProperty("records")]
         public List<MLangPhrase> Records { get; set; }
+        [JsonProperty("results")]
+        public int Count { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public partial class MLangPhrase : ReactiveObject, MPhraseInterface

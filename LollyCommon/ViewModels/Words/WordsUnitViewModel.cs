@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace LollyCommon
@@ -20,17 +21,24 @@ namespace LollyCommon
         public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             this.inTextbook = inTextbook;
-            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            ReloadAsync = async () =>
             {
                 IsBusy = true;
-                WordItems = new ObservableCollection<MUnitWord>(inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
-                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
-                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter,
-                    paginated ? PageNo : null, paginated ? PageSize : null));
+                var (items, count) = inTextbook
+                    ? await unitWordDS.GetDataByTextbookUnitPart(
+                        vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter,
+                        ScopeFilter)
+                    : await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter,
+                        ScopeFilter, TextbookFilter,
+                        paginated ? PageNo : null, paginated ? PageSize : null);
+                WordItems = new ObservableCollection<MUnitWord>(items);
+                ItemCount = count;
                 this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
-            });
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => Reload());
+            };
+            ReloadCommand = ReactiveCommand.CreateFromTask(ReloadAsync);
+            if (!paginated)
+                this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => Reload());
             this.WhenAnyValue(x => x.WordItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();

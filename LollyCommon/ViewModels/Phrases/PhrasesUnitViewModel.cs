@@ -18,17 +18,24 @@ namespace LollyCommon
         public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             this.inTextbook = inTextbook;
-            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            ReloadAsync = async () =>
             {
                 IsBusy = true;
-                PhraseItems = new ObservableCollection<MUnitPhrase>(inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
-                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
-                    await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter,
-                    paginated ? PageNo : null, paginated ? PageSize : null));
+                var (items, count) = inTextbook
+                    ? await unitPhraseDS.GetDataByTextbookUnitPart(
+                        vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter,
+                        ScopeFilter)
+                    : await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter,
+                        ScopeFilter, TextbookFilter,
+                        paginated ? PageNo : null, paginated ? PageSize : null);
+                PhraseItems = new ObservableCollection<MUnitPhrase>(items);
+                ItemCount = count;
                 this.RaisePropertyChanged(nameof(PhraseItems));
                 IsBusy = false;
-            });
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => Reload());
+            };
+            ReloadCommand = ReactiveCommand.CreateFromTask(ReloadAsync);
+            if (!paginated)
+                this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter, x => x.TextbookFilter).Subscribe(_ => Reload());
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
         }
         public void Reload() => ReloadCommand.Execute().Subscribe();

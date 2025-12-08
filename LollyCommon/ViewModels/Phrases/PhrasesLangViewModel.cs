@@ -18,15 +18,18 @@ namespace LollyCommon
 
         public PhrasesLangViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
-            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            ReloadAsync = async () =>
             {
                 IsBusy = true;
-                PhraseItems = new ObservableCollection<MLangPhrase>(
+                var (items, count) =
                     await langPhraseDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID, TextFilter, ScopeFilter,
-                    paginated ? PageNo : null, paginated ? PageSize : null));
+                        paginated ? PageNo : null, paginated ? PageSize : null);
+                PhraseItems = new ObservableCollection<MLangPhrase>(items);
+                ItemCount = count;
                 this.RaisePropertyChanged(nameof(PhraseItems));
                 IsBusy = false;
-            });
+            };
+            ReloadCommand = ReactiveCommand.CreateFromTask(ReloadAsync);
             this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => Reload());
             this.WhenAnyValue(x => x.PhraseItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
         }

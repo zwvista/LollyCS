@@ -8,7 +8,7 @@ namespace LollyCommon
 {
     public class PatternDataStore : LollyDataStore<MPattern>
     {
-        public async Task<List<MPattern>> GetDataByLang(int langid,
+        public async Task<(List<MPattern>, int)> GetDataByLang(int langid,
             string textFilter, string scopeFilter, int? pageNo = null, int? pageSize = null)
         {
             var url = $"PATTERNS?filter=LANGID,eq,{langid}&order=PATTERN";
@@ -16,7 +16,8 @@ namespace LollyCommon
                 url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)}";
             if (pageNo.HasValue && pageSize.HasValue)
                 url += $"&page={pageNo},{pageSize}";
-            return (await GetDataByUrl<MPatterns>(url)).Records;
+            var o = await GetDataByUrl<MPatterns>(url);
+            return (o.Records, o.Count);
         }
 
         public async Task<List<MPattern>> GetDataById(int id) =>

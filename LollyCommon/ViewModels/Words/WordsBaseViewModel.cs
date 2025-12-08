@@ -1,13 +1,16 @@
-﻿using ReactiveUI;
+﻿using System;
+using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using System.Linq;
 using System.Reactive;
+using System.Threading.Tasks;
 
 namespace LollyCommon
 {
     public partial class WordsPhrasesBaseViewModel : ReactiveObject
     {
         public SettingsViewModel vmSettings { get; }
+        public int ItemCount { get; set; }
         [Reactive]
         public partial string ScopeFilter { get; set; }
         [Reactive]
@@ -26,6 +29,7 @@ namespace LollyCommon
         public partial int PageSize { get; set; }
         [Reactive]
         public partial bool IsBusy { get; set; } = true;
+        public Func<Task> ReloadAsync { get; set; }
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
         public WordsPhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated)

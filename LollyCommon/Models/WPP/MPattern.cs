@@ -12,6 +12,8 @@ namespace LollyCommon
     {
         [JsonProperty("records")]
         public List<MPattern> Records { get; set; }
+        [JsonProperty("results")]
+        public int Count { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public partial class MPattern : ReactiveObject

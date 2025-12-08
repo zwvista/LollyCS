@@ -91,8 +91,8 @@ namespace LollyCommon
             }
             else
             {
-                Items = await unitPhraseDS.GetDataByTextbookUnitPart(
-                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, "", "");
+                Items = (await unitPhraseDS.GetDataByTextbookUnitPart(
+                    vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, "", "")).Item1;
                 int nFrom = Count * (Options.GroupSelected - 1) / Options.GroupCount;
                 int nTo = Count * Options.GroupSelected / Options.GroupCount;
                 Items = Items.Skip(nFrom).Take(nTo - nFrom).ToList();

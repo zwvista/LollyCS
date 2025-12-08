@@ -13,6 +13,7 @@ namespace LollyCommon
         public SettingsViewModel vmSettings;
         PatternDataStore patternDS = new PatternDataStore();
         public ObservableCollection<MPattern> PatternItems { get; set; } = [];
+        public int ItemCount { get; set; }
         [Reactive]
         public partial string TextFilter { get; set; } = "";
         [Reactive]
@@ -32,6 +33,7 @@ namespace LollyCommon
         public int SelectedPatternID => SelectedPatternItem?.PATTERNID ?? 0;
         [Reactive]
         public partial bool IsBusy { get; set; } = true;
+        public Func<Task> ReloadAsync { get; set; }
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
         public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated)
@@ -39,16 +41,20 @@ namespace LollyCommon
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             paginated = paginated;
             PageSize = vmSettings.USROWSPERPAGE;
-            ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            ReloadAsync = async () =>
             {
                 IsBusy = true;
-                PatternItems = new ObservableCollection<MPattern>(
+                var (items, count) =
                     await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter,
-                    paginated ? PageNo : null, paginated ? PageSize : null));
+                        paginated ? PageNo : null, paginated ? PageSize : null);
+                PatternItems = new ObservableCollection<MPattern>(items);
+                ItemCount = count;
                 this.RaisePropertyChanged(nameof(PatternItems));
                 IsBusy = false;
-            });
-            this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => Reload());
+            };
+            ReloadCommand = ReactiveCommand.CreateFromTask(ReloadAsync);
+            if (!paginated)
+                this.WhenAnyValue(x => x.TextFilter, x => x.ScopeFilter).Subscribe(_ => Reload());
             this.WhenAnyValue(x => x.PatternItems).Subscribe(_ => this.RaisePropertyChanged(nameof(StatusText)));
             this.WhenAnyValue(x => x.SelectedPatternItem, (MPattern v) => v != null).ToProperty(this, x => x.HasSelectedPatternItem);
         }

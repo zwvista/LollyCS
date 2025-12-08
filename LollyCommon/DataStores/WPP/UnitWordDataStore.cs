@@ -8,16 +8,16 @@ namespace LollyCommon
 {
     public class UnitWordDataStore : LollyDataStore<MUnitWord>
     {
-        public async Task<List<MUnitWord>> GetDataByTextbookUnitPart(
+        public async Task<(List<MUnitWord>, int)> GetDataByTextbookUnitPart(
             MTextbook textbook, int unitPartFrom, int unitPartTo, string textFilter, string scopeFilter)
         {
             var url = $"VUNITWORDS?filter=TEXTBOOKID,eq,{textbook.ID}&filter=UNITPART,bt,{unitPartFrom},{unitPartTo}&order=UNITPART&order=SEQNUM";
             if (!string.IsNullOrEmpty(textFilter))
                 url += $"&filter={scopeFilter},cs,{HttpUtility.UrlEncode(textFilter)}";
-            var lst = (await GetDataByUrl<MUnitWords>(url)).Records;
-            foreach (var o in lst)
-                o.Textbook = textbook;
-            return lst;
+            var o = await GetDataByUrl<MUnitWords>(url);
+            foreach (var o2 in o.Records)
+                o2.Textbook = textbook;
+            return (o.Records, o.Count);
         }
 
         public async Task<List<MUnitWord>> GetDataByTextbook(MTextbook textbook)
@@ -36,7 +36,7 @@ namespace LollyCommon
             return lst;
         }
 
-        public async Task<List<MUnitWord>> GetDataByLang(int langid, List<MTextbook> lstTextbooks,
+        public async Task<(List<MUnitWord>, int)> GetDataByLang(int langid, List<MTextbook> lstTextbooks,
             string textFilter, string scopeFilter, int textbookFilter, int? pageNo = null, int? pageSize = null)
         {
             var url = $"VUNITWORDS?filter=LANGID,eq,{langid}&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM";
@@ -46,8 +46,8 @@ namespace LollyCommon
                 url += $"&filter=TEXTBOOKID,eq,{textbookFilter}";
             if (pageNo.HasValue && pageSize.HasValue)
                 url += $"&page={pageNo},{pageSize}";
-            var lst = (await GetDataByUrl<MUnitWords>(url)).Records;
-            return SetTextbook(lst, lstTextbooks);
+            var o = await GetDataByUrl<MUnitWords>(url);
+            return (SetTextbook(o.Records, lstTextbooks), o.Count);
         }
 
         public async Task<MUnitWord> GetDataById(int id, List<MTextbook> lstTextbooks)

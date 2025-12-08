@@ -13,6 +13,8 @@ namespace LollyCommon
     {
         [JsonProperty("records")]
         public List<MUnitPhrase> Records { get; set; }
+        [JsonProperty("results")]
+        public int Count { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]
     public partial class MUnitPhrase : ReactiveObject, MPhraseInterface
