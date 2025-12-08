@@ -1,4 +1,4 @@
-@page "/words-textbook"
+@page "/phrases-textbook"
 @inject IDialogService DialogService
 @inject CommonService CommonService
 @inject NavigationManager NavigationManager
@@ -7,7 +7,7 @@
 
 <MudToolBar>
     <MudSelect @bind-Value="vm.ScopeFilter">
-        @foreach (var item in SettingsViewModel.ScopeWordFilters)
+        @foreach (var item in SettingsViewModel.ScopePhraseFilters)
         {
             <MudSelectItem Value="@item">@item</MudSelectItem>
         }
@@ -24,10 +24,9 @@
         <MudTh>UNIT</MudTh>
         <MudTh>PART</MudTh>
         <MudTh>SEQNUM</MudTh>
-        <MudTh>WORDID</MudTh>
-        <MudTh>WORD</MudTh>
-        <MudTh>NOTE</MudTh>
-        <MudTh>ACCURACY</MudTh>
+        <MudTh>PHRASEID</MudTh>
+        <MudTh>PHRASE</MudTh>
+        <MudTh>TRANSLATION</MudTh>
         <MudTh>ACTIONS</MudTh>
     </HeaderContent>
     <RowTemplate>
@@ -36,10 +35,9 @@
         <MudTd>@context.UNITSTR</MudTd>
         <MudTd>@context.PARTSTR</MudTd>
         <MudTd>@context.SEQNUM</MudTd>
-        <MudTd>@context.WORDID</MudTd>
-        <MudTd>@context.WORD</MudTd>
-        <MudTd>@context.NOTE</MudTd>
-        <MudTd>@context.ACCURACY</MudTd>
+        <MudTd>@context.PHRASEID</MudTd>
+        <MudTd>@context.PHRASE</MudTd>
+        <MudTd>@context.TRANSLATION</MudTd>
         <MudTd>
             <MudTooltip Text="Delete" Arrow="true" Placement="Placement.Top">
                 <MudFab StartIcon="fa fa-trash" Color="Color.Secondary"/>
@@ -51,16 +49,14 @@
                 <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary"/>
             </MudTooltip>
             <MudTooltip Text="Copy" Arrow="true" Placement="Placement.Top">
-                <MudFab StartIcon="fa fa-copy" Color="Color.Primary" OnClick="@(() => CopyWord(context.WORD))"/>
+                <MudFab StartIcon="fa fa-copy" Color="Color.Primary" OnClick="@(() => CopyPhrase(context.PHRASE))"/>
             </MudTooltip>
-            <MudTooltip Text="Google Word" Arrow="true" Placement="Placement.Top">
-                <MudFab StartIcon="fab fa-google" Color="Color.Primary" OnClick="@(() => GoogleWord(context.WORD))"/>
+            <MudTooltip Text="Google Phrase" Arrow="true" Placement="Placement.Top">
+                <MudFab StartIcon="fab fa-google" Color="Color.Primary" OnClick="@(() => GooglePhrase(context.PHRASE))"/>
             </MudTooltip>
             <MudTooltip Text="Dictionary" Arrow="true" Placement="Placement.Top">
                 <MudFab StartIcon="fa fa-book" Color="Color.Primary"/>
             </MudTooltip>
-            <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => GetNote(context))">Get Note</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => ClearNote(context))">Clear Note</MudButton>
         </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -71,27 +67,27 @@
 </RequireAuth>
 
 @code {
-    WordsUnitViewModel vm = new(App.vmSettings, false, false, true);
+    PhrasesUnitViewModel vm = new(App.vmSettings, false, false, true);
 
     protected override void OnInitialized()
     {
         vm.PropertyChanged += (_, __) => InvokeAsync(StateHasChanged);
     }
 
-    async Task<TableData<MUnitWord>> ServerReload(TableState state, CancellationToken token)
+    async Task<TableData<MUnitPhrase>> ServerReload(TableState state, CancellationToken token)
     {
         vm.PageNo = state.Page + 1;
         vm.PageSize = state.PageSize;
         await vm.ReloadAsync();
-        return new TableData<MUnitWord> {TotalItems = vm.ItemCount, Items = vm.WordItems};
+        return new TableData<MUnitPhrase> {TotalItems = vm.ItemCount, Items = vm.PhraseItems};
     }
 
-    async Task ShowDetailDialog(MUnitWord item)
+    async Task ShowDetailDialog(MUnitPhrase item)
     {
-        var itemEdit = new MUnitWord();
+        var itemEdit = new MUnitPhrase();
         item.CopyProperties(itemEdit);
-        var parameters = new DialogParameters<WordsTextbookDetail> { { x => x.Item, itemEdit } };
-        var dialog = await DialogService.ShowAsync<WordsTextbookDetail>("Simple Dialog", parameters);
+        var parameters = new DialogParameters<PhrasesTextbookDetail> { { x => x.Item, itemEdit } };
+        var dialog = await DialogService.ShowAsync<PhrasesTextbookDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
         {
@@ -101,15 +97,9 @@
     async Task OnRefresh() =>
         NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
 
-    async Task CopyWord(string word) =>
-        await CommonService.WriteTextAsync(word);
+    async Task CopyPhrase(string phrase) =>
+        await CommonService.WriteTextAsync(phrase);
 
-    async Task GoogleWord(string word) =>
-        await CommonService.GoogleStringAsync(word);
-
-    async Task GetNote(MUnitWord item) =>
-        await vm.GetNote(item);
-
-    async Task ClearNote(MUnitWord item) =>
-        await vm.ClearNote(item);
+    async Task GooglePhrase(string phrase) =>
+        await CommonService.GoogleStringAsync(phrase);
 }
