@@ -21,7 +21,9 @@ namespace LollyCommon
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                WordItems = new ObservableCollection<MLangWord>(await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID, TextFilter, ScopeFilter));
+                WordItems = new ObservableCollection<MLangWord>(
+                    await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID, TextFilter, ScopeFilter,
+                    Paged ? PageNo : null, Paged ? PageSize : null));
                 this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
             });

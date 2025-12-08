@@ -21,6 +21,10 @@ namespace LollyCommon
         public string StatusText => $"{PatternItems.Count} Patterns in {vmSettings.LANGINFO}";
         public bool Paged { get; set; }
         [Reactive]
+        public partial int PageNo { get; set; } = 1;
+        [Reactive]
+        public partial int PageSize { get; set; }
+        [Reactive]
         public partial MPattern SelectedPatternItem { get; set; }
         [ObservableAsProperty]
         public partial bool HasSelectedPatternItem { get; }
@@ -34,10 +38,13 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             Paged = paged;
+            PageSize = vmSettings.USROWSPERPAGE;
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
-                PatternItems = new ObservableCollection<MPattern>(await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter));
+                PatternItems = new ObservableCollection<MPattern>(
+                    await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter,
+                    Paged ? PageNo : null, Paged ? PageSize : null));
                 this.RaisePropertyChanged(nameof(PatternItems));
                 IsBusy = false;
             });

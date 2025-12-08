@@ -25,7 +25,8 @@ namespace LollyCommon
                 IsBusy = true;
                 WordItems = new ObservableCollection<MUnitWord>(inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
                     vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
-                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter));
+                    await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter,
+                    Paged ? PageNo : null, Paged ? PageSize : null));
                 this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
             });

@@ -21,9 +21,9 @@ namespace LollyCommon
         }
         public bool Paged { get; set; }
         [Reactive]
-        public partial int? PageNo { get; set; }
+        public partial int PageNo { get; set; } = 1;
         [Reactive]
-        public partial int? PageSize { get; set; }
+        public partial int PageSize { get; set; }
         [Reactive]
         public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
@@ -32,6 +32,7 @@ namespace LollyCommon
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
             Paged = paged;
+            PageSize = vmSettings.USROWSPERPAGE;
         }
     }
     public partial class WordsBaseViewModel : WordsPhrasesBaseViewModel
