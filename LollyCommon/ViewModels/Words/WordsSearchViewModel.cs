@@ -11,7 +11,7 @@ namespace LollyCommon
     {
         public ObservableCollection<MUnitWord> WordItems { get; set; }
 
-        public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
+        public WordsSearchViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             WordItems = new ObservableCollection<MUnitWord>();
         }

@@ -17,7 +17,7 @@ namespace LollyCommon
         public bool IfEmpty { get; set; } = true;
         public string StatusText => $"{WordItems.Count} Words in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
 
-        public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
+        public WordsUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             this.inTextbook = inTextbook;
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -26,7 +26,7 @@ namespace LollyCommon
                 WordItems = new ObservableCollection<MUnitWord>(inTextbook ? await unitWordDS.GetDataByTextbookUnitPart(
                     vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
                     await unitWordDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter,
-                    Paged ? PageNo : null, Paged ? PageSize : null));
+                    paginated ? PageNo : null, paginated ? PageSize : null));
                 this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
             });

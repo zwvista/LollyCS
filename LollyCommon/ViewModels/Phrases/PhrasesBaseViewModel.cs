@@ -11,7 +11,7 @@ namespace LollyCommon
         public partial bool HasSelectedPhraseItem { get; }
         public string SelectedPhrase => SelectedPhraseItem?.PHRASE ?? "";
         public int SelectedPhraseID => SelectedPhraseItem?.PHRASEID ?? 0;
-        public PhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
+        public PhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             ScopeFilter = SettingsViewModel.ScopePhraseFilters[0];
             this.WhenAnyValue(x => x.SelectedPhraseItem, (MPhraseInterface v) => v != null).ToProperty(this, x => x.HasSelectedPhraseItem);

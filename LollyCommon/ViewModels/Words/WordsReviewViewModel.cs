@@ -76,7 +76,7 @@ namespace LollyCommon
         public partial bool MoveForwardVisible { get; set; } = true;
         public override string SelectedWord => CurrentWord;
 
-        public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged, Action doTestAction) : base(vmSettings, needCopy, paged)
+        public WordsReviewViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated, Action doTestAction) : base(vmSettings, needCopy, paginated)
         {
             DoTestAction = doTestAction;
         }

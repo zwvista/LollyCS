@@ -15,7 +15,7 @@ namespace LollyCommon
         public bool NoFilter => string.IsNullOrEmpty(TextFilter) && TextbookFilter == 0;
         public string StatusText => $"{PhraseItems.Count} Phrases in {(inTextbook ? vmSettings.UNITINFO : vmSettings.LANGINFO)}";
 
-        public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
+        public PhrasesUnitViewModel(SettingsViewModel vmSettings, bool inTextbook, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             this.inTextbook = inTextbook;
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -24,7 +24,7 @@ namespace LollyCommon
                 PhraseItems = new ObservableCollection<MUnitPhrase>(inTextbook ? await unitPhraseDS.GetDataByTextbookUnitPart(
                     vmSettings.SelectedTextbook, vmSettings.USUNITPARTFROM, vmSettings.USUNITPARTTO, TextFilter, ScopeFilter) :
                     await unitPhraseDS.GetDataByLang(vmSettings.SelectedLang.ID, vmSettings.Textbooks, TextFilter, ScopeFilter, TextbookFilter,
-                    Paged ? PageNo : null, Paged ? PageSize : null));
+                    paginated ? PageNo : null, paginated ? PageSize : null));
                 this.RaisePropertyChanged(nameof(PhraseItems));
                 IsBusy = false;
             });

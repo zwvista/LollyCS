@@ -17,7 +17,7 @@
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
 
-<MudTable Items="@vm.WordItems">
+<MudTable ServerData="ServerReload" RowsPerPage="@vm.PageSize">
     <HeaderContent>
         <MudTh>No.</MudTh>
         <MudTh>ID</MudTh>
@@ -63,6 +63,9 @@
             <MudButton Variant="Variant.Filled" Color="Color.Warning" OnClick="@(() => ClearNote(context))">Clear Note</MudButton>
         </MudTd>
     </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="@vm.vmSettings.USROWSPERPAGEOPTIONS.ToArray()" />
+    </PagerContent>
 </MudTable>
 
 </RequireAuth>
@@ -75,10 +78,12 @@
         vm.PropertyChanged += (_, __) => InvokeAsync(StateHasChanged);
     }
 
-    async Task OnKeyDownNewWord(KeyboardEventArgs e)
+    async Task<TableData<MUnitWord>> ServerReload(TableState state, CancellationToken token)
     {
-        if (e.Key != "Enter" || string.IsNullOrEmpty(vm.NewWord)) return;
-        await vm.AddNewWord();
+        vm.PageNo = state.Page;
+        vm.PageSize = state.PageSize;
+        vm.Reload();
+        return new TableData<MUnitWord>() {TotalItems = 250, Items = vm.WordItems};
     }
 
     async Task ShowDetailDialog(MUnitWord item)

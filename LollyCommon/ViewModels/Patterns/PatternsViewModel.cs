@@ -19,7 +19,7 @@ namespace LollyCommon
         public partial string ScopeFilter { get; set; } = SettingsViewModel.ScopePatternFilters[0];
         bool NoFilter => string.IsNullOrEmpty(TextFilter);
         public string StatusText => $"{PatternItems.Count} Patterns in {vmSettings.LANGINFO}";
-        public bool Paged { get; set; }
+        public bool paginated { get; set; }
         [Reactive]
         public partial int PageNo { get; set; } = 1;
         [Reactive]
@@ -34,17 +34,17 @@ namespace LollyCommon
         public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
-        public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged)
+        public PatternsViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            Paged = paged;
+            paginated = paginated;
             PageSize = vmSettings.USROWSPERPAGE;
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
                 PatternItems = new ObservableCollection<MPattern>(
                     await patternDS.GetDataByLang(vmSettings.SelectedLang.ID, TextFilter, ScopeFilter,
-                    Paged ? PageNo : null, Paged ? PageSize : null));
+                    paginated ? PageNo : null, paginated ? PageSize : null));
                 this.RaisePropertyChanged(nameof(PatternItems));
                 IsBusy = false;
             });

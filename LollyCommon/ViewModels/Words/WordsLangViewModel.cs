@@ -16,14 +16,14 @@ namespace LollyCommon
         public ObservableCollection<MLangWord> WordItems { get; set; } = new ObservableCollection<MLangWord>();
         public string StatusText => $"{WordItems.Count} Words in {vmSettings.LANGINFO}";
 
-        public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
+        public WordsLangViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             ReloadCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 IsBusy = true;
                 WordItems = new ObservableCollection<MLangWord>(
                     await langWordDS.GetDataByLang(vmSettings.SelectedTextbook.LANGID, TextFilter, ScopeFilter,
-                    Paged ? PageNo : null, Paged ? PageSize : null));
+                    paginated ? PageNo : null, paginated ? PageSize : null));
                 this.RaisePropertyChanged(nameof(WordItems));
                 IsBusy = false;
             });
@@ -67,7 +67,7 @@ namespace LollyCommon
             await langWordDS.UpdateNote(item.ID, item.NOTE);
         }
 
-        public WordsLangViewModel(SettingsViewModel vmSettings, bool paged) : base(vmSettings, false, paged)
+        public WordsLangViewModel(SettingsViewModel vmSettings, bool paginated) : base(vmSettings, false, paginated)
         {
         }
         public async Task GetWords(int phraseid)

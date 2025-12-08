@@ -65,7 +65,7 @@ namespace LollyWPF
 
         public override async Task OnSettingsChanged()
         {
-            DataContext = vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true, paged: false);
+            DataContext = vm = new WordsUnitViewModelWPF(MainWindow.vmSettings, inTextbook: true, needCopy: true, paginated: false);
             await base.OnSettingsChanged();
         }
         void miEditWord_Click(object sender, RoutedEventArgs? e)

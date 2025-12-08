@@ -19,7 +19,7 @@ namespace LollyCommon
             get => vmSettings.TextbookFilters.SingleOrDefault(o => o.Value == TextbookFilter);
             set { if (value != null) TextbookFilter = value.Value; }
         }
-        public bool Paged { get; set; }
+        public bool paginated { get; set; }
         [Reactive]
         public partial int PageNo { get; set; } = 1;
         [Reactive]
@@ -28,10 +28,10 @@ namespace LollyCommon
         public partial bool IsBusy { get; set; } = true;
         public ReactiveCommand<Unit, Unit> ReloadCommand { get; set; }
 
-        public WordsPhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged)
+        public WordsPhrasesBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated)
         {
             this.vmSettings = !needCopy ? vmSettings : vmSettings.ShallowCopy();
-            Paged = paged;
+            paginated = paginated;
             PageSize = vmSettings.USROWSPERPAGE;
         }
     }
@@ -45,7 +45,7 @@ namespace LollyCommon
         public partial bool HasSelectedWordItem { get; }
         public virtual string SelectedWord => SelectedWordItem?.WORD ?? "";
         public int SelectedWordID => SelectedWordItem?.WORDID ?? 0;
-        public WordsBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paged) : base(vmSettings, needCopy, paged)
+        public WordsBaseViewModel(SettingsViewModel vmSettings, bool needCopy, bool paginated) : base(vmSettings, needCopy, paginated)
         {
             ScopeFilter = SettingsViewModel.ScopeWordFilters[0];
             this.WhenAnyValue(x => x.SelectedWordItem, (MWordInterface v) => v != null).ToProperty(this, x => x.HasSelectedWordItem);
