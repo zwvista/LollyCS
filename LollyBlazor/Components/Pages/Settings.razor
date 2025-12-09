@@ -1,0 +1,166 @@
+@page "/settings"
+
+<div class="settings-container">
+  <!-- Language -->
+  <div class="form-row">
+    <label for="lang">Language:</label>
+    <select id="lang"
+            [(ngModel)]="vm.selectedLang"
+            (ngModelChange)="onLangChange()"
+            class="select-input">
+      @foreach (var o in vm.Languages)
+      {
+        <option [ngValue]="o">{{ o.NAME }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Voice -->
+  <div class="form-row">
+    <label for="voice">Voice:</label>
+    <select id="voice"
+            [(ngModel)]="vm.selectedVoice"
+            (ngModelChange)="onVoiceChange()"
+            class="select-input">
+      @foreach (var o in vm.Voices)
+      {
+        <option [ngValue]="o">{{ o.VOICENAME }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Dictionary(Reference) -->
+  <div class="form-row">
+    <label for="dictReference">Dictionary(Reference):</label>
+    <select id="dictReference"
+            [(ngModel)]="vm.selectedDictReference"
+            (ngModelChange)="onDictReferenceChange()"
+            class="select-input">
+      @foreach (var o in vm.DictsReference)
+      {
+        <option [ngValue]="o">{{ o.NAME }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Dictionary(Note) -->
+  <div class="form-row">
+    <label for="dictNote">Dictionary(Note):</label>
+    <select id="dictNote"
+            [(ngModel)]="vm.selectedDictNote"
+            (ngModelChange)="onDictNoteChange()"
+            class="select-input">
+      @foreach (var o in vm.DictsNote)
+      {
+        <option [ngValue]="o">{{ o.NAME }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Dictionary(Translation) -->
+  <div class="form-row">
+    <label for="dictTranslation">Dictionary(Translation):</label>
+    <select id="dictTranslation"
+            [(ngModel)]="vm.selectedDictTranslation"
+            (ngModelChange)="onDictTranslationChange()"
+            class="select-input">
+      @foreach (var o in vm.DictsTranslation)
+      {
+        <option [ngValue]="o">{{ o.NAME }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Textbook -->
+  <div class="form-row">
+    <label for="textbook">Textbook:</label>
+    <select id="textbook"
+            [(ngModel)]="vm.selectedTextbook"
+            (ngModelChange)="onTextbookChange()"
+            class="select-input">
+      @foreach (var o in vm.Textbooks)
+      {
+        <option [ngValue]="o">{{ o.NAME }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Unit From -->
+  <div class="form-row">
+    <label for="unitFrom">Unit:</label>
+    <select id="unitFrom"
+            [(ngModel)]="vm.USUNITFROM"
+            (ngModelChange)="onUnitFromChange()"
+            class="select-input">
+      @foreach (var o in vm.Units)
+      {
+        <option [ngValue]="o.value">{{ o.label }}</option>
+      }
+    </select>
+    <select id="partFrom"
+            [disabled]="toTypeIsUnit"
+            [(ngModel)]="vm.USPARTFROM"
+            (ngModelChange)="onPartFromChange()"
+            class="select-input">
+      @foreach (var o in vm.Parts)
+      {
+        <option [ngValue]="o.value">{{ o.label }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- To Type + Unit/Part To -->
+  <div class="form-row">
+    <select id="toType"
+            [(ngModel)]="vm.toType"
+            (ngModelChange)="onToTypeChange()"
+    class="select-short">
+    @foreach (var o in SettingsViewModel.ToTypes)
+    {
+      <option [ngValue]="o.value">{{ o.label }}</option>
+    }
+    </select>
+    <select id="unitTo"
+            [disabled]="!toTypeIsTo"
+            [(ngModel)]="vm.USUNITTO"
+            (ngModelChange)="onUnitToChange()"
+            class="select-input">
+      @foreach (var o in vm.Units)
+      {
+        <option [ngValue]="o.value">{{ o.label }}</option>
+      }
+    </select>
+    <select id="partTo"
+            [disabled]="!toTypeIsTo"
+            [(ngModel)]="vm.USPARTTO"
+            (ngModelChange)="onPartToChange()"
+            class="select-input">
+      @foreach (var o in vm.Parts)
+      {
+        <option [ngValue]="o.value">{{ o.label }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Previous / Next Buttons -->
+  <div class="form-row">
+    <div class="label-spacer"></div>
+    <div class="button-group">
+      <button class="btn-primary"
+              [disabled]="toTypeIsTo"
+              (click)="previousUnitPart()">
+        Previous
+      </button>
+      <button class="btn-primary"
+              [disabled]="toTypeIsTo"
+              (click)="nextUnitPart()">
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+
+
+@code {
+  SettingsViewModel vm = App.vmSettings;
+}

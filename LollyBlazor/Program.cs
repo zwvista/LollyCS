@@ -1,6 +1,7 @@
 using LollyBlazor.Components;
 using LollyBlazor.Services;
 using MudBlazor.Services;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddScoped<AppStateService>();
 builder.Services.AddScoped<CommonService>();
 builder.Services.AddScoped<LocalUserService>();
 builder.Services.AddMudServices();
+builder.Services.AddSpeechSynthesis();
 
 var app = builder.Build();
 
