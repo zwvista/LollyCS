@@ -268,7 +268,7 @@ namespace LollyCommon
 
         public HttpClient client = new HttpClient();
 
-        public SettingsViewModel()
+        public SettingsViewModel(string nameVoice)
         {
             // https://stackoverflow.com/questions/35685063/httpclient-getasync-method-403-error
             client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "http://developer.github.com/v3/#user-agent-required");
@@ -283,7 +283,7 @@ namespace LollyCommon
                 INFO_USDICTNOTE = GetUSInfo(MUSMapping.NAME_USDICTNOTE);
                 INFO_USDICTSREFERENCE = GetUSInfo(MUSMapping.NAME_USDICTSREFERENCE);
                 INFO_USDICTTRANSLATION = GetUSInfo(MUSMapping.NAME_USDICTTRANSLATION);
-                INFO_USVOICE = GetUSInfo(MUSMapping.NAME_USWINDOWSVOICE);
+                INFO_USVOICE = GetUSInfo(nameVoice);
                 var res1 = DictionaryDS.GetDictsReferenceByLang(USLANG);
                 var res2 = DictionaryDS.GetDictsNoteByLang(USLANG);
                 var res3 = DictionaryDS.GetDictsTranslationByLang(USLANG);
@@ -305,7 +305,7 @@ namespace LollyCommon
                     .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
                 OnlineTextbookFilters = Textbooks.Where(o => o.ONLINE).Select(o => new MSelectItem(o.ID, o.TEXTBOOKNAME))
                     .StartWith(new MSelectItem(0, "All Textbooks")).ToList();
-                SelectedVoice = Voices.FirstOrDefault(o => o.ID == USDICTTRANSLATION) ?? Voices.FirstOrDefault();
+                SelectedVoice = Voices.FirstOrDefault(o => o.ID == USVOICE) ?? Voices.FirstOrDefault();
                 if (dirty)
                     await UserSettingDS.Update(INFO_USLANG, USLANG);
             });
