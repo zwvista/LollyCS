@@ -15,7 +15,7 @@ namespace LollyWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static SettingsViewModel vmSettings = new(MUSMapping.NAME_USWINDOWSVOICE);
+        public static SettingsViewModel vmSettings = new(MUSMapping.NAME_USWINDOWSVOICE, 3);
         // https://stackoverflow.com/questions/43528152/how-to-close-tab-with-a-close-button-in-wpf
         // These are the tabs that will be bound to the TabControl 
         public ObservableCollection<ActionTabItem> Tabs { get; } = new ObservableCollection<ActionTabItem>();

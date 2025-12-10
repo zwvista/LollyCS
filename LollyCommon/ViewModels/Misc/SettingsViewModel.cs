@@ -268,7 +268,7 @@ namespace LollyCommon
 
         public HttpClient client = new HttpClient();
 
-        public SettingsViewModel(string nameVoice)
+        public SettingsViewModel(string nameVoice, int idVoiceType)
         {
             // https://stackoverflow.com/questions/35685063/httpclient-getasync-method-403-error
             client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "http://developer.github.com/v3/#user-agent-required");
@@ -289,7 +289,7 @@ namespace LollyCommon
                 var res3 = DictionaryDS.GetDictsTranslationByLang(USLANG);
                 var res4 = TextbookDS.GetDataByLang(USLANG);
                 var res5 = AutoCorrectDS.GetDataByLang(USLANG);
-                var res6 = VoiceDS.GetDataByLang(USLANG).ToObservable();
+                var res6 = VoiceDS.GetDataByLang(USLANG, idVoiceType).ToObservable();
                 DictsReference = await res1;
                 DictsNote = await res2;
                 DictsTranslation = await res3;
