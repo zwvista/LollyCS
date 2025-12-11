@@ -15,7 +15,7 @@ namespace LollyMaui
         public WordsTextbookPage()
         {
             InitializeComponent();
-            BindingContext = vm = new WordsUnitViewModel(AppShell.vmSettings, false, false);
+            BindingContext = vm = new WordsUnitViewModel(AppShell.vmSettings, false, false, false);
         }
 
         protected override void OnAppearing()

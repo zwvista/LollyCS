@@ -8,11 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddMudServices();
+builder.Services.AddSpeechSynthesis();
 builder.Services.AddScoped<AppStateService>();
 builder.Services.AddScoped<CommonService>();
 builder.Services.AddScoped<LocalUserService>();
-builder.Services.AddMudServices();
-builder.Services.AddSpeechSynthesis();
+builder.Services.AddScoped<TextToSpeechService>();
 
 var app = builder.Build();
 

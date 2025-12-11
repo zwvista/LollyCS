@@ -15,7 +15,7 @@ namespace LollyMaui
         public WordsReviewPage()
         {
             InitializeComponent();
-            vm = new WordsReviewViewModel(AppShell.vmSettings, false, async () =>
+            vm = new WordsReviewViewModel(AppShell.vmSettings, false, false, async () =>
             {
                 WordInputEntry.Focus();
                 if (vm.HasCurrent && vm.IsSpeaking)

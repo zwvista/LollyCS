@@ -2,6 +2,7 @@
 @inject IDialogService DialogService
 @inject CommonService CommonService
 @inject NavigationManager NavigationManager
+@inject TextToSpeechService TextToSpeechService
 
 <RequireAuth>
 
@@ -48,7 +49,7 @@
                 <MudFab StartIcon="fa fa-edit" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(context))"/>
             </MudTooltip>
             <MudTooltip Text="Speak" Arrow="true" Placement="Placement.Top">
-                <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary"/>
+                <MudFab StartIcon="fa fa-volume-up" Color="Color.Primary" OnClick="@(() => Speak(context.WORD))"/>
             </MudTooltip>
             <MudTooltip Text="Copy" Arrow="true" Placement="Placement.Top">
                 <MudFab StartIcon="fa fa-copy" Color="Color.Primary" OnClick="@(() => CopyWord(context.WORD))"/>
@@ -102,6 +103,9 @@
     
     async Task OnRefresh() =>
         NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+
+    async Task Speak(string word) =>
+        await TextToSpeechService.SpeakAsync(word);
 
     async Task CopyWord(string word) =>
         await CommonService.WriteTextAsync(word);
