@@ -18,4 +18,8 @@
     <ProjectReference Include="..\LollyCommon\LollyCommon.csproj" />
   </ItemGroup>
 
+  <Target Name="TailwindCSSBuild" AfterTargets="Build">
+      <Exec Command="tailwindcss -i tailwind-input.css -o wwwroot/tailwind-output.css --minify" />
+  </Target>
+
 </Project>
