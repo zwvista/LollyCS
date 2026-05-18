@@ -14,8 +14,8 @@
         }
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(null))">Add</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
-    <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
 
 <MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy" @ref="table">
@@ -76,10 +76,17 @@
         return new TableData<MPattern> { TotalItems = vm.ItemCount, Items = vm.PatternItems };
     }
 
-    async Task ShowDetailDialog(MPattern item)
+    async Task ShowDetailDialog(MPattern? item)
     {
-        var itemEdit = new MPattern();
-        item.CopyProperties(itemEdit);
+        var isAdd = item == null;
+        MPattern itemEdit;
+        if (isAdd)
+            itemEdit = vm.NewPattern();
+        else
+        {
+            itemEdit = new MPattern();
+            item!.CopyProperties(itemEdit);
+        }
         var parameters = new DialogParameters<PatternsDetail> { { x => x.Item, itemEdit } };
         var dialog = await DialogService.ShowAsync<PatternsDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;

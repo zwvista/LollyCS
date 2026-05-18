@@ -14,6 +14,7 @@
         }
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
+    <MudButton Variant="Variant.Filled" StartIcon="fa fa-plus" Color="Color.Primary" OnClick="@(() => ShowDetailDialog(null))">Add</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
@@ -79,10 +80,17 @@
         return new TableData<MLangWord> {TotalItems = vm.ItemCount, Items = vm.WordItems};
     }
 
-    async Task ShowDetailDialog(MLangWord item)
+    async Task ShowDetailDialog(MLangWord? item)
     {
-        var itemEdit = new MLangWord();
-        item.CopyProperties(itemEdit);
+        var isAdd = item == null;
+        MLangWord itemEdit;
+        if (isAdd)
+            itemEdit = vm.NewLangWord();
+        else
+        {
+            itemEdit = new MLangWord();
+            item!.CopyProperties(itemEdit);
+        }
         var parameters = new DialogParameters<WordsLangDetail> { { x => x.Item, itemEdit } };
         var dialog = await DialogService.ShowAsync<WordsLangDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;

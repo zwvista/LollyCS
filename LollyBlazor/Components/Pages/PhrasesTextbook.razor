@@ -15,7 +15,6 @@
     </MudSelect>
     <MudTextField @bind-Value="vm.TextFilter" Label="Filter" Variant="Variant.Text"></MudTextField>
     <MudButton Variant="Variant.Filled" StartIcon="fa fa-sync" Color="Color.Primary" OnClick="@OnRefresh">Refresh</MudButton>
-    <MudButton Variant="Variant.Filled" StartIcon="fa fa-book" Color="Color.Primary">Dictionary</MudButton>
 </MudToolBar>
 
 <MudTable ServerData="@ServerReload" RowsPerPage="@vm.PageSize" Loading="@vm.IsBusy" @ref="table">
