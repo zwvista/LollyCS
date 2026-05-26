@@ -4,8 +4,8 @@
     </TitleContent>
     <DialogContent>
         <MudTextField Value="@Item.ID" Label="ID" Variant="Variant.Text" Disabled="true"></MudTextField>
-        <MudTextField Value="@Item.PHRASE" Label="PHRASE" Variant="Variant.Text"></MudTextField>
-        <MudTextField Value="@Item.TRANSLATION" Label="TRANSLATION" Variant="Variant.Text"></MudTextField>
+        <MudTextField @bind-Value="Item.PHRASE" Label="PHRASE" Variant="Variant.Text"></MudTextField>
+        <MudTextField @bind-Value="Item.TRANSLATION" Label="TRANSLATION" Variant="Variant.Text"></MudTextField>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="@Cancel">Cancel</MudButton>
@@ -17,7 +17,8 @@
     [CascadingParameter] 
     IMudDialogInstance MudDialog { get; set; }
     [Parameter]
-    public MLangPhrase Item { get; set; }
+    public PhrasesLangDetailViewModel vmDetail { get; set; }
+    MLangPhraseEdit Item => vmDetail.ItemEdit;
 
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel() => MudDialog.Cancel();

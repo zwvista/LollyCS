@@ -78,21 +78,12 @@
 
     async Task ShowDetailDialog(MPattern? item)
     {
-        var isAdd = item == null;
-        MPattern itemEdit;
-        if (isAdd)
-            itemEdit = vm.NewPattern();
-        else
-        {
-            itemEdit = new MPattern();
-            item!.CopyProperties(itemEdit);
-        }
-        var parameters = new DialogParameters<PatternsDetail> { { x => x.Item, itemEdit } };
+        var vmDetail = new PatternsDetailViewModel(vm, item ?? vm.NewPattern());
+        var parameters = new DialogParameters<PatternsDetail> { { x => x.vmDetail, vmDetail } };
         var dialog = await DialogService.ShowAsync<PatternsDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
-        {
-        }
+            vmDetail.ItemEdit.Save.Execute().Subscribe();
     }
     
     async Task OnRefresh() =>

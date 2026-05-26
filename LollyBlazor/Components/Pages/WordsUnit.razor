@@ -92,21 +92,12 @@
 
     async Task ShowDetailDialog(MUnitWord? item)
     {
-        var isAdd = item == null;
-        MUnitWord itemEdit;
-        if (isAdd)
-            itemEdit = vm.NewUnitWord();
-        else
-        {
-            itemEdit = new MUnitWord();
-            item!.CopyProperties(itemEdit);
-        }
-        var parameters = new DialogParameters<WordsUnitDetail> { { x => x.Item, itemEdit } };
+        var vmDetail = new WordsUnitDetailViewModel(vm, item ?? vm.NewUnitWord(), 0);
+        var parameters = new DialogParameters<WordsUnitDetail> { { x => x.vmDetail, vmDetail } };
         var dialog = await DialogService.ShowAsync<WordsUnitDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
-        {
-        }
+            vmDetail.ItemEdit.Save.Execute().Subscribe();
     }
     
     async Task OnRefresh() =>

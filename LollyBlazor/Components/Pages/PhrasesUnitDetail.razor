@@ -18,8 +18,8 @@
         </MudSelect>
         <MudTextField Value="@Item.SEQNUM" Label="SEQNUM" Variant="Variant.Text"></MudTextField>
         <MudTextField Value="@Item.PHRASEID" Label="PHRASEID" Variant="Variant.Text" Disabled="true"></MudTextField>
-        <MudTextField Value="@Item.PHRASE" Label="PHRASE" Variant="Variant.Text"></MudTextField>
-        <MudTextField Value="@Item.TRANSLATION" Label="TRANSLATION" Variant="Variant.Text"></MudTextField>
+        <MudTextField @bind-Value="Item.PHRASE" Label="PHRASE" Variant="Variant.Text"></MudTextField>
+        <MudTextField @bind-Value="Item.TRANSLATION" Label="TRANSLATION" Variant="Variant.Text"></MudTextField>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="@Cancel">Cancel</MudButton>
@@ -31,7 +31,8 @@
     [CascadingParameter] 
     IMudDialogInstance MudDialog { get; set; }
     [Parameter]
-    public MUnitPhrase Item { get; set; }
+    public PhrasesUnitDetailViewModel vmDetail { get; set; }
+    MUnitPhraseEdit Item => vmDetail.ItemEdit;
 
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel() => MudDialog.Cancel();

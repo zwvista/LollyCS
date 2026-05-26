@@ -74,21 +74,12 @@
 
     async Task ShowDetailDialog(MLangPhrase? item)
     {
-        var isAdd = item == null;
-        MLangPhrase itemEdit;
-        if (isAdd)
-            itemEdit = vm.NewLangPhrase();
-        else
-        {
-            itemEdit = new MLangPhrase();
-            item!.CopyProperties(itemEdit);
-        }
-        var parameters = new DialogParameters<PhrasesLangDetail> { { x => x.Item, itemEdit } };
+        var vmDetail = new PhrasesLangDetailViewModel(vm, item ?? vm.NewLangPhrase());
+        var parameters = new DialogParameters<PhrasesLangDetail> { { x => x.vmDetail, vmDetail } };
         var dialog = await DialogService.ShowAsync<PhrasesLangDetail>("Simple Dialog", parameters);
         var result = await dialog.Result;
         if (!result.Canceled)
-        {
-        }
+            vmDetail.ItemEdit.Save.Execute().Subscribe();
     }
     
     async Task OnRefresh() =>
