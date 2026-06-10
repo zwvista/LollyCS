@@ -1,16 +1,18 @@
-﻿using System;
+﻿using CefSharp;
+using CefSharp.Wpf;
+using LollyCommon;
+using LollyWPF.Properties;
+using ReactiveUI.Builder;
+using Splat.Builder;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.Versioning;
+using System.Speech.Synthesis;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Speech.Synthesis;
-using CefSharp;
-using CefSharp.Wpf;
-using LollyCommon;
-using LollyWPF.Properties;
-using System.Runtime.Versioning;
 
 namespace LollyWPF
 {
@@ -50,6 +52,11 @@ namespace LollyWPF
         // https://stackoverflow.com/questions/3145511/how-to-set-the-default-font-for-a-wpf-application
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            var app = RxAppBuilder.CreateReactiveUIBuilder()
+                .WithWpf() // Or WithMaui(), WithBlazor(), WithWinUI(), etc.
+                .WithViewsFromAssembly(typeof(App).Assembly)
+                .BuildApp();
+
             FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
             {
                 DefaultValue = FindResource(typeof(Window))
